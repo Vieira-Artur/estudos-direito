@@ -1,0 +1,161 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f4f6f9;
+  color: #222;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+header {
+  background: #1a3a5c;
+  color: white;
+  padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+
+.site-titulo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  margin-bottom: 6px;
+}
+
+/* ── Breadcrumb ── */
+#breadcrumb {
+  font-size: 13px;
+  color: rgba(255,255,255,.75);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+#breadcrumb .crumb {
+  cursor: pointer;
+  color: rgba(255,255,255,.85);
+  text-decoration: underline;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 13px;
+  padding: 0;
+}
+
+#breadcrumb .crumb:hover { color: white; }
+#breadcrumb .sep { color: rgba(255,255,255,.4); }
+#breadcrumb .crumb-atual { color: white; font-weight: 600; cursor: default; text-decoration: none; }
+
+/* ── Main ── */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* ── Título de seção ── */
+.secao-titulo {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* ── Cards de matéria (nível 1) ── */
+.cards-materias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card-materia {
+  background: #1a3a5c;
+  color: white;
+  border-radius: 12px;
+  padding: 24px 28px;
+  min-width: 180px;
+  flex: 1 1 180px;
+  max-width: 240px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,.2);
+  transition: transform .15s, box-shadow .15s;
+}
+
+.card-materia:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+
+.card-materia .icone { font-size: 32px; margin-bottom: 10px; }
+.card-materia .nome { font-weight: 700; font-size: 15px; line-height: 1.3; }
+
+/* ── Cards de turma (nível 2) ── */
+.cards-turmas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.card-turma {
+  background: #e8f0fe;
+  border: 2px solid #1a3a5c;
+  border-radius: 8px;
+  padding: 14px 22px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1a3a5c;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.card-turma:hover { background: #d0e2ff; }
+
+/* ── Cards de tema (nível 3) ── */
+.cards-temas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.card-tema {
+  background: white;
+  border: 1px solid #dde3ee;
+  border-radius: 10px;
+  padding: 16px 20px;
+  min-width: 200px;
+  flex: 1 1 200px;
+  max-width: 280px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,.07);
+  transition: transform .15s, box-shadow .15s;
+}
+
+.card-tema:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+}
+
+.card-tema .icone { font-size: 20px; margin-bottom: 8px; }
+.card-tema .nome { font-weight: 700; font-size: 14px; margin-bottom: 4px; line-height: 1.3; }
+.card-tema .descricao { font-size: 12px; color: #777; }
+
+/* ── Área de conteúdo ── */
+#conteudo-area {
+  background: white;
+  border-radius: 10px;
+  padding: 28px;
+  box-shadow: 0 1px 6px rgba(0,0,0,.08);
+}
+
+/* ── Responsivo ── */
+@media (max-width: 600px) {
+  .card-materia { max-width: 100%; }
+  .card-tema    { max-width: 100%; }
+  main { padding: 20px 14px; }
+}

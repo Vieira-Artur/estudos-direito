@@ -57,6 +57,37 @@ function selecionarTurma(materiaId, turmaId) {
   estado.turmaAtual = turma
   atualizarBreadcrumb()
 
+  if (turma.indice) {
+    app.innerHTML = `<div id="conteudo-area"><p style="color:#888;font-size:13px">Carregando...</p></div>`
+    fetch(turma.indice)
+      .then(r => {
+        if (!r.ok) throw new Error('Arquivo não encontrado')
+        return r.text()
+      })
+      .then(html => {
+        const area = document.getElementById('conteudo-area')
+        area.innerHTML = html
+        const base = turma.indice.substring(0, turma.indice.lastIndexOf('/') + 1)
+        area.querySelectorAll('a[href]').forEach(a => {
+          const href = a.getAttribute('href')
+          if (href && !href.startsWith('http') && !href.startsWith('#')) {
+            const arquivo = base + href
+            const temaIndex = turma.temas.findIndex(t => t.arquivo === arquivo)
+            if (temaIndex !== -1) {
+              a.href = '#'
+              a.onclick = (e) => { e.preventDefault(); abrirTema(temaIndex) }
+            }
+          }
+        })
+      })
+      .catch(() => {
+        document.getElementById('conteudo-area').innerHTML =
+          `<p style="color:#c00">Não foi possível carregar o índice.<br>
+           Verifique se o arquivo <code>${turma.indice}</code> existe.</p>`
+      })
+    return
+  }
+
   app.innerHTML = `
     <p class="secao-titulo">${turma.titulo} — Selecione o tema</p>
     <div class="cards-temas">

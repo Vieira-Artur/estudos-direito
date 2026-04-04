@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teoria Geral das Provas — Processo Penal II</title>
+<style>
+    :root {
+    --bg:      #ffffff;
+    --bg2:     #f7f7f7;
+    --bg3:     #eeeeee;
+    --border:  #d0d0d0;
+    --text:    #1a1a1a;
+    --text2:   #444444;
+    --accent:  #1F497D;
+    --accent2: #1F497D;
+    --accent-light: #dce6f1;
+    --blue:    #1F497D;
+    --blue-light: #dce6f1;
+    --green:        #1a5c1a;
+    --green-light:  #d6f0d6;
+    --red:          #8b1a1a;
+    --red-light:    #fce8e8;
+    --orange:       #7a3800;
+    --orange-light: #fdebd6;
+    --purple:       #4a1a8a;
+    --purple-light: #ede5fb;
+    --teal:         #0a5c4a;
+    --teal-light:   #d6f0e8;
+    --yellow:       #5a4000;
+    --yellow-light: #fdf6d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:      #13131f;
+      --bg2:     #1d1d2e;
+      --bg3:     #262636;
+      --border:  #3a3a52;
+      --text:    #e8e8f0;
+      --text2:   #a8a8c0;
+      --accent:  #7a9cf0;
+      --accent2: #9ab4f8;
+      --accent-light: #1a2550;
+      --blue:         #9ab4f8;
+      --blue-light:   #1a2550;
+      --green:        #6fd86f;
+      --green-light:  #0d2e0d;
+      --red:          #f08080;
+      --red-light:    #2e0d0d;
+      --orange:       #f0a060;
+      --orange-light: #2e1500;
+      --purple:       #c0a0f8;
+      --purple-light: #200a40;
+      --teal:         #60d8b8;
+      --teal-light:   #072e22;
+      --yellow:       #f0d060;
+      --yellow-light: #2e2000;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--bg3);
+    border-bottom: 2px solid var(--accent);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '§';
+    position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+    font-size: 8rem; color: var(--accent-light); font-weight: bold;
+    pointer-events: none;
+  }
+  header h1 { font-size: 1.9rem; color: var(--accent2); letter-spacing: 0.03em; }
+  header p { color: var(--text2); font-size: 0.95rem; margin-top: 0.4rem; }
+  .badge {
+    display: inline-block; background: var(--accent); color: #fff;
+    padding: 0.15rem 0.7rem; border-radius: 3px; font-size: 0.75rem;
+    font-family: monospace; font-weight: bold; margin-bottom: 0.8rem;
+  }
+
+  /* NAV TABS */
+  nav { background: var(--bg2); border-bottom: 1px solid var(--border); display: flex; gap: 0; overflow-x: auto; }
+  nav button {
+    background: none; border: none; color: var(--text2); padding: 1rem 1.4rem;
+    cursor: pointer; font-family: inherit; font-size: 0.88rem; white-space: nowrap;
+    border-bottom: 3px solid transparent; transition: all 0.2s;
+  }
+  nav button:hover { color: var(--text); background: var(--bg3); }
+  nav button.active { color: var(--accent2); border-bottom-color: var(--accent); }
+
+  /* CONTENT */
+  .tab-content { display: none; padding: 2rem; max-width: 1100px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-size: 1.3rem; color: var(--accent2); border-left: 4px solid var(--accent);
+    padding-left: 1rem; margin-bottom: 1.5rem; margin-top: 2.5rem;
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.4rem; margin-bottom: 1.2rem; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card h3 { color: var(--blue); font-size: 1rem; margin-bottom: 0.6rem; }
+  .card p, .card li { color: var(--text2); font-size: 0.92rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.3rem; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th {
+    background: var(--bg3); color: var(--accent2); border-bottom: 2px solid var(--accent-light); padding: 0.75rem 1rem;
+    text-align: left; border: 1px solid var(--border); font-weight: 600;
+  }
+  td { padding: 0.65rem 1rem; border: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  tr:hover td { background: var(--accent-light); }
+
+  /* TAGS */
+  .tag {
+    display: inline-block; padding: 0.15rem 0.55rem; border-radius: 3px;
+    font-size: 0.75rem; font-family: monospace; font-weight: bold; margin: 0.15rem;
+  }
+  .tag-blue  { background: var(--blue-light); color: var(--blue); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-red   { background: var(--red-light);  color: var(--red); }
+  .tag-gold  { background: var(--accent-light); color: var(--accent2); }
+  .tag-purple{ background: var(--purple-light);color: var(--purple); }
+  .tag-orange{ background: var(--orange-light);color: var(--orange); }
+
+  /* JURISPRUDÊNCIA */
+  .juris {
+    background: var(--blue-light); border-left: 3px solid var(--blue);
+    padding: 1rem 1.2rem; border-radius: 0 6px 6px 0; margin-bottom: 1rem;
+  }
+  .juris .tribunal { color: var(--blue); font-size: 0.8rem; font-family: monospace; font-weight: bold; }
+  .juris p { color: var(--text2); font-size: 0.9rem; margin-top: 0.3rem; }
+
+  /* ALERTA */
+  .alert {
+    background: var(--red-light); border: 1px solid var(--red);
+    border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: 1rem;
+  }
+  .alert strong { color: var(--red); }
+  .alert p { color: var(--text2); font-size: 0.9rem; margin-top: 0.3rem; }
+
+  .tip {
+    background: var(--green-light); border: 1px solid var(--green);
+    border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: 1rem;
+  }
+  .tip strong { color: var(--green); }
+  .tip p { color: var(--text2); font-size: 0.9rem; margin-top: 0.3rem; }
+
+  /* MAPA MENTAL */
+  .mapa {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1.8rem; margin-bottom: 1.5rem;
+  }
+  .mapa-center {
+    text-align: center; background: var(--accent); color: #fff;
+    border-radius: 8px; padding: 0.8rem 1.5rem; font-weight: bold;
+    font-size: 1.1rem; display: inline-block; margin-bottom: 2rem;
+  }
+  .mapa-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  .mapa-node {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.6rem 1rem; font-size: 0.85rem; color: var(--text);
+    position: relative; cursor: default;
+  }
+  .mapa-node.blue { border-color: var(--blue); color: var(--blue); background: rgba(88,166,255,0.08); }
+  .mapa-node.gold { border-color: var(--accent); color: var(--accent2); background: var(--accent-light); }
+  .mapa-node.red  { border-color: var(--red); color: var(--red); background: var(--red-light); }
+  .mapa-node.green{ border-color: var(--green); color: var(--green); background: var(--green-light); }
+  .mapa-node.purple{border-color: var(--purple); color: var(--purple); background: rgba(188,140,255,0.08); }
+  .mapa-label { font-size: 0.75rem; color: var(--text2); margin-bottom: 0.4rem; font-style: italic; }
+
+  /* FLOWCHART */
+  .flow { display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .flow-step {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.8rem 1.1rem; font-size: 0.85rem; text-align: center;
+    min-width: 120px; flex: 1;
+  }
+  .flow-step span { display: block; font-size: 0.75rem; color: var(--text2); margin-top: 0.2rem; }
+  .flow-arrow { display: flex; align-items: center; padding: 0 0.4rem; color: var(--accent); font-size: 1.2rem; }
+
+  /* ROTEIRO */
+  .roteiro-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1rem 1.2rem; margin-bottom: 0.8rem; transition: border-color 0.2s;
+  }
+  .roteiro-item:hover { border-color: var(--accent); }
+  .roteiro-num {
+    background: var(--accent); color: #fff; border-radius: 50%;
+    width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 0.85rem; flex-shrink: 0; margin-top: 0.1rem;
+  }
+  .roteiro-item h4 { color: var(--text); font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .roteiro-item p { color: var(--text2); font-size: 0.88rem; }
+
+  /* CASO PRÁTICO */
+  .caso {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; margin-bottom: 1.5rem;
+  }
+  .caso-header {
+    background: var(--bg3); padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--border); display: flex; justify-content: space-between;
+    align-items: center;
+  }
+  .caso-header h3 { color: var(--accent2); font-size: 1rem; }
+  .caso-body { padding: 1.4rem; }
+  .caso-fatos { color: var(--text); font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.2rem; }
+  .caso-perguntas { list-style: none; padding: 0; }
+  .caso-perguntas li {
+    background: var(--bg3); border-left: 3px solid var(--purple);
+    padding: 0.7rem 1rem; border-radius: 0 4px 4px 0; margin-bottom: 0.5rem;
+    font-size: 0.9rem; color: var(--text2);
+  }
+  .caso-perguntas li strong { color: var(--purple); }
+  details { margin-bottom: 0.5rem; }
+  details summary {
+    cursor: pointer; padding: 0.7rem 1rem; background: var(--bg3);
+    border-radius: 4px; color: var(--teal); font-size: 0.88rem; font-weight: bold;
+    list-style: none;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before { content: '▶ '; font-size: 0.7rem; }
+  details[open] summary::before { content: '▼ '; }
+  details p { padding: 0.8rem 1rem; background: var(--green-light); color: var(--text2); font-size: 0.88rem; border-radius: 0 0 4px 4px; }
+
+  /* ARTIGO */
+  .artigo {
+    background: var(--blue-light); border: 1px solid rgba(88,166,255,0.2);
+    border-radius: 6px; padding: 0.9rem 1.2rem; margin-bottom: 0.8rem;
+    font-family: monospace; font-size: 0.87rem; color: var(--text);
+  }
+  .artigo strong { color: var(--blue); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  @media(max-width:600px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.4rem; }
+    .tab-content { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">PROCESSO PENAL II</div>
+  <h1>Teoria Geral das Provas</h1>
+  <p>Prof. Artur Vieira · Direito Processual Penal II · Material de Apoio</p>
+</header>
+
+<nav>
+  <button class="active" onclick="show('mapa')">🗺 Mapa Mental</button>
+  <button onclick="show('conceitos')">📖 Conceitos Essenciais</button>
+  <button onclick="show('ilicita')">🚫 Prova Ilícita</button>
+  <button onclick="show('sistemas')">⚖️ Sistemas de Avaliação</button>
+  <button onclick="show('tabela')">📊 Tabelas Comparativas</button>
+  <button onclick="show('roteiro')">📋 Roteiro de Estudo</button>
+  <button onclick="show('casos')">⚖️ Casos Práticos</button>
+</nav>
+
+<!-- ============================================================ MAPA MENTAL -->
+<div id="mapa" class="tab-content active">
+  <div class="section-title">Mapa Mental — Teoria Geral das Provas</div>
+
+  <div class="mapa">
+    <div style="text-align:center; margin-bottom:1.8rem;">
+      <span class="mapa-center">TEORIA GERAL DAS PROVAS</span>
+    </div>
+
+    <div class="mapa-label">SENTIDOS DO TERMO "PROVA"</div>
+    <div class="mapa-row">
+      <div class="mapa-node blue">Atividade probatória<br><small>Conjunto de atividades de verificação</small></div>
+      <div class="mapa-node blue">Resultado<br><small>Formação da convicção do juiz</small></div>
+      <div class="mapa-node blue">Meio<br><small>Instrumento de convicção</small></div>
+    </div>
+
+    <hr>
+
+    <div class="mapa-label">ELEMENTOS FUNDAMENTAIS</div>
+    <div class="mapa-row">
+      <div class="mapa-node gold">Objeto de prova<br><small>Fatos relevantes à controvérsia</small></div>
+      <div class="mapa-node gold">Fonte de prova<br><small>Pessoas ou coisas que fornecem a prova</small></div>
+      <div class="mapa-node gold">Meio de prova<br><small>Instrumento para introduzir no processo</small></div>
+      <div class="mapa-node gold">Destinatário<br><small>Órgão julgador (convicção)</small></div>
+    </div>
+
+    <hr>
+
+    <div class="mapa-label">ESPÉCIES DE PROVA</div>
+    <div class="mapa-row">
+      <div class="mapa-node green">Direta<br><small>1 operação inferencial</small></div>
+      <div class="mapa-node green">Indireta<br><small>2 operações inferenciais</small></div>
+      <div class="mapa-node green">Nominada<br><small>Com previsão legal</small></div>
+      <div class="mapa-node green">Inominada<br><small>Sem previsão, mas lícita</small></div>
+      <div class="mapa-node green">Típica<br><small>Com procedimento legal</small></div>
+      <div class="mapa-node green">Atípica<br><small>Sem procedimento legal</small></div>
+    </div>
+
+    <hr>
+
+    <div class="mapa-label">PROVAS × ELEMENTOS INFORMATIVOS (Art. 155 CPP)</div>
+    <div class="mapa-row">
+      <div class="mapa-node blue">Prova<br><small>Produzida com contraditório · Fundamenta condenação</small></div>
+      <div class="mapa-node red">Elemento informativo<br><small>Fase investigatória · Não fundamenta condenação sozinho</small></div>
+      <div class="mapa-node gold">Exceções: Provas cautelares, não repetíveis e antecipadas<br><small>Contraditório diferido</small></div>
+    </div>
+
+    <hr>
+
+    <div class="mapa-label">SISTEMAS DE AVALIAÇÃO DA PROVA</div>
+    <div class="mapa-row">
+      <div class="mapa-node purple">Íntima convicção<br><small>Jurado (Júri)</small></div>
+      <div class="mapa-node purple">Prova tarifada<br><small>Exceção (corpo de delito, estado civil)</small></div>
+      <div class="mapa-node purple" style="border-color:var(--orange); color:var(--orange); background:rgba(255,166,87,0.1)">
+        ✓ Convencimento motivado<br><small>Regra geral — Art. 93, IX, CF</small>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="mapa-label">PROVA ILÍCITA E TEORIA DOS FRUTOS</div>
+    <div class="mapa-row">
+      <div class="mapa-node red">Ilícita<br><small>Viola norma material (tortura, violação domicílio)</small></div>
+      <div class="mapa-node red">Ilegítima<br><small>Viola norma processual (art. 203 CPP)</small></div>
+    </div>
+    <div class="mapa-row" style="margin-top:0.5rem;">
+      <div class="mapa-node green">Fonte independente<br><small>Art. 157, §1º CPP</small></div>
+      <div class="mapa-node green">Descoberta inevitável<br><small>Art. 157, §2º CPP</small></div>
+      <div class="mapa-node green">Mancha purgada<br><small>Wong Sun v. US (1963)</small></div>
+      <div class="mapa-node green">Pro reo<br><small>Proporcionalidade em favor do réu</small></div>
+    </div>
+
+    <hr>
+
+    <div class="mapa-label">PRINCÍPIOS</div>
+    <div class="mapa-row">
+      <div class="mapa-node" style="border-color:var(--blue); color:var(--blue); background: var(--blue-light)">Proporcionalidade pro reo</div>
+      <div class="mapa-node" style="border-color:var(--blue); color:var(--blue); background: var(--blue-light)">Comunhão da prova</div>
+      <div class="mapa-node" style="border-color:var(--blue); color:var(--blue); background: var(--blue-light)">Identidade física do juiz (art. 399, §2º)</div>
+      <div class="mapa-node" style="border-color:var(--blue); color:var(--blue); background: var(--blue-light)">Favor rei / in dubio pro reo</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ CONCEITOS -->
+<div id="conceitos" class="tab-content">
+  <div class="section-title">Distinção: Prova × Elementos Informativos</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🔵 Prova</h3>
+      <ul>
+        <li>Produzida durante o <strong>processo</strong></li>
+        <li>Com <strong>contraditório</strong> (ainda que diferido) e ampla defesa</li>
+        <li>Pode fundamentar <strong>condenação</strong></li>
+        <li>Art. 155, <em>caput</em>, CPP</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🟡 Elemento Informativo</h3>
+      <ul>
+        <li>Colhido na <strong>fase investigatória</strong></li>
+        <li>Sem participação dialética das partes</li>
+        <li><strong>Não</strong> pode fundamentar condenação sozinho</li>
+        <li>STF HC 96.356/RS · STJ REsp 1.740.921/GO</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Atenção — Exceções ao Art. 155 CPP:</strong>
+    <p>Provas <strong>cautelares</strong>, <strong>não repetíveis</strong> e <strong>antecipadas</strong> podem embasar decisão mesmo sem contraditório real — o contraditório é diferido (postergado).</p>
+  </div>
+
+  <div class="section-title">Provas Cautelares, Não Repetíveis e Antecipadas</div>
+  <div class="grid-3">
+    <div class="card">
+      <h3>⏱ Cautelares</h3>
+      <p>Risco de desaparecimento do objeto pelo decurso do tempo. Contraditório diferido.</p>
+      <p style="margin-top:0.5rem; color:var(--orange)">Ex.: Interceptação telefônica (exige fator surpresa)</p>
+    </div>
+    <div class="card">
+      <h3>🔒 Não Repetíveis</h3>
+      <p>Uma vez produzida, não pode ser novamente coletada (desaparecimento/destruição).</p>
+      <p style="margin-top:0.5rem; color:var(--orange)">Ex.: Exame de corpo de delito · Perícias em geral</p>
+    </div>
+    <div class="card">
+      <h3>📋 Antecipadas</h3>
+      <p>Feitas com contraditório <strong>real</strong>, perante autoridade judicial, mas em momento distinto do previsto.</p>
+      <p style="margin-top:0.5rem; color:var(--orange)">Ex.: Depoimento <em>ad perpetuam rei memoriam</em> · Art. 225 CPP</p>
+    </div>
+  </div>
+
+  <div class="juris">
+    <div class="tribunal">STJ · Súmula 455</div>
+    <p>A decisão que determina a produção antecipada de provas com base no art. 366 do CPP deve ser concretamente fundamentada, não a justificando unicamente o mero decurso do tempo.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · 5ª Turma · AgRg no RHC 160.012/SC (Info 767)</div>
+    <p>É justificável a antecipação de prova no caso de depoimento especial de adolescente vítima de possível crime sexual (Lei 13.431/2017) pela relevância da palavra da vítima e pela falibilidade da memória de crianças e adolescentes.</p>
+  </div>
+
+  <div class="section-title">Ônus da Prova</div>
+  <div class="artigo">
+    <strong>Art. 156 CPP</strong> — A prova da alegação incumbirá a quem a fizer.
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>📌 Corrente Majoritária</h3>
+      <ul>
+        <li>Acusação prova: fato típico, autoria, causalidade, dolo/culpa</li>
+        <li>Presume-se ilicitude e culpabilidade (defesa que alega)</li>
+        <li>Para absolver: basta <strong>dúvida razoável</strong> (art. 386, VI, CPP)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>📌 Corrente Minoritária (R. Brasileiro)</h3>
+      <ul>
+        <li>Ônus probatório é <strong>exclusivo da acusação</strong></li>
+        <li>Fundamento: presunção de inocência</li>
+        <li>Réu nunca tem ônus probatório</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Prova Emprestada</div>
+  <div class="card">
+    <h3>Requisitos da Prova Emprestada</h3>
+    <ul>
+      <li>Produzida originalmente em <strong>outro processo</strong></li>
+      <li>Transportada por <strong>certidão</strong></li>
+      <li>Aquele contra quem é usada deve ter <strong>participado do processo original</strong> (garantia do contraditório)</li>
+      <li>Não cabe empréstimo de <strong>elementos de informação</strong></li>
+    </ul>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · Súmula 591</div>
+    <p>É permitida a "prova emprestada" no processo administrativo disciplinar, desde que devidamente autorizada pelo juízo competente e respeitados o contraditório e a ampla defesa.</p>
+  </div>
+
+  <div class="section-title">Encontro Fortuito de Provas (Serendipidade)</div>
+  <div class="card">
+    <h3>Crime Achado</h3>
+    <p style="margin-bottom:0.6rem">Infração penal <strong>desconhecida e não investigada</strong> que é descoberta durante diligência voltada a outro crime.</p>
+    <ul>
+      <li><strong>STF/STJ:</strong> aceitam a prova do crime achado desde que a diligência original seja regular</li>
+      <li><strong>STF HC 129.678/SP:</strong> prova do homicídio descoberto em interceptação de tráfico é lícita, se respeitados os requisitos constitucionais e sem desvio de finalidade</li>
+      <li><strong>Aury Lopes Jr.:</strong> posição crítica — risco de "arrastão investigatório" e violação da vinculação causal</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ PROVA ILÍCITA -->
+<div id="ilicita" class="tab-content">
+  <div class="section-title">Prova Ilícita × Prova Ilegítima</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🔴 Ilícita (norma material)</h3>
+      <ul>
+        <li>Violação de <strong>norma de direito material</strong></li>
+        <li>Ex.: confissão obtida mediante tortura</li>
+        <li>Ex.: violação ilegal de domicílio</li>
+        <li>Consequência: <strong>desentranhamento</strong> (art. 157, CPP)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🟠 Ilegítima (norma processual)</h3>
+      <ul>
+        <li>Violação de <strong>norma processual</strong></li>
+        <li>Ex.: ouvir testemunha sem compromisso (art. 203)</li>
+        <li>Consequência: <strong>nulidade</strong> (art. 573 CPP)</li>
+        <li>Nucci/LFG: art. 157 abarca as duas</li>
+        <li>R. Brasileiro/Ada: abarca só as ilícitas</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="artigo">
+    <strong>Art. 5º, LVI, CF</strong> — São inadmissíveis, no processo, as provas obtidas por meios ilícitos.<br><br>
+    <strong>Art. 157 CPP</strong> — São inadmissíveis, devendo ser desentranhadas do processo, as provas ilícitas, assim entendidas as obtidas em violação a normas constitucionais ou legais.
+  </div>
+
+  <div class="section-title">Teoria dos Frutos da Árvore Envenenada</div>
+
+  <div class="card">
+    <h3>Fundamento</h3>
+    <p>Provas derivadas da ilícita também são contaminadas. Origem: <em>Silverthorne Lumber & Co. v. US</em> (1920). Expressão cunhada em <em>Nardone v. US</em> (1937).</p>
+    <div style="margin-top:0.8rem">
+      <span class="tag tag-red">Art. 157, §1º CPP</span>
+      <p style="margin-top:0.5rem; font-size:0.9rem">Provas derivadas da ilícita também são inadmissíveis, <strong>salvo</strong> quando não evidenciado o nexo de causalidade entre umas e outras, ou quando puderem ser obtidas por fonte independente.</p>
+    </div>
+  </div>
+
+  <div class="section-title">Limitações à Contaminação (Exceptions)</div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3>🌿 Fonte Independente</h3>
+      <p><em>Independent source doctrine</em> — Bynum v. EUA (1960)</p>
+      <p style="margin-top:0.5rem">Prova obtida legitimamente <strong>sem causalidade</strong> com a ilícita. Dúvida: in dubio pro reo.</p>
+      <div style="margin-top:0.6rem"><span class="tag tag-blue">Art. 157, §1º</span></div>
+    </div>
+    <div class="card">
+      <h3>🔮 Descoberta Inevitável</h3>
+      <p><em>Inevitable discovery — Nix v. Williams</em> (1984)</p>
+      <p style="margin-top:0.5rem">Prova seria descoberta de qualquer modo, independentemente da ilícita. <strong>Acusação que prova!</strong></p>
+      <div style="margin-top:0.6rem"><span class="tag tag-blue">Art. 157, §2º</span></div>
+    </div>
+    <div class="card">
+      <h3>🧹 Mancha Purgada</h3>
+      <p><em>Purged taint — Wong Sun v. US</em> (1963)</p>
+      <p style="margin-top:0.5rem">Nexo causal <strong>atenuado</strong> por evento futuro (decurso do tempo, ato voluntário do acusado etc.). Não adotada expressamente no Brasil ainda.</p>
+      <div style="margin-top:0.6rem"><span class="tag tag-orange">Não positivada no BR</span></div>
+    </div>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Atenção — Art. 157, §5º CPP (inconstitucional):</strong>
+    <p>O STF declarou inconstitucional o §5º (que vedava ao juiz que conheceu da prova ilícita proferir sentença), por violação à legalidade, juiz natural e razoabilidade — STF, ADI 6.298, 6.299, 6.300 e 6.305/DF, j. 24/08/2023 (Info 1106).</p>
+  </div>
+
+  <div class="tip">
+    <strong>✅ Pro Reo:</strong>
+    <p>A prova ilícita pode ser valorada <strong>em favor do réu</strong> (proporcionalidade pro reo). O direito de liberdade do inocente prevalece. — STF e jurisprudência majoritária.</p>
+  </div>
+
+  <div class="section-title">Cadeia de Custódia</div>
+  <div class="card">
+    <h3>Conceito (Art. 158-A CPP — Lei 13.964/2019)</h3>
+    <p style="margin-bottom:0.8rem">Conjunto de procedimentos para manter e documentar a história cronológica do vestígio coletado — do reconhecimento ao descarte.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">
+      <span class="tag tag-blue">1 Reconhecimento</span>
+      <span class="tag tag-blue">2 Isolamento</span>
+      <span class="tag tag-blue">3 Fixação</span>
+      <span class="tag tag-blue">4 Coleta</span>
+      <span class="tag tag-blue">5 Acondicionamento</span>
+      <span class="tag tag-blue">6 Transporte</span>
+      <span class="tag tag-blue">7 Recebimento</span>
+      <span class="tag tag-blue">8 Processamento</span>
+      <span class="tag tag-blue">9 Armazenamento</span>
+      <span class="tag tag-blue">10 Descarte</span>
+    </div>
+  </div>
+  <div class="alert">
+    <strong>⚠️ Quebra da Cadeia = Prova Ilícita</strong>
+    <p>A 1ª etapa é o <strong>reconhecimento</strong> (não o isolamento). Questão de concurso frequente — STJ, Analista STJ 2024.</p>
+  </div>
+</div>
+
+<!-- ============================================================ SISTEMAS -->
+<div id="sistemas" class="tab-content">
+  <div class="section-title">Sistemas de Avaliação da Prova</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Sistema</th>
+          <th>Características</th>
+          <th>Adoção no Brasil</th>
+          <th>Base Legal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--orange)">Íntima Convicção</strong><br>(Livre Convicção)</td>
+          <td>Juiz valoriza livremente as provas, inclusive externas aos autos. <strong>Não precisa fundamentar.</strong></td>
+          <td><span class="tag tag-gold">Somente no Júri</span><br>Jurados — sigilo das votações (art. 5º, XXXVIII, CF)</td>
+          <td>Art. 5º, XXXVIII, CF</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--red)">Prova Tarifada</strong><br>(Regras Legais)</td>
+          <td>Cada prova tem valor probatório <strong>fixado em abstrato</strong> pelo legislador. Ideia da confissão como "rainha das provas".</td>
+          <td><span class="tag tag-red">Exceção</span><br>Estado civil (art. 155, §único) · Corpo de delito (art. 158)</td>
+          <td>Arts. 155, §único e 158 CPP</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--green)">Convencimento Motivado</strong><br>(Persuasão Racional)</td>
+          <td>Livre valoração das provas, <strong>todas com mesmo valor</strong>, mas obrigatoriedade de fundamentar. Somente o que está nos autos.</td>
+          <td><span class="tag tag-green">Regra Geral</span><br>Sistema adotado no Brasil</td>
+          <td>Art. 93, IX, CF · Art. 155 CPP</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Iniciativa Probatória do Juiz (Art. 156 CPP)</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>⚠️ Inciso I — Antes da Ação Penal (Inconstitucional)</h3>
+      <p>Permite ao juiz ordenar produção antecipada de provas urgentes <strong>mesmo antes de iniciada a ação penal</strong>. Crítica: juiz inquisidor, viola imparcialidade.</p>
+      <p style="margin-top:0.5rem; color:var(--red)">Aury Lopes Jr.: "inquisitório substancialmente inconstitucional, tacitamente revogado pelo art. 3º-A do CPP" (suspenso pela liminar do Min. Fux)</p>
+    </div>
+    <div class="card">
+      <h3>✅ Inciso II — No Curso da Instrução (Subsidiário)</h3>
+      <p>Permite ao juiz determinar diligências para <strong>dirimir dúvida</strong> sobre ponto relevante. Admitido de forma subsidiária.</p>
+      <p style="margin-top:0.5rem; color:var(--green)">O juiz não busca provas para condenar — apenas esclarece dúvidas, sem saber previamente quem será beneficiado.</p>
+    </div>
+  </div>
+
+  <div class="section-title">Standards Probatórios (Critérios de Decisão)</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Momento Processual</th>
+          <th>Standard Exigido</th>
+          <th>Base Legal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Indiciamento</td>
+          <td>Indícios de autoria e materialidade</td>
+          <td>Art. 2º, §6º, Lei 12.830/2013</td>
+        </tr>
+        <tr>
+          <td>Recebimento da denúncia</td>
+          <td>Justa causa — fumus commissi delicti</td>
+          <td>Art. 395, III, CPP</td>
+        </tr>
+        <tr>
+          <td>Prisão preventiva</td>
+          <td>Prova da existência do crime + <strong>indício suficiente</strong> de autoria</td>
+          <td>Art. 312 CPP</td>
+        </tr>
+        <tr>
+          <td>Pronúncia (Júri)</td>
+          <td>Indícios suficientes de autoria</td>
+          <td>Art. 413 CPP</td>
+        </tr>
+        <tr>
+          <td>Condenação</td>
+          <td><strong>Certeza</strong> de autoria e materialidade — <em>beyond a reasonable doubt</em></td>
+          <td>Art. 386 CPP · STF</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================ TABELAS -->
+<div id="tabela" class="tab-content">
+  <div class="section-title">Prova × Elemento Informativo — Diferenças</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Critério</th><th>Prova</th><th>Elemento Informativo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Fase</td><td>Processual</td><td>Investigatória (IP)</td></tr>
+        <tr><td>Contraditório</td><td>Sim (real ou diferido)</td><td>Não (necessariamente)</td></tr>
+        <tr><td>Fundamentar condenação</td><td>✅ Sim</td><td>❌ Sozinho, não</td></tr>
+        <tr><td>Fundamentar preventiva</td><td>✅ Sim</td><td>✅ Sim</td></tr>
+        <tr><td>Prova emprestada</td><td>✅ Admite</td><td>❌ Não admite</td></tr>
+        <tr><td>Base legal</td><td>Art. 155 CPP</td><td>Art. 155 CPP (a contrario sensu)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Limitações à Prova Ilícita por Derivação</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Teoria</th><th>Origem</th><th>Mecanismo</th><th>Previsão no Brasil</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fonte Independente</strong></td>
+          <td>Bynum v. EUA (1960)</td>
+          <td>Prova obtida de fonte autônoma, sem causalidade com a ilícita</td>
+          <td>Art. 157, §1º CPP</td>
+        </tr>
+        <tr>
+          <td><strong>Descoberta Inevitável</strong></td>
+          <td>Nix v. Williams (1984)</td>
+          <td>Prova seria encontrada de qualquer modo pelos meios de investigação comuns</td>
+          <td>Art. 157, §2º CPP</td>
+        </tr>
+        <tr>
+          <td><strong>Mancha Purgada</strong></td>
+          <td>Wong Sun v. US (1963)</td>
+          <td>Nexo causal atenuado por evento superveniente (ato voluntário, tempo etc.)</td>
+          <td>Não positivada — doutrinária</td>
+        </tr>
+        <tr>
+          <td><strong>Pro Reo</strong></td>
+          <td>Doutrina/jurisprudência brasileira</td>
+          <td>Admissão da prova ilícita em favor do réu (proporcionalidade)</td>
+          <td>Jurisprudência STF/STJ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Tipos de Testemunha — Tabela Comparativa</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Tipo</th><th>Características</th><th>Presta Compromisso?</th><th>Conta para limite?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Numerária</td><td>Arrolada pelas partes</td><td>✅ Sim</td><td>✅ Sim</td></tr>
+        <tr><td>Extranumerária</td><td>Juiz (art. 209), sem compromisso, nada sabe</td><td>⚠️ Depende</td><td>❌ Não</td></tr>
+        <tr><td>Informante/Declarante</td><td>Art. 206 · Menor 14 · Doente mental</td><td>❌ Não</td><td>❌ Não</td></tr>
+        <tr><td>Direta (visual)</td><td>Presenciou o fato</td><td>✅ Em regra</td><td>✅ Em regra</td></tr>
+        <tr><td>Indireta (auricular)</td><td>Ouviu falar — hearsay</td><td>✅ Em regra</td><td>✅ Em regra</td></tr>
+        <tr><td>Referida</td><td>Mencionada por outra testemunha (art. 209, §1º)</td><td>⚠️ Depende</td><td>❌ Não</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================ ROTEIRO -->
+<div id="roteiro" class="tab-content">
+  <div class="section-title">Roteiro de Estudo — Teoria Geral das Provas</div>
+
+  <div class="roteiro-item">
+    <div class="roteiro-num">1</div>
+    <div>
+      <h4>Dominar os sentidos de "prova" e distinguir de elemento informativo</h4>
+      <p>Art. 155 CPP. STF HC 96.356/RS. STJ REsp 1.740.921/GO. Saber as 3 exceções (cautelares, não repetíveis, antecipadas) e o que é contraditório diferido.</p>
+    </div>
+  </div>
+  <div class="roteiro-item">
+    <div class="roteiro-num">2</div>
+    <div>
+      <h4>Compreender os sistemas de avaliação da prova</h4>
+      <p>Íntima convicção (Júri) × Prova tarifada (exceções: estado civil, corpo de delito) × Convencimento motivado (regra geral — art. 93, IX, CF + art. 155 CPP).</p>
+    </div>
+  </div>
+  <div class="roteiro-item">
+    <div class="roteiro-num">3</div>
+    <div>
+      <h4>Ônus da prova — correntes doutrinárias</h4>
+      <p>Corrente majoritária (acusação prova o fato típico + autoria + causalidade + dolo/culpa; presume-se ilicitude e culpabilidade) × Corrente minoritária (ônus exclusivo da acusação — presunção de inocência absoluta).</p>
+    </div>
+  </div>
+  <div class="roteiro-item">
+    <div class="roteiro-num">4</div>
+    <div>
+      <h4>Prova ilícita: conceito, derivação e limitações</h4>
+      <p>Art. 5º, LVI, CF + Art. 157 CPP. Diferença entre ilícita (norma material) × ilegítima (norma processual). Frutos da árvore envenenada. 3 teorias limitadoras: fonte independente, descoberta inevitável, mancha purgada. Pro reo.</p>
+    </div>
+  </div>
+  <div class="roteiro-item">
+    <div class="roteiro-num">5</div>
+    <div>
+      <h4>Cadeia de custódia (Arts. 158-A ao 158-F CPP)</h4>
+      <p>Conceito, início (reconhecimento), 10 etapas. Quebra = prova ilícita. Incluído pela Lei 13.964/2019.</p>
+    </div>
+  </div>
+  <div class="roteiro-item">
+    <div class="roteiro-num">6</div>
+    <div>
+      <h4>Serendipidade / Crime Achado</h4>
+      <p>STF HC 129.678/SP (Min. Alexandre de Moraes). STJ admite mesmo sem conexão. Crítica de Aury Lopes Jr. sobre risco de arrastão investigatório.</p>
+    </div>
+  </div>
+  <div class="roteiro-item">
+    <div class="roteiro-num">7</div>
+    <div>
+      <h4>Prova emprestada e requisitos</h4>
+      <p>STJ Súmula 591. Contraditório no processo de origem. Elemento informativo não pode ser emprestado. Prova pericial não repetível pode.</p>
+    </div>
+  </div>
+  <div class="roteiro-item">
+    <div class="roteiro-num">8</div>
+    <div>
+      <h4>Art. 157, §5º CPP — inconstitucional</h4>
+      <p>STF ADI 6.298, 6.299, 6.300 e 6.305/DF (j. 24/08/2023 · Info 1106). O juiz que conheceu a prova ilícita pode proferir sentença — regra atual.</p>
+    </div>
+  </div>
+
+  <div class="section-title">Jurisprudência Estruturante</div>
+  <div class="juris">
+    <div class="tribunal">STF · HC 96.356/RS</div>
+    <p>Elementos informativos do IP não podem fundamentar condenação sozinhos.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · REsp 1.740.921/GO (19/11/2018)</div>
+    <p>Confirmação: elementos informativos não fundamentam condenação por si só.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STF · RE-AgR 425.734/MG</div>
+    <p>Elementos informativos podem, subsidiariamente, <em>complementar</em> outras provas.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STF · ADI 6.298, 6.299, 6.300 e 6.305/DF (Info 1106)</div>
+    <p>Art. 157, §5º CPP é inconstitucional (juiz pode julgar mesmo tendo visto prova ilícita).</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · AREsp 2.123.334-MG (Info 819 · 20/6/2024)</div>
+    <p>Confissão extrajudicial admissível exige formalidade e documentação em estabelecimento estatal público. Efeitos modulados a partir de 02/07/2024.</p>
+  </div>
+</div>
+
+<!-- ============================================================ CASOS PRÁTICOS -->
+<div id="casos" class="tab-content">
+  <div class="section-title">Casos Práticos — Teoria Geral das Provas</div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 1 — A Confissão sob Tortura e o DNA</h3>
+      <span class="tag tag-red">Prova Ilícita por Derivação</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">Carlos foi detido como suspeito de homicídio. Após horas de interrogatório com uso de violência física pelos policiais, confessou o crime e indicou o local onde havia escondido a arma do crime. Policiais encontraram a arma, nela havia DNA da vítima. O Ministério Público pretende usar tanto a confissão quanto o laudo de DNA na instrução penal.</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> A confissão pode ser usada como prova na ação penal? Fundamente.</li>
+        <li><strong>2.</strong> O laudo de DNA da arma encontrada a partir da indicação de Carlos é prova lícita ou ilícita?</li>
+        <li><strong>3.</strong> Existe alguma teoria que poderia validar o laudo de DNA? Quais as condições?</li>
+        <li><strong>4.</strong> Qual o procedimento correto para o juiz ao tomar conhecimento dessas provas?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. Não. A confissão obtida mediante tortura é prova ilícita (viola norma material — proibição de tortura, art. 5º, III, CF + art. 157 CPP) e deve ser desentranhada.<br><br>
+          2. O laudo de DNA, embora produzido licitamente por si só, é prova derivada da ilícita (confissão obtida por tortura). Aplica-se a teoria dos frutos da árvore envenenada (art. 157, §1º CPP).<br><br>
+          3. Teorias possíveis: (a) Fonte independente — se a polícia já tinha outra pista legítima que levaria à arma, independentemente da confissão; (b) Descoberta inevitável (art. 157, §2º CPP) — se demonstrar que a arma seria encontrada pelos meios de investigação comuns. Ônus: acusação.<br><br>
+          4. O juiz deve determinar o desentranhamento de ambas (art. 157, §3º CPP). O §5º, que vedava ao juiz proferir sentença, foi declarado inconstitucional pelo STF (ADI 6.298/DF, Info 1106).
+        </p>
+      </details>
+    </div>
+  </div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 2 — A Interceptação e o Homicídio Descoberto</h3>
+      <span class="tag tag-orange">Serendipidade / Crime Achado</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">O delegado obteve autorização judicial para interceptar o telefone de Pedro, investigado por tráfico de drogas. No 10º dia de interceptação, Pedro combina com um amigo os detalhes de um homicídio que havia praticado uma semana antes, mencionando o local do corpo. A investigação do tráfico ainda está em curso. O MP pretende usar a gravação para instaurar inquérito pelo homicídio.</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> A prova do homicídio colhida na interceptação autorizada para apurar tráfico é lícita? Fundamente com base na jurisprudência do STF e STJ.</li>
+        <li><strong>2.</strong> A que doutrina se denomina essa situação?</li>
+        <li><strong>3.</strong> Qual a posição crítica de Aury Lopes Jr. sobre o tema?</li>
+        <li><strong>4.</strong> Como advogado de Pedro, qual argumento você utilizaria?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. Sim, segundo o STF (HC 129.678/SP, Min. Alexandre de Moraes) e o STJ: a prova do crime achado é lícita desde que a diligência original (interceptação) seja regular, sem desvio de finalidade ou fraude. Não é necessária a conexão entre os crimes.<br><br>
+          2. Teoria do Encontro Fortuito de Provas (Serendipidade / Princípio da Serendipidade). O crime descoberto é denominado "crime achado".<br><br>
+          3. Aury Lopes Jr. critica: se usarmos a prova com desvio causal, estaremos usando prova ilícita. A investigação deve partir de prova lícita. Admitir o contrário gera paradoxo e contamina todos os atos subsequentes. Risco do "arrastão investigatório".<br><br>
+          4. Como advogado de Pedro: arguir que a interceptação foi autorizada especificamente para o crime de tráfico, sendo o uso para apurar homicídio desvio de finalidade (violação do princípio da especialidade da prova / vinculação causal). Pedir desentranhamento da prova referente ao homicídio.
+        </p>
+      </details>
+    </div>
+  </div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 3 — O Inquérito e a Condenação</h3>
+      <span class="tag tag-blue">Art. 155 CPP</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">Ricardo foi denunciado por homicídio. Durante a instrução, foram colhidos depoimentos de 3 testemunhas em juízo, mas duas delas contradisseram os elementos colhidos no IP. O juiz, em sentença, fundamentou a condenação "com base em todo o conjunto probatório, incluindo os depoimentos colhidos no inquérito policial, que corroboram a autoria de Ricardo".</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> A sentença está corretamente fundamentada? Há algum vício?</li>
+        <li><strong>2.</strong> Em que casos o juiz poderia legalmente se valer de elementos colhidos no IP?</li>
+        <li><strong>3.</strong> Como a defesa deve reagir processualmente?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. Depende: o art. 155 CPP permite que elementos informativos do IP complementem provas produzidas em juízo. Mas o art. 155 proíbe que a condenação se fundamente <em>exclusivamente</em> nos elementos informativos. Se as testemunhas judiciais contradisseram os depoimentos do IP e o juiz os usou como reforço sem explicitar a distinção, há risco de nulidade da fundamentação.<br><br>
+          2. Legalmente: elementos informativos podem complementar provas produzidas em juízo (STF, RE-AgR 425.734/MG). Provas cautelares, não repetíveis e antecipadas também valem diretamente (art. 155, parte final).<br><br>
+          3. Defesa: interpor apelação arguindo nulidade da sentença por violação ao art. 155 CPP c/c art. 93, IX, CF (falta de fundamentação adequada). Alternativamente, HC ao STJ/STF se houver ilegalidade flagrante na fundamentação.
+        </p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

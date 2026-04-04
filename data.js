@@ -46,7 +46,30 @@ const materias = [
     id: "processual-penal",
     titulo: "Direito Processual Penal",
     icone: "🏛️",
-    turmas: []
+    turmas: [
+      {
+        id: "processual-penal-ii",
+        titulo: "Direito Processual Penal II",
+        indice: "conteudo/processual-penal-ii/index.html",
+        temas: [
+          {
+            titulo: "Teoria Geral das Provas",
+            descricao: "Mapa mental · Prova vs elemento informativo · Sistemas de avaliação · Prova ilícita · Cadeia de custódia",
+            arquivo: "conteudo/processual-penal-ii/01-teoria-geral-provas.html"
+          },
+          {
+            titulo: "Provas em Espécie",
+            descricao: "Perícia · Interrogatório · Confissão · Prova testemunhal · Reconhecimento · Busca e apreensão",
+            arquivo: "conteudo/processual-penal-ii/02-provas-em-especie.html"
+          },
+          {
+            titulo: "Prisões e Cautelares",
+            descricao: "Flagrante · Preventiva · Temporária · Medidas cautelares · Prisão domiciliar · Fiança · Audiência de custódia",
+            arquivo: "conteudo/processual-penal-ii/03-prisoes.html"
+          }
+        ]
+      }
+    ]
   },
   {
     id: "tributario",

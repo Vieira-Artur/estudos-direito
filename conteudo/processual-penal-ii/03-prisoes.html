@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prisões — Processo Penal II</title>
+<style>
+    :root {
+    --bg:      #ffffff;
+    --bg2:     #f7f7f7;
+    --bg3:     #eeeeee;
+    --border:  #d0d0d0;
+    --text:    #1a1a1a;
+    --text2:   #444444;
+    --accent:  #1F497D;
+    --accent2: #1F497D;
+    --accent-light: #dce6f1;
+    --blue:    #1F497D;
+    --blue-light: #dce6f1;
+    --green:        #1a5c1a;
+    --green-light:  #d6f0d6;
+    --red:          #8b1a1a;
+    --red-light:    #fce8e8;
+    --orange:       #7a3800;
+    --orange-light: #fdebd6;
+    --purple:       #4a1a8a;
+    --purple-light: #ede5fb;
+    --teal:         #0a5c4a;
+    --teal-light:   #d6f0e8;
+    --yellow:       #5a4000;
+    --yellow-light: #fdf6d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:      #13131f;
+      --bg2:     #1d1d2e;
+      --bg3:     #262636;
+      --border:  #3a3a52;
+      --text:    #e8e8f0;
+      --text2:   #a8a8c0;
+      --accent:  #7a9cf0;
+      --accent2: #9ab4f8;
+      --accent-light: #1a2550;
+      --blue:         #9ab4f8;
+      --blue-light:   #1a2550;
+      --green:        #6fd86f;
+      --green-light:  #0d2e0d;
+      --red:          #f08080;
+      --red-light:    #2e0d0d;
+      --orange:       #f0a060;
+      --orange-light: #2e1500;
+      --purple:       #c0a0f8;
+      --purple-light: #200a40;
+      --teal:         #60d8b8;
+      --teal-light:   #072e22;
+      --yellow:       #f0d060;
+      --yellow-light: #2e2000;
+    }
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background: var(--bg);color:var(--text);font-family:'Georgia','Times New Roman',serif;line-height:1.7;}
+  header{background: var(--bg3);border-bottom:2px solid var(--accent2);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
+  header::before{content:'🔒';position:absolute;right:3rem;top:50%;transform:translateY(-50%);font-size:6rem;opacity:0.07;pointer-events:none;}
+  header h1{font-size:1.9rem;color:var(--accent2);}
+  header p{color:var(--text2);font-size:0.95rem;margin-top:0.4rem;}
+  .badge{display:inline-block;background:var(--accent2);color:#ffffff;padding:0.15rem 0.7rem;border-radius:3px;font-size:0.75rem;font-family:monospace;font-weight:bold;margin-bottom:0.8rem;}
+  nav{background: var(--bg2);border-bottom:1px solid var(--border);display:flex;gap:0;overflow-x:auto;}
+  nav button{background:none;border:none;color:var(--text2);padding:1rem 1.2rem;cursor:pointer;font-family:inherit;font-size:0.87rem;white-space:nowrap;border-bottom:3px solid transparent;transition:all 0.2s;}
+  nav button:hover{color:var(--text);background: var(--bg3);}
+  nav button.active{color:var(--accent2);border-bottom-color:var(--accent2);}
+  .tab-content{display:none;padding:2rem;max-width:1100px;margin:0 auto;}
+  .tab-content.active{display:block;}
+  .section-title{font-size:1.3rem;color:var(--accent2);border-left:4px solid var(--accent2);padding-left:1rem;margin-bottom:1.5rem;margin-top:2.5rem;}
+  .section-title:first-child{margin-top:0;}
+  .card{background: var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.4rem;margin-bottom:1.2rem;transition:border-color 0.2s;}
+  .card:hover{border-color:var(--accent2);}
+  .card h3{color:var(--accent2);font-size:1rem;margin-bottom:0.6rem;}
+  .card p,.card li{color:var(--text2);font-size:0.92rem;}
+  .card ul{padding-left:1.2rem;}
+  .card li{margin-bottom:0.3rem;}
+  .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;}
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;}
+  .table-wrap{overflow-x:auto;margin-bottom:1.5rem;}
+  table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+  th{background: var(--bg3);color:var(--accent2);padding:0.75rem 1rem;text-align:left;border:1px solid var(--border);font-weight:600;}
+  td{padding:0.65rem 1rem;border:1px solid var(--border);color:var(--text2);vertical-align:top;}
+  tr:nth-child(even) td{background:var(--bg2);}
+  tr:hover td{background:var(--accent-light);}
+  .tag{display:inline-block;padding:0.15rem 0.55rem;border-radius:3px;font-size:0.75rem;font-family:monospace;font-weight:bold;margin:0.15rem;}
+  .tag-blue{background:var(--blue-light);color:var(--blue);}
+  .tag-green{background: var(--green-light);color:var(--green);}
+  .tag-red{background: var(--red-light);color:var(--red);}
+  .tag-red2{background:var(--accent-light);color:var(--accent2);}
+  .tag-purple{background:var(--purple-light);color:var(--purple);}
+  .tag-orange{background:var(--orange-light);color:var(--orange);}
+  .tag-yellow{background:var(--yellow-light);color:var(--yellow);}
+  .juris{background: var(--blue-light);border-left:3px solid var(--blue);padding:1rem 1.2rem;border-radius:0 6px 6px 0;margin-bottom:1rem;}
+  .juris .tribunal{color:var(--blue);font-size:0.8rem;font-family:monospace;font-weight:bold;}
+  .juris p{color:var(--text2);font-size:0.9rem;margin-top:0.3rem;}
+  .alert{background: var(--red-light);border:1px solid var(--red);border-radius:6px;padding:1rem 1.2rem;margin-bottom:1rem;}
+  .alert strong{color:var(--red);}
+  .alert p{color:var(--text2);font-size:0.9rem;margin-top:0.3rem;}
+  .tip{background: var(--green-light);border:1px solid var(--green);border-radius:6px;padding:1rem 1.2rem;margin-bottom:1rem;}
+  .tip strong{color:var(--green);}
+  .tip p{color:var(--text2);font-size:0.9rem;margin-top:0.3rem;}
+  .warn{background: var(--orange-light);border:1px solid var(--orange);border-radius:6px;padding:1rem 1.2rem;margin-bottom:1rem;}
+  .warn strong{color:var(--orange);}
+  .warn p{color:var(--text2);font-size:0.9rem;margin-top:0.3rem;}
+  .artigo{background: var(--blue-light);border:1px solid var(--border);border-radius:6px;padding:0.9rem 1.2rem;margin-bottom:0.8rem;font-family:monospace;font-size:0.87rem;color: var(--text);}
+  .artigo strong{color:var(--blue);}
+  hr{border:none;border-top:1px solid var(--border);margin:2rem 0;}
+  .roteiro-item{display:flex;gap:1rem;align-items:flex-start;background: var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1rem 1.2rem;margin-bottom:0.8rem;transition:border-color 0.2s;}
+  .roteiro-item:hover{border-color:var(--accent2);}
+  .roteiro-num{background:var(--accent2);color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:0.85rem;flex-shrink:0;margin-top:0.1rem;}
+  .roteiro-item h4{color:var(--text);font-size:0.95rem;margin-bottom:0.3rem;}
+  .roteiro-item p{color:var(--text2);font-size:0.88rem;}
+  .caso{background: var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:1.5rem;}
+  .caso-header{background: var(--bg3);padding:1rem 1.4rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;}
+  .caso-header h3{color:var(--accent2);font-size:1rem;}
+  .caso-body{padding:1.4rem;}
+  .caso-fatos{color:var(--text);font-size:0.92rem;line-height:1.8;margin-bottom:1.2rem;}
+  .caso-perguntas{list-style:none;padding:0;}
+  .caso-perguntas li{background: var(--bg3);border-left:3px solid var(--purple);padding:0.7rem 1rem;border-radius:0 4px 4px 0;margin-bottom:0.5rem;font-size:0.9rem;color:var(--text2);}
+  .caso-perguntas li strong{color:var(--purple);}
+  details{margin-bottom:0.5rem;}
+  details summary{cursor:pointer;padding:0.7rem 1rem;background: var(--bg3);border-radius:4px;color:var(--green);font-size:0.88rem;font-weight:bold;list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary::before{content:'▶ ';font-size:0.7rem;}
+  details[open] summary::before{content:'▼ ';}
+  details p{padding:0.8rem 1rem;background: var(--green-light);color:var(--text2);font-size:0.88rem;border-radius:0 0 4px 4px;}
+  .mapa{background: var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.8rem;margin-bottom:1.5rem;}
+  .mapa-label{font-size:0.75rem;color:var(--text2);margin-bottom:0.5rem;font-style:italic;margin-top:1.2rem;}
+  .mapa-row{display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.8rem;}
+  .mapa-node{background: var(--bg3);border:1px solid var(--border);border-radius:6px;padding:0.6rem 1rem;font-size:0.85rem;color:var(--text);}
+  .mapa-node.red{border-color:var(--accent2);color:var(--accent2);background:var(--accent-light);}
+  .mapa-node.blue{border-color:var(--blue);color:var(--blue);background: var(--blue-light);}
+  .mapa-node.green{border-color:var(--green);color:var(--green);background: var(--green-light);}
+  .mapa-node.orange{border-color:var(--orange);color:var(--orange);background: var(--orange-light);}
+  .mapa-node.yellow{border-color:var(--yellow);color:var(--yellow);background: var(--yellow-light);}
+  .mapa-node.purple{border-color:var(--purple);color:var(--purple);background: var(--purple-light);}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;margin:1rem 0;}
+  .flow-step{background: var(--bg3);border:1px solid var(--border);border-radius:6px;padding:0.7rem 1rem;font-size:0.85rem;text-align:center;flex:1;min-width:120px;}
+  .flow-arrow{color:var(--accent2);font-size:1.3rem;flex-shrink:0;}
+  @media(max-width:600px){.grid-2,.grid-3{grid-template-columns:1fr;}header h1{font-size:1.4rem;}.tab-content{padding:1rem;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">PROCESSO PENAL II</div>
+  <h1>Prisões e Medidas Cautelares</h1>
+  <p>Prof. Artur Vieira · Direito Processual Penal II · Material de Apoio</p>
+</header>
+<nav>
+  <button class="active" onclick="show('mapa')">🗺 Mapa Mental</button>
+  <button onclick="show('flagrante')">🚨 Flagrante</button>
+  <button onclick="show('preventiva')">⚖️ Preventiva</button>
+  <button onclick="show('temporaria')">⏱ Temporária</button>
+  <button onclick="show('cautelares')">📋 Cautelares Diversas</button>
+  <button onclick="show('domiciliar')">🏠 Domiciliar & Fiança</button>
+  <button onclick="show('tabela')">📊 Tabelas</button>
+  <button onclick="show('roteiro')">📖 Roteiro</button>
+  <button onclick="show('casos')">⚖️ Casos</button>
+</nav>
+
+<!-- MAPA MENTAL -->
+<div id="mapa" class="tab-content active">
+  <div class="section-title">Mapa Mental — Prisões e Medidas Cautelares</div>
+  <div class="mapa">
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <span style="background:var(--accent2);color:#fff;border-radius:8px;padding:0.8rem 1.5rem;font-weight:bold;font-size:1.1rem;display:inline-block">PRISÕES NO PROCESSO PENAL</span>
+    </div>
+
+    <div class="mapa-label">ESPÉCIES DE PRISÃO</div>
+    <div class="mapa-row">
+      <div class="mapa-node orange">Extrapenal<br><small>Civil (alimentos) · Militar</small></div>
+      <div class="mapa-node yellow">Penal (pena)<br><small>Sentença com trânsito em julgado</small></div>
+      <div class="mapa-node red">Cautelar / Provisória<br><small>Flagrante · Preventiva · Temporária</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">PRISÃO EM FLAGRANTE (Arts. 301–310-A)</div>
+    <div class="mapa-row">
+      <div class="mapa-node red">Próprio (I)<br><small>Está cometendo</small></div>
+      <div class="mapa-node red">Impróprio (II/III)<br><small>Acabou de cometer / perseguido logo após</small></div>
+      <div class="mapa-node red">Presumido (IV)<br><small>Encontrado logo depois com objetos do crime</small></div>
+    </div>
+    <div class="mapa-row">
+      <div class="mapa-node green">Esperado<br><small>Lícito · Policia aguarda sem provocar</small></div>
+      <div class="mapa-node green">Controlado<br><small>Lícito · Ação controlada (Leis Drogas/ORCRIM)</small></div>
+      <div class="mapa-node orange">Preparado<br><small>ILÍCITO · Crime impossível · Súm. 145 STF</small></div>
+      <div class="mapa-node red">Forjado<br><small>ILÍCITO · Prova criada artificialmente</small></div>
+    </div>
+    <div class="mapa-row">
+      <div class="mapa-node blue">Audiência de custódia<br><small>Prazo: 24h após prisão (art. 310)</small></div>
+      <div class="mapa-node blue">3 opções do juiz<br><small>Relaxar · Converter em preventiva · Liberdade provisória</small></div>
+      <div class="mapa-node blue">Não pode de ofício<br><small>Súm. 676 STJ · Lei 13.964/2019</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">PRISÃO PREVENTIVA (Arts. 311–316)</div>
+    <div class="mapa-row">
+      <div class="mapa-node red">Pressupostos<br><small>Fumus delicti + Periculum libertatis</small></div>
+      <div class="mapa-node red">Fundamentos (art. 312)<br><small>Ordem pública · Ordem econômica · Instrução criminal · Aplicação da lei penal</small></div>
+      <div class="mapa-node orange">Revisão obrigatória<br><small>A cada 90 dias (art. 316, §único)</small></div>
+    </div>
+    <div class="mapa-row">
+      <div class="mapa-node blue">Admissibilidade (art. 313)<br><small>Pena &gt;4 anos · Reincidente doloso · VD · Identidade civil</small></div>
+      <div class="mapa-node green">Não cabimento<br><small>Excludentes de ilicitude (art. 314) · Crime culposo</small></div>
+      <div class="mapa-node yellow">Sem de ofício<br><small>Só a requerimento (após 13.964/2019)</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">PRISÃO TEMPORÁRIA (Lei 7.960/89)</div>
+    <div class="mapa-row">
+      <div class="mapa-node red">Requisitos<br><small>(I ou II) + III</small></div>
+      <div class="mapa-node orange">Prazo normal<br><small>5 dias + 5 dias</small></div>
+      <div class="mapa-node red">Prazo hediondo<br><small>30 dias + 30 dias</small></div>
+      <div class="mapa-node blue">Só no IP<br><small>Não cabe na ação penal</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">MEDIDAS CAUTELARES DIVERSAS (Art. 319)</div>
+    <div class="mapa-row">
+      <div class="mapa-node green">9 medidas alternativas à prisão<br><small>Comparecimento · Proibições · Recolhimento domiciliar · Suspensão função · Internação provisória · Fiança · Monitoração eletrônica</small></div>
+      <div class="mapa-node blue">Ultima ratio<br><small>Preventiva só se art. 319 insuficiente (art. 282, §6º)</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- FLAGRANTE -->
+<div id="flagrante" class="tab-content">
+  <div class="section-title">Espécies de Flagrante</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Espécie</th><th>Situação</th><th>Validade</th><th>Base Legal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Próprio / Real</strong></td><td>Agente está cometendo a infração</td><td><span class="tag tag-green">Lícito</span></td><td>Art. 302, I</td></tr>
+        <tr><td><strong>Impróprio / Imperfeito</strong></td><td>Acaba de cometer + perseguido logo após</td><td><span class="tag tag-green">Lícito</span></td><td>Art. 302, II e III</td></tr>
+        <tr><td><strong>Presumido / Ficto</strong></td><td>Encontrado logo depois com instrumentos/objetos do crime (sem perseguição)</td><td><span class="tag tag-green">Lícito</span></td><td>Art. 302, IV</td></tr>
+        <tr><td><strong>Esperado</strong></td><td>Polícia aguarda o momento da prática sem provocar</td><td><span class="tag tag-green">Lícito</span></td><td>Jurisprudência</td></tr>
+        <tr><td><strong>Controlado</strong></td><td>Retardamento da intervenção policial (ação controlada)</td><td><span class="tag tag-green">Lícito</span></td><td>Leis 11.343 / 12.850</td></tr>
+        <tr><td><strong>Preparado</strong></td><td>Agente provocador — crime impossível</td><td><span class="tag tag-red">Ilícito</span></td><td>Súm. 145 STF</td></tr>
+        <tr><td><strong>Forjado</strong></td><td>Policiais/terceiros criam provas de crime inexistente</td><td><span class="tag tag-red">Ilícito</span></td><td>Jurisprudência</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn">
+    <strong>⚠️ Tráfico × Flagrante Preparado:</strong>
+    <p>No tráfico de drogas, o crime é de ação múltipla e permanente. Condutas como "ter em depósito", "guardar", "transportar" consumam-se antes da atuação policial — afasta a tese de flagrante preparado (STJ, Jurisprudência em Teses).</p>
+  </div>
+
+  <div class="section-title">Sujeito Ativo do Flagrante</div>
+  <div class="grid-2">
+    <div class="card"><h3>🟢 Qualquer pessoa do povo</h3><p>Faculdade (art. 301, 1ª parte). Não é obrigação.</p></div>
+    <div class="card"><h3>🔴 Autoridade policial e agentes</h3><p>Obrigação — devem prender quem for encontrado em flagrante delito (art. 301, 2ª parte).</p></div>
+  </div>
+
+  <div class="section-title">Audiência de Custódia (Art. 310)</div>
+  <div class="flow">
+    <div class="flow-step">Prisão em Flagrante<span>Momento da captura</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">APF enviado ao juiz<span>Em até 24h</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Audiência de custódia<span>Em até 24h (totalidade)</span></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step" style="border-color:var(--accent2)">Decisão do juiz<br><span style="color:var(--accent2)">I – Relaxar · II – Converter em preventiva · III – Lib. provisória</span></div>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Súmula 676 STJ — Pós Lei 13.964/2019:</strong>
+    <p>Não é mais possível ao juiz, de ofício, decretar ou converter prisão em flagrante em preventiva. Necessário requerimento do MP, querelante, assistente ou representação da autoridade policial.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · 5ª Turma · AgRg RHC 136.708/MS (Info 691)</div>
+    <p>O posterior requerimento da autoridade policial ou manifestação favorável do MP supre o vício de ausência de prévio requerimento na conversão da prisão em flagrante em preventiva pelo juiz.</p>
+  </div>
+
+  <div class="section-title">Novidades — Lei 15.272/2025 (Art. 310, §§5º e 6º)</div>
+  <div class="card">
+    <h3>Circunstâncias que recomendam conversão em preventiva</h3>
+    <ul>
+      <li>I – Provas de prática reiterada de infrações penais</li>
+      <li>II – Infração com violência ou grave ameaça</li>
+      <li>III – Agente já liberado em prévia audiência de custódia por outra infração (salvo absolvição)</li>
+      <li>IV – Infração praticada na pendência de IP ou ação penal</li>
+      <li>V – Fuga ou perigo de fuga</li>
+      <li>VI – Perigo para coleta, conservação ou incolumidade da prova</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Coleta de material biológico (Art. 310-A — Lei 15.272/2025)</h3>
+    <p>Em crimes com violência/grave ameaça, crimes sexuais ou hediondos, o MP ou a autoridade policial deve requerer ao juiz coleta de material biológico do custodiado para obtenção do perfil genético. Realizada preferencialmente na audiência de custódia ou em até 10 dias.</p>
+  </div>
+</div>
+
+<!-- PREVENTIVA -->
+<div id="preventiva" class="tab-content">
+  <div class="section-title">Pressupostos da Prisão Preventiva (Art. 312)</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>🔍 Fumus Comissi Delicti</h3>
+      <ul>
+        <li><strong>Prova</strong> da existência do crime (materialidade)</li>
+        <li><strong>Indício suficiente</strong> de autoria (menor valor persuasivo que a prova)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>⚠️ Periculum Libertatis</h3>
+      <p>Perigo gerado pelo estado de liberdade do imputado. Fundamentos (art. 312, caput):</p>
+      <ul>
+        <li>Garantia da <strong>ordem pública</strong></li>
+        <li>Garantia da <strong>ordem econômica</strong></li>
+        <li>Conveniência da <strong>instrução criminal</strong></li>
+        <li>Assegurar a <strong>aplicação da lei penal</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Critérios de Periculosidade — Art. 312, §3º (Lei 15.272/2025)</div>
+  <div class="card">
+    <ul>
+      <li>I – Modus operandi (violência reiterada, premeditação)</li>
+      <li>II – Participação em organização criminosa</li>
+      <li>III – Natureza, quantidade e variedade de drogas, armas ou munições</li>
+      <li>IV – Fundado receio de reiteração delitiva (inclusive outros IPs e ações penais em curso)</li>
+    </ul>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Proibições Expressas — Art. 312, §4º (Lei 15.272/2025):</strong>
+    <p>É <strong>incabível</strong> a preventiva com base em gravidade abstrata do delito. Necessário demonstrar concretamente a periculosidade do agente.</p>
+  </div>
+
+  <div class="section-title">Admissibilidade (Art. 313)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Hipótese</th><th>Condição</th></tr></thead>
+      <tbody>
+        <tr><td>I – Crime doloso</td><td>Pena privativa de liberdade máxima <strong>superior a 4 anos</strong></td></tr>
+        <tr><td>II – Reincidente doloso</td><td>Condenação com trânsito em julgado (ressalvado art. 64, I, CP)</td></tr>
+        <tr><td>III – Violência Doméstica</td><td>Crimes envolvendo mulher, criança, adolescente, idoso, enfermo ou pessoa com deficiência — para garantir medidas protetivas</td></tr>
+        <tr><td>§1º – Identidade civil duvidosa</td><td>Quando não fornece elementos suficientes para esclarecimento — liberado imediatamente após identificação</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Atenção:</strong>
+    <p>
+      — Crimes culposos: <strong>não cabe</strong> preventiva<br>
+      — Contravenção penal, mesmo em violência doméstica: <strong>não cabe</strong> preventiva (STJ HC 437.535-SP, Info 632)<br>
+      — Art. 313, §2º: Não pode ser decretada como antecipação de pena ou decorrência imediata de denúncia recebida
+    </p>
+  </div>
+
+  <div class="section-title">Fundamentação e Prazo</div>
+  <div class="artigo">
+    <strong>Art. 315, §2º CPP</strong> — Não se considera fundamentada a decisão que:<br>
+    I – limitar-se a indicar ou parafrasear ato normativo sem explicar sua relação com o caso;<br>
+    II – empregar conceitos jurídicos indeterminados sem explicar o motivo concreto;<br>
+    III – invocar motivos que se prestariam a justificar qualquer outra decisão;<br>
+    IV – não enfrentar todos os argumentos deduzidos;<br>
+    V – limitar-se a invocar precedente sem identificar seus fundamentos determinantes;<br>
+    VI – deixar de seguir súmula sem demonstrar distinção ou superação.
+  </div>
+  <div class="artigo">
+    <strong>Art. 316, §único CPP</strong> — Decretada a preventiva, revisão obrigatória a cada <strong>90 dias</strong>, de ofício, sob pena de tornar a prisão ilegal.
+  </div>
+  <div class="juris">
+    <div class="tribunal">STF · Plenário · ADI 6581/DF e ADI 6582/DF (Info 1046)</div>
+    <p>O transcurso do prazo de 90 dias <strong>não acarreta automaticamente</strong> a revogação da preventiva. A ilegalidade é declarada, mas cabe análise do caso concreto.</p>
+  </div>
+
+  <div class="section-title">Não Cabimento (Art. 314)</div>
+  <div class="card">
+    <h3>Excludentes de Ilicitude</h3>
+    <p>A preventiva não será decretada se o agente praticou o fato em:</p>
+    <ul>
+      <li>Estado de necessidade</li>
+      <li>Legítima defesa</li>
+      <li>Estrito cumprimento de dever legal ou exercício regular de direito</li>
+    </ul>
+    <p style="margin-top:0.5rem; color:var(--text2); font-size:0.88rem">Extensivo às excludentes de culpabilidade também — interpretação doutrinária dominante.</p>
+  </div>
+</div>
+
+<!-- TEMPORÁRIA -->
+<div id="temporaria" class="tab-content">
+  <div class="section-title">Prisão Temporária (Lei 7.960/89)</div>
+  <div class="card">
+    <h3>Conceito</h3>
+    <p>Prisão cautelar decretada <strong>durante a fase investigatória (IP)</strong>, com prazo preestabelecido, para obter elementos quanto à autoria e materialidade de crimes específicos.</p>
+    <div style="margin-top:0.6rem">
+      <span class="tag tag-red2">Só no IP — não cabe na ação penal</span>
+      <span class="tag tag-red2">Não cabe de ofício</span>
+    </div>
+  </div>
+
+  <div class="section-title">Requisitos Cumulativos</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Passo 1 — Inciso I ou II</h3>
+      <ul>
+        <li><strong>I</strong> – Imprescindível para as investigações do IP</li>
+        <li><strong>II</strong> – Indicado sem residência fixa ou sem identidade</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Passo 2 — Inciso III (crimes específicos)</h3>
+      <ul>
+        <li>Homicídio doloso</li>
+        <li>Sequestro ou cárcere privado</li>
+        <li>Roubo · Extorsão · Extorsão mediante sequestro</li>
+        <li>Estupro (atual: art. 213 — ex arts. 213, 214, 219)</li>
+        <li>Epidemia com resultado de morte · Envenenamento</li>
+        <li>Associação criminosa (ex-quadrilha)</li>
+        <li>Genocídio · Tráfico de drogas · Crimes financeiros · Terrorismo</li>
+        <li>Crimes hediondos e equiparados</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Prazos</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Regime</th><th>Prazo Inicial</th><th>Prorrogação</th><th>Total Máximo</th></tr></thead>
+      <tbody>
+        <tr><td>Crimes comuns (art. 2º)</td><td>5 dias</td><td>+ 5 dias (extrema necessidade)</td><td>10 dias</td></tr>
+        <tr><td>Crimes hediondos e equiparados (art. 2º, §4º, Lei 8.072/90)</td><td>30 dias</td><td>+ 30 dias (extrema necessidade)</td><td>60 dias</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="artigo">
+    <strong>Art. 2º, §7º Lei 7.960/89</strong> — Decorrido o prazo do mandado, a autoridade custódia deverá, <em>independentemente de nova ordem judicial</em>, colocar o preso em liberdade, salvo comunicação de prorrogação ou decretação de preventiva.
+  </div>
+
+  <div class="juris">
+    <div class="tribunal">STF · Plenário · ADI 4109/DF e ADI 3360/DF (Info 1043)</div>
+    <p>A temporária só é cabível quando: (i) imprescindível para o IP; (ii) fundadas razões de autoria/participação; (iii) fatos novos ou contemporâneos; (iv) adequada à gravidade concreta; (v) insuficientes as cautelares diversas.</p>
+  </div>
+
+  <div class="tip">
+    <strong>✅ Diferença preventiva × temporária:</strong>
+    <p>Temporária: só no IP, prazo definido, crimes específicos, urgência investigatória. Preventiva: qualquer fase, sem prazo determinado (revisão 90 dias), requisitos de ordem pública/econômica/instrução/lei penal.</p>
+  </div>
+</div>
+
+<!-- CAUTELARES DIVERSAS -->
+<div id="cautelares" class="tab-content">
+  <div class="section-title">Medidas Cautelares Diversas da Prisão (Art. 319)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Medida</th><th>Finalidade</th></tr></thead>
+      <tbody>
+        <tr><td>I</td><td>Comparecimento periódico em juízo</td><td>Informar e justificar atividades</td></tr>
+        <tr><td>II</td><td>Proibição de acesso a determinados lugares</td><td>Evitar risco de novas infrações</td></tr>
+        <tr><td>III</td><td>Proibição de contato com pessoa determinada</td><td>Afastamento vinculado ao fato</td></tr>
+        <tr><td>IV</td><td>Proibição de ausentar-se da comarca</td><td>Necessidade investigatória ou instrutória</td></tr>
+        <tr><td>V</td><td>Recolhimento domiciliar noturno e dias de folga</td><td>Residência e trabalho fixos</td></tr>
+        <tr><td>VI</td><td>Suspensão do exercício de função pública ou atividade econômica/financeira</td><td>Evitar uso para crimes</td></tr>
+        <tr><td>VII</td><td>Internação provisória</td><td>Crimes com violência/grave ameaça + semi/inimputável + risco de reiteração</td></tr>
+        <tr><td>VIII</td><td>Fiança</td><td>Comparecer aos atos, não obstruir, não resistir</td></tr>
+        <tr><td>IX</td><td>Monitoração eletrônica</td><td>Vigilância e controle</td></tr>
+        <tr><td>Art. 320</td><td>Proibição de ausentar-se do País</td><td>Entrega do passaporte em 24h</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Principiologia das Cautelares (Art. 282)</div>
+  <div class="grid-2">
+    <div class="card"><h3>Necessidade (inciso I)</h3><p>Para aplicação da lei penal, investigação ou instrução criminal, e em casos expressos, para evitar infrações penais.</p></div>
+    <div class="card"><h3>Adequação (inciso II)</h3><p>Adequada à gravidade do crime, circunstâncias do fato e condições pessoais do indiciado.</p></div>
+    <div class="card"><h3>Ultima Ratio (§6º)</h3><p>Prisão preventiva somente quando art. 319 for inadequado ou insuficiente. Não cabimento da substitutiva deve ser fundamentado.</p></div>
+    <div class="card"><h3>Revisabilidade (§5º)</h3><p>Juiz pode, de ofício ou a pedido, revogar ou substituir quando ausentes os motivos. Cláusula rebus sic stantibus.</p></div>
+  </div>
+
+  <div class="juris">
+    <div class="tribunal">STJ · Tema Repetitivo 1155 · REsp 1977135/SC</div>
+    <p>O recolhimento domiciliar obrigatório noturno + monitoramento eletrônico comprometem o <em>status libertatis</em> e devem ser detraídos da pena. O monitoramento eletrônico não é condição indeclinável para a detração.</p>
+  </div>
+</div>
+
+<!-- DOMICILIAR E FIANÇA -->
+<div id="domiciliar" class="tab-content">
+  <div class="section-title">Prisão Domiciliar (Arts. 317–318-B)</div>
+  <div class="artigo">
+    <strong>Art. 317 CPP</strong> — A prisão domiciliar consiste no recolhimento do indiciado ou acusado em sua residência, só podendo dela ausentar-se com autorização judicial.
+  </div>
+
+  <div class="section-title">Hipóteses de Substituição da Preventiva por Domiciliar</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Hipótese (Art. 318)</th><th>Condição</th></tr></thead>
+      <tbody>
+        <tr><td>I – Maior de 80 anos</td><td>—</td></tr>
+        <tr><td>II – Extremamente debilitado por doença grave</td><td>Prova da doença + incompatibilidade com o cárcere</td></tr>
+        <tr><td>III – Imprescindível aos cuidados de menor de <strong>6 anos</strong> ou com deficiência</td><td>Prova idônea</td></tr>
+        <tr><td>IV – Gestante</td><td>Qualquer período da gestação</td></tr>
+        <tr><td>V – Mulher com filho de até <strong>12 anos</strong> incompletos</td><td>—</td></tr>
+        <tr><td>VI – Homem único responsável por filho de até <strong>12 anos</strong> incompletos</td><td>Único responsável</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="artigo">
+    <strong>Art. 318-A (Lei 13.769/2018)</strong> — A domiciliar é obrigatória para gestante ou mãe/responsável por crianças ou deficientes, <strong>desde que</strong>: I – não tenha praticado crime com violência ou grave ameaça; II – não tenha praticado o crime contra seu filho ou dependente.
+  </div>
+  <div class="alert">
+    <strong>⚠️ Atenção — Inciso III × V:</strong>
+    <p>Art. 318, III (6 anos): imprescindível aos cuidados especiais. Art. 318, V (12 anos): mulher com filho — não precisa ser imprescindível. Questão do STJ PC-MG 2025: "imprescindível + menor de 12 anos" = hipótese inexistente (gabarito B).</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STF · 2ª Turma · HC 165704/DF (Info 996)</div>
+    <p>Outras pessoas presas além da mãe/pai (ex.: tios, avós) também podem ter direito à domiciliar se imprescindíveis aos cuidados de menor de 6 anos ou de deficientes.</p>
+  </div>
+
+  <div class="section-title">Fiança</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Aspecto</th><th>Regra</th><th>Base Legal</th></tr></thead>
+      <tbody>
+        <tr><td>Delegado concede</td><td>Infrações com pena máx. até <strong>4 anos</strong></td><td>Art. 322</td></tr>
+        <tr><td>Juiz concede</td><td>Demais casos — prazo: 48h</td><td>Art. 322, §único</td></tr>
+        <tr><td>Crimes inafiançáveis</td><td>Racismo · Tortura · Tráfico · Terrorismo · Hediondos · Crimes contra o Estado Democrático</td><td>Art. 323 (CF, art. 5º, XLII, XLIII e XLIV)</td></tr>
+        <tr><td>Quebramento</td><td>Perde metade do valor · Juiz decide sobre outras cautelares/preventiva</td><td>Art. 341 e 343</td></tr>
+        <tr><td>Perda total</td><td>Condenado que não se apresenta ao início do cumprimento da pena</td><td>Art. 344</td></tr>
+        <tr><td>Destino</td><td>Fianças quebradas ou perdidas → FUNPEN (LC 79/94)</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip">
+    <strong>✅ Inafiançável ≠ Sem liberdade provisória:</strong>
+    <p>A inafiançabilidade impede a fiança mas não impede a concessão de liberdade provisória. São institutos distintos (STF e STJ).</p>
+  </div>
+</div>
+
+<!-- TABELAS COMPARATIVAS -->
+<div id="tabela" class="tab-content">
+  <div class="section-title">Quadro Comparativo — Três Prisões Cautelares</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Critério</th><th>Flagrante</th><th>Preventiva</th><th>Temporária</th></tr></thead>
+      <tbody>
+        <tr><td>Fase</td><td>IP ou ação penal</td><td>IP ou ação penal</td><td>Só IP</td></tr>
+        <tr><td>Quem decreta</td><td>Autoridade policial</td><td>Juiz (a requerimento)</td><td>Juiz (a requerimento)</td></tr>
+        <tr><td>De ofício?</td><td>Delegado obrigatório</td><td>❌ Nunca</td><td>❌ Nunca</td></tr>
+        <tr><td>Prazo</td><td>Sem prazo (convalidação 24h)</td><td>Indeterminado (revisão 90 dias)</td><td>5+5 dias ou 30+30 dias</td></tr>
+        <tr><td>Crimes admissíveis</td><td>Qualquer crime</td><td>Art. 313 CPP (pena &gt;4, reincidente, VD etc.)</td><td>Rol taxativo art. 1º, III + hediondos</td></tr>
+        <tr><td>Audiência de custódia</td><td>✅ Obrigatória em 24h</td><td>✅ Obrigatória (RCl 29303/RJ)</td><td>✅ Obrigatória (RCl 29303/RJ)</td></tr>
+        <tr><td>Fundamentos</td><td>Situação de flagrância</td><td>Art. 312: Ordem pública/econômica, instrução, lei penal</td><td>Art. 1º, I ou II + III</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Prisão Domiciliar × Medidas Cautelares Diversas</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Aspecto</th><th>Prisão Domiciliar (Arts. 317–318-B)</th><th>Medidas Diversas (Art. 319)</th></tr></thead>
+      <tbody>
+        <tr><td>Natureza</td><td>Substituição da <em>prisão preventiva</em></td><td>Alternativa à prisão cautelar</td></tr>
+        <tr><td>Restrição da liberdade</td><td>Alta — recolhimento em residência</td><td>Variada — da mais leve (comparecimento) à mais intensa (internação)</td></tr>
+        <tr><td>Quem pode requerer</td><td>Juiz de ofício ou partes</td><td>Juiz ou a requerimento</td></tr>
+        <tr><td>Cumulatividade</td><td>Pode cumular com art. 319 (art. 318-B)</td><td>Podem ser cumuladas entre si</td></tr>
+        <tr><td>Detração</td><td>Sim</td><td>Recolhimento domiciliar noturno: sim (Tema 1155 STJ)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Checklist da Prisão Preventiva</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Verificação</th><th>Pergunta</th><th>Consequência se Negativo</th></tr></thead>
+      <tbody>
+        <tr><td>1. Legitimidade</td><td>Foi requerida por MP, querelante, assistente ou delegado?</td><td>Nulidade — decretação de ofício vedada</td></tr>
+        <tr><td>2. Admissibilidade</td><td>O crime se enquadra no art. 313?</td><td>Preventiva inadmissível</td></tr>
+        <tr><td>3. Fumus comissi delicti</td><td>Há prova da materialidade e indício de autoria?</td><td>Falta de pressuposto</td></tr>
+        <tr><td>4. Periculum libertatis</td><td>Há risco concreto para a ordem pública/econômica/instrução/lei penal?</td><td>Falta de fundamento</td></tr>
+        <tr><td>5. Fundamentação</td><td>A decisão apresenta fatos concretos e contemporâneos?</td><td>Nulidade da decisão (art. 315 CPP)</td></tr>
+        <tr><td>6. Ultima ratio</td><td>As medidas do art. 319 são insuficientes?</td><td>Deve decretar medida alternativa</td></tr>
+        <tr><td>7. Prazo</td><td>Há revisão periódica (90 dias)?</td><td>Prisão ilegal se não revisada</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ROTEIRO -->
+<div id="roteiro" class="tab-content">
+  <div class="section-title">Roteiro de Estudo — Prisões</div>
+  <div class="roteiro-item"><div class="roteiro-num">1</div><div><h4>Espécies de prisão no sistema brasileiro</h4><p>Extrapenal (civil e militar) × Penal (sentença transitada) × Cautelar (flagrante, preventiva, temporária). Art. 283 CPP. Reserva de jurisdição.</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">2</div><div><h4>Prisão em flagrante — espécies</h4><p>Próprio, impróprio, presumido (art. 302). Esperado (lícito), controlado (lícito), preparado (ILÍCITO — Súm. 145 STF + crime impossível), forjado (ilícito). Flagrante em crimes permanentes (art. 303). Exceções ao flagrante (JECRIM, porte próprio drogas, socorro no trânsito).</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">3</div><div><h4>Audiência de custódia (Art. 310)</h4><p>24 horas. 3 opções do juiz. Vedação de ofício (Súm. 676 STJ). Novidades da Lei 15.272/2025 (§§5º, 6º e art. 310-A). Material biológico para perfil genético.</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">4</div><div><h4>Prisão preventiva — estrutura analítica</h4><p>Pressupostos (fumus + periculum). Fundamentos (art. 312). Admissibilidade (art. 313). Fundamentação concreta (art. 315). Não cabimento (art. 314). Revisão 90 dias (art. 316). Vedação de ofício. Critérios de periculosidade (§3º) e proibição de gravidade abstrata (§4º) — Lei 15.272/2025.</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">5</div><div><h4>Prisão temporária</h4><p>Só no IP. Requisitos cumulativos (I ou II + III). Rol taxativo. Prazos: 5+5 vs 30+30. Não cabe de ofício. STF ADI 4109 (5 condições). Separação dos presos temporários (art. 3º).</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">6</div><div><h4>Medidas cautelares diversas (Art. 319)</h4><p>9 medidas + proibição de ausentar-se do País. Princípios: necessidade, adequação, última ratio, revisabilidade. Detração do recolhimento domiciliar (Tema 1155 STJ). Descumprimento: pode converter em preventiva.</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">7</div><div><h4>Prisão domiciliar (Art. 318)</h4><p>6 hipóteses. Obrigatória (art. 318-A): gestante/mãe/responsável por crianças ou deficientes (sem violência e sem crime contra filhos). Art. 318-B: cumulação com art. 319. Prova idônea dos requisitos.</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">8</div><div><h4>Fiança e liberdade provisória</h4><p>Delegado concede até pena max 4 anos. Crimes inafiançáveis (racismo, tortura, tráfico, terrorismo, hediondos, contra o Estado). Quebramento (perde metade) vs perda total (condenado não se apresenta). Inafiançável ≠ sem liberdade provisória.</p></div></div>
+
+  <div class="section-title">Jurisprudência Estruturante</div>
+  <div class="juris"><div class="tribunal">Súm. 145 STF</div><p>Não há crime quando a preparação do flagrante pela polícia torna impossível a sua consumação.</p></div>
+  <div class="juris"><div class="tribunal">Súm. 676 STJ</div><p>Em razão da Lei 13.964/2019, não é mais possível ao juiz, de ofício, decretar ou converter prisão em flagrante em preventiva.</p></div>
+  <div class="juris"><div class="tribunal">STF · RCl 29303/RJ (2023)</div><p>Audiência de custódia é obrigatória em todas as modalidades prisionais: flagrante, preventiva, temporária, extradição, descumprimento de cautelar, definitiva.</p></div>
+  <div class="juris"><div class="tribunal">STF · Plenário · HC 208.240/SP (Info 1132)</div><p>Busca pessoal sem mandado deve ter fundamento objetivo. Ilícita quando motivada por raça, cor da pele, orientação sexual ou aparência física.</p></div>
+  <div class="juris"><div class="tribunal">STJ · HC 437.535-SP (Info 632)</div><p>Contravenção penal em violência doméstica não admite preventiva — o art. 313, III, CPP exige "crime", não contravenção.</p></div>
+</div>
+
+<!-- CASOS PRÁTICOS -->
+<div id="casos" class="tab-content">
+  <div class="section-title">Casos Práticos — Prisões</div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 1 — O Ingresso Noturno e o Flagrante de Tráfico</h3>
+      <span class="tag tag-red2">Flagrante · Busca domiciliar</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">Policiais receberam denúncia anônima de tráfico na casa de Rafael. Às 23h, sem mandado judicial, foram ao local. Afirmam que Rafael os autorizou verbalmente a entrar. Dentro da casa, encontraram 2 kg de cocaína. Rafael foi preso em flagrante. Na audiência de custódia no dia seguinte, o juiz, de ofício, converteu o flagrante em preventiva, sem requerimento do MP ou da polícia. O advogado de Rafael questiona tanto o flagrante quanto a preventiva.</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> O ingresso domiciliar noturno era constitucional? Quais as hipóteses de ingresso à noite?</li>
+        <li><strong>2.</strong> O consentimento verbal é suficiente para validar o ingresso?</li>
+        <li><strong>3.</strong> A denúncia anônima isolada autoriza a busca domiciliar?</li>
+        <li><strong>4.</strong> O tráfico é crime permanente — isso altera a análise do flagrante?</li>
+        <li><strong>5.</strong> A conversão em preventiva de ofício pelo juiz é válida? O que fazer como advogado?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. À noite, o ingresso só é possível sem mandado em: consentimento do morador, flagrante delito, desastre ou para prestar socorro (art. 5º, XI, CF). Mandado judicial é restrito ao período diurno (6h–18h segundo José Afonso da Silva).<br><br>
+          2. Não. O STJ exige que o consentimento voluntário seja registrado por escrito ou em áudio e vídeo. Mera palavra dos policiais é insuficiente, especialmente quando negada pelo réu (STJ AgRg AREsp 2.223.319-MS, Info 778).<br><br>
+          3. Não. Denúncia anônima isolada é insuficiente para justificar o ingresso forçado. É necessária investigação que a corrobore com elementos concretos (STJ HC 695.980-GO, Info 730).<br><br>
+          4. Tráfico é crime permanente (art. 303 CPP) — o agente está em flagrante enquanto não cessar a permanência. Isso permitiria o ingresso a qualquer hora, inclusive à noite, SE os policiais já tivessem elementos concretos de que o crime estava em curso. A questão é se havia esses elementos concretos ou apenas a denúncia anônima.<br><br>
+          5. Não. Desde a Lei 13.964/2019 (Pacote Anticrime), o juiz não pode converter o flagrante em preventiva de ofício — necessário requerimento (Súm. 676 STJ). Como advogado: impetrar habeas corpus arguindo ilegalidade da prisão preventiva (ausência de requerimento). Resultado: relaxamento ou liberdade provisória.
+        </p>
+      </details>
+    </div>
+  </div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 2 — A Preventiva Mal Fundamentada</h3>
+      <span class="tag tag-red2">Prisão Preventiva · Fundamentação</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">Débora, primária, sem antecedentes, foi denunciada por homicídio culposo em acidente de trânsito. O juiz decretou, de ofício durante o inquérito, a prisão preventiva de Débora, fundamentando: "considerando a gravidade do delito de homicídio e o clamor público gerado pelo caso, decreto a prisão preventiva para garantia da ordem pública". Não havia sido decretada nenhuma medida cautelar diversa anteriormente.</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> Quais os vícios da decisão que decretou a preventiva?</li>
+        <li><strong>2.</strong> É cabível preventiva em crime culposo? E em crime com pena máx. de 3 anos?</li>
+        <li><strong>3.</strong> "Clamor público" e "gravidade do delito" são fundamentos válidos?</li>
+        <li><strong>4.</strong> Qual o habeas corpus correto a ser impetrado e quais teses arguir?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. Três vícios: (a) decretação de ofício durante o inquérito — vedada desde a Lei 13.964/2019 (Súm. 676 STJ); (b) crime culposo não admite preventiva; (c) fundamentação abstrata (clamor público e gravidade do delito são fundamentos inidôneos — STJ HC 497.006/MS).<br><br>
+          2. Não cabe preventiva em crime culposo — a admissibilidade (art. 313, I) exige crime doloso. Pena máx. de 3 anos: também não, pois o art. 313, I exige pena máxima superior a 4 anos.<br><br>
+          3. Não. Clamor público e gravidade abstrata do delito são fundamentos inidôneos e reiteradamente recusados pelo STJ/STF. A preventiva exige fatos concretos e contemporâneos que demonstrem o periculum libertatis (art. 315, §§1º e 2º; art. 312, §4º — incluído pela Lei 15.272/2025).<br><br>
+          4. HC ao TJ (competência para revisão de decisões de 1º grau). Teses: (a) decretação de ofício no inquérito — ilegalidade; (b) inadmissibilidade: crime culposo e pena inferior a 4 anos (art. 313, I); (c) fundamentação inidônea (art. 315, §2º, II e III); (d) não esgotamento das medidas do art. 319 (violação do art. 282, §6º — princípio da ultima ratio). Pedido: relaxamento da prisão + liberdade provisória com ou sem medidas cautelares.
+        </p>
+      </details>
+    </div>
+  </div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 3 — A Gestante Traficante e a Prisão Domiciliar</h3>
+      <span class="tag tag-orange">Prisão Domiciliar · Art. 318-A</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">Vanessa, grávida de 7 meses, primária e sem antecedentes, foi presa em flagrante no aeroporto portando 12 kg de cocaína com destino à Espanha, sendo autuada por tráfico internacional de drogas. O juiz decretou a prisão preventiva na audiência de custódia, negando a prisão domiciliar sob o argumento de que a quantidade de drogas e a transnacionalidade do crime demonstram elevadíssima periculosidade.</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> Vanessa tem direito à prisão domiciliar? Qual o fundamento?</li>
+        <li><strong>2.</strong> A gravidade do crime e a quantidade de drogas obstacula a domiciliar?</li>
+        <li><strong>3.</strong> Existem limitações legais ao direito de domiciliar de gestantes?</li>
+        <li><strong>4.</strong> Como a defesa deve fundamentar o pedido?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. Sim. Vanessa, gestante (art. 318, IV) ou "mulher com filho em desenvolvimento" (art. 318-A), tem direito à domiciliar. Tráfico é crime sem violência ou grave ameaça e ela não praticou o crime contra filhos — presentes os requisitos do art. 318-A.<br><br>
+          2. Não. A quantidade de drogas e a transnacionalidade não obstam a domiciliar. A lei é clara: os critérios são ausência de violência/grave ameaça e ausência de crime contra os filhos. Gabarito FGV OAB XL: Letra C ("a natureza não violenta do delito imputado e a gestação autorizam a concessão").<br><br>
+          3. Sim. Art. 318-A: (i) não ter cometido crime com violência ou grave ameaça; (ii) não ter praticado o crime contra seu filho ou dependente. Fora dessas hipóteses, a domiciliar é substituição obrigatória da preventiva para gestantes/mães (art. 318-A usa "será substituída").<br><br>
+          4. Defesa: (a) art. 318, IV CPP (gestante — qualquer período) c/c art. 318-A (substituição obrigatória); (b) tráfico: crime sem violência ou grave ameaça — requisito atendido; (c) não praticou crime contra os filhos — requisito atendido; (d) STJ HC 487.763-SP (Info 647): admissível mesmo na execução provisória da pena; (e) STF: gravidade abstrata não obsta a domiciliar para gestantes.
+        </p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

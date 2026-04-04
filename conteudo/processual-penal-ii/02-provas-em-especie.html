@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provas em Espécie — Processo Penal II</title>
+<style>
+    :root {
+    --bg:      #ffffff;
+    --bg2:     #f7f7f7;
+    --bg3:     #eeeeee;
+    --border:  #d0d0d0;
+    --text:    #1a1a1a;
+    --text2:   #444444;
+    --accent:  #1F497D;
+    --accent2: #1F497D;
+    --accent-light: #dce6f1;
+    --blue:    #1F497D;
+    --blue-light: #dce6f1;
+    --green:        #1a5c1a;
+    --green-light:  #d6f0d6;
+    --red:          #8b1a1a;
+    --red-light:    #fce8e8;
+    --orange:       #7a3800;
+    --orange-light: #fdebd6;
+    --purple:       #4a1a8a;
+    --purple-light: #ede5fb;
+    --teal:         #0a5c4a;
+    --teal-light:   #d6f0e8;
+    --yellow:       #5a4000;
+    --yellow-light: #fdf6d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:      #13131f;
+      --bg2:     #1d1d2e;
+      --bg3:     #262636;
+      --border:  #3a3a52;
+      --text:    #e8e8f0;
+      --text2:   #a8a8c0;
+      --accent:  #7a9cf0;
+      --accent2: #9ab4f8;
+      --accent-light: #1a2550;
+      --blue:         #9ab4f8;
+      --blue-light:   #1a2550;
+      --green:        #6fd86f;
+      --green-light:  #0d2e0d;
+      --red:          #f08080;
+      --red-light:    #2e0d0d;
+      --orange:       #f0a060;
+      --orange-light: #2e1500;
+      --purple:       #c0a0f8;
+      --purple-light: #200a40;
+      --teal:         #60d8b8;
+      --teal-light:   #072e22;
+      --yellow:       #f0d060;
+      --yellow-light: #2e2000;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: var(--bg); color:var(--text); font-family:'Georgia','Times New Roman',serif; line-height:1.7; }
+  header { background: var(--bg3); border-bottom:2px solid var(--accent2); padding:2.5rem 2rem 2rem; position:relative; overflow:hidden; }
+  header::before { content:'⚖'; position:absolute; right:3rem; top:50%; transform:translateY(-50%); font-size:7rem; color:var(--accent-light); pointer-events:none; }
+  header h1 { font-size:1.9rem; color:var(--accent2); }
+  header p { color:var(--text2); font-size:0.95rem; margin-top:0.4rem; }
+  .badge { display:inline-block; background:var(--accent2); color:#000; padding:0.15rem 0.7rem; border-radius:3px; font-size:0.75rem; font-family:monospace; font-weight:bold; margin-bottom:0.8rem; }
+  nav { background: var(--bg2); border-bottom:1px solid var(--border); display:flex; gap:0; overflow-x:auto; }
+  nav button { background:none; border:none; color:var(--text2); padding:1rem 1.3rem; cursor:pointer; font-family:inherit; font-size:0.87rem; white-space:nowrap; border-bottom:3px solid transparent; transition:all 0.2s; }
+  nav button:hover { color:var(--text); background: var(--bg3); }
+  nav button.active { color:var(--accent2); border-bottom-color:var(--accent2); }
+  .tab-content { display:none; padding:2rem; max-width:1100px; margin:0 auto; }
+  .tab-content.active { display:block; }
+  .section-title { font-size:1.3rem; color:var(--accent2); border-left:4px solid var(--accent2); padding-left:1rem; margin-bottom:1.5rem; margin-top:2.5rem; }
+  .section-title:first-child { margin-top:0; }
+  .card { background: var(--bg2); border:1px solid var(--border); border-radius:8px; padding:1.4rem; margin-bottom:1.2rem; transition:border-color 0.2s; }
+  .card:hover { border-color:var(--accent2); }
+  .card h3 { color:var(--accent2); font-size:1rem; margin-bottom:0.6rem; }
+  .card p,.card li { color:var(--text2); font-size:0.92rem; }
+  .card ul { padding-left:1.2rem; }
+  .card li { margin-bottom:0.3rem; }
+  .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1rem; }
+  .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; }
+  .table-wrap { overflow-x:auto; margin-bottom:1.5rem; }
+  table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+  th { background: var(--bg3); color:var(--accent2); padding:0.75rem 1rem; text-align:left; border:1px solid var(--border); font-weight:600; }
+  td { padding:0.65rem 1rem; border:1px solid var(--border); color:var(--text2); vertical-align:top; }
+  tr:nth-child(even) td { background:var(--bg2); }
+  tr:hover td { background:var(--accent-light); }
+  .tag { display:inline-block; padding:0.15rem 0.55rem; border-radius:3px; font-size:0.75rem; font-family:monospace; font-weight:bold; margin:0.15rem; }
+  .tag-blue { background:var(--blue-light); color:var(--blue); }
+  .tag-green { background: var(--green-light); color:var(--green); }
+  .tag-red { background: var(--red-light); color:var(--red); }
+  .tag-teal { background:var(--accent-light); color:var(--accent2); }
+  .tag-purple { background:var(--purple-light); color:var(--purple); }
+  .tag-orange { background:var(--orange-light); color:var(--orange); }
+  .juris { background: var(--blue-light); border-left:3px solid var(--blue); padding:1rem 1.2rem; border-radius:0 6px 6px 0; margin-bottom:1rem; }
+  .juris .tribunal { color:var(--blue); font-size:0.8rem; font-family:monospace; font-weight:bold; }
+  .juris p { color:var(--text2); font-size:0.9rem; margin-top:0.3rem; }
+  .alert { background: var(--red-light); border:1px solid var(--red); border-radius:6px; padding:1rem 1.2rem; margin-bottom:1rem; }
+  .alert strong { color:var(--red); }
+  .alert p { color:var(--text2); font-size:0.9rem; margin-top:0.3rem; }
+  .tip { background:var(--accent-light); border:1px solid var(--accent-light); border-radius:6px; padding:1rem 1.2rem; margin-bottom:1rem; }
+  .tip strong { color:var(--accent2); }
+  .tip p { color:var(--text2); font-size:0.9rem; margin-top:0.3rem; }
+  .artigo { background: var(--blue-light); border:1px solid var(--border); border-radius:6px; padding:0.9rem 1.2rem; margin-bottom:0.8rem; font-family:monospace; font-size:0.87rem; color: var(--text); }
+  .artigo strong { color:var(--blue); }
+  .roteiro-item { display:flex; gap:1rem; align-items:flex-start; background: var(--bg2); border:1px solid var(--border); border-radius:6px; padding:1rem 1.2rem; margin-bottom:0.8rem; transition:border-color 0.2s; }
+  .roteiro-item:hover { border-color:var(--accent2); }
+  .roteiro-num { background:var(--accent2); color:#000; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.85rem; flex-shrink:0; margin-top:0.1rem; }
+  .roteiro-item h4 { color:var(--text); font-size:0.95rem; margin-bottom:0.3rem; }
+  .roteiro-item p { color:var(--text2); font-size:0.88rem; }
+  .caso { background: var(--bg2); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:1.5rem; }
+  .caso-header { background: var(--bg3); padding:1rem 1.4rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+  .caso-header h3 { color:var(--accent2); font-size:1rem; }
+  .caso-body { padding:1.4rem; }
+  .caso-fatos { color:var(--text); font-size:0.92rem; line-height:1.8; margin-bottom:1.2rem; }
+  .caso-perguntas { list-style:none; padding:0; }
+  .caso-perguntas li { background: var(--bg3); border-left:3px solid var(--purple); padding:0.7rem 1rem; border-radius:0 4px 4px 0; margin-bottom:0.5rem; font-size:0.9rem; color:var(--text2); }
+  .caso-perguntas li strong { color:var(--purple); }
+  details { margin-bottom:0.5rem; }
+  details summary { cursor:pointer; padding:0.7rem 1rem; background: var(--bg3); border-radius:4px; color:var(--green); font-size:0.88rem; font-weight:bold; list-style:none; }
+  details summary::-webkit-details-marker { display:none; }
+  details summary::before { content:'▶ '; font-size:0.7rem; }
+  details[open] summary::before { content:'▼ '; }
+  details p { padding:0.8rem 1rem; background: var(--green-light); color:var(--text2); font-size:0.88rem; border-radius:0 0 4px 4px; }
+  hr { border:none; border-top:1px solid var(--border); margin:2rem 0; }
+  .numero-badge { background:var(--accent2); color:#000; border-radius:4px; font-weight:bold; font-family:monospace; padding:0.1rem 0.5rem; font-size:0.85rem; margin-right:0.5rem; }
+  .mapa { background: var(--bg2); border:1px solid var(--border); border-radius:10px; padding:1.8rem; margin-bottom:1.5rem; }
+  .mapa-label { font-size:0.75rem; color:var(--text2); margin-bottom:0.4rem; font-style:italic; margin-top:1rem; }
+  .mapa-row { display:flex; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.8rem; }
+  .mapa-node { background: var(--bg3); border:1px solid var(--border); border-radius:6px; padding:0.6rem 1rem; font-size:0.85rem; color:var(--text); }
+  .mapa-node.teal { border-color:var(--accent2); color:var(--accent2); background:var(--accent-light); }
+  .mapa-node.blue { border-color:var(--blue); color:var(--blue); background: var(--blue-light); }
+  .mapa-node.red { border-color:var(--red); color:var(--red); background: var(--red-light); }
+  .mapa-node.green { border-color:var(--green); color:var(--green); background: var(--green-light); }
+  .mapa-node.purple { border-color:var(--purple); color:var(--purple); background: var(--purple-light); }
+  .mapa-node.orange { border-color:var(--orange); color:var(--orange); background: var(--orange-light); }
+  @media(max-width:600px) { .grid-2,.grid-3{grid-template-columns:1fr;} header h1{font-size:1.4rem;} .tab-content{padding:1rem;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">PROCESSO PENAL II</div>
+  <h1>Provas em Espécie</h1>
+  <p>Prof. Artur Vieira · Direito Processual Penal II · Material de Apoio</p>
+</header>
+<nav>
+  <button class="active" onclick="show('mapa')">🗺 Mapa Mental</button>
+  <button onclick="show('pericia')">🔬 Perícia</button>
+  <button onclick="show('testemunha')">👥 Testemunha</button>
+  <button onclick="show('reconhecimento')">🔍 Reconhecimento</button>
+  <button onclick="show('outros')">📋 Outros Meios</button>
+  <button onclick="show('tabela')">📊 Tabelas</button>
+  <button onclick="show('roteiro')">📖 Roteiro</button>
+  <button onclick="show('casos')">⚖️ Casos</button>
+</nav>
+
+<!-- MAPA MENTAL -->
+<div id="mapa" class="tab-content active">
+  <div class="section-title">Mapa Mental — Provas em Espécie</div>
+  <div class="mapa">
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <span style="background:var(--accent2);color:#ffffff;border-radius:8px;padding:0.8rem 1.5rem;font-weight:bold;font-size:1.1rem;display:inline-block">PROVAS EM ESPÉCIE</span>
+    </div>
+
+    <div class="mapa-label">1 — EXAME DE CORPO DE DELITO E PERÍCIAS (Arts. 158–184)</div>
+    <div class="mapa-row">
+      <div class="mapa-node teal">Perito oficial<br><small>1 perito · Diploma nível superior</small></div>
+      <div class="mapa-node teal">Falta de oficial<br><small>2 peritos não oficiais idôneos</small></div>
+      <div class="mapa-node blue">Laudo pericial<br><small>Prazo 10 dias · Prorrogável</small></div>
+      <div class="mapa-node blue">Juiz não fica adstrito<br><small>Art. 182 CPP · Persuasão racional</small></div>
+      <div class="mapa-node orange">Cadeia de custódia<br><small>Arts. 158-A a 158-F</small></div>
+    </div>
+    <div class="mapa-row">
+      <div class="mapa-node red">Crime que deixa vestígios<br><small>Corpo de delito OBRIGATÓRIO</small></div>
+      <div class="mapa-node green">Vestígios desaparecidos<br><small>Prova testemunhal supre (art. 167)</small></div>
+      <div class="mapa-node green">Lesão grave &gt;30 dias<br><small>Exame complementar (art. 168)</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">2 — INTERROGATÓRIO (Arts. 185–196)</div>
+    <div class="mapa-row">
+      <div class="mapa-node teal">Natureza dúplice<br><small>Meio de prova + Meio de defesa</small></div>
+      <div class="mapa-node teal">Ato bifásico<br><small>Pessoa + Fatos</small></div>
+      <div class="mapa-node blue">Direito ao silêncio<br><small>Art. 186 CPP · Art. 5º, LXIII, CF</small></div>
+      <div class="mapa-node orange">Último ato da instrução<br><small>Art. 400 CPP · STF HC 127.900/AM</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">3 — CONFISSÃO (Arts. 197–200)</div>
+    <div class="mapa-row">
+      <div class="mapa-node purple">Personalíssima · Livre · Retratável · Divisível</div>
+      <div class="mapa-node blue">Valor probatório<br><small>Art. 197: confrontar com demais provas</small></div>
+      <div class="mapa-node green">Atenuante<br><small>Art. 65, III, d, CP · Súm. 545 STJ</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">4 — PROVA TESTEMUNHAL (Arts. 202–225)</div>
+    <div class="mapa-row">
+      <div class="mapa-node teal">Características<br><small>Judicialidade · Oralidade · Objetividade · Retrospectividade · Individualidade</small></div>
+      <div class="mapa-node blue">Pode recusar (art. 206)<br><small>Cônjuge, ascendentes, descendentes, irmãos etc.</small></div>
+      <div class="mapa-node red">Proibidas de depor (art. 207)<br><small>Confidentes necessários (padre, psicólogo etc.)</small></div>
+    </div>
+    <div class="mapa-row">
+      <div class="mapa-node orange">Número de testemunhas<br><small>Ordinário:8 · Sumário:5 · Sumaríssimo:3 · Júri 1ª:8 · Júri 2ª:5</small></div>
+      <div class="mapa-node green">Depoimento por escrito<br><small>Presidente/VP Rep · Pres. Senado · Câmara · STF (art. 221, §1º)</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">5 — RECONHECIMENTO DE PESSOAS (Art. 226)</div>
+    <div class="mapa-row">
+      <div class="mapa-node red">Procedimento obrigatório<br><small>1. Descreve → 2. Alinha semelhantes → 3. Aponta → 4. Lavra auto</small></div>
+      <div class="mapa-node orange">Fotográfico<br><small>Etapa antecedente — não fundamenta condenação sozinho</small></div>
+      <div class="mapa-node green">Invalidade<br><small>STJ HC 598.886-SC · STF RHC 206846/SP</small></div>
+    </div>
+
+    <hr style="border-color:var(--border);margin:1rem 0;">
+
+    <div class="mapa-label">6 — BUSCA E APREENSÃO / ACAREAÇÃO</div>
+    <div class="mapa-row">
+      <div class="mapa-node blue">Busca domiciliar<br><small>Somente autoridade judiciária · Só de dia (salvo consentimento)</small></div>
+      <div class="mapa-node blue">Busca pessoal<br><small>Autoridade policial ou judicial · Independe de mandado se preso ou arma</small></div>
+      <div class="mapa-node purple">Acareação<br><small>Declarações divergentes · Direito ao silêncio vale (nemo tenetur)</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- PERÍCIA -->
+<div id="pericia" class="tab-content">
+  <div class="section-title">Exame de Corpo de Delito</div>
+  <div class="artigo">
+    <strong>Art. 158 CPP</strong> — Quando a infração deixar vestígios, será indispensável o exame de corpo de delito, direto ou indireto, não podendo supri-lo a confissão do acusado.<br>
+    <strong>§único</strong> — Prioridade para: I – violência doméstica contra mulher; II – violência contra criança, adolescente, idoso ou pessoa com deficiência.
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>🔴 Crime não transeunte (deixa vestígios)</h3>
+      <ul>
+        <li>Corpo de delito <strong>obrigatório</strong></li>
+        <li>Confissão <strong>não supre</strong> o exame</li>
+        <li>Falta = Nulidade absoluta (art. 564, III, "b")</li>
+        <li>Vestígios desaparecidos → prova testemunhal supre (art. 167)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🟢 Crime transeunte (não deixa vestígios)</h3>
+      <ul>
+        <li>Corpo de delito <strong>dispensado</strong></li>
+        <li>Prova pode se dar por outros meios</li>
+        <li>Ex.: ameaça verbal, injúria oral sem lesão</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Peritos</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Situação</th><th>Regra</th><th>Obs.</th></tr></thead>
+      <tbody>
+        <tr><td>Perito oficial disponível</td><td><strong>1 perito oficial</strong> (diploma nível superior)</td><td>Regra — art. 159 CPP</td></tr>
+        <tr><td>Falta de perito oficial</td><td><strong>2 peritos não oficiais</strong> idôneos, nível superior, preferencialmente na área</td><td>Prestam compromisso · Súm. 361 STF</td></tr>
+        <tr><td>Perícia complexa (multi-área)</td><td>Mais de 1 perito oficial + mais de 1 assistente técnico</td><td>Art. 159, §7º</td></tr>
+        <tr><td>Laudo pericial</td><td>Prazo máximo 10 dias (prorrogável)</td><td>Art. 160, §único</td></tr>
+        <tr><td>Juiz × laudo</td><td>Juiz <strong>não fica adstrito</strong> ao laudo</td><td>Art. 182 CPP · Persuasão racional</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Súmula 361 STF:</strong>
+    <p>É nulo o exame realizado por um só perito, considerando-se impedido o que tiver funcionado anteriormente na diligência de apreensão. <em>Atenção: só vale para peritos NÃO oficiais e é nulidade relativa.</em></p>
+  </div>
+
+  <div class="juris">
+    <div class="tribunal">STJ · 3ª Seção · Tema Repetitivo 1206 (Info 796)</div>
+    <p>A simples falta de assinatura do perito no laudo toxicológico definitivo é mera irregularidade (não nulidade), desde que haja outros elementos que comprovem sua autenticidade e a substância ilícita seja identificada.</p>
+  </div>
+
+  <div class="section-title">Assistente Técnico</div>
+  <div class="card">
+    <h3>Momento de Atuação</h3>
+    <ul>
+      <li>Admitido pelo juiz</li>
+      <li>Atua <strong>após</strong> conclusão dos exames pelos peritos oficiais</li>
+      <li>Pode apresentar quesitos e pareceres</li>
+      <li>Pode ser inquirido em audiência (art. 159, §5º, II)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TESTEMUNHA -->
+<div id="testemunha" class="tab-content">
+  <div class="section-title">Prova Testemunhal — Características</div>
+  <div class="grid-3">
+    <div class="card"><h3>⚖️ Judicialidade</h3><p>A testemunha é ouvida <strong>em juízo</strong>. Leitura de depoimento do IP não é lícita — precisa ratificar (STJ HC 183.696/ES).</p></div>
+    <div class="card"><h3>🗣️ Oralidade</h3><p>Depoimento oral. Pode consultar apontamentos. Exceção: depoimento por escrito (art. 221, §1º) para as autoridades mais relevantes do país.</p></div>
+    <div class="card"><h3>🎯 Objetividade</h3><p>Fatos — não opiniões. Salvo quando inseparáveis da narrativa (art. 213). Ex.: velocidade estimada do veículo.</p></div>
+    <div class="card"><h3>⏪ Retrospectividade</h3><p>Sobre fatos <strong>passados</strong>. Nunca futuros.</p></div>
+    <div class="card"><h3>👤 Individualidade</h3><p>Ouvidas separadamente, sem comunicação entre si (art. 210). Reserva de espaços separados antes da audiência.</p></div>
+  </div>
+
+  <div class="section-title">Quem Pode/Não Pode Depor</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Situação</th><th>Regra</th><th>Presta Compromisso?</th><th>Base Legal</th></tr></thead>
+      <tbody>
+        <tr><td>Qualquer pessoa</td><td>✅ Pode e deve depor</td><td>✅ Sim (art. 203)</td><td>Art. 202</td></tr>
+        <tr><td>Cônjuge, ascendente, descendente, afim em linha reta, irmão, pai/mãe/filho adotivo do acusado</td><td>⚠️ Podem <strong>recusar-se</strong> (exceto se prova impossível por outro modo)</td><td>❌ Não (art. 208)</td><td>Art. 206</td></tr>
+        <tr><td>Confidentes necessários (padre, psicólogo, advogado etc.)</td><td>🚫 Proibidas de depor (sobre o segredo)</td><td>Se desobrigadas e desejarem: ✅ Sim</td><td>Art. 207</td></tr>
+        <tr><td>Menores de 14 anos · Doentes/deficientes mentais</td><td>✅ Podem depor</td><td>❌ Não</td><td>Art. 208</td></tr>
+        <tr><td>Presidente/VP da República · Pres. Senado · Câmara · STF</td><td>✅ Podem depor por escrito</td><td>✅ Sim</td><td>Art. 221, §1º</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip"><strong>✅ Depoentes × Declarantes/Informantes:</strong><p>Depoentes = prestam compromisso. Declarantes/Informantes = não prestam compromisso (art. 206, menores 14 anos, doentes mentais). Ambos podem ser ouvidos.</p></div>
+
+  <div class="section-title">Número de Testemunhas por Procedimento</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Procedimento</th><th>Acusação</th><th>Defesa</th></tr></thead>
+      <tbody>
+        <tr><td>Ordinário (art. 401)</td><td>8</td><td>8</td></tr>
+        <tr><td>Sumário (art. 532)</td><td>5</td><td>5</td></tr>
+        <tr><td>Sumaríssimo (Lei 9.099/95)</td><td>3</td><td>3</td></tr>
+        <tr><td>Júri — 1ª fase (art. 406, §3º)</td><td>8</td><td>8</td></tr>
+        <tr><td>Júri — 2ª fase (art. 422)</td><td>5</td><td>5</td></tr>
+        <tr><td>Lei de Drogas (art. 54, III)</td><td>5</td><td>5</td></tr>
+        <tr><td>CPPM — ordinário (art. 77, h)</td><td>6</td><td>6</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Contradita (Art. 214)</div>
+  <div class="card">
+    <h3>Momento e Finalidade</h3>
+    <p>Arguida <strong>antes de iniciado o depoimento</strong>. Pode-se contraditar a testemunha ou arguir circunstâncias que a tornem suspeita de parcialidade ou indigna de fé. O juiz só a exclui nos casos dos arts. 207 e 208.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">FGV · OAB XLIII (2025)</div>
+    <p>Psiquiatra do réu indicada como testemunha pelo MP → Defesa deve oferecer <strong>contradita</strong>, alegando que a testemunha é proibida de depor (art. 207) por ter conhecimento dos fatos em razão de sua profissão.</p>
+  </div>
+</div>
+
+<!-- RECONHECIMENTO -->
+<div id="reconhecimento" class="tab-content">
+  <div class="section-title">Reconhecimento de Pessoas — Procedimento Obrigatório (Art. 226)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Etapa</th><th>Ação</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag tag-teal">1</span></td><td>Pessoa que reconhece <strong>descreve</strong> o suspeito antes de vê-lo</td></tr>
+        <tr><td><span class="tag tag-teal">2</span></td><td>Suspeito é colocado ao lado de <strong>pessoas semelhantes</strong> (quanto ao fenótipo)</td></tr>
+        <tr><td><span class="tag tag-teal">3</span></td><td>Se houver risco de intimidação, reconhecimento feito sem que o suspeito veja o reconhecedor (somente válido no IP — não no plenário)</td></tr>
+        <tr><td><span class="tag tag-teal">4</span></td><td>Lavrar <strong>auto pormenorizado</strong> subscrito pela autoridade, pelo reconhecedor e por 2 testemunhas</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Consequência da inobservância do procedimento:</strong>
+    <p>O reconhecimento feito em desacordo com o art. 226 é <strong>inválido</strong> e não pode fundamentar condenação. — STJ HC 598.886-SC (Info 684) · STF RHC 206846/SP (Info 1045).</p>
+  </div>
+
+  <div class="section-title">Reconhecimento Fotográfico</div>
+  <div class="card">
+    <h3>Posição Consolidada do STJ — HC 598.886-SC e Tema Repetitivo 1258</h3>
+    <ul>
+      <li>O reconhecimento fotográfico é apenas <strong>etapa antecedente</strong> ao reconhecimento pessoal — não pode, por si só, fundamentar condenação</li>
+      <li>Reconhecimento via WhatsApp/aplicativo informal → <strong>nulo</strong> (STJ HC 817.270-RJ, Info 820)</li>
+      <li>Mesmo o reconhecimento pessoal válido deve ser corroborado por outras provas</li>
+      <li>Reconhecimento por fotografia é prova <strong>irrepetível</strong> — reconhecimento inicial falho pode contaminar a memória do reconhecedor</li>
+    </ul>
+  </div>
+
+  <div class="juris">
+    <div class="tribunal">STJ · 3ª Seção · Tema Repetitivo 1258 (REsp 1.953.602-SP e outros, j. 11/6/2025)</div>
+    <p>6 teses fixadas: (1) procedimento obrigatório tanto no IP quanto em juízo; (2) invalidade gera impossibilidade de fundamentar até prisão preventiva, recebimento de denúncia e pronúncia; (3) prova irrepetível; (4) pode condenar por outras provas independentes; (5) semelhança física entre os alinhados é exigência; (6) desnecessário o procedimento formal quando o depoente já conhecia o suspeito antes do crime.</p>
+  </div>
+
+  <div class="section-title">Busca e Apreensão</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>🏠 Domiciliar</h3>
+      <ul>
+        <li>Mandado expedido por <strong>autoridade judiciária</strong></li>
+        <li>Executada <strong>de dia</strong> (salvo consentimento do morador)</li>
+        <li>"Dia" = critério de José Afonso da Silva: 6h–18h (maior segurança jurídica)</li>
+        <li>Art. 5º, XI, CF: à noite = consentimento, flagrante, desastre, socorro</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>👤 Pessoal</h3>
+      <ul>
+        <li>Pode ser determinada por autoridade policial <strong>ou</strong> judicial</li>
+        <li><strong>Independe de mandado</strong> se: prisão, fundada suspeita de arma proibida, corpo de delito ou no curso de busca domiciliar (art. 244)</li>
+        <li><strong>Não pode</strong> ser baseada em raça, cor da pele, aparência física (STF HC 208.240/SP, Info 1132)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="juris">
+    <div class="tribunal">STJ · 5ª Turma · AgRg AREsp 2.223.319-MS (Info 778)</div>
+    <p>A confissão do réu, por si só, não autoriza a entrada dos policiais em seu domicílio. A permissão voluntária do morador deve ser registrada por escrito ou em áudio e vídeo.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STF · Plenário · HC 208.240/SP (Info 1132)</div>
+    <p>A busca pessoal sem mandado deve estar fundada em elementos indiciários objetivos. É ilícita quando motivada exclusivamente por raça, sexo, orientação sexual, cor da pele ou aparência física.</p>
+  </div>
+</div>
+
+<!-- OUTROS -->
+<div id="outros" class="tab-content">
+  <div class="section-title">Interrogatório — Pontos Críticos</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>🕐 Quando é Realizado</h3>
+      <ul>
+        <li>Sempre o <strong>último ato da instrução</strong> (art. 400)</li>
+        <li>STF HC 127.900/AM: aplica-se ao CPM, eleitoral e legislações especiais (ex.: Lei de Drogas)</li>
+        <li>Pode ser renovado a qualquer tempo antes do trânsito em julgado (art. 196)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>🎥 Videoconferência</h3>
+      <ul>
+        <li>Excepcional — decisão fundamentada</li>
+        <li>Hipóteses (art. 185, §2º): segurança pública, dificuldade de comparecimento, influência em testemunha, gravíssima questão de ordem pública</li>
+        <li>Intimação com <strong>10 dias</strong> de antecedência</li>
+      </ul>
+    </div>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · 6ª Turma · HC 703.978-SC (Info 732)</div>
+    <p>É ilegal encerrar o interrogatório do réu que se nega a responder antes de oportunizar indagações pela defesa.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · 6ª Turma · REsp 2.037.491-SP (Info 780)</div>
+    <p>O exercício do direito ao silêncio não pode servir de fundamento para descredibilizar o acusado nem para presumir a veracidade das versões dos policiais.</p>
+  </div>
+
+  <div class="section-title">Confissão — Pontos Críticos</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Característica</th><th>Consequência Prática</th><th>Base</th></tr></thead>
+      <tbody>
+        <tr><td>Personalíssima</td><td>Advogado não pode confessar pelo réu</td><td>Art. 200 CPP</td></tr>
+        <tr><td>Retratável</td><td>Pode ser desfeita a qualquer tempo</td><td>Art. 200 CPP</td></tr>
+        <tr><td>Divisível</td><td>Pode confessar um crime e negar outro</td><td>Art. 200 CPP</td></tr>
+        <tr><td>Atenuante (art. 65, III, d)</td><td>Aplica mesmo que não usada na formação da convicção — Súm. 545 STJ</td><td>CP + STJ</td></tr>
+        <tr><td>Extrajudicial</td><td>Só admissível se formal + documentada + em estabelecimento estatal (STJ AREsp 2.123.334-MG, Info 819 · modulação 02/07/2024)</td><td>STJ 2024</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Ofendido (Arts. 201–203)</div>
+  <div class="card">
+    <h3>Distinção do Ofendido × Testemunha</h3>
+    <ul>
+      <li>Ofendido <strong>não é testemunha</strong> — capítulo distinto no CPP</li>
+      <li>Não presta compromisso de dizer a verdade</li>
+      <li>Não é computado no limite de testemunhas</li>
+      <li>Não responde por falso testemunho</li>
+      <li>Pode responder por <strong>denunciação caluniosa</strong> (art. 339 CP)</li>
+      <li>Pode ser conduzido coercitivamente se intimado e não comparecer (art. 201, §1º)</li>
+    </ul>
+  </div>
+
+  <div class="section-title">Acareação (Arts. 229–230)</div>
+  <div class="card">
+    <h3>Quando Cabe</h3>
+    <ul>
+      <li>Entre: acusados; acusado e testemunha; testemunhas; acusado/testemunha e ofendido; ofendidos</li>
+      <li>Sempre que houver <strong>divergências em declarações sobre fatos ou circunstâncias relevantes</strong></li>
+      <li>O acusado pode se recusar a participar — direito ao silêncio / nemo tenetur (FGV OAB XXXIX, Resp. D)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- TABELAS -->
+<div id="tabela" class="tab-content">
+  <div class="section-title">Quadro Comparativo — Principais Meios de Prova em Espécie</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Meio de Prova</th><th>Natureza Jurídica</th><th>Presta Compromisso?</th><th>Admite Recusa?</th><th>Art. CPP</th></tr></thead>
+      <tbody>
+        <tr><td>Perícia / corpo de delito</td><td>Meio de prova</td><td>✅ Não oficiais</td><td>❌ (obrigatório se vestígios)</td><td>158–184</td></tr>
+        <tr><td>Interrogatório</td><td>Meio de prova <strong>e</strong> meio de defesa</td><td>Não se aplica</td><td>✅ Silêncio (art. 186)</td><td>185–196</td></tr>
+        <tr><td>Confissão</td><td>Meio de prova</td><td>Não se aplica</td><td>✅ (ato personalíssimo voluntário)</td><td>197–200</td></tr>
+        <tr><td>Declarações do ofendido</td><td>Meio de prova</td><td>❌ Não presta</td><td>Condução coercitiva possível</td><td>201–203</td></tr>
+        <tr><td>Prova testemunhal</td><td>Meio de prova</td><td>✅ Em regra</td><td>Art. 206 (parentes) · Art. 207 (confidentes)</td><td>202–225</td></tr>
+        <tr><td>Reconhecimento</td><td>Meio de prova</td><td>Não se aplica</td><td>❌ (mas procedimento obrigatório)</td><td>226–228</td></tr>
+        <tr><td>Acareação</td><td>Meio de prova</td><td>Não se aplica</td><td>✅ Acusado pode se recusar (nemo tenetur)</td><td>229–230</td></tr>
+        <tr><td>Busca e apreensão</td><td>Meio de obtenção de prova</td><td>Não se aplica</td><td>Não (mas casa: reserva de jurisdição)</td><td>240–250</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">Reconhecimento — Comparativo: Fotográfico × Pessoal</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Critério</th><th>Reconhecimento Pessoal</th><th>Reconhecimento Fotográfico</th></tr></thead>
+      <tbody>
+        <tr><td>Procedimento art. 226</td><td>✅ Obrigatório</td><td>✅ Obrigatório (por analogia)</td></tr>
+        <tr><td>Fundamenta condenação sozinho?</td><td>⚠️ Não — deve ser corroborado</td><td>❌ Não — é etapa antecedente</td></tr>
+        <tr><td>Invalidade por desvio</td><td>Prova inválida (exceto outros elementos)</td><td>Prova inválida + derivadas</td></tr>
+        <tr><td>Caráter</td><td>Irrepetível</td><td>Irrepetível (pode contaminar memória)</td></tr>
+        <tr><td>Quando é dispensado</td><td>—</td><td>Quando depoente já conhecia o suspeito antes do crime (Tema 1258 STJ)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ROTEIRO -->
+<div id="roteiro" class="tab-content">
+  <div class="section-title">Roteiro de Estudo — Provas em Espécie</div>
+  <div class="roteiro-item"><div class="roteiro-num">1</div><div><h4>Perícia e corpo de delito</h4><p>Crime transeunte × não transeunte. 1 perito oficial × 2 não oficiais. Confissão não supre. Prova testemunhal supre se vestígios desapareceram. Súm. 361 STF. Laudo: juiz não fica adstrito (art. 182). Assistente técnico (momento). Cadeia de custódia (arts. 158-A a 158-F).</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">2</div><div><h4>Interrogatório</h4><p>Natureza dúplice. Último ato (art. 400 + STF HC 127.900/AM). Ato bifásico (pessoa + fatos). Direito ao silêncio. Videoconferência: hipóteses e prazo de 10 dias. Silêncio não pode descredibilizar réu (STJ REsp 2.037.491-SP, Info 780).</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">3</div><div><h4>Confissão</h4><p>4 características: personalíssima, livre, retratável, divisível. Art. 197 CPP. Súm. 545 STJ (atenuante mesmo não usada). Súm. 630 STJ (tráfico — proporção inferior). Confissão extrajudicial (STJ AREsp 2.123.334-MG, Info 819 — modulação 02/07/2024).</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">4</div><div><h4>Testemunha</h4><p>5 características. Quem pode recusar (art. 206) × quem é proibido (art. 207). Depoentes × declarantes. Espécies de testemunha. Número por procedimento. Contradita. Depoimento por escrito (Pres. Rep., VP, Pres. Senado, Câmara, STF).</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">5</div><div><h4>Reconhecimento de pessoas</h4><p>Procedimento obrigatório do art. 226 (4 etapas). Fotográfico = etapa antecedente. STJ HC 598.886-SC + Tema Repetitivo 1258 (6 teses). STF RHC 206846/SP. Invalidade pode afetar preventiva, recebimento da denúncia e pronúncia.</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">6</div><div><h4>Busca e apreensão</h4><p>Domiciliar (só judiciário, só de dia). Pessoal (policial ou judiciário, independe de mandado se preso/arma). Conceito de "dia". Ingresso forçado: consentimento deve ser documentado. Busca não pode ser por perfil racial (STF HC 208.240/SP).</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">7</div><div><h4>Acareação</h4><p>Cabimento (art. 229). Acusado pode se recusar (nemo tenetur). Prova irrepetível. Pode ser por videoconferência.</p></div></div>
+  <div class="roteiro-item"><div class="roteiro-num">8</div><div><h4>Ofendido</h4><p>Não é testemunha. Não presta compromisso. Não responde por falso testemunho. Pode responder por denunciação caluniosa. Condução coercitiva possível (art. 201, §1º). Proteção de intimidade (art. 201, §§4–6).</p></div></div>
+</div>
+
+<!-- CASOS -->
+<div id="casos" class="tab-content">
+  <div class="section-title">Casos Práticos — Provas em Espécie</div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 1 — O Reconhecimento Fotográfico pelo WhatsApp</h3>
+      <span class="tag tag-teal">Reconhecimento de Pessoas</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">Maria foi vítima de roubo. Na delegacia, o delegado abriu o Instagram no celular e mostrou a Maria a foto do perfil de Marcos, suspeito. Maria reconheceu: "é ele". O delegado anotou no BO: "vítima reconheceu o suspeito por fotografia". Meses depois, durante a instrução criminal, Marcos foi colocado numa sala ao lado de 5 outras pessoas. Maria novamente o apontou. O MP quer usar ambos os reconhecimentos para embasar a condenação.</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> O reconhecimento fotográfico feito pelo Instagram é válido? Fundamente com base na jurisprudência.</li>
+        <li><strong>2.</strong> O reconhecimento pessoal posterior supre o vício do fotográfico?</li>
+        <li><strong>3.</strong> Quais as teses defensivas disponíveis para Marcos?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. Não. O reconhecimento fotográfico informal via aplicativo de mensagens/redes sociais é nulo, por não observar o procedimento do art. 226 CPP (não houve descrição prévia, não houve alinhamento de fotos semelhantes, não houve auto). STJ HC 817.270-RJ (Info 820).<br><br>
+          2. Não necessariamente. O reconhecimento pessoal não "cura" o fotográfico viciado porque o reconhecimento é prova irrepetível — o reconhecimento fotográfico inicial pode ter contaminado a memória de Maria, gerando "viés de confirmação" (Tema 1258 STJ, tese 3). A validade do reconhecimento pessoal deve ser analisada em si mesmo, verificando se o vício anterior contaminou a memória da reconhecedora.<br><br>
+          3. Teses defensivas: (a) nulidade do reconhecimento fotográfico por inobservância do art. 226; (b) contaminação do reconhecimento pessoal (viés de confirmação/memória); (c) inexistência de prova independente e suficiente para condenar; (d) se houver condenação baseada apenas nos reconhecimentos, nulidade da sentença.
+        </p>
+      </details>
+    </div>
+  </div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 2 — A Testemunha que Não Quer Depor</h3>
+      <span class="tag tag-blue">Prova Testemunhal</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">Bruno é acusado de lesão corporal grave contra seu pai, Antônio. Sua mãe, Lúcia, e sua namorada, Helena, foram as únicas presenciadoras do fato. O MP arrolou Lúcia e Helena como testemunhas. Ambas se recusam a depor: Lúcia porque é mãe de Bruno, Helena porque é namorada e não quer prejudicá-lo. O psicólogo que acompanha Bruno, Dr. Fábio, tem informações cruciais sobre a dinâmica familiar e o histórico de conflitos. O MP também pretende ouvi-lo.</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> Lúcia pode se recusar a depor? E Helena?</li>
+        <li><strong>2.</strong> Em que circunstância Lúcia e Helena seriam obrigadas a depor?</li>
+        <li><strong>3.</strong> O Dr. Fábio pode depor sobre informações obtidas em sessão clínica?</li>
+        <li><strong>4.</strong> Caso Lúcia deponha voluntariamente contra Bruno, responderá por falso testemunho se mentir em seu favor?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. Lúcia sim (art. 206 CPP — mãe do acusado). Helena também pode se recusar (companheira — por força do art. 226, §3º da CF c/c art. 206). O objetivo é preservar a harmonia familiar.<br><br>
+          2. Quando não for possível, por outro modo, obter ou integrar a prova do fato — ex.: se são as únicas testemunhas e a prova é essencial. Nesse caso, depõem sem prestar compromisso (informantes/declarantes — art. 208).<br><br>
+          3. Não. O psicólogo é confidente necessário — proibido de depor sobre segredos de consulta (art. 207 CPP + art. 154 CP — violação de sigilo profissional). Só poderá depor se desobrigado pela parte interessada (Bruno). Nesse caso, prestará compromisso.<br><br>
+          4. Sim. Mesmo sem prestar compromisso de dizer a verdade (art. 208), quem depõe voluntariamente pode ser responsabilizado por falso testemunho se suas declarações forem inverídicas — há divergência doutrinária, mas a orientação dominante é no sentido de possibilidade de responsabilização.
+        </p>
+      </details>
+    </div>
+  </div>
+
+  <div class="caso">
+    <div class="caso-header">
+      <h3>Caso 3 — A Busca e o Tráfico</h3>
+      <span class="tag tag-orange">Busca e Apreensão · Flagrante</span>
+    </div>
+    <div class="caso-body">
+      <p class="caso-fatos">Policiais receberam denúncia anônima de que havia tráfico de drogas na casa de Fernanda. À noite, por volta das 22h, foram até o local. Fernanda abriu a porta e os policiais afirmam que ela os autorizou a entrar. Dentro, encontraram 500g de cocaína. Fernanda nega ter autorizado o ingresso. No BO, há apenas o relato dos policiais de que houve "consentimento verbal".</p>
+      <ul class="caso-perguntas">
+        <li><strong>1.</strong> O ingresso noturno na residência era constitucional? Quais as hipóteses?</li>
+        <li><strong>2.</strong> O consentimento verbal dos policiais é suficiente para validar o ingresso?</li>
+        <li><strong>3.</strong> A denúncia anônima isolada autoriza a busca domiciliar?</li>
+        <li><strong>4.</strong> Sendo a busca inválida, qual o destino da prova (cocaína) e da prisão em flagrante?</li>
+      </ul>
+      <details style="margin-top:1rem">
+        <summary>Gabarito Orientativo</summary>
+        <p>
+          1. À noite, o ingresso em domicílio sem mandado só é possível: consentimento do morador, flagrante delito, desastre ou para prestar socorro (art. 5º, XI, CF). Mandado judicial só vale durante o dia. Tráfico, por ser crime permanente (art. 303 CPP), gera flagrante a qualquer hora, mas é preciso que os policiais já tenham elementos concretos da atividade em curso.<br><br>
+          2. Não. O STJ (AgRg no AREsp 2.223.319-MS, Info 778) exige que o consentimento voluntário do morador seja registrado por escrito ou em áudio e vídeo. A mera palavra dos policiais é insuficiente, ainda mais quando Fernanda nega o consentimento.<br><br>
+          3. Não. Denúncia anônima isolada não é elemento concreto suficiente. É preciso investigação prévia que corrobore as informações antes do ingresso forçado (STJ HC 695.980-GO, Info 730; STJ HC 762.932-SP, Info 760).<br><br>
+          4. A busca sendo ilegal: (a) a cocaína é prova ilícita — deve ser desentranhada (art. 157 CPP); (b) a prisão em flagrante é ilegal — deve ser relaxada (art. 5º, LXV, CF).
+        </p>
+      </details>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

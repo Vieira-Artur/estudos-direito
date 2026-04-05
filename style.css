@@ -278,7 +278,6 @@ main {
 
 /* ── Responsivo ── */
 @media (max-width: 600px) {
-  .card-materia { max-width: 100%; }
-  .card-tema    { max-width: 100%; }
+  .card-tema { max-width: 100%; }
   main { padding: 20px 14px; }
 }

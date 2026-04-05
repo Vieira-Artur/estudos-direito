@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup — Árvore de Matérias</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 24px 16px; }
+
+  h2 { font-size: 15px; color: #444; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 24px; }
+
+  /* ── Árvore ── */
+  .arvore {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding-bottom: 16px;
+  }
+
+  /* Coluna de cada matéria */
+  .ramo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 200px;
+    max-width: 260px;
+    position: relative;
+  }
+
+  /* Separador vertical entre ramos */
+  .ramo + .ramo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #d0d8e8;
+  }
+
+  /* Nó raiz — matéria */
+  .no-materia {
+    background: #1a3a5c;
+    color: white;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    max-width: 200px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+  }
+
+  /* Conector matéria → turmas */
+  .conector-v {
+    width: 2px;
+    background: #1a3a5c;
+    flex-shrink: 0;
+  }
+  .conector-v-curto { height: 14px; }
+  .conector-v-medio { height: 20px; }
+
+  /* Linha horizontal ligando turmas */
+  .conector-h {
+    height: 2px;
+    background: #1a3a5c;
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  /* Container das turmas */
+  .turmas {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    padding: 0 12px;
+    align-items: center;
+  }
+
+  /* Nó turma */
+  .no-turma-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .no-turma {
+    background: #e8f0fe;
+    border: 2px solid #1a3a5c;
+    border-radius: 7px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1a3a5c;
+    text-align: center;
+    width: 100%;
+    max-width: 190px;
+  }
+
+  .no-turma.vazia {
+    background: #f0f0f0;
+    border-color: #bbb;
+    color: #999;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Temas */
+  .temas {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    padding: 0 4px;
+  }
+
+  .no-tema {
+    background: white;
+    border: 1px solid #dde3ee;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #222;
+    cursor: pointer;
+    transition: background .15s, transform .1s, box-shadow .15s;
+    text-align: left;
+    line-height: 1.3;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  .no-tema::before {
+    content: '→';
+    position: absolute;
+    left: 7px;
+    color: #1a3a5c;
+    font-size: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity .15s;
+  }
+
+  .no-tema:hover {
+    background: #eef3ff;
+    border-color: #1a3a5c;
+    transform: translateX(2px);
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  }
+
+  .no-tema:hover::before { opacity: 1; }
+
+  .no-tema .tag {
+    font-size: 9px;
+    color: #888;
+    display: block;
+    margin-top: 1px;
+  }
+
+  /* Aviso "em breve" */
+  .em-breve {
+    font-size: 11px;
+    color: #bbb;
+    font-style: italic;
+    text-align: center;
+    padding: 8px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Selecione um tema para estudar</h2>
+
+<div class="arvore">
+
+  <!-- ── DIREITO PENAL ── -->
+  <div class="ramo">
+    <div class="no-materia">⚖️ Direito Penal</div>
+    <div class="conector-v conector-v-curto"></div>
+
+    <div class="turmas">
+      <div class="no-turma-wrap">
+        <div class="no-turma">Direito Penal IV</div>
+        <div class="conector-v" style="height:10px"></div>
+        <div class="temas">
+          <div class="no-tema">Crimes contra a Dignidade Sexual <span class="tag">Mapa mental + Quadro comparativo</span></div>
+          <div class="no-tema">Crimes contra a Vida <span class="tag">Roteiro de aula + Arte gráfica</span></div>
+          <div class="no-tema">Sentimento Religioso — Tabela <span class="tag">Tabela comparativa arts. 208–212</span></div>
+          <div class="no-tema">Sentimento Religioso — Mapa Mental <span class="tag">Mapa mental interativo</span></div>
+          <div class="no-tema">Sentimento Religioso — Roteiro <span class="tag">Roteiro com questões reflexivas</span></div>
+          <div class="no-tema">Sentimento Religioso — SmartArt <span class="tag">Arte gráfica visual</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROCESSUAL PENAL ── -->
+  <div class="ramo">
+    <div class="no-materia">🏛️ Dir. Processual Penal</div>
+    <div class="conector-v conector-v-curto"></div>
+
+    <div class="turmas">
+
+      <div class="no-turma-wrap">
+        <div class="no-turma vazia">Processual Penal I<br><span style="font-size:10px">(em breve)</span></div>
+      </div>
+
+      <div class="no-turma-wrap">
+        <div class="no-turma">Processual Penal II</div>
+        <div class="conector-v" style="height:10px"></div>
+        <div class="temas">
+          <div class="no-tema">Teoria Geral das Provas <span class="tag">Mapa mental · Prova vs elem. informativo</span></div>
+          <div class="no-tema">Provas em Espécie <span class="tag">Perícia · Interrogatório · Confissão</span></div>
+          <div class="no-tema">Prisões e Cautelares <span class="tag">Flagrante · Preventiva · Temporária</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── TRIBUTÁRIO ── -->
+  <div class="ramo">
+    <div class="no-materia">📜 Direito Tributário</div>
+    <div class="conector-v conector-v-curto"></div>
+
+    <div class="turmas">
+      <div class="no-turma-wrap">
+        <div class="no-turma vazia">Tributário e Financeiro I<br><span style="font-size:10px">(em breve)</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center;font-size:11px;color:#aaa;margin-top:16px">Os temas com seta (→) são clicáveis e abrem o conteúdo diretamente.</p>
+
+</body>
+</html>

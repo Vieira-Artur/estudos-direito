@@ -1,0 +1,167 @@
+<h2>Como mostrar a hierarquia na página inicial?</h2>
+<p class="subtitle">Três abordagens para exibir matérias → turmas → temas sem precisar clicar</p>
+
+<div class="cards">
+
+  <!-- OPÇÃO A: Cascata -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#f4f6f9;padding:16px;border-radius:6px;font-family:sans-serif">
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+
+          <!-- Card Penal -->
+          <div style="flex:1;min-width:160px">
+            <div style="background:#1a3a5c;color:white;border-radius:8px 8px 0 0;padding:10px 12px;font-size:13px;font-weight:700">⚖️ Direito Penal</div>
+            <div style="background:#e8f0fe;border:2px solid #1a3a5c;border-top:none;padding:8px 12px">
+              <div style="font-size:11px;font-weight:700;color:#1a3a5c;margin-bottom:6px">Penal IV</div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px;color:#333">Crimes contra a Dignidade Sexual</div>
+                <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px;color:#333">Crimes contra a Vida</div>
+                <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px;color:#333">Sentimento Religioso</div>
+                <div style="background:#f7f8fc;border:1px dashed #ccc;border-radius:4px;padding:4px 8px;font-size:10px;color:#999;text-align:center">+3 temas</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Processual -->
+          <div style="flex:1;min-width:160px">
+            <div style="background:#1a3a5c;color:white;border-radius:8px 8px 0 0;padding:10px 12px;font-size:13px;font-weight:700">🏛️ Proc. Penal</div>
+            <div style="background:#e8f0fe;border:2px solid #1a3a5c;border-top:none;padding:8px 12px">
+              <div style="font-size:11px;font-weight:700;color:#1a3a5c;margin-bottom:6px">Processual Penal II</div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px;color:#333">Teoria Geral das Provas</div>
+                <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px;color:#333">Provas em Espécie</div>
+                <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px;color:#333">Prisões e Cautelares</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Tributário -->
+          <div style="flex:1;min-width:120px">
+            <div style="background:#1a3a5c;color:white;border-radius:8px 8px 0 0;padding:10px 12px;font-size:13px;font-weight:700">📜 Tributário</div>
+            <div style="background:#e8f0fe;border:2px solid #1a3a5c;border-top:none;padding:8px 12px;min-height:60px">
+              <div style="font-size:10px;color:#999;font-style:italic;text-align:center;padding-top:8px">Em breve</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Cascata integrada</h3>
+      <p>Cada matéria já aparece expandida com turmas e temas visíveis. Hierarquia clara, tudo acessível sem clique.</p>
+    </div>
+  </div>
+
+  <!-- OPÇÃO B: Accordion -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#f4f6f9;padding:16px;border-radius:6px;font-family:sans-serif">
+
+        <!-- Item 1 expandido -->
+        <div style="background:white;border:1px solid #dde3ee;border-radius:8px;margin-bottom:8px;overflow:hidden">
+          <div style="background:#1a3a5c;color:white;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:13px;font-weight:700">⚖️ Direito Penal</span>
+            <span style="font-size:11px;opacity:0.7">▾ expandido</span>
+          </div>
+          <div style="padding:10px 14px;background:#fafbff">
+            <div style="font-size:11px;font-weight:700;color:#1a3a5c;margin-bottom:6px;padding-left:8px;border-left:3px solid #1a3a5c">Penal IV</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;padding-left:8px">
+              <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px">Dignidade Sexual</div>
+              <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px">Crimes contra a Vida</div>
+              <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px">Sent. Religioso</div>
+              <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px;color:#aaa">+3 temas…</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 expandido -->
+        <div style="background:white;border:1px solid #dde3ee;border-radius:8px;margin-bottom:8px;overflow:hidden">
+          <div style="background:#1a3a5c;color:white;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:13px;font-weight:700">🏛️ Proc. Penal</span>
+            <span style="font-size:11px;opacity:0.7">▾ expandido</span>
+          </div>
+          <div style="padding:10px 14px;background:#fafbff">
+            <div style="font-size:11px;font-weight:700;color:#1a3a5c;margin-bottom:6px;padding-left:8px;border-left:3px solid #1a3a5c">Processual Penal II</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;padding-left:8px">
+              <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px">Teoria Geral das Provas</div>
+              <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px">Provas em Espécie</div>
+              <div style="background:white;border:1px solid #dde3ee;border-radius:4px;padding:4px 8px;font-size:10px">Prisões e Cautelares</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 colapsado -->
+        <div style="background:white;border:1px solid #dde3ee;border-radius:8px;overflow:hidden">
+          <div style="background:#4a6a8c;color:white;padding:10px 14px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:13px;font-weight:700">📜 Tributário</span>
+            <span style="font-size:11px;opacity:0.7">▸ expandir</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Accordion expansível</h3>
+      <p>Lista vertical com cada matéria expansível. Abre expandido por padrão, pode colapsar. Bom para telas menores.</p>
+    </div>
+  </div>
+
+  <!-- OPÇÃO C: Árvore com linhas -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#f4f6f9;padding:16px 8px;border-radius:6px;font-family:sans-serif;overflow-x:auto">
+        <div style="min-width:320px;position:relative">
+
+          <!-- Matérias no topo -->
+          <div style="display:flex;justify-content:space-around;margin-bottom:0px">
+            <div style="background:#1a3a5c;color:white;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;text-align:center;width:88px">⚖️<br>Penal</div>
+            <div style="background:#1a3a5c;color:white;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;text-align:center;width:88px">🏛️<br>Proc. Penal</div>
+            <div style="background:#4a6a8c;color:white;border-radius:6px;padding:6px 10px;font-size:11px;font-weight:700;text-align:center;width:88px">📜<br>Tributário</div>
+          </div>
+
+          <!-- Linhas e turmas -->
+          <div style="display:flex;justify-content:space-around;margin-top:0">
+
+            <!-- Coluna Penal -->
+            <div style="width:88px;display:flex;flex-direction:column;align-items:center">
+              <div style="width:2px;height:14px;background:#1a3a5c"></div>
+              <div style="background:#e8f0fe;border:1px solid #1a3a5c;border-radius:4px;padding:4px 6px;font-size:10px;font-weight:700;color:#1a3a5c;text-align:center">Penal IV</div>
+              <div style="width:2px;height:8px;background:#aaa"></div>
+              <div style="display:flex;flex-direction:column;gap:3px;width:100%">
+                <div style="background:white;border:1px solid #dde3ee;border-radius:3px;padding:3px 5px;font-size:9px;color:#333">Dignidade Sexual</div>
+                <div style="background:white;border:1px solid #dde3ee;border-radius:3px;padding:3px 5px;font-size:9px;color:#333">Crimes s/ Vida</div>
+                <div style="background:white;border:1px solid #dde3ee;border-radius:3px;padding:3px 5px;font-size:9px;color:#333">Sent. Religioso</div>
+                <div style="background:#f7f8fc;border:1px dashed #ccc;border-radius:3px;padding:3px 5px;font-size:9px;color:#aaa;text-align:center">+3…</div>
+              </div>
+            </div>
+
+            <!-- Coluna Processual -->
+            <div style="width:88px;display:flex;flex-direction:column;align-items:center">
+              <div style="width:2px;height:14px;background:#1a3a5c"></div>
+              <div style="background:#e8f0fe;border:1px solid #1a3a5c;border-radius:4px;padding:4px 6px;font-size:10px;font-weight:700;color:#1a3a5c;text-align:center">Proc. Penal II</div>
+              <div style="width:2px;height:8px;background:#aaa"></div>
+              <div style="display:flex;flex-direction:column;gap:3px;width:100%">
+                <div style="background:white;border:1px solid #dde3ee;border-radius:3px;padding:3px 5px;font-size:9px;color:#333">Teoria das Provas</div>
+                <div style="background:white;border:1px solid #dde3ee;border-radius:3px;padding:3px 5px;font-size:9px;color:#333">Provas em Espécie</div>
+                <div style="background:white;border:1px solid #dde3ee;border-radius:3px;padding:3px 5px;font-size:9px;color:#333">Prisões</div>
+              </div>
+            </div>
+
+            <!-- Coluna Tributário -->
+            <div style="width:88px;display:flex;flex-direction:column;align-items:center">
+              <div style="width:2px;height:14px;background:#aaa"></div>
+              <div style="background:#f7f8fc;border:1px dashed #ccc;border-radius:4px;padding:4px 6px;font-size:10px;color:#999;text-align:center;font-style:italic">em breve</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Árvore com ramos</h3>
+      <p>Visual de organograma com linhas conectando níveis. Hierarquia explícita, visual mais "árvore de conhecimento".</p>
+    </div>
+  </div>
+
+</div>

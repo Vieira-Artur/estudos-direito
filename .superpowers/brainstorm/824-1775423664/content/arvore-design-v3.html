@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup — Árvore de Matérias v3</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f4f6f9; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 28px 20px; }
+
+  h2 { font-size: 17px; color: #444; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 28px; }
+
+  .arvore {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding-bottom: 16px;
+  }
+
+  .ramo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 240px;
+    max-width: 300px;
+    position: relative;
+  }
+
+  .ramo + .ramo::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: #d0d8e8;
+  }
+
+  .no-materia {
+    background: #1a3a5c;
+    color: white;
+    border-radius: 10px;
+    padding: 16px 24px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    max-width: 230px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+  }
+
+  .conector-v { width: 2px; background: #1a3a5c; flex-shrink: 0; }
+
+  .turmas {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    padding: 0 14px;
+    align-items: center;
+  }
+
+  .no-turma-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .no-turma {
+    background: #e8f0fe;
+    border: 2px solid #1a3a5c;
+    border-radius: 7px;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a3a5c;
+    text-align: center;
+    width: 100%;
+    max-width: 230px;
+  }
+
+  .no-turma.vazia {
+    background: #f0f0f0;
+    border-color: #bbb;
+    color: #999;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .temas {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+    padding: 0 4px;
+  }
+
+  .no-tema {
+    background: white;
+    border: 1px solid #dde3ee;
+    border-radius: 6px;
+    padding: 10px 14px 10px 26px;
+    font-size: 14px;
+    color: #222;
+    cursor: pointer;
+    transition: background .15s, transform .1s, box-shadow .15s;
+    text-align: left;
+    line-height: 1.35;
+    position: relative;
+  }
+
+  .no-tema::before {
+    content: '→';
+    position: absolute;
+    left: 9px;
+    color: #1a3a5c;
+    font-size: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity .15s;
+  }
+
+  .no-tema:hover {
+    background: #eef3ff;
+    border-color: #1a3a5c;
+    transform: translateX(2px);
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  }
+
+  .no-tema:hover::before { opacity: 1; }
+
+  .no-tema .tag {
+    font-size: 12px;
+    color: #888;
+    display: block;
+    margin-top: 3px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Selecione um tema para estudar</h2>
+
+<div class="arvore">
+
+  <!-- ── DIREITO PENAL ── -->
+  <div class="ramo">
+    <div class="no-materia">⚖️ Direito Penal</div>
+    <div class="conector-v" style="height:14px"></div>
+    <div class="turmas">
+      <div class="no-turma-wrap">
+        <div class="no-turma">Direito Penal IV</div>
+        <div class="conector-v" style="height:10px"></div>
+        <div class="temas">
+          <div class="no-tema">Crimes contra a Dignidade Sexual <span class="tag">Mapa mental + Quadro comparativo</span></div>
+          <div class="no-tema">Crimes contra o Sentimento Religioso <span class="tag">Tabela · Mapa mental · Roteiro · SmartArt</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROCESSUAL PENAL ── -->
+  <div class="ramo">
+    <div class="no-materia">🏛️ Dir. Processual Penal</div>
+    <div class="conector-v" style="height:14px"></div>
+    <div class="turmas">
+
+      <div class="no-turma-wrap">
+        <div class="no-turma vazia">Processual Penal I<br><span style="font-size:12px">(em breve)</span></div>
+      </div>
+
+      <div class="no-turma-wrap">
+        <div class="no-turma">Processual Penal II</div>
+        <div class="conector-v" style="height:10px"></div>
+        <div class="temas">
+          <div class="no-tema">Teoria Geral das Provas <span class="tag">Mapa mental · Prova vs elem. informativo</span></div>
+          <div class="no-tema">Provas em Espécie <span class="tag">Perícia · Interrogatório · Confissão</span></div>
+          <div class="no-tema">Prisões e Cautelares <span class="tag">Flagrante · Preventiva · Temporária</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── TRIBUTÁRIO ── -->
+  <div class="ramo">
+    <div class="no-materia">📜 Direito Tributário</div>
+    <div class="conector-v" style="height:14px"></div>
+    <div class="turmas">
+      <div class="no-turma-wrap">
+        <div class="no-turma vazia">Tributário e Financeiro I<br><span style="font-size:12px">(em breve)</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center;font-size:13px;color:#aaa;margin-top:16px">Temas clicáveis abrem o conteúdo diretamente.</p>
+
+</body>
+</html>

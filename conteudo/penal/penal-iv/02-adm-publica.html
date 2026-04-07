@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crimes contra a Administração Pública — Direito Penal IV</title>
+<style>
+    :root {
+    --bg:      #ffffff;
+    --bg2:     #f7f7f7;
+    --bg3:     #eeeeee;
+    --border:  #d0d0d0;
+    --text:    #1a1a1a;
+    --text2:   #444444;
+    --accent:  #1F497D;
+    --accent2: #1F497D;
+    --accent-light: #dce6f1;
+    --blue:    #1F497D;
+    --blue-light: #dce6f1;
+    --green:        #1a5c1a;
+    --green-light:  #d6f0d6;
+    --red:          #8b1a1a;
+    --red-light:    #fce8e8;
+    --orange:       #7a3800;
+    --orange-light: #fdebd6;
+    --purple:       #4a1a8a;
+    --purple-light: #ede5fb;
+    --teal:         #0a5c4a;
+    --teal-light:   #d6f0e8;
+    --yellow:       #5a4000;
+    --yellow-light: #fdf6d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:      #0d1b2e;
+      --bg2:     #142238;
+      --bg3:     #1b2d47;
+      --border:  #2a4060;
+      --text:    #e8eef5;
+      --text2:   #a0b4cc;
+      --accent:  #7a9cf0;
+      --accent2: #9ab4f8;
+      --accent-light: #1a2550;
+      --blue:         #9ab4f8;
+      --blue-light:   #1a2550;
+      --green:        #6fd86f;
+      --green-light:  #0d2e0d;
+      --red:          #f08080;
+      --red-light:    #2e0d0d;
+      --orange:       #f0a060;
+      --orange-light: #2e1500;
+      --purple:       #c0a0f8;
+      --purple-light: #200a40;
+      --teal:         #60d8b8;
+      --teal-light:   #072e22;
+      --yellow:       #f0d060;
+      --yellow-light: #2e2000;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.7;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--bg3);
+    border-bottom: 2px solid var(--accent);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '§';
+    position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+    font-size: 8rem; color: var(--accent-light); font-weight: bold;
+    pointer-events: none;
+  }
+  header h1 { font-size: 1.9rem; color: var(--accent2); letter-spacing: 0.03em; }
+  header p { color: var(--text2); font-size: 0.95rem; margin-top: 0.4rem; }
+  .badge {
+    display: inline-block; background: var(--accent); color: #fff;
+    padding: 0.15rem 0.7rem; border-radius: 3px; font-size: 0.75rem;
+    font-family: monospace; font-weight: bold; margin-bottom: 0.8rem;
+  }
+
+  /* NAV TABS */
+  nav { background: var(--bg2); border-bottom: 1px solid var(--border); display: flex; gap: 0; overflow-x: auto; }
+  nav button {
+    background: none; border: none; color: var(--text2); padding: 1rem 1.4rem;
+    cursor: pointer; font-family: inherit; font-size: 0.88rem; white-space: nowrap;
+    border-bottom: 3px solid transparent; transition: all 0.2s;
+  }
+  nav button:hover { color: var(--text); background: var(--bg3); }
+  nav button.active { color: var(--accent2); border-bottom-color: var(--accent); }
+
+  /* CONTENT */
+  .tab-content { display: none; padding: 2rem; max-width: 1100px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* SECTION TITLES */
+  .section-title {
+    font-size: 1.3rem; color: var(--accent2); border-left: 4px solid var(--accent);
+    padding-left: 1rem; margin-bottom: 1.5rem; margin-top: 2.5rem;
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.4rem; margin-bottom: 1.2rem; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card h3 { color: var(--blue); font-size: 1rem; margin-bottom: 0.6rem; }
+  .card p, .card li { color: var(--text2); font-size: 0.92rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.3rem; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th {
+    background: var(--bg3); color: var(--accent2); border-bottom: 2px solid var(--accent-light); padding: 0.75rem 1rem;
+    text-align: left; border: 1px solid var(--border); font-weight: 600;
+  }
+  td { padding: 0.65rem 1rem; border: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  tr:hover td { background: var(--accent-light); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  /* QUADRO SINÓPTICO INLINE STYLES */
+  .qs-filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+  .qs-fbtn{padding:6px 14px;border-radius:6px;border:1.5px solid var(--border);background:var(--bg2);color:var(--text2);font-size:12.5px;font-weight:500;cursor:pointer;transition:all .15s;font-family:inherit;}
+  .qs-fbtn:hover,.qs-fbtn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .qs-tbl-wrap{overflow-x:auto;border-radius:10px;box-shadow:0 2px 12px rgba(31,73,125,.1);margin-bottom:32px;}
+  .qs-table{width:100%;border-collapse:collapse;font-size:13px;min-width:960px;}
+  .qs-table thead tr th{background:var(--accent);color:#fff;padding:11px 14px;text-align:left;font-weight:600;font-size:12px;letter-spacing:.04em;white-space:nowrap;}
+  .qs-table thead tr th:first-child{border-radius:10px 0 0 0;}
+  .qs-table thead tr th:last-child{border-radius:0 10px 0 0;}
+  .qs-table tbody tr{border-bottom:1px solid var(--border);transition:background .12s;}
+  .qs-table tbody tr:hover{background:var(--accent-light);}
+  .qs-table tbody tr:last-child{border-bottom:none;}
+  .qs-table td{padding:11px 14px;vertical-align:top;line-height:1.5;border:none;background:var(--bg);}
+  .qs-table td:first-child{font-weight:600;color:var(--accent2);}
+  .qs-table td.art{font-size:11.5px;color:var(--text2);font-style:italic;white-space:nowrap;}
+  .qs-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;white-space:nowrap;margin-bottom:2px;}
+  .qs-b-rec{background:var(--blue-light);color:var(--blue);}
+  .qs-b-det{background:var(--green-light);color:var(--green);}
+  .qs-b-jf{background:var(--accent-light);color:var(--accent2);}
+  .qs-b-je{background:var(--red-light);color:var(--red);}
+  .qs-chip{display:inline-block;padding:2px 7px;border-radius:3px;font-size:10.5px;margin:1px 2px 1px 0;background:var(--bg3);color:var(--text2);}
+  .qs-dist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-bottom:32px;}
+  .qs-dist-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:18px 20px;}
+  .qs-dist-card h4{font-size:15px;color:var(--accent2);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  .qs-vs-row{display:flex;gap:12px;margin-bottom:8px;}
+  .qs-vs-col{flex:1;background:var(--bg3);border-radius:7px;padding:10px 12px;}
+  .qs-vs-col h5{font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:6px;}
+  .qs-vs-col p{font-size:12px;color:var(--text2);line-height:1.55;}
+  .qs-juris-list{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+  .qs-juris-card{background:var(--bg2);border-left:4px solid var(--yellow);border-radius:0 8px 8px 0;padding:14px 18px;}
+  .qs-j-source{font-size:11.5px;font-weight:700;color:var(--yellow);margin-bottom:4px;letter-spacing:.03em;}
+  .qs-j-text{font-size:13px;line-height:1.6;color:var(--text);}
+  .qs-j-obs{font-size:12px;color:var(--text2);margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
+  .qs-section-title{font-size:18px;color:var(--accent2);margin:36px 0 16px;padding-bottom:8px;border-bottom:2px solid var(--accent);display:flex;align-items:center;gap:10px;}
+  .qs-section-title span{font-size:11px;font-weight:600;background:var(--accent);color:#fff;padding:2px 9px;border-radius:4px;letter-spacing:.05em;}
+
+  /* ROTEIRO INLINE STYLES */
+  .rot-intro-box{background:var(--accent);border-radius:12px;padding:24px 28px;color:#fff;margin-bottom:32px;}
+  .rot-intro-box h2{font-size:20px;margin-bottom:10px;}
+  .rot-intro-box p{font-size:13.5px;line-height:1.65;opacity:.88;}
+  .rot-obj-list{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;}
+  .rot-obj-tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:5px 12px;font-size:12px;}
+  .rot-unit{margin-bottom:36px;}
+  .rot-unit-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer;user-select:none;}
+  .rot-unit-num{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0;}
+  .rot-unit-title{font-size:17px;color:var(--accent2);flex:1;}
+  .rot-unit-toggle{font-size:18px;color:var(--text2);transition:transform .2s;}
+  .rot-unit-toggle.open{transform:rotate(180deg);}
+  .rot-unit-body{display:none;}
+  .rot-unit-body.open{display:block;}
+  .rot-step{background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+  .rot-step-head{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;}
+  .rot-step-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;margin-top:1px;}
+  .rot-step-check svg{display:none;width:12px;height:12px;}
+  .rot-step.done .rot-step-check{background:var(--accent);border-color:var(--accent);}
+  .rot-step.done .rot-step-check svg{display:block;}
+  .rot-step-title{font-size:14px;font-weight:600;color:var(--text);flex:1;line-height:1.45;}
+  .rot-step.done .rot-step-title{text-decoration:line-through;color:var(--text2);}
+  .rot-step-meta{font-size:11.5px;color:var(--text2);margin-top:3px;}
+  .rot-step-expand{font-size:15px;color:var(--text2);padding-top:2px;flex-shrink:0;}
+  .rot-step-content{display:none;padding:0 16px 16px 50px;border-top:1px solid var(--border);}
+  .rot-step-content.open{display:block;}
+  .rot-step-content p{font-size:13px;line-height:1.65;margin-bottom:10px;color:var(--text);}
+  .rot-step-content ul{margin-left:16px;font-size:13px;line-height:1.7;color:var(--text);}
+  .rot-step-content li{margin-bottom:4px;}
+  .rot-art-box{background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0;font-size:12.5px;line-height:1.6;font-style:italic;color:var(--text);}
+  .rot-stj-box{background:var(--yellow-light);border-left:3px solid var(--yellow);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0;font-size:12.5px;line-height:1.6;color:var(--text);}
+  .rot-stj-box strong{color:var(--yellow);font-weight:600;}
+  .rot-warn-box{background:var(--red-light);border-left:3px solid var(--red);border-radius:0 6px 6px 0;padding:10px 14px;margin:10px 0;font-size:12.5px;line-height:1.6;color:var(--text);}
+  .rot-warn-box strong{color:var(--red);font-weight:600;}
+  .rot-tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+  .rot-tag{display:inline-block;padding:2px 9px;border-radius:4px;font-size:11px;font-weight:600;}
+  .rot-t-art{background:var(--accent-light);color:var(--accent2);}
+  .rot-t-stj{background:var(--yellow-light);color:var(--yellow);}
+  .rot-t-imp{background:var(--red-light);color:var(--red);}
+  .rot-reset-btn{margin:0 auto 20px;display:block;padding:8px 22px;background:transparent;border:1.5px solid var(--border);border-radius:6px;color:var(--text2);font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s;}
+  .rot-reset-btn:hover{border-color:var(--accent);color:var(--accent2);}
+
+  /* ESTUDO DE CASO INLINE STYLES */
+  .ec-case-header{background:var(--accent);border-radius:12px;padding:26px 30px;color:#fff;margin-bottom:28px;}
+  .ec-op-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow-light);margin-bottom:6px;}
+  .ec-case-header h2{font-size:24px;margin-bottom:10px;}
+  .ec-case-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+  .ec-meta-tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:4px 12px;font-size:12px;}
+  .ec-sec{margin-bottom:28px;}
+  .ec-sec-title{font-size:17px;color:var(--accent2);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--accent);display:flex;align-items:center;gap:10px;}
+  .ec-sec-title .ec-badge{font-size:11px;background:var(--accent);color:#fff;padding:2px 10px;border-radius:4px;font-weight:600;}
+  .ec-narrative{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:22px 26px;font-size:14px;line-height:1.75;margin-bottom:20px;}
+  .ec-narrative p{margin-bottom:12px;}
+  .ec-narrative p:last-child{margin-bottom:0;}
+  .ec-doc-sim{background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:18px 22px;margin-bottom:16px;font-size:13px;line-height:1.65;}
+  .ec-doc-sim .ec-doc-title{font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+  .ec-doc-sim table{width:100%;font-size:12.5px;border-collapse:collapse;}
+  .ec-doc-sim td{padding:3px 6px;vertical-align:top;border:none;background:transparent;color:var(--text);}
+  .ec-doc-sim td:first-child{color:var(--text2);width:38%;font-weight:500;}
+  .ec-q-list{display:flex;flex-direction:column;gap:16px;}
+  .ec-q-item{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  .ec-q-head{display:flex;align-items:flex-start;gap:12px;padding:16px 18px;cursor:pointer;}
+  .ec-q-num{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+  .ec-q-text{font-size:14px;line-height:1.5;flex:1;font-weight:500;color:var(--text);}
+  .ec-q-bloom{font-size:11px;color:var(--text2);margin-top:3px;font-weight:400;}
+  .ec-q-arrow{color:var(--text2);font-size:16px;padding-top:2px;flex-shrink:0;transition:transform .2s;}
+  .ec-q-arrow.open{transform:rotate(180deg);}
+  .ec-q-body{display:none;padding:0 18px 18px 62px;border-top:1px solid var(--border);}
+  .ec-q-body.open{display:block;}
+  .ec-q-body p{font-size:13px;line-height:1.65;margin-bottom:10px;color:var(--text);}
+  .ec-q-body ul{margin-left:16px;font-size:13px;line-height:1.7;}
+  .ec-q-body li{margin-bottom:5px;color:var(--text);}
+  .ec-art-ref{background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 5px 5px 0;padding:8px 12px;margin:8px 0;font-size:12.5px;font-style:italic;line-height:1.55;color:var(--text);}
+  .ec-stj-ref{background:var(--yellow-light);border-left:3px solid var(--yellow);border-radius:0 5px 5px 0;padding:8px 12px;margin:8px 0;font-size:12.5px;line-height:1.55;color:var(--text);}
+  .ec-stj-ref strong{color:var(--yellow);font-weight:600;}
+  .ec-q-show-btn{margin-top:10px;padding:7px 18px;background:transparent;border:1.5px solid var(--border);border-radius:6px;color:var(--text2);font-size:12.5px;cursor:pointer;font-family:inherit;transition:all .15s;}
+  .ec-q-show-btn:hover{border-color:var(--accent);color:var(--accent2);}
+  .ec-answer{display:none;margin-top:12px;padding:12px 14px;background:var(--green-light);border-radius:8px;font-size:13px;line-height:1.65;color:var(--text);}
+  .ec-answer.show{display:block;}
+  .ec-answer strong{color:var(--green);}
+  .ec-bl{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:600;margin-right:4px;}
+  .ec-bl-1{background:var(--blue-light);color:var(--blue);}
+  .ec-bl-2{background:var(--green-light);color:var(--green);}
+  .ec-bl-3{background:var(--red-light);color:var(--red);}
+  .ec-bl-4{background:var(--yellow-light);color:var(--yellow);}
+  .ec-summary-table{width:100%;border-collapse:collapse;font-size:13px;min-width:620px;}
+  .ec-summary-table thead th{background:var(--accent);color:#fff;padding:10px 14px;text-align:left;font-size:12px;font-weight:600;border:none;}
+  .ec-summary-table tbody tr{border-bottom:1px solid var(--border);}
+  .ec-summary-table tbody tr:hover td{background:var(--accent-light);}
+  .ec-summary-table td{padding:10px 14px;vertical-align:top;color:var(--text2);border:none;background:var(--bg);}
+  .ec-summary-table td:first-child{font-weight:600;color:var(--accent2);}
+
+  @media(max-width:600px) {
+    header h1 { font-size: 1.4rem; }
+    .tab-content { padding: 1rem; }
+    .qs-dist-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">DIREITO PENAL IV</div>
+  <h1>Crimes contra a Administração Pública</h1>
+  <p>Prof. Artur Vieira · Arts. 312–359 CP · Material de Apoio</p>
+</header>
+
+<nav>
+  <button class="active" onclick="show('mapa')">🗺 Mapa Mental</button>
+  <button onclick="show('conceitual')">🔗 Mapa Conceitual</button>
+  <button onclick="show('sinoptico')">📋 Quadro Sinóptico</button>
+  <button onclick="show('roteiro')">📖 Roteiro</button>
+  <button onclick="show('caso')">⚖️ Estudo de Caso</button>
+</nav>
+
+<!-- TAB: MAPA MENTAL -->
+<div id="tab-mapa" class="tab-content active">
+  <iframe src="adm-publica-mapa-mental.html" style="width:100%;height:80vh;border:none;border-radius:8px;"></iframe>
+</div>
+
+<!-- TAB: MAPA CONCEITUAL -->
+<div id="tab-conceitual" class="tab-content">
+  <iframe src="adm-publica-mapa-conceitual.html" style="width:100%;height:80vh;border:none;border-radius:8px;"></iframe>
+</div>
+
+<!-- TAB: QUADRO SINÓPTICO -->
+<div id="tab-sinoptico" class="tab-content">
+
+  <div class="qs-filter-bar">
+    <button class="qs-fbtn active" onclick="qsFilter('all',this)">Todos</button>
+    <button class="qs-fbtn" onclick="qsFilter('cap1',this)">Cap. I — Func. Público (312–326)</button>
+    <button class="qs-fbtn" onclick="qsFilter('cap2',this)">Cap. II — Particular (328–337)</button>
+    <button class="qs-fbtn" onclick="qsFilter('cap3',this)">Adm. Judiciária (338–359)</button>
+  </div>
+
+  <div class="qs-tbl-wrap">
+  <table class="qs-table" id="qs-main-table">
+    <thead>
+      <tr>
+        <th>Crime</th>
+        <th>Art.</th>
+        <th>Conduta nuclear</th>
+        <th>Pena base</th>
+        <th>Sujeito ativo</th>
+        <th>Consumação</th>
+        <th>Competência</th>
+        <th>Ponto crítico / Jurisprudência</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-cat="cap1">
+        <td>Peculato-apropriação</td><td class="art">Art. 312, <em>caput</em> 1.ª p.</td>
+        <td>Apropriar-se de dinheiro, valor ou bem móvel público ou particular, de que tem a posse em razão do cargo</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–12 anos</span> + multa</td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a apropriação</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>Não pune o 'peculato de uso'. Súm. 599 STJ: insignificância inaplicável.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Peculato-desvio</td><td class="art">Art. 312, <em>caput</em> 2.ª p.</td>
+        <td>Desviar, em proveito próprio ou alheio, o bem de que tem a posse em razão do cargo</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–12 anos</span> + multa</td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com o desvio</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>Desvio: destino diverso do correto, sem necessariamente apropriar-se.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Peculato-furto (impróprio)</td><td class="art">Art. 312, §1.º</td>
+        <td>Subtrair ou concorrer para a subtração, valendo-se das facilidades do cargo</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–12 anos</span> + multa</td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a subtração</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>Não tem a posse do bem — distingue do peculato-apropriação. Art. 30: coautor civil ciente da qualidade responde pelo mesmo crime.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Peculato culposo</td><td class="art">Art. 312, §2.º</td>
+        <td>Concorrer culposamente para que terceiro pratique o crime</td>
+        <td><span class="qs-badge qs-b-det">Det. 3m–1 ano</span></td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a contribuição culposa</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>Reparação antes da sentença irrecorrível: extingue punibilidade. Reparação depois: reduz pena à metade (§3.º).</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Peculato mediante erro de outrem</td><td class="art">Art. 313</td>
+        <td>Apropriar-se de dinheiro ou utilidade recebida por erro de outrem, no exercício do cargo</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 1–4 anos</span> + multa</td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a apropriação</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>O erro deve ser espontâneo (majoritário). Se o agente provocou o erro: concussão ou estelionato.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Peculato eletrônico</td><td class="art">Art. 313-A</td>
+        <td>Inserir/facilitar dados falsos ou alterar/excluir dados corretos em sistemas informatizados da Adm. Pública para obter vantagem</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–12 anos</span> + multa</td>
+        <td><span class="qs-chip">Próprio (func. autorizado)</span></td>
+        <td>Com a inserção/alteração</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>Exige finalidade especial (vantagem indevida ou dano). Aumento de 1/3 se comissionado ou diretor.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Emprego irregular de verbas</td><td class="art">Art. 315</td>
+        <td>Dar às verbas ou rendas públicas aplicação diversa da estabelecida em lei</td>
+        <td><span class="qs-badge qs-b-det">Det. 1–3 meses</span></td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a aplicação irregular</td>
+        <td>Conforme a esfera</td>
+        <td>Se praticado por prefeito: aplica-se o Decreto-Lei 201/67 (art. 1.º, III), por especialidade.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Concussão</td><td class="art">Art. 316</td>
+        <td>Exigir, para si ou para outrem, vantagem indevida em razão da função (ainda que fora dela)</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–8 anos</span> + multa</td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a exigência (crime formal)</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>Consumação = exigência. Recebimento = exaurimento. Médico SUS: concussão; competência Estadual (STJ). Exação vexatória: §1.º (Det. 3m–1 ano).</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Corrupção passiva</td><td class="art">Art. 317</td>
+        <td>Solicitar ou receber vantagem indevida, ou aceitar promessa de tal vantagem, em razão da função</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–12 anos</span> + multa</td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com o ato de solicitar/receber/aceitar</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>§1.º: +1/3 se o ato é retardado/omitido/praticado com infração. §2.º: corrupção passiva privilegiada (ceder a pedido).</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Prevaricação</td><td class="art">Art. 319</td>
+        <td>Retardar, omitir ou praticar ato de ofício contra lei, para satisfazer interesse ou sentimento pessoal</td>
+        <td><span class="qs-badge qs-b-det">Det. 3m–1 ano</span></td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com o ato/omissão</td>
+        <td>Conforme a esfera</td>
+        <td>Elemento subjetivo especial obrigatório e demonstrável de forma concreta (STJ). Mera negligência/descompromisso: atípico.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Condescendência criminosa</td><td class="art">Art. 320</td>
+        <td>Deixar, por indulgência, de responsabilizar subordinado que cometeu infração; ou não levar o fato ao conhecimento competente</td>
+        <td><span class="qs-badge qs-b-det">Det. 15 dias–1 mês</span></td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a omissão</td>
+        <td>Conforme a esfera</td>
+        <td>A omissão deve ser por indulgência (dolo). Mera inércia sem dolo: atípico.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Advocacia administrativa</td><td class="art">Art. 321</td>
+        <td>Patrocinar, direta ou indiretamente, interesse privado perante a Administração, valendo-se da qualidade de funcionário</td>
+        <td><span class="qs-badge qs-b-det">Det. 1–3 meses</span></td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com o patrocínio</td>
+        <td>Conforme a esfera</td>
+        <td>Qualificado se o interesse é ilegítimo: Det. 3m–1 ano + multa.</td>
+      </tr>
+      <tr data-cat="cap1">
+        <td>Violação de sigilo funcional</td><td class="art">Art. 325</td>
+        <td>Revelar fato de que tem ciência em razão do cargo e que deva permanecer em segredo</td>
+        <td><span class="qs-badge qs-b-det">Det. 6m–2 anos</span> ou multa</td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a revelação</td>
+        <td>Conforme a esfera</td>
+        <td>§1.º: qualificado se resulta dano à Administração ou a outrem. §2.º: acesso indevido a sistema.</td>
+      </tr>
+      <tr data-cat="cap2">
+        <td>Usurpação de função pública</td><td class="art">Art. 328</td>
+        <td>Usurpar o exercício de função pública</td>
+        <td><span class="qs-badge qs-b-det">Det. 3m–2 anos</span></td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com a prática de ato funcional</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
+        <td>Exige prática efetiva de ato. Apresentar-se sem praticar ato = contravenção (art. 45 LCP). Qualificado (vantagem): Rec. 2–5 anos.</td>
+      </tr>
+      <tr data-cat="cap2">
+        <td>Resistência</td><td class="art">Art. 329</td>
+        <td>Opor-se à execução de ato legal mediante violência ou ameaça a funcionário competente</td>
+        <td><span class="qs-badge qs-b-det">Det. 2m–2 anos</span></td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com o ato de violência/ameaça</td>
+        <td>Conforme a esfera</td>
+        <td>§1.º: Det. 1–3 anos se o ato não se executa. Penas sem prejuízo da violência. Resistência passiva: desobediência. Concurso com desacato: possível (Greco).</td>
+      </tr>
+      <tr data-cat="cap2">
+        <td>Desobediência</td><td class="art">Art. 330</td>
+        <td>Desobedecer a ordem legal de funcionário público</td>
+        <td><span class="qs-badge qs-b-det">Det. 15 dias–6m</span> ou multa</td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com a desobediência</td>
+        <td>Conforme a esfera</td>
+        <td>Resistência passiva sem violência. Subsidiário: se outra lei prevê sanção específica, o art. 330 é afastado.</td>
+      </tr>
+      <tr data-cat="cap2">
+        <td>Desacato</td><td class="art">Art. 331</td>
+        <td>Desacatar funcionário público no exercício da função ou em razão dela</td>
+        <td><span class="qs-badge qs-b-det">Det. 6m–2 anos</span></td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com o ato de desacato</td>
+        <td>Conforme a esfera</td>
+        <td>Exige presença do funcionário (não obrigatoriamente face a face). Nexo funcional. Concurso com resistência: possível (Greco).</td>
+      </tr>
+      <tr data-cat="cap2">
+        <td>Tráfico de influência</td><td class="art">Art. 332</td>
+        <td>Solicitar, exigir, cobrar ou obter vantagem a pretexto de influir em ato de funcionário público</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–5 anos</span> + multa</td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com o ato de solicitar/exigir/cobrar (crime formal)</td>
+        <td>Conforme a esfera</td>
+        <td>Agente age como estelionatário; pode não ter influência real. Qualificado: Rec. 3–8 anos.</td>
+      </tr>
+      <tr data-cat="cap2">
+        <td>Corrupção ativa</td><td class="art">Art. 333</td>
+        <td>Oferecer ou prometer vantagem indevida a funcionário público para determiná-lo a praticar, omitir ou retardar ato de ofício</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–12 anos</span> + multa</td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com o oferecimento/promessa (crime formal)</td>
+        <td>Conforme a esfera</td>
+        <td>Tipo não prevê 'dar': quem cede à solicitação (sem ter antes oferecido) é atípico quanto ao art. 333. +1/3 se ato visado é ilícito.</td>
+      </tr>
+      <tr data-cat="cap2">
+        <td>Descaminho</td><td class="art">Art. 334</td>
+        <td>Iludir o pagamento de tributo sobre entrada, saída ou consumo de mercadoria</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 1–4 anos</span></td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com a ilusão do tributo</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span></td>
+        <td>Insignificância aplicável abaixo de R$ 20.000,00 (STF/STJ — Portaria MF 75/12). Dobro se cometido em transporte aéreo/marítimo/fluvial (§3.º).</td>
+      </tr>
+      <tr data-cat="cap2">
+        <td>Contrabando</td><td class="art">Art. 334-A</td>
+        <td>Importar ou exportar mercadoria proibida</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–5 anos</span></td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com a importação/exportação</td>
+        <td><span class="qs-badge qs-b-jf">J. Federal</span></td>
+        <td>Insignificância inaplicável (bem jurídico: saúde, segurança, moralidade — além do erário). Distingue do descaminho: mercadoria proibida vs. tributo sonegado.</td>
+      </tr>
+      <tr data-cat="cap3">
+        <td>Falso testemunho</td><td class="art">Art. 342</td>
+        <td>Fazer afirmação falsa, negar ou calar a verdade como testemunha, perito, tradutor ou intérprete em processo</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–4 anos</span> + multa</td>
+        <td><span class="qs-chip">Próprio</span></td>
+        <td>Com a afirmação/negativa</td>
+        <td>Conforme o processo</td>
+        <td>Retratação antes da sentença do fato principal: extinção da punibilidade. Qualificado com suborno: 3–6 anos.</td>
+      </tr>
+      <tr data-cat="cap3">
+        <td>Favorecimento pessoal</td><td class="art">Art. 348</td>
+        <td>Auxiliar a subtrair-se à ação de autoridade pública autor de crime punido com reclusão</td>
+        <td><span class="qs-badge qs-b-det">Det. 1–6 meses</span></td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com o ato de favorecimento</td>
+        <td>Conforme a esfera</td>
+        <td>Qualificado se o beneficiado for cônjuge, ascendente, descendente ou irmão. Distinção com favorecimento real: este favorece o proveito do crime.</td>
+      </tr>
+      <tr data-cat="cap3">
+        <td>Favorecimento real</td><td class="art">Art. 349</td>
+        <td>Prestar auxílio destinado a tornar seguro o proveito do crime, fora dos casos de coautoria ou receptação</td>
+        <td><span class="qs-badge qs-b-det">Det. 1–6 meses</span></td>
+        <td><span class="qs-chip">Comum</span></td>
+        <td>Com a prestação do auxílio</td>
+        <td>Conforme a esfera</td>
+        <td>Favorece o produto/proveito, não a pessoa. Distingue do favorecimento pessoal e da receptação.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="qs-section-title">Distinções fundamentais <span>PONTO CRÍTICO</span></div>
+  <div class="qs-dist-grid">
+    <div class="qs-dist-card">
+      <h4>Concussão × Extorsão × Corrupção passiva</h4>
+      <div class="qs-vs-row">
+        <div class="qs-vs-col">
+          <h5>Concussão (art. 316)</h5>
+          <p>Funcionário EXIGE — coação implícita ligada à função. Vantagem de qualquer natureza. Crime formal.</p>
+        </div>
+        <div class="qs-vs-col" style="background:var(--red-light);">
+          <h5 style="color:var(--red);">Extorsão (art. 158)</h5>
+          <p>Qualquer pessoa. Constrangimento com violência ou ameaça explícita. Vantagem econômica. Crime formal.</p>
+        </div>
+      </div>
+      <div class="qs-vs-row">
+        <div class="qs-vs-col" style="background:var(--yellow-light);">
+          <h5 style="color:var(--yellow);">Corrupção passiva (art. 317)</h5>
+          <p>Funcionário SOLICITA, RECEBE ou ACEITA promessa. Sem coação. Pode se manifestar em passividade.</p>
+        </div>
+      </div>
+    </div>
+    <div class="qs-dist-card">
+      <h4>Corrupção ativa × Corrupção passiva</h4>
+      <div class="qs-vs-row">
+        <div class="qs-vs-col">
+          <h5>Ativa (art. 333) — particular</h5>
+          <p>Oferece ou promete vantagem. Tipo não prevê 'dar'. Quem cede à solicitação sem ter antes oferecido é atípico.</p>
+        </div>
+        <div class="qs-vs-col" style="background:var(--green-light);">
+          <h5 style="color:var(--green);">Passiva (art. 317) — funcionário</h5>
+          <p>Solicita, recebe ou aceita promessa. Crimes autônomos que podem coexistir no mesmo fato.</p>
+        </div>
+      </div>
+    </div>
+    <div class="qs-dist-card">
+      <h4>Descaminho × Contrabando</h4>
+      <div class="qs-vs-row">
+        <div class="qs-vs-col">
+          <h5>Descaminho (art. 334)</h5>
+          <p>Mercadoria LÍCITA, mas tributo não pago. Insignificância possível (abaixo de R$ 20.000,00).</p>
+        </div>
+        <div class="qs-vs-col" style="background:var(--red-light);">
+          <h5 style="color:var(--red);">Contrabando (art. 334-A)</h5>
+          <p>Mercadoria PROIBIDA. Insignificância inaplicável. Bens jurídicos: saúde, segurança, moralidade + erário.</p>
+        </div>
+      </div>
+    </div>
+    <div class="qs-dist-card">
+      <h4>Peculato doloso × Peculato culposo</h4>
+      <div class="qs-vs-row">
+        <div class="qs-vs-col">
+          <h5>Doloso (art. 312, caput/§1.º)</h5>
+          <p>Rec. 2–12 anos + multa. Não admite extinção por reparação. Insignificância inaplicável (Súm. 599 STJ).</p>
+        </div>
+        <div class="qs-vs-col" style="background:var(--green-light);">
+          <h5 style="color:var(--green);">Culposo (art. 312, §2.º)</h5>
+          <p>Det. 3m–1 ano. Reparação antes da sentença irrecorrível: extingue punibilidade. Depois: reduz à metade.</p>
+        </div>
+      </div>
+    </div>
+    <div class="qs-dist-card">
+      <h4>Favorecimento pessoal × real × receptação</h4>
+      <div class="qs-vs-row">
+        <div class="qs-vs-col">
+          <h5>Pessoal (art. 348)</h5>
+          <p>Favorece a PESSOA do criminoso para fugir à autoridade. Beneficiado: autor de crime punível com reclusão.</p>
+        </div>
+        <div class="qs-vs-col" style="background:var(--yellow-light);">
+          <h5 style="color:var(--yellow);">Real (art. 349)</h5>
+          <p>Favorece o PROVEITO/produto do crime. Não é receptação (esta tem dolo de locupletamento).</p>
+        </div>
+      </div>
+    </div>
+    <div class="qs-dist-card">
+      <h4>Resistência × Desobediência × Desacato</h4>
+      <div class="qs-vs-row">
+        <div class="qs-vs-col">
+          <h5>Resistência (art. 329)</h5>
+          <p>Violência ou ameaça para impedir ato legal. 'Desobediência belicosa' (Hungria).</p>
+        </div>
+        <div class="qs-vs-col" style="background:var(--green-light);">
+          <h5 style="color:var(--green);">Desobediência (art. 330)</h5>
+          <p>Resistência passiva — sem violência ou ameaça. Subsidiário.</p>
+        </div>
+      </div>
+      <div class="qs-vs-row">
+        <div class="qs-vs-col" style="background:var(--accent-light);">
+          <h5>Desacato (art. 331)</h5>
+          <p>Afrontar/menosprezar o funcionário. Finalidade diferente da resistência: não visa impedir ato, mas ofender.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="qs-section-title">Jurisprudência estruturante</div>
+  <div class="qs-juris-list">
+    <div class="qs-juris-card">
+      <div class="qs-j-source">STJ — Súmula 599</div>
+      <div class="qs-j-text">O princípio da insignificância é inaplicável aos crimes contra a Administração Pública.</div>
+      <div class="qs-j-obs">Fundamento: o bem jurídico protegido é a moralidade administrativa, insuscetível de valoração econômica. Exceção discutida: descaminho abaixo de R$ 20.000,00 (arts. 20 da Lei 10.522/02 + Portaria MF 75 e 130/2012 — STF/STJ em divergência).</div>
+    </div>
+    <div class="qs-juris-card">
+      <div class="qs-j-source">STJ — AgRg no RHC 87.068/SP (Médico do SUS)</div>
+      <div class="qs-j-text">Os Tribunais Superiores pacificaram o entendimento de que a cobrança indevida de honorários por médicos do SUS acarreta prejuízos apenas ao particular, não ao sistema de saúde federal, razão pela qual compete à Justiça Estadual processar e julgar a ação penal.</div>
+      <div class="qs-j-obs">Aplicação: médico conveniado que exige pagamento responde por concussão (art. 316 + art. 327, §1.º CP), perante a Justiça Estadual.</div>
+    </div>
+    <div class="qs-juris-card">
+      <div class="qs-j-source">STJ — Prevaricação: elemento subjetivo especial</div>
+      <div class="qs-j-text">Para a configuração do crime de prevaricação é necessário que fique demonstrado que o agente agiu por interesse ou sentimento pessoal de forma objetiva e concreta — não sendo suficiente a mera negligência, comodismo ou descompromisso.</div>
+      <div class="qs-j-obs">Consequência prática: a ausência de demonstração concreta do interesse/sentimento pessoal afasta a prevaricação e pode configurar, apenas, infração disciplinar ou improbidade administrativa.</div>
+    </div>
+    <div class="qs-juris-card">
+      <div class="qs-j-source">STJ — HC 198.750/SP (Concussão × Extorsão)</div>
+      <div class="qs-j-text">O emprego de violência ou grave ameaça é circunstância elementar do crime de extorsão tipificado no art. 158 do CP. Assim, se o funcionário público utiliza esse meio para obter vantagem indevida, comete extorsão e não concussão.</div>
+      <div class="qs-j-obs">Critério: a coação na concussão é implícita, ligada ao temor da função. Na extorsão, é explícita (violência física ou ameaça direta).</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TAB: ROTEIRO -->
+<div id="tab-roteiro" class="tab-content">
+
+  <div class="rot-intro-box">
+    <h2>Roteiro de Estudo — Crimes contra a Administração Pública</h2>
+    <p>Cinco unidades progressivas, do conceitual ao jurisprudencial. Marque cada etapa como concluída. Clique para expandir o conteúdo de cada item.</p>
+    <div class="rot-obj-list">
+      <span class="rot-obj-tag">CP, Título XI — arts. 312–359</span>
+      <span class="rot-obj-tag">Peculato · Concussão · Corrupção</span>
+      <span class="rot-obj-tag">Prevaricação · Desacato · Resistência</span>
+      <span class="rot-obj-tag">Súm. 599 STJ · art. 327 CP</span>
+      <span class="rot-obj-tag">Competência J. Federal × Estadual</span>
+    </div>
+  </div>
+
+  <button class="rot-reset-btn" onclick="rotReset()">↺ Reiniciar progresso</button>
+
+  <div class="rot-unit" id="ru1">
+    <div class="rot-unit-header" onclick="rotToggleUnit('ru1')">
+      <div class="rot-unit-num">1</div>
+      <div class="rot-unit-title">Bem jurídico, conceito de funcionário público e comunicabilidade</div>
+      <span class="rot-unit-toggle open" id="rot-tog-ru1">▾</span>
+    </div>
+    <div class="rot-unit-body open" id="rot-body-ru1">
+      <div class="rot-step" id="rs1">
+        <div class="rot-step-head" onclick="rotExpand('rs1')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs1')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Bem jurídico: moralidade e probidade administrativa</div><div class="rot-step-meta">Título XI CP · fundamento de proteção</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs1">
+          <p>O Título XI do CP protege a <strong>moralidade, probidade e o regular funcionamento da Administração Pública</strong>. Rogério Greco destaca que o corruptor é um "exterminador": ao subverter a Administração, impede-a de cumprir suas funções sociais, prejudicando difusamente toda a coletividade.</p>
+          <p>O bem jurídico é de natureza supraindividual — vai além do patrimônio público, tutelando a própria integridade institucional do Estado.</p>
+          <div class="rot-art-box">CP, Título XI — arts. 312–359</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Título XI CP</span></div>
+        </div>
+      </div>
+      <div class="rot-step" id="rs2">
+        <div class="rot-step-head" onclick="rotExpand('rs2')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs2')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Conceito penal de funcionário público — art. 327 CP</div><div class="rot-step-meta">Conceito ampliado · equiparação · aumento de pena</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs2">
+          <p>Art. 327: <strong>Quem, embora transitoriamente ou sem remuneração, exerce cargo, emprego ou função pública.</strong></p>
+          <p><strong>§1.º (equiparados):</strong> quem exerce cargo, emprego ou função em entidade paraestatal, e quem trabalha para empresa prestadora de serviço contratada ou conveniada para a execução de atividade típica da Administração Pública. Exemplo: médico do SUS.</p>
+          <p><strong>§2.º (aumento):</strong> quando o autor do crime for ocupante de cargo em comissão ou de função de direção/assessoramento: +1/3 de pena.</p>
+          <div class="rot-art-box">Art. 327 e §§ CP</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Art. 327 CP</span></div>
+        </div>
+      </div>
+      <div class="rot-step" id="rs3">
+        <div class="rot-step-head" onclick="rotExpand('rs3')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs3')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Comunicabilidade de elementares — art. 30 CP</div><div class="rot-step-meta">Coautoria entre funcionário público e particular</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs3">
+          <p>A qualidade de funcionário público é elementar do tipo nos crimes do Capítulo I. Por força do art. 30 do CP, essa elementar <strong>se comunica ao coautor particular</strong> que participar do fato, desde que ciente da condição funcional do outro agente.</p>
+          <p>Exemplo: extraneus que ajuda o funcionário a desviar verba pública, ciente da condição funcional, responde por peculato — não por apropriação indébita.</p>
+          <div class="rot-warn-box"><strong>Atenção:</strong> se o particular não soube da qualidade de funcionário, não há comunicação da elementar — ele responderá pelo crime comum correspondente.</div>
+          <div class="rot-art-box">Art. 30 CP — As circunstâncias e condições de caráter pessoal não se comunicam, salvo quando elementares do crime.</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Art. 30 CP</span><span class="rot-tag rot-t-imp">Ciência da qualidade funcional</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rot-unit" id="ru2">
+    <div class="rot-unit-header" onclick="rotToggleUnit('ru2')">
+      <div class="rot-unit-num">2</div>
+      <div class="rot-unit-title">Peculato — as quatro modalidades (arts. 312–313)</div>
+      <span class="rot-unit-toggle open" id="rot-tog-ru2">▾</span>
+    </div>
+    <div class="rot-unit-body open" id="rot-body-ru2">
+      <div class="rot-step" id="rs4">
+        <div class="rot-step-head" onclick="rotExpand('rs4')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs4')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Peculato-apropriação, peculato-desvio e peculato-furto</div><div class="rot-step-meta">Art. 312, caput e §1.º</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs4">
+          <p><strong>Peculato-apropriação (caput, 1.ª parte):</strong> apropriar-se de dinheiro, valor ou bem móvel público ou particular, de que tem a <em>posse em razão do cargo</em>. Não pune o 'peculato de uso' — utilização temporária sem animus de apropriar.</p>
+          <p><strong>Peculato-desvio (caput, 2.ª parte):</strong> desviar o bem em proveito próprio ou alheio. O desvio implica dar destinação diversa da devida, sem necessariamente apropriar-se definitivamente.</p>
+          <p><strong>Peculato-furto impróprio (§1.º):</strong> o agente não tem a posse do bem, mas subtrai ou concorre para a subtração valendo-se das <em>facilidades do cargo</em>. Distingue-se do furto comum justamente por esse elemento funcional.</p>
+          <div class="rot-art-box">Art. 312, caput e §1.º CP — Reclusão 2–12 anos + multa. Aumento de 1/3 se comissionado (§2.º do art. 327).</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Art. 312 CP</span><span class="rot-tag rot-t-stj">Súm. 599 STJ – insignificância inaplicável</span></div>
+        </div>
+      </div>
+      <div class="rot-step" id="rs5">
+        <div class="rot-step-head" onclick="rotExpand('rs5')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs5')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Peculato culposo e a extinção da punibilidade pela reparação</div><div class="rot-step-meta">Art. 312, §2.º e §3.º — regra única no CP</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs5">
+          <p>O peculato culposo (§2.º) ocorre quando o funcionário <strong>concorre culposamente</strong> para que terceiro pratique o crime. Não é que o funcionário cometa o peculato com culpa — ele contribui negligentemente para que outrem o cometa.</p>
+          <p>Regra especial do §3.º:</p>
+          <ul>
+            <li><strong>Reparação antes da sentença irrecorrível:</strong> extingue a punibilidade.</li>
+            <li><strong>Reparação após a sentença irrecorrível:</strong> reduz a pena à metade.</li>
+          </ul>
+          <div class="rot-warn-box"><strong>Atenção:</strong> essa regra se aplica <em>exclusivamente</em> ao peculato culposo. No peculato doloso, a reparação não extingue a punibilidade — pode ser circunstância atenuante (art. 65, III, b) ou causa de redução (art. 16 CP), mas não extingue.</div>
+          <div class="rot-art-box">Art. 312, §2.º e §3.º CP — Det. 3m–1 ano (culposo)</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Art. 312, §3.º CP</span><span class="rot-tag rot-t-imp">Reparação = extinção (antes da sentença)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rot-unit" id="ru3">
+    <div class="rot-unit-header" onclick="rotToggleUnit('ru3')">
+      <div class="rot-unit-num">3</div>
+      <div class="rot-unit-title">Concussão, corrupção passiva e prevaricação (arts. 316–319)</div>
+      <span class="rot-unit-toggle open" id="rot-tog-ru3">▾</span>
+    </div>
+    <div class="rot-unit-body open" id="rot-body-ru3">
+      <div class="rot-step" id="rs6">
+        <div class="rot-step-head" onclick="rotExpand('rs6')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs6')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Concussão — art. 316: crime formal, exigência e exaurimento</div><div class="rot-step-meta">Distinção com extorsão e corrupção passiva</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs6">
+          <p>Concussão: <strong>exigir</strong> vantagem indevida para si ou para outrem, em razão da função, ainda que fora dela ou antes de assumi-la.</p>
+          <p>Crime <strong>formal</strong>: consuma-se com a exigência. O efetivo recebimento = exaurimento (não é mais necessário para a consumação).</p>
+          <p>Vantagem de <strong>qualquer natureza</strong> (não apenas econômica). Extorsão: só econômica + violência/ameaça.</p>
+          <div class="rot-stj-box"><strong>STJ, HC 198.750/SP:</strong> se o funcionário usa violência ou grave ameaça explícita, comete extorsão (art. 158), não concussão.</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Art. 316 CP</span><span class="rot-tag rot-t-imp">Crime formal — exigência = consumação</span></div>
+        </div>
+      </div>
+      <div class="rot-step" id="rs7">
+        <div class="rot-step-head" onclick="rotExpand('rs7')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs7')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Corrupção passiva (art. 317) × Corrupção ativa (art. 333)</div><div class="rot-step-meta">Crimes autônomos · peculiaridade do 'dar' na ativa</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs7">
+          <p><strong>Corrupção passiva (art. 317):</strong> SOLICITAR, RECEBER ou ACEITAR promessa de vantagem. O funcionário está em posição de passividade ou de iniciativa (solicitação). §1.º: se retarda/omite/pratica ato com infração: +1/3. §2.º: privilegiada (ceder a pedido).</p>
+          <p><strong>Corrupção ativa (art. 333):</strong> OFERECER ou PROMETER vantagem. O tipo não prevê o verbo "DAR". Por isso, quem cede à solicitação do funcionário sem ter antes oferecido é <strong>atípico quanto ao art. 333</strong>.</p>
+          <p>São crimes autônomos: podem coexistir no mesmo episódio — funcionário solicita e particular oferece/promete.</p>
+          <div class="rot-art-box">Art. 317 CP – Rec. 2–12 anos + multa (passiva). Art. 333 CP – Rec. 2–12 anos + multa (ativa).</div>
+          <div class="rot-warn-box"><strong>Ponto de prova:</strong> quem 'dá' após solicitação do funcionário (sem antes oferecer) é atípico no art. 333. Cuidado com questões que usam o verbo 'dar' na corrupção ativa.</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Art. 317 CP</span><span class="rot-tag rot-t-art">Art. 333 CP</span><span class="rot-tag rot-t-imp">'Dar' sem antes oferecer = atípico (art. 333)</span></div>
+        </div>
+      </div>
+      <div class="rot-step" id="rs8">
+        <div class="rot-step-head" onclick="rotExpand('rs8')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs8')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Prevaricação (art. 319) — elemento subjetivo especial obrigatório</div><div class="rot-step-meta">Demonstração concreta do interesse/sentimento pessoal</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs8">
+          <p>Prevaricação: retardar ou deixar de praticar ato de ofício, ou praticá-lo contra lei, <strong>para satisfazer interesse ou sentimento pessoal</strong>.</p>
+          <p>O elemento subjetivo especial é o núcleo diferenciador do crime. Sem ele, o fato é atípico (podendo configurar improbidade administrativa ou infração disciplinar, mas não crime).</p>
+          <div class="rot-stj-box"><strong>STJ (posição pacificada):</strong> para configurar prevaricação, é imprescindível demonstrar de forma objetiva e concreta qual é o interesse ou sentimento pessoal que motivou a conduta. Mera negligência, comodismo ou descompromisso não configuram prevaricação.</div>
+          <p>Prevaricação imprópria: art. 319-A (diretor de penitenciária que permite acesso de preso a aparelho de comunicação).</p>
+          <div class="rot-art-box">Art. 319 CP — Det. 3m–1 ano</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Art. 319 CP</span><span class="rot-tag rot-t-imp">Interesse/sentimento pessoal: demonstração concreta</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rot-unit" id="ru4">
+    <div class="rot-unit-header" onclick="rotToggleUnit('ru4')">
+      <div class="rot-unit-num">4</div>
+      <div class="rot-unit-title">Crimes por particular — resistência, desacato, corrupção ativa, descaminho (arts. 328–334-A)</div>
+      <span class="rot-unit-toggle open" id="rot-tog-ru4">▾</span>
+    </div>
+    <div class="rot-unit-body open" id="rot-body-ru4">
+      <div class="rot-step" id="rs9">
+        <div class="rot-step-head" onclick="rotExpand('rs9')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs9')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Resistência (art. 329) × Desobediência (art. 330) × Desacato (art. 331)</div><div class="rot-step-meta">Três figuras próximas — distinções e possibilidade de concurso</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs9">
+          <p><strong>Resistência (art. 329):</strong> oposição ativa — mediante violência ou ameaça — à execução de ato legal. "Desobediência belicosa" (Hungria). Penas sem prejuízo da violência.</p>
+          <p><strong>Desobediência (art. 330):</strong> oposição passiva — sem violência ou ameaça — a ordem legal de funcionário. Art. subsidiário: afastado quando lei especial prevê sanção para o descumprimento.</p>
+          <p><strong>Desacato (art. 331):</strong> afrontar, menosprezar o funcionário no exercício ou em razão da função. Nexo funcional obrigatório. Exige presença do funcionário (não necessariamente face a face). Finalidade diferente da resistência.</p>
+          <p>Rogério Greco: possível <strong>concurso real</strong> entre resistência e desacato — finalidades distintas (impedir o ato vs. ofender o funcionário).</p>
+          <div class="rot-art-box">Art. 329 – Det. 2m–2 anos · Art. 330 – Det. 15 dias–6 meses · Art. 331 – Det. 6m–2 anos</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Arts. 329, 330 e 331 CP</span></div>
+        </div>
+      </div>
+      <div class="rot-step" id="rs10">
+        <div class="rot-step-head" onclick="rotExpand('rs10')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs10')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Descaminho × Contrabando — e o princípio da insignificância</div><div class="rot-step-meta">Art. 334 × Art. 334-A · Súm. 599 STJ e a exceção</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs10">
+          <p><strong>Descaminho (art. 334):</strong> mercadoria LÍCITA; tributo não pago. O bem jurídico afetado é principalmente o erário. Competência: Justiça Federal. Insignificância: <strong>possível</strong> quando o tributo sonegado for inferior a R$ 20.000,00 (art. 20 da Lei 10.522/02 + Portaria MF 75 e 130/2012 — entendimento do STJ/STF, embora haja divergência).</p>
+          <p><strong>Contrabando (art. 334-A):</strong> mercadoria PROIBIDA. Bem jurídico: saúde, segurança, moralidade pública e erário. Insignificância: <strong>inaplicável</strong>, pois os bens jurídicos protegidos vão além do aspecto econômico.</p>
+          <div class="rot-stj-box"><strong>STJ — Súmula 599:</strong> O princípio da insignificância é inaplicável aos crimes contra a Administração Pública. A exceção (descaminho) foi construída pelo STF com base no limite fiscal de arquivamento de execuções.</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">Art. 334 CP</span><span class="rot-tag rot-t-art">Art. 334-A CP</span><span class="rot-tag rot-t-stj">Súm. 599 STJ</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rot-unit" id="ru5">
+    <div class="rot-unit-header" onclick="rotToggleUnit('ru5')">
+      <div class="rot-unit-num">5</div>
+      <div class="rot-unit-title">Jurisprudência consolidada e síntese dos pontos de prova</div>
+      <span class="rot-unit-toggle open" id="rot-tog-ru5">▾</span>
+    </div>
+    <div class="rot-unit-body open" id="rot-body-ru5">
+      <div class="rot-step" id="rs11">
+        <div class="rot-step-head" onclick="rotExpand('rs11')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs11')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Súmulas e teses obrigatórias — consolidação</div><div class="rot-step-meta">STJ Súm. 599 · Teses repetitivas · Competência médico SUS</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs11">
+          <div class="rot-stj-box"><strong>STJ — Súmula 599:</strong> O princípio da insignificância é inaplicável aos crimes contra a Administração Pública.</div>
+          <div class="rot-stj-box"><strong>STJ — Médico do SUS (AgRg no RHC 87.068/SP):</strong> A cobrança indevida de honorários por médico do SUS prejudica apenas o paciente, não o sistema federal. Competência: Justiça Estadual. Crime: concussão (art. 316 c/c art. 327, §1.º).</div>
+          <div class="rot-stj-box"><strong>STJ — Prevaricação:</strong> O elemento subjetivo especial 'interesse ou sentimento pessoal' deve ser demonstrado de forma objetiva e concreta. Mera negligência = atípico.</div>
+          <div class="rot-stj-box"><strong>STJ/STF — Corrupção ativa:</strong> Quem cede à solicitação do funcionário sem antes ter oferecido ou prometido vantagem é atípico quanto ao art. 333 CP (tipo não prevê 'dar').</div>
+          <div class="rot-warn-box"><strong>Ponto de prova recorrente:</strong> as quatro modalidades do peculato (doloso: apropriação, desvio, furto; culposo) e seus efeitos distintos quanto à reparação. Dominar: reparação no peculato culposo = extinção antes da sentença; redução depois.</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-stj">Súm. 599 STJ</span><span class="rot-tag rot-t-stj">AgRg RHC 87.068/SP</span></div>
+        </div>
+      </div>
+      <div class="rot-step" id="rs12">
+        <div class="rot-step-head" onclick="rotExpand('rs12')">
+          <div class="rot-step-check" onclick="rotCheck(event,'rs12')"><svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+          <div style="flex:1"><div class="rot-step-title">Competência — síntese e regras de distribuição</div><div class="rot-step-meta">CF, art. 109, IV · interesse da União · exceções</div></div>
+          <span class="rot-step-expand">+</span>
+        </div>
+        <div class="rot-step-content" id="rot-sc-rs12">
+          <p><strong>Regra geral (CF, art. 109, IV):</strong> Justiça Federal quando o crime ofende bens, serviços ou interesses da União. Exemplos: peculato por servidor federal, corrupção de agente federal, crimes contra a Previdência Social.</p>
+          <p><strong>Justiça Estadual:</strong> quando o crime afeta apenas estados, municípios ou particulares. Exemplos: peculato por servidor estadual/municipal; médico do SUS conveniado com município (o dano patrimonial é ao paciente, não à União).</p>
+          <ul>
+            <li>Peculato por servidor do INSS → <strong>J. Federal</strong></li>
+            <li>Peculato por servidor estadual → <strong>J. Estadual</strong></li>
+            <li>Médico SUS (cobrança indevida) → <strong>J. Estadual</strong> (STJ)</li>
+            <li>Corrupção de auditor da Receita Federal → <strong>J. Federal</strong></li>
+          </ul>
+          <div class="rot-art-box">CF, art. 109, IV · STJ – AgRg no RHC 87.068/SP</div>
+          <div class="rot-tag-row"><span class="rot-tag rot-t-art">CF, art. 109, IV</span><span class="rot-tag rot-t-stj">Médico SUS: J. Estadual</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TAB: ESTUDO DE CASO -->
+<div id="tab-caso" class="tab-content">
+
+  <div class="ec-case-header">
+    <div class="ec-op-label">Operação Erário Limpo</div>
+    <h2>O caso do auditor, do prefeito e do médico conveniado</h2>
+    <p style="font-size:13.5px;opacity:.88;line-height:1.6;">Estudo de caso fictício para análise integrada dos crimes contra a Administração Pública (CP, Título XI). Personagens e fatos inteiramente fictícios.</p>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Arts. 312, 316, 317, 319, 333 CP</span>
+      <span class="ec-meta-tag">Art. 327, §1.º CP (equiparado)</span>
+      <span class="ec-meta-tag">Súmula 599 STJ</span>
+      <span class="ec-meta-tag">Competência J. Federal × Estadual</span>
+      <span class="ec-meta-tag">Pós-graduação · Direito Penal IV</span>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-sec-title">Narrativa dos fatos <span class="ec-badge">LEIA ATENTAMENTE</span></div>
+    <div class="ec-narrative">
+      <p><strong>Fato 1 — O auditor federal.</strong> Rodrigo Menezes, auditor fiscal da Receita Federal, durante fiscalização em empresa privada, exigiu do sócio-diretor Fábio Lins o pagamento de R$ 30.000,00 em espécie, sob a ameaça velada de que, caso não recebesse o valor, lavraria auto de infração milionário por irregularidades "que poderiam ser encontradas". Fábio Lins, temeroso, combinou a entrega para a semana seguinte. Ainda que não tenha recebido o dinheiro, a Corregedoria da Receita foi alertada por Fábio antes da entrega.</p>
+      <p><strong>Fato 2 — O prefeito e o desvio de verbas.</strong> Marcelo Aguiar, prefeito do município de Rio Vermelho/MG, responsável pela gestão de verbas municipais de saúde, desviou R$ 180.000,00 de recurso próprio municipal (não federal) para conta de empresa de sua esposa, utilizando nota fiscal fria. Seu secretário de saúde, Eduardo Pires, ciente do esquema e responsável pelo controle dos pagamentos, autorizou as transferências sem qualquer verificação — por comodidade administrativa, sem motivação pessoal identificada.</p>
+      <p><strong>Fato 3 — O médico conveniado.</strong> Dr. Paulo Régis, médico conveniado ao SUS por meio de contrato com o município de Rio Vermelho/MG, passou a exigir de seus pacientes o pagamento de R$ 200,00 por consulta coberta pelo sistema, sob a justificativa de que "o SUS demora a repassar". Os pacientes, intimidados, pagavam sem denunciar. Um paciente finalmente registrou boletim de ocorrência na Polícia Civil.</p>
+      <p><strong>Fato 4 — A proposta recusada.</strong> Fábio Lins, antes de acionar a Corregedoria, havia dito ao auditor Rodrigo: "se o senhor não lavrar o auto e me deixar em paz, eu pago os R$ 30.000,00". O MP avaliou esse trecho da conversa como possível crime do próprio Fábio.</p>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-sec-title">Documentos simulados</div>
+    <div class="ec-doc-sim">
+      <div class="ec-doc-title">Termo de Depoimento — Fábio Lins (perante a Corregedoria da Receita Federal)</div>
+      <table>
+        <tr><td>Data:</td><td>22/04/2024</td></tr>
+        <tr><td>Depoente:</td><td>Fábio Lins Cavalcante, sócio-diretor</td></tr>
+        <tr><td>Relato:</td><td>"O auditor Rodrigo me disse que poderia encontrar irregularidades sérias se eu não colaborasse. Combinamos a entrega de R$ 30.000,00 para sexta-feira. Antes disso, procurei a Corregedoria."</td></tr>
+        <tr><td>Observação:</td><td>Fábio também relatou ter sugerido o pagamento ao auditor antes de ser exigido. O MP anotou essa declaração.</td></tr>
+      </table>
+    </div>
+    <div class="ec-doc-sim">
+      <div class="ec-doc-title">Relatório de Controladoria — Município de Rio Vermelho/MG</div>
+      <table>
+        <tr><td>Período auditado:</td><td>Jan/2023 – Dez/2023</td></tr>
+        <tr><td>Irregularidade:</td><td>Transferências de R$ 180.000,00 a empresa "Saúde &amp; Vida Ltda." sem comprovação de serviço prestado.</td></tr>
+        <tr><td>Origem dos recursos:</td><td>Verba municipal própria (não federal).</td></tr>
+        <tr><td>Responsável direto:</td><td>Prefeito Marcelo Aguiar.</td></tr>
+        <tr><td>Responsável autorização:</td><td>Secretário Eduardo Pires (assinou ordens de pagamento).</td></tr>
+        <tr><td>Conclusão:</td><td>Indícios de desvio doloso. Eduardo Pires não apresentou motivação para as autorizações além de "confiança no chefe".</td></tr>
+      </table>
+    </div>
+    <div class="ec-doc-sim">
+      <div class="ec-doc-title">Boletim de Ocorrência — Dr. Paulo Régis</div>
+      <table>
+        <tr><td>Data:</td><td>15/05/2024</td></tr>
+        <tr><td>Vítima:</td><td>José Geraldo Tavares, 58 anos, paciente do SUS.</td></tr>
+        <tr><td>Narração:</td><td>"O Dr. Paulo Régis exigiu R$ 200,00 por consulta, dizendo que sem pagamento não me atenderia. Paguei com medo de ficar sem atendimento."</td></tr>
+        <tr><td>Local:</td><td>Clínica particular conveniada ao SUS — município de Rio Vermelho/MG.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-sec-title">Perguntas para análise</div>
+    <div class="ec-q-list">
+
+      <div class="ec-q-item" id="ecq1">
+        <div class="ec-q-head" onclick="ecTog('ecq1')">
+          <div class="ec-q-num">1</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Rodrigo (auditor) já praticou algum crime com a exigência, mesmo não tendo recebido o dinheiro? Qual a natureza jurídica do crime e qual o momento da consumação?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Aplicar</span> Art. 316 CP · Crime formal · Exaurimento</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ecq1">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ecq1">
+          <p>Analise: (a) qual o tipo penal aplicável; (b) o momento da consumação; (c) se o não recebimento interfere na tipicidade; (d) a competência.</p>
+          <div class="ec-art-ref">Art. 316 CP (concussão) · Crime formal · Competência: Justiça Federal (servidor federal)</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('eca1')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="eca1">
+            <strong>Resposta:</strong> Sim. Rodrigo pratica concussão (art. 316 CP) no momento em que EXIGE a vantagem indevida. A concussão é crime FORMAL: consuma-se com a exigência, independentemente do recebimento. O recebimento seria mero exaurimento. Por isso, ainda que Fábio tenha acionado a Corregedoria antes da entrega, o crime já estava consumado. Rodrigo é auditor da Receita Federal — servidor público federal — logo a competência é da Justiça Federal (CF, art. 109, IV). Súmula 599 STJ: insignificância inaplicável. Pena: reclusão 2–8 anos + multa.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ecq2">
+        <div class="ec-q-head" onclick="ecTog('ecq2')">
+          <div class="ec-q-num">2</div>
+          <div style="flex:1">
+            <div class="ec-q-text">A frase de Fábio Lins — "se o senhor não lavrar o auto e me deixar em paz, eu pago os R$ 30.000,00" — configura corrupção ativa? Justifique à luz do art. 333 CP.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Analisar</span> Art. 333 CP · 'oferecer ou prometer' · atipicidade de 'dar'</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ecq2">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ecq2">
+          <p>O art. 333 prevê: "oferecer ou prometer". Fábio ainda não pagou — mas prometeu. Analise se a conduta se enquadra no tipo e se o contexto (reagindo à exigência ou tomando iniciativa) interfere na tipificação.</p>
+          <div class="ec-art-ref">Art. 333 CP — Oferecer ou prometer vantagem indevida a funcionário público</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('eca2')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="eca2">
+            <strong>Resposta:</strong> A questão é controvertida. O art. 333 prevê "oferecer ou prometer". Fábio PROMETEU pagar. Em tese, o ato se enquadra na letra da lei. No entanto, parte da doutrina e da jurisprudência distingue: (a) se Fábio toma a iniciativa de oferecer/prometer para corromper o agente = corrupção ativa consumada; (b) se Fábio apenas cede à exigência do agente sem ter antes oferecido = pode ser atípico quanto ao art. 333. No caso, a exigência partiu de Rodrigo (concussão). A frase de Fábio veio em resposta à exigência — é discutível se configura corrupção ativa ou mera resposta à coação. A posição do STJ é de que quem apenas dá após solicitação, sem antes oferecer, é atípico no art. 333 (tipo não prevê 'dar'). Aqui, Fábio prometeu — mas a iniciativa foi do auditor. A melhor solução é a atipicidade ou, no mínimo, a discussão como coação no processo de avaliação do dolo.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ecq3">
+        <div class="ec-q-head" onclick="ecTog('ecq3')">
+          <div class="ec-q-num">3</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Qual o crime do prefeito Marcelo Aguiar? E do secretário Eduardo Pires, que autorizou os pagamentos "por comodidade, sem motivação pessoal identificada"?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Analisar</span> Art. 312 CP · peculato-desvio · prevaricação · elemento subjetivo especial</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ecq3">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ecq3">
+          <p>Analise separadamente: (a) a conduta do prefeito — qual modalidade de peculato; (b) a conduta do secretário — é peculato doloso, peculato culposo ou prevaricação? Considere especialmente o elemento subjetivo especial da prevaricação e a competência.</p>
+          <div class="ec-art-ref">Art. 312 CP (peculato-desvio · caput) · Art. 319 CP (prevaricação) · Art. 312, §2.º (peculato culposo)</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('eca3')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="eca3">
+            <strong>Resposta:</strong> (a) Marcelo Aguiar: peculato-desvio (art. 312, caput, 2.ª parte) — desviou verba municipal de que tinha a posse em razão do cargo de prefeito. A verba é municipal (não federal): competência da Justiça Estadual. Súmula 599 STJ: insignificância inaplicável. (b) Eduardo Pires: a análise é mais complexa. Para prevaricação (art. 319), exige-se demonstração concreta de 'interesse ou sentimento pessoal' — o STJ pacificou que mera negligência ou comodismo NÃO configura prevaricação. Logo, Eduardo não pratica prevaricação. Mas autorizou os desvios: se ciente do desvio e dolosamente conivente, responde por peculato-desvio na condição de coautor (art. 30 CP — elementar comunicável). Se genuinamente negligente, poderia ser peculato culposo (§2.º). No caso, o fato de assinar as ordens de pagamento sem qualquer verificação, sendo responsável direto pelo controle, aponta para coautoria dolosa ou, ao menos, culpa grave. A tipificação correta depende da prova do dolo.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ecq4">
+        <div class="ec-q-head" onclick="ecTog('ecq4')">
+          <div class="ec-q-num">4</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Dr. Paulo Régis, médico conveniado ao SUS, que exige pagamento de consulta coberta pelo sistema: qual crime pratica? Qual a competência?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Avaliar</span> Art. 316 CP · Art. 327, §1.º CP · Competência · Súm. 599 STJ</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ecq4">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ecq4">
+          <p>O médico não é servidor público. É conveniado ao SUS por contrato com o município. Analise: (a) se ele é funcionário público para fins penais; (b) qual crime pratica; (c) a competência; (d) a aplicabilidade da Súmula 599 STJ.</p>
+          <div class="ec-art-ref">Art. 327, §1.º CP — Equiparado a funcionário público · Art. 316 CP (concussão)</div>
+          <div class="ec-stj-ref"><strong>STJ — AgRg no RHC 87.068/SP:</strong> A cobrança indevida por médico do SUS acarreta prejuízo apenas ao paciente, não ao sistema de saúde federal. Competência: Justiça Estadual.</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('eca4')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="eca4">
+            <strong>Resposta:</strong> (a) Dr. Paulo Régis é equiparado a funcionário público pelo art. 327, §1.º CP — exerce função em empresa prestadora de serviço contratada/conveniada para atividade típica da Administração (serviço de saúde pública). (b) Pratica concussão (art. 316 CP): EXIGE vantagem indevida em razão da função, ainda que esta seja exercida em clínica conveniada. Crime formal — consumado com a exigência. (c) Competência: Justiça ESTADUAL. Fundamento: STJ, AgRg no RHC 87.068/SP — a cobrança indevida causa prejuízo financeiro apenas ao particular (paciente), não ao sistema de saúde administrado pela União. O convênio é com o município. (d) Súmula 599 STJ: inaplicável ao caso — a exigência de R$ 200,00 não pode ser considerada insignificante nos crimes contra a Administração.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ecq5">
+        <div class="ec-q-head" onclick="ecTog('ecq5')">
+          <div class="ec-q-num">5</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Sintetize em um quadro-argumento: quais crimes foram praticados, por quem, qual a competência e qual a principal discussão jurídica de cada conduta.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> Síntese analítica · argumentação forense</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ecq5">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ecq5">
+          <p>Esta questão pede síntese e argumentação. Elabore um quadro completo com: agente, conduta, tipificação, competência e a principal controvérsia jurídica de cada caso.</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('eca5')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="eca5">
+            <strong>Síntese:</strong> (1) Rodrigo — Concussão (art. 316), Justiça Federal. Controvérsia: distinção com extorsão e o momento de consumação. (2) Fábio — Possivelmente atípico quanto ao art. 333 (prometeu em resposta à exigência, sem iniciativa). Controvérsia: se a promessa diante de coação configura corrupção ativa. (3) Marcelo — Peculato-desvio (art. 312, caput), Justiça Estadual (verba municipal). Controvérsia: incidência do DL 201/67 ou do CP (prevalece o CP para peculato, DL 201 para crimes de responsabilidade de prefeito). (4) Eduardo — Coautoria no peculato-desvio (se dolo demonstrado) ou peculato culposo (se negligência). Controvérsia: ausência de elemento subjetivo especial afasta prevaricação; o dolo do secretário precisa ser provado. (5) Dr. Paulo Régis — Concussão (art. 316 c/c art. 327, §1.º), Justiça Estadual. Controvérsia: enquadramento como equiparado; competência estadual em detrimento do interesse federal (STJ).
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-sec-title">Síntese — quadro dos crimes identificados</div>
+    <div style="overflow-x:auto;border-radius:10px;">
+    <table class="ec-summary-table">
+      <thead>
+        <tr>
+          <th>Agente</th>
+          <th>Conduta</th>
+          <th>Tipo</th>
+          <th>Pena</th>
+          <th>Competência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Rodrigo (auditor)</td><td>Exigiu vantagem em razão do cargo (ameaça velada de autuação)</td><td>Concussão — Art. 316 CP</td><td>Rec. 2–8 anos + multa</td><td>Justiça Federal</td></tr>
+        <tr><td>Fábio (particular)</td><td>Prometeu pagar em resposta à exigência do auditor</td><td>Discussão: atípico (art. 333 não prevê 'dar'; iniciativa foi do auditor)</td><td>—</td><td>—</td></tr>
+        <tr><td>Marcelo (prefeito)</td><td>Desviou R$ 180.000,00 de verba municipal para empresa da esposa</td><td>Peculato-desvio — Art. 312, caput, 2.ª p., CP</td><td>Rec. 2–12 anos + multa</td><td>Justiça Estadual</td></tr>
+        <tr><td>Eduardo (secretário)</td><td>Autorizou desvios sem verificação — dolo a ser provado</td><td>Coautoria peculato-desvio (se dolo) ou Peculato culposo §2.º (se culpa)</td><td>Rec. 2–12 anos ou Det. 3m–1 ano</td><td>Justiça Estadual</td></tr>
+        <tr><td>Dr. Paulo Régis</td><td>Exigiu pagamento de consultas cobertas pelo SUS</td><td>Concussão — Art. 316 c/c Art. 327, §1.º, CP</td><td>Rec. 2–8 anos + multa</td><td>Justiça Estadual (STJ)</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function show(tab) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Quadro Sinóptico filter
+function qsFilter(cat, btn) {
+  document.querySelectorAll('.qs-fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#qs-main-table tbody tr').forEach(tr => {
+    tr.style.display = (cat === 'all' || tr.dataset.cat === cat) ? '' : 'none';
+  });
+}
+
+// Roteiro functions
+function rotGetState(){try{return JSON.parse(localStorage.getItem('ap_rot_v2')||'{}')}catch(e){return{}}}
+function rotSetState(s){try{localStorage.setItem('ap_rot_v2',JSON.stringify(s))}catch(e){}}
+function rotCheck(e,id){
+  e.stopPropagation();
+  const s=rotGetState();s[id]=!s[id];rotSetState(s);
+  document.getElementById(id).classList.toggle('done',!!s[id]);
+}
+function rotExpand(id){
+  const c=document.getElementById('rot-sc-'+id);
+  const btn=document.querySelector('#'+id+' .rot-step-expand');
+  if(c.classList.contains('open')){c.classList.remove('open');btn.textContent='+';}
+  else{c.classList.add('open');btn.textContent='−';}
+}
+function rotToggleUnit(uid){
+  const b=document.getElementById('rot-body-'+uid);
+  const t=document.getElementById('rot-tog-'+uid);
+  b.classList.toggle('open');t.classList.toggle('open');
+}
+function rotReset(){
+  rotSetState({});
+  document.querySelectorAll('.rot-step').forEach(s=>s.classList.remove('done'));
+}
+(function(){
+  const s=rotGetState();
+  Object.keys(s).forEach(id=>{if(s[id])document.getElementById(id)&&document.getElementById(id).classList.add('done');});
+})();
+
+// Estudo de Caso functions
+function ecTog(id){
+  const b=document.getElementById('ec-qb-'+id);
+  const a=document.getElementById('ec-arr-'+id);
+  const open=b.classList.contains('open');
+  b.classList.toggle('open',!open);
+  a.classList.toggle('open',!open);
+}
+function ecShowAns(id){
+  const a=document.getElementById(id);
+  a.classList.toggle('show');
+  const btn=a.previousElementSibling;
+  btn.textContent=a.classList.contains('show')?'Ocultar resposta':'Revelar gabarito comentado';
+}
+</script>
+</body>
+</html>

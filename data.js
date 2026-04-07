@@ -7,66 +7,17 @@ const materias = [
       {
         id: "penal-iv",
         titulo: "Direito Penal IV",
+        indice: "conteudo/penal/penal-iv/index.html",
         temas: [
           {
-            titulo: "Crimes contra a Dignidade Sexual",
-            descricao: "Mapa mental + Quadro comparativo",
-            arquivo: "conteudo/penal/penal-iv/dignidade-sexual.html"
+            titulo: "Crimes contra a Fé Pública",
+            descricao: "Mapa mental · Mapa conceitual · Quadro sinóptico · Roteiro · Estudo de caso",
+            arquivo: "conteudo/penal/penal-iv/01-fe-publica.html"
           },
           {
-            titulo: "Crimes contra o Sentimento Religioso",
-            descricao: "Tabela · Mapa mental · Roteiro · SmartArt",
-            arquivo: "conteudo/penal/penal-iv/sentimento-religioso.html"
-          },
-          {
-            titulo: "Crimes contra a Fé Pública — Mapa Mental",
-            descricao: "Visão geral em mapa mental",
-            arquivo: "conteudo/penal/penal-iv/fe-publica-mapa-mental.html"
-          },
-          {
-            titulo: "Crimes contra a Fé Pública — Mapa Conceitual",
-            descricao: "Relações e conceitos fundamentais",
-            arquivo: "conteudo/penal/penal-iv/fe-publica-mapa-conceitual.html"
-          },
-          {
-            titulo: "Crimes contra a Fé Pública — Quadro Sinóptico",
-            descricao: "Resumo estruturado dos tipos penais",
-            arquivo: "conteudo/penal/penal-iv/fe-publica-quadro-sinoptico.html"
-          },
-          {
-            titulo: "Crimes contra a Fé Pública — Roteiro de Estudos",
-            descricao: "Guia de estudo passo a passo",
-            arquivo: "conteudo/penal/penal-iv/fe-publica-roteiro.html"
-          },
-          {
-            titulo: "Crimes contra a Fé Pública — Estudo de Caso",
-            descricao: "Casos práticos e análise",
-            arquivo: "conteudo/penal/penal-iv/fe-publica-estudo-de-caso.html"
-          },
-          {
-            titulo: "Crimes contra a Adm. Pública — Mapa Mental",
-            descricao: "Visão geral em mapa mental",
-            arquivo: "conteudo/penal/penal-iv/adm-publica-mapa-mental.html"
-          },
-          {
-            titulo: "Crimes contra a Adm. Pública — Mapa Conceitual",
-            descricao: "Relações e conceitos fundamentais",
-            arquivo: "conteudo/penal/penal-iv/adm-publica-mapa-conceitual.html"
-          },
-          {
-            titulo: "Crimes contra a Adm. Pública — Quadro Sinóptico",
-            descricao: "Resumo estruturado dos tipos penais",
-            arquivo: "conteudo/penal/penal-iv/adm-publica-quadro-sinoptico.html"
-          },
-          {
-            titulo: "Crimes contra a Adm. Pública — Roteiro de Estudos",
-            descricao: "Guia de estudo passo a passo",
-            arquivo: "conteudo/penal/penal-iv/adm-publica-roteiro.html"
-          },
-          {
-            titulo: "Crimes contra a Adm. Pública — Estudo de Caso",
-            descricao: "Casos práticos e análise",
-            arquivo: "conteudo/penal/penal-iv/adm-publica-estudo-de-caso.html"
+            titulo: "Crimes contra a Adm. Pública",
+            descricao: "Mapa mental · Mapa conceitual · Quadro sinóptico · Roteiro · Estudo de caso",
+            arquivo: "conteudo/penal/penal-iv/02-adm-publica.html"
           }
         ]
       }

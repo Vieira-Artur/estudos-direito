@@ -64,10 +64,10 @@
   header h1{font-size:1.9rem;color:var(--accent2);}
   header p{color:var(--text2);font-size:0.95rem;margin-top:0.4rem;}
   .badge{display:inline-block;background:var(--accent2);color:#ffffff;padding:0.15rem 0.7rem;border-radius:3px;font-size:0.75rem;font-family:monospace;font-weight:bold;margin-bottom:0.8rem;}
-  nav{background: var(--bg2);border-bottom:1px solid var(--border);display:flex;gap:0;overflow-x:auto;}
-  nav button{background:none;border:none;color:var(--text2);padding:1rem 1.2rem;cursor:pointer;font-family:inherit;font-size:0.87rem;white-space:nowrap;border-bottom:3px solid transparent;transition:all 0.2s;}
+  nav{background: var(--bg2);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;}
+  nav button{background:none;border:none;border-right:1px solid var(--border);color:var(--text2);padding:0.9rem 1.2rem;cursor:pointer;font-family:inherit;font-size:0.87rem;text-align:left;border-bottom:3px solid transparent;transition:all 0.2s;}
   nav button:hover{color:var(--text);background: var(--bg3);}
-  nav button.active{color:var(--accent2);border-bottom-color:var(--accent2);}
+  nav button.active{color:var(--accent2);border-bottom-color:var(--accent2);background:var(--bg3);}
   .tab-content{display:none;padding:2rem;max-width:1100px;margin:0 auto;}
   .tab-content.active{display:block;}
   .section-title{font-size:1.3rem;color:var(--accent2);border-left:4px solid var(--accent2);padding-left:1rem;margin-bottom:1.5rem;margin-top:2.5rem;}

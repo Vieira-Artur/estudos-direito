@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia Prático: Prisões e Medidas Cautelares | Processo Penal II</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ─────────────────────────────────────────── */
+    :root {
+      --navy:      #1f497d;
+      --navy-dark: #163660;
+      --navy-light:#2c5f9e;
+      --gold:      #c9a84c;
+      --gold-light:#e8c76a;
+      --bg:        #f8f6f1;
+      --surface:   #ffffff;
+      --surface-2: #f0ede6;
+      --text:      #1a1a1a;
+      --text-muted:#5a5a6a;
+      --border:    #ddd8cc;
+      --danger:    #b0321e;
+      --success:   #2a6e3f;
+      --warn:      #7a5c00;
+      --radius:    8px;
+      --shadow:    0 2px 12px rgba(31,73,125,.10);
+      --shadow-md: 0 4px 24px rgba(31,73,125,.16);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:        #0e1824;
+        --surface:   #162337;
+        --surface-2: #1e2e42;
+        --text:      #e8e4da;
+        --text-muted:#8fa4bb;
+        --border:    #2a3d55;
+        --navy:      #2c5f9e;
+        --navy-dark: #1f497d;
+        --shadow:    0 2px 12px rgba(0,0,0,.4);
+        --shadow-md: 0 4px 24px rgba(0,0,0,.5);
+      }
+    }
+
+    /* ── Reset / Base ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── Nav ────────────────────────────────────────────── */
+    .top-nav {
+      background: var(--navy);
+      padding: .75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .85rem;
+      color: rgba(255,255,255,.75);
+    }
+    .top-nav a { color: rgba(255,255,255,.75); text-decoration: none; }
+    .top-nav a:hover { color: #fff; }
+    .top-nav .sep { opacity: .4; }
+
+    /* ── Hero ───────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
+      color: #fff;
+      padding: 3.5rem 1.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: .75rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: .75rem;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      opacity: .85;
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: .82rem;
+      opacity: .75;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: .3rem; }
+
+    /* ── Layout wrapper ─────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    /* ── Section header ─────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin: 2.5rem 0 1.25rem;
+    }
+    .section-number {
+      background: var(--navy);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      width: 2.2rem; height: 2.2rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    @media (prefers-color-scheme: dark) {
+      .section-header h2 { color: var(--gold-light); }
+    }
+
+    /* ── Card ───────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.25rem;
+    }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .card h3 { color: var(--gold-light); }
+    }
+    .card p { color: var(--text-muted); margin-bottom: .5rem; font-size: .95rem; }
+    .card p:last-child { margin-bottom: 0; }
+
+    /* ── Callout ────────────────────────────────────────── */
+    .callout {
+      border-left: 4px solid var(--navy);
+      background: var(--surface-2);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: .95rem;
+    }
+    .callout.danger  { border-color: var(--danger);  }
+    .callout.success { border-color: var(--success); }
+    .callout.warn    { border-color: var(--gold);    }
+    .callout strong  { display: block; margin-bottom: .3rem; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+
+    /* ── Table ──────────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+    th {
+      background: var(--navy);
+      color: #fff;
+      text-align: left;
+      padding: .65rem .9rem;
+      font-weight: 600;
+      font-size: .82rem;
+      letter-spacing: .04em;
+    }
+    td {
+      padding: .6rem .9rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td { background: var(--surface-2); }
+    tr:last-child td { border-bottom: none; }
+
+    /* ── Grid ───────────────────────────────────────────── */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+
+    /* ── Badge ──────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      padding: .2rem .55rem;
+      border-radius: 4px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .badge-navy    { background: var(--navy);    color: #fff; }
+    .badge-gold    { background: var(--gold);    color: #fff; }
+    .badge-danger  { background: var(--danger);  color: #fff; }
+    .badge-success { background: var(--success); color: #fff; }
+    .badge-warn    { background: var(--gold);    color: #fff; }
+
+    /* ── Standards card ─────────────────────────────────── */
+    .standard-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: .75rem;
+    }
+    .standard-card .sc-head {
+      background: var(--navy);
+      color: #fff;
+      padding: .6rem 1rem;
+      font-weight: 700;
+      font-size: .88rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .standard-card .sc-body { padding: .9rem 1rem; font-size: .92rem; }
+
+    /* ── Fundamentos grid ───────────────────────────────── */
+    .fund-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--navy);
+      border-radius: var(--radius);
+      padding: 1.1rem 1rem;
+      box-shadow: var(--shadow);
+    }
+    .fund-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: .98rem;
+      color: var(--navy);
+      margin-bottom: .5rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .fund-card h4 { color: var(--gold-light); }
+    }
+    .fund-card p { font-size: .88rem; color: var(--text-muted); }
+
+    /* ── Timeline ───────────────────────────────────────── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: .6rem; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .tl-item { position: relative; margin-bottom: 1.25rem; }
+    .tl-dot {
+      position: absolute; left: -1.65rem; top: .35rem;
+      width: 1rem; height: 1rem;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid var(--bg);
+    }
+    .tl-item h4 { font-weight: 700; font-size: .95rem; margin-bottom: .25rem; }
+    .tl-item p  { font-size: .88rem; color: var(--text-muted); }
+
+    /* ── Prazo boxes ─────────────────────────────────────── */
+    .prazo-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+    .prazo-box .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+    @media (prefers-color-scheme: dark) {
+      .prazo-box .num { color: var(--gold-light); }
+    }
+    .prazo-box .label { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; color: var(--text-muted); margin-top: .3rem; }
+    .prazo-box .detail { font-size: .82rem; color: var(--text-muted); margin-top: .4rem; }
+
+    /* ── Flagrante boxes ─────────────────────────────────── */
+    .flagrante-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1rem 1rem;
+    }
+    .flagrante-card .fk-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: .4rem;
+    }
+    .flagrante-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--navy); margin-bottom: .4rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .flagrante-card h4 { color: var(--gold-light); }
+    }
+    .flagrante-card p { font-size: .88rem; color: var(--text-muted); }
+
+    /* ── Miranda Rights ─────────────────────────────────── */
+    .miranda-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      counter-reset: miranda;
+    }
+    .miranda-item {
+      counter-increment: miranda;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1rem 1rem;
+      position: relative;
+    }
+    .miranda-item::before {
+      content: counter(miranda);
+      position: absolute; top: -.7rem; left: 1rem;
+      background: var(--gold);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: .85rem; font-weight: 700;
+      width: 1.4rem; height: 1.4rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+      padding-left: .45rem;
+    }
+    .miranda-item h4 { font-weight: 700; font-size: .95rem; margin-bottom: .35rem; }
+    .miranda-item p  { font-size: .88rem; color: var(--text-muted); }
+
+    /* ── Jurisprudência strip ────────────────────────────── */
+    .juris-strip {
+      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+    }
+    .juris-strip h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--gold-light);
+      margin-bottom: .9rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .juris-item { margin-bottom: .6rem; font-size: .88rem; line-height: 1.5; }
+    .juris-item .ref { font-weight: 700; color: var(--gold-light); margin-right: .4rem; }
+    .juris-item:last-child { margin-bottom: 0; }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.7);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: .82rem;
+      margin-top: 3rem;
+    }
+    footer strong { color: #fff; }
+
+    /* ── Print ──────────────────────────────────────────── */
+    @media print {
+      .top-nav { display: none; }
+      body { font-size: 13px; }
+      .hero { padding: 1.5rem; }
+      .card, .fund-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Breadcrumb -->
+<nav class="top-nav">
+  <a href="../../index.html">Início</a>
+  <span class="sep">›</span>
+  <a href="../index.html">Processo Penal II</a>
+  <span class="sep">›</span>
+  <span>Prisões e Medidas Cautelares</span>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <p class="hero-label">Processo Penal II &nbsp;·&nbsp; Prisões</p>
+  <h1>Guia Prático:<br/>Prisões e Medidas Cautelares</h1>
+  <p class="hero-sub">Natureza, requisitos, espécies e garantias fundamentais no processo penal cautelar brasileiro.</p>
+  <div class="hero-meta">
+    <span>📋 CPP – Arts. 282, 302, 312, 313</span>
+    <span>⚖️ Lei 7.960/1989</span>
+    <span>📚 Pós-Graduação Lato Sensu</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ①  Natureza e princípios -->
+  <div class="section-header">
+    <div class="section-number">1</div>
+    <h2>Natureza e Princípios das Medidas Cautelares</h2>
+  </div>
+
+  <div class="card">
+    <p>As medidas cautelares ostentam natureza <strong>excepcional</strong>, regidas pelo postulado da <em>extrema ratio</em> (última razão). A intervenção na esfera de liberdade do indivíduo exige estrita necessidade e proporcionalidade — a liberdade é a regra; a restrição, a exceção.</p>
+    <p><strong>Fundamento constitucional:</strong> Art. 5º, LVI, CF/88 (inadmissibilidade de provas ilícitas) e o princípio do devido processo legal.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>📌 Art. 282 CPP — Requisitos</h3>
+      <p><strong>Necessidade:</strong> para aplicação da lei penal, investigação, instrução ou para evitar a prática de infrações.</p>
+      <p><strong>Adequação:</strong> gravidade do crime, circunstâncias do fato e condições pessoais do indiciado ou acusado.</p>
+      <p>Prisão = <em>ultima ratio</em>. Medidas alternativas (art. 319 CPP) devem ser preferidas sempre que cabíveis.</p>
+    </div>
+    <div class="card">
+      <h3>⚖️ Estrutura Acusatória — Art. 3º-A CPP</h3>
+      <p>Consagra o sistema <strong>acusatório</strong>, vedando a iniciativa probatória do juiz na fase investigativa e a substituição da atuação do órgão de acusação.</p>
+      <div class="callout warn" style="margin-top:.75rem">
+        <strong>⚠️ Atenção</strong>
+        A eficácia do art. 3º-A foi suspensa por liminar do Min. Luiz Fux (STF). A doutrina majoritária (Aury Lopes Jr.) sustenta que o art. 156 CPP — que permite ao juiz ordenar provas de ofício — viola a imparcialidade judicial.
+      </div>
+    </div>
+  </div>
+
+  <!-- ② Standards probatórios -->
+  <div class="section-header">
+    <div class="section-number">2</div>
+    <h2>Standards Probatórios: <em>Fumus</em> e <em>Periculum</em></h2>
+  </div>
+
+  <p style="margin-bottom:1rem; color:var(--text-muted); font-size:.95rem;">O art. 312 CPP exige dois pressupostos cumulativos. É essencial distinguir os níveis de convicção exigidos em cada fase.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Pressuposto</th>
+          <th>Standard exigido</th>
+          <th>Conteúdo</th>
+          <th>Fase</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong><em>Fumus comissi delicti</em></strong><br/><span style="font-size:.8rem; color:var(--text-muted)">Materialidade</span></td>
+          <td><span class="badge badge-danger">Certeza</span></td>
+          <td>Prova cabal de que a infração penal ocorreu. Não há prisão preventiva sem materialidade demonstrada.</td>
+          <td>Cautelar</td>
+        </tr>
+        <tr>
+          <td><strong><em>Fumus comissi delicti</em></strong><br/><span style="font-size:.8rem; color:var(--text-muted)">Autoria</span></td>
+          <td><span class="badge badge-warn">Probabilidade</span></td>
+          <td>Indícios suficientes de autoria. Não se exige certeza — suficiente a probabilidade qualificada.</td>
+          <td>Cautelar</td>
+        </tr>
+        <tr>
+          <td><strong><em>Periculum libertatis</em></strong></td>
+          <td><span class="badge badge-navy">Concretude</span></td>
+          <td>Risco concreto e atual à ordem pública, instrução ou aplicação da lei penal. Vedada motivação genérica.</td>
+          <td>Cautelar</td>
+        </tr>
+        <tr>
+          <td><strong>Condenação definitiva</strong></td>
+          <td><span class="badge badge-success">Beyond reasonable doubt</span></td>
+          <td>Certeza plena — único standard que afasta a presunção de inocência para fins de pena definitiva.</td>
+          <td>Mérito</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ③ Prisão em Flagrante -->
+  <div class="section-header">
+    <div class="section-number">3</div>
+    <h2>Prisão em Flagrante — Espécies (Art. 302 CPP)</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="flagrante-card">
+      <div class="fk-label">Art. 302, I</div>
+      <h4>🔴 Flagrante Próprio</h4>
+      <p>Agente <strong>está cometendo</strong> a infração penal no momento da abordagem. Hipótese mais evidente de flagrância.</p>
+    </div>
+    <div class="flagrante-card">
+      <div class="fk-label">Art. 302, II</div>
+      <h4>🟠 Flagrante Impróprio</h4>
+      <p>Agente <strong>acaba de cometer</strong> a infração e é perseguido, logo após, em situação que faça presumir ser ele o autor.</p>
+    </div>
+    <div class="flagrante-card">
+      <div class="fk-label">Art. 302, III e IV</div>
+      <h4>🟡 Flagrante Presumido</h4>
+      <p>Agente é encontrado, <strong>logo depois</strong>, com instrumentos, armas ou objetos que façam presumir sua participação na infração.</p>
+    </div>
+    <div class="flagrante-card">
+      <div class="fk-label">Art. 302, I e II + Súm. 145 STF</div>
+      <h4>⛔ Flagrante Preparado vs. Esperado</h4>
+      <p><strong>Preparado (ilegal):</strong> crime impossível — agente provoca o crime (Súmula 145 STF).<br/>
+      <strong>Esperado (lícito):</strong> polícia aguarda o momento da infração sem provocar.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:.5rem">
+    <strong>📌 Sistema de prova cautelar — Art. 155 CPP</strong>
+    A prisão em flagrante produz provas cautelares (não repetíveis), com contraditório diferido. O risco de perecimento do objeto justifica a colheita imediata, mas exige posterior controle judicial na audiência de custódia.
+  </div>
+
+  <!-- ④ Audiência de Custódia -->
+  <div class="section-header">
+    <div class="section-number">4</div>
+    <h2>Audiência de Custódia e Aviso de Miranda</h2>
+  </div>
+
+  <div class="card">
+    <h3>🏛️ Audiência de Custódia</h3>
+    <p>Deve ocorrer em até <strong>24 horas</strong> após a prisão para análise da legalidade, necessidade de preventiva ou concessão de liberdade. Fundamento: Convenção Americana de Direitos Humanos (Pacto de San José) e Resolução 213/2015 do CNJ.</p>
+  </div>
+
+  <div class="callout success" style="margin-top:0">
+    <strong>📖 Precedente histórico — Miranda v. Arizona (EUA, 1966)</strong>
+    A ausência das garantias do "Aviso de Miranda" inquina de nulidade as declarações do custodiado. O Brasil incorporou essas garantias no art. 5º, LXIII, CF/88 e no art. 186 CPP.
+  </div>
+
+  <div class="miranda-grid" style="margin-top:1.25rem">
+    <div class="miranda-item">
+      <h4>Direito ao Silêncio</h4>
+      <p>O indivíduo não é obrigado a responder qualquer indagação. Art. 5º, LXIII, CF/88 — <em>nemo tenetur se detegere</em>.</p>
+    </div>
+    <div class="miranda-item">
+      <h4>Advertência de Uso</h4>
+      <p>Tudo o que for dito poderá ser utilizado contra o indiciado em juízo. Ciência obrigatória antes de qualquer interrogatório.</p>
+    </div>
+    <div class="miranda-item">
+      <h4>Assistência Jurídica</h4>
+      <p>Direito de ser assistido por defensor constituído ou, se hipossuficiente, por defensor nomeado. Art. 5º, LXXIV, CF/88.</p>
+    </div>
+  </div>
+
+  <!-- ⑤ Prisão Preventiva -->
+  <div class="section-header">
+    <div class="section-number">5</div>
+    <h2>Prisão Preventiva — Arts. 312 e 313 CPP</h2>
+  </div>
+
+  <div class="callout danger">
+    <strong>⚠️ Natureza processual — nunca antecipação de pena</strong>
+    A prisão preventiva é medida cautelar voltada a assegurar a eficácia do processo ou a proteção social. Jamais pode constituir antecipação do cumprimento de pena (art. 283 CPP; ADC 43/44/54 STF).
+  </div>
+
+  <h3 style="font-family: 'Playfair Display', serif; font-size:1.05rem; margin: 1.25rem 0 .75rem; color:var(--navy)">Fundamentos — Art. 312 CPP</h3>
+  <div class="grid-2">
+    <div class="fund-card">
+      <h4>🏛️ Garantia da Ordem Pública</h4>
+      <p>Interromper a reiteração criminosa e assegurar a paz social. Exige fatos concretos — não mera gravidade abstrata do crime.</p>
+    </div>
+    <div class="fund-card">
+      <h4>💼 Garantia da Ordem Econômica</h4>
+      <p>Impedir a continuidade de fraudes financeiras ou danos graves ao erário. Aplicável em crimes de colarinho branco.</p>
+    </div>
+    <div class="fund-card">
+      <h4>🔍 Conveniência da Instrução Criminal</h4>
+      <p>Proteger a higidez das provas, impedindo suborno ou ameaça a testemunhas. Fundamentação concreta indispensável.</p>
+    </div>
+    <div class="fund-card">
+      <h4>⚖️ Aplicação da Lei Penal</h4>
+      <p>Mitigar risco de fuga, assegurando que o Estado possa exercer o <em>ius puniendi</em>. Exige indícios objetivos de fuga iminente.</p>
+    </div>
+  </div>
+
+  <h3 style="font-family: 'Playfair Display', serif; font-size:1.05rem; margin: 1.5rem 0 .75rem; color:var(--navy)">Admissibilidade — Art. 313 CPP</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Hipótese</th><th>Requisito</th><th>Observação</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Crime doloso com pena máx. > 4 anos</td>
+          <td>Art. 313, I</td>
+          <td>Regra geral de admissibilidade.</td>
+        </tr>
+        <tr>
+          <td>Condenado por crime doloso anterior</td>
+          <td>Art. 313, II</td>
+          <td>Reincidente — independe da pena.</td>
+        </tr>
+        <tr>
+          <td>Violência doméstica (Lei 11.340/06)</td>
+          <td>Art. 313, III</td>
+          <td>Para garantir execução das medidas protetivas.</td>
+        </tr>
+        <tr>
+          <td>Dúvida sobre identidade civil</td>
+          <td>Art. 313, § único</td>
+          <td>Até esclarecimento, independe dos demais requisitos.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="juris-strip">
+    <h3>📚 Jurisprudência Estruturante — Preventiva</h3>
+    <div class="juris-item">
+      <span class="ref">STF – HC 152.752:</span>
+      A fundamentação da preventiva deve ser concreta e individualizada; vedada a motivação genérica ou baseada apenas na gravidade abstrata do delito.
+    </div>
+    <div class="juris-item">
+      <span class="ref">STJ – Súmula 455:</span>
+      A decisão que determina a produção antecipada de provas com base no art. 366 CPP deve ser concretamente fundamentada — o mero decurso do tempo não basta.
+    </div>
+    <div class="juris-item">
+      <span class="ref">STF – ADC 43/44/54:</span>
+      Reafirma o princípio da presunção de inocência; execução penal definitiva somente após o trânsito em julgado da condenação.
+    </div>
+  </div>
+
+  <!-- ⑥ Prisão Temporária -->
+  <div class="section-header">
+    <div class="section-number">6</div>
+    <h2>Prisão Temporária — Lei 7.960/1989</h2>
+  </div>
+
+  <div class="card">
+    <h3>🕐 Características essenciais</h3>
+    <p>Aplicável <strong>exclusivamente na fase investigativa</strong> — imprescindível para o inquérito policial. Não pode ser decretada na fase processual.</p>
+    <p>Restrita aos crimes <strong>expressamente listados</strong> no art. 1º, III, da Lei 7.960/89 e no art. 2º, § 4º, da Lei 8.072/90 (crimes hediondos).</p>
+  </div>
+
+  <h3 style="font-family: 'Playfair Display', serif; font-size:1.05rem; margin: 1.25rem 0 .75rem; color:var(--navy)">Prazos de Duração</h3>
+  <div class="grid-3">
+    <div class="prazo-box">
+      <div class="num">5</div>
+      <div class="label">dias — regra geral</div>
+      <div class="detail">Prorrogável por mais 5 dias em caso de extrema e comprovada necessidade.</div>
+    </div>
+    <div class="prazo-box">
+      <div class="num">30</div>
+      <div class="label">dias — crimes hediondos</div>
+      <div class="detail">Lei 8.072/90, art. 2º, § 4º. Prorrogável por mais 30 dias em caso de extrema necessidade.</div>
+    </div>
+    <div class="prazo-box">
+      <div class="num">24h</div>
+      <div class="label">Audiência de custódia</div>
+      <div class="detail">Prazo para apresentação ao juiz após qualquer forma de prisão em flagrante ou decretação de temporária.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family: 'Playfair Display', serif; font-size:1.05rem; margin: 1.5rem 0 .75rem; color:var(--navy)">Crimes listados (exemplos — art. 1º, III, Lei 7.960/89)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Crime</th><th>Artigo</th></tr></thead>
+      <tbody>
+        <tr><td>Homicídio doloso</td><td>Art. 121 CP</td></tr>
+        <tr><td>Sequestro e cárcere privado</td><td>Art. 148 CP</td></tr>
+        <tr><td>Roubo / extorsão com violência</td><td>Arts. 157, 158 CP</td></tr>
+        <tr><td>Estupro</td><td>Art. 213 CP</td></tr>
+        <tr><td>Tráfico de drogas</td><td>Lei 11.343/06</td></tr>
+        <tr><td>Crimes hediondos (Lei 8.072/90)</td><td>Art. 2º, §4º</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ⑦ Prisão Domiciliar -->
+  <div class="section-header">
+    <div class="section-number">7</div>
+    <h2>Prisão Domiciliar e Depoimento Especial</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🏠 Prisão Domiciliar — Art. 317 CPP</h3>
+      <p>Consiste no recolhimento do indiciado ou acusado em sua residência, só podendo dela ausentar-se com autorização judicial. Medida diversa da prisão e alternativa à preventiva.</p>
+      <p><strong>Hipóteses:</strong> maior de 80 anos, extremamente debilitado por moléstia grave, imprescindível aos cuidados de menor de 6 anos ou deficiente, gestante, mulher com filho de até 12 anos (HC 143.641 STF — decisão coletiva).</p>
+    </div>
+    <div class="card">
+      <h3>👶 Lei 13.431/2017 — Depoimento Especial</h3>
+      <p>Em casos de violência contra crianças ou adolescentes, o sistema prioriza o <strong>depoimento especial em sede de antecipação de prova</strong>.</p>
+      <p><strong>Justificativa:</strong> falibilidade da memória da vítima vulnerável e necessidade de colheita imediata sob contraditório real — evita a revitimização e preserva o valor epistêmico da prova.</p>
+      <p style="font-size:.82rem; color:var(--text-muted); margin-top:.5rem">STJ – AgRg no RHC 160.012/SC</p>
+    </div>
+  </div>
+
+  <!-- ⑧ Medidas cautelares diversas -->
+  <div class="section-header">
+    <div class="section-number">8</div>
+    <h2>Medidas Cautelares Diversas da Prisão — Art. 319 CPP</h2>
+  </div>
+
+  <p style="color:var(--text-muted); font-size:.95rem; margin-bottom:1rem">Antes de decretar a prisão preventiva, o juiz deve verificar se medida alternativa é suficiente (<em>princípio da proporcionalidade — necessidade</em>).</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Medida</th><th>Inciso</th><th>Síntese</th></tr></thead>
+      <tbody>
+        <tr><td>Comparecimento periódico em juízo</td><td>I</td><td>Prazo e condições fixados pelo juiz.</td></tr>
+        <tr><td>Proibição de acesso a lugares</td><td>II</td><td>Locais relacionados ao crime ou às vítimas.</td></tr>
+        <tr><td>Proibição de manter contato</td><td>III</td><td>Coautores, testemunhas ou vítimas.</td></tr>
+        <tr><td>Proibição de ausentar-se do país</td><td>IV</td><td>Comunicação ao órgão de controle de fronteira.</td></tr>
+        <tr><td>Recolhimento domiciliar noturno</td><td>V</td><td>Em dias de folga, sem monitoração eletrônica.</td></tr>
+        <tr><td>Suspensão do exercício de função pública</td><td>VI</td><td>Ou de atividade econômica/financeira.</td></tr>
+        <tr><td>Internação provisória</td><td>VII</td><td>Inimputáveis ou semi-imputáveis.</td></tr>
+        <tr><td>Fiança</td><td>VIII</td><td>Valores fixados nos arts. 322 a 350 CPP.</td></tr>
+        <tr><td>Monitoração eletrônica</td><td>IX</td><td>Tornozeleira ou dispositivo equivalente.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ⑨ Quadro comparativo -->
+  <div class="section-header">
+    <div class="section-number">9</div>
+    <h2>Quadro Comparativo: Espécies de Prisão Cautelar</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Espécie</th>
+          <th>Fundamento</th>
+          <th>Fase</th>
+          <th>Prazo</th>
+          <th>Decisão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Flagrante</strong></td>
+          <td>Art. 302 CPP</td>
+          <td>Investigação / processual</td>
+          <td>Até audiência de custódia (24h)</td>
+          <td>Autoridade policial (lavratura)</td>
+        </tr>
+        <tr>
+          <td><strong>Temporária</strong></td>
+          <td>Lei 7.960/89</td>
+          <td>Investigativa (IP)</td>
+          <td>5 dias (+5) / 30 dias (+30)</td>
+          <td>Decreto judicial a requerimento</td>
+        </tr>
+        <tr>
+          <td><strong>Preventiva</strong></td>
+          <td>Art. 312 CPP</td>
+          <td>Investigação / processual</td>
+          <td>Sem prazo fixo — reavaliação periódica obrigatória</td>
+          <td>Decreto judicial — de ofício vedado na fase IP</td>
+        </tr>
+        <tr>
+          <td><strong>Domiciliar</strong></td>
+          <td>Art. 317 CPP</td>
+          <td>Investigação / processual</td>
+          <td>Enquanto subsistir a necessidade</td>
+          <td>Decreto judicial substitutivo da preventiva</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Referências -->
+  <div class="section-header" style="margin-top:2.5rem">
+    <div class="section-number" style="background:var(--gold); font-size:.85rem">📚</div>
+    <h2>Referências</h2>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:.95rem; margin-bottom:.75rem">Legislação</h3>
+    <p>Código de Processo Penal (Decreto-Lei 3.689/1941), Arts. 282, 283, 302, 310–317, 319.</p>
+    <p>Lei 7.960/1989 (Prisão Temporária).</p>
+    <p>Lei 8.072/1990 (Crimes Hediondos), art. 2º, §4º.</p>
+    <p>Lei 11.340/2006 (Lei Maria da Penha), art. 20.</p>
+    <p>Lei 13.431/2017 (Depoimento Especial de Crianças e Adolescentes).</p>
+    <p>Constituição Federal, Art. 5º, incisos LIV, LV, LVI, LXII, LXIII, LXIV, LXV, LXVI, LXXIV.</p>
+    <h3 style="font-size:.95rem; margin:.9rem 0 .5rem">Jurisprudência</h3>
+    <p>STF – HC 152.752 (fundamentação da preventiva); ADC 43/44/54 (presunção de inocência); HC 143.641 (prisão domiciliar coletiva).</p>
+    <p>STJ – Súmula 455 (motivação cautelar concreta); AgRg no RHC 160.012/SC (depoimento especial).</p>
+    <p>STF – Súmula 145 (flagrante preparado — crime impossível).</p>
+    <h3 style="font-size:.95rem; margin:.9rem 0 .5rem">Doutrina</h3>
+    <p>LOPES JR., Aury. <em>Direito Processual Penal</em>. 20. ed. São Paulo: Saraiva, 2023.</p>
+    <p>PACELLI, Eugênio. <em>Curso de Processo Penal</em>. 27. ed. São Paulo: Atlas, 2023.</p>
+    <p>NUCCI, Guilherme de Souza. <em>Código de Processo Penal Comentado</em>. 22. ed. Rio de Janeiro: Forense, 2023.</p>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p><strong>Processo Penal II</strong> &nbsp;·&nbsp; Faculdade Vianna Júnior &nbsp;·&nbsp; Pós-Graduação Lato Sensu</p>
+  <p style="margin-top:.4rem">Prof. Artur Vieira &nbsp;·&nbsp; OAB/MG 119.797 &nbsp;·&nbsp; Material didático — uso interno</p>
+</footer>
+
+</body>
+</html>

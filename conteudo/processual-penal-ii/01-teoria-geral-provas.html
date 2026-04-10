@@ -263,6 +263,19 @@
     header h1 { font-size: 1.4rem; }
     .tab-content { padding: 1rem; }
   }
+  @media (max-width: 768px) {
+    nav {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      grid-template-columns: unset;
+    }
+    nav button {
+      white-space: nowrap;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+    }
+  }
 </style>
 </head>
 <body>

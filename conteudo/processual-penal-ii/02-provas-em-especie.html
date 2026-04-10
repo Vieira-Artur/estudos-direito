@@ -136,6 +136,19 @@
   .mapa-node.purple { border-color:var(--purple); color:var(--purple); background: var(--purple-light); }
   .mapa-node.orange { border-color:var(--orange); color:var(--orange); background: var(--orange-light); }
   @media(max-width:600px) { .grid-2,.grid-3{grid-template-columns:1fr;} header h1{font-size:1.4rem;} .tab-content{padding:1rem;} }
+  @media (max-width: 768px) {
+    nav {
+      display: flex;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      grid-template-columns: unset;
+    }
+    nav button {
+      white-space: nowrap;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+    }
+  }
 </style>
 </head>
 <body>

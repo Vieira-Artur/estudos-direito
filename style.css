@@ -308,8 +308,8 @@ main {
     padding: 0 0 0 12px;
     width: 100%;
   }
+}
 
-  #conteudo-area > header {
-    display: none;
-  }
+#conteudo-area > header {
+  display: none;
 }

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade Avaliativa — Tributário e Financeiro I</title>
+<style>
+  :root {
+    --bg:      #ffffff;
+    --bg2:     #f7f7f7;
+    --bg3:     #eeeeee;
+    --border:  #d0d0d0;
+    --text:    #1a1a1a;
+    --text2:   #444444;
+    --accent:  #5a3e00;
+    --accent2: #7a5500;
+    --accent-light: #fdf3dc;
+    --blue:    #1F497D;
+    --blue-light: #dce6f1;
+    --green:        #1a5c1a;
+    --green-light:  #d6f0d6;
+    --red:          #8b1a1a;
+    --red-light:    #fce8e8;
+    --orange:       #7a3800;
+    --orange-light: #fdebd6;
+    --purple:       #4a1a8a;
+    --purple-light: #ede5fb;
+    --gold:         #7a5500;
+    --gold-light:   #fdf3dc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:      #0d1b2e;
+      --bg2:     #142238;
+      --bg3:     #1b2d47;
+      --border:  #2a4060;
+      --text:    #e8eef5;
+      --text2:   #a0b4cc;
+      --accent:  #e0b84a;
+      --accent2: #f0cc6a;
+      --accent-light: #2a1f00;
+      --blue:         #9ab4f8;
+      --blue-light:   #1a2550;
+      --green:        #6fd86f;
+      --green-light:  #0d2e0d;
+      --red:          #f08080;
+      --red-light:    #2e0d0d;
+      --orange:       #f0a060;
+      --orange-light: #2e1500;
+      --purple:       #c0a0f8;
+      --purple-light: #200a40;
+      --gold:         #f0cc6a;
+      --gold-light:   #2a1f00;
+    }
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Georgia','Times New Roman',serif;line-height:1.7;}
+  header{background:var(--bg3);border-bottom:2px solid var(--accent2);padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;}
+  header::before{content:'§';position:absolute;right:3rem;top:50%;transform:translateY(-50%);font-size:8rem;color:var(--accent-light);font-weight:bold;pointer-events:none;}
+  header h1{font-size:1.9rem;color:var(--accent2);}
+  header p{color:var(--text2);font-size:0.95rem;margin-top:0.4rem;}
+  .badge{display:inline-block;background:var(--accent2);color:#fff;padding:0.15rem 0.7rem;border-radius:3px;font-size:0.75rem;font-family:monospace;font-weight:bold;margin-bottom:0.8rem;}
+  nav{background:var(--bg2);border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr;}
+  nav button{background:none;border:none;border-right:1px solid var(--border);color:var(--text2);padding:0.9rem 1.4rem;cursor:pointer;font-family:inherit;font-size:0.88rem;text-align:left;border-bottom:3px solid transparent;transition:all 0.2s;}
+  nav button:hover{color:var(--text);background:var(--bg3);}
+  nav button.active{color:var(--accent2);border-bottom-color:var(--accent2);background:var(--bg3);}
+  .tab-content{display:none;padding:2rem;max-width:1000px;margin:0 auto;}
+  .tab-content.active{display:block;}
+  .section-title{font-size:1.3rem;color:var(--accent2);border-left:4px solid var(--accent2);padding-left:1rem;margin-bottom:1.5rem;margin-top:2.5rem;}
+  .section-title:first-child{margin-top:0;}
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:1.4rem;margin-bottom:1.2rem;transition:border-color 0.2s;}
+  .card:hover{border-color:var(--accent2);}
+  .card h3{color:var(--accent2);font-size:1rem;margin-bottom:0.7rem;}
+  .card p{color:var(--text2);font-size:0.92rem;}
+  .card p+p{margin-top:0.6rem;}
+  .autores{background:var(--accent-light);border:1px solid var(--accent2);border-radius:8px;padding:1.2rem 1.5rem;margin-bottom:2rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;}
+  .autores span{font-family:monospace;font-size:0.88rem;color:var(--accent2);font-weight:bold;}
+  .autores label{color:var(--text2);font-size:0.82rem;}
+  blockquote{background:var(--accent-light);border-left:3px solid var(--accent2);padding:0.8rem 1.2rem;border-radius:0 6px 6px 0;margin:0.8rem 0;color:var(--text2);font-size:0.9rem;font-style:italic;}
+  @media(max-width:600px){header h1{font-size:1.4rem;}.tab-content{padding:1rem;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">TRIBUTÁRIO E FINANCEIRO I</div>
+  <h1>Atividade Avaliativa</h1>
+  <p>Prof. Artur Vieira · Direito Tributário e Financeiro I · Conceitos Fundamentais</p>
+</header>
+<nav>
+  <button class="active" onclick="show('questoes')">📋 Questões e Respostas</button>
+</nav>
+
+<div id="questoes" class="tab-content active">
+
+  <div class="autores">
+    <div>
+      <label>Alunas</label><br>
+      <span>Manuela Albuquerque Belletti Rodrigues</span> <span style="color:var(--text2);font-weight:normal;">· RA 37209</span>
+    </div>
+    <div>
+      <span>Rafaela de Araujo Porto Ramos</span> <span style="color:var(--text2);font-weight:normal;">· RA 37312</span>
+    </div>
+  </div>
+
+  <div class="section-title">Conceitos Fundamentais</div>
+
+  <div class="card">
+    <h3>1. O que é Fato Gerador?</h3>
+    <p>O fato gerador é o evento definido em lei que faz surgir a obrigação tributária. Trata-se da situação que, uma vez ocorrida, gera a obrigação de pagar um tributo.</p>
+    <blockquote>Exemplo: no Imposto de Renda, o fato gerador é a obtenção de renda pelo contribuinte.</blockquote>
+  </div>
+
+  <div class="card">
+    <h3>2. O que é Alíquota?</h3>
+    <p>A alíquota é a porcentagem aplicada sobre a base de cálculo de um tributo para determinar o valor a ser pago.</p>
+  </div>
+
+  <div class="card">
+    <h3>3. O que é Base de Cálculo?</h3>
+    <p>A base de cálculo é o valor sobre o qual é aplicada a alíquota para determinar o montante do tributo a ser pago. É o valor de referência para calcular a quantidade de imposto devido.</p>
+    <blockquote>Exemplo: no Imposto de Renda, a base de cálculo pode ser a renda obtida pelo contribuinte em determinado período.</blockquote>
+  </div>
+
+  <div class="section-title">Direito Financeiro vs. Tributário</div>
+
+  <div class="card">
+    <h3>4. Qual a diferença entre Direito Financeiro e Direito Tributário?</h3>
+    <p>O <strong>Direito Financeiro</strong> é mais amplo: regula a atividade financeira do Estado em sua totalidade — orçamento, crédito, receita e despesa no âmbito da administração pública.</p>
+    <p>O <strong>Direito Tributário</strong> está circunscrito à obtenção das receitas tributárias, disciplinando a relação entre o Estado e o contribuinte.</p>
+    <p>Embora o Direito Financeiro seja mais abrangente, é o Direito Tributário que afeta diretamente os cidadãos no cotidiano.</p>
+  </div>
+
+  <div class="section-title">Princípios da Anterioridade</div>
+
+  <div class="card">
+    <h3>5. Qual a diferença entre a anterioridade anual e a noventena?</h3>
+    <p><strong>Anterioridade anual (do exercício):</strong> é vedada a cobrança de tributos no mesmo ano civil da publicação da lei que os criou ou majorou — é necessário que se vire o ano calendário.</p>
+    <p><strong>Noventena (anterioridade nonagesimal ou especial):</strong> é proibida a cobrança antes de transcorridos noventa dias da publicação da lei que criou ou majorou o tributo.</p>
+    <p>Em regra, ambas devem ser observadas cumulativamente, além da irretroatividade, para que um tributo passe a ser cobrado ou majorado.</p>
+  </div>
+
+  <div class="section-title">Legalidade e Extrafiscalidade</div>
+
+  <div class="card">
+    <h3>6. Por que alguns tributos podem ter sua alíquota alterada pelo Poder Executivo federal?</h3>
+    <p>O <strong>Princípio da Legalidade tributária</strong> (art. 150, I, CF) determina que o tributo depende do Poder Legislativo para ser criado ou majorado.</p>
+    <p>Contudo, há exceções expressas. O art. 153, §1º, CF faculta ao Poder Executivo alterar as alíquotas do II, IE, IOF e IPI, desde que respeitadas as condições e limites fixados em lei.</p>
+    <p>A justificativa reside na <strong>extrafiscalidade</strong>: o objetivo dessas alterações é estimular ou inibir condutas econômicas, e não a mera arrecadação — o que exige flexibilidade e rapidez incompatíveis com o processo legislativo ordinário.</p>
+  </div>
+
+  <div class="card">
+    <h3>7. O que é um tributo com função fiscal?</h3>
+    <p>Os tributos com <strong>função fiscal</strong> — presentes na ideologia do liberalismo econômico — têm a finalidade precípua de prover os cofres públicos para que o Estado financie seus objetivos e preste serviços à coletividade.</p>
+  </div>
+
+  <div class="card">
+    <h3>8. O que é um tributo com função extrafiscal?</h3>
+    <p>Os tributos com <strong>função extrafiscal</strong> — surgidos no Estado de bem-estar social — não se restringem à mera arrecadação de receitas. Servem também para ordenar ou reordenar a economia e as relações sociais, por meio da estimulação ou inibição de determinadas condutas.</p>
+  </div>
+
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

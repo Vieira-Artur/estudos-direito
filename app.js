@@ -210,6 +210,20 @@ function abrirTema(index, fromPop = false) {
           el.href = base + s
         }
       })
+      // Âncoras internas (#seção): scroll suave sem alterar hash da URL
+      // (evita que o popstate interprete o estado como nulo e volte à tela inicial)
+      area.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          e.preventDefault()
+          const id = a.getAttribute('href').slice(1)
+          const target = document.getElementById(id)
+          if (target) {
+            const headerH = document.querySelector('header')?.offsetHeight ?? 0
+            const top = target.getBoundingClientRect().top + window.scrollY - headerH - 12
+            window.scrollTo({ top, behavior: 'smooth' })
+          }
+        })
+      })
       executarScripts(area)
     })
     .catch(() => {

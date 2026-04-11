@@ -1,5 +1,7 @@
 /* ── Design tokens ─────────────────────────────────────── */
 :root {
+  --sk-base:  #e4eaf3;
+  --sk-shine: #f2f5fb;
   --blue:        #1F497D;
   --blue-dark:   #162f52;
   --blue-mid:    #2c5f9e;
@@ -428,6 +430,36 @@ main {
   display: none;
 }
 
+/* ── Skeleton loader ── */
+@keyframes sk-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Shimmer em fundo claro/escuro (usa variáveis do :root) */
+.sk {
+  border-radius: 6px;
+  background: linear-gradient(90deg,
+    var(--sk-base)  25%,
+    var(--sk-shine) 50%,
+    var(--sk-base)  75%
+  );
+  background-size: 300% 100%;
+  animation: sk-shimmer 1.5s ease-in-out infinite;
+}
+
+/* Shimmer para áreas com fundo azul escuro (ex: .page-header do sobre) */
+.sk-inv {
+  border-radius: 6px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,.10) 25%,
+    rgba(255,255,255,.22) 50%,
+    rgba(255,255,255,.10) 75%
+  );
+  background-size: 300% 100%;
+  animation: sk-shimmer 1.5s ease-in-out infinite;
+}
+
 /* ── Dark mode ── */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -447,6 +479,9 @@ main {
     --shadow-md:   0 4px 16px rgba(0,0,0,.40);
     --shadow-lg:   0 8px 32px rgba(0,0,0,.50);
   }
+
+  --sk-base:  #1c2d42;
+  --sk-shine: #243650;
 
   /* Textura de fundo ajustada para o tema escuro */
   body::before {

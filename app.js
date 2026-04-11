@@ -1,3 +1,48 @@
+// ── Skeleton loaders ────────────────────────────────────
+
+function skeletonConteudo() {
+  return `
+  <div id="conteudo-area" style="animation:none">
+    <div class="sk" style="height:22px;width:52%;margin-bottom:22px"></div>
+    <div class="sk" style="height:13px;width:100%;margin-bottom:9px"></div>
+    <div class="sk" style="height:13px;width:91%;margin-bottom:9px"></div>
+    <div class="sk" style="height:13px;width:74%;margin-bottom:28px"></div>
+    <div class="sk" style="height:13px;width:100%;margin-bottom:9px"></div>
+    <div class="sk" style="height:13px;width:85%;margin-bottom:9px"></div>
+    <div class="sk" style="height:13px;width:61%;margin-bottom:28px"></div>
+    <div class="sk" style="height:13px;width:100%;margin-bottom:9px"></div>
+    <div class="sk" style="height:13px;width:93%;margin-bottom:9px"></div>
+    <div class="sk" style="height:13px;width:68%"></div>
+  </div>`
+}
+
+function skeletonSobre() {
+  return `
+  <div style="border-radius:10px;overflow:hidden;box-shadow:var(--shadow-md);animation:fadeUp .3s ease both">
+    <div style="background:linear-gradient(135deg,#162f52 0%,#1F497D 100%);border-bottom:2px solid var(--gold);padding:2.2rem 2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap">
+      <div class="sk-inv" style="width:110px;height:110px;border-radius:50%;flex-shrink:0"></div>
+      <div style="flex:1;min-width:150px">
+        <div class="sk-inv" style="height:20px;width:180px;margin-bottom:12px"></div>
+        <div class="sk-inv" style="height:13px;width:130px;margin-bottom:14px"></div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <div class="sk-inv" style="height:22px;width:90px;border-radius:11px"></div>
+          <div class="sk-inv" style="height:22px;width:110px;border-radius:11px"></div>
+          <div class="sk-inv" style="height:22px;width:75px;border-radius:11px"></div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--surface);padding:2rem">
+      <div class="sk" style="height:15px;width:28%;margin-bottom:18px"></div>
+      <div class="sk" style="height:12px;width:100%;margin-bottom:9px"></div>
+      <div class="sk" style="height:12px;width:86%;margin-bottom:9px"></div>
+      <div class="sk" style="height:12px;width:70%;margin-bottom:28px"></div>
+      <div class="sk" style="height:15px;width:22%;margin-bottom:18px"></div>
+      <div class="sk" style="height:12px;width:100%;margin-bottom:9px"></div>
+      <div class="sk" style="height:12px;width:78%"></div>
+    </div>
+  </div>`
+}
+
 // ── Estado ──────────────────────────────────────────────
 const estado = { materiaAtual: null, turmaAtual: null }
 
@@ -104,7 +149,7 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
   if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '')
 
   if (turma.indice) {
-    app.innerHTML = `<div id="conteudo-area"><p style="color:#888;font-size:13px">Carregando...</p></div>`
+    app.innerHTML = skeletonConteudo()
     fetch(turma.indice)
       .then(r => {
         if (!r.ok) throw new Error('Arquivo não encontrado')
@@ -179,7 +224,7 @@ function abrirTema(index, fromPop = false) {
     temaIndex: index
   }, '')
 
-  app.innerHTML = `<div id="conteudo-area"><p style="color:#888;font-size:13px">Carregando...</p></div>`
+  app.innerHTML = skeletonConteudo()
 
   const base = tema.arquivo.substring(0, tema.arquivo.lastIndexOf('/') + 1)
 
@@ -274,7 +319,7 @@ function abrirSobre(fromPop = false) {
   atualizarBreadcrumb('Sobre mim')
   if (!fromPop) history.pushState({ view: 'sobre' }, '')
 
-  app.innerHTML = '<p style="color:#888;font-size:13px;padding:2rem">Carregando...</p>'
+  app.innerHTML = skeletonSobre()
 
   fetch('sobre.html')
     .then(r => { if (!r.ok) throw new Error(); return r.text() })

@@ -428,6 +428,76 @@ main {
   display: none;
 }
 
+/* ── Dark mode ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blue:        #9ab4f8;
+    --blue-dark:   #1F497D;
+    --blue-mid:    #6a9fd4;
+    --blue-light:  #1a2550;
+    --blue-hover:  #1e3050;
+    --gold:        #e8c96a;
+    --gold-light:  #2a2000;
+    --bg:          #0d1b2e;
+    --surface:     #142238;
+    --border:      #2a4060;
+    --text:        #e8eef5;
+    --text2:       #a0b4cc;
+    --shadow-sm:   0 2px 8px rgba(0,0,0,.30);
+    --shadow-md:   0 4px 16px rgba(0,0,0,.40);
+    --shadow-lg:   0 8px 32px rgba(0,0,0,.50);
+  }
+
+  /* Textura de fundo ajustada para o tema escuro */
+  body::before {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(154,180,248,.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(232,201,106,.04) 0%, transparent 40%);
+  }
+
+  /* Header: gradiente mais fundo no escuro */
+  header {
+    background: linear-gradient(135deg, #060e1a 0%, #1F497D 100%);
+  }
+
+  /* .no-materia usa --blue como fundo; em dark mode --blue virou claro → manter azul sólido */
+  .no-materia {
+    background: #1F497D;
+    box-shadow: 0 3px 12px rgba(0,0,0,.45);
+  }
+
+  /* Conector vertical */
+  .conector-v {
+    background: linear-gradient(to bottom, #1F497D, #1a2550);
+  }
+
+  /* Nó de turma */
+  .no-turma {
+    background: #1a2840;
+  }
+
+  .no-turma.vazia {
+    background: #181818;
+    border-color: #333;
+    color: #555;
+  }
+
+  /* Barra de destaque no topo dos cards de turma */
+  .card-turma::before {
+    background: var(--blue);
+  }
+
+  /* Barra gradiente no rodapé dos cards de tema */
+  .card-tema::after {
+    background: linear-gradient(90deg, var(--blue), var(--gold));
+  }
+
+  /* Área de conteúdo: borda sutil para separar do fundo */
+  #conteudo-area {
+    border: 1px solid var(--border);
+  }
+}
+
 /* ── Responsivo ── */
 @media (max-width: 600px) {
   .card-tema { max-width: 100%; }

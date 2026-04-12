@@ -79,6 +79,7 @@ window.addEventListener('popstate', (e) => {
 function renderArvore(fromPop = false) {
   estado.materiaAtual = null
   estado.turmaAtual   = null
+  document.title = 'Estudos Complementares — Direito'
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'materias' }, '')
 
@@ -120,6 +121,7 @@ function selecionarMateria(id, fromPop = false) {
   const materia = materias.find(m => m.id === id)
   estado.materiaAtual = materia
   estado.turmaAtual   = null
+  document.title = `${materia.titulo} — Estudos Complementares`
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'materia', materiaId: id }, '')
 
@@ -145,6 +147,7 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
   const turma   = materia.turmas.find(t => t.id === turmaId)
   estado.materiaAtual = materia
   estado.turmaAtual   = turma
+  document.title = `${turma.titulo} — ${materia.titulo}`
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '')
 
@@ -216,6 +219,7 @@ function abrirTemaDaArvore(materiaId, turmaId, temaIndex) {
 
 function abrirTema(index, fromPop = false) {
   const tema = estado.turmaAtual.temas[index]
+  document.title = `${tema.titulo} — ${estado.turmaAtual.titulo}`
   atualizarBreadcrumb(tema.titulo)
   if (!fromPop) history.pushState({
     view: 'tema',
@@ -316,6 +320,7 @@ function atualizarBreadcrumb(tituloTema) {
 function abrirSobre(fromPop = false) {
   estado.materiaAtual = null
   estado.turmaAtual   = null
+  document.title = 'Sobre mim — Prof. Artur Vieira'
   atualizarBreadcrumb('Sobre mim')
   if (!fromPop) history.pushState({ view: 'sobre' }, '')
 

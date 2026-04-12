@@ -422,6 +422,9 @@ main {
   padding: 32px;
   box-shadow: var(--shadow-md);
   animation: fadeUp .3s ease both;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Oculta headers próprios das páginas de conteúdo no contexto do SPA */

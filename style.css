@@ -74,10 +74,8 @@ header {
 }
 
 .site-titulo::before {
-  content: '§';
-  color: var(--gold);
-  font-size: 22px;
-  line-height: 1;
+  content: '';
+  display: none;
   opacity: .9;
 }
 

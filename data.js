@@ -77,6 +77,12 @@ const materias = [
             arquivo: "conteudo/tributario/tributario-financeiro-i/01-guia-estudos.html"
           }
         ]
+      },
+      {
+        id: "processo-tributario",
+        titulo: "Processo Tributário",
+        indice: "conteudo/tributario/processo-tributario/index.html",
+        temas: []
       }
     ]
   }

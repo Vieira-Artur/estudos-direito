@@ -43,6 +43,14 @@ function skeletonSobre() {
   </div>`
 }
 
+// ── Temas visitados ──────────────────────────────────────
+const visitados = new Set(JSON.parse(localStorage.getItem('temas_visitados') || '[]'))
+
+function marcarVisitado(arquivo) {
+  visitados.add(arquivo)
+  localStorage.setItem('temas_visitados', JSON.stringify([...visitados]))
+}
+
 // ── Estado ──────────────────────────────────────────────
 const estado = { materiaAtual: null, turmaAtual: null }
 
@@ -99,7 +107,7 @@ function renderArvore(fromPop = false) {
                          <div class="conector-v" style="height:10px"></div>
                          <div class="temas-lista">
                            ${t.temas.map((tema, i) => `
-                             <div class="no-tema" onclick="abrirTemaDaArvore('${m.id}','${t.id}',${i})">
+                             <div class="no-tema${visitados.has(tema.arquivo) ? ' visitado' : ''}" onclick="abrirTemaDaArvore('${m.id}','${t.id}',${i})">
                                ${tema.titulo}
                                <span class="tag">${tema.descricao}</span>
                              </div>
@@ -228,6 +236,7 @@ function abrirTema(index, fromPop = false) {
     temaIndex: index
   }, '')
 
+  marcarVisitado(tema.arquivo)
   app.innerHTML = skeletonConteudo()
 
   const base = tema.arquivo.substring(0, tema.arquivo.lastIndexOf('/') + 1)

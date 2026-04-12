@@ -321,6 +321,21 @@ main {
   font-style: italic;
 }
 
+.no-tema.visitado {
+  border-left: 2px solid var(--gold);
+}
+
+.no-tema.visitado::after {
+  content: '✓';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 /* ── Cards de turma (nível 2) ── */
 .cards-turmas {
   display: flex;

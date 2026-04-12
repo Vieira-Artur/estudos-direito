@@ -94,7 +94,7 @@ window.addEventListener('popstate', (e) => {
 function renderArvore(fromPop = false) {
   estado.materiaAtual = null
   estado.turmaAtual   = null
-  document.title = 'Estudos Complementares — Direito'
+  document.title = 'Estudos Complementares — Prof. Artur Vieira'
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'materias' }, '')
   window.scrollTo(0, 0)

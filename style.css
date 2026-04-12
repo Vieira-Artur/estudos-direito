@@ -192,21 +192,6 @@ main {
   animation: fadeUp .45s ease both;
 }
 
-.hero::before {
-  content: '§';
-  position: absolute;
-  right: 28px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--serif);
-  font-size: 110px;
-  font-weight: 700;
-  color: var(--blue);
-  opacity: .04;
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-}
 
 .hero-sup {
   display: flex;
@@ -245,13 +230,11 @@ main {
   line-height: 1.7;
   color: var(--text2);
   max-width: 520px;
-  margin-bottom: 20px;
 }
 
 
 @media (max-width: 500px) {
   .hero { padding: 22px 20px 20px; }
-  .hero::before { font-size: 70px; right: 14px; }
 }
 
 .ramo {

@@ -51,6 +51,13 @@ function marcarVisitado(arquivo) {
   localStorage.setItem('temas_visitados', JSON.stringify([...visitados]))
 }
 
+function resetarProgresso() {
+  if (!confirm('Apagar todo o histórico de temas lidos?')) return
+  visitados.clear()
+  localStorage.removeItem('temas_visitados')
+  renderArvore()
+}
+
 // ── Estado ──────────────────────────────────────────────
 const estado = { materiaAtual: null, turmaAtual: null }
 

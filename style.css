@@ -599,6 +599,33 @@ main {
   background: var(--blue-mid);
 }
 
+/* ── Rodapé ── */
+#rodape {
+  text-align: center;
+  padding: 20px 20px 32px;
+}
+
+.btn-reset-progresso {
+  background: none;
+  border: none;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: var(--text2);
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  transition: color .15s, background .15s;
+  opacity: .6;
+}
+
+.btn-reset-progresso:hover {
+  color: #c00;
+  background: rgba(200,0,0,.06);
+  opacity: 1;
+}
+
+@media print { #rodape { display: none; } }
+
 /* ── Foco visível (acessibilidade) ── */
 :focus-visible {
   outline: 2px solid var(--gold);

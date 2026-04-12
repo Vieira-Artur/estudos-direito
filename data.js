@@ -67,8 +67,8 @@ const materias = [
         titulo: "Direito Tributário e Financeiro I",
         temas: [
           {
-            titulo: "Guia de Estudos — Fundamentos e Crédito Tributário",
-            descricao: "Espécies tributárias · Crédito tributário · Extrafiscalidade · Limitações · Competência · Repartição de receitas",
+            titulo: "Fundamentos e Crédito Tributário",
+            descricao: "Visão geral · Mapa mental · Roteiro de estudo · Estudo de caso",
             arquivo: "conteudo/tributario/tributario-financeiro-i/01-guia-estudos.html"
           }
         ]

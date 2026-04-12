@@ -313,6 +313,44 @@
     </div>
     <p class="tf-mm-hint">Toque em um ramo para expandir</p>
   </div>
+
+  <!-- Infográficos NotebookLM -->
+  <div style="margin-top:28px">
+    <div class="tf-section-title">Infográficos de Apoio</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:10px">
+
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/fundamentos-dir-financeiro.png" alt="Fundamentos do Direito Financeiro e Tributário" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Fundamentos do Dir. Financeiro e Tributário</p>
+      </div>
+
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/principios-constitucionais.png" alt="Princípios Constitucionais Tributários" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Princípios Constitucionais Tributários</p>
+      </div>
+
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/imunidades-tributarias.png" alt="Imunidades Tributárias" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Guia das Imunidades Tributárias</p>
+      </div>
+
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/partilha-bolo.png" alt="Partilha do Bolo" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Repartição das Receitas Tributárias</p>
+      </div>
+
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/jornada-tributo.png" alt="Jornada do Tributo" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">A Jornada do Tributo: Do Papel à Cobrança</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Lightbox para zoom das imagens -->
+  <div id="tf-lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out" onclick="document.getElementById('tf-lightbox').style.display='none'">
+    <img id="tf-lightbox-img" src="" alt="" style="max-width:92vw;max-height:92vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.5)">
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -500,6 +538,13 @@
       if (el) { el.style.opacity = '1'; el.style.transform = 'scale(1)' }
     })
     document.getElementById('tf-detail').innerHTML = '<p style="color:var(--text2);text-align:center;font-size:13px">Clique em qualquer ramo para ver os detalhes.</p>'
+  }
+
+  /* ── Zoom de infográficos ── */
+  window.tfZoom = function(img) {
+    const lb = document.getElementById('tf-lightbox')
+    document.getElementById('tf-lightbox-img').src = img.src
+    lb.style.display = 'flex'
   }
 
   /* ── Estudo de Caso: acordeão ── */

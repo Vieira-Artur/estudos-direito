@@ -99,19 +99,11 @@ function renderArvore(fromPop = false) {
   if (!fromPop) history.pushState({ view: 'materias' }, '')
   window.scrollTo(0, 0)
 
-  const totalTemas = materias.reduce((acc, m) => acc + m.turmas.reduce((a, t) => a + t.temas.length, 0), 0)
-  const totalTurmas = materias.reduce((acc, m) => acc + m.turmas.length, 0)
-
   app.innerHTML = `
     <div class="hero">
-      <div class="hero-sup">Prof. Artur Vieira · Vianna Jr</div>
+      <div class="hero-sup">Prof. Artur Vieira</div>
       <h1>Material de apoio para os estudos de Direito</h1>
       <p class="hero-desc">Mapas mentais, tabelas comparativas, roteiros de estudo e casos práticos organizados por disciplina. Navegue pela árvore abaixo e acesse os temas disponíveis.</p>
-      <div class="hero-stats">
-        <div class="hero-stat">${materias.length} <span>disciplinas</span></div>
-        <div class="hero-stat">${totalTurmas} <span>matérias</span></div>
-        <div class="hero-stat">${totalTemas} <span>materiais disponíveis</span></div>
-      </div>
     </div>
     <div class="arvore">
       ${materias.map(m => `

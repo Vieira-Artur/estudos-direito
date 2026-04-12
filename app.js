@@ -90,6 +90,7 @@ function renderArvore(fromPop = false) {
   document.title = 'Estudos Complementares — Direito'
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'materias' }, '')
+  window.scrollTo(0, 0)
 
   app.innerHTML = `
     <div class="arvore">
@@ -132,6 +133,7 @@ function selecionarMateria(id, fromPop = false) {
   document.title = `${materia.titulo} — Estudos Complementares`
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'materia', materiaId: id }, '')
+  window.scrollTo(0, 0)
 
   if (materia.turmas.length === 0) {
     app.innerHTML = `<p class="secao-titulo">Nenhuma turma cadastrada ainda para ${materia.titulo}.</p>`
@@ -158,6 +160,7 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
   document.title = `${turma.titulo} — ${materia.titulo}`
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '')
+  window.scrollTo(0, 0)
 
   if (turma.indice) {
     app.innerHTML = skeletonConteudo()
@@ -235,6 +238,7 @@ function abrirTema(index, fromPop = false) {
     turmaId: estado.turmaAtual.id,
     temaIndex: index
   }, '')
+  window.scrollTo(0, 0)
 
   marcarVisitado(tema.arquivo)
   app.innerHTML = skeletonConteudo()
@@ -332,6 +336,7 @@ function abrirSobre(fromPop = false) {
   document.title = 'Sobre mim — Prof. Artur Vieira'
   atualizarBreadcrumb('Sobre mim')
   if (!fromPop) history.pushState({ view: 'sobre' }, '')
+  window.scrollTo(0, 0)
 
   app.innerHTML = skeletonSobre()
 

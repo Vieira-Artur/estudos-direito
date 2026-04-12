@@ -551,6 +551,38 @@ main {
   }
 }
 
+/* ── Botão voltar ao topo ── */
+#btn-topo {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 100;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity .22s, transform .22s, background .18s;
+}
+
+#btn-topo.visivel {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#btn-topo:hover {
+  background: var(--blue-mid);
+}
+
 /* ── Mobile ≤ 768px ── */
 @media (max-width: 768px) {
   /* Header */

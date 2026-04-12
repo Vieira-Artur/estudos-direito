@@ -255,6 +255,22 @@ main {
   text-align: center;
   width: 100%;
   letter-spacing: .01em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.progresso-turma {
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--gold);
+  color: #1a1000;
+  border-radius: 10px;
+  padding: 1px 7px;
+  line-height: 1.6;
+  flex-shrink: 0;
 }
 
 .no-turma.vazia {

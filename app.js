@@ -104,7 +104,7 @@ function renderArvore(fromPop = false) {
               : m.turmas.map(t => `
                   <div class="no-turma-wrap">
                     ${t.temas.length > 0
-                      ? `<div class="no-turma">${t.titulo}</div>
+                      ? `<div class="no-turma">${t.titulo}${(() => { const lidos = t.temas.filter(tema => visitados.has(tema.arquivo)).length; return lidos > 0 ? `<span class="progresso-turma">${lidos}/${t.temas.length}</span>` : '' })()}</div>
                          <div class="conector-v" style="height:10px"></div>
                          <div class="temas-lista">
                            ${t.temas.map((tema, i) => `

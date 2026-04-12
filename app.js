@@ -115,7 +115,7 @@ function renderArvore(fromPop = false) {
                          <div class="conector-v" style="height:10px"></div>
                          <div class="temas-lista">
                            ${t.temas.map((tema, i) => `
-                             <div class="no-tema${visitados.has(tema.arquivo) ? ' visitado' : ''}" onclick="abrirTemaDaArvore('${m.id}','${t.id}',${i})">
+                             <div class="no-tema${visitados.has(tema.arquivo) ? ' visitado' : ''}" role="button" tabindex="0" onclick="abrirTemaDaArvore('${m.id}','${t.id}',${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirTemaDaArvore('${m.id}','${t.id}',${i})}">
                                ${tema.titulo}
                                <span class="tag">${tema.descricao}</span>
                              </div>
@@ -179,6 +179,9 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
       .then(html => {
         const area = document.getElementById('conteudo-area')
         area.innerHTML = html
+        area.style.animation = 'none'
+        void area.offsetWidth
+        area.style.removeProperty('animation')
         const base = turma.indice.substring(0, turma.indice.lastIndexOf('/') + 1)
         area.querySelectorAll('a[href]').forEach(a => {
           const href = a.getAttribute('href')
@@ -260,6 +263,10 @@ function abrirTema(index, fromPop = false) {
     .then(html => {
       const area = document.getElementById('conteudo-area')
       area.innerHTML = html
+      // restaura animação de entrada (o skeleton a desligava com inline style)
+      area.style.animation = 'none'
+      void area.offsetWidth  // força reflow para reiniciar a animação
+      area.style.removeProperty('animation')
       // corrige caminhos relativos de imagens e iframes injetados via fetch
       area.querySelectorAll('img[src]').forEach(el => {
         const s = el.getAttribute('src')

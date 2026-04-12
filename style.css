@@ -512,10 +512,9 @@ main {
     --shadow-sm:   0 2px 8px rgba(0,0,0,.30);
     --shadow-md:   0 4px 16px rgba(0,0,0,.40);
     --shadow-lg:   0 8px 32px rgba(0,0,0,.50);
+    --sk-base:     #1c2d42;
+    --sk-shine:    #243650;
   }
-
-  --sk-base:  #1c2d42;
-  --sk-shine: #243650;
 
   /* Textura de fundo ajustada para o tema escuro */
   body::before {
@@ -650,6 +649,15 @@ main {
   a { color: inherit; text-decoration: none; }
 }
 
+/* ── Redução de movimento (acessibilidade) ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
 /* ── Mobile ≤ 768px ── */
 @media (max-width: 768px) {
   /* Header */
@@ -731,6 +739,20 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  /* Sidebar de conteúdo (ex: nav#sumario em 01-guia-estudos.html) */
+  #conteudo-area .page-wrapper {
+    flex-direction: column;
+  }
+
+  #conteudo-area nav#sumario {
+    width: 100% !important;
+    min-width: unset !important;
+    position: static !important;
+    height: auto !important;
+    top: auto !important;
+    padding: 1rem 1.2rem !important;
   }
 }
 

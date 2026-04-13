@@ -257,7 +257,8 @@ function mostrarTabConteudo() {
   document.getElementById('tab-flash')?.classList.remove('ativa')
 }
 
-// localStorage helpers — expandidos na Task 8
+// ── Meu Deck (localStorage) ──────────────────────────────
+
 function flashcardsDoAluno(turmaId) {
   try {
     return JSON.parse(localStorage.getItem(`flashcards_${turmaId}`) || '[]')
@@ -266,8 +267,71 @@ function flashcardsDoAluno(turmaId) {
   }
 }
 
+function salvarFlashcard(turmaId, frente, verso) {
+  const cards = flashcardsDoAluno(turmaId)
+  cards.push({ id: Date.now().toString(), frente: frente.trim(), verso: verso.trim() })
+  localStorage.setItem(`flashcards_${turmaId}`, JSON.stringify(cards))
+}
+
+function deletarFlashcard(turmaId, id) {
+  const cards = flashcardsDoAluno(turmaId).filter(c => c.id !== id)
+  localStorage.setItem(`flashcards_${turmaId}`, JSON.stringify(cards))
+}
+
 function renderMeuDeckHTML(turma) {
-  return '' // implementado na Task 8
+  const cards = flashcardsDoAluno(turma.id)
+
+  const listaHTML = cards.length > 0
+    ? cards.map(c => `
+        <div class="flash-card-usuario">
+          <div class="flash-card-usuario-corpo">
+            <div class="flash-card-usuario-frente">${esc(c.frente)}</div>
+            <div class="flash-card-usuario-verso">${esc(c.verso)}</div>
+          </div>
+          <button class="flash-btn-deletar" onclick="deletarEAtualizar('${esc(turma.id)}', '${esc(c.id)}')" title="Remover card">✕</button>
+        </div>
+      `).join('')
+    : '<p style="font-size:13px;color:var(--text2);margin-bottom:12px">Você ainda não criou nenhum card.</p>'
+
+  return `
+    <div class="meu-deck-secao">
+      <div class="meu-deck-titulo">Meu Deck</div>
+      <div id="meu-deck-lista">${listaHTML}</div>
+      <div class="flash-form" id="flash-form">
+        <div class="flash-form-titulo">+ Adicionar card</div>
+        <textarea class="flash-input" id="flash-novo-frente" placeholder="Pergunta / frente do card" rows="2"></textarea>
+        <textarea class="flash-input" id="flash-novo-verso" placeholder="Resposta / verso do card" rows="2"></textarea>
+        <div class="flash-form-acoes">
+          <button class="flash-btn-cancelar" onclick="limparFormFlash()">Limpar</button>
+          <button class="flash-btn-salvar" onclick="adicionarFlashcard('${esc(turma.id)}')">Salvar card</button>
+        </div>
+      </div>
+    </div>
+  `
+}
+
+function adicionarFlashcard(turmaId) {
+  const frente = document.getElementById('flash-novo-frente')?.value || ''
+  const verso  = document.getElementById('flash-novo-verso')?.value || ''
+  if (!frente.trim() || !verso.trim()) {
+    alert('Preencha a pergunta e a resposta antes de salvar.')
+    return
+  }
+  salvarFlashcard(turmaId, frente, verso)
+  renderFlashSessao(estado.turmaAtual)
+}
+
+function deletarEAtualizar(turmaId, id) {
+  if (!confirm('Remover este card?')) return
+  deletarFlashcard(turmaId, id)
+  renderFlashSessao(estado.turmaAtual)
+}
+
+function limparFormFlash() {
+  const f = document.getElementById('flash-novo-frente')
+  const v = document.getElementById('flash-novo-verso')
+  if (f) f.value = ''
+  if (v) v.value = ''
 }
 
 function renderFlashSessao(turma) {

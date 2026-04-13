@@ -91,6 +91,9 @@ header {
   .btn-sobre {
     font-size: 11px;
     padding: 4px 10px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
   }
 
   main { padding: 20px 14px; }
@@ -492,7 +495,6 @@ main {
   position: relative;
   overflow: hidden;
   min-height: 72px;
-  max-width: none;
 }
 
 .card-tema::after {
@@ -528,7 +530,6 @@ main {
 #conteudo-area {
   background: var(--surface);
   border-radius: 12px;
-  padding: 24px 20px;
   box-shadow: var(--shadow-md);
   animation: fadeUp .3s ease both;
   max-width: 860px;
@@ -733,11 +734,6 @@ main {
     background: #181818;
     border-color: #333;
     color: #555;
-  }
-
-  /* Barra de destaque no topo dos cards de turma */
-  .card-turma::before {
-    background: var(--blue);
   }
 
   /* Barra gradiente no rodapé dos cards de tema */

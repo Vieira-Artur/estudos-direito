@@ -247,10 +247,131 @@ function mostrarTabConteudo() {
   document.getElementById('tab-flash')?.classList.remove('ativa')
 }
 
-// Stub — será substituído na Task 7
+// localStorage helpers — expandidos na Task 8
+function flashcardsDoAluno(turmaId) {
+  return JSON.parse(localStorage.getItem(`flashcards_${turmaId}`) || '[]')
+}
+
+function renderMeuDeckHTML(turma) {
+  return '' // implementado na Task 8
+}
+
 function renderFlashSessao(turma) {
   const area = document.getElementById('tab-area-flash')
-  if (area) area.innerHTML = '<p style="padding:24px;text-align:center;color:var(--text2)">Carregando flashcards...</p>'
+  if (!area) return
+
+  const cardsProf = turma.flashcards || []
+  const cardsAluno = flashcardsDoAluno(turma.id)
+  const todos = [...cardsProf, ...cardsAluno]
+
+  if (todos.length === 0) {
+    area.innerHTML = `
+      <div class="flash-sessao" style="text-align:center;padding:32px 16px">
+        <div style="font-size:36px;margin-bottom:12px">🃏</div>
+        <p style="color:var(--text2);font-size:14px">Nenhum flashcard ainda nesta turma.</p>
+      </div>
+      ${renderMeuDeckHTML(turma)}
+    `
+    return
+  }
+
+  area.innerHTML = `
+    <div class="flash-sessao">
+      <div id="flash-sessao-area" data-index="0" data-acertos="0">
+        ${renderCardHTML(todos, 0, 0, false)}
+      </div>
+    </div>
+    ${renderMeuDeckHTML(turma)}
+  `
+}
+
+function renderCardHTML(todos, index, acertos, virado) {
+  const card = todos[index]
+  const total = todos.length
+  const pct = Math.round((index / total) * 100)
+  const profCount = estado.turmaAtual?.flashcards?.length || 0
+
+  return `
+    <div class="flash-deck-header">
+      <span class="flash-deck-label">${index < profCount ? 'Deck do Professor' : 'Meu Deck'}</span>
+      <span class="flash-contador">Card ${index + 1} de ${total}</span>
+    </div>
+    <div class="flash-barra-wrap">
+      <div class="flash-barra-progresso"><div class="flash-barra-fill" style="width:${pct}%"></div></div>
+      <div class="flash-barra-label"><span>${index} vistos</span><span>${acertos} acertos</span></div>
+    </div>
+    <div class="flash-card" onclick="virarCard()">
+      <div class="flash-card-label">${virado ? 'Resposta' : 'Pergunta'}</div>
+      <div class="flash-card-texto">${virado ? card.verso : card.frente}</div>
+      ${!virado ? '<div class="flash-card-dica">toque para revelar</div>' : ''}
+    </div>
+    <div class="flash-acoes">
+      ${virado ? `
+        <button class="flash-btn flash-btn-nao" onclick="avaliarCard(false)">✗ Não sabia</button>
+        <button class="flash-btn flash-btn-sim" onclick="avaliarCard(true)">✓ Sabia!</button>
+      ` : `
+        <button class="flash-btn flash-btn-ver" onclick="virarCard()">Ver resposta</button>
+      `}
+    </div>
+  `
+}
+
+function virarCard() {
+  const area = document.getElementById('flash-sessao-area')
+  if (!area) return
+  const turma = estado.turmaAtual
+  const todos = [...(turma.flashcards || []), ...flashcardsDoAluno(turma.id)]
+  const index = parseInt(area.dataset.index || '0')
+  const acertos = parseInt(area.dataset.acertos || '0')
+  area.innerHTML = renderCardHTML(todos, index, acertos, true)
+  area.dataset.index = index
+  area.dataset.acertos = acertos
+}
+
+function avaliarCard(acertou) {
+  const area = document.getElementById('flash-sessao-area')
+  if (!area) return
+  const turma = estado.turmaAtual
+  const todos = [...(turma.flashcards || []), ...flashcardsDoAluno(turma.id)]
+  const index = parseInt(area.dataset.index || '0')
+  const acertos = parseInt(area.dataset.acertos || '0') + (acertou ? 1 : 0)
+  const proximo = index + 1
+
+  if (proximo >= todos.length) {
+    area.innerHTML = renderFlashResumoHTML(acertos, todos.length)
+    return
+  }
+
+  area.innerHTML = renderCardHTML(todos, proximo, acertos, false)
+  area.dataset.index = proximo
+  area.dataset.acertos = acertos
+}
+
+function renderFlashResumoHTML(acertos, total) {
+  const pct = Math.round((acertos / total) * 100)
+  const emoji = pct >= 80 ? '🎉' : pct >= 50 ? '👍' : '📖'
+  const msg = pct >= 80
+    ? 'Ótimo desempenho! Você está bem preparado.'
+    : pct >= 50
+      ? 'Bom progresso! Revise os cards que errou.'
+      : 'Mais uma rodada vai ajudar. Continue!'
+
+  return `
+    <div class="flash-resumo">
+      <div class="flash-resumo-emoji">${emoji}</div>
+      <div class="flash-resumo-titulo">${acertos} de ${total} acertos (${pct}%)</div>
+      <div class="flash-resumo-sub">${msg}</div>
+      <button class="flash-resumo-btn" onclick="reiniciarSessao()">Reiniciar sessão</button>
+    </div>
+  `
+}
+
+function reiniciarSessao() {
+  const area = document.getElementById('tab-area-flash')
+  if (area) {
+    area.innerHTML = ''
+    renderFlashSessao(estado.turmaAtual)
+  }
 }
 
 function mostrarTabFlash() {

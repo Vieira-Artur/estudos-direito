@@ -80,6 +80,22 @@ header {
   opacity: .9;
 }
 
+.site-titulo-short { display: none; }
+
+@media (max-width: 540px) {
+  .site-titulo-full { display: none; }
+  .site-titulo-short { display: inline; }
+
+  header { padding: 12px 16px; }
+
+  .btn-sobre {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  main { padding: 20px 14px; }
+}
+
 .btn-sobre {
   font-family: var(--sans);
   font-size: 12.5px;

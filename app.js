@@ -172,21 +172,43 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
   if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '')
   window.scrollTo(0, 0)
 
+  const temFlashcards = turma.flashcards && turma.flashcards.length > 0
+
+  app.innerHTML = `
+    <p class="secao-titulo">${turma.titulo}</p>
+    ${temFlashcards ? `
+      <div class="turma-tabs" id="turma-tabs">
+        <button class="turma-tab ativa" id="tab-conteudo" onclick="mostrarTabConteudo()">📚 Conteúdo</button>
+        <button class="turma-tab" id="tab-flash" onclick="mostrarTabFlash()">🃏 Flashcards</button>
+      </div>
+    ` : ''}
+    <div id="tab-area-conteudo"></div>
+    <div id="tab-area-flash" style="display:none"></div>
+  `
+
+  renderConteudoTurma(turma)
+}
+
+function renderConteudoTurma(turma) {
+  const area = document.getElementById('tab-area-conteudo')
+  if (!area) return
+
   if (turma.indice) {
-    app.innerHTML = skeletonConteudo()
+    area.innerHTML = skeletonConteudo()
     fetch(turma.indice)
       .then(r => {
         if (!r.ok) throw new Error('Arquivo não encontrado')
         return r.text()
       })
       .then(html => {
-        const area = document.getElementById('conteudo-area')
-        area.innerHTML = html
-        area.style.animation = 'none'
-        void area.offsetWidth
-        area.style.removeProperty('animation')
+        const el = document.getElementById('conteudo-area')
+        if (!el) return
+        el.innerHTML = html
+        el.style.animation = 'none'
+        void el.offsetWidth
+        el.style.removeProperty('animation')
         const base = turma.indice.substring(0, turma.indice.lastIndexOf('/') + 1)
-        area.querySelectorAll('a[href]').forEach(a => {
+        el.querySelectorAll('a[href]').forEach(a => {
           const href = a.getAttribute('href')
           if (href && !href.startsWith('http') && !href.startsWith('#')) {
             const arquivo = base + href
@@ -199,15 +221,13 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
         })
       })
       .catch(() => {
-        document.getElementById('conteudo-area').innerHTML =
-          `<p style="color:#c00">Não foi possível carregar o índice.<br>
-           Verifique se o arquivo <code>${turma.indice}</code> existe.</p>`
+        const el = document.getElementById('conteudo-area')
+        if (el) el.innerHTML = `<p style="color:#c00">Não foi possível carregar o índice.<br>Verifique se o arquivo <code>${turma.indice}</code> existe.</p>`
       })
     return
   }
 
-  app.innerHTML = `
-    <p class="secao-titulo">${turma.titulo} — Selecione o tema</p>
+  area.innerHTML = `
     <div class="cards-temas">
       ${turma.temas.map((tema, i) => `
         <div class="card-tema" onclick="abrirTema(${i})">
@@ -218,6 +238,21 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
       `).join('')}
     </div>
   `
+}
+
+function mostrarTabConteudo() {
+  document.getElementById('tab-area-conteudo').style.display = ''
+  document.getElementById('tab-area-flash').style.display = 'none'
+  document.getElementById('tab-conteudo')?.classList.add('ativa')
+  document.getElementById('tab-flash')?.classList.remove('ativa')
+}
+
+function mostrarTabFlash() {
+  document.getElementById('tab-area-conteudo').style.display = 'none'
+  document.getElementById('tab-area-flash').style.display = ''
+  document.getElementById('tab-conteudo')?.classList.remove('ativa')
+  document.getElementById('tab-flash')?.classList.add('ativa')
+  renderFlashSessao(estado.turmaAtual)
 }
 
 function executarScripts(container) {

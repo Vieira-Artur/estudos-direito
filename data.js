@@ -24,6 +24,28 @@ const materias = [
             descricao: "Tabela comparativa · Mapa mental · Roteiro de estudo · Estudo de caso",
             arquivo: "conteudo/penal/penal-iv/03-sentimento-religioso.html"
           }
+        ],
+        flashcards: [
+          {
+            frente: "Qual o bem jurídico protegido pelos crimes contra a Fé Pública?",
+            verso: "A confiança e a credibilidade da sociedade na autenticidade de documentos, moeda e símbolos públicos."
+          },
+          {
+            frente: "O que é falsidade material?",
+            verso: "Alteração física do documento — rasura, adulteração, contrafação ou supressão."
+          },
+          {
+            frente: "O que é falsidade ideológica (Art. 299 CP)?",
+            verso: "Omissão ou inserção de declaração falsa em documento verdadeiro, com fim de criar obrigação, alterar a verdade ou prejudicar direito."
+          },
+          {
+            frente: "Qual a diferença entre peculato-apropriação e peculato-furto?",
+            verso: "No peculato-apropriação (Art. 312 caput), o funcionário já tem a posse do bem. No peculato-furto (§1º), o agente subtrai o bem aproveitando-se da facilidade do cargo."
+          },
+          {
+            frente: "O que é peculato culposo (Art. 312 §2º CP)?",
+            verso: "Ocorre quando o funcionário facilita, por negligência, a subtração ou apropriação indevida por terceiro. Admite extinção da punibilidade pela reparação do dano antes da sentença irrecorrível."
+          }
         ]
       }
     ]
@@ -58,6 +80,24 @@ const materias = [
             descricao: "Flagrante · Preventiva · Temporária · Medidas cautelares · Prisão domiciliar · Fiança · Audiência de custódia",
             arquivo: "conteudo/processual-penal-ii/03-prisoes.html"
           }
+        ],
+        flashcards: [
+          {
+            frente: "Qual a diferença entre prova e elemento informativo?",
+            verso: "Prova é produzida sob contraditório judicial. Elemento informativo (ex: inquérito policial) prescinde do contraditório e serve apenas para formar a opinio delicti."
+          },
+          {
+            frente: "O que é prova ilícita por derivação (teoria dos frutos da árvore envenenada)?",
+            verso: "São provas obtidas a partir de uma prova ilícita originária. São inadmissíveis salvo quando: (a) não evidenciado nexo causal; (b) obtidas por fonte independente; (c) poderia ser descoberta por outra via (descoberta inevitável)."
+          },
+          {
+            frente: "Quais são os pressupostos da prisão preventiva?",
+            verso: "Fumus commissi delicti (indícios de autoria e materialidade) + periculum libertatis (garantia da ordem pública, ordem econômica, conveniência da instrução ou aplicação da lei penal). Não cabe de ofício — exige requerimento ou representação."
+          },
+          {
+            frente: "Por quanto tempo pode durar a prisão temporária em crime hediondo?",
+            verso: "30 dias, prorrogável por mais 30 em caso de extrema necessidade (Lei 7.960/89, art. 2º, §4º). Para crimes comuns: 5 + 5 dias."
+          }
         ]
       }
     ]
@@ -75,6 +115,20 @@ const materias = [
             titulo: "Fundamentos e Crédito Tributário",
             descricao: "Visão geral · Mapa mental · Roteiro de estudo · Estudo de caso",
             arquivo: "conteudo/tributario/tributario-financeiro-i/01-guia-estudos.html"
+          }
+        ],
+        flashcards: [
+          {
+            frente: "Quais são as modalidades de extinção do crédito tributário (Art. 156 CTN)?",
+            verso: "Pagamento, compensação, transação, remissão, prescrição, decadência, conversão de depósito em renda, pagamento antecipado + homologação, consignação em pagamento, decisão administrativa/judicial irreformável, dação em pagamento de bens imóveis."
+          },
+          {
+            frente: "Qual a diferença entre decadência e prescrição tributária?",
+            verso: "Decadência: extinção do direito de constituir o crédito tributário (prazo para lançamento — Art. 173 CTN). Prescrição: extinção do direito de cobrar o crédito já constituído (5 anos da constituição definitiva — Art. 174 CTN)."
+          },
+          {
+            frente: "O que é substituição tributária para frente (progressiva)?",
+            verso: "O fato gerador ainda não ocorreu, mas o tributo é recolhido antecipadamente pelo substituto (ex: fabricante recolhe ICMS do varejista). Admitida pelo Art. 150 §7º CF. Se o fato não ocorrer, garante-se a restituição."
           }
         ]
       },

@@ -552,6 +552,103 @@ main {
   animation: sk-shimmer 1.5s ease-in-out infinite;
 }
 
+/* ── Tela inicial: cards de matéria (mobile-first) ── */
+.materias-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeUp .35s ease both;
+}
+
+@media (min-width: 640px) {
+  .materias-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+.card-materia {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: box-shadow .2s, transform .18s, border-color .18s;
+  min-height: 72px;
+}
+
+.card-materia:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--blue-light);
+}
+
+.card-materia-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--blue-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.card-materia-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-materia-titulo {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-materia-sub {
+  font-size: 11px;
+  color: var(--text2);
+  margin-bottom: 6px;
+}
+
+.card-materia-arrow {
+  color: var(--border);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* Barra de progresso genérica */
+.barra-progresso {
+  height: 4px;
+  background: var(--blue-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.barra-progresso-fill {
+  height: 100%;
+  background: var(--blue-accent);
+  border-radius: 2px;
+  transition: width .3s ease;
+}
+
+.barra-progresso-label {
+  font-size: 10px;
+  color: var(--text2);
+  margin-top: 3px;
+}
+
 /* ── Dark mode ── */
 @media (prefers-color-scheme: dark) {
   :root {

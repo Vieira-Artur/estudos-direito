@@ -103,37 +103,34 @@ function renderArvore(fromPop = false) {
     <div class="hero">
       <div class="hero-sup">Prof. Artur Vieira</div>
       <h1>Material de apoio para os estudos de Direito</h1>
-      <p class="hero-desc">Mapas mentais, tabelas comparativas, roteiros de estudo e casos práticos organizados por disciplina. Navegue pela árvore abaixo e acesse os temas disponíveis.</p>
+      <p class="hero-desc">Mapas mentais, roteiros de estudo e casos práticos organizados por disciplina. Selecione uma matéria para começar.</p>
     </div>
-    <div class="arvore">
-      ${materias.map(m => `
-        <div class="ramo">
-          <div class="no-materia">${m.icone} ${m.titulo}</div>
-          <div class="conector-v" style="height:14px"></div>
-          <div class="turmas-lista">
-            ${m.turmas.length === 0
-              ? '<div class="no-turma vazia">Em breve</div>'
-              : m.turmas.map(t => `
-                  <div class="no-turma-wrap">
-                    ${t.temas.length > 0
-                      ? `<div class="no-turma">${t.titulo}${(() => { const lidos = t.temas.filter(tema => visitados.has(tema.arquivo)).length; return lidos > 0 ? `<span class="progresso-turma">${lidos}/${t.temas.length}</span>` : '' })()}</div>
-                         <div class="conector-v" style="height:10px"></div>
-                         <div class="temas-lista">
-                           ${t.temas.map((tema, i) => `
-                             <div class="no-tema${visitados.has(tema.arquivo) ? ' visitado' : ''}" role="button" tabindex="0" onclick="abrirTemaDaArvore('${m.id}','${t.id}',${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirTemaDaArvore('${m.id}','${t.id}',${i})}">
-                               ${tema.titulo}
-                               <span class="tag">${tema.descricao}</span>
-                             </div>
-                           `).join('')}
-                         </div>`
-                      : `<div class="no-turma vazia">${t.titulo}<br><span style="font-size:12px">(em breve)</span></div>`
-                    }
-                  </div>
-                `).join('')
-            }
+    <p class="secao-titulo">Matérias</p>
+    <div class="materias-cards">
+      ${materias.map(m => {
+        const totalTemas = m.turmas.reduce((acc, t) => acc + t.temas.length, 0)
+        const totalVisitados = m.turmas.reduce((acc, t) =>
+          acc + t.temas.filter(tema => visitados.has(tema.arquivo)).length, 0)
+        const pct = totalTemas > 0 ? Math.round(totalVisitados / totalTemas * 100) : 0
+        return `
+          <div class="card-materia" role="button" tabindex="0"
+               onclick="selecionarMateria('${m.id}')"
+               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selecionarMateria('${m.id}')}">
+            <div class="card-materia-icon">${m.icone}</div>
+            <div class="card-materia-body">
+              <div class="card-materia-titulo">${m.titulo}</div>
+              <div class="card-materia-sub">${m.turmas.length} turma${m.turmas.length !== 1 ? 's' : ''}</div>
+              ${totalTemas > 0 ? `
+                <div class="barra-progresso">
+                  <div class="barra-progresso-fill" style="width:${pct}%"></div>
+                </div>
+                <div class="barra-progresso-label">${totalVisitados} de ${totalTemas} temas lidos</div>
+              ` : ''}
+            </div>
+            <div class="card-materia-arrow">›</div>
           </div>
-        </div>
-      `).join('')}
+        `
+      }).join('')}
     </div>
   `
 }

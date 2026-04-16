@@ -61,11 +61,6 @@ const materias = [
         temas: []
       },
       {
-        id: "processual-penal-iii",
-        titulo: "Direito Processual Penal III",
-        temas: []
-      },
-      {
         id: "processual-penal-ii",
         titulo: "Direito Processual Penal II",
         indice: "conteudo/processual-penal-ii/index.html",
@@ -104,6 +99,11 @@ const materias = [
             verso: "30 dias, prorrogável por mais 30 em caso de extrema necessidade (Lei 7.960/89, art. 2º, §4º). Para crimes comuns: 5 + 5 dias."
           }
         ]
+      },
+      {
+        id: "processual-penal-iii",
+        titulo: "Direito Processual Penal III",
+        temas: []
       }
     ]
   },

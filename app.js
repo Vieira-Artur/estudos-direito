@@ -138,7 +138,10 @@ function selecionarMateria(id, fromPop = false) {
     <p class="secao-titulo">${materia.titulo} — Selecione a turma</p>
     <div class="cards-turmas">
       ${materia.turmas.map(t => `
-        <div class="card-turma" onclick="selecionarTurma('${materia.id}', '${t.id}')">
+        <div class="card-turma" role="button" tabindex="0"
+             aria-label="${t.titulo}"
+             onclick="selecionarTurma('${materia.id}', '${t.id}')"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selecionarTurma('${materia.id}','${t.id}')}">
           ${t.titulo}
         </div>
       `).join('')}
@@ -211,10 +214,18 @@ function renderConteudoTurma(turma) {
     return
   }
 
+  if (turma.temas.length === 0) {
+    area.innerHTML = `<p class="secao-titulo">Conteúdo em breve.</p>`
+    return
+  }
+
   area.innerHTML = `
     <div class="cards-temas">
       ${turma.temas.map((tema, i) => `
-        <div class="card-tema" onclick="abrirTema(${i})">
+        <div class="card-tema" role="button" tabindex="0"
+             aria-label="${tema.titulo}"
+             onclick="abrirTema(${i})"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirTema(${i})}">
           <div class="icone">📓</div>
           <div class="nome">${tema.titulo}</div>
           <div class="descricao">${tema.descricao}</div>
@@ -354,7 +365,9 @@ function renderCardHTML(todos, index, acertos, virado) {
       <div class="flash-barra-progresso"><div class="flash-barra-fill" style="width:${pct}%"></div></div>
       <div class="flash-barra-label"><span>Card ${index + 1} de ${total}</span><span>${acertos} acertos</span></div>
     </div>
-    <div class="flash-card" onclick="virarCard()">
+    <div class="flash-card" role="button" tabindex="0"
+         onclick="virarCard()"
+         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();virarCard()}">
       <div class="flash-card-label">${virado ? 'Resposta' : 'Pergunta'}</div>
       <div class="flash-card-texto">${esc(virado ? card.verso : card.frente)}</div>
       ${!virado ? '<div class="flash-card-dica">toque para revelar</div>' : ''}

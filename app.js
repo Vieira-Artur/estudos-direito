@@ -620,7 +620,7 @@ async function indexarConteudo() {
           materia:   mat.titulo,
           materiaId: mat.id,
           turmaId:   turma.id,
-          temaIdx:   i,
+          temaIndex: i,
           arquivo:   tema.arquivo,
         })
       })
@@ -701,8 +701,8 @@ function renderResultados(resultados, termo) {
           <div class="busca-resultado"
                role="button" tabindex="0"
                aria-label="${esc(r.titulo)}, ${esc(r.materia)}"
-               onclick="navegarParaResultado('${esc(r.materiaId)}','${esc(r.turmaId)}',${r.temaIdx})"
-               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navegarParaResultado('${esc(r.materiaId)}','${esc(r.turmaId)}',${r.temaIdx})}">
+               onclick="navegarParaResultado('${esc(r.materiaId)}','${esc(r.turmaId)}',${parseInt(r.temaIndex,10)})"
+               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navegarParaResultado('${esc(r.materiaId)}','${esc(r.turmaId)}',${parseInt(r.temaIndex,10)})}">
             <div class="busca-resultado-corpo">
               <div class="busca-resultado-materia">${esc(r.materia)}</div>
               <div class="busca-resultado-titulo">${esc(r.titulo)}</div>
@@ -717,9 +717,9 @@ function renderResultados(resultados, termo) {
   document.getElementById('app').classList.add('busca-ativa')
 }
 
-function navegarParaResultado(materiaId, turmaId, temaIdx) {
+function navegarParaResultado(materiaId, turmaId, temaIndex) {
   fecharBusca()
-  abrirTemaDaArvore(materiaId, turmaId, temaIdx)
+  abrirTemaDaArvore(materiaId, turmaId, temaIndex)
 }
 
 let _buscaTimer = null
@@ -746,6 +746,8 @@ async function abrirBusca() {
   const wrap  = document.getElementById('busca-input-wrap')
   const input = document.getElementById('busca-input')
 
+  input.removeEventListener('input', _onBuscaInput)
+  document.removeEventListener('keydown', _onEscBusca)
   btn.setAttribute('hidden', '')
   wrap.removeAttribute('hidden')
   input.disabled    = true

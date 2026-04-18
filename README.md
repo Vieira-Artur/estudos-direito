@@ -8,6 +8,16 @@ Site estático hospedado no GitHub Pages para alunos de graduação.
 2. Abra `data.js` e adicione a entrada correspondente no array `temas` da turma correta
 3. Faça commit e push — o site atualiza automaticamente
 
+## Atualizar sitemap
+
+Sempre que adicionar matérias ou temas em `data.js`, regenere o `sitemap.xml`:
+
+```bash
+node scripts/gerar-sitemap.js
+```
+
+O arquivo `sitemap.xml` gerado deve ser commitado junto com as alterações em `data.js`.
+
 ## Estrutura de dados (`data.js`)
 
 Cada tema segue este formato:

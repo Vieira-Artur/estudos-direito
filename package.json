@@ -1,0 +1,7 @@
+{
+  "name": "estudos-direito",
+  "private": true,
+  "scripts": {
+    "sitemap": "node scripts/gerar-sitemap.js"
+  }
+}

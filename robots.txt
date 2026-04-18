@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /docs/
+Disallow: /.superpowers/
+Sitemap: https://prof-artur-vieira.github.io/estudos-direito/sitemap.xml

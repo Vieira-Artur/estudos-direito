@@ -1188,6 +1188,25 @@ main {
   }
 }
 
+/* ── Skip link (WCAG 2.4.1) ── */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  padding: 8px 12px;
+  background: #1F497D;
+  color: #fff;
+  border-radius: 0 0 6px 6px;
+  z-index: 1000;
+  text-decoration: none;
+  transition: top .15s;
+}
+.skip-link:focus-visible {
+  top: 0;
+  outline: 3px solid #C9A84C;
+  outline-offset: 2px;
+}
+
 /* ── Mobile pequeno ≤ 480px ── */
 @media (max-width: 480px) {
   header { padding: 10px 14px; }

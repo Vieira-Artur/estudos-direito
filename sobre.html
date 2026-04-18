@@ -233,6 +233,24 @@
 
   hr { border:none; border-top: 1px solid var(--border); margin: 2rem 0; }
 
+  .skip-link-sobre {
+    position: absolute;
+    top: -40px;
+    left: 8px;
+    padding: 8px 12px;
+    background: #1F497D;
+    color: #fff;
+    border-radius: 0 0 6px 6px;
+    z-index: 1000;
+    text-decoration: none;
+    transition: top .15s;
+  }
+  .skip-link-sobre:focus-visible {
+    top: 0;
+    outline: 3px solid #C9A84C;
+    outline-offset: 2px;
+  }
+
   @media(max-width:600px){
     .page-header { padding: 1.5rem 1rem; gap: 1.2rem; }
     .photo-circle { width:90px; height:90px; }
@@ -242,6 +260,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link-sobre" href="#main-content">Ir para o conteúdo principal</a>
 
 <div class="back-bar">
   <a href="index.html">← Voltar para Estudos Complementares</a>
@@ -255,7 +274,7 @@
   </div>
 </header>
 
-<main>
+<main id="main-content">
 
   <!-- FORMAÇÃO -->
   <section class="section">

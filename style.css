@@ -198,6 +198,13 @@ main {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  @keyframes fadeUp {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}
+
 /* ── Hero / Intro da tela inicial ──────────────────────── */
 .hero {
   position: relative;
@@ -537,6 +544,13 @@ main {
 @keyframes sk-shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes sk-shimmer {
+    0%, 100% { background-position: 0 0; }
+  }
+  .sk, .sk-inv { animation-duration: 3s; }
 }
 
 /* Shimmer em fundo claro/escuro (usa variáveis do :root) */
@@ -1244,15 +1258,6 @@ main {
   a { color: inherit; text-decoration: none; }
 }
 
-/* ── Redução de movimento (acessibilidade) ── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-  }
-}
-
 /* ── Mobile ≤ 768px ── */
 @media (max-width: 768px) {
   /* Header */
@@ -1381,12 +1386,7 @@ main {
   :focus-visible { outline-color: #4C9BE8; }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
-    scroll-behavior: auto !important;
-  }
+  html { scroll-behavior: auto; }
 }
 
 /* ── Mobile pequeno ≤ 480px ── */

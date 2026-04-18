@@ -577,7 +577,7 @@ function abrirTema(index, fromPop = false) {
 
   app.innerHTML = skeletonConteudo()
 
-  const base = tema.arquivo.substring(0, tema.arquivo.lastIndexOf('/') + 1)
+  const base = SITE_BASE + tema.arquivo.substring(0, tema.arquivo.lastIndexOf('/') + 1)
 
   fetch(SITE_BASE + tema.arquivo)
     .then(r => {

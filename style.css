@@ -461,6 +461,15 @@ main {
   transform: translateY(-2px);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .card-turma {
+    transition: background .18s, box-shadow .18s;
+  }
+  .card-turma:hover {
+    transform: none;
+  }
+}
+
 /* ── Cards de tema (nível 3) ── */
 .cards-temas {
   display: flex;
@@ -507,6 +516,15 @@ main {
 }
 
 .card-tema:hover::after { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card-tema {
+    transition: box-shadow .18s, border-color .18s;
+  }
+  .card-tema:hover {
+    transform: none;
+  }
+}
 
 .card-tema .icone { font-size: 22px; margin-bottom: 10px; }
 .card-tema .nome {
@@ -613,6 +631,18 @@ main {
 .card-materia:active {
   transform: translateY(0);
   box-shadow: var(--shadow-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-materia {
+    transition: box-shadow .2s, border-color .18s;
+  }
+  .card-materia:hover {
+    transform: none;
+  }
+  .card-materia:active {
+    transform: none;
+  }
 }
 
 .card-materia-icon {

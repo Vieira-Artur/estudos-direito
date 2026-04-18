@@ -54,6 +54,10 @@ function esc(str) {
 }
 
 
+// ── Base URL (capturada antes de qualquer pushState) ────
+const SITE_BASE = new URL('./', document.baseURI).href
+const BASE_PATH = new URL('./', document.baseURI).pathname  // ex: "/estudos-direito/" ou "/"
+
 // ── Estado ──────────────────────────────────────────────
 const estado = { materiaAtual: null, turmaAtual: null }
 
@@ -63,23 +67,27 @@ const breadcrumb = document.getElementById('breadcrumb')
 
 // ── Inicialização ────────────────────────────────────────
 function inicializarRota() {
-  const path = window.location.pathname.replace(/\/$/, '') || '/'
+  const rawPath = window.location.pathname
+  const path = '/' + (rawPath.startsWith(BASE_PATH)
+    ? rawPath.slice(BASE_PATH.length)
+    : rawPath.slice(1)
+  ).replace(/\/$/, '')
 
   if (path === '/' || path === '') {
-    history.replaceState({ view: 'materias' }, '', '/')
+    history.replaceState({ view: 'materias' }, '', BASE_PATH)
     renderArvore(true)
     return
   }
 
   if (path === '/sobre') {
-    history.replaceState({ view: 'sobre' }, '', '/sobre')
+    history.replaceState({ view: 'sobre' }, '', BASE_PATH + 'sobre')
     abrirSobre(true)
     return
   }
 
   for (const materia of materias) {
     if (path === `/${materia.id}`) {
-      history.replaceState({ view: 'materia', materiaId: materia.id }, '', path)
+      history.replaceState({ view: 'materia', materiaId: materia.id }, '', BASE_PATH + materia.id)
       selecionarMateria(materia.id, true)
       return
     }
@@ -87,7 +95,7 @@ function inicializarRota() {
       if (path === `/${materia.id}/${turma.id}`) {
         estado.materiaAtual = materia
         estado.turmaAtual   = turma
-        history.replaceState({ view: 'turma', materiaId: materia.id, turmaId: turma.id }, '', path)
+        history.replaceState({ view: 'turma', materiaId: materia.id, turmaId: turma.id }, '', BASE_PATH + materia.id + '/' + turma.id)
         selecionarTurma(materia.id, turma.id, true)
         return
       }
@@ -102,7 +110,7 @@ function inicializarRota() {
             materiaId: materia.id,
             turmaId: turma.id,
             temaIndex: i
-          }, '', path)
+          }, '', BASE_PATH + slug)
           abrirTema(i, true)
           return
         }
@@ -110,7 +118,7 @@ function inicializarRota() {
     }
   }
 
-  history.replaceState({ view: 'materias' }, '', '/')
+  history.replaceState({ view: 'materias' }, '', BASE_PATH)
   renderArvore(true)
 }
 
@@ -143,7 +151,7 @@ function renderArvore(fromPop = false) {
   estado.turmaAtual   = null
   document.title = 'Estudos Complementares — Prof. Artur Vieira'
   atualizarBreadcrumb()
-  if (!fromPop) history.pushState({ view: 'materias' }, '', '/')
+  if (!fromPop) history.pushState({ view: 'materias' }, '', BASE_PATH)
   window.scrollTo(0, 0)
 
   app.innerHTML = `
@@ -177,7 +185,7 @@ function selecionarMateria(id, fromPop = false) {
   estado.turmaAtual   = null
   document.title = `${materia.titulo} — Estudos Complementares`
   atualizarBreadcrumb()
-  if (!fromPop) history.pushState({ view: 'materia', materiaId: id }, '', `/${id}`)
+  if (!fromPop) history.pushState({ view: 'materia', materiaId: id }, '', BASE_PATH + id)
   window.scrollTo(0, 0)
 
   if (materia.turmas.length === 0) {
@@ -207,7 +215,7 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
   estado.turmaAtual   = turma
   document.title = `${turma.titulo} — ${materia.titulo}`
   atualizarBreadcrumb()
-  if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '', `/${materiaId}/${turmaId}`)
+  if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '', BASE_PATH + materiaId + '/' + turmaId)
   window.scrollTo(0, 0)
 
   const temFlashcards = turma.flashcards && turma.flashcards.length > 0
@@ -233,7 +241,7 @@ function renderConteudoTurma(turma) {
 
   if (turma.indice) {
     area.innerHTML = skeletonConteudo()
-    fetch(turma.indice)
+    fetch(SITE_BASE + turma.indice)
       .then(r => {
         if (!r.ok) throw new Error('Arquivo não encontrado')
         return r.text()
@@ -564,14 +572,14 @@ function abrirTema(index, fromPop = false) {
     materiaId: estado.materiaAtual.id,
     turmaId: estado.turmaAtual.id,
     temaIndex: index
-  }, '', `/${_temaSlug}`)
+  }, '', BASE_PATH + _temaSlug)
   window.scrollTo(0, 0)
 
   app.innerHTML = skeletonConteudo()
 
   const base = tema.arquivo.substring(0, tema.arquivo.lastIndexOf('/') + 1)
 
-  fetch(tema.arquivo)
+  fetch(SITE_BASE + tema.arquivo)
     .then(r => {
       if (!r.ok) throw new Error('Arquivo não encontrado')
       return r.text()
@@ -666,12 +674,12 @@ function abrirSobre(fromPop = false) {
   estado.turmaAtual   = null
   document.title = 'Sobre mim — Prof. Artur Vieira'
   atualizarBreadcrumb('Sobre mim')
-  if (!fromPop) history.pushState({ view: 'sobre' }, '', '/sobre')
+  if (!fromPop) history.pushState({ view: 'sobre' }, '', BASE_PATH + 'sobre')
   window.scrollTo(0, 0)
 
   app.innerHTML = skeletonSobre()
 
-  fetch('sobre.html')
+  fetch(SITE_BASE + 'sobre.html')
     .then(r => { if (!r.ok) throw new Error(); return r.text() })
     .then(html => {
       app.innerHTML = html
@@ -712,7 +720,7 @@ async function indexarConteudo() {
   window._searchIndex = await Promise.all(
     entradas.map(async entrada => {
       try {
-        const r = await fetch(entrada.arquivo)
+        const r = await fetch(SITE_BASE + entrada.arquivo)
         if (!r.ok) throw new Error('not found')
         const html = await r.text()
         const doc  = parser.parseFromString(html, 'text/html')

@@ -896,7 +896,7 @@ main {
   min-height: 40px;
 }
 
-.flash-input:focus {
+.flash-input:focus-visible {
   outline: none;
   border-color: var(--blue-accent);
   box-shadow: 0 0 0 3px rgba(76,155,232,.15);
@@ -1205,6 +1205,25 @@ main {
   top: 0;
   outline: 3px solid #C9A84C;
   outline-offset: 2px;
+}
+
+/* ── Foco visível global (WCAG 2.4.7) + prefers-reduced-motion (WCAG 2.3.3) ── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid #1F497D;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+@media (prefers-color-scheme: dark) {
+  :focus-visible { outline-color: #4C9BE8; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ── Mobile pequeno ≤ 480px ── */

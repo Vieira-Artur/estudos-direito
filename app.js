@@ -605,3 +605,175 @@ function abrirSobre(fromPop = false) {
       app.innerHTML = '<p style="color:#c00;padding:2rem">Não foi possível carregar a página.</p>'
     })
 }
+
+// ── Busca ──────────────────────────────────────────────
+
+window._searchIndex = null   // null = não indexado; [] = indexado (pode ser vazio)
+
+async function indexarConteudo() {
+  const entradas = []
+  for (const mat of materias) {
+    for (const turma of mat.turmas) {
+      turma.temas.forEach((tema, i) => {
+        entradas.push({
+          titulo:    tema.titulo,
+          materia:   mat.titulo,
+          materiaId: mat.id,
+          turmaId:   turma.id,
+          temaIdx:   i,
+          arquivo:   tema.arquivo,
+        })
+      })
+    }
+  }
+
+  const parser = new DOMParser()
+  window._searchIndex = await Promise.all(
+    entradas.map(async entrada => {
+      try {
+        const r = await fetch(entrada.arquivo)
+        if (!r.ok) throw new Error('not found')
+        const html = await r.text()
+        const doc  = parser.parseFromString(html, 'text/html')
+        doc.querySelectorAll('script, style').forEach(el => el.remove())
+        entrada.texto = doc.body.textContent.replace(/\s+/g, ' ').trim()
+      } catch {
+        entrada.texto = ''
+      }
+      return entrada
+    })
+  )
+}
+
+function _normalizar(str) {
+  return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
+function _snippetComMark(texto, palavras, raio = 60) {
+  const norm   = _normalizar(texto)
+  const idx    = norm.indexOf(palavras[0])
+  if (idx === -1) return ''
+  const inicio = Math.max(0, idx - raio)
+  const fim    = Math.min(texto.length, idx + raio + palavras[0].length)
+  // Escapa HTML do trecho antes de inserir <mark>
+  let trecho = esc(
+    (inicio > 0 ? '…' : '') + texto.slice(inicio, fim) + (fim < texto.length ? '…' : '')
+  )
+  palavras.forEach(p => {
+    const re = new RegExp(p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi')
+    trecho = trecho.replace(re, m => `<mark>${m}</mark>`)
+  })
+  return trecho
+}
+
+function buscar(termo) {
+  if (!window._searchIndex || !termo) return []
+  const palavras = _normalizar(termo).split(/\s+/).filter(Boolean)
+  if (!palavras.length) return []
+
+  const scored = []
+  for (const entrada of window._searchIndex) {
+    const nt = _normalizar(entrada.titulo)
+    const nx = _normalizar(entrada.texto)
+    if (!palavras.every(p => nt.includes(p) || nx.includes(p))) continue
+
+    let score = 0
+    palavras.forEach(p => {
+      if (nt.includes(p)) score += 10
+      const m = nx.match(new RegExp(p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'))
+      score += Math.min(5, (m || []).length)
+    })
+    scored.push({ ...entrada, score, snippet: _snippetComMark(entrada.texto, palavras) })
+  }
+  return scored.sort((a, b) => b.score - a.score).slice(0, 6)
+}
+
+function renderResultados(resultados, termo) {
+  const painel = document.getElementById('busca-painel')
+  if (!resultados.length) {
+    painel.innerHTML = `<p class="busca-vazio">Nenhum resultado para <strong>"${esc(termo)}"</strong>.</p>`
+  } else {
+    const label = resultados.length === 1 ? 'resultado' : 'resultados'
+    painel.innerHTML = `
+      <p class="busca-count">${resultados.length} ${label} para <strong>"${esc(termo)}"</strong></p>
+      <div class="busca-resultados">
+        ${resultados.map(r => `
+          <div class="busca-resultado"
+               role="button" tabindex="0"
+               aria-label="${esc(r.titulo)}, ${esc(r.materia)}"
+               onclick="navegarParaResultado('${esc(r.materiaId)}','${esc(r.turmaId)}',${r.temaIdx})"
+               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navegarParaResultado('${esc(r.materiaId)}','${esc(r.turmaId)}',${r.temaIdx})}">
+            <div class="busca-resultado-corpo">
+              <div class="busca-resultado-materia">${esc(r.materia)}</div>
+              <div class="busca-resultado-titulo">${esc(r.titulo)}</div>
+              ${r.snippet ? `<div class="busca-resultado-snippet">${r.snippet}</div>` : ''}
+            </div>
+            <span class="busca-resultado-seta" aria-hidden="true">›</span>
+          </div>
+        `).join('')}
+      </div>`
+  }
+  painel.removeAttribute('hidden')
+  document.getElementById('app').classList.add('busca-ativa')
+}
+
+function navegarParaResultado(materiaId, turmaId, temaIdx) {
+  fecharBusca()
+  abrirTemaDaArvore(materiaId, turmaId, temaIdx)
+}
+
+let _buscaTimer = null
+
+function _onBuscaInput(e) {
+  clearTimeout(_buscaTimer)
+  const termo = e.target.value.trim()
+  const painel = document.getElementById('busca-painel')
+  if (termo.length < 2) {
+    painel.setAttribute('hidden', '')
+    painel.innerHTML = ''
+    document.getElementById('app').classList.remove('busca-ativa')
+    return
+  }
+  _buscaTimer = setTimeout(() => renderResultados(buscar(termo), termo), 200)
+}
+
+function _onEscBusca(e) {
+  if (e.key === 'Escape') fecharBusca()
+}
+
+async function abrirBusca() {
+  const btn   = document.getElementById('busca-btn')
+  const wrap  = document.getElementById('busca-input-wrap')
+  const input = document.getElementById('busca-input')
+
+  btn.setAttribute('hidden', '')
+  wrap.removeAttribute('hidden')
+  input.disabled    = true
+  input.placeholder = '⏳ Indexando conteúdo…'
+
+  if (!window._searchIndex) await indexarConteudo()
+
+  input.disabled    = false
+  input.placeholder = 'Buscar tema…'
+  input.focus()
+  input.addEventListener('input', _onBuscaInput)
+  document.addEventListener('keydown', _onEscBusca)
+}
+
+function fecharBusca() {
+  const btn    = document.getElementById('busca-btn')
+  const wrap   = document.getElementById('busca-input-wrap')
+  const input  = document.getElementById('busca-input')
+  const painel = document.getElementById('busca-painel')
+
+  input.removeEventListener('input', _onBuscaInput)
+  document.removeEventListener('keydown', _onEscBusca)
+  clearTimeout(_buscaTimer)
+
+  input.value = ''
+  wrap.setAttribute('hidden', '')
+  btn.removeAttribute('hidden')
+  painel.setAttribute('hidden', '')
+  painel.innerHTML = ''
+  document.getElementById('app').classList.remove('busca-ativa')
+}

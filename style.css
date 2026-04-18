@@ -547,10 +547,7 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  @keyframes sk-shimmer {
-    0%, 100% { background-position: 0 0; }
-  }
-  .sk, .sk-inv { animation-duration: 3s; }
+  .sk, .sk-inv { animation-play-state: paused; }
 }
 
 /* Shimmer em fundo claro/escuro (usa variáveis do :root) */

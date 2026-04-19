@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup — Links para o Planalto</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #1a1a2e; padding: 2rem; }
+    h1 { font-size: 1.3rem; margin-bottom: 0.4rem; color: #1F497D; }
+    .sub { font-size: 0.85rem; color: #666; margin-bottom: 2rem; }
+
+    /* Layout lado a lado */
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media(max-width:760px) { .cols { grid-template-columns: 1fr; } }
+
+    .col-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: #888; margin-bottom: 0.7rem;
+    }
+    .box {
+      background: #fff; border: 1px solid #dde3ec; border-radius: 10px;
+      padding: 1.4rem; font-size: 0.9rem; line-height: 1.9; color: #333;
+    }
+    .box p { margin-bottom: 0.8rem; }
+    .box p:last-child { margin-bottom: 0; }
+
+    /* Link estilo discreto */
+    a.planalto-link {
+      color: #1F497D;
+      text-decoration: underline dotted #1F497D;
+      text-underline-offset: 3px;
+      border-radius: 3px;
+      padding: 0 2px;
+      transition: background .15s, color .15s;
+      white-space: nowrap;
+    }
+    a.planalto-link:hover {
+      background: #dde9f7;
+      text-decoration: underline solid #1F497D;
+    }
+    a.planalto-link::after {
+      content: ' ↗';
+      font-size: 0.7em;
+      opacity: 0.55;
+    }
+
+    /* Painel de configuração */
+    .config {
+      background: #1F497D; color: #fff; border-radius: 10px;
+      padding: 1.2rem 1.4rem; margin-bottom: 1.5rem;
+      display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+    }
+    .config span { font-size: 0.85rem; opacity: .85; }
+    .toggle {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; cursor: pointer; user-select: none;
+    }
+    .toggle input { accent-color: #7ab4f5; width: 16px; height: 16px; cursor: pointer; }
+
+    /* Contador de links */
+    .badge {
+      background: #e8f0fb; color: #1F497D; border: 1px solid #b8cfe8;
+      border-radius: 20px; padding: 0.15rem 0.7rem; font-size: 0.78rem; font-weight: 600;
+    }
+
+    /* Log de detecções */
+    .log {
+      margin-top: 1.5rem; background: #fff; border: 1px solid #dde3ec;
+      border-radius: 10px; overflow: hidden;
+    }
+    .log-header {
+      background: #f5f7fa; border-bottom: 1px solid #dde3ec;
+      padding: 0.7rem 1.2rem; font-size: 0.78rem; font-weight: 700;
+      color: #555; text-transform: uppercase; letter-spacing: .06em;
+    }
+    .log-body { padding: 1rem 1.2rem; font-size: 0.82rem; line-height: 1.7; }
+    .log-item { display: flex; gap: 0.8rem; align-items: baseline; margin-bottom: 0.3rem; }
+    .log-lei { font-weight: 700; min-width: 36px; }
+    .log-lei.CPP { color: #1a5c8a; }
+    .log-lei.CF  { color: #6b3a9e; }
+    .log-lei.CP  { color: #8a1a1a; }
+    .log-lei.CTN { color: #0a5c4a; }
+    .log-art { color: #333; flex: 1; }
+    .log-url { color: #888; font-size: 0.75rem; word-break: break-all; }
+  </style>
+</head>
+<body>
+
+<h1>Mockup — Auto-link de Artigos para o Planalto</h1>
+<p class="sub">Simulação do comportamento no site real. Passe o mouse nos artigos destacados para ver o link gerado.</p>
+
+<div class="config">
+  <span>Configurações do teste:</span>
+  <label class="toggle"><input type="checkbox" id="chk-cpp" checked> CPP</label>
+  <label class="toggle"><input type="checkbox" id="chk-cf"  checked> CF</label>
+  <label class="toggle"><input type="checkbox" id="chk-cp"  checked> CP</label>
+  <label class="toggle"><input type="checkbox" id="chk-ctn" checked> CTN</label>
+  <button onclick="reprocessar()" style="margin-left:auto;background:#fff;color:#1F497D;border:none;border-radius:6px;padding:0.4rem 1rem;font-size:0.82rem;font-weight:700;cursor:pointer;">↺ Reaplicar</button>
+  <span id="badge-count" class="badge">0 links</span>
+</div>
+
+<div class="cols">
+  <div>
+    <div class="col-label">Texto original (sem links)</div>
+    <div class="box" id="texto-original">
+      <p>O Art. 155 do CPP estabelece que o juiz formará sua convicção pela livre apreciação da prova judicializada. Todavia, a jurisprudência do STF admite que elementos do inquérito influam subsidiariamente no convencimento, desde que complementem outras provas produzidas sob o contraditório.</p>
+
+      <p>O Art. 157 CPP dispõe que são inadmissíveis as provas ilícitas. Pelo Art. 157, §1º CPP, as provas derivadas da ilícita também são inadmissíveis, salvo nas exceções previstas. O Art. 157, §2º CPP prevê a descoberta inevitável.</p>
+
+      <p>O Art. 5º, LVI, CF estabelece que são inadmissíveis, no processo, as provas obtidas por meios ilícitos. Já o Art. 93, IX, CF impõe o dever de fundamentação das decisões judiciais.</p>
+
+      <p>O Art. 158 CPP impõe o exame de corpo de delito quando a infração deixar vestígios. O Art. 225 CPP trata do depoimento antecipado de testemunha enferma ou idosa.</p>
+
+      <p>No âmbito do Direito Penal, o Art. 121 CP define o crime de homicídio. O Art. 155 CP tipifica o furto, enquanto o Art. 157 CP define o roubo. A prescrição está regulada nos Arts. 109 ao 119 CP.</p>
+
+      <p>Em matéria tributária, o Art. 3º CTN conceitua o tributo. O lançamento tributário está disciplinado nos Arts. 142 ao 150 CTN. O Art. 150 CF traz as limitações constitucionais ao poder de tributar.</p>
+
+      <p>O Art. 312 CPP estabelece os requisitos da prisão preventiva. O Art. 313 CPP lista as hipóteses de cabimento. O Art. 315 CPP exige fundamentação idônea para o decreto prisional.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="col-label">Com auto-links para o Planalto</div>
+    <div class="box" id="texto-processado"></div>
+  </div>
+</div>
+
+<div class="log">
+  <div class="log-header">Artigos detectados e URLs geradas</div>
+  <div class="log-body" id="log-body">—</div>
+</div>
+
+<script>
+// ── Mapeamento de leis ──────────────────────────────────────────────────────
+const LEIS = {
+  CPP: 'https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689.htm',
+  CP:  'https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm',
+  CF:  'https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm',
+  CTN: 'https://www.planalto.gov.br/ccivil_03/leis/l5172compilado.htm'
+}
+
+// ── Regex principal ─────────────────────────────────────────────────────────
+// Captura: Arts?. NÚMERO[º°] [modificadores opcionais] CÓDIGO_LEI
+// Modificadores: ", §1º", ", IX", ", caput", ", LVI" etc.
+const REGEX_ART = /(Arts?\.)\s*(\d+)[º°]?(\s*(?:,\s*(?:§\s*\d+[º°]?|\d+[º°]?|[IVXLCDM]+|[a-zA-Z]+))*)?(\s+(?:ao|e)\s+\d+[º°]?)?(\s+(?:do|da|ao)?\s*|\s+)(CPP|CP\b|CTN|CF)\b/g
+
+function extrairNumero(str) {
+  const m = str.match(/(\d+)/)
+  return m ? m[1] : null
+}
+
+function gerarUrl(lei, artNum) {
+  const base = LEIS[lei]
+  if (!base || !artNum) return null
+  return base + '#art' + artNum
+}
+
+function processar(html, leisAtivas) {
+  const deteccoes = []
+
+  const resultado = html.replace(REGEX_ART, (match, pref, num, mods, faixa, sep, lei) => {
+    if (!leisAtivas.includes(lei)) return match
+
+    const url = gerarUrl(lei, num)
+    if (!url) return match
+
+    deteccoes.push({ lei, art: `Art. ${num}${mods || ''}`, url, original: match.trim() })
+
+    return `<a class="planalto-link" href="${url}" target="_blank" rel="noopener" title="${lei} — Art. ${num} no Planalto">${match}</a>`
+  })
+
+  return { resultado, deteccoes }
+}
+
+function reprocessar() {
+  const leisAtivas = []
+  if (document.getElementById('chk-cpp').checked) leisAtivas.push('CPP')
+  if (document.getElementById('chk-cf').checked)  leisAtivas.push('CF')
+  if (document.getElementById('chk-cp').checked)  leisAtivas.push('CP')
+  if (document.getElementById('chk-ctn').checked) leisAtivas.push('CTN')
+
+  const original = document.getElementById('texto-original').innerHTML
+  const { resultado, deteccoes } = processar(original, leisAtivas)
+
+  document.getElementById('texto-processado').innerHTML = resultado
+
+  // Badge
+  document.getElementById('badge-count').textContent = deteccoes.length + ' link' + (deteccoes.length !== 1 ? 's' : '')
+
+  // Log
+  const logEl = document.getElementById('log-body')
+  if (deteccoes.length === 0) {
+    logEl.innerHTML = '<span style="color:#aaa">Nenhum artigo detectado com as leis selecionadas.</span>'
+    return
+  }
+  logEl.innerHTML = deteccoes.map(d => `
+    <div class="log-item">
+      <span class="log-lei ${d.lei}">${d.lei}</span>
+      <span class="log-art">${d.original}</span>
+      <a class="log-url" href="${d.url}" target="_blank">${d.url}</a>
+    </div>
+  `).join('')
+}
+
+// Roda ao carregar
+reprocessar()
+</script>
+</body>
+</html>

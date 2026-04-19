@@ -1307,7 +1307,7 @@ main {
 }
 
 .btn-download-pdf {
-  background: var(--gold);
+  background: #b8943f;
   color: white;
   border: none;
   border-radius: 8px;
@@ -1322,7 +1322,7 @@ main {
   transition: background .2s;
 }
 
-.btn-download-pdf:hover { background: #b8943f; }
+.btn-download-pdf:hover { background: #9a7530; }
 
 /* Botão de download de imagem individual */
 .img-download-wrap {
@@ -1334,7 +1334,7 @@ main {
 }
 
 .btn-download-img {
-  background: var(--gold);
+  background: #b8943f;
   color: white;
   border-radius: 6px;
   padding: 6px 14px;
@@ -1348,7 +1348,7 @@ main {
   transition: background .2s;
 }
 
-.btn-download-img:hover { background: #b8943f; }
+.btn-download-img:hover { background: #9a7530; }
 
 /* Cabeçalho de identidade — visível só no PDF */
 #print-header { display: none; }

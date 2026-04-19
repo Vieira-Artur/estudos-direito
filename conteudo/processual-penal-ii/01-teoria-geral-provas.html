@@ -236,6 +236,7 @@
   <button class="pp1-tab" onclick="pp1Tab(event,'pp1-roteiro')">📋 Roteiro de Estudo</button>
   <button class="pp1-tab" onclick="pp1Tab(event,'pp1-casos')">⚖️ Casos Práticos</button>
   <button class="pp1-tab" onclick="pp1Tab(event,'pp1-relatorio')">📄 Relatório Geral</button>
+  <button class="pp1-tab" onclick="pp1Tab(event,'pp1-resumido')">📝 Relatório Resumido</button>
 </div>
 
 <!-- ============================================================ MAPA MENTAL -->
@@ -1115,6 +1116,252 @@
     <p style="color:var(--text2); font-size:0.88rem; font-style:italic; line-height:1.8; margin:0;">
       O Art. 157, §2º do CPP, embora use o termo "fonte independente", descreve tecnicamente a <strong>descoberta inevitável</strong>. A doutrina vê possibilidade de aplicação da mancha purgada na exegese do Art. 157, §1º. Em ambos os casos, a garantia das liberdades fundamentais permanece como norte hermenêutico inafastável.
     </p>
+  </div>
+
+</div>
+
+<!-- ============================================================ RELATÓRIO RESUMIDO -->
+<div id="pp1-resumido" class="pp1-painel">
+
+  <div class="section-title" style="margin-top:0">Guia Prático: Teoria Geral das Provas no Processo Penal Brasileiro</div>
+
+  <!-- 1 -->
+  <div class="section-title">1. Fundamentos e Conceitos de Prova</div>
+
+  <p style="color:var(--text2); font-size:0.92rem; line-height:1.8; margin-bottom:1.2rem;">
+    No plano da dogmática processual penal, o ato de provar constitui a demonstração técnica da veracidade de um enunciado fático sobre um evento ocorrido no mundo real. Distinguem-se três acepções fundamentais:
+  </p>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3>📌 Atividade Probatória</h3>
+      <p>Conjunto de atos de verificação e demonstração dos sujeitos processuais para reconstruir a verdade histórica. Deriva do direito de ação, mas não é absoluta — limita-se pelas garantias fundamentais e o devido processo legal.</p>
+    </div>
+    <div class="card">
+      <h3>🧠 Resultado</h3>
+      <p>Estado de convicção ou certeza jurídica alcançado pelo magistrado após o contato com os elementos instrutórios.</p>
+    </div>
+    <div class="card">
+      <h3>🔧 Meio</h3>
+      <p>Instrumentos idôneos (testemunhas, documentos, perícias) utilizados para introduzir dados informativos no processo.</p>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:0.5rem">
+    <table>
+      <thead>
+        <tr><th>Categoria</th><th>Conceito</th><th>Exemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fonte de Prova</strong></td>
+          <td>Elemento exterior ao processo: pessoa (testemunha, vítima) ou coisa (documento, objeto do crime)</td>
+          <td>A testemunha ocular</td>
+        </tr>
+        <tr>
+          <td><strong>Meio de Prova</strong></td>
+          <td>Canal institucionalizado que transporta a fonte para os autos</td>
+          <td>O depoimento; a busca e apreensão</td>
+        </tr>
+        <tr>
+          <td><strong>Prova Direta</strong></td>
+          <td>Permite conhecimento do fato por uma única operação lógica</td>
+          <td>Testemunha que presenciou o disparo</td>
+        </tr>
+        <tr>
+          <td><strong>Prova Indireta</strong></td>
+          <td>Exige operações inferenciais sucessivas (indícios)</td>
+          <td>Ouviu o estampido e viu o réu fugindo com a arma</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2 -->
+  <div class="section-title">2. A Distinção Crucial: Elementos Informativos vs. Provas</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🔵 Elementos Informativos</h3>
+      <p>Colhidos na investigação preliminar (Inquérito Policial) <strong>sem participação dialética das partes</strong>. Não fundamentam, sozinhos, condenação.</p>
+      <div style="margin-top:0.6rem">
+        <span class="tag tag-blue">STF HC 96.356/RS</span>
+        <span class="tag tag-blue">STJ REsp 1.740.921/GO</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>🟢 Provas</h3>
+      <p>Produzidas perante o magistrado, com observância do <strong>contraditório real</strong> e da ampla defesa. Podem fundamentar condenação.</p>
+      <div style="margin-top:0.5rem; font-size:0.85rem; color:var(--text2)"><strong>Ressalva:</strong> Perícias e documentos (AgRg no REsp 1.522.716/SE) não necessariamente precisam ser repetidos em juízo.</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Categoria</th><th>Definição Técnica</th><th>Exemplo Forense</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Provas Cautelares</strong></td>
+          <td>Risco de desaparecimento do objeto. Contraditório postergado (diferido).</td>
+          <td>Interceptação telefônica — exige fator surpresa; contraditório ocorre após degravação</td>
+        </tr>
+        <tr>
+          <td><strong>Provas Não Repetíveis</strong></td>
+          <td>Não podem ser reproduzidas pelo perecimento natural da fonte.</td>
+          <td>Exame de Corpo de Delito (Art. 158 CPP) — vestigialidade exige coleta imediata</td>
+        </tr>
+        <tr>
+          <td><strong>Provas Antecipadas</strong></td>
+          <td>Produzidas antes do momento processual oportuno, preservando a prova contra o esquecimento ou morte.</td>
+          <td>Depoimento <em>ad perpetuam rei memoriam</em> — testemunha anciã ou enferma (Art. 225 CPP)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3 -->
+  <div class="section-title">3. Standards Probatórios: Critérios de Decisão</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>⚖️ <em>Beyond a Reasonable Doubt</em></h3>
+      <p>Para sentença condenatória: <strong>certeza</strong> quanto à materialidade e à autoria. Dúvida fundada → absolvição obrigatória (<em>in dubio pro reo</em>, Art. 386, VI, CPP). Reconhecido pelo STF como compatível com o processo penal brasileiro.</p>
+    </div>
+    <div class="card">
+      <h3>🔒 Prisão Preventiva (Art. 312 CPP)</h3>
+      <p><strong>Materialidade</strong>: certeza da existência do crime.<br><strong>Autoria</strong>: apenas indício suficiente (probabilidade) — <em>fumus comissi delicti</em>.</p>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section-title">4. Sistemas de Avaliação e Valoração da Prova</div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h3 style="color:var(--pp1-orange)">Íntima Convicção</h3>
+      <p>Decisão por convicção pessoal, sem fundamentação. No Brasil: <strong>Tribunal do Júri</strong> (sigilo das votações — Art. 5º, XXXVIII, CF).</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--pp1-red)">Prova Tarifada</h3>
+      <p>Valores pré-fixados pelo legislador. Resquícios: Art. 155, §único (estado das pessoas) e Art. 158 (exame pericial indispensável — a confissão não substitui).</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--pp1-green)">Persuasão Racional ✓</h3>
+      <p><strong>Regra geral</strong>. Liberdade de apreciação com dever constitucional de motivar. Sem hierarquia absoluta entre meios de prova.</p>
+      <div style="margin-top:0.6rem">
+        <span class="tag tag-green">Art. 93, IX, CF</span>
+        <span class="tag tag-green">Art. 155 CPP</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="section-title">5. Dinâmica do Ônus da Prova e Iniciativa do Juiz</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>📌 Corrente Majoritária (Art. 156 CPP)</h3>
+      <ul>
+        <li>Acusação prova: autoria e materialidade</li>
+        <li>Defesa prova: excludentes ou extintivas</li>
+        <li>Dúvida fundada → absolvição (Art. 386, VI, CPP)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>📌 Corrente Garantista (R. Brasileiro)</h3>
+      <ul>
+        <li>Ônus <strong>exclusivo da acusação</strong> — presunção de inocência</li>
+        <li>À defesa basta gerar "fundada dúvida"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Conflito: Art. 156, I/II × Art. 3º-A CPP</strong>
+    <p>O Art. 156 permite provas de ofício; o Art. 3º-A (sistema acusatório) veda iniciativa judicial na investigação. O Art. 3º-A está <strong>suspenso por liminar do Min. Luiz Fux</strong>, mantendo viva a atuação subsidiária do magistrado para dirimir dúvidas sobre pontos relevantes.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="section-title">6. Regime das Provas Ilicitamente Obtidas</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🔴 Provas Ilícitas</h3>
+      <p>Violam normas de <strong>direito material</strong> ou princípios constitucionais.</p>
+      <p style="margin-top:0.4rem; color:var(--text2); font-size:0.88rem">Ex.: tortura, invasão domiciliar sem mandado.</p>
+    </div>
+    <div class="card">
+      <h3>🟠 Provas Ilegítimas</h3>
+      <p>Violam normas de natureza <strong>processual</strong> no momento da produção.</p>
+      <p style="margin-top:0.4rem; color:var(--text2); font-size:0.88rem">Ex.: oitiva de testemunha impedida sem observar as formalidades legais.</p>
+    </div>
+  </div>
+
+  <div class="artigo">
+    <strong>Art. 157 CPP — Regra de Exclusão:</strong> provas ilícitas devem ser <strong>desentranhadas</strong> dos autos e, após preclusão, <strong>inutilizadas</strong> por decisão judicial.
+  </div>
+
+  <!-- 7 -->
+  <div class="section-title">7. Provas Ilícitas por Derivação: A Árvore Envenenada</div>
+
+  <div class="card">
+    <h3>🌳 Teoria dos Frutos da Árvore Envenenada</h3>
+    <p style="margin-bottom:0.8rem">Provas legalmente produzidas que dependam causalmente de uma prova originária ilícita também são contaminadas.</p>
+    <div class="juris" style="margin-bottom:0">
+      <div class="tribunal">Miranda v. Arizona (1966) — Aviso de Miranda</div>
+      <p>A ausência de advertência sobre: (1) direito ao silêncio; (2) uso das declarações contra si; (3) direito ao advogado — inquina de nulidade as declarações e todas as provas que delas derivem por nexo causal.</p>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="section-title">8. Limitações à Exclusão: Teorias de Exceção</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>🌿 Fonte Independente <span class="tag tag-blue" style="vertical-align:middle">Art. 157, §1º</span></h3>
+      <p>Prova válida se o Estado demonstrar que obteve os elementos por meios <strong>sem nexo causal</strong> com a ilicitude original.</p>
+      <p style="color:var(--text2); font-size:0.85rem; margin-top:0.4rem">Ex.: dados já constantes em arquivos policiais antes da busca ilegal.</p>
+    </div>
+    <div class="card">
+      <h3>🔮 Descoberta Inevitável <span class="tag tag-blue" style="vertical-align:middle">Art. 157, §2º</span></h3>
+      <p>Prova admitida se demonstrado que, pelos trâmites típicos da investigação, o elemento seria <strong>inevitavelmente alcançado</strong>.</p>
+      <p style="color:var(--text2); font-size:0.85rem; margin-top:0.4rem">Nix v. Williams (1984).</p>
+    </div>
+    <div class="card">
+      <h3>🧹 Mancha Purgada</h3>
+      <p>Circunstâncias supervenientes ou decurso do tempo <strong>atenuam o nexo causal</strong>, "limpando" a contaminação.</p>
+      <p style="color:var(--text2); font-size:0.85rem; margin-top:0.4rem">Ex.: confissão voluntária dias após uma prisão ilegal.</p>
+    </div>
+    <div class="card">
+      <h3>🎲 Serendipidade</h3>
+      <p>Encontro fortuito de provas durante investigação lícita de fato diverso. Válidas desde que o <strong>meio de obtenção tenha sido legal</strong>.</p>
+      <div style="margin-top:0.5rem"><span class="tag tag-green">RMS 28.774/DF</span></div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="section-title">9. Síntese Jurisprudencial dos Tribunais Superiores</div>
+
+  <div class="juris">
+    <div class="tribunal">STJ · HC 740.431-DF — Autópsia Psicológica</div>
+    <p>Admitida como <strong>prova atípica</strong>. O juiz deve exercer controle rigoroso sobre sua utilização e pertinência no caso concreto.</p>
+  </div>
+
+  <div class="juris">
+    <div class="tribunal">STJ · RHC 167.478-MS — Cartas Psicografadas</div>
+    <p><strong>Inadmissíveis</strong> por ausência de idoneidade epistêmica. A psicografia é ato de fé (prescinde de demonstração racional); o processo exige ato de prova (demonstração racional e objetiva).</p>
+  </div>
+
+  <div class="juris">
+    <div class="tribunal">STJ · Súmula 591 — Prova Emprestada em PADs</div>
+    <p>Transposição de prova de um processo para outro via certidão. Válida inclusive em PADs, desde que respeitado o contraditório e que a parte contra quem se usa tenha participado de sua produção original.</p>
+  </div>
+
+  <div class="tip">
+    <strong>✅ Depoimento de Policiais</strong>
+    <p>Possui fé pública, mas <strong>não é prova tarifada</strong>. Trata-se de testemunho sujeito à <strong>persuasão racional</strong>, devendo ser confrontado com os demais elementos de convicção. — STJ/CESPE.</p>
   </div>
 
 </div>

@@ -2,57 +2,12 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estudos Complementares — Prof. Artur Vieira</title>
-  <meta name="description" content="Material de estudos complementares de Direito — Prof. Artur Vieira. Penal, Processual Penal, Tributário e mais.">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Estudos Complementares — Prof. Artur Vieira">
-  <meta property="og:description" content="Material de estudos complementares de Direito — Prof. Artur Vieira. Penal, Processual Penal, Tributário e mais.">
-  <meta property="og:url" content="https://prof-artur-vieira.github.io/estudos-direito/">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <a class="skip-link" href="#app">Ir para o conteúdo principal</a>
-  <header>
-    <div class="header-top">
-      <div class="site-titulo">
-        <span class="site-titulo-full">Estudos Complementares — Prof. Artur Vieira</span>
-        <span class="site-titulo-short">Estudos Complementares</span>
-      </div>
-      <div class="header-acoes">
-        <a href="#" class="btn-sobre" onclick="abrirSobre(); return false;">Sobre mim</a>
-        <button id="busca-btn" aria-label="Buscar tema" onclick="abrirBusca()">🔍</button>
-        <div id="busca-input-wrap" hidden>
-          <input id="busca-input" type="search" aria-label="Buscar tema"
-                 placeholder="Buscar tema…" autocomplete="off">
-          <button id="busca-fechar" aria-label="Fechar busca" onclick="fecharBusca()">✕</button>
-        </div>
-      </div>
-    </div>
-    <nav id="breadcrumb"></nav>
-    <div id="busca-painel" aria-live="polite" hidden></div>
-  </header>
-  <main id="app" aria-live="polite" aria-atomic="false"></main>
-
-  <button id="btn-topo" title="Voltar ao topo" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})">↑</button>
-
-  <footer class="rodape-site">
-    <p class="rodape-autoria">Criado e desenvolvido por Artur Vieira</p>
-    <p class="rodape-creditos">Com ajuda dos incríveis alunos <span id="alunos-creditos">[nomes a preencher]</span></p>
-    <p id="rodape-privacidade" class="rodape-privacidade" hidden>Este site não coleta dados pessoais. Os flashcards criados ficam apenas no seu navegador (localStorage).</p>
-  </footer>
-
-  <script src="data.js"></script>
-  <script src="app.js"></script>
   <script>
-    const btnTopo = document.getElementById('btn-topo')
-    window.addEventListener('scroll', () => {
-      btnTopo.classList.toggle('visivel', window.scrollY > 320)
-    }, { passive: true })
+    // GitHub Pages SPA: redireciona para index.html preservando o caminho como ?p=...
+    var l = window.location;
+    var base = l.pathname.split('/').slice(0, 2).join('/'); // ex: "/estudos-direito"
+    var rest = l.pathname.slice(base.length) || '/';        // ex: "/processual-penal-ii/teoria-geral-provas"
+    l.replace(l.origin + base + '/?p=' + encodeURIComponent(rest) + l.hash);
   </script>
-</body>
+</head>
 </html>

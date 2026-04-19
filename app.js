@@ -73,6 +73,13 @@ const breadcrumb = document.getElementById('breadcrumb')
 
 // ── Inicialização ────────────────────────────────────────
 function inicializarRota() {
+  // Restaura caminho após redirecionamento do 404.html (GitHub Pages SPA)
+  const redirectPath = new URLSearchParams(window.location.search).get('p')
+  if (redirectPath) {
+    const decoded = decodeURIComponent(redirectPath)
+    history.replaceState(null, '', BASE_PATH + decoded.replace(/^\//, ''))
+  }
+
   const rawPath = window.location.pathname
   const path = '/' + (rawPath.startsWith(BASE_PATH)
     ? rawPath.slice(BASE_PATH.length)

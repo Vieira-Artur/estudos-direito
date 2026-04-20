@@ -37,8 +37,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    radial-gradient(circle at 20% 50%, rgba(31,73,125,.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(201,168,76,.04) 0%, transparent 40%);
+    radial-gradient(circle at 20% 50%, rgba(31,73,125,.09) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(201,168,76,.07) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
 }
@@ -1014,8 +1014,8 @@ main {
   /* Textura de fundo ajustada para o tema escuro */
   body::before {
     background-image:
-      radial-gradient(circle at 20% 50%, rgba(154,180,248,.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(232,201,106,.04) 0%, transparent 40%);
+      radial-gradient(circle at 20% 50%, rgba(154,180,248,.09) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(232,201,106,.07) 0%, transparent 40%);
   }
 
   /* Header: gradiente mais fundo no escuro */

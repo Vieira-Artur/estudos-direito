@@ -21,6 +21,17 @@ const MeuEspaco = (() => {
     document.head.appendChild(s)
   }
 
+  function sanitize(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html')
+    doc.querySelectorAll('script,style').forEach(el => el.remove())
+    doc.querySelectorAll('*').forEach(el => {
+      ;[...el.attributes].forEach(attr => {
+        if (/^on/i.test(attr.name)) el.removeAttribute(attr.name)
+      })
+    })
+    return doc.body.innerHTML
+  }
+
   function renderPainel() {
     return `
       <div class="me-inner-tabs">
@@ -68,6 +79,7 @@ const MeuEspaco = (() => {
   }
 
   function init(area, arquivo) {
+    if (!arquivo) return
     const tabsBar = area.querySelector('.fp-tabs')
     if (!tabsBar) return
 
@@ -128,7 +140,7 @@ const MeuEspaco = (() => {
   function restoreTexto(painel, arquivo) {
     const editor = painel.querySelector('.me-editor')
     const saved = localStorage.getItem(storageKey('texto', arquivo))
-    if (saved) editor.innerHTML = saved
+    if (saved) editor.innerHTML = sanitize(saved)
   }
 
   // Stubs — implementados nas tasks seguintes

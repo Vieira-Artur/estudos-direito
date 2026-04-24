@@ -638,6 +638,10 @@ function abrirTema(index, fromPop = false) {
           }
         })
       })
+      // Injeta aba "Meu Espaço" se a página tem sistema de abas
+      if (typeof MeuEspaco !== 'undefined') {
+        MeuEspaco.init(area, tema.arquivo)
+      }
       // Botão de download para imagens (infográficos, mapas mentais)
       area.querySelectorAll('a[href]').forEach(link => {
         const href = link.getAttribute('href')

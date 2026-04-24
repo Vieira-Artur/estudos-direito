@@ -186,7 +186,89 @@ const MeuEspaco = (() => {
   }
 
   // Stubs — implementados nas tasks 6-8
-  function initMapaMental(painel, arquivo) {}
+  function initMapaMental(painel, arquivo) {
+    const key = storageKey('diagrama-mapa-mental', arquivo)
+    const canvasEl = painel.querySelector('#me-canvas-mapa')
+    const w = Math.max(painel.clientWidth - 32, 320)
+
+    const fc = new fabric.Canvas(canvasEl, {
+      width: w, height: 280, backgroundColor: '#fafafa'
+    })
+    painel._mesCanvases['mapa'] = fc
+
+    let primeiroNo = null
+
+    function criarNo(x, y, texto) {
+      const rx = Math.max(texto.length * 5, 50)
+      const ellipse = new fabric.Ellipse({
+        rx, ry: 22, fill: '#dce6f1',
+        stroke: '#1F497D', strokeWidth: 2,
+        originX: 'center', originY: 'center', left: 0, top: 0
+      })
+      const label = new fabric.IText(texto, {
+        fontSize: 13, fill: '#1a1a2e',
+        fontFamily: 'Source Sans 3, sans-serif',
+        originX: 'center', originY: 'center', left: 0, top: 0
+      })
+      return new fabric.Group([ellipse, label], {
+        left: x - rx, top: y - 22
+      })
+    }
+
+    fc.on('mouse:down', opt => {
+      const e = opt.e
+      if (e.shiftKey) {
+        if (!opt.target || opt.target.type !== 'group') return
+        if (!primeiroNo) {
+          primeiroNo = opt.target
+          primeiroNo.set('opacity', 0.6)
+          fc.renderAll()
+          return
+        }
+        const a = primeiroNo, b = opt.target
+        const ax = a.left + a.width / 2
+        const ay = a.top + a.height / 2
+        const bx = b.left + b.width / 2
+        const by = b.top + b.height / 2
+        const linha = new fabric.Line([ax, ay, bx, by], {
+          stroke: '#1F497D', strokeWidth: 1.5,
+          selectable: true, hasBorders: false, hasControls: false
+        })
+        fc.add(linha)
+        fc.sendToBack(linha)
+        a.set('opacity', 1)
+        fc.renderAll()
+        primeiroNo = null
+        salvarCanvas(fc, key)
+        return
+      }
+
+      if (opt.target) return
+      const texto = prompt('Texto do nó:')
+      if (!texto || !texto.trim()) return
+      const no = criarNo(e.offsetX, e.offsetY, texto.trim())
+      fc.add(no)
+      fc.setActiveObject(no)
+      fc.renderAll()
+      salvarCanvas(fc, key)
+    })
+
+    fc.on('mouse:dblclick', opt => {
+      if (!opt.target || opt.target.type !== 'group') return
+      const label = opt.target.getObjects('i-text')[0]
+      if (!label) return
+      const novo = prompt('Editar texto do nó:', label.text)
+      if (novo === null) return
+      label.set('text', novo.trim() || label.text)
+      fc.renderAll()
+      salvarCanvas(fc, key)
+    })
+
+    fc.on('object:modified', () => salvarCanvas(fc, key))
+
+    const saved = localStorage.getItem(key)
+    if (saved) fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+  }
   function initLinhaDoTempo(painel, arquivo) {}
   function initCanvasLivre(painel, arquivo) {
     const key = storageKey('diagrama-canvas-livre', arquivo)

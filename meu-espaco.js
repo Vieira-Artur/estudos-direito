@@ -13,11 +13,15 @@ const MeuEspaco = (() => {
   function loadFabric(cb) {
     if (window.fabric) return cb()
     let s = document.getElementById('me-fabric-script')
-    if (s) { s.addEventListener('load', cb); return }
+    if (s) {
+      if (s.dataset.loaded) return cb()
+      s.addEventListener('load', cb)
+      return
+    }
     s = document.createElement('script')
     s.id = 'me-fabric-script'
     s.src = FABRIC_CDN
-    s.onload = cb
+    s.onload = () => { s.dataset.loaded = '1'; cb() }
     document.head.appendChild(s)
   }
 
@@ -143,8 +147,49 @@ const MeuEspaco = (() => {
     if (saved) editor.innerHTML = sanitize(saved)
   }
 
-  // Stubs — implementados nas tasks seguintes
-  function wireDiagramaTabs(painel, arquivo) {}
+  function wireDiagramaTabs(painel, arquivo) {
+    // Abas internas: Anotações ↔ Diagrama
+    painel.querySelectorAll('.me-itab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        painel.querySelectorAll('.me-itab').forEach(t => t.classList.remove('ativo'))
+        painel.querySelectorAll('.me-ipainel').forEach(p => p.classList.remove('ativo'))
+        tab.classList.add('ativo')
+        painel.querySelector(`[data-me-painel="${tab.dataset.meTab}"]`).classList.add('ativo')
+        if (tab.dataset.meTab === 'diagrama') initDiagramaLazy(painel, arquivo)
+      })
+    })
+
+    // Sub-abas: Mapa Mental ↔ Linha do Tempo ↔ Canvas Livre
+    painel.querySelectorAll('.me-stab').forEach(stab => {
+      stab.addEventListener('click', () => {
+        painel.querySelectorAll('.me-stab').forEach(t => t.classList.remove('ativo'))
+        painel.querySelectorAll('.me-sub-painel').forEach(p => p.classList.remove('ativo'))
+        stab.classList.add('ativo')
+        painel.querySelector(`[data-me-spanel="${stab.dataset.meStab}"]`).classList.add('ativo')
+      })
+    })
+  }
+
+  function initDiagramaLazy(painel, arquivo) {
+    if (painel._mesFabricLoaded) return
+    painel._mesFabricLoaded = true
+    loadFabric(() => {
+      painel._mesCanvases = {}
+      initMapaMental(painel, arquivo)
+      initLinhaDoTempo(painel, arquivo)
+      initCanvasLivre(painel, arquivo)
+    })
+  }
+
+  function salvarCanvas(fc, key) {
+    localStorage.setItem(key, JSON.stringify(fc.toJSON()))
+  }
+
+  // Stubs — implementados nas tasks 6-8
+  function initMapaMental(painel, arquivo) {}
+  function initLinhaDoTempo(painel, arquivo) {}
+  function initCanvasLivre(painel, arquivo) {}
+
   function wireApagar(painel, arquivo) {
     painel.querySelector('.me-apagar-btn').addEventListener('click', () => {
       if (!confirm('Apagar todas as anotações e diagramas deste tema?\nEsta ação não pode ser desfeita.')) return

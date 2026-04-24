@@ -188,7 +188,78 @@ const MeuEspaco = (() => {
   // Stubs — implementados nas tasks 6-8
   function initMapaMental(painel, arquivo) {}
   function initLinhaDoTempo(painel, arquivo) {}
-  function initCanvasLivre(painel, arquivo) {}
+  function initCanvasLivre(painel, arquivo) {
+    const key = storageKey('diagrama-canvas-livre', arquivo)
+    const canvasEl = painel.querySelector('#me-canvas-livre')
+    const w = Math.max(painel.clientWidth - 32, 320)
+
+    const fc = new fabric.Canvas(canvasEl, {
+      width: w, height: 280, backgroundColor: '#fafafa'
+    })
+    painel._mesCanvases['livre'] = fc
+
+    let formaAtiva = 'caixa'
+
+    painel.querySelectorAll('.me-sbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        painel.querySelectorAll('.me-sbtn').forEach(b => b.classList.remove('ativo'))
+        btn.classList.add('ativo')
+        formaAtiva = btn.dataset.shape
+      })
+    })
+
+    fc.on('mouse:down', opt => {
+      if (opt.target) return
+      const x = opt.e.offsetX, y = opt.e.offsetY
+      let obj
+
+      if (formaAtiva === 'caixa') {
+        obj = new fabric.Rect({
+          left: x - 40, top: y - 20,
+          width: 80, height: 40,
+          fill: '#dce6f1', stroke: '#1F497D', strokeWidth: 2, rx: 4, ry: 4
+        })
+      } else if (formaAtiva === 'circulo') {
+        obj = new fabric.Circle({
+          left: x - 30, top: y - 30, radius: 30,
+          fill: '#dce6f1', stroke: '#1F497D', strokeWidth: 2
+        })
+      } else if (formaAtiva === 'texto') {
+        obj = new fabric.IText('Texto', {
+          left: x, top: y, fontSize: 14, fill: '#1a1a2e',
+          fontFamily: 'Source Sans 3, sans-serif'
+        })
+        fc.add(obj)
+        fc.setActiveObject(obj)
+        obj.enterEditing()
+        fc.renderAll()
+        salvarCanvas(fc, key)
+        return
+      } else if (formaAtiva === 'seta') {
+        const linha = new fabric.Line([0, 0, 80, 0], {
+          stroke: '#1F497D', strokeWidth: 2
+        })
+        const ponta = new fabric.Triangle({
+          left: 68, top: -6, width: 12, height: 12,
+          fill: '#1F497D', angle: 90
+        })
+        obj = new fabric.Group([linha, ponta], { left: x, top: y })
+      }
+
+      if (obj) {
+        fc.add(obj)
+        fc.setActiveObject(obj)
+        fc.renderAll()
+        salvarCanvas(fc, key)
+      }
+    })
+
+    fc.on('object:modified', () => salvarCanvas(fc, key))
+    fc.on('text:changed', () => salvarCanvas(fc, key))
+
+    const saved = localStorage.getItem(key)
+    if (saved) fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+  }
 
   function wireApagar(painel, arquivo) {
     painel.querySelector('.me-apagar-btn').addEventListener('click', () => {

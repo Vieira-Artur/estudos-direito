@@ -185,7 +185,6 @@ const MeuEspaco = (() => {
     localStorage.setItem(key, JSON.stringify(fc.toJSON()))
   }
 
-  // Stubs — implementados nas tasks 6-8
   function initMapaMental(painel, arquivo) {
     const key = storageKey('diagrama-mapa-mental', arquivo)
     const canvasEl = painel.querySelector('#me-canvas-mapa')
@@ -223,6 +222,12 @@ const MeuEspaco = (() => {
           primeiroNo = opt.target
           primeiroNo.set('opacity', 0.6)
           fc.renderAll()
+          return
+        }
+        if (primeiroNo === opt.target) {
+          primeiroNo.set('opacity', 1)
+          fc.renderAll()
+          primeiroNo = null
           return
         }
         const a = primeiroNo, b = opt.target
@@ -267,7 +272,14 @@ const MeuEspaco = (() => {
     fc.on('object:modified', () => salvarCanvas(fc, key))
 
     const saved = localStorage.getItem(key)
-    if (saved) fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+    if (saved) {
+      try {
+        fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+      } catch (e) {
+        console.warn('MeuEspaco: dados corrompidos, resetando', key)
+        localStorage.removeItem(key)
+      }
+    }
   }
   function initLinhaDoTempo(painel, arquivo) {
     const key = storageKey('diagrama-linha-do-tempo', arquivo)
@@ -297,7 +309,14 @@ const MeuEspaco = (() => {
 
     const saved = localStorage.getItem(key)
     if (saved) {
-      fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+      try {
+        fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+      } catch (e) {
+        console.warn('MeuEspaco: dados corrompidos, resetando', key)
+        localStorage.removeItem(key)
+        addBase()
+        fc.renderAll()
+      }
     } else {
       addBase()
       fc.renderAll()
@@ -398,7 +417,14 @@ const MeuEspaco = (() => {
     fc.on('text:changed', () => salvarCanvas(fc, key))
 
     const saved = localStorage.getItem(key)
-    if (saved) fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+    if (saved) {
+      try {
+        fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+      } catch (e) {
+        console.warn('MeuEspaco: dados corrompidos, resetando', key)
+        localStorage.removeItem(key)
+      }
+    }
   }
 
   function wireApagar(painel, arquivo) {
@@ -413,7 +439,7 @@ const MeuEspaco = (() => {
       painel.querySelector('.me-editor').innerHTML = ''
 
       if (painel._mesCanvases) {
-        Object.values(painel._mesCanvases).forEach(fc => fc.clear())
+        Object.values(painel._mesCanvases).forEach(fc => fc.dispose())
       }
       painel._mesFabricLoaded = false
       delete painel._mesCanvases

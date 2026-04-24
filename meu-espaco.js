@@ -97,11 +97,43 @@ const MeuEspaco = (() => {
     restoreTexto(painel, arquivo)
   }
 
+  function wireAnotacoes(painel, arquivo) {
+    const editor = painel.querySelector('.me-editor')
+    const salvoSpan = painel.querySelector('.me-salvo')
+
+    const save = debounce(() => {
+      localStorage.setItem(storageKey('texto', arquivo), editor.innerHTML)
+      salvoSpan.textContent = 'salvo ✓'
+      setTimeout(() => { salvoSpan.textContent = '' }, 1500)
+    }, 500)
+
+    editor.addEventListener('input', save)
+
+    painel.querySelectorAll('.me-tbtn').forEach(btn => {
+      btn.addEventListener('mousedown', e => {
+        e.preventDefault()
+        const cmd = btn.dataset.cmd
+        if (cmd === 'seta') {
+          document.execCommand('insertHTML', false,
+            '<span class="me-flow-arrow">⟶</span>\u200B')
+        } else {
+          document.execCommand(cmd, false, null)
+        }
+        editor.focus()
+        save()
+      })
+    })
+  }
+
+  function restoreTexto(painel, arquivo) {
+    const editor = painel.querySelector('.me-editor')
+    const saved = localStorage.getItem(storageKey('texto', arquivo))
+    if (saved) editor.innerHTML = saved
+  }
+
   // Stubs — implementados nas tasks seguintes
-  function wireAnotacoes(painel, arquivo) {}
   function wireDiagramaTabs(painel, arquivo) {}
   function wireApagar(painel, arquivo) {}
-  function restoreTexto(painel, arquivo) {}
 
   return { init }
 })()

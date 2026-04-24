@@ -316,7 +316,7 @@ const MeuEspaco = (() => {
       const label = new fabric.IText(texto.trim(), {
         fontSize: 12, fill: '#1a1a2e',
         fontFamily: 'Source Sans 3, sans-serif',
-        originX: 'center', left: 0, top: 16
+        originX: 'center', originY: 'center', left: 0, top: 16
       })
       const grupo = new fabric.Group([circulo, label], {
         left: x - 7, top: yLinha - 7, hasControls: false

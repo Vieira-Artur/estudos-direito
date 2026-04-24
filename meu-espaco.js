@@ -145,7 +145,24 @@ const MeuEspaco = (() => {
 
   // Stubs — implementados nas tasks seguintes
   function wireDiagramaTabs(painel, arquivo) {}
-  function wireApagar(painel, arquivo) {}
+  function wireApagar(painel, arquivo) {
+    painel.querySelector('.me-apagar-btn').addEventListener('click', () => {
+      if (!confirm('Apagar todas as anotações e diagramas deste tema?\nEsta ação não pode ser desfeita.')) return
+
+      localStorage.removeItem(storageKey('texto', arquivo))
+      localStorage.removeItem(storageKey('diagrama-mapa-mental', arquivo))
+      localStorage.removeItem(storageKey('diagrama-linha-do-tempo', arquivo))
+      localStorage.removeItem(storageKey('diagrama-canvas-livre', arquivo))
+
+      painel.querySelector('.me-editor').innerHTML = ''
+
+      if (painel._mesCanvases) {
+        Object.values(painel._mesCanvases).forEach(fc => fc.clear())
+      }
+      painel._mesFabricLoaded = false
+      delete painel._mesCanvases
+    })
+  }
 
   return { init }
 })()

@@ -1,0 +1,116 @@
+/* ── Aba externa (botão dourado na barra fp-tabs) ─────── */
+.me-tab-btn {
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+}
+.me-tab-btn:hover { background: var(--gold-light) !important; }
+.me-tab-btn.ativo {
+  background: var(--gold) !important;
+  color: #fff !important;
+  border-color: var(--gold) !important;
+}
+
+/* ── Abas internas (Anotações | Diagrama) ─────────────── */
+.me-inner-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 0;
+}
+.me-itab {
+  padding: 7px 18px;
+  font-size: 13px; font-weight: 600; font-family: var(--sans);
+  background: none; border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer; color: var(--text2);
+  transition: color .15s, border-color .15s;
+}
+.me-itab:hover { color: var(--blue); }
+.me-itab.ativo { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ── Painéis internos ─────────────────────────────────── */
+.me-ipainel { display: none; padding: 14px 0 0; }
+.me-ipainel.ativo { display: block; }
+
+/* ── Toolbar do editor de texto ───────────────────────── */
+.me-toolbar {
+  display: flex; gap: 4px;
+  padding: 0 0 8px; flex-wrap: wrap; align-items: center;
+}
+.me-tbtn {
+  padding: 3px 10px; font-size: 13px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; cursor: pointer; color: var(--text);
+  font-family: var(--sans); transition: background .1s;
+}
+.me-tbtn:hover { background: var(--blue-hover); }
+.me-salvo {
+  font-size: 11px; color: var(--text2);
+  margin-left: 6px; font-family: var(--sans); opacity: .7;
+}
+
+/* ── Editor contenteditable ───────────────────────────── */
+.me-editor {
+  min-height: 120px; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: 6px;
+  font-size: 14px; font-family: var(--serif); line-height: 1.7;
+  color: var(--text); background: var(--surface);
+  outline: none; transition: border-color .15s;
+}
+.me-editor:focus { border-color: var(--blue); }
+.me-editor:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text2); pointer-events: none;
+}
+.me-flow-arrow { color: var(--blue); font-size: 1.1em; margin: 0 2px; }
+
+/* ── Botão apagar ─────────────────────────────────────── */
+.me-apagar-btn {
+  margin-top: 12px; padding: 5px 12px; font-size: 12px;
+  background: none; border: 1px solid #c0392b;
+  border-radius: 4px; color: #c0392b; cursor: pointer;
+  font-family: var(--sans); transition: background .1s;
+}
+.me-apagar-btn:hover { background: #fde8e8; }
+
+/* ── Sub-abas de diagrama ─────────────────────────────── */
+.me-sub-tabs {
+  display: flex; gap: 4px;
+  padding: 12px 0 8px; flex-wrap: wrap;
+}
+.me-stab {
+  padding: 4px 12px; font-size: 12px; font-weight: 600;
+  font-family: var(--sans); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px;
+  cursor: pointer; color: var(--text2); transition: background .1s, color .1s;
+}
+.me-stab:hover { background: var(--blue-hover); color: var(--blue); }
+.me-stab.ativo { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* ── Sub-painéis ──────────────────────────────────────── */
+.me-sub-painel { display: none; }
+.me-sub-painel.ativo { display: block; }
+
+/* ── Dica abaixo do canvas ────────────────────────────── */
+.me-canvas-hint {
+  font-size: 11px; color: var(--text2);
+  font-family: var(--sans); margin-top: 5px;
+  text-align: center;
+}
+
+/* ── Toolbar de formas (canvas livre) ─────────────────── */
+.me-shape-toolbar {
+  display: flex; gap: 4px;
+  padding: 0 0 6px; flex-wrap: wrap;
+}
+.me-sbtn {
+  padding: 4px 10px; font-size: 12px; font-family: var(--sans);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; cursor: pointer; color: var(--text);
+  transition: background .1s;
+}
+.me-sbtn:hover { background: var(--blue-hover); }
+.me-sbtn.ativo { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* ── Fabric.js canvas border override ─────────────────── */
+.canvas-container { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }

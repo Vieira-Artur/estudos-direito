@@ -368,8 +368,24 @@ const MeuEspaco = (() => {
     })
 
     fc.on('mouse:down', opt => {
-      if (opt.target) return
       const x = opt.pointer.x, y = opt.pointer.y
+
+      if (formaAtiva === 'texto') {
+        const obj = new fabric.IText('Texto', {
+          left: x, top: y,
+          originX: 'center', originY: 'center',
+          fontSize: 14, fill: '#1a1a2e',
+          fontFamily: 'Source Sans 3, sans-serif'
+        })
+        fc.add(obj)
+        fc.setActiveObject(obj)
+        obj.enterEditing()
+        fc.renderAll()
+        salvarCanvas(fc, key)
+        return
+      }
+
+      if (opt.target) return
       let obj
 
       if (formaAtiva === 'caixa') {
@@ -383,17 +399,6 @@ const MeuEspaco = (() => {
           left: x - 30, top: y - 30, radius: 30,
           fill: '#dce6f1', stroke: '#1F497D', strokeWidth: 2
         })
-      } else if (formaAtiva === 'texto') {
-        obj = new fabric.IText('Texto', {
-          left: x, top: y, fontSize: 14, fill: '#1a1a2e',
-          fontFamily: 'Source Sans 3, sans-serif'
-        })
-        fc.add(obj)
-        fc.setActiveObject(obj)
-        obj.enterEditing()
-        fc.renderAll()
-        salvarCanvas(fc, key)
-        return
       } else if (formaAtiva === 'seta') {
         const linha = new fabric.Line([0, 0, 80, 0], {
           stroke: '#1F497D', strokeWidth: 2
@@ -412,6 +417,21 @@ const MeuEspaco = (() => {
         salvarCanvas(fc, key)
       }
     })
+
+    const handleKeyDown = (e) => {
+      if (e.key !== 'Delete' && e.key !== 'Backspace') return
+      const tag = (document.activeElement?.tagName || '').toUpperCase()
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable) return
+      const active = fc.getActiveObject()
+      if (!active || active.isEditing) return
+      e.preventDefault()
+      fc.remove(active)
+      fc.discardActiveObject()
+      fc.renderAll()
+      salvarCanvas(fc, key)
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    fc.on('canvas:disposed', () => document.removeEventListener('keydown', handleKeyDown))
 
     fc.on('object:modified', () => salvarCanvas(fc, key))
     fc.on('text:changed', () => salvarCanvas(fc, key))

@@ -74,9 +74,11 @@ const MeuEspaco = (() => {
             <button class="me-sbtn" data-shape="circulo">○ Círculo</button>
             <button class="me-sbtn" data-shape="seta">→ Seta</button>
             <button class="me-sbtn" data-shape="texto">T Texto</button>
+            <button class="me-sbtn me-sbtn-foto">📷 Foto</button>
           </div>
+          <input type="file" class="me-foto-input" accept="image/*" style="display:none">
           <canvas id="me-canvas-livre"></canvas>
-          <p class="me-canvas-hint">Clique no canvas para inserir · Arraste para mover</p>
+          <p class="me-canvas-hint">Clique no canvas para inserir · Arraste para mover · Del para apagar</p>
         </div>
       </div>
     `
@@ -359,12 +361,50 @@ const MeuEspaco = (() => {
 
     let formaAtiva = 'caixa'
 
-    painel.querySelectorAll('.me-sbtn').forEach(btn => {
+    painel.querySelectorAll('.me-sbtn:not(.me-sbtn-foto)').forEach(btn => {
       btn.addEventListener('click', () => {
         painel.querySelectorAll('.me-sbtn').forEach(b => b.classList.remove('ativo'))
         btn.classList.add('ativo')
         formaAtiva = btn.dataset.shape
       })
+    })
+
+    const fotoInput = painel.querySelector('.me-foto-input')
+    painel.querySelector('.me-sbtn-foto').addEventListener('click', () => fotoInput.click())
+    fotoInput.addEventListener('change', () => {
+      const file = fotoInput.files[0]
+      if (!file) return
+      fotoInput.value = ''
+      const reader = new FileReader()
+      reader.onload = ev => {
+        const img = new Image()
+        img.onload = () => {
+          const MAX = 800
+          let w = img.width, h = img.height
+          if (w > MAX || h > MAX) {
+            if (w >= h) { h = Math.round(h * MAX / w); w = MAX }
+            else        { w = Math.round(w * MAX / h); h = MAX }
+          }
+          const tmp = document.createElement('canvas')
+          tmp.width = w; tmp.height = h
+          tmp.getContext('2d').drawImage(img, 0, 0, w, h)
+          const dataUrl = tmp.toDataURL('image/jpeg', 0.75)
+          fabric.Image.fromURL(dataUrl, fImg => {
+            const maxW = fc.width * 0.6
+            if (fImg.width > maxW) fImg.scaleToWidth(maxW)
+            fImg.set({
+              left: (fc.width  - fImg.getScaledWidth())  / 2,
+              top:  (fc.height - fImg.getScaledHeight()) / 2
+            })
+            fc.add(fImg)
+            fc.setActiveObject(fImg)
+            fc.renderAll()
+            salvarCanvas(fc, key)
+          })
+        }
+        img.src = ev.target.result
+      }
+      reader.readAsDataURL(file)
     })
 
     fc.on('mouse:down', opt => {

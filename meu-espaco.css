@@ -111,6 +111,7 @@
 }
 .me-sbtn:hover { background: var(--blue-hover); }
 .me-sbtn.ativo { background: var(--blue); color: #fff; border-color: var(--blue); }
+.me-sbtn-foto { margin-left: 6px; border-style: dashed; }
 
 /* ── Fabric.js canvas border override ─────────────────── */
 .fp-painel .canvas-container { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }

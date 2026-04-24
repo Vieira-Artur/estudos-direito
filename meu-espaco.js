@@ -269,7 +269,65 @@ const MeuEspaco = (() => {
     const saved = localStorage.getItem(key)
     if (saved) fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
   }
-  function initLinhaDoTempo(painel, arquivo) {}
+  function initLinhaDoTempo(painel, arquivo) {
+    const key = storageKey('diagrama-linha-do-tempo', arquivo)
+    const canvasEl = painel.querySelector('#me-canvas-linha')
+    const w = Math.max(painel.clientWidth - 32, 320)
+
+    const fc = new fabric.Canvas(canvasEl, {
+      width: w, height: 150, backgroundColor: '#fafafa'
+    })
+    painel._mesCanvases['linha'] = fc
+
+    const yLinha = 70
+
+    function addBase() {
+      const linhaBase = new fabric.Line([20, yLinha, w - 24, yLinha], {
+        stroke: '#1F497D', strokeWidth: 3,
+        selectable: false, evented: false, hoverCursor: 'default'
+      })
+      const ponta = new fabric.Triangle({
+        left: w - 18, top: yLinha - 7, width: 14, height: 14,
+        fill: '#1F497D', angle: 90,
+        selectable: false, evented: false
+      })
+      fc.add(linhaBase)
+      fc.add(ponta)
+    }
+
+    const saved = localStorage.getItem(key)
+    if (saved) {
+      fc.loadFromJSON(JSON.parse(saved), () => fc.renderAll())
+    } else {
+      addBase()
+      fc.renderAll()
+    }
+
+    fc.on('mouse:down', opt => {
+      if (opt.target) return
+      const x = opt.pointer.x
+      const texto = prompt('Nome do evento:')
+      if (!texto || !texto.trim()) return
+
+      const circulo = new fabric.Circle({
+        radius: 7, fill: '#1F497D',
+        originX: 'center', originY: 'center', left: 0, top: 0
+      })
+      const label = new fabric.IText(texto.trim(), {
+        fontSize: 12, fill: '#1a1a2e',
+        fontFamily: 'Source Sans 3, sans-serif',
+        originX: 'center', left: 0, top: 16
+      })
+      const grupo = new fabric.Group([circulo, label], {
+        left: x - 7, top: yLinha - 7, hasControls: false
+      })
+      fc.add(grupo)
+      fc.renderAll()
+      salvarCanvas(fc, key)
+    })
+
+    fc.on('object:modified', () => salvarCanvas(fc, key))
+  }
   function initCanvasLivre(painel, arquivo) {
     const key = storageKey('diagrama-canvas-livre', arquivo)
     const canvasEl = painel.querySelector('#me-canvas-livre')

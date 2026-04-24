@@ -246,7 +246,7 @@ const MeuEspaco = (() => {
       if (opt.target) return
       const texto = prompt('Texto do nó:')
       if (!texto || !texto.trim()) return
-      const no = criarNo(e.offsetX, e.offsetY, texto.trim())
+      const no = criarNo(opt.pointer.x, opt.pointer.y, texto.trim())
       fc.add(no)
       fc.setActiveObject(no)
       fc.renderAll()
@@ -292,7 +292,7 @@ const MeuEspaco = (() => {
 
     fc.on('mouse:down', opt => {
       if (opt.target) return
-      const x = opt.e.offsetX, y = opt.e.offsetY
+      const x = opt.pointer.x, y = opt.pointer.y
       let obj
 
       if (formaAtiva === 'caixa') {

@@ -231,16 +231,12 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
   if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '', BASE_PATH + materiaId + '/' + turmaId)
   window.scrollTo(0, 0)
 
-  const temFlashcards = turma.flashcards && turma.flashcards.length > 0
-
   app.innerHTML = `
     <p class="secao-titulo">${turma.titulo}</p>
-    ${temFlashcards ? `
-      <div class="turma-tabs" id="turma-tabs">
-        <button class="turma-tab ativa" id="tab-conteudo" onclick="mostrarTabConteudo()">📚 Conteúdo</button>
-        <button class="turma-tab" id="tab-flash" onclick="mostrarTabFlash()">🃏 Flashcards</button>
-      </div>
-    ` : ''}
+    <div class="turma-tabs" id="turma-tabs">
+      <button class="turma-tab ativa" id="tab-conteudo" onclick="mostrarTabConteudo()">📚 Conteúdo</button>
+      <button class="turma-tab" id="tab-flash" onclick="mostrarTabFlash()">🃏 Flashcards</button>
+    </div>
     <div id="tab-area-conteudo"></div>
     <div id="tab-area-flash" style="display:none"></div>
   `

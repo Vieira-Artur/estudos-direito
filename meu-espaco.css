@@ -111,7 +111,42 @@
 }
 .me-sbtn:hover { background: var(--blue-hover); }
 .me-sbtn.ativo { background: var(--blue); color: #fff; border-color: var(--blue); }
-.me-sbtn-foto { margin-left: 6px; border-style: dashed; }
+
+/* ── Upload de Material ────────────────────────────────── */
+.me-upload-zona {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px; padding: 16px 12px;
+  border: 2px dashed var(--border); border-radius: 8px; margin-bottom: 12px;
+}
+.me-material-add-btn {
+  font-size: 13px; font-family: var(--sans); font-weight: 600;
+  background: var(--blue-light); color: var(--blue);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 7px 16px; cursor: pointer;
+}
+.me-material-add-btn:hover { background: var(--blue-hover); }
+.me-galeria-vazia { font-size: 13px; color: var(--text2); text-align: center; margin-top: 8px; }
+.me-material-galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+.me-material-item { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); }
+.me-material-img { width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover; }
+.me-material-acoes {
+  position: absolute; top: 4px; right: 4px;
+  display: flex; gap: 3px; opacity: 0; transition: opacity .15s;
+}
+.me-material-item:hover .me-material-acoes { opacity: 1; }
+.me-material-ver,
+.me-material-del {
+  width: 22px; height: 22px; border-radius: 50%; border: none;
+  cursor: pointer; font-size: 11px; font-weight: 700;
+  background: rgba(0,0,0,.55); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.me-material-ver:hover { background: var(--blue); }
+.me-material-del:hover { background: #DC2626; }
 
 /* ── Fabric.js canvas border override ─────────────────── */
 .fp-painel .canvas-container { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }

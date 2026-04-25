@@ -59,6 +59,7 @@ const MeuEspaco = (() => {
           <button class="me-stab ativo" data-me-stab="mapa-mental">🧠 Mapa Mental</button>
           <button class="me-stab" data-me-stab="linha-do-tempo">📅 Linha do Tempo</button>
           <button class="me-stab" data-me-stab="canvas-livre">🎨 Canvas Livre</button>
+          <button class="me-stab" data-me-stab="upload-material">📎 Material</button>
         </div>
         <div class="me-sub-painel ativo" data-me-spanel="mapa-mental">
           <canvas id="me-canvas-mapa"></canvas>
@@ -66,7 +67,7 @@ const MeuEspaco = (() => {
         </div>
         <div class="me-sub-painel" data-me-spanel="linha-do-tempo">
           <canvas id="me-canvas-linha"></canvas>
-          <p class="me-canvas-hint">Clique na linha para adicionar evento · Arraste para mover</p>
+          <p class="me-canvas-hint">Clique na linha para adicionar evento · Arraste para mover · Del para apagar</p>
         </div>
         <div class="me-sub-painel" data-me-spanel="canvas-livre">
           <div class="me-shape-toolbar">
@@ -74,11 +75,17 @@ const MeuEspaco = (() => {
             <button class="me-sbtn" data-shape="circulo">○ Círculo</button>
             <button class="me-sbtn" data-shape="seta">→ Seta</button>
             <button class="me-sbtn" data-shape="texto">T Texto</button>
-            <button class="me-sbtn me-sbtn-foto">📷 Foto</button>
           </div>
-          <input type="file" class="me-foto-input" accept="image/*" style="display:none">
           <canvas id="me-canvas-livre"></canvas>
           <p class="me-canvas-hint">Clique no canvas para inserir · Arraste para mover · Del para apagar</p>
+        </div>
+        <div class="me-sub-painel" data-me-spanel="upload-material">
+          <div class="me-upload-zona">
+            <input type="file" class="me-material-input" accept="image/*" multiple style="display:none">
+            <button class="me-material-add-btn">📎 Adicionar imagem</button>
+            <p class="me-canvas-hint">Fotos de caderno, resumos, slides...</p>
+          </div>
+          <div class="me-material-galeria"></div>
         </div>
       </div>
     `
@@ -89,19 +96,16 @@ const MeuEspaco = (() => {
     const tabsBar = area.querySelector('.fp-tabs')
     if (!tabsBar) return
 
-    // Criar botão da aba
     const btn = document.createElement('button')
     btn.className = 'fp-tab me-tab-btn'
     btn.textContent = '✏️ Meu Espaço'
     tabsBar.appendChild(btn)
 
-    // Criar painel
     const painel = document.createElement('div')
     painel.className = 'fp-painel'
     painel.innerHTML = renderPainel()
     tabsBar.parentNode.appendChild(painel)
 
-    // Ativar aba ao clicar
     btn.addEventListener('click', () => {
       area.querySelectorAll('.fp-painel').forEach(p => p.classList.remove('ativo'))
       area.querySelectorAll('.fp-tab').forEach(b => b.classList.remove('ativo'))
@@ -113,6 +117,7 @@ const MeuEspaco = (() => {
     wireDiagramaTabs(painel, arquivo)
     wireApagar(painel, arquivo)
     restoreTexto(painel, arquivo)
+    initUploadMaterial(painel, arquivo)
   }
 
   function wireAnotacoes(painel, arquivo) {
@@ -133,7 +138,7 @@ const MeuEspaco = (() => {
         const cmd = btn.dataset.cmd
         if (cmd === 'seta') {
           document.execCommand('insertHTML', false,
-            '<span class="me-flow-arrow">⟶</span>\u200B')
+            '<span class="me-flow-arrow">⟶</span>​')
         } else {
           document.execCommand(cmd, false, null)
         }
@@ -150,7 +155,6 @@ const MeuEspaco = (() => {
   }
 
   function wireDiagramaTabs(painel, arquivo) {
-    // Abas internas: Anotações ↔ Diagrama
     painel.querySelectorAll('.me-itab').forEach(tab => {
       tab.addEventListener('click', () => {
         painel.querySelectorAll('.me-itab').forEach(t => t.classList.remove('ativo'))
@@ -161,7 +165,6 @@ const MeuEspaco = (() => {
       })
     })
 
-    // Sub-abas: Mapa Mental ↔ Linha do Tempo ↔ Canvas Livre
     painel.querySelectorAll('.me-stab').forEach(stab => {
       stab.addEventListener('click', () => {
         painel.querySelectorAll('.me-stab').forEach(t => t.classList.remove('ativo'))
@@ -185,6 +188,27 @@ const MeuEspaco = (() => {
 
   function salvarCanvas(fc, key) {
     localStorage.setItem(key, JSON.stringify(fc.toJSON()))
+  }
+
+  // Retorna handler de Delete reutilizável para qualquer canvas Fabric
+  function makeDeleteHandler(fc, key) {
+    return (e) => {
+      if (e.key !== 'Delete') return
+      const el = document.activeElement
+      const tag = (el?.tagName || '').toUpperCase()
+      if (tag === 'INPUT') return
+      if (el?.isContentEditable) return
+      // Ignora TEXTAREA que não seja a interna do Fabric
+      if (tag === 'TEXTAREA' && !fc.wrapperEl?.contains(el)) return
+      const active = fc.getActiveObject()
+      if (!active) return
+      if (active.isEditing) active.exitEditing()
+      e.preventDefault()
+      fc.remove(active)
+      fc.discardActiveObject()
+      fc.renderAll()
+      salvarCanvas(fc, key)
+    }
   }
 
   function initMapaMental(painel, arquivo) {
@@ -273,6 +297,10 @@ const MeuEspaco = (() => {
 
     fc.on('object:modified', () => salvarCanvas(fc, key))
 
+    const onKey = makeDeleteHandler(fc, key)
+    document.addEventListener('keydown', onKey)
+    fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
+
     const saved = localStorage.getItem(key)
     if (saved) {
       try {
@@ -283,6 +311,7 @@ const MeuEspaco = (() => {
       }
     }
   }
+
   function initLinhaDoTempo(painel, arquivo) {
     const key = storageKey('diagrama-linha-do-tempo', arquivo)
     const canvasEl = painel.querySelector('#me-canvas-linha')
@@ -348,7 +377,12 @@ const MeuEspaco = (() => {
     })
 
     fc.on('object:modified', () => salvarCanvas(fc, key))
+
+    const onKey = makeDeleteHandler(fc, key)
+    document.addEventListener('keydown', onKey)
+    fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
   }
+
   function initCanvasLivre(painel, arquivo) {
     const key = storageKey('diagrama-canvas-livre', arquivo)
     const canvasEl = painel.querySelector('#me-canvas-livre')
@@ -361,50 +395,12 @@ const MeuEspaco = (() => {
 
     let formaAtiva = 'caixa'
 
-    painel.querySelectorAll('.me-sbtn:not(.me-sbtn-foto)').forEach(btn => {
+    painel.querySelectorAll('.me-sbtn').forEach(btn => {
       btn.addEventListener('click', () => {
         painel.querySelectorAll('.me-sbtn').forEach(b => b.classList.remove('ativo'))
         btn.classList.add('ativo')
         formaAtiva = btn.dataset.shape
       })
-    })
-
-    const fotoInput = painel.querySelector('.me-foto-input')
-    painel.querySelector('.me-sbtn-foto').addEventListener('click', () => fotoInput.click())
-    fotoInput.addEventListener('change', () => {
-      const file = fotoInput.files[0]
-      if (!file) return
-      fotoInput.value = ''
-      const reader = new FileReader()
-      reader.onload = ev => {
-        const img = new Image()
-        img.onload = () => {
-          const MAX = 800
-          let w = img.width, h = img.height
-          if (w > MAX || h > MAX) {
-            if (w >= h) { h = Math.round(h * MAX / w); w = MAX }
-            else        { w = Math.round(w * MAX / h); h = MAX }
-          }
-          const tmp = document.createElement('canvas')
-          tmp.width = w; tmp.height = h
-          tmp.getContext('2d').drawImage(img, 0, 0, w, h)
-          const dataUrl = tmp.toDataURL('image/jpeg', 0.75)
-          fabric.Image.fromURL(dataUrl, fImg => {
-            const maxW = fc.width * 0.6
-            if (fImg.width > maxW) fImg.scaleToWidth(maxW)
-            fImg.set({
-              left: (fc.width  - fImg.getScaledWidth())  / 2,
-              top:  (fc.height - fImg.getScaledHeight()) / 2
-            })
-            fc.add(fImg)
-            fc.setActiveObject(fImg)
-            fc.renderAll()
-            salvarCanvas(fc, key)
-          })
-        }
-        img.src = ev.target.result
-      }
-      reader.readAsDataURL(file)
     })
 
     fc.on('mouse:down', opt => {
@@ -458,23 +454,12 @@ const MeuEspaco = (() => {
       }
     })
 
-    const handleKeyDown = (e) => {
-      if (e.key !== 'Delete' && e.key !== 'Backspace') return
-      const tag = (document.activeElement?.tagName || '').toUpperCase()
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable) return
-      const active = fc.getActiveObject()
-      if (!active || active.isEditing) return
-      e.preventDefault()
-      fc.remove(active)
-      fc.discardActiveObject()
-      fc.renderAll()
-      salvarCanvas(fc, key)
-    }
-    document.addEventListener('keydown', handleKeyDown)
-    fc.on('canvas:disposed', () => document.removeEventListener('keydown', handleKeyDown))
-
     fc.on('object:modified', () => salvarCanvas(fc, key))
     fc.on('text:changed', () => salvarCanvas(fc, key))
+
+    const onKey = makeDeleteHandler(fc, key)
+    document.addEventListener('keydown', onKey)
+    fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
 
     const saved = localStorage.getItem(key)
     if (saved) {
@@ -487,6 +472,84 @@ const MeuEspaco = (() => {
     }
   }
 
+  function initUploadMaterial(painel, arquivo) {
+    const key = storageKey('material', arquivo)
+    const galeria = painel.querySelector('.me-material-galeria')
+    const input   = painel.querySelector('.me-material-input')
+    const addBtn  = painel.querySelector('.me-material-add-btn')
+
+    function carregar() {
+      try { return JSON.parse(localStorage.getItem(key) || '[]') } catch { return [] }
+    }
+    function salvar(imgs) { localStorage.setItem(key, JSON.stringify(imgs)) }
+
+    function renderGaleria() {
+      const imgs = carregar()
+      if (imgs.length === 0) {
+        galeria.innerHTML = '<p class="me-galeria-vazia">Nenhuma imagem ainda.</p>'
+        return
+      }
+      galeria.innerHTML = imgs.map(img => `
+        <div class="me-material-item" data-id="${img.id}">
+          <img class="me-material-img" src="${img.dataUrl}" alt="${img.nome}" title="${img.nome}">
+          <div class="me-material-acoes">
+            <button class="me-material-ver" data-url="${img.dataUrl}" title="Ver em tamanho real">↗</button>
+            <button class="me-material-del" data-id="${img.id}" title="Remover">✕</button>
+          </div>
+        </div>
+      `).join('')
+
+      galeria.querySelectorAll('.me-material-ver').forEach(btn => {
+        btn.addEventListener('click', () => window.open(btn.dataset.url))
+      })
+      galeria.querySelectorAll('.me-material-del').forEach(btn => {
+        btn.addEventListener('click', () => {
+          salvar(carregar().filter(i => i.id !== btn.dataset.id))
+          renderGaleria()
+        })
+      })
+    }
+
+    addBtn.addEventListener('click', () => input.click())
+
+    input.addEventListener('change', () => {
+      const files = Array.from(input.files)
+      if (!files.length) return
+      input.value = ''
+      let pending = files.length
+      files.forEach(file => {
+        const reader = new FileReader()
+        reader.onload = ev => {
+          const img = new Image()
+          img.onload = () => {
+            const MAX = 1200
+            let w = img.width, h = img.height
+            if (w > MAX || h > MAX) {
+              if (w >= h) { h = Math.round(h * MAX / w); w = MAX }
+              else        { w = Math.round(w * MAX / h); h = MAX }
+            }
+            const tmp = document.createElement('canvas')
+            tmp.width = w; tmp.height = h
+            tmp.getContext('2d').drawImage(img, 0, 0, w, h)
+            const dataUrl = tmp.toDataURL('image/jpeg', 0.8)
+            const imgs = carregar()
+            imgs.push({
+              id: `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+              nome: file.name,
+              dataUrl
+            })
+            salvar(imgs)
+            if (--pending === 0) renderGaleria()
+          }
+          img.src = ev.target.result
+        }
+        reader.readAsDataURL(file)
+      })
+    })
+
+    renderGaleria()
+  }
+
   function wireApagar(painel, arquivo) {
     painel.querySelector('.me-apagar-btn').addEventListener('click', () => {
       if (!confirm('Apagar todas as anotações e diagramas deste tema?\nEsta ação não pode ser desfeita.')) return
@@ -495,8 +558,10 @@ const MeuEspaco = (() => {
       localStorage.removeItem(storageKey('diagrama-mapa-mental', arquivo))
       localStorage.removeItem(storageKey('diagrama-linha-do-tempo', arquivo))
       localStorage.removeItem(storageKey('diagrama-canvas-livre', arquivo))
+      localStorage.removeItem(storageKey('material', arquivo))
 
       painel.querySelector('.me-editor').innerHTML = ''
+      painel.querySelector('.me-material-galeria').innerHTML = ''
 
       if (painel._mesCanvases) {
         Object.values(painel._mesCanvases).forEach(fc => fc.dispose())

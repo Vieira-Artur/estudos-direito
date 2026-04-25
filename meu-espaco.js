@@ -679,14 +679,14 @@ const MeuEspaco = (() => {
   }
 
   function wireApagar(painel, arquivo) {
-    painel.querySelector('.me-apagar-btn').addEventListener('click', () => {
+    painel.querySelector('.me-apagar-btn').addEventListener('click', async () => {
       if (!confirm('Apagar todas as anotações e diagramas deste tema?\nEsta ação não pode ser desfeita.')) return
 
       localStorage.removeItem(storageKey('texto', arquivo))
       localStorage.removeItem(storageKey('diagrama-mapa-mental', arquivo))
       localStorage.removeItem(storageKey('diagrama-linha-do-tempo', arquivo))
       localStorage.removeItem(storageKey('diagrama-canvas-livre', arquivo))
-      localStorage.removeItem(storageKey('material', arquivo))
+      await MaterialDB.clearByArquivo(arquivo)
 
       painel.querySelector('.me-editor').innerHTML = ''
       painel.querySelector('.me-material-galeria').innerHTML = ''

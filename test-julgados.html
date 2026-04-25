@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Teste — linkificarJulgados</title>
+<style>
+  body { font-family: monospace; padding: 1rem; }
+  .pass { color: green; }
+  .fail { color: red; font-weight: bold; }
+</style>
+</head>
+<body>
+<h2>Resultados dos testes</h2>
+<div id="out"></div>
+<script>
+// ── Cópia provisória da implementação para teste isolado ──────────────
+function _detectarTribunal(text, matchIdx, fallback) {
+  const chunk = text.slice(Math.max(0, matchIdx - 60), Math.min(text.length, matchIdx + 80)).toUpperCase()
+  if (/\bSTF\b/.test(chunk)) return 'stf'
+  if (/\bSTJ\b/.test(chunk)) return 'stj'
+  return fallback
+}
+
+function _urlJulgado({ tribunal, tipo, m }) {
+  const g = m.groups
+  const num = (g.num || '').replace(/\./g, '')
+  if (tipo === 'sumula') return `https://scon.stj.jus.br/SCON/pesquisar.jsp?query=S%C3%BAmula+${num}`
+  if (tipo === 'sv')     return `https://jurisprudencia.stf.jus.br/pages/search?queryString=S%C3%BAmula+Vinculante+${num}`
+  if (tipo === 'tema') {
+    if ((g.court || '').toUpperCase() === 'STJ')
+      return `https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?tipo=tabela&cod=${num}`
+    return `https://jurisprudencia.stf.jus.br/pages/search?queryString=Tema+${num}`
+  }
+  const t = encodeURIComponent(g.tipo || '')
+  if (tribunal === 'stj') return `https://scon.stj.jus.br/SCON/pesquisar.jsp?query=${t}+${num}`
+  return `https://jurisprudencia.stf.jus.br/pages/search?queryString=${t}+${num}`
+}
+
+function linkificarJulgados(el) {
+  if (!el) return
+  const PX = '(?:(?:AgRg|AgInt|EDcl|EDiv|QO)\\s+n[ao]s?\\s+)?'
+  const NM = '(?<num>\\d[\\d.]*\\d|\\d)(?:\\s*[-/]\\s*[A-Z]{2})?'
+  const PADROES = [
+    { re: new RegExp(`\\b${PX}(?<tipo>REsp|AREsp|RHC|EREsp)\\s+${NM}`, 'g'), tribunal: 'stj' },
+    { re: new RegExp(`\\b${PX}(?<tipo>ADI|ADC|ADPF|ARE|MI|RCL)\\s+${NM}`, 'g'), tribunal: 'stf' },
+    { re: new RegExp(`\\b${PX}(?<tipo>HC)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stj' },
+    { re: new RegExp(`\\b${PX}(?<tipo>RE)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stf' },
+    { re: new RegExp(`\\b${PX}(?<tipo>MS)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stf' },
+    { re: /S[uú]m(?:ula)?\.?\s+n?[ºo°.]?\s*(?<num>\d+)\s+(?:do\s+)?STJ/g, tribunal: 'stj', tipo: 'sumula' },
+    { re: /\bSV\s+(?<num>\d+)\b/g,                                           tribunal: 'stf', tipo: 'sv' },
+    { re: /S[uú]mula\s+Vinculante\s+n?[ºo°.]?\s*(?<num>\d+)/g,              tribunal: 'stf', tipo: 'sv' },
+    { re: /Tema\s+(?<num>\d+)\s+(?:do\s+)?(?<court>STJ|STF)/g, tribunal: null, tipo: 'tema' },
+  ]
+  const SKIP = new Set(['A', 'CODE', 'SCRIPT', 'STYLE', 'PRE'])
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      let p = node.parentElement
+      while (p && p !== el) {
+        if (SKIP.has(p.tagName)) return NodeFilter.FILTER_REJECT
+        p = p.parentElement
+      }
+      return NodeFilter.FILTER_ACCEPT
+    }
+  })
+  const nodes = []
+  while (walker.nextNode()) nodes.push(walker.currentNode)
+  for (const node of nodes) {
+    const text = node.nodeValue
+    const hits = []
+    for (const { re, tribunal, fallback, tipo } of PADROES) {
+      re.lastIndex = 0
+      let m
+      while ((m = re.exec(text)) !== null) {
+        const s = m.index, e = m.index + m[0].length
+        if (hits.some(h => h.s < e && h.e > s)) continue
+        const trib = tribunal ?? _detectarTribunal(text, s, fallback ?? 'stj')
+        hits.push({ s, e, raw: m[0], tribunal: trib, tipo: tipo ?? 'acordao', m })
+      }
+    }
+    if (!hits.length) continue
+    hits.sort((a, b) => a.s - b.s)
+    const frag = document.createDocumentFragment()
+    let cur = 0
+    for (const h of hits) {
+      if (h.s > cur) frag.appendChild(document.createTextNode(text.slice(cur, h.s)))
+      const a = document.createElement('a')
+      a.className   = 'julgado-link'
+      a.textContent = h.raw
+      a.href        = _urlJulgado(h)
+      a.target      = '_blank'
+      a.rel         = 'noopener noreferrer'
+      a.title       = `Ver no ${h.tribunal.toUpperCase()}`
+      frag.appendChild(a)
+      cur = h.e
+    }
+    if (cur < text.length) frag.appendChild(document.createTextNode(text.slice(cur)))
+    node.parentNode.replaceChild(frag, node)
+  }
+}
+// ─────────────────────────────────────────────────────────
+
+// ── Mini framework de testes ──────────────────────────────
+const out = document.getElementById('out')
+let passed = 0, failed = 0
+
+function criarEl(html) {
+  const div = document.createElement('div')
+  div.innerHTML = html
+  return div
+}
+
+function assert(label, condition) {
+  const el = document.createElement('div')
+  if (condition) {
+    el.className = 'pass'
+    el.textContent = '✓ ' + label
+    passed++
+  } else {
+    el.className = 'fail'
+    el.textContent = '✗ ' + label
+    failed++
+  }
+  out.appendChild(el)
+}
+
+// T1: REsp → STJ
+;(function() {
+  const el = criarEl('<p>Conforme REsp 1.977.135, o tribunal decidiu.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T1: REsp gera link', links.length === 1)
+  assert('T1: REsp texto correto', links[0]?.textContent === 'REsp 1.977.135')
+  assert('T1: REsp aponta STJ', links[0]?.href.includes('scon.stj.jus.br'))
+  assert('T1: REsp número sem pontos na URL', links[0]?.href.includes('1977135'))
+})()
+
+;(function() {
+  const el = criarEl('<p>Ver AREsp 2.123.334-MG.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T2: AREsp gera link STJ', links.length === 1 && links[0]?.href.includes('scon.stj.jus.br'))
+})()
+
+;(function() {
+  const el = criarEl('<p>A ADI 4296/DF tratou do tema.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T3: ADI gera link', links.length === 1)
+  assert('T3: ADI aponta STF', links[0]?.href.includes('jurisprudencia.stf.jus.br'))
+})()
+
+;(function() {
+  const el = criarEl('<p>O STF julgou o HC 96.356/RS por maioria.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T4: HC com STF no contexto → link STF', links.length === 1 && links[0]?.href.includes('jurisprudencia.stf.jus.br'))
+})()
+
+;(function() {
+  const el = criarEl('<p>Conforme HC 740.431-DF, a prova foi admitida.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T5: HC sem contexto → STJ default', links.length === 1 && links[0]?.href.includes('scon.stj.jus.br'))
+})()
+
+;(function() {
+  const el = criarEl('<p>Aplica-se a Súmula 17 STJ ao caso.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T6: Súmula STJ gera link', links.length === 1)
+  assert('T6: Súmula STJ aponta SCON', links[0]?.href.includes('scon.stj.jus.br') && links[0]?.href.includes('S%C3%BAmula'))
+  assert('T6: Súmula STJ número correto', links[0]?.href.includes('+17'))
+})()
+
+;(function() {
+  const el = criarEl('<p>Ver SV 36 sobre o tema.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T7: SV gera link STF', links.length === 1 && links[0]?.href.includes('jurisprudencia.stf.jus.br'))
+  assert('T7: SV contém "Vinculante" na URL', links[0]?.href.includes('Vinculante'))
+})()
+
+;(function() {
+  const el = criarEl('<p>Súmula Vinculante 50 estabelece que...</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T8: Súmula Vinculante longa gera link STF', links.length === 1 && links[0]?.href.includes('jurisprudencia.stf.jus.br'))
+})()
+
+;(function() {
+  const el = criarEl('<p>Conforme Tema 1313 STJ, os honorários...</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T9: Tema STJ gera link', links.length === 1)
+  assert('T9: Tema STJ aponta repetitivos', links[0]?.href.includes('repetitivos') && links[0]?.href.includes('1313'))
+})()
+
+;(function() {
+  const el = criarEl('<p>O AgRg no REsp 1.234.567/SP foi desprovido.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T10: AgRg no REsp gera 1 link', links.length === 1)
+  assert('T10: AgRg no REsp texto completo', links[0]?.textContent.startsWith('AgRg'))
+})()
+
+;(function() {
+  const el = criarEl('<p>Texto comum sem citação de julgado.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T11: Texto sem citação → sem links', links.length === 0)
+})()
+
+;(function() {
+  const el = criarEl('<p>Ver <code>REsp 1.977.135</code> no código.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T12: <code> não é linkado', links.length === 0)
+})()
+
+;(function() {
+  const el = criarEl('<p>Ver <a href="http://stj.jus.br">HC 123.456</a>.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T13: <a> existente não é re-linkado', links.length === 0)
+})()
+
+;(function() {
+  const el = criarEl('<p>O REsp 1.977.135 e o RE 601.392 divergem.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T14: REsp e RE geram 2 links distintos', links.length === 2)
+  assert('T14: REsp → STJ', [...links].some(a => a.textContent.startsWith('REsp') && a.href.includes('scon.stj')))
+  assert('T14: RE → STF', [...links].some(a => a.textContent === 'RE 601.392' && a.href.includes('stf.jus.br')))
+})()
+
+;(function() {
+  const el = criarEl('<p>Conforme HC 740.431-DF e REsp 1.977.135, além da Súmula 17 STJ.</p>')
+  linkificarJulgados(el)
+  const links = el.querySelectorAll('.julgado-link')
+  assert('T15: 3 citações em 1 parágrafo → 3 links', links.length === 3)
+})()
+
+const resumo = document.createElement('div')
+resumo.style.cssText = 'margin-top:1rem;font-weight:bold;font-size:1.1rem'
+resumo.textContent = `${passed} passed, ${failed} failed`
+resumo.style.color = failed === 0 ? 'green' : 'red'
+out.appendChild(resumo)
+</script>
+</body>
+</html>

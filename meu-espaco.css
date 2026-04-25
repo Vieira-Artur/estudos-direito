@@ -175,5 +175,32 @@
 .me-material-ver:hover { background: var(--blue); }
 .me-material-del:hover { background: #DC2626; }
 
+/* ── Lightbox de material ──────────────────────────────── */
+.me-lightbox {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.85);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+}
+.me-lightbox-inner {
+  position: relative; max-width: 95vw; max-height: 95vh;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.me-lightbox-fechar {
+  position: absolute; top: -12px; right: -12px;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: #fff; color: #111; border: none;
+  font-size: 14px; font-weight: 700; cursor: pointer; line-height: 1;
+}
+.me-lightbox-nome {
+  color: rgba(255,255,255,.7); font-size: 12px;
+  font-family: var(--sans); max-width: 100%;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.me-lightbox-img {
+  max-width: 100%; max-height: calc(95vh - 48px);
+  border-radius: 6px; display: block; object-fit: contain;
+}
+
 /* ── Fabric.js canvas border override ─────────────────── */
 .fp-painel .canvas-container { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }

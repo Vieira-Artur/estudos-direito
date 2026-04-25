@@ -530,6 +530,23 @@ const MeuEspaco = (() => {
     }
     function salvar(imgs) { localStorage.setItem(key, JSON.stringify(imgs)) }
 
+    function abrirLightbox(dataUrl, nome) {
+      const overlay = document.createElement('div')
+      overlay.className = 'me-lightbox'
+      overlay.innerHTML = `
+        <div class="me-lightbox-inner">
+          <button class="me-lightbox-fechar" title="Fechar">✕</button>
+          <p class="me-lightbox-nome">${nome}</p>
+          <img class="me-lightbox-img" src="${dataUrl}" alt="${nome}">
+        </div>
+      `
+      overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove() })
+      overlay.querySelector('.me-lightbox-fechar').addEventListener('click', () => overlay.remove())
+      const onEsc = e => { if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', onEsc) } }
+      document.addEventListener('keydown', onEsc)
+      document.body.appendChild(overlay)
+    }
+
     function renderGaleria() {
       const imgs = carregar()
       if (imgs.length === 0) {
@@ -540,14 +557,17 @@ const MeuEspaco = (() => {
         <div class="me-material-item" data-id="${img.id}">
           <img class="me-material-img" src="${img.dataUrl}" alt="${img.nome}" title="${img.nome}">
           <div class="me-material-acoes">
-            <button class="me-material-ver" data-url="${img.dataUrl}" title="Ver em tamanho real">↗</button>
+            <button class="me-material-ver" data-id="${img.id}" title="Ver em tamanho real">↗</button>
             <button class="me-material-del" data-id="${img.id}" title="Remover">✕</button>
           </div>
         </div>
       `).join('')
 
       galeria.querySelectorAll('.me-material-ver').forEach(btn => {
-        btn.addEventListener('click', () => window.open(btn.dataset.url))
+        btn.addEventListener('click', () => {
+          const img = carregar().find(i => i.id === btn.dataset.id)
+          if (img) abrirLightbox(img.dataUrl, img.nome)
+        })
       })
       galeria.querySelectorAll('.me-material-del').forEach(btn => {
         btn.addEventListener('click', () => {

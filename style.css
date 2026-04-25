@@ -1583,9 +1583,9 @@ main {
   color: inherit;
   text-decoration: underline;
   text-decoration-style: dotted;
-  text-decoration-color: #1F497D;
+  text-decoration-color: var(--blue);
   text-underline-offset: 3px;
-  transition: color .15s, text-decoration-style .15s;
+  transition: color .15s;
   white-space: nowrap;
 }
 .julgado-link::after {
@@ -1596,10 +1596,14 @@ main {
   vertical-align: middle;
 }
 .julgado-link:hover {
-  color: #1F497D;
+  color: var(--blue);
   text-decoration-style: solid;
 }
 .julgado-link:hover::after { opacity: 1; }
 @media (hover: none) {
   .julgado-link::after { opacity: 0.7; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .julgado-link,
+  .julgado-link::after { transition: none; }
 }

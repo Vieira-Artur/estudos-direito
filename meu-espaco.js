@@ -5,6 +5,73 @@ const MeuEspaco = (() => {
     return `meu-espaco-${tipo}:${arquivo}`
   }
 
+  // ── IndexedDB para imagens (sem limite de quota) ─────────
+  const MaterialDB = (() => {
+    const DB  = 'estudos-direito-material'
+    const ST  = 'imagens'
+    const VER = 1
+
+    function open() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB, VER)
+        req.onupgradeneeded = e => {
+          const db = e.target.result
+          if (!db.objectStoreNames.contains(ST)) {
+            const store = db.createObjectStore(ST, { keyPath: 'id' })
+            store.createIndex('arquivo', 'arquivo', { unique: false })
+          }
+        }
+        req.onsuccess = e => resolve(e.target.result)
+        req.onerror   = e => reject(e.target.error)
+      })
+    }
+
+    async function getAll(arquivo) {
+      const db = await open()
+      return new Promise((resolve, reject) => {
+        const req = db.transaction(ST, 'readonly')
+          .objectStore(ST).index('arquivo').getAll(arquivo)
+        req.onsuccess = () => resolve(req.result)
+        req.onerror   = e => reject(e.target.error)
+      })
+    }
+
+    async function put(item) {
+      const db = await open()
+      return new Promise((resolve, reject) => {
+        const req = db.transaction(ST, 'readwrite').objectStore(ST).put(item)
+        req.onsuccess = () => resolve()
+        req.onerror   = e => reject(e.target.error)
+      })
+    }
+
+    async function remove(id) {
+      const db = await open()
+      return new Promise((resolve, reject) => {
+        const req = db.transaction(ST, 'readwrite').objectStore(ST).delete(id)
+        req.onsuccess = () => resolve()
+        req.onerror   = e => reject(e.target.error)
+      })
+    }
+
+    async function clearByArquivo(arquivo) {
+      const db  = await open()
+      return new Promise((resolve, reject) => {
+        const tx  = db.transaction(ST, 'readwrite')
+        const cur = tx.objectStore(ST).index('arquivo')
+          .openKeyCursor(IDBKeyRange.only(arquivo))
+        cur.onsuccess = e => {
+          const c = e.target.result
+          if (c) { tx.objectStore(ST).delete(c.primaryKey); c.continue() }
+        }
+        tx.oncomplete = () => resolve()
+        tx.onerror    = e => reject(e.target.error)
+      })
+    }
+
+    return { getAll, put, remove, clearByArquivo }
+  })()
+
   function debounce(fn, ms) {
     let t
     return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms) }
@@ -520,15 +587,9 @@ const MeuEspaco = (() => {
   }
 
   function initUploadMaterial(painel, arquivo) {
-    const key = storageKey('material', arquivo)
     const galeria = painel.querySelector('.me-material-galeria')
     const input   = painel.querySelector('.me-material-input')
     const addBtn  = painel.querySelector('.me-material-add-btn')
-
-    function carregar() {
-      try { return JSON.parse(localStorage.getItem(key) || '[]') } catch { return [] }
-    }
-    function salvar(imgs) { localStorage.setItem(key, JSON.stringify(imgs)) }
 
     function abrirLightbox(dataUrl, nome) {
       const overlay = document.createElement('div')
@@ -547,8 +608,8 @@ const MeuEspaco = (() => {
       document.body.appendChild(overlay)
     }
 
-    function renderGaleria() {
-      const imgs = carregar()
+    async function renderGaleria() {
+      const imgs = await MaterialDB.getAll(arquivo)
       if (imgs.length === 0) {
         galeria.innerHTML = '<p class="me-galeria-vazia">Nenhuma imagem ainda.</p>'
         return
@@ -564,14 +625,15 @@ const MeuEspaco = (() => {
       `).join('')
 
       galeria.querySelectorAll('.me-material-ver').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const img = carregar().find(i => i.id === btn.dataset.id)
+        btn.addEventListener('click', async () => {
+          const todos = await MaterialDB.getAll(arquivo)
+          const img = todos.find(i => i.id === btn.dataset.id)
           if (img) abrirLightbox(img.dataUrl, img.nome)
         })
       })
       galeria.querySelectorAll('.me-material-del').forEach(btn => {
-        btn.addEventListener('click', () => {
-          salvar(carregar().filter(i => i.id !== btn.dataset.id))
+        btn.addEventListener('click', async () => {
+          await MaterialDB.remove(btn.dataset.id)
           renderGaleria()
         })
       })
@@ -588,7 +650,7 @@ const MeuEspaco = (() => {
         const reader = new FileReader()
         reader.onload = ev => {
           const img = new Image()
-          img.onload = () => {
+          img.onload = async () => {
             const MAX = 1200
             let w = img.width, h = img.height
             if (w > MAX || h > MAX) {
@@ -599,13 +661,12 @@ const MeuEspaco = (() => {
             tmp.width = w; tmp.height = h
             tmp.getContext('2d').drawImage(img, 0, 0, w, h)
             const dataUrl = tmp.toDataURL('image/jpeg', 0.8)
-            const imgs = carregar()
-            imgs.push({
+            await MaterialDB.put({
               id: `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+              arquivo,
               nome: file.name,
               dataUrl
             })
-            salvar(imgs)
             if (--pending === 0) renderGaleria()
           }
           img.src = ev.target.result

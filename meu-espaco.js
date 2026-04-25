@@ -41,6 +41,7 @@ const MeuEspaco = (() => {
       <div class="me-inner-tabs">
         <button class="me-itab ativo" data-me-tab="anotacoes">Anotações</button>
         <button class="me-itab" data-me-tab="diagrama">Diagrama</button>
+        <button class="me-itab" data-me-tab="material">📎 Meu Material</button>
       </div>
       <div class="me-ipainel ativo" data-me-painel="anotacoes">
         <div class="me-toolbar">
@@ -59,7 +60,6 @@ const MeuEspaco = (() => {
           <button class="me-stab ativo" data-me-stab="mapa-mental">🧠 Mapa Mental</button>
           <button class="me-stab" data-me-stab="linha-do-tempo">📅 Linha do Tempo</button>
           <button class="me-stab" data-me-stab="canvas-livre">🎨 Canvas Livre</button>
-          <button class="me-stab" data-me-stab="upload-material">📎 Material</button>
         </div>
         <div class="me-sub-painel ativo" data-me-spanel="mapa-mental">
           <canvas id="me-canvas-mapa"></canvas>
@@ -85,14 +85,14 @@ const MeuEspaco = (() => {
             <button class="me-limpar-btn" data-canvas="livre">🗑 Limpar</button>
           </div>
         </div>
-        <div class="me-sub-painel" data-me-spanel="upload-material">
-          <div class="me-upload-zona">
-            <input type="file" class="me-material-input" accept="image/*" multiple style="display:none">
-            <button class="me-material-add-btn">📎 Adicionar imagem</button>
-            <p class="me-canvas-hint">Fotos de caderno, resumos, slides...</p>
-          </div>
-          <div class="me-material-galeria"></div>
+      </div>
+      <div class="me-ipainel" data-me-painel="material">
+        <div class="me-upload-zona">
+          <input type="file" class="me-material-input" accept="image/*" multiple style="display:none">
+          <button class="me-material-add-btn">📎 Adicionar imagem</button>
+          <p class="me-canvas-hint">Fotos de caderno, resumos, slides...</p>
         </div>
+        <div class="me-material-galeria"></div>
       </div>
     `
   }

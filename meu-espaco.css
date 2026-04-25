@@ -92,11 +92,21 @@
 .me-sub-painel.ativo { display: block; }
 
 /* ── Dica abaixo do canvas ────────────────────────────── */
+.me-canvas-rodape {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 5px; gap: 8px;
+}
 .me-canvas-hint {
   font-size: 11px; color: var(--text2);
-  font-family: var(--sans); margin-top: 5px;
-  text-align: center;
+  font-family: var(--sans);
 }
+.me-limpar-btn {
+  font-size: 11px; font-family: var(--sans);
+  background: none; border: 1px solid var(--border);
+  border-radius: 4px; padding: 3px 8px; cursor: pointer;
+  color: var(--text2); white-space: nowrap; flex-shrink: 0;
+}
+.me-limpar-btn:hover { color: #DC2626; border-color: #DC2626; }
 
 /* ── Toolbar de formas (canvas livre) ─────────────────── */
 .me-shape-toolbar {

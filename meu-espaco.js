@@ -67,7 +67,10 @@ const MeuEspaco = (() => {
         </div>
         <div class="me-sub-painel" data-me-spanel="linha-do-tempo">
           <canvas id="me-canvas-linha"></canvas>
-          <p class="me-canvas-hint">Clique na linha para adicionar evento · Arraste para mover · Del para apagar</p>
+          <div class="me-canvas-rodape">
+            <p class="me-canvas-hint">Clique na linha para adicionar evento · Arraste para mover · Del para apagar</p>
+            <button class="me-limpar-btn" data-canvas="linha">🗑 Limpar</button>
+          </div>
         </div>
         <div class="me-sub-painel" data-me-spanel="canvas-livre">
           <div class="me-shape-toolbar">
@@ -77,7 +80,10 @@ const MeuEspaco = (() => {
             <button class="me-sbtn" data-shape="texto">T Texto</button>
           </div>
           <canvas id="me-canvas-livre"></canvas>
-          <p class="me-canvas-hint">Clique no canvas para inserir · Arraste para mover · Del para apagar</p>
+          <div class="me-canvas-rodape">
+            <p class="me-canvas-hint">Clique no canvas para inserir · Arraste para mover · Del para apagar</p>
+            <button class="me-limpar-btn" data-canvas="livre">🗑 Limpar</button>
+          </div>
         </div>
         <div class="me-sub-painel" data-me-spanel="upload-material">
           <div class="me-upload-zona">
@@ -381,6 +387,14 @@ const MeuEspaco = (() => {
     const onKey = makeDeleteHandler(fc, key)
     document.addEventListener('keydown', onKey)
     fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
+
+    painel.querySelector('.me-limpar-btn[data-canvas="linha"]').addEventListener('click', () => {
+      if (!confirm('Limpar toda a linha do tempo?')) return
+      fc.clear()
+      addBase()
+      fc.renderAll()
+      localStorage.removeItem(key)
+    })
   }
 
   function initCanvasLivre(painel, arquivo) {
@@ -460,6 +474,14 @@ const MeuEspaco = (() => {
     const onKey = makeDeleteHandler(fc, key)
     document.addEventListener('keydown', onKey)
     fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
+
+    painel.querySelector('.me-limpar-btn[data-canvas="livre"]').addEventListener('click', () => {
+      if (!confirm('Limpar todo o canvas?')) return
+      fc.clear()
+      fc.backgroundColor = '#fafafa'
+      fc.renderAll()
+      localStorage.removeItem(key)
+    })
 
     const saved = localStorage.getItem(key)
     if (saved) {

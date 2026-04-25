@@ -1042,7 +1042,7 @@ function linkificarJulgados(el) {
     acceptNode(node) {
       let p = node.parentElement
       while (p && p !== el) {
-        if (SKIP.has(p.tagName)) return NodeFilter.FILTER_REJECT
+        if (SKIP.has(p.tagName)) return NodeFilter.FILTER_SKIP
         p = p.parentElement
       }
       return NodeFilter.FILTER_ACCEPT

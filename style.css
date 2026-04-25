@@ -1577,3 +1577,29 @@ main {
   #conteudo-area { padding: 16px 12px; }
   .no-materia { font-size: 15px; }
 }
+
+/* ── Julgados ───────────────────────────────────────────── */
+.julgado-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #1F497D;
+  text-underline-offset: 3px;
+  transition: color .15s, text-decoration-style .15s;
+  white-space: nowrap;
+}
+.julgado-link::after {
+  content: ' ⚖';
+  font-size: 0.7em;
+  opacity: 0.2;
+  transition: opacity .15s;
+  vertical-align: middle;
+}
+.julgado-link:hover {
+  color: #1F497D;
+  text-decoration-style: solid;
+}
+.julgado-link:hover::after { opacity: 1; }
+@media (hover: none) {
+  .julgado-link::after { opacity: 0.7; }
+}

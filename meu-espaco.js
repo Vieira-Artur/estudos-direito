@@ -164,9 +164,9 @@ const MeuEspaco = (() => {
       </div>
       <div class="me-ipainel" data-me-painel="material">
         <div class="me-upload-zona">
-          <input type="file" class="me-material-input" accept="image/*" multiple style="display:none">
-          <button class="me-material-add-btn">📎 Adicionar imagem</button>
-          <p class="me-canvas-hint">Fotos de caderno, resumos, slides...</p>
+          <input type="file" class="me-material-input" accept="image/*,application/pdf" multiple style="display:none">
+          <button class="me-material-add-btn">📎 Adicionar arquivo</button>
+          <p class="me-canvas-hint">Fotos de caderno, resumos, slides, PDFs...</p>
         </div>
         <div class="me-material-galeria"></div>
       </div>
@@ -633,7 +633,7 @@ const MeuEspaco = (() => {
     async function renderGaleria() {
       const items = await MaterialDB.getAll(arquivo)
       if (items.length === 0) {
-        galeria.innerHTML = '<p class="me-galeria-vazia">Nenhuma imagem ainda.</p>'
+        galeria.innerHTML = '<p class="me-galeria-vazia">Nenhum arquivo ainda.</p>'
         return
       }
 
@@ -647,10 +647,12 @@ const MeuEspaco = (() => {
           <div class="me-material-item" data-id="${item.id}">
             ${thumb}
             <div class="me-material-acoes">
+              <button class="me-material-ver" data-id="${item.id}" title="Ver">↗</button>
+              <button class="me-material-del" data-id="${item.id}" title="Remover">✕</button>
+            </div>
+            <div class="me-material-ordem">
               <button class="me-material-up"   data-id="${item.id}" title="Mover para cima"  ${isFirst ? 'disabled' : ''}>↑</button>
               <button class="me-material-down" data-id="${item.id}" title="Mover para baixo" ${isLast  ? 'disabled' : ''}>↓</button>
-              <button class="me-material-ver"  data-id="${item.id}" title="Ver">↗</button>
-              <button class="me-material-del"  data-id="${item.id}" title="Remover">✕</button>
             </div>
             <input class="me-material-caption" data-id="${item.id}" type="text"
                    value="${escAttr(item.caption || '')}" placeholder="Adicionar legenda...">

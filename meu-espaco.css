@@ -189,16 +189,22 @@
   white-space: nowrap; padding: 0 4px; text-align: center;
 }
 
-/* ── Botões ↑↓ ─────────────────────────────────────────── */
+/* ── Botões ↑↓ (sempre visíveis, fora do hover overlay) ── */
+.me-material-ordem {
+  display: flex; justify-content: center; gap: 4px;
+  padding: 4px 0; border-top: 1px solid var(--border);
+  background: var(--surface);
+}
 .me-material-up,
 .me-material-down {
-  width: 22px; height: 22px; border-radius: 50%; border: none;
+  width: 24px; height: 22px; border-radius: 4px; border: 1px solid var(--border);
   cursor: pointer; font-size: 12px; font-weight: 700;
-  background: rgba(0,0,0,.55); color: #fff;
+  background: var(--surface); color: var(--text2);
   display: flex; align-items: center; justify-content: center;
+  transition: background .1s;
 }
 .me-material-up:hover,
-.me-material-down:hover   { background: var(--blue); }
+.me-material-down:hover   { background: var(--blue-hover); color: var(--blue); border-color: var(--blue); }
 .me-material-up:disabled,
 .me-material-down:disabled { opacity: .3; cursor: default; }
 

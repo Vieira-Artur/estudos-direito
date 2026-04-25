@@ -880,6 +880,39 @@ main {
 }
 .flash-resumo-btn:hover { background: var(--blue-mid); }
 
+.flash-historico {
+  margin-top: 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  width: 100%;
+}
+.flash-historico-titulo {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: 10px;
+}
+.flash-historico-linha {
+  display: grid;
+  grid-template-columns: 20px 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 13px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+.flash-historico-linha:last-child { border-bottom: none; }
+.flash-trend { font-size: 14px; font-weight: 700; text-align: center; }
+.flash-trend-up   { color: #16A34A; }
+.flash-trend-down { color: #DC2626; }
+.flash-trend-flat { color: var(--text2); }
+.flash-hist-data  { color: var(--text2); font-size: 12px; }
+.flash-hist-pct   { font-weight: 600; }
+.flash-hist-cards { font-size: 12px; color: var(--text2); }
+
 /* Meu Deck */
 .meu-deck-secao { margin-top: 24px; }
 .meu-deck-titulo {

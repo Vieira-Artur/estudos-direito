@@ -332,6 +332,48 @@ function deletarFlashcard(turmaId, id) {
   localStorage.setItem(`flashcards_${turmaId}`, JSON.stringify(cards))
 }
 
+function salvarHistoricoSessao(turmaId, acertos, total) {
+  if (!turmaId || typeof acertos !== 'number' || typeof total !== 'number' || total <= 0 || acertos < 0) return
+  const key = `flashcards_historico_${turmaId}`
+  const historico = carregarHistorico(turmaId)
+  historico.unshift({ data: Date.now(), acertos, total })
+  if (historico.length > 10) historico.pop()
+  localStorage.setItem(key, JSON.stringify(historico))
+}
+
+function carregarHistorico(turmaId) {
+  try {
+    return JSON.parse(localStorage.getItem(`flashcards_historico_${turmaId}`) || '[]')
+  } catch { return [] }
+}
+
+function calcularTendencia(historico) {
+  if (historico.length < 3) return ''
+  if (historico[0].total === 0 || historico[1].total === 0 || historico[2].total === 0) return ''
+  const ultima = Math.round((historico[0].acertos / historico[0].total) * 100)
+  const media = Math.round(
+    ((historico[1].acertos / historico[1].total) +
+     (historico[2].acertos / historico[2].total)) / 2 * 100
+  )
+  if (ultima - media >= 5) return '↑'
+  if (media - ultima >= 5) return '↓'
+  return '→'
+}
+
+function formatarDataSessao(ts) {
+  const agora = new Date()
+  const d = new Date(ts)
+  if (isNaN(d.getTime())) return ''
+  const mesmoDia = d.toDateString() === agora.toDateString()
+  const ontem = new Date(agora)
+  ontem.setDate(ontem.getDate() - 1)
+  const diaAnterior = d.toDateString() === ontem.toDateString()
+  const hhmm = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+  if (mesmoDia)    return `Hoje, ${hhmm}`
+  if (diaAnterior) return `Ontem, ${hhmm}`
+  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
+}
+
 function renderMeuDeckHTML(turma) {
   const cards = flashcardsDoAluno(turma.id)
 
@@ -476,7 +518,8 @@ function avaliarCard(acertou) {
   const proximo = index + 1
 
   if (proximo >= todos.length) {
-    area.innerHTML = renderFlashResumoHTML(acertos, todos.length)
+    salvarHistoricoSessao(turma.id, acertos, todos.length)
+    area.innerHTML = renderFlashResumoHTML(acertos, todos.length, turma.id)
     return
   }
 
@@ -485,7 +528,7 @@ function avaliarCard(acertou) {
   area.dataset.acertos = acertos
 }
 
-function renderFlashResumoHTML(acertos, total) {
+function renderFlashResumoHTML(acertos, total, turmaId) {
   const pct = Math.round((acertos / total) * 100)
   const emoji = pct >= 80 ? '🎉' : pct >= 50 ? '👍' : '📖'
   const msg = pct >= 80
@@ -494,12 +537,36 @@ function renderFlashResumoHTML(acertos, total) {
       ? 'Bom progresso! Revise os cards que errou.'
       : 'Mais uma rodada vai ajudar. Continue!'
 
+  const historico = turmaId ? carregarHistorico(turmaId) : []
+  const tendencia = calcularTendencia(historico)
+  const ultimas = historico.slice(0, 5)
+
+  const historicoHTML = ultimas.length === 0 ? '' : `
+    <div class="flash-historico">
+      <div class="flash-historico-titulo">Suas últimas sessões</div>
+      ${ultimas.map((s, i) => {
+        const spct = s.total > 0 ? Math.round((s.acertos / s.total) * 100) : 0
+        const trend = i === 0 && tendencia
+          ? `<span class="flash-trend flash-trend-${tendencia === '↑' ? 'up' : tendencia === '↓' ? 'down' : 'flat'}">${tendencia}</span>`
+          : '<span class="flash-trend"></span>'
+        return `
+          <div class="flash-historico-linha">
+            ${trend}
+            <span class="flash-hist-data">${formatarDataSessao(s.data)}</span>
+            <span class="flash-hist-pct">${spct}%</span>
+            <span class="flash-hist-cards">${s.total} cards</span>
+          </div>`
+      }).join('')}
+    </div>
+  `
+
   return `
     <div class="flash-resumo">
       <div class="flash-resumo-emoji">${emoji}</div>
       <div class="flash-resumo-titulo">${acertos} de ${total} acertos (${pct}%)</div>
       <div class="flash-resumo-sub">${msg}</div>
       <button class="flash-resumo-btn" onclick="reiniciarSessao()">Reiniciar sessão</button>
+      ${historicoHTML}
     </div>
   `
 }

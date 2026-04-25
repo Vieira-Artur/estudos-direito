@@ -973,7 +973,10 @@ async function abrirBusca() {
   input.focus()
   input.addEventListener('input', _onBuscaInput)
   document.addEventListener('keydown', _onEscBusca)
-  document.addEventListener('click', _onAppClick)
+  // Defer to let the current click event finish propagating before we listen
+  // for outside clicks — otherwise the btn click that opened the search would
+  // immediately trigger _onAppClick and close it again (race on 2nd+ open).
+  setTimeout(() => document.addEventListener('click', _onAppClick), 0)
 }
 
 function fecharBusca() {
@@ -993,4 +996,90 @@ function fecharBusca() {
   painel.setAttribute('hidden', '')
   painel.innerHTML = ''
   document.getElementById('app').classList.remove('busca-ativa')
+}
+
+// ── Julgados ──────────────────────────────────────────────
+
+function _detectarTribunal(text, matchIdx, fallback) {
+  const chunk = text.slice(Math.max(0, matchIdx - 60), Math.min(text.length, matchIdx + 80)).toUpperCase()
+  if (/\bSTF\b/.test(chunk)) return 'stf'
+  if (/\bSTJ\b/.test(chunk)) return 'stj'
+  return fallback
+}
+
+function _urlJulgado({ tribunal, tipo, m }) {
+  const g = m.groups
+  const num = (g.num || '').replace(/\./g, '')
+  if (tipo === 'sumula') return `https://scon.stj.jus.br/SCON/pesquisar.jsp?query=S%C3%BAmula+${num}`
+  if (tipo === 'sv')     return `https://jurisprudencia.stf.jus.br/pages/search?queryString=S%C3%BAmula+Vinculante+${num}`
+  if (tipo === 'tema') {
+    if ((g.court || '').toUpperCase() === 'STJ')
+      return `https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?tipo=tabela&cod=${num}`
+    return `https://jurisprudencia.stf.jus.br/pages/search?queryString=Tema+${num}`
+  }
+  const t = encodeURIComponent(g.tipo || '')
+  if (tribunal === 'stj') return `https://scon.stj.jus.br/SCON/pesquisar.jsp?query=${t}+${num}`
+  return `https://jurisprudencia.stf.jus.br/pages/search?queryString=${t}+${num}`
+}
+
+function linkificarJulgados(el) {
+  if (!el) return
+  const PX = '(?:(?:AgRg|AgInt|EDcl|EDiv|QO)\\s+n[ao]s?\\s+)?'
+  const NM = '(?<num>\\d[\\d.]*\\d|\\d)(?:\\s*[-/]\\s*[A-Z]{2})?'
+  const PADROES = [
+    { re: new RegExp(`\\b${PX}(?<tipo>REsp|AREsp|RHC|EREsp)\\s+${NM}`, 'g'), tribunal: 'stj' },
+    { re: new RegExp(`\\b${PX}(?<tipo>ADI|ADC|ADPF|ARE|MI|RCL)\\s+${NM}`, 'g'), tribunal: 'stf' },
+    { re: new RegExp(`\\b${PX}(?<tipo>HC)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stj' },
+    { re: new RegExp(`\\b${PX}(?<tipo>RE)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stf' },
+    { re: new RegExp(`\\b${PX}(?<tipo>MS)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stf' },
+    { re: /S[uú]m(?:ula)?\.?\s+n?[ºo°.]?\s*(?<num>\d+)\s+(?:do\s+)?STJ/g, tribunal: 'stj', tipo: 'sumula' },
+    { re: /\bSV\s+(?<num>\d+)\b/g,                                           tribunal: 'stf', tipo: 'sv' },
+    { re: /S[uú]mula\s+Vinculante\s+n?[ºo°.]?\s*(?<num>\d+)/g,              tribunal: 'stf', tipo: 'sv' },
+    { re: /Tema\s+(?<num>\d+)\s+(?:do\s+)?(?<court>STJ|STF)/g, tribunal: null, tipo: 'tema' },
+  ]
+  const SKIP = new Set(['A', 'CODE', 'SCRIPT', 'STYLE', 'PRE'])
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      let p = node.parentElement
+      while (p && p !== el) {
+        if (SKIP.has(p.tagName)) return NodeFilter.FILTER_REJECT
+        p = p.parentElement
+      }
+      return NodeFilter.FILTER_ACCEPT
+    }
+  })
+  const nodes = []
+  while (walker.nextNode()) nodes.push(walker.currentNode)
+  for (const node of nodes) {
+    const text = node.nodeValue
+    const hits = []
+    for (const { re, tribunal, fallback, tipo } of PADROES) {
+      re.lastIndex = 0
+      let m
+      while ((m = re.exec(text)) !== null) {
+        const s = m.index, e = m.index + m[0].length
+        if (hits.some(h => h.s < e && h.e > s)) continue
+        const trib = tribunal ?? _detectarTribunal(text, s, fallback ?? 'stj')
+        hits.push({ s, e, raw: m[0], tribunal: trib, tipo: tipo ?? 'acordao', m })
+      }
+    }
+    if (!hits.length) continue
+    hits.sort((a, b) => a.s - b.s)
+    const frag = document.createDocumentFragment()
+    let cur = 0
+    for (const h of hits) {
+      if (h.s > cur) frag.appendChild(document.createTextNode(text.slice(cur, h.s)))
+      const a = document.createElement('a')
+      a.className   = 'julgado-link'
+      a.textContent = h.raw
+      a.href        = _urlJulgado(h)
+      a.target      = '_blank'
+      a.rel         = 'noopener noreferrer'
+      a.title       = `Ver no ${h.tribunal.toUpperCase()}`
+      frag.appendChild(a)
+      cur = h.e
+    }
+    if (cur < text.length) frag.appendChild(document.createTextNode(text.slice(cur)))
+    node.parentNode.replaceChild(frag, node)
+  }
 }

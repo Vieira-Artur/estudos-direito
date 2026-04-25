@@ -31,8 +31,17 @@ const MeuEspaco = (() => {
       return new Promise((resolve, reject) => {
         const req = db.transaction(ST, 'readonly')
           .objectStore(ST).index('arquivo').getAll(arquivo)
-        req.onsuccess = () => resolve(req.result)
-        req.onerror   = e => reject(e.target.error)
+        req.onsuccess = () => {
+          const items = req.result.map((item, i) => ({
+            type:    item.nome?.toLowerCase().endsWith('.pdf') ? 'pdf' : 'image',
+            caption: '',
+            order:   i * 1000,
+            ...item
+          }))
+          items.sort((a, b) => a.order - b.order)
+          resolve(items)
+        }
+        req.onerror = e => reject(e.target.error)
       })
     }
 
@@ -591,14 +600,27 @@ const MeuEspaco = (() => {
     const input   = painel.querySelector('.me-material-input')
     const addBtn  = painel.querySelector('.me-material-add-btn')
 
+    input.accept = 'image/*,application/pdf'
+
+    const escAttr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+
+    function abrirPdf(dataUrl) {
+      const arr  = dataUrl.split(',')
+      const mime = arr[0].match(/:(.*?);/)[1]
+      const bstr = atob(arr[1])
+      const u8   = new Uint8Array(bstr.length)
+      for (let i = 0; i < bstr.length; i++) u8[i] = bstr.charCodeAt(i)
+      window.open(URL.createObjectURL(new Blob([u8], { type: mime })))
+    }
+
     function abrirLightbox(dataUrl, nome) {
       const overlay = document.createElement('div')
       overlay.className = 'me-lightbox'
       overlay.innerHTML = `
         <div class="me-lightbox-inner">
           <button class="me-lightbox-fechar" title="Fechar">✕</button>
-          <p class="me-lightbox-nome">${nome}</p>
-          <img class="me-lightbox-img" src="${dataUrl}" alt="${nome}">
+          <p class="me-lightbox-nome">${escAttr(nome)}</p>
+          <img class="me-lightbox-img" src="${dataUrl}" alt="${escAttr(nome)}">
         </div>
       `
       overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove() })
@@ -609,32 +631,84 @@ const MeuEspaco = (() => {
     }
 
     async function renderGaleria() {
-      const imgs = await MaterialDB.getAll(arquivo)
-      if (imgs.length === 0) {
+      const items = await MaterialDB.getAll(arquivo)
+      if (items.length === 0) {
         galeria.innerHTML = '<p class="me-galeria-vazia">Nenhuma imagem ainda.</p>'
         return
       }
-      galeria.innerHTML = imgs.map(img => `
-        <div class="me-material-item" data-id="${img.id}">
-          <img class="me-material-img" src="${img.dataUrl}" alt="${img.nome}" title="${img.nome}">
-          <div class="me-material-acoes">
-            <button class="me-material-ver" data-id="${img.id}" title="Ver em tamanho real">↗</button>
-            <button class="me-material-del" data-id="${img.id}" title="Remover">✕</button>
-          </div>
-        </div>
-      `).join('')
+
+      galeria.innerHTML = items.map((item, i) => {
+        const isFirst = i === 0
+        const isLast  = i === items.length - 1
+        const thumb = item.type === 'pdf'
+          ? `<div class="me-pdf-thumb"><span class="me-pdf-icone">📄</span><span class="me-pdf-nome">${escAttr(item.nome)}</span></div>`
+          : `<img class="me-material-img" src="${item.dataUrl}" alt="${escAttr(item.nome)}" title="${escAttr(item.nome)}">`
+        return `
+          <div class="me-material-item" data-id="${item.id}">
+            ${thumb}
+            <div class="me-material-acoes">
+              <button class="me-material-up"   data-id="${item.id}" title="Mover para cima"  ${isFirst ? 'disabled' : ''}>↑</button>
+              <button class="me-material-down" data-id="${item.id}" title="Mover para baixo" ${isLast  ? 'disabled' : ''}>↓</button>
+              <button class="me-material-ver"  data-id="${item.id}" title="Ver">↗</button>
+              <button class="me-material-del"  data-id="${item.id}" title="Remover">✕</button>
+            </div>
+            <input class="me-material-caption" data-id="${item.id}" type="text"
+                   value="${escAttr(item.caption || '')}" placeholder="Adicionar legenda...">
+          </div>`
+      }).join('')
+
+      galeria.querySelectorAll('.me-material-up').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const all = await MaterialDB.getAll(arquivo)
+          const idx = all.findIndex(i => i.id === btn.dataset.id)
+          if (idx <= 0) return
+          const tmp          = all[idx].order
+          all[idx].order     = all[idx - 1].order
+          all[idx - 1].order = tmp
+          await MaterialDB.put(all[idx])
+          await MaterialDB.put(all[idx - 1])
+          renderGaleria()
+        })
+      })
+
+      galeria.querySelectorAll('.me-material-down').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const all = await MaterialDB.getAll(arquivo)
+          const idx = all.findIndex(i => i.id === btn.dataset.id)
+          if (idx < 0 || idx >= all.length - 1) return
+          const tmp          = all[idx].order
+          all[idx].order     = all[idx + 1].order
+          all[idx + 1].order = tmp
+          await MaterialDB.put(all[idx])
+          await MaterialDB.put(all[idx + 1])
+          renderGaleria()
+        })
+      })
 
       galeria.querySelectorAll('.me-material-ver').forEach(btn => {
         btn.addEventListener('click', async () => {
-          const todos = await MaterialDB.getAll(arquivo)
-          const img = todos.find(i => i.id === btn.dataset.id)
-          if (img) abrirLightbox(img.dataUrl, img.nome)
+          const all  = await MaterialDB.getAll(arquivo)
+          const item = all.find(i => i.id === btn.dataset.id)
+          if (!item) return
+          if (item.type === 'pdf') abrirPdf(item.dataUrl)
+          else abrirLightbox(item.dataUrl, item.nome)
         })
       })
+
       galeria.querySelectorAll('.me-material-del').forEach(btn => {
         btn.addEventListener('click', async () => {
           await MaterialDB.remove(btn.dataset.id)
           renderGaleria()
+        })
+      })
+
+      galeria.querySelectorAll('.me-material-caption').forEach(inp => {
+        inp.addEventListener('blur', async () => {
+          const all  = await MaterialDB.getAll(arquivo)
+          const item = all.find(i => i.id === inp.dataset.id)
+          if (!item) return
+          item.caption = inp.value.trim()
+          await MaterialDB.put(item)
         })
       })
     }
@@ -646,32 +720,38 @@ const MeuEspaco = (() => {
       if (!files.length) return
       input.value = ''
       let pending = files.length
-      files.forEach(file => {
-        const reader = new FileReader()
-        reader.onload = ev => {
-          const img = new Image()
-          img.onload = async () => {
-            const MAX = 1200
-            let w = img.width, h = img.height
-            if (w > MAX || h > MAX) {
-              if (w >= h) { h = Math.round(h * MAX / w); w = MAX }
-              else        { w = Math.round(w * MAX / h); h = MAX }
-            }
-            const tmp = document.createElement('canvas')
-            tmp.width = w; tmp.height = h
-            tmp.getContext('2d').drawImage(img, 0, 0, w, h)
-            const dataUrl = tmp.toDataURL('image/jpeg', 0.8)
-            await MaterialDB.put({
-              id: `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-              arquivo,
-              nome: file.name,
-              dataUrl
-            })
+      files.forEach((file, idx) => {
+        const order = Date.now() + idx * 100
+        const id    = `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`
+        if (file.type === 'application/pdf') {
+          const reader = new FileReader()
+          reader.onload = async ev => {
+            await MaterialDB.put({ id, arquivo, nome: file.name, dataUrl: ev.target.result, type: 'pdf', caption: '', order })
             if (--pending === 0) renderGaleria()
           }
-          img.src = ev.target.result
+          reader.readAsDataURL(file)
+        } else {
+          const reader = new FileReader()
+          reader.onload = ev => {
+            const img = new Image()
+            img.onload = async () => {
+              const MAX = 1200
+              let w = img.width, h = img.height
+              if (w > MAX || h > MAX) {
+                if (w >= h) { h = Math.round(h * MAX / w); w = MAX }
+                else        { w = Math.round(w * MAX / h); h = MAX }
+              }
+              const tmp = document.createElement('canvas')
+              tmp.width = w; tmp.height = h
+              tmp.getContext('2d').drawImage(img, 0, 0, w, h)
+              const dataUrl = tmp.toDataURL('image/jpeg', 0.8)
+              await MaterialDB.put({ id, arquivo, nome: file.name, dataUrl, type: 'image', caption: '', order })
+              if (--pending === 0) renderGaleria()
+            }
+            img.src = ev.target.result
+          }
+          reader.readAsDataURL(file)
         }
-        reader.readAsDataURL(file)
       })
     })
 

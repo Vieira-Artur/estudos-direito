@@ -175,6 +175,44 @@
 .me-material-ver:hover { background: var(--blue); }
 .me-material-del:hover { background: #DC2626; }
 
+/* ── PDF thumbnail ─────────────────────────────────────── */
+.me-pdf-thumb {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 4px;
+  aspect-ratio: 4/3; background: #f1f5f9;
+  border-radius: 4px 4px 0 0;
+}
+.me-pdf-icone { font-size: 28px; line-height: 1; }
+.me-pdf-nome  {
+  font-size: 10px; color: var(--text2); font-family: var(--sans);
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; padding: 0 4px; text-align: center;
+}
+
+/* ── Botões ↑↓ ─────────────────────────────────────────── */
+.me-material-up,
+.me-material-down {
+  width: 22px; height: 22px; border-radius: 50%; border: none;
+  cursor: pointer; font-size: 12px; font-weight: 700;
+  background: rgba(0,0,0,.55); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.me-material-up:hover,
+.me-material-down:hover   { background: var(--blue); }
+.me-material-up:disabled,
+.me-material-down:disabled { opacity: .3; cursor: default; }
+
+/* ── Legenda ────────────────────────────────────────────── */
+.me-material-caption {
+  width: 100%; box-sizing: border-box;
+  border: none; border-top: 1px solid var(--border);
+  padding: 4px 6px; font-size: 11px; font-family: var(--sans);
+  color: var(--text); background: var(--surface);
+  border-radius: 0 0 6px 6px; outline: none;
+}
+.me-material-caption::placeholder { color: var(--text2); }
+.me-material-caption:focus { background: var(--blue-light); }
+
 /* ── Lightbox de material ──────────────────────────────── */
 .me-lightbox {
   position: fixed; inset: 0; z-index: 9999;

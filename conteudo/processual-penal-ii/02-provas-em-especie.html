@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 :root {
   --pp2-green:  #1a5c1a; --pp2-green-lt: #d6f0d6;
   --pp2-red:    #8b1a1a; --pp2-red-lt:   #fce8e8;
@@ -47,18 +47,18 @@
   .card { background: var(--pp2-bg2); border:1px solid var(--border); border-radius:8px; padding:1.4rem; margin-bottom:1.2rem; transition:border-color 0.2s; }
   .card:hover { border-color:var(--blue); }
   .card h3 { color:var(--blue); font-size:1rem; margin-bottom:0.6rem; }
-  .card p,.card li { color:var(--text2); font-size:0.92rem; }
+  .card p,.card li { color:var(--text2); font-size:0.96rem; }
   .card ul { padding-left:1.2rem; }
   .card li { margin-bottom:0.3rem; }
   .grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1rem; }
   .grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem; }
   .table-wrap { overflow-x:auto; margin-bottom:1.5rem; }
-  .pp2-wrap table { width:100%; border-collapse:collapse; font-size:0.88rem; }
+  .pp2-wrap table { width:100%; border-collapse:collapse; font-size:0.92rem; }
   .pp2-wrap th { background: var(--pp2-bg3); color:var(--blue); padding:0.75rem 1rem; text-align:left; border:1px solid var(--border); font-weight:600; }
   .pp2-wrap td { padding:0.65rem 1rem; border:1px solid var(--border); color:var(--text2); vertical-align:top; }
   .pp2-wrap tr:nth-child(even) td { background:var(--pp2-bg2); }
   .pp2-wrap tr:hover td { background:var(--blue-light); }
-  .tag { display:inline-block; padding:0.15rem 0.55rem; border-radius:3px; font-size:0.75rem; font-family:monospace; font-weight:bold; margin:0.15rem; }
+  .tag { display:inline-block; padding:0.15rem 0.55rem; border-radius:3px; font-size:0.79rem; font-family:monospace; font-weight:bold; margin:0.15rem; }
   .tag-blue { background:var(--blue-light); color:var(--blue); }
   .tag-green { background: var(--pp2-green-lt); color:var(--pp2-green); }
   .tag-red { background: var(--pp2-red-lt); color:var(--pp2-red); }
@@ -66,41 +66,41 @@
   .tag-purple { background:var(--pp2-purple-lt); color:var(--pp2-purple); }
   .tag-orange { background:var(--pp2-orange-lt); color:var(--pp2-orange); }
   .juris { background: var(--blue-light); border-left:3px solid var(--blue); padding:1rem 1.2rem; border-radius:0 6px 6px 0; margin-bottom:1rem; }
-  .juris .tribunal { color:var(--blue); font-size:0.8rem; font-family:monospace; font-weight:bold; }
-  .juris p { color:var(--text2); font-size:0.9rem; margin-top:0.3rem; }
+  .juris .tribunal { color:var(--blue); font-size:0.84rem; font-family:monospace; font-weight:bold; }
+  .juris p { color:var(--text2); font-size:0.94rem; margin-top:0.3rem; }
   .alert { background: var(--pp2-red-lt); border:1px solid var(--pp2-red); border-radius:6px; padding:1rem 1.2rem; margin-bottom:1rem; }
   .alert strong { color:var(--pp2-red); }
-  .alert p { color:var(--text2); font-size:0.9rem; margin-top:0.3rem; }
+  .alert p { color:var(--text2); font-size:0.94rem; margin-top:0.3rem; }
   .tip { background:var(--blue-light); border:1px solid var(--blue-light); border-radius:6px; padding:1rem 1.2rem; margin-bottom:1rem; }
   .tip strong { color:var(--blue); }
-  .tip p { color:var(--text2); font-size:0.9rem; margin-top:0.3rem; }
-  .artigo { background: var(--blue-light); border:1px solid var(--border); border-radius:6px; padding:0.9rem 1.2rem; margin-bottom:0.8rem; font-family:monospace; font-size:0.87rem; color: var(--text); }
+  .tip p { color:var(--text2); font-size:0.94rem; margin-top:0.3rem; }
+  .artigo { background: var(--blue-light); border:1px solid var(--border); border-radius:6px; padding:0.9rem 1.2rem; margin-bottom:0.8rem; font-family:monospace; font-size:0.91rem; color: var(--text); }
   .artigo strong { color:var(--blue); }
   .roteiro-item { display:flex; gap:1rem; align-items:flex-start; background: var(--pp2-bg2); border:1px solid var(--border); border-radius:6px; padding:1rem 1.2rem; margin-bottom:0.8rem; transition:border-color 0.2s; }
   .roteiro-item:hover { border-color:var(--blue); }
-  .roteiro-num { background:var(--blue); color:#000; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.85rem; flex-shrink:0; margin-top:0.1rem; }
-  .roteiro-item h4 { color:var(--text); font-size:0.95rem; margin-bottom:0.3rem; }
-  .roteiro-item p { color:var(--text2); font-size:0.88rem; }
+  .roteiro-num { background:var(--blue); color:#000; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:0.89rem; flex-shrink:0; margin-top:0.1rem; }
+  .roteiro-item h4 { color:var(--text); font-size:0.99rem; margin-bottom:0.3rem; }
+  .roteiro-item p { color:var(--text2); font-size:0.92rem; }
   .caso { background: var(--pp2-bg2); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:1.5rem; }
   .caso-.pp2-header { background: var(--pp2-bg3); padding:1rem 1.4rem; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
   .caso-.pp2-header h3 { color:var(--blue); font-size:1rem; }
   .caso-
-.caso-fatos { color:var(--text); font-size:0.92rem; line-height:1.8; margin-bottom:1.2rem; }
+.caso-fatos { color:var(--text); font-size:0.96rem; line-height:1.8; margin-bottom:1.2rem; }
   .caso-perguntas { list-style:none; padding:0; }
-  .caso-perguntas li { background: var(--pp2-bg3); border-left:3px solid var(--pp2-purple); padding:0.7rem 1rem; border-radius:0 4px 4px 0; margin-bottom:0.5rem; font-size:0.9rem; color:var(--text2); }
+  .caso-perguntas li { background: var(--pp2-bg3); border-left:3px solid var(--pp2-purple); padding:0.7rem 1rem; border-radius:0 4px 4px 0; margin-bottom:0.5rem; font-size:0.94rem; color:var(--text2); }
   .caso-perguntas li strong { color:var(--pp2-purple); }
   .pp2-wrap details { margin-bottom:0.5rem; }
-  .pp2-wrap details summary { cursor:pointer; padding:0.7rem 1rem; background: var(--pp2-bg3); border-radius:4px; color:var(--pp2-green); font-size:0.88rem; font-weight:bold; list-style:none; }
+  .pp2-wrap details summary { cursor:pointer; padding:0.7rem 1rem; background: var(--pp2-bg3); border-radius:4px; color:var(--pp2-green); font-size:0.92rem; font-weight:bold; list-style:none; }
   .pp2-wrap details summary::-webkit-details-marker { display:none; }
-  .pp2-wrap details summary::before { content:'▶ '; font-size:0.7rem; }
+  .pp2-wrap details summary::before { content:'▶ '; font-size:0.74rem; }
   .pp2-wrap details[open] summary::before { content:'▼ '; }
-  .pp2-wrap details p { padding:0.8rem 1rem; background: var(--pp2-green-lt); color:var(--text2); font-size:0.88rem; border-radius:0 0 4px 4px; }
+  .pp2-wrap details p { padding:0.8rem 1rem; background: var(--pp2-green-lt); color:var(--text2); font-size:0.92rem; border-radius:0 0 4px 4px; }
   .pp2-wrap hr { border:none; border-top:1px solid var(--border); margin:2rem 0; }
-  .numero-badge { background:var(--blue); color:#000; border-radius:4px; font-weight:bold; font-family:monospace; padding:0.1rem 0.5rem; font-size:0.85rem; margin-right:0.5rem; }
+  .numero-badge { background:var(--blue); color:#000; border-radius:4px; font-weight:bold; font-family:monospace; padding:0.1rem 0.5rem; font-size:0.89rem; margin-right:0.5rem; }
   .mapa { background: var(--pp2-bg2); border:1px solid var(--border); border-radius:10px; padding:1.8rem; margin-bottom:1.5rem; }
-  .mapa-label { font-size:0.75rem; color:var(--text2); margin-bottom:0.4rem; font-style:italic; margin-top:1rem; }
+  .mapa-label { font-size:0.79rem; color:var(--text2); margin-bottom:0.4rem; font-style:italic; margin-top:1rem; }
   .mapa-row { display:flex; gap:0.8rem; flex-wrap:wrap; margin-bottom:0.8rem; }
-  .mapa-node { background: var(--pp2-bg3); border:1px solid var(--border); border-radius:6px; padding:0.6rem 1rem; font-size:0.85rem; color:var(--text); }
+  .mapa-node { background: var(--pp2-bg3); border:1px solid var(--border); border-radius:6px; padding:0.6rem 1rem; font-size:0.89rem; color:var(--text); }
   .mapa-node.teal { border-color:var(--blue); color:var(--blue); background:var(--blue-light); }
   .mapa-node.blue { border-color:var(--blue); color:var(--blue); background: var(--blue-light); }
   .mapa-node.red { border-color:var(--pp2-red); color:var(--pp2-red); background: var(--pp2-red-lt); }

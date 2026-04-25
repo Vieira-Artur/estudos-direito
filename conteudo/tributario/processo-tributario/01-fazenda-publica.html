@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 /* ── Cores extras ────────────────────────────────────── */
 :root {
   --pt-green:  #276749; --pt-green-lt: #edfaf3;
@@ -20,7 +20,7 @@
 /* ── Abas ────────────────────────────────────────────── */
 .pt-tabs { display:flex; gap:4px; margin-bottom:22px; flex-wrap:wrap; }
 .pt-tab {
-  padding:7px 18px; font-size:13px; font-weight:600;
+  padding:7px 18px; font-size:14px; font-weight:600;
   font-family:var(--sans); border:1.5px solid var(--blue);
   border-radius:6px; cursor:pointer;
   background:var(--surface); color:var(--blue);
@@ -46,7 +46,7 @@
 .pt-section-title:first-child { margin-top:0; }
 
 .pt-table-wrap { overflow-x:auto; margin:10px 0 18px; }
-.pt-table { width:100%; border-collapse:collapse; font-size:13px; }
+.pt-table { width:100%; border-collapse:collapse; font-size:14px; }
 .pt-table thead th {
   background:var(--blue); color:#fff;
   padding:8px 12px; text-align:left; font-weight:600; font-family:var(--sans);
@@ -68,13 +68,13 @@
 .pt-card.teal    { border-top-color:var(--pt-teal); }
 .pt-card.roxo    { border-top-color:var(--pt-purple); }
 .pt-card.vermelho{ border-top-color:var(--pt-red); }
-.pt-card h4 { font-size:13.5px; color:var(--blue); margin-bottom:6px; font-weight:700; }
-.pt-card p, .pt-card li { font-size:12.5px; color:var(--text2); line-height:1.55; }
+.pt-card h4 { font-size:14.5px; color:var(--blue); margin-bottom:6px; font-weight:700; }
+.pt-card p, .pt-card li { font-size:13.5px; color:var(--text2); line-height:1.55; }
 .pt-card ul { padding-left:14px; margin-top:5px; }
 
 .pt-alert {
   border-radius:7px; padding:10px 14px; margin:10px 0;
-  font-size:13px; border-left:4px solid; line-height:1.55;
+  font-size:14px; border-left:4px solid; line-height:1.55;
 }
 .pt-alert.info    { background:var(--blue-light);   border-color:var(--blue);       color:var(--text); }
 .pt-alert.atencao { background:var(--pt-orange-lt); border-color:var(--pt-orange);  color:var(--text); }
@@ -83,7 +83,7 @@
 .pt-alert strong  { display:block; margin-bottom:3px; }
 
 .pt-badge {
-  display:inline-block; font-size:11px; font-weight:600;
+  display:inline-block; font-size:12px; font-weight:600;
   border-radius:4px; padding:2px 7px; margin:2px 2px 0 0;
 }
 .pt-b-blue   { background:var(--blue-light);   color:var(--blue); }
@@ -98,17 +98,17 @@
 .pt-num {
   flex-shrink:0; width:24px; height:24px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
-  font-size:11.5px; font-weight:600; margin-top:2px;
+  font-size:12.5px; font-weight:600; margin-top:2px;
 }
 .pt-num.azul   { background:var(--blue-light);   color:var(--blue); }
 .pt-num.verde  { background:var(--pt-green-lt);  color:var(--pt-green); }
 .pt-num.laranja{ background:var(--pt-orange-lt); color:var(--pt-orange); }
 .pt-num.roxo   { background:var(--pt-purple-lt); color:var(--pt-purple); }
-.pt-txt { flex:1; font-size:13.5px; color:var(--text); line-height:1.6; }
+.pt-txt { flex:1; font-size:14.5px; color:var(--text); line-height:1.6; }
 .pt-quest {
   background:var(--surface); border-left:3px solid var(--gold);
   border-radius:0 6px 6px 0; padding:8px 12px;
-  margin:4px 0 14px 34px; font-size:13px; color:var(--text2);
+  margin:4px 0 14px 34px; font-size:14px; color:var(--text2);
 }
 .pt-divider { border:none; border-top:1px solid var(--border); margin:16px 0; }
 
@@ -121,7 +121,7 @@
   box-shadow:0 4px 18px rgba(31,73,125,.18);
 }
 .pt-infog-caption {
-  font-size:12px; color:var(--text2); margin-top:10px;
+  font-size:13px; color:var(--text2); margin-top:10px;
   font-family:var(--sans);
 }
 
@@ -131,11 +131,11 @@
   border-radius:10px; padding:22px 26px; color:#fff; margin-bottom:20px;
 }
 .pt-caso-header .pt-label {
-  font-size:11px; font-weight:600; letter-spacing:.1em;
+  font-size:12px; font-weight:600; letter-spacing:.1em;
   text-transform:uppercase; color:var(--gold); margin-bottom:5px;
 }
 .pt-caso-header h3 { font-family:var(--serif); font-size:20px; margin-bottom:8px; }
-.pt-caso-header p  { font-size:13px; opacity:.9; line-height:1.55; }
+.pt-caso-header p  { font-size:14px; opacity:.9; line-height:1.55; }
 .pt-pergunta {
   background:var(--surface); border:1px solid var(--border);
   border-radius:8px; margin-bottom:12px; overflow:hidden;
@@ -149,12 +149,12 @@
   width:28px; height:28px; border-radius:50%;
   background:var(--blue); color:#fff;
   display:flex; align-items:center; justify-content:center;
-  font-size:13px; font-weight:700; flex-shrink:0;
+  font-size:14px; font-weight:700; flex-shrink:0;
 }
-.pt-pergunta-head p { flex:1; font-size:13.5px; color:var(--text); font-weight:600; margin:0; }
+.pt-pergunta-head p { flex:1; font-size:14.5px; color:var(--text); font-weight:600; margin:0; }
 .pt-pergunta-head .pt-toggle { font-size:18px; color:var(--text2); transition:transform .2s; }
 .pt-pergunta-body {
-  display:none; padding:14px 16px 14px 56px; font-size:13px;
+  display:none; padding:14px 16px 14px 56px; font-size:14px;
   color:var(--text2); line-height:1.65; border-top:1px solid var(--border);
 }
 .pt-pergunta-body.open { display:block; }
@@ -174,8 +174,8 @@
 .pt-prec-item.destaque { border-left-color:var(--gold); }
 .pt-prec-item.alerta   { border-left-color:var(--pt-orange); }
 .pt-prec-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
-.pt-prec-content h4 { font-size:13.5px; font-weight:700; color:var(--blue); margin-bottom:3px; }
-.pt-prec-content p  { font-size:12.5px; color:var(--text2); line-height:1.55; }
+.pt-prec-content h4 { font-size:14.5px; font-weight:700; color:var(--blue); margin-bottom:3px; }
+.pt-prec-content p  { font-size:13.5px; color:var(--text2); line-height:1.55; }
 </style>
 
 <h2 class="pt-titulo">A Fazenda Pública em Juízo — Prerrogativas e Regime de Pagamentos</h2>

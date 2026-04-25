@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 :root {
   --pp1-green:  #1a5c1a; --pp1-green-lt: #d6f0d6;
   --pp1-red:    #8b1a1a; --pp1-red-lt:   #fce8e8;
@@ -56,7 +56,7 @@
   }
   .card:hover { border-color: var(--blue); }
   .card h3 { color: var(--blue); font-size: 1rem; margin-bottom: 0.6rem; }
-  .card p, .card li { color: var(--text2); font-size: 0.92rem; }
+  .card p, .card li { color: var(--text2); font-size: 0.96rem; }
   .card ul { padding-left: 1.2rem; }
   .card li { margin-bottom: 0.3rem; }
 
@@ -66,7 +66,7 @@
 
   /* TABLE */
   .table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
-  .pp1-wrap table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  .pp1-wrap table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
   .pp1-wrap th {
     background: var(--pp1-bg3); color: var(--blue); border-bottom: 2px solid var(--blue-light); padding: 0.75rem 1rem;
     text-align: left; border: 1px solid var(--border); font-weight: 600;
@@ -78,7 +78,7 @@
   /* TAGS */
   .tag {
     display: inline-block; padding: 0.15rem 0.55rem; border-radius: 3px;
-    font-size: 0.75rem; font-family: monospace; font-weight: bold; margin: 0.15rem;
+    font-size: 0.79rem; font-family: monospace; font-weight: bold; margin: 0.15rem;
   }
   .tag-blue  { background: var(--blue-light); color: var(--blue); }
   .tag-green { background: var(--pp1-green-lt); color: var(--pp1-green); }
@@ -92,8 +92,8 @@
     background: var(--blue-light); border-left: 3px solid var(--blue);
     padding: 1rem 1.2rem; border-radius: 0 6px 6px 0; margin-bottom: 1rem;
   }
-  .juris .tribunal { color: var(--blue); font-size: 0.8rem; font-family: monospace; font-weight: bold; }
-  .juris p { color: var(--text2); font-size: 0.9rem; margin-top: 0.3rem; }
+  .juris .tribunal { color: var(--blue); font-size: 0.84rem; font-family: monospace; font-weight: bold; }
+  .juris p { color: var(--text2); font-size: 0.94rem; margin-top: 0.3rem; }
 
   /* ALERTA */
   .alert {
@@ -101,14 +101,14 @@
     border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: 1rem;
   }
   .alert strong { color: var(--pp1-red); }
-  .alert p { color: var(--text2); font-size: 0.9rem; margin-top: 0.3rem; }
+  .alert p { color: var(--text2); font-size: 0.94rem; margin-top: 0.3rem; }
 
   .tip {
     background: var(--pp1-green-lt); border: 1px solid var(--pp1-green);
     border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: 1rem;
   }
   .tip strong { color: var(--pp1-green); }
-  .tip p { color: var(--text2); font-size: 0.9rem; margin-top: 0.3rem; }
+  .tip p { color: var(--text2); font-size: 0.94rem; margin-top: 0.3rem; }
 
   /* MAPA MENTAL */
   .mapa {
@@ -123,7 +123,7 @@
   .mapa-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
   .mapa-node {
     background: var(--pp1-bg3); border: 1px solid var(--border); border-radius: 6px;
-    padding: 0.6rem 1rem; font-size: 0.85rem; color: var(--text);
+    padding: 0.6rem 1rem; font-size: 0.89rem; color: var(--text);
     position: relative; cursor: default;
   }
   .mapa-node.blue { border-color: var(--blue); color: var(--blue); background: rgba(88,166,255,0.08); }
@@ -131,16 +131,16 @@
   .mapa-node.red  { border-color: var(--pp1-red); color: var(--pp1-red); background: var(--pp1-red-lt); }
   .mapa-node.green{ border-color: var(--pp1-green); color: var(--pp1-green); background: var(--pp1-green-lt); }
   .mapa-node.purple{border-color: var(--pp1-purple); color: var(--pp1-purple); background: rgba(188,140,255,0.08); }
-  .mapa-label { font-size: 0.75rem; color: var(--text2); margin-bottom: 0.4rem; font-style: italic; }
+  .mapa-label { font-size: 0.79rem; color: var(--text2); margin-bottom: 0.4rem; font-style: italic; }
 
   /* FLOWCHART */
   .flow { display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; margin-bottom: 1.5rem; }
   .flow-step {
     background: var(--pp1-bg3); border: 1px solid var(--border); border-radius: 6px;
-    padding: 0.8rem 1.1rem; font-size: 0.85rem; text-align: center;
+    padding: 0.8rem 1.1rem; font-size: 0.89rem; text-align: center;
     min-width: 120px; flex: 1;
   }
-  .flow-step span { display: block; font-size: 0.75rem; color: var(--text2); margin-top: 0.2rem; }
+  .flow-step span { display: block; font-size: 0.79rem; color: var(--text2); margin-top: 0.2rem; }
   .flow-arrow { display: flex; align-items: center; padding: 0 0.4rem; color: var(--blue); font-size: 1.2rem; }
 
   /* ROTEIRO */
@@ -153,10 +153,10 @@
   .roteiro-num {
     background: var(--blue); color: #fff; border-radius: 50%;
     width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
-    font-weight: bold; font-size: 0.85rem; flex-shrink: 0; margin-top: 0.1rem;
+    font-weight: bold; font-size: 0.89rem; flex-shrink: 0; margin-top: 0.1rem;
   }
-  .roteiro-item h4 { color: var(--text); font-size: 0.95rem; margin-bottom: 0.3rem; }
-  .roteiro-item p { color: var(--text2); font-size: 0.88rem; }
+  .roteiro-item h4 { color: var(--text); font-size: 0.99rem; margin-bottom: 0.3rem; }
+  .roteiro-item p { color: var(--text2); font-size: 0.92rem; }
 
   /* CASO PRÁTICO */
   .caso {
@@ -170,30 +170,30 @@
   }
   .caso-.pp1-header h3 { color: var(--blue); font-size: 1rem; }
   .caso-
-.caso-fatos { color: var(--text); font-size: 0.92rem; line-height: 1.8; margin-bottom: 1.2rem; }
+.caso-fatos { color: var(--text); font-size: 0.96rem; line-height: 1.8; margin-bottom: 1.2rem; }
   .caso-perguntas { list-style: none; padding: 0; }
   .caso-perguntas li {
     background: var(--pp1-bg3); border-left: 3px solid var(--pp1-purple);
     padding: 0.7rem 1rem; border-radius: 0 4px 4px 0; margin-bottom: 0.5rem;
-    font-size: 0.9rem; color: var(--text2);
+    font-size: 0.94rem; color: var(--text2);
   }
   .caso-perguntas li strong { color: var(--pp1-purple); }
   .pp1-wrap details { margin-bottom: 0.5rem; }
   .pp1-wrap details summary {
     cursor: pointer; padding: 0.7rem 1rem; background: var(--pp1-bg3);
-    border-radius: 4px; color: var(--pp1-teal); font-size: 0.88rem; font-weight: bold;
+    border-radius: 4px; color: var(--pp1-teal); font-size: 0.92rem; font-weight: bold;
     list-style: none;
   }
   .pp1-wrap details summary::-webkit-details-marker { display: none; }
-  .pp1-wrap details summary::before { content: '▶ '; font-size: 0.7rem; }
+  .pp1-wrap details summary::before { content: '▶ '; font-size: 0.74rem; }
   .pp1-wrap details[open] summary::before { content: '▼ '; }
-  .pp1-wrap details p { padding: 0.8rem 1rem; background: var(--pp1-green-lt); color: var(--text2); font-size: 0.88rem; border-radius: 0 0 4px 4px; }
+  .pp1-wrap details p { padding: 0.8rem 1rem; background: var(--pp1-green-lt); color: var(--text2); font-size: 0.92rem; border-radius: 0 0 4px 4px; }
 
   /* ARTIGO */
   .artigo {
     background: var(--blue-light); border: 1px solid rgba(88,166,255,0.2);
     border-radius: 6px; padding: 0.9rem 1.2rem; margin-bottom: 0.8rem;
-    font-family: monospace; font-size: 0.87rem; color: var(--text);
+    font-family: monospace; font-size: 0.91rem; color: var(--text);
   }
   .artigo strong { color: var(--blue); }
 
@@ -325,7 +325,7 @@
   <div class="section-title" style="margin-top:2rem;">Infográfico — Provas no Processo Penal</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center;">
     <a href="guia-provas-teoria-geral.png" target="_blank"><img src="guia-provas-teoria-geral.png" alt="Infográfico — Provas no Processo Penal" style="max-width:100%;border-radius:6px;cursor:pointer;" title="Clique para ampliar"></a>
-    <p style="color:var(--text2);font-size:0.8rem;margin-top:0.6rem;font-style:italic;">Teoria geral · Admissibilidade · Frutos da árvore envenenada · Meios de prova — clique para ampliar</p>
+    <p style="color:var(--text2);font-size:0.84rem;margin-top:0.6rem;font-style:italic;">Teoria geral · Admissibilidade · Frutos da árvore envenenada · Meios de prova — clique para ampliar</p>
   </div>
 </div>
 
@@ -475,7 +475,7 @@
     <p>Provas derivadas da ilícita também são contaminadas. Origem: <em>Silverthorne Lumber & Co. v. US</em> (1920). Expressão cunhada em <em>Nardone v. US</em> (1937).</p>
     <div style="margin-top:0.8rem">
       <span class="tag tag-red">Art. 157, §1º CPP</span>
-      <p style="margin-top:0.5rem; font-size:0.9rem">Provas derivadas da ilícita também são inadmissíveis, <strong>salvo</strong> quando não evidenciado o nexo de causalidade entre umas e outras, ou quando puderem ser obtidas por fonte independente.</p>
+      <p style="margin-top:0.5rem; font-size:0.94rem">Provas derivadas da ilícita também são inadmissíveis, <strong>salvo</strong> quando não evidenciado o nexo de causalidade entre umas e outras, ou quando puderem ser obtidas por fonte independente.</p>
     </div>
   </div>
 
@@ -868,14 +868,14 @@
 
   <div class="section-title" style="margin-top:0">Teoria Geral das Provas no Processo Penal: Fundamentos, Sistemas e Ilicitudes</div>
 
-  <div class="artigo" style="font-family:var(--sans); font-size:0.93rem; line-height:1.8; border-left:4px solid var(--blue); background:var(--blue-light);">
+  <div class="artigo" style="font-family:var(--sans); font-size:0.97rem; line-height:1.8; border-left:4px solid var(--blue); background:var(--blue-light);">
     A atividade probatória constitui o cerne da dinâmica processual penal, servindo como o instrumento por excelência para a reconstrução histórica dos fatos e a consequente aplicação do direito material. Em um Estado Democrático de Direito, a busca pela verdade não possui caráter absoluto, devendo submeter-se aos ditames do devido processo legal e ao respeito inarredável às garantias fundamentais.
   </div>
 
   <!-- 1 -->
   <div class="section-title">1. Introdução e Conceitos Fundamentais</div>
 
-  <p style="color:var(--text2); font-size:0.92rem; line-height:1.8; margin-bottom:1.2rem;">
+  <p style="color:var(--text2); font-size:0.96rem; line-height:1.8; margin-bottom:1.2rem;">
     Etimologicamente, o termo <em>provar</em> deriva do latim <em>probare</em>, significando a demonstração da veracidade de um enunciado fático tido por ocorrido no mundo fenomenológico. No plano jurídico-processual, a "prova" assume uma dimensão polissêmica, devendo ser analisada sob três vertentes em sentido estrito:
   </p>
 
@@ -1034,7 +1034,7 @@
   <!-- 6 -->
   <div class="section-title">6. Ônus da Prova e Iniciativa Instrutória</div>
 
-  <p style="color:var(--text2); font-size:0.92rem; line-height:1.8; margin-bottom:1rem;">
+  <p style="color:var(--text2); font-size:0.96rem; line-height:1.8; margin-bottom:1rem;">
     O ônus da prova é o encargo das partes de demonstrar a veracidade de suas alegações, <em>"resultando de sua inação uma situação de desvantagem perante o direito"</em> (Renato Brasileiro).
   </p>
 
@@ -1071,13 +1071,13 @@
       <h3>🔴 Prova Ilícita</h3>
       <p>Violação de normas <strong>constitucionais ou de direito material</strong>.</p>
       <p style="margin-top:0.5rem; color:var(--text2)">Consequência: <strong>desentranhamento</strong> (Art. 157 CPP).</p>
-      <div style="margin-top:0.5rem; font-size:0.85rem; color:var(--text2)"><strong>Nucci / LFG:</strong> Art. 157 abrange ambas (ilícita e ilegítima).</div>
+      <div style="margin-top:0.5rem; font-size:0.89rem; color:var(--text2)"><strong>Nucci / LFG:</strong> Art. 157 abrange ambas (ilícita e ilegítima).</div>
     </div>
     <div class="card">
       <h3>🟠 Prova Ilegítima</h3>
       <p>Violação de <strong>normas processuais</strong>.</p>
       <p style="margin-top:0.5rem; color:var(--text2)">Consequência: <strong>nulidade processual</strong> (Art. 573 CPP).</p>
-      <div style="margin-top:0.5rem; font-size:0.85rem; color:var(--text2)"><strong>R. Brasileiro / Ada Pellegrini:</strong> Art. 157 abarca só as ilícitas; ilegítima = nulidade.</div>
+      <div style="margin-top:0.5rem; font-size:0.89rem; color:var(--text2)"><strong>R. Brasileiro / Ada Pellegrini:</strong> Art. 157 abarca só as ilícitas; ilegítima = nulidade.</div>
     </div>
   </div>
 
@@ -1113,7 +1113,7 @@
   </div>
 
   <div style="background:var(--pp1-bg2); border:1px solid var(--border); border-radius:8px; padding:1.4rem; margin-top:1rem; border-left:4px solid var(--blue);">
-    <p style="color:var(--text2); font-size:0.88rem; font-style:italic; line-height:1.8; margin:0;">
+    <p style="color:var(--text2); font-size:0.92rem; font-style:italic; line-height:1.8; margin:0;">
       O Art. 157, §2º do CPP, embora use o termo "fonte independente", descreve tecnicamente a <strong>descoberta inevitável</strong>. A doutrina vê possibilidade de aplicação da mancha purgada na exegese do Art. 157, §1º. Em ambos os casos, a garantia das liberdades fundamentais permanece como norte hermenêutico inafastável.
     </p>
   </div>
@@ -1128,7 +1128,7 @@
   <!-- 1 -->
   <div class="section-title">1. Fundamentos e Conceitos de Prova</div>
 
-  <p style="color:var(--text2); font-size:0.92rem; line-height:1.8; margin-bottom:1.2rem;">
+  <p style="color:var(--text2); font-size:0.96rem; line-height:1.8; margin-bottom:1.2rem;">
     No plano da dogmática processual penal, o ato de provar constitui a demonstração técnica da veracidade de um enunciado fático sobre um evento ocorrido no mundo real. Distinguem-se três acepções fundamentais:
   </p>
 
@@ -1192,7 +1192,7 @@
     <div class="card">
       <h3>🟢 Provas</h3>
       <p>Produzidas perante o magistrado, com observância do <strong>contraditório real</strong> e da ampla defesa. Podem fundamentar condenação.</p>
-      <div style="margin-top:0.5rem; font-size:0.85rem; color:var(--text2)"><strong>Ressalva:</strong> Perícias e documentos (AgRg no REsp 1.522.716/SE) não necessariamente precisam ser repetidos em juízo.</div>
+      <div style="margin-top:0.5rem; font-size:0.89rem; color:var(--text2)"><strong>Ressalva:</strong> Perícias e documentos (AgRg no REsp 1.522.716/SE) não necessariamente precisam ser repetidos em juízo.</div>
     </div>
   </div>
 
@@ -1290,12 +1290,12 @@
     <div class="card">
       <h3>🔴 Provas Ilícitas</h3>
       <p>Violam normas de <strong>direito material</strong> ou princípios constitucionais.</p>
-      <p style="margin-top:0.4rem; color:var(--text2); font-size:0.88rem">Ex.: tortura, invasão domiciliar sem mandado.</p>
+      <p style="margin-top:0.4rem; color:var(--text2); font-size:0.92rem">Ex.: tortura, invasão domiciliar sem mandado.</p>
     </div>
     <div class="card">
       <h3>🟠 Provas Ilegítimas</h3>
       <p>Violam normas de natureza <strong>processual</strong> no momento da produção.</p>
-      <p style="margin-top:0.4rem; color:var(--text2); font-size:0.88rem">Ex.: oitiva de testemunha impedida sem observar as formalidades legais.</p>
+      <p style="margin-top:0.4rem; color:var(--text2); font-size:0.92rem">Ex.: oitiva de testemunha impedida sem observar as formalidades legais.</p>
     </div>
   </div>
 
@@ -1322,17 +1322,17 @@
     <div class="card">
       <h3>🌿 Fonte Independente <span class="tag tag-blue" style="vertical-align:middle">Art. 157, §1º</span></h3>
       <p>Prova válida se o Estado demonstrar que obteve os elementos por meios <strong>sem nexo causal</strong> com a ilicitude original.</p>
-      <p style="color:var(--text2); font-size:0.85rem; margin-top:0.4rem">Ex.: dados já constantes em arquivos policiais antes da busca ilegal.</p>
+      <p style="color:var(--text2); font-size:0.89rem; margin-top:0.4rem">Ex.: dados já constantes em arquivos policiais antes da busca ilegal.</p>
     </div>
     <div class="card">
       <h3>🔮 Descoberta Inevitável <span class="tag tag-blue" style="vertical-align:middle">Art. 157, §2º</span></h3>
       <p>Prova admitida se demonstrado que, pelos trâmites típicos da investigação, o elemento seria <strong>inevitavelmente alcançado</strong>.</p>
-      <p style="color:var(--text2); font-size:0.85rem; margin-top:0.4rem">Nix v. Williams (1984).</p>
+      <p style="color:var(--text2); font-size:0.89rem; margin-top:0.4rem">Nix v. Williams (1984).</p>
     </div>
     <div class="card">
       <h3>🧹 Mancha Purgada</h3>
       <p>Circunstâncias supervenientes ou decurso do tempo <strong>atenuam o nexo causal</strong>, "limpando" a contaminação.</p>
-      <p style="color:var(--text2); font-size:0.85rem; margin-top:0.4rem">Ex.: confissão voluntária dias após uma prisão ilegal.</p>
+      <p style="color:var(--text2); font-size:0.89rem; margin-top:0.4rem">Ex.: confissão voluntária dias após uma prisão ilegal.</p>
     </div>
     <div class="card">
       <h3>🎲 Serendipidade</h3>

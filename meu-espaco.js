@@ -99,8 +99,33 @@ const MeuEspaco = (() => {
 
   function init(area, arquivo) {
     if (!arquivo) return
-    const tabsBar = area.querySelector('.fp-tabs')
-    if (!tabsBar) return
+
+    let tabsBar = area.querySelector('.fp-tabs')
+
+    if (!tabsBar) {
+      // Página sem sistema de abas: embrulha o conteúdo existente numa aba "Conteúdo"
+      const conteudoPainel = document.createElement('div')
+      conteudoPainel.className = 'fp-painel ativo'
+      while (area.firstChild) conteudoPainel.appendChild(area.firstChild)
+
+      tabsBar = document.createElement('div')
+      tabsBar.className = 'fp-tabs'
+
+      const conteudoBtn = document.createElement('button')
+      conteudoBtn.className = 'fp-tab ativo'
+      conteudoBtn.textContent = '📄 Conteúdo'
+      tabsBar.appendChild(conteudoBtn)
+
+      area.appendChild(tabsBar)
+      area.appendChild(conteudoPainel)
+
+      conteudoBtn.addEventListener('click', () => {
+        area.querySelectorAll('.fp-painel').forEach(p => p.classList.remove('ativo'))
+        area.querySelectorAll('.fp-tab').forEach(b => b.classList.remove('ativo'))
+        conteudoPainel.classList.add('ativo')
+        conteudoBtn.classList.add('ativo')
+      })
+    }
 
     const btn = document.createElement('button')
     btn.className = 'fp-tab me-tab-btn'

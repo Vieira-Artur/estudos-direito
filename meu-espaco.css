@@ -1,3 +1,20 @@
+/* ── Sistema de abas fp-tabs (injetado dinamicamente em páginas sem abas) ── */
+.fp-tabs {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 16px; border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+.fp-tab {
+  font-size: 13px; font-family: var(--sans); font-weight: 600;
+  padding: 6px 14px; border-radius: 6px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text2); cursor: pointer; transition: background .15s;
+}
+.fp-tab:hover { background: var(--blue-hover); color: var(--blue); }
+.fp-tab.ativo  { background: var(--blue); color: #fff; border-color: var(--blue); }
+.fp-painel { display: none; }
+.fp-painel.ativo { display: block; }
+
 /* ── Aba externa (botão dourado na barra fp-tabs) ─────── */
 .me-tab-btn {
   border-color: var(--gold) !important;

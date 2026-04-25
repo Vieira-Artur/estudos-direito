@@ -274,6 +274,7 @@ function renderConteudoTurma(turma) {
             }
           }
         })
+        linkificarJulgados(el)
       })
       .catch(() => {
         const el = document.getElementById('conteudo-area')
@@ -701,6 +702,7 @@ function abrirTema(index, fromPop = false) {
           }
         })
       })
+      linkificarJulgados(area)
       // Injeta aba "Meu Espaço" se a página tem sistema de abas
       if (typeof MeuEspaco !== 'undefined') {
         MeuEspaco.init(area, tema.arquivo)

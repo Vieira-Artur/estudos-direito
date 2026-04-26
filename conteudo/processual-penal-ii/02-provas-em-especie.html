@@ -145,6 +145,26 @@
 .lt-s6 .lt-num{background:#0e7490} .lt-s6 .lt-card{border-left-color:#0e7490;background:#ecfeff} .lt-s6 .lt-card h2{color:#0e7490} .lt-s6 .lt-badge{background:#cffafe;color:#0e7490}
 .lt-s7 .lt-num{background:#b91c1c} .lt-s7 .lt-card{border-left-color:#b91c1c;background:#fff5f5} .lt-s7 .lt-card h2{color:#b91c1c} .lt-s7 .lt-badge{background:#fee2e2;color:#991b1b}
 @media(max-width:600px){.lt-timeline::before{left:41px}.lt-num{margin-left:20px;width:38px;height:38px;font-size:.9rem}.lt-step{gap:14px}.lt-card{padding:12px 14px}}
+/* ── Cadeia de Custódia ── */
+.ltc-badge-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.ltc-badge{display:inline-block;font-size:0.8rem;font-weight:600;padding:5px 15px;border-radius:20px}
+.ltc-badge-blue{background:#dbeafe;border:1px solid #93c5fd;color:#1e40af}
+.ltc-badge-green{background:#d1fae5;border:1px solid #6ee7b7;color:#065f46}
+.ltc-intro{background:var(--blue-light);border-left:5px solid var(--blue-dark);border-radius:9px;padding:16px 20px;margin-bottom:32px;font-size:0.92rem;color:var(--text);line-height:1.65}
+.ltc-intro strong{color:var(--blue)}
+.ltc-tl{position:relative;list-style:none;padding:0}
+.ltc-tl::before{content:'';position:absolute;left:51px;top:20px;bottom:20px;width:3px;border-radius:3px;background:linear-gradient(to bottom,#1e3a8a,#dc2626,#b45309,#0f766e,#6d28d9,#0369a1,#be185d,#1d6b3b,#0e7490,#374151)}
+.ltc-s1 .lt-num{background:#1e3a8a}.ltc-s1 .lt-card{border-left-color:#1e3a8a;background:#eff6ff}.ltc-s1 .lt-card h2{color:#1e3a8a}.ltc-s1 .lt-badge{background:#dbeafe;color:#1e40af}
+.ltc-s2 .lt-num{background:#dc2626}.ltc-s2 .lt-card{border-left-color:#dc2626;background:#fff5f5}.ltc-s2 .lt-card h2{color:#b91c1c}.ltc-s2 .lt-badge{background:#fee2e2;color:#991b1b}
+.ltc-s3 .lt-num{background:#b45309}.ltc-s3 .lt-card{border-left-color:#b45309;background:#fffbeb}.ltc-s3 .lt-card h2{color:#92400e}.ltc-s3 .lt-badge{background:#fef3c7;color:#92400e}
+.ltc-s4 .lt-num{background:#0f766e}.ltc-s4 .lt-card{border-left-color:#0f766e;background:#f0fdfa}.ltc-s4 .lt-card h2{color:#0f766e}.ltc-s4 .lt-badge{background:#ccfbf1;color:#0f766e}
+.ltc-s5 .lt-num{background:#6d28d9}.ltc-s5 .lt-card{border-left-color:#6d28d9;background:#faf5ff}.ltc-s5 .lt-card h2{color:#6d28d9}.ltc-s5 .lt-badge{background:#ede9fe;color:#5b21b6}
+.ltc-s6 .lt-num{background:#0369a1}.ltc-s6 .lt-card{border-left-color:#0369a1;background:#f0f9ff}.ltc-s6 .lt-card h2{color:#0369a1}.ltc-s6 .lt-badge{background:#bae6fd;color:#0369a1}
+.ltc-s7 .lt-num{background:#be185d}.ltc-s7 .lt-card{border-left-color:#be185d;background:#fdf2f8}.ltc-s7 .lt-card h2{color:#be185d}.ltc-s7 .lt-badge{background:#fce7f3;color:#9d174d}
+.ltc-s8 .lt-num{background:#1d6b3b}.ltc-s8 .lt-card{border-left-color:#1d6b3b;background:#f0fdf4}.ltc-s8 .lt-card h2{color:#1d6b3b}.ltc-s8 .lt-badge{background:#dcfce7;color:#166534}
+.ltc-s9 .lt-num{background:#0e7490}.ltc-s9 .lt-card{border-left-color:#0e7490;background:#ecfeff}.ltc-s9 .lt-card h2{color:#0e7490}.ltc-s9 .lt-badge{background:#cffafe;color:#0e7490}
+.ltc-s10 .lt-num{background:#374151}.ltc-s10 .lt-card{border-left-color:#374151;background:#f9fafb}.ltc-s10 .lt-card h2{color:#374151}.ltc-s10 .lt-badge{background:#e5e7eb;color:#374151}
+@media(max-width:600px){.ltc-tl::before{left:41px}}
 </style>
 
 <div class="pp2-wrap">
@@ -162,6 +182,7 @@
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-casos')">⚖️ Casos</button>
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-relatorio')">📄 Relatório</button>
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-lt')">⏱ Linha do Tempo</button>
+  <button class="pp2-tab" onclick="pp2Tab(event,'pp2-cadeia')">⛓ Cadeia de Custódia</button>
 </div>
 
 <!-- MAPA MENTAL -->
@@ -699,6 +720,122 @@
     <strong>Reconhecimento:</strong> art. 226, CPP
     &nbsp;·&nbsp;
     <strong>Direito ao silêncio:</strong> CF/88, art. 5º, LXIII
+  </div>
+</div>
+
+<!-- CADEIA DE CUSTÓDIA -->
+<div id="pp2-cadeia" class="pp2-painel">
+  <div class="lt-header">
+    <h1>Cadeia de Custódia do Vestígio</h1>
+    <p class="lt-subtitulo">CPP · Arts. 158-A e 158-B · Lei nº 13.964/2019 (Pacote Anticrime)</p>
+    <div class="ltc-badge-row">
+      <span class="ltc-badge ltc-badge-blue">Do reconhecimento ao descarte</span>
+      <span class="ltc-badge ltc-badge-green">10 etapas obrigatórias</span>
+    </div>
+  </div>
+
+  <div class="ltc-intro">
+    <strong>O que é?</strong> A cadeia de custódia é o conjunto de procedimentos para manter e documentar a <strong>história cronológica do vestígio</strong> coletado em locais ou vítimas de crimes — rastreando sua posse e manuseio desde o reconhecimento até o descarte (art. 158-A, CPP). <strong>Vestígio</strong> é todo objeto ou material bruto, visível ou latente, constatado ou recolhido, que se relaciona à infração penal (art. 158-A, §3º). O início da cadeia se dá com a <strong>preservação do local ou com a detecção do vestígio</strong> em procedimento policial ou pericial (art. 158-A, §1º).
+  </div>
+
+  <ol class="ltc-tl">
+
+    <li class="lt-step ltc-s1">
+      <div class="lt-num">1</div>
+      <div class="lt-card">
+        <span class="lt-badge">Início</span>
+        <h2>Reconhecimento</h2>
+        <p>Ato de distinguir um elemento como de potencial interesse para a produção da prova pericial. O agente público que reconhece o vestígio torna-se responsável por sua preservação (art. 158-A, §2º).</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s2">
+      <div class="lt-num">2</div>
+      <div class="lt-card">
+        <span class="lt-badge">Preservação</span>
+        <h2>Isolamento</h2>
+        <p>Ato de evitar que se altere o estado das coisas — isolar e preservar o ambiente imediato, mediato e relacionado aos vestígios e ao local de crime. Impede a contaminação da cena e dos elementos probatórios.</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s3">
+      <div class="lt-num">3</div>
+      <div class="lt-card">
+        <span class="lt-badge">Documentação</span>
+        <h2>Fixação</h2>
+        <p>Descrição detalhada do vestígio conforme encontrado no local de crime ou no corpo de delito — posição, aspecto e contexto — podendo ser ilustrada por fotografias, filmagens ou croqui. Obrigatória a descrição no laudo pericial.</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s4">
+      <div class="lt-num">4</div>
+      <div class="lt-card">
+        <span class="lt-badge">Recolhimento</span>
+        <h2>Coleta</h2>
+        <p>Ato de recolher o vestígio que será submetido à análise pericial, respeitando suas características e natureza física, química ou biológica, com técnicas adequadas a cada tipo de material.</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s5">
+      <div class="lt-num">5</div>
+      <div class="lt-card">
+        <span class="lt-badge">Embalagem</span>
+        <h2>Acondicionamento</h2>
+        <p>Cada vestígio coletado é embalado de forma individualizada, conforme suas características físicas, químicas e biológicas. Devem constar obrigatoriamente: data, hora e nome de quem realizou a coleta e o acondicionamento.</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s6">
+      <div class="lt-num">6</div>
+      <div class="lt-card">
+        <span class="lt-badge">Deslocamento</span>
+        <h2>Transporte</h2>
+        <p>Transferência do vestígio de um local para outro, em condições adequadas de embalagem, veículo e temperatura — garantindo a manutenção das características originais e o controle permanente da posse.</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s7">
+      <div class="lt-num">7</div>
+      <div class="lt-card">
+        <span class="lt-badge">Formalização</span>
+        <h2>Recebimento</h2>
+        <p>Ato formal de transferência da posse, documentado com: número do procedimento, unidade policial, local de origem, nome do transportador, código de rastreamento, natureza do exame, protocolo, assinatura e identificação do receptor.</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s8">
+      <div class="lt-num">8</div>
+      <div class="lt-card">
+        <span class="lt-badge">Análise Pericial</span>
+        <h2>Processamento</h2>
+        <p>Exame pericial em si — manipulação do vestígio com metodologia adequada às suas características biológicas, físicas e químicas. O resultado deve ser formalizado em laudo produzido por perito.</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s9">
+      <div class="lt-num">9</div>
+      <div class="lt-card">
+        <span class="lt-badge">Guarda</span>
+        <h2>Armazenamento</h2>
+        <p>Guarda do material em condições adequadas — seja para processamento futuro, contraperícia ou descarte — com vinculação ao número do laudo correspondente, garantindo plena rastreabilidade.</p>
+      </div>
+    </li>
+
+    <li class="lt-step ltc-s10">
+      <div class="lt-num">10</div>
+      <div class="lt-card">
+        <span class="lt-badge">Encerramento</span>
+        <h2>Descarte</h2>
+        <p>Liberação do vestígio, respeitando a legislação vigente e, quando pertinente, mediante autorização judicial. Encerra o ciclo da cadeia de custódia.</p>
+      </div>
+    </li>
+
+  </ol>
+
+  <div class="lt-footer">
+    <strong>Fundamento:</strong> CPP, arts. 158-A e 158-B (Lei nº 13.964/2019 — Pacote Anticrime)
+    &nbsp;·&nbsp;
+    <strong>Vigência:</strong> conforme art. 20 da Lei nº 13.964/2019
   </div>
 </div>
 

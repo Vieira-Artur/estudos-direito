@@ -1102,19 +1102,16 @@ function linkificarJulgados(el) {
       a.className   = 'julgado-link'
       a.textContent = h.raw
       a.target      = '_blank'
+      a.rel         = 'noopener noreferrer'
       if (h.tipo === 'acordao' && h.tribunal === 'stj') {
-        const searchUrl = _urlJulgado(h)
-        a.href  = searchUrl
-        a.rel   = 'noreferrer'
-        a.title = 'Buscar no STJ'
-        a.addEventListener('click', (e) => {
-          e.preventDefault()
-          const w = window.open('https://scon.stj.jus.br/SCON/', '_blank')
-          if (w) setTimeout(() => { try { w.location = searchUrl } catch (_) {} }, 1500)
+        a.href  = 'https://scon.stj.jus.br/SCON/'
+        a.title = 'Abrir STJ — número copiado para colar na busca'
+        a.addEventListener('click', () => {
+          navigator.clipboard.writeText(h.raw).catch(() => {})
+          _toastJulgado(h.raw)
         })
       } else {
         a.href  = _urlJulgado(h)
-        a.rel   = 'noopener noreferrer'
         a.title = `Ver no ${(h.m.groups?.court || h.tribunal).toUpperCase()}`
       }
       frag.appendChild(a)

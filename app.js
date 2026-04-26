@@ -1029,9 +1029,9 @@ function _urlJulgado({ tribunal, tipo, m }) {
       return `https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?tipo=tabela&cod=${num}`
     return `https://jurisprudencia.stf.jus.br/pages/search?queryString=Tema+${num}`
   }
-  const t = encodeURIComponent((g.tipo || '').replace(/-\w+$/, ''))
   if (tribunal === 'stj')
-    return `https://scon.stj.jus.br/SCON/pesquisar.jsp?b=ACOR&livre=${t}+${num}`
+    return `https://www.google.com/search?q=STJ+${encodeURIComponent('"' + m[0].trim() + '"')}`
+  const t = encodeURIComponent((g.tipo || '').replace(/-\w+$/, ''))
   return `https://jurisprudencia.stf.jus.br/pages/search?queryString=${t}+${num}`
 }
 

@@ -489,8 +489,8 @@ const MeuEspaco = (() => {
     document.addEventListener('keydown', onKey)
     fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
 
-    painel.querySelector('.me-limpar-btn[data-canvas="linha"]').addEventListener('click', () => {
-      if (!confirm('Limpar toda a linha do tempo?')) return
+    painel.querySelector('.me-limpar-btn[data-canvas="linha"]').addEventListener('click', async () => {
+      if (!await _confirmar('Limpar toda a linha do tempo?')) return
       fc.clear()
       addBase()
       fc.renderAll()
@@ -576,8 +576,8 @@ const MeuEspaco = (() => {
     document.addEventListener('keydown', onKey)
     fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
 
-    painel.querySelector('.me-limpar-btn[data-canvas="livre"]').addEventListener('click', () => {
-      if (!confirm('Limpar todo o canvas?')) return
+    painel.querySelector('.me-limpar-btn[data-canvas="livre"]').addEventListener('click', async () => {
+      if (!await _confirmar('Limpar todo o canvas?')) return
       fc.clear()
       fc.backgroundColor = '#fafafa'
       fc.renderAll()
@@ -762,7 +762,7 @@ const MeuEspaco = (() => {
 
   function wireApagar(painel, arquivo) {
     painel.querySelector('.me-apagar-btn').addEventListener('click', async () => {
-      if (!confirm('Apagar todas as anotações e diagramas deste tema?\nEsta ação não pode ser desfeita.')) return
+      if (!await _confirmar('Apagar todas as anotações e diagramas deste tema?\nEsta ação não pode ser desfeita.')) return
 
       localStorage.removeItem(storageKey('texto', arquivo))
       localStorage.removeItem(storageKey('diagrama-mapa-mental', arquivo))

@@ -64,6 +64,37 @@ function esc(str) {
 const SITE_BASE = new URL('./', document.baseURI).href
 const BASE_PATH = new URL('./', document.baseURI).pathname  // ex: "/estudos-direito/" ou "/"
 
+// ── Helpers globais ─────────────────────────────────────
+function _confirmar(msg) {
+  return new Promise(resolve => {
+    const d = document.createElement('dialog')
+    d.className = 'app-dlg'
+    d.setAttribute('aria-modal', 'true')
+    d.innerHTML = `<p class="app-dlg-msg">${msg}</p><div class="app-dlg-btns"><button class="app-dlg-cancel">Cancelar</button><button class="app-dlg-ok">Confirmar</button></div>`
+    document.body.appendChild(d)
+    d.showModal()
+    const fim = v => { d.close(); d.remove(); resolve(v) }
+    d.querySelector('.app-dlg-ok').onclick     = () => fim(true)
+    d.querySelector('.app-dlg-cancel').onclick  = () => fim(false)
+    d.addEventListener('cancel', () => fim(false))
+  })
+}
+
+function _fetchComTimeout(url, ms = 8000) {
+  const ctrl = new AbortController()
+  const id   = setTimeout(() => ctrl.abort(), ms)
+  return fetch(url, { signal: ctrl.signal }).finally(() => clearTimeout(id))
+}
+
+function _atualizarOG(titulo, desc) {
+  const base = 'Estudos Complementares — Prof. Artur Vieira'
+  const descPad = 'Material de estudos complementares de Direito — Prof. Artur Vieira.'
+  document.querySelector('meta[property="og:title"]').content       = titulo ? `${titulo} — ${base}` : base
+  document.querySelector('meta[property="og:description"]').content = desc || descPad
+  document.querySelector('meta[property="og:url"]').content         = location.href
+  document.querySelector('meta[name="description"]').content        = desc || descPad
+}
+
 // ── Estado ──────────────────────────────────────────────
 const estado = { materiaAtual: null, turmaAtual: null }
 
@@ -136,6 +167,7 @@ function inicializarRota() {
 }
 
 inicializarRota()
+setTimeout(indexarConteudo, 2000) // indexa em background após carregamento inicial
 
 // ── Histórico do navegador ───────────────────────────────
 window.addEventListener('popstate', (e) => {
@@ -165,6 +197,7 @@ function renderArvore(fromPop = false) {
   document.title = 'Estudos Complementares — Prof. Artur Vieira'
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'materias' }, '', BASE_PATH)
+  _atualizarOG()
   window.scrollTo(0, 0)
 
   app.innerHTML = `
@@ -199,6 +232,7 @@ function selecionarMateria(id, fromPop = false) {
   document.title = `${materia.titulo} — Estudos Complementares`
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'materia', materiaId: id }, '', BASE_PATH + id)
+  _atualizarOG(materia.titulo, materia.descricao)
   window.scrollTo(0, 0)
 
   if (materia.turmas.length === 0) {
@@ -229,6 +263,7 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
   document.title = `${turma.titulo} — ${materia.titulo}`
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '', BASE_PATH + materiaId + '/' + turmaId)
+  _atualizarOG(`${turma.titulo} — ${materia.titulo}`)
   window.scrollTo(0, 0)
 
   app.innerHTML = `
@@ -250,7 +285,7 @@ function renderConteudoTurma(turma) {
 
   if (turma.indice) {
     area.innerHTML = skeletonConteudo()
-    fetch(SITE_BASE + turma.indice)
+    _fetchComTimeout(SITE_BASE + turma.indice)
       .then(r => {
         if (!r.ok) throw new Error('Arquivo não encontrado')
         return r.text()
@@ -278,7 +313,7 @@ function renderConteudoTurma(turma) {
       })
       .catch(() => {
         const el = document.getElementById('conteudo-area')
-        if (el) el.innerHTML = `<p style="color:#c00">Não foi possível carregar o índice.<br>Verifique se o arquivo <code>${turma.indice}</code> existe.</p>`
+        if (el) el.innerHTML = `<p style="color:#c00">Não foi possível carregar o material. Tente recarregar a página.</p>`
       })
     return
   }
@@ -412,16 +447,20 @@ function adicionarFlashcard(turmaId) {
   const frente = document.getElementById('flash-novo-frente')?.value || ''
   const verso  = document.getElementById('flash-novo-verso')?.value || ''
   if (!frente.trim() || !verso.trim()) {
-    alert('Preencha a pergunta e a resposta antes de salvar.')
+    const form = document.getElementById('flash-form')
+    let err = form?.querySelector('.flash-erro')
+    if (!err && form) { err = document.createElement('p'); err.className = 'flash-erro'; form.appendChild(err) }
+    if (err) err.textContent = 'Preencha a pergunta e a resposta antes de salvar.'
     return
   }
+  document.getElementById('flash-form')?.querySelector('.flash-erro')?.remove()
   salvarFlashcard(turmaId, frente, verso)
   renderFlashSessao(estado.turmaAtual)
 }
 
-function deletarEAtualizar(turmaId, id) {
+async function deletarEAtualizar(turmaId, id) {
   if (!estado.turmaAtual) return
-  if (!confirm('Remover este card?')) return
+  if (!await _confirmar('Remover este card?')) return
   deletarFlashcard(turmaId, id)
   renderFlashSessao(estado.turmaAtual)
 }
@@ -643,6 +682,7 @@ function abrirTema(index, fromPop = false) {
   const tema = estado.turmaAtual.temas[index]
   document.title = `${tema.titulo} — ${estado.turmaAtual.titulo}`
   atualizarBreadcrumb(tema.titulo)
+  _atualizarOG(`${tema.titulo} — ${estado.turmaAtual.titulo}`, tema.descricao)
   const _temaSlug = tema.arquivo.replace('conteudo/', '').replace('.html', '')
   if (!fromPop) history.pushState({
     view: 'tema',
@@ -656,7 +696,7 @@ function abrirTema(index, fromPop = false) {
 
   const base = SITE_BASE + tema.arquivo.substring(0, tema.arquivo.lastIndexOf('/') + 1)
 
-  fetch(SITE_BASE + tema.arquivo)
+  _fetchComTimeout(SITE_BASE + tema.arquivo)
     .then(r => {
       if (!r.ok) throw new Error('Arquivo não encontrado')
       return r.text()
@@ -748,8 +788,7 @@ function abrirTema(index, fromPop = false) {
     })
     .catch(() => {
       document.getElementById('conteudo-area').innerHTML =
-        `<p style="color:#c00">Não foi possível carregar o conteúdo.<br>
-         Verifique se o arquivo <code>${tema.arquivo}</code> existe.</p>`
+        `<p style="color:#c00">Não foi possível carregar o conteúdo. Tente recarregar a página.</p>`
     })
 }
 
@@ -793,12 +832,13 @@ function abrirSobre(fromPop = false) {
   estado.turmaAtual   = null
   document.title = 'Sobre mim — Prof. Artur Vieira'
   atualizarBreadcrumb('Sobre mim')
+  _atualizarOG('Sobre mim')
   if (!fromPop) history.pushState({ view: 'sobre' }, '', BASE_PATH + 'sobre')
   window.scrollTo(0, 0)
 
   app.innerHTML = skeletonSobre()
 
-  fetch(SITE_BASE + 'sobre.html')
+  _fetchComTimeout(SITE_BASE + 'sobre.html')
     .then(r => { if (!r.ok) throw new Error(); return r.text() })
     .then(html => {
       app.innerHTML = html

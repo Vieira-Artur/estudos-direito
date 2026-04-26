@@ -139,6 +139,7 @@
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-tabela')">📊 Tabelas</button>
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-roteiro')">📖 Roteiro</button>
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-casos')">⚖️ Casos</button>
+  <button class="pp2-tab" onclick="pp2Tab(event,'pp2-relatorio')">📄 Relatório</button>
 </div>
 
 <!-- MAPA MENTAL -->
@@ -588,6 +589,67 @@
         </p>
       </details>
     </div>
+  </div>
+</div>
+
+<!-- RELATÓRIO GERAL -->
+<div id="pp2-relatorio" class="pp2-painel">
+  <div class="section-title" style="margin-top:0">Relatório de Texto Base: Provas em Espécie no Processo Penal Brasileiro</div>
+
+  <div class="card">
+    <h3>1. Introdução aos Meios de Prova e Standards Probatórios</h3>
+    <p>A atividade probatória no processo penal, superada a compreensão de sua teoria geral, dedica-se ao estudo dos instrumentos específicos que viabilizam a reconstrução retrospectiva dos fatos. Sob o prisma da prova como meio, compreendem-se os instrumentos idôneos à formação da convicção do julgador. É imperativo destacar que o sistema brasileiro adota o <strong>sistema do convencimento motivado</strong> (ou persuasão racional), exigindo que a valoração da prova seja sempre fundamentada. Nesse contexto, surge a relevância do <strong>Standard Probatório</strong>, que define o nível de certeza exigido para cada decisão judicial. Enquanto para a decretação de uma prisão preventiva o Art. 312 do CPP exige apenas a prova da materialidade e indícios suficientes (<em>probabilidade</em>) de autoria, para uma condenação criminal o Direito pátrio exige o standard <em>beyond a reasonable doubt</em> — a certeza de autoria e materialidade além de qualquer dúvida razoável, em estrita observância à presunção de inocência.</p>
+  </div>
+
+  <div class="card">
+    <h3>2. Exame de Corpo de Delito e Perícias Forenses</h3>
+    <p>A perícia constitui-se como prova material indispensável nos <strong>crimes não transeuntes</strong> — aqueles que deixam vestígios. Segundo a regra de ouro do Art. 158 do CPP, quando a infração deixar rastros, o exame de corpo de delito, seja ele <em>direto</em> (sobre o próprio objeto) ou <em>indireto</em> (por meio de outros elementos), é obrigatório. Ressalte-se que a confissão do acusado não possui o condão de suprir a falta do exame pericial, uma vez que o legislador buscou assegurar a objetividade da materialidade delitiva. Por ser considerada uma prova não repetível, o contraditório é <strong>diferido</strong> (postergado), permitindo que a ampla defesa seja exercida em momento posterior, durante a instrução judicial. Ademais, o Art. 158, parágrafo único, estabelece <strong>prioridade</strong> na realização do exame para crimes que envolvam violência doméstica contra a mulher, ou cometidos contra crianças, adolescentes, idosos ou pessoas com deficiência.</p>
+  </div>
+
+  <div class="card">
+    <h3>3. A Cadeia de Custódia da Prova (Arts. 158-A a 158-F)</h3>
+    <p>A preservação da integridade do vestígio é condição <em>sine qua non</em> para a confiabilidade epistemológica da prova. A cadeia de custódia, definida pelo Art. 158-A, é o conjunto de procedimentos que documentam a história cronológica do vestígio, evitando manipulações. O fluxo estabelecido pelo Art. 158-B compreende <strong>dez etapas</strong> que devem ser rigorosamente seguidas:</p>
+    <ol style="margin-top:0.8rem;padding-left:1.4rem;color:var(--text2);font-size:0.94rem;line-height:1.8">
+      <li><strong>Reconhecimento</strong> — identificação do potencial vestígio</li>
+      <li><strong>Isolamento</strong> — preservação do local para evitar alterações</li>
+      <li><strong>Fixação</strong> — descrição detalhada por meio de fotos ou laudos</li>
+      <li><strong>Coleta</strong> — recolhimento do vestígio respeitando técnicas específicas</li>
+      <li><strong>Acondicionamento</strong> — selagem em embalagem adequada e individualizada</li>
+      <li><strong>Transporte</strong> — transferência segura para o órgão pericial</li>
+      <li><strong>Recebimento</strong> — formalização da entrega do vestígio</li>
+      <li><strong>Processamento</strong> — a realização da perícia propriamente dita</li>
+      <li><strong>Armazenamento</strong> — guarda em local apropriado após o exame</li>
+      <li><strong>Descarte</strong> — destinação final conforme autorização legal</li>
+    </ol>
+    <p style="margin-top:0.8rem">O controle rigoroso dessas etapas impede que conclusões irracionais ou fundadas em provas adulteradas fundamentem a pretensão punitiva.</p>
+  </div>
+
+  <div class="card">
+    <h3>4. Interrogatório do Acusado e Confissão</h3>
+    <p>O interrogatório é um ato de natureza jurídica <strong>híbrida</strong>: é meio de prova, mas, primordialmente, um <strong>meio de defesa</strong> (autodefesa). Deve ser pautado pelo princípio do <em>nemo tenetur se detegere</em>, garantindo o direito ao silêncio sem que este seja interpretado em prejuízo do réu. A doutrina e a jurisprudência enfatizam a obrigatoriedade do <strong>Aviso de Miranda</strong> (<em>Miranda Rights</em>), informando ao acusado seus direitos constitucionais; a ausência deste aviso pode inquinar de nulidade o ato e as provas dele derivadas. Embora a videoconferência seja admitida como medida excepcional, as formalidades legais devem ser estritas para garantir o devido processo. Sobre a <strong>confissão</strong>, o sistema brasileiro abandonou o conceito de "Rainha das Provas" (sistema tarifado). Ela é agora caracterizada pela <strong>divisibilidade</strong> e <strong>retratabilidade</strong>, devendo ser confrontada com os demais elementos de convicção para que possua validade no convencimento motivado do magistrado.</p>
+  </div>
+
+  <div class="card">
+    <h3>5. Declarações do Ofendido e Prova Testemunhal</h3>
+    <p>Nas declarações do ofendido, a palavra da vítima assume especial relevo, especialmente em crimes sexuais e de violência doméstica, ocorridos frequentemente sem testemunhas oculares. A Lei 13.431/17 reforça essa importância ao prever o <strong>depoimento especial</strong>, justificando a urgência pela falibilidade da memória de crianças e adolescentes. Já a prova testemunhal rege-se pela <strong>oralidade</strong> e <strong>retrospectividade</strong>. O procedimento de inquirição, conforme o Art. 212 do CPP, adota o sistema de perguntas diretas (<em>Direct and Cross-examination</em>), no qual as partes formulam os questionamentos e o juiz atua de forma complementar para dirimir dúvidas. Para manter a idoneidade epistêmica, aplica-se a <strong>Hearsay Rule</strong> (testemunho de "ouvir dizer"), limitando a validade de depoimentos indiretos que não permitem a demonstração racional e objetiva dos fatos, visando evitar distorções subjetivas.</p>
+  </div>
+
+  <div class="card">
+    <h3>6. Reconhecimento de Pessoas e Coisas e Provas Atípicas</h3>
+    <p>O reconhecimento exige observância estrita das formalidades do Art. 226 do CPP (descrição prévia, colocação ao lado de pessoas semelhantes e lavratura de auto) para mitigar o risco de erros judiciários baseados em <strong>falsas memórias</strong>. A jurisprudência atual consolidou que o rito legal não é mera recomendação, sob pena de nulidade. No campo das <strong>provas atípicas</strong>, o STJ proferiu decisões fundamentais sobre a fronteira entre fé e prova:</p>
+    <div class="juris" style="margin-top:0.9rem">
+      <div class="tribunal">STJ · RHC 167.478-MS — Cartas Psicografadas</div>
+      <p>Não são admitidas como prova. São atos de fé que prescindem de demonstração racional e carecem de idoneidade epistêmica.</p>
+    </div>
+    <div class="juris">
+      <div class="tribunal">STJ · HC 740.431-DF — Autópsia Psicológica</div>
+      <p>Considerada prova atípica admissível. Cabe ao magistrado o controle de sua utilidade no caso concreto para auxiliar na compreensão da materialidade ou autoria.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>7. Busca e Apreensão e a Prova Ilícita</h3>
+    <p>A busca e apreensão divide-se em <strong>busca domiciliar</strong> — que exige mandado judicial e respeito à inviolabilidade do domicílio — e <strong>busca pessoal</strong>, que demanda fundada suspeita para ser realizada sem mandado. O descumprimento das garantias constitucionais transmuda a diligência em prova ilícita. Conforme o Art. 157, §1º do CPP, aplica-se a <strong>Teoria dos Frutos da Árvore Envenenada</strong> (<em>Fruits of the Poisonous Tree</em>), determinando que a ilicitude originária contamina as provas que dela derivem. Se um mandado de busca é nulo, a apreensão dele decorrente também o será, salvo se demonstrada a existência de uma <strong>fonte independente</strong> ou se a descoberta fosse <strong>inevitável</strong> pelos trâmites típicos da investigação. Tais limites asseguram que o Estado não se beneficie de métodos violadores de direitos fundamentais na busca pela verdade processual.</p>
   </div>
 </div>
 

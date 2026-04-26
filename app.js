@@ -1013,13 +1013,13 @@ function _urlJulgado({ tribunal, tipo, m }) {
   const g = m.groups
   const num = (g.num || '').replace(/\./g, '')
   if (tipo === 'sumula')
-    return `https://scon.stj.jus.br/SCON/pesquisar.jsp?b=SUMU&livre=S%C3%BAmula+${num}`
+    return `https://scon.stj.jus.br/SCON/pesquisar.jsp?b=SUMU&livre=S%FAmula+${num}`
   if (tipo === 'sumula_stf')
     return `https://jurisprudencia.stf.jus.br/pages/search?base=sumulas&sinonimo=true&plural=true&queryString=S%C3%BAmula+${num}`
   if (tipo === 'sumula_pre') {
     if ((g.court || '').toUpperCase() === 'STF')
       return `https://jurisprudencia.stf.jus.br/pages/search?base=sumulas&sinonimo=true&plural=true&queryString=S%C3%BAmula+${num}`
-    return `https://scon.stj.jus.br/SCON/pesquisar.jsp?b=SUMU&livre=S%C3%BAmula+${num}`
+    return `https://scon.stj.jus.br/SCON/pesquisar.jsp?b=SUMU&livre=S%FAmula+${num}`
   }
   if (tipo === 'sv')
     return `https://jurisprudencia.stf.jus.br/pages/search?base=sumulas&sinonimo=true&plural=true&queryString=S%C3%BAmula+Vinculante+${num}`

@@ -1029,7 +1029,7 @@ function _urlJulgado({ tribunal, tipo, m }) {
       return `https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?tipo=tabela&cod=${num}`
     return `https://jurisprudencia.stf.jus.br/pages/search?queryString=Tema+${num}`
   }
-  const t = encodeURIComponent(g.tipo || '')
+  const t = encodeURIComponent((g.tipo || '').replace(/-\w+$/, ''))
   if (tribunal === 'stj')
     return `https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?processo=${num}&b=ACOR&thesaurus=JURIDICO`
   return `https://jurisprudencia.stf.jus.br/pages/search?queryString=${t}+${num}`
@@ -1041,9 +1041,9 @@ function linkificarJulgados(el) {
   const NM = '(?<num>\\d[\\d.]*\\d|\\d)(?:\\s*[-/]\\s*[A-Z]{2})?'
   const PADROES = [
     { re: new RegExp(`\\b${PX}(?<tipo>REsp|AREsp|RHC|EREsp)\\s+${NM}`, 'g'), tribunal: 'stj' },
-    { re: new RegExp(`\\b${PX}(?<tipo>ADI|ADC|ADPF|ARE|MI|RCL)\\s+${NM}`, 'g'), tribunal: 'stf' },
+    { re: new RegExp(`\\b${PX}(?<tipo>ADI|ADC|ADPF|ARE|MI|RCL|Rcl|RCl)\\s+${NM}`, 'g'), tribunal: 'stf' },
     { re: new RegExp(`\\b${PX}(?<tipo>HC)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stj' },
-    { re: new RegExp(`\\b${PX}(?<tipo>RE)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stf' },
+    { re: new RegExp(`\\b${PX}(?<tipo>RE(?:-(?:AgR|AgRg|ED|EDj|MC|RG))?)\\s+${NM}`, 'g'), tribunal: null, fallback: 'stf' },
     { re: new RegExp(`\\b${PX}(?<tipo>MS)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stf' },
     { re: /S[uú]m(?:ula)?\.?\s+n?[ºo°.]?\s*(?<num>\d+)\s+(?:do\s+)?STJ/g, tribunal: 'stj', tipo: 'sumula' },
     { re: /S[uú]m(?:ula)?\.?\s+n?[ºo°.]?\s*(?<num>\d+)\s+(?:do\s+)?STF/g, tribunal: 'stf', tipo: 'sumula_stf' },

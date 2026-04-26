@@ -128,6 +128,136 @@
     }
   }
 
+  /* ── Linha do Tempo — Medidas Cautelares ──────────────── */
+  :root {
+    --tl-green:       #22863a;
+    --tl-green-light: #e6f4ea;
+    --tl-green-line:  #2ea44f;
+    --tl-amber:       #b45309;
+    --tl-amber-light: #fef3c7;
+    --tl-amber-line:  #d97706;
+    --tl-red:         #b91c1c;
+    --tl-red-light:   #fee2e2;
+    --tl-red-line:    #dc2626;
+    --tl-dot-size:    18px;
+    --tl-lw:          3px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --tl-green:       #3fb950;
+      --tl-green-light: #0f2d1a;
+      --tl-green-line:  #3fb950;
+      --tl-amber:       #f0a843;
+      --tl-amber-light: #2d1e07;
+      --tl-amber-line:  #f0a843;
+      --tl-red:         #f85149;
+      --tl-red-light:   #2d0e0e;
+      --tl-red-line:    #f85149;
+    }
+  }
+  .tl-principle-banner {
+    background: var(--tl-green-light);
+    border: 1px solid var(--tl-green-line);
+    border-left: 5px solid var(--tl-green-line);
+    border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+  }
+  .tl-principle-banner .tl-pl-label {
+    font-size: .72rem; font-weight: 700; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--tl-green); margin-bottom: .35rem;
+  }
+  .tl-principle-banner h2 { font-size: 1.08rem; font-weight: 700; color: var(--tl-green); margin-bottom: .4rem; }
+  .tl-principle-banner p  { font-size: .9rem; color: var(--text2); }
+  .tl-cite {
+    display: inline-block; margin-top: .55rem; font-size: .78rem; font-weight: 600;
+    background: var(--tl-green-light); border: 1px solid var(--tl-green-line);
+    color: var(--tl-green); padding: .15rem .55rem; border-radius: 4px; margin-right: .3rem;
+  }
+  .pp3-timeline {
+    position: relative;
+    padding-left: calc(var(--tl-dot-size) + 2rem);
+    margin-bottom: 1.5rem;
+  }
+  .pp3-timeline::before {
+    content: ''; position: absolute;
+    left: calc(var(--tl-dot-size) / 2 - var(--tl-lw) / 2);
+    top: .5rem; bottom: .5rem;
+    width: var(--tl-lw); background: var(--border);
+  }
+  .pp3-tl-item { position: relative; margin-bottom: 2.25rem; }
+  .pp3-tl-item:last-child { margin-bottom: 0; }
+  .pp3-tl-dot {
+    position: absolute;
+    left: calc(-2rem - var(--tl-dot-size));
+    top: 1.1rem;
+    width: var(--tl-dot-size); height: var(--tl-dot-size);
+    border-radius: 50%; border: 3px solid var(--surface);
+    box-shadow: 0 0 0 var(--tl-lw) var(--border); z-index: 1;
+  }
+  .pp3-tl-item.tl-green .pp3-tl-dot { background: var(--tl-green-line); box-shadow: 0 0 0 var(--tl-lw) var(--tl-green-line); }
+  .pp3-tl-item.tl-amber .pp3-tl-dot { background: var(--tl-amber-line); box-shadow: 0 0 0 var(--tl-lw) var(--tl-amber-line); }
+  .pp3-tl-item.tl-red   .pp3-tl-dot { background: var(--tl-red-line);   box-shadow: 0 0 0 var(--tl-lw) var(--tl-red-line); }
+  .pp3-tl-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.25rem 1.4rem 1.4rem;
+    transition: box-shadow .18s ease;
+  }
+  .pp3-tl-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,.1); }
+  .pp3-tl-item.tl-green .pp3-tl-card { border-left: 4px solid var(--tl-green-line); }
+  .pp3-tl-item.tl-amber .pp3-tl-card { border-left: 4px solid var(--tl-amber-line); }
+  .pp3-tl-item.tl-red   .pp3-tl-card { border-left: 4px solid var(--tl-red-line); }
+  .pp3-tl-badge {
+    display: inline-flex; align-items: center; gap: .35rem;
+    font-size: .72rem; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; padding: .2rem .65rem;
+    border-radius: 20px; margin-bottom: .6rem;
+  }
+  .pp3-tl-item.tl-green .pp3-tl-badge { background: var(--tl-green-light); color: var(--tl-green); }
+  .pp3-tl-item.tl-amber .pp3-tl-badge { background: var(--tl-amber-light); color: var(--tl-amber); }
+  .pp3-tl-item.tl-red   .pp3-tl-badge { background: var(--tl-red-light);   color: var(--tl-red); }
+  .pp3-tl-card h3 { font-size: 1.08rem; font-weight: 700; color: var(--text); margin-bottom: .45rem; }
+  .pp3-tl-card .tl-desc { font-size: .92rem; color: var(--text2); margin-bottom: 1rem; }
+  .tl-norms { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .85rem; }
+  .tl-norm-pill {
+    display: inline-block; font-size: .78rem; font-weight: 600;
+    padding: .2rem .7rem; border-radius: 5px; border: 1px solid; cursor: default;
+  }
+  .pp3-tl-item.tl-green .tl-norm-pill { background: var(--tl-green-light); color: var(--tl-green); border-color: var(--tl-green-line); }
+  .pp3-tl-item.tl-amber .tl-norm-pill { background: var(--tl-amber-light); color: var(--tl-amber); border-color: var(--tl-amber-line); }
+  .pp3-tl-item.tl-red   .tl-norm-pill { background: var(--tl-red-light);   color: var(--tl-red);   border-color: var(--tl-red-line); }
+  .tl-detail-list { list-style: none; padding: 0; }
+  .tl-detail-list li {
+    font-size: .87rem; color: var(--text2);
+    padding: .3rem 0 .3rem 1.3rem; position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .tl-detail-list li:last-child { border-bottom: none; }
+  .tl-detail-list li::before { content: '›'; position: absolute; left: 0; font-weight: 700; }
+  .pp3-tl-item.tl-green .tl-detail-list li::before { color: var(--tl-green); }
+  .pp3-tl-item.tl-amber .tl-detail-list li::before { color: var(--tl-amber); }
+  .pp3-tl-item.tl-red   .tl-detail-list li::before { color: var(--tl-red); }
+  .tl-warn-box {
+    display: flex; align-items: flex-start; gap: .6rem;
+    background: var(--tl-red-light); border: 1px solid var(--tl-red-line);
+    border-radius: 6px; padding: .75rem 1rem; margin-top: .9rem;
+    font-size: .84rem; color: var(--tl-red);
+  }
+  .tl-warn-box svg { flex-shrink: 0; margin-top: .05rem; }
+  .pp3-tl-arrow {
+    text-align: center; color: var(--text2);
+    font-size: .78rem; font-weight: 600; letter-spacing: .05em;
+    text-transform: uppercase; padding: .5rem 0;
+    position: relative; z-index: 1; margin: -.4rem 0;
+  }
+  .tl-footer-note {
+    padding: 1.1rem 1.4rem;
+    background: var(--pp3-bg2); border: 1px solid var(--border);
+    border-radius: 10px; font-size: .84rem; color: var(--text2); margin-top: 1.5rem;
+  }
+  .tl-footer-note strong { color: var(--text); }
+  @media (max-width: 520px) {
+    .pp3-timeline { padding-left: calc(var(--tl-dot-size) + 1.25rem); }
+    .pp3-tl-dot   { left: calc(-1.25rem - var(--tl-dot-size)); }
+  }
 
 </style>
 
@@ -146,6 +276,7 @@
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-roteiro')">📖 Roteiro</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-casos')">⚖️ Casos</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-guia')">📄 Guia Prático</button>
+  <button class="pp3-tab" onclick="pp3Tab(event,'pp3-timeline')">🕐 Linha do Tempo</button>
 </div>
 
 <!-- MAPA MENTAL -->
@@ -692,6 +823,163 @@
         </p>
       </details>
     </div>
+  </div>
+</div>
+
+<!-- LINHA DO TEMPO -->
+<div id="pp3-timeline" class="pp3-painel">
+  <div class="section-title">Medidas Cautelares Pessoais — Da Liberdade à Prisão Preventiva</div>
+
+  <div class="tl-principle-banner">
+    <div class="tl-pl-label">Princípio Fundante</div>
+    <h2>⚖️ Presunção de Inocência</h2>
+    <p>
+      Ninguém será considerado culpado até o trânsito em julgado de sentença penal condenatória.
+      A regra é que o investigado ou acusado <strong>responda o processo em liberdade</strong>.
+      Qualquer restrição à liberdade é <em>exceção</em> e exige fundamentação judicial concreta.
+    </p>
+    <span class="tl-cite">Art. 5º, LVII — CF/88</span>
+    <span class="tl-cite">Art. 283 — CPP</span>
+  </div>
+
+  <div class="pp3-timeline">
+
+    <!-- ETAPA 1 — Liberdade como Regra -->
+    <div class="pp3-tl-item tl-green">
+      <div class="pp3-tl-dot"></div>
+      <div class="pp3-tl-card">
+        <div class="pp3-tl-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Regra Geral
+        </div>
+        <h3>Liberdade — O indivíduo responde solto</h3>
+        <p class="tl-desc">
+          Durante a investigação policial e ao longo de toda a persecução penal, o investigado/acusado
+          permanece em liberdade. A prisão antes do trânsito em julgado é medida de exceção
+          e não pode decorrer de mero automatismo legal.
+        </p>
+        <div class="tl-norms">
+          <span class="tl-norm-pill">Art. 5º, LVII — CF/88</span>
+          <span class="tl-norm-pill">Art. 283 — CPP</span>
+          <span class="tl-norm-pill">Art. 282, caput — CPP</span>
+        </div>
+        <ul class="tl-detail-list">
+          <li>Nenhuma prisão pode ocorrer sem ordem escrita e fundamentada de autoridade judiciária competente (art. 283, <em>caput</em>, CPP), salvo flagrante delito.</li>
+          <li>O estado natural é a liberdade; toda restrição deve ser necessária, adequada e proporcional ao caso concreto (art. 282, I e II, CPP).</li>
+          <li>O juiz deve optar, sempre que possível, pela medida menos gravosa (princípio da subsidiariedade).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pp3-tl-arrow">↓ se houver necessidade de cautela</div>
+
+    <!-- ETAPA 2 — Medidas Cautelares Diversas da Prisão -->
+    <div class="pp3-tl-item tl-amber">
+      <div class="pp3-tl-dot"></div>
+      <div class="pp3-tl-card">
+        <div class="pp3-tl-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          1ª Opção Cautelar
+        </div>
+        <h3>Medidas Cautelares Diversas da Prisão</h3>
+        <p class="tl-desc">
+          Antes de se cogitar qualquer forma de prisão, o juiz deve verificar se uma
+          medida alternativa é adequada e suficiente para tutelar o processo.
+          São nove medidas não privativas de liberdade, aplicáveis isolada ou cumulativamente.
+        </p>
+        <div class="tl-norms">
+          <span class="tl-norm-pill">Art. 319 — CPP</span>
+          <span class="tl-norm-pill">Art. 282, § 6º — CPP</span>
+          <span class="tl-norm-pill">Lei 13.964/2019 — Pacote Anticrime</span>
+        </div>
+        <ul class="tl-detail-list">
+          <li><strong>I</strong> — Comparecimento periódico em juízo, no prazo e nas condições fixadas pelo juiz.</li>
+          <li><strong>II</strong> — Proibição de acesso ou frequência a determinados lugares.</li>
+          <li><strong>III</strong> — Proibição de manter contato com pessoa determinada.</li>
+          <li><strong>IV</strong> — Proibição de ausentar-se da comarca ou do país.</li>
+          <li><strong>V</strong> — Recolhimento domiciliar no período noturno e nos dias de folga.</li>
+          <li><strong>VI</strong> — Suspensão do exercício de função pública ou de atividade econômica ou financeira.</li>
+          <li><strong>VII</strong> — Internação provisória, nos casos de crimes violentos praticados por inimputável ou semi-imputável.</li>
+          <li><strong>VIII</strong> — Fiança.</li>
+          <li><strong>IX</strong> — Monitoração eletrônica.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pp3-tl-arrow">↓ somente se as cautelares forem insuficientes ou inadequadas</div>
+
+    <!-- ETAPA 3 — Prisão Preventiva -->
+    <div class="pp3-tl-item tl-red">
+      <div class="pp3-tl-dot"></div>
+      <div class="pp3-tl-card">
+        <div class="pp3-tl-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Último Recurso
+        </div>
+        <h3>Prisão Preventiva — Ultima Ratio</h3>
+        <p class="tl-desc">
+          A prisão preventiva somente poderá ser decretada quando <em>nenhuma</em> das medidas
+          cautelares alternativas for cabível no caso concreto. É a medida mais gravosa e exige
+          fundamentação específica em duplo requisito: prova do crime (fumus comissi delicti)
+          e perigo gerado pelo estado de liberdade (periculum libertatis).
+        </p>
+        <div class="tl-norms">
+          <span class="tl-norm-pill">Art. 282, § 6º — CPP</span>
+          <span class="tl-norm-pill">Art. 312 — CPP</span>
+          <span class="tl-norm-pill">Art. 313 — CPP</span>
+          <span class="tl-norm-pill">Lei 15.272/2025</span>
+          <span class="tl-norm-pill">Lei 15.358/2026</span>
+        </div>
+
+        <p style="font-size:.82rem;font-weight:700;color:var(--tl-red);margin:.9rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em;">
+          Art. 312 — Requisitos (fumus + periculum)
+        </p>
+        <ul class="tl-detail-list">
+          <li><strong>Caput</strong> — Prova da existência do crime e indício suficiente de autoria e de perigo gerado pelo estado de liberdade do imputado. Fundamentos: garantia da ordem pública, da ordem econômica, conveniência da instrução criminal ou para assegurar a aplicação da lei penal. <em>(Redação dada pela Lei 13.964/2019)</em></li>
+          <li><strong>§ 1º</strong> — Descumprimento de qualquer obrigação imposta por força de outra medida cautelar (art. 282, § 4º). <em>(Redação dada pela Lei 13.964/2019)</em></li>
+          <li><strong>§ 2º</strong> — A decisão deve ser motivada e fundamentada em receio de perigo e existência concreta de fatos novos ou contemporâneos que justifiquem a medida. <em>(Incluído pela Lei 13.964/2019)</em></li>
+          <li style="background:var(--tl-red-light);border-left:3px solid var(--tl-red-line);padding-left:.8rem;"><strong>§ 3º — NOVO (Lei 15.272/2025):</strong> Devem ser considerados na aferição da periculosidade do agente: <strong>I</strong> – modus operandi, inclusive uso reiterado de violência/grave ameaça ou premeditação; <strong>II</strong> – participação em organização criminosa; <strong>III</strong> – natureza, quantidade e variedade de drogas, armas ou munições apreendidas; <strong>IV</strong> – fundado receio de reiteração delitiva, inclusive à vista de outros inquéritos e ações penais em curso.</li>
+          <li style="background:var(--tl-red-light);border-left:3px solid var(--tl-red-line);padding-left:.8rem;"><strong>§ 4º — NOVO (Lei 15.272/2025):</strong> É <strong>incabível</strong> a decretação com base em <em>gravidade abstrata</em> do delito — devem ser concretamente demonstrados a periculosidade do agente e seu risco à ordem pública, econômica, à instrução criminal e à aplicação da lei penal.</li>
+        </ul>
+
+        <p style="font-size:.82rem;font-weight:700;color:var(--tl-red);margin:.9rem 0 .4rem;text-transform:uppercase;letter-spacing:.05em;">
+          Art. 313 — Admissibilidade (hipóteses taxativas)
+        </p>
+        <ul class="tl-detail-list">
+          <li><strong>I</strong> — Crimes dolosos punidos com pena privativa de liberdade máxima superior a 4 anos. <em>(Lei 12.403/2011)</em></li>
+          <li><strong>II</strong> — Reincidência em crime doloso, em sentença transitada em julgado (ressalvado art. 64, I, CP). <em>(Lei 12.403/2011)</em></li>
+          <li><strong>III</strong> — Crime que envolva violência doméstica e familiar contra mulher, criança, adolescente, idoso, enfermo ou pessoa com deficiência, para garantir a execução de medidas protetivas de urgência. <em>(Lei 12.403/2011)</em></li>
+          <li style="background:var(--tl-red-light);border-left:3px solid var(--tl-red-line);padding-left:.8rem;"><strong>V — NOVO (Lei 15.358/2026):</strong> Crime cometido por integrante de <strong>organização criminosa ultraviolenta, grupo paramilitar ou milícia privada</strong>, no contexto da atuação ou para consecução das condutas previstas no art. 2º da lei do marco legal do combate ao crime organizado.</li>
+          <li><strong>§ 1º</strong> — Também admitida quando houver dúvida sobre a identidade civil ou esta não for esclarecida (o preso é solto imediatamente após identificação). <em>(Lei 13.964/2019)</em></li>
+          <li><strong>§ 2º</strong> — <strong>Vedada</strong> a decretação com finalidade de antecipação de cumprimento de pena ou como decorrência imediata de investigação criminal ou do recebimento de denúncia. <em>(Lei 13.964/2019)</em></li>
+        </ul>
+
+        <div class="tl-warn-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>
+            <strong>Art. 282, § 6º, CPP:</strong> "A prisão preventiva somente será determinada
+            quando não for cabível a sua substituição por outra medida cautelar (art. 319)."
+            A não observância desse requisito configura constrangimento ilegal, sanável por
+            <em>habeas corpus</em>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /pp3-timeline -->
+
+  <div class="tl-footer-note">
+    <strong>Referências normativas (texto compilado — Planalto, abr./2026):</strong>
+    Constituição Federal de 1988, art. 5º, LVII;
+    Decreto-Lei n.º 3.689/1941 (CPP), arts. 282, 283, 312, 313 e 319.
+    Redações: <strong>Lei 12.403/2011</strong> (cautelares diversas);
+    <strong>Lei 13.964/2019</strong> — Pacote Anticrime (arts. 312 caput, §§ 1º e 2º; art. 313, §§ 1º e 2º);
+    <strong>Lei 15.272/2025</strong> (art. 312, §§ 3º e 4º — critérios de periculosidade e vedação à gravidade abstrata);
+    <strong>Lei 15.358/2026</strong> (art. 313, V — organização criminosa ultraviolenta, grupo paramilitar e milícia privada).
+    <br><br>
+    <strong>Obs.:</strong> A prisão em flagrante (art. 302 CPP), uma vez realizada, deve ser convertida em preventiva,
+    relaxada ou substituída por cautelar diversa no prazo de 24h (art. 310 CPP).
+    O flagrante, por si só, não mantém o indivíduo preso — exige reexame judicial imediato.
   </div>
 </div>
 

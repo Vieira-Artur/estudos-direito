@@ -1035,6 +1035,19 @@ function _urlJulgado({ tribunal, tipo, m }) {
   return `https://jurisprudencia.stf.jus.br/pages/search?queryString=${t}+${num}`
 }
 
+function _toastJulgado(raw) {
+  let el = document.getElementById('julgado-toast')
+  if (!el) {
+    el = document.createElement('div')
+    el.id = 'julgado-toast'
+    document.body.appendChild(el)
+  }
+  el.textContent = `${raw} copiado — cole na busca do STJ (Ctrl+V)`
+  el.classList.add('visivel')
+  clearTimeout(el._t)
+  el._t = setTimeout(() => el.classList.remove('visivel'), 4500)
+}
+
 function linkificarJulgados(el) {
   if (!el) return
   const PX = '(?:(?:AgRg|AgInt|EDcl|EDiv|QO)\\s+n[ao]s?\\s+)?'
@@ -1088,10 +1101,22 @@ function linkificarJulgados(el) {
       const a = document.createElement('a')
       a.className   = 'julgado-link'
       a.textContent = h.raw
-      a.href        = _urlJulgado(h)
       a.target      = '_blank'
-      a.rel         = 'noopener noreferrer'
-      a.title       = `Ver no ${(h.m.groups?.court || h.tribunal).toUpperCase()}`
+      if (h.tipo === 'acordao' && h.tribunal === 'stj') {
+        const searchUrl = _urlJulgado(h)
+        a.href  = searchUrl
+        a.rel   = 'noreferrer'
+        a.title = 'Buscar no STJ'
+        a.addEventListener('click', (e) => {
+          e.preventDefault()
+          const w = window.open('https://scon.stj.jus.br/SCON/', '_blank')
+          if (w) setTimeout(() => { try { w.location = searchUrl } catch (_) {} }, 1500)
+        })
+      } else {
+        a.href  = _urlJulgado(h)
+        a.rel   = 'noopener noreferrer'
+        a.title = `Ver no ${(h.m.groups?.court || h.tribunal).toUpperCase()}`
+      }
       frag.appendChild(a)
       cur = h.e
     }

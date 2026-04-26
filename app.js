@@ -1012,15 +1012,26 @@ function _detectarTribunal(text, matchIdx, fallback) {
 function _urlJulgado({ tribunal, tipo, m }) {
   const g = m.groups
   const num = (g.num || '').replace(/\./g, '')
-  if (tipo === 'sumula') return `https://scon.stj.jus.br/SCON/pesquisar.jsp?query=S%C3%BAmula+${num}`
-  if (tipo === 'sv')     return `https://jurisprudencia.stf.jus.br/pages/search?queryString=S%C3%BAmula+Vinculante+${num}`
+  if (tipo === 'sumula')
+    return `https://scon.stj.jus.br/SCON/pesquisar.jsp?b=SUMU&livre=S%C3%BAmula+${num}`
+  if (tipo === 'sumula_stf')
+    return `https://jurisprudencia.stf.jus.br/pages/search?base=sumulas&sinonimo=true&plural=true&queryString=S%C3%BAmula+${num}`
+  if (tipo === 'sumula_pre') {
+    if ((g.court || '').toUpperCase() === 'STF')
+      return `https://jurisprudencia.stf.jus.br/pages/search?base=sumulas&sinonimo=true&plural=true&queryString=S%C3%BAmula+${num}`
+    return `https://scon.stj.jus.br/SCON/pesquisar.jsp?b=SUMU&livre=S%C3%BAmula+${num}`
+  }
+  if (tipo === 'sv')
+    return `https://jurisprudencia.stf.jus.br/pages/search?base=sumulas&sinonimo=true&plural=true&queryString=S%C3%BAmula+Vinculante+${num}`
   if (tipo === 'tema') {
-    if ((g.court || '').toUpperCase() === 'STJ')
+    const court = ((g.court || '').toUpperCase()) || (tribunal || '').toUpperCase()
+    if (court === 'STJ')
       return `https://processo.stj.jus.br/repetitivos/temas_repetitivos/pesquisa.jsp?tipo=tabela&cod=${num}`
     return `https://jurisprudencia.stf.jus.br/pages/search?queryString=Tema+${num}`
   }
   const t = encodeURIComponent(g.tipo || '')
-  if (tribunal === 'stj') return `https://scon.stj.jus.br/SCON/pesquisar.jsp?query=${t}+${num}`
+  if (tribunal === 'stj')
+    return `https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?processo=${num}&b=ACOR&thesaurus=JURIDICO`
   return `https://jurisprudencia.stf.jus.br/pages/search?queryString=${t}+${num}`
 }
 
@@ -1035,9 +1046,12 @@ function linkificarJulgados(el) {
     { re: new RegExp(`\\b${PX}(?<tipo>RE)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stf' },
     { re: new RegExp(`\\b${PX}(?<tipo>MS)\\s+${NM}`, 'g'),  tribunal: null, fallback: 'stf' },
     { re: /S[uú]m(?:ula)?\.?\s+n?[ºo°.]?\s*(?<num>\d+)\s+(?:do\s+)?STJ/g, tribunal: 'stj', tipo: 'sumula' },
+    { re: /S[uú]m(?:ula)?\.?\s+n?[ºo°.]?\s*(?<num>\d+)\s+(?:do\s+)?STF/g, tribunal: 'stf', tipo: 'sumula_stf' },
+    { re: /(?<court>STJ|STF)\s*[·—]\s*S[uú]m(?:ula)?\s+(?<num>\d+)/g,      tribunal: null,  tipo: 'sumula_pre' },
     { re: /\bSV\s+(?<num>\d+)\b/g,                                           tribunal: 'stf', tipo: 'sv' },
     { re: /S[uú]mula\s+Vinculante\s+n?[ºo°.]?\s*(?<num>\d+)/g,              tribunal: 'stf', tipo: 'sv' },
-    { re: /Tema\s+(?<num>\d+)\s+(?:do\s+)?(?<court>STJ|STF)/g, tribunal: null, tipo: 'tema' },
+    { re: /Tema\s+(?<num>\d+)\s+(?:do\s+)?(?<court>STJ|STF)/g,              tribunal: null,  tipo: 'tema' },
+    { re: /Tema\s+Repetitivo\s+(?<num>\d+)(?:\s+(?:do\s+)?(?<court>STJ|STF))?/g, tribunal: null, tipo: 'tema' },
   ]
   const SKIP = new Set(['A', 'CODE', 'SCRIPT', 'STYLE', 'PRE'])
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
@@ -1077,7 +1091,7 @@ function linkificarJulgados(el) {
       a.href        = _urlJulgado(h)
       a.target      = '_blank'
       a.rel         = 'noopener noreferrer'
-      a.title       = `Ver no ${h.tribunal.toUpperCase()}`
+      a.title       = `Ver no ${(h.m.groups?.court || h.tribunal).toUpperCase()}`
       frag.appendChild(a)
       cur = h.e
     }

@@ -1031,7 +1031,7 @@ function _urlJulgado({ tribunal, tipo, m }) {
   }
   const t = encodeURIComponent((g.tipo || '').replace(/-\w+$/, ''))
   if (tribunal === 'stj')
-    return `https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?processo=${num}&b=ACOR&thesaurus=JURIDICO`
+    return `https://scon.stj.jus.br/SCON/pesquisar.jsp?b=ACOR&livre=${t}+${num}`
   return `https://jurisprudencia.stf.jus.br/pages/search?queryString=${t}+${num}`
 }
 

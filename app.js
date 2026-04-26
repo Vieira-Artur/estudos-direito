@@ -1035,18 +1035,6 @@ function _urlJulgado({ tribunal, tipo, m }) {
   return `https://jurisprudencia.stf.jus.br/pages/search?queryString=${t}+${num}`
 }
 
-function _toastJulgado(raw) {
-  let el = document.getElementById('julgado-toast')
-  if (!el) {
-    el = document.createElement('div')
-    el.id = 'julgado-toast'
-    document.body.appendChild(el)
-  }
-  el.textContent = `${raw} copiado — cole na busca do STJ (Ctrl+V)`
-  el.classList.add('visivel')
-  clearTimeout(el._t)
-  el._t = setTimeout(() => el.classList.remove('visivel'), 4500)
-}
 
 function linkificarJulgados(el) {
   if (!el) return
@@ -1103,17 +1091,8 @@ function linkificarJulgados(el) {
       a.textContent = h.raw
       a.target      = '_blank'
       a.rel         = 'noopener noreferrer'
-      if (h.tipo === 'acordao' && h.tribunal === 'stj') {
-        a.href  = 'https://scon.stj.jus.br/SCON/'
-        a.title = 'Abrir STJ — número copiado para colar na busca'
-        a.addEventListener('click', () => {
-          navigator.clipboard.writeText(h.raw).catch(() => {})
-          _toastJulgado(h.raw)
-        })
-      } else {
-        a.href  = _urlJulgado(h)
-        a.title = `Ver no ${(h.m.groups?.court || h.tribunal).toUpperCase()}`
-      }
+      a.href  = _urlJulgado(h)
+      a.title = `Ver no ${(h.m.groups?.court || h.tribunal).toUpperCase()}`
       frag.appendChild(a)
       cur = h.e
     }

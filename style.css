@@ -1371,30 +1371,7 @@ main {
 /* Cabeçalho de identidade — visível só no PDF */
 #print-header { display: none; }
 
-/* ── Toast julgado ── */
-#julgado-toast {
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: var(--blue-dark);
-  color: white;
-  font-family: var(--sans);
-  font-size: 13.5px;
-  font-weight: 600;
-  padding: 11px 20px;
-  border-radius: 8px;
-  box-shadow: var(--shadow-md);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .2s, transform .2s;
-  white-space: nowrap;
-  z-index: 9999;
-}
-#julgado-toast.visivel {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+
 
 /* ── Print ── */
 @media print {

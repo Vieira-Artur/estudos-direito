@@ -122,8 +122,29 @@
     }
   }
 
-
-
+/* ── Linha do Tempo ── */
+.lt-header { text-align:center; margin-bottom:36px; padding-bottom:20px; border-bottom:3px solid var(--blue-dark); }
+.lt-header h1 { font-family:var(--serif); font-size:1.3rem; font-weight:700; color:var(--blue); margin-bottom:6px; }
+.lt-subtitulo { font-size:0.92rem; color:var(--text2); font-style:italic; margin-bottom:10px; }
+.lt-prazo-badge { display:inline-block; background:#fef3c7; border:1px solid #f59e0b; color:#92400e; font-size:0.83rem; font-weight:600; padding:5px 16px; border-radius:20px; }
+.lt-timeline { position:relative; padding-left:0; list-style:none; }
+.lt-timeline::before { content:''; position:absolute; left:51px; top:20px; bottom:20px; width:3px; background:linear-gradient(to bottom,var(--blue-dark) 0%,var(--blue-accent) 50%,var(--blue-dark) 100%); border-radius:3px; }
+.lt-step { display:flex; align-items:flex-start; margin-bottom:24px; position:relative; gap:22px; }
+.lt-num { flex-shrink:0; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.05rem; font-weight:800; color:#fff; position:relative; z-index:1; margin-left:30px; box-shadow:0 3px 10px rgba(0,0,0,.18); }
+.lt-card { flex:1; border-radius:10px; padding:16px 20px; border-left:5px solid; box-shadow:0 1px 4px rgba(0,0,0,.07); transition:box-shadow .2s,transform .15s; }
+.lt-card:hover { box-shadow:0 5px 16px rgba(0,0,0,.12); transform:translateX(2px); }
+.lt-card h2 { font-family:var(--serif); font-size:0.97rem; font-weight:700; margin-bottom:6px; }
+.lt-card p { font-size:0.92rem; color:var(--text2); line-height:1.65; }
+.lt-badge { display:inline-block; font-size:0.72rem; font-weight:700; padding:3px 10px; border-radius:12px; margin-bottom:8px; letter-spacing:.05em; text-transform:uppercase; }
+.lt-footer { margin-top:32px; padding-top:16px; border-top:1px solid var(--border); font-size:0.83rem; color:var(--text2); text-align:center; line-height:2.2; }
+.lt-s1 .lt-num{background:#0f4c81} .lt-s1 .lt-card{border-left-color:#0f4c81;background:#eff6ff} .lt-s1 .lt-card h2{color:#0f4c81} .lt-s1 .lt-badge{background:#dbeafe;color:#1d4ed8}
+.lt-s2 .lt-num{background:#1d6b3b} .lt-s2 .lt-card{border-left-color:#1d6b3b;background:#f0fdf4} .lt-s2 .lt-card h2{color:#1d6b3b} .lt-s2 .lt-badge{background:#dcfce7;color:#166534}
+.lt-s3 .lt-num{background:#7c3aed} .lt-s3 .lt-card{border-left-color:#7c3aed;background:#faf5ff} .lt-s3 .lt-card h2{color:#7c3aed} .lt-s3 .lt-badge{background:#ede9fe;color:#6d28d9}
+.lt-s4 .lt-num{background:#b45309} .lt-s4 .lt-card{border-left-color:#b45309;background:#fffbeb} .lt-s4 .lt-card h2{color:#b45309} .lt-s4 .lt-badge{background:#fef3c7;color:#92400e}
+.lt-s5 .lt-num{background:#be185d} .lt-s5 .lt-card{border-left-color:#be185d;background:#fdf2f8} .lt-s5 .lt-card h2{color:#be185d} .lt-s5 .lt-badge{background:#fce7f3;color:#9d174d}
+.lt-s6 .lt-num{background:#0e7490} .lt-s6 .lt-card{border-left-color:#0e7490;background:#ecfeff} .lt-s6 .lt-card h2{color:#0e7490} .lt-s6 .lt-badge{background:#cffafe;color:#0e7490}
+.lt-s7 .lt-num{background:#b91c1c} .lt-s7 .lt-card{border-left-color:#b91c1c;background:#fff5f5} .lt-s7 .lt-card h2{color:#b91c1c} .lt-s7 .lt-badge{background:#fee2e2;color:#991b1b}
+@media(max-width:600px){.lt-timeline::before{left:41px}.lt-num{margin-left:20px;width:38px;height:38px;font-size:.9rem}.lt-step{gap:14px}.lt-card{padding:12px 14px}}
 </style>
 
 <div class="pp2-wrap">
@@ -140,6 +161,7 @@
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-roteiro')">📖 Roteiro</button>
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-casos')">⚖️ Casos</button>
   <button class="pp2-tab" onclick="pp2Tab(event,'pp2-relatorio')">📄 Relatório</button>
+  <button class="pp2-tab" onclick="pp2Tab(event,'pp2-lt')">⏱ Linha do Tempo</button>
 </div>
 
 <!-- MAPA MENTAL -->
@@ -589,6 +611,94 @@
         </p>
       </details>
     </div>
+  </div>
+</div>
+
+<!-- LINHA DO TEMPO -->
+<div id="pp2-lt" class="pp2-painel">
+  <div class="lt-header">
+    <h1>Audiência de Instrução e Julgamento</h1>
+    <p class="lt-subtitulo">Código de Processo Penal · Art. 400 · Ordem legal dos atos processuais</p>
+    <span class="lt-prazo-badge">⏱ Prazo máximo para realização: 60 dias</span>
+  </div>
+
+  <ol class="lt-timeline">
+
+    <li class="lt-step lt-s1">
+      <div class="lt-num">1</div>
+      <div class="lt-card">
+        <span class="lt-badge">Vítima</span>
+        <h2>Declarações do Ofendido</h2>
+        <p>A vítima presta declarações sobre os fatos. Não é testemunha e não presta compromisso legal — mas suas declarações têm relevante valor probatório. Conduzidas pelo juiz; acusação e defesa podem formular perguntas em seguida.</p>
+      </div>
+    </li>
+
+    <li class="lt-step lt-s2">
+      <div class="lt-num">2</div>
+      <div class="lt-card">
+        <span class="lt-badge">Acusação</span>
+        <h2>Testemunhas da Acusação</h2>
+        <p>Inquirição das testemunhas arroladas pelo Ministério Público (ou querelante, na ação penal privada). O juiz pergunta primeiro; depois as partes (sistema presidencialista). Perguntas capciosas, sugestivas ou impertinentes são vedadas.</p>
+      </div>
+    </li>
+
+    <li class="lt-step lt-s3">
+      <div class="lt-num">3</div>
+      <div class="lt-card">
+        <span class="lt-badge">Defesa</span>
+        <h2>Testemunhas da Defesa</h2>
+        <p>Inquirição das testemunhas arroladas pela defesa, sob as mesmas regras. <strong>Ressalva (art. 222, CPP):</strong> a expedição de carta precatória não suspende a audiência, desde que a diligência tenha sido requerida em tempo hábil.</p>
+      </div>
+    </li>
+
+    <li class="lt-step lt-s4">
+      <div class="lt-num">4</div>
+      <div class="lt-card">
+        <span class="lt-badge">Prova Técnica</span>
+        <h2>Esclarecimentos dos Peritos</h2>
+        <p>Peritos oficiais ou não-oficiais são chamados para esclarecer laudos periciais já juntados e responder a quesitos complementares das partes. Aplicável quando houver necessidade de complementação oral da prova técnica.</p>
+      </div>
+    </li>
+
+    <li class="lt-step lt-s5">
+      <div class="lt-num">5</div>
+      <div class="lt-card">
+        <span class="lt-badge">Confronto</span>
+        <h2>Acareações</h2>
+        <p>Confronto direto entre pessoas cujas declarações apresentam divergências relevantes — pode ocorrer entre testemunhas, entre testemunha e acusado, ou entre o ofendido e qualquer outro declarante (art. 229, CPP).</p>
+      </div>
+    </li>
+
+    <li class="lt-step lt-s6">
+      <div class="lt-num">6</div>
+      <div class="lt-card">
+        <span class="lt-badge">Reconhecimento</span>
+        <h2>Reconhecimento de Pessoas e Coisas</h2>
+        <p>Ato formal regido pelo art. 226 do CPP. O reconhecimento de pessoas exige ao menos mais três pessoas de aparência semelhante (STJ: nulidade em caso de inobservância do rito). Reconhecimento de coisas segue o mesmo espírito legal.</p>
+      </div>
+    </li>
+
+    <li class="lt-step lt-s7">
+      <div class="lt-num">7</div>
+      <div class="lt-card">
+        <span class="lt-badge">Réu · Ato Final</span>
+        <h2>Interrogatório do Acusado</h2>
+        <p>Último ato da instrução — o réu ouve tudo o que foi produzido antes de exercer sua defesa pessoal. Garantido o direito ao silêncio (art. 5º, LXIII, CF/88). Nenhuma confissão pode ser usada como única prova da condenação.</p>
+      </div>
+    </li>
+
+  </ol>
+
+  <div class="lt-footer">
+    <strong>Fundamento principal:</strong> CPP, art. 400 (Lei nº 11.719/2008)
+    &nbsp;·&nbsp;
+    <strong>Carta precatória:</strong> art. 222, CPP
+    &nbsp;·&nbsp;
+    <strong>Acareação:</strong> art. 229, CPP
+    &nbsp;·&nbsp;
+    <strong>Reconhecimento:</strong> art. 226, CPP
+    &nbsp;·&nbsp;
+    <strong>Direito ao silêncio:</strong> CF/88, art. 5º, LXIII
   </div>
 </div>
 

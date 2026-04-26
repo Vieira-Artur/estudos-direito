@@ -25,7 +25,6 @@
         <span class="site-titulo-short">Estudos Complementares</span>
       </div>
       <div class="header-acoes">
-        <a href="#" class="btn-sobre" onclick="abrirSobre(); return false;">Sobre mim</a>
         <button id="busca-btn" aria-label="Buscar tema" onclick="abrirBusca()">🔍</button>
         <div id="busca-input-wrap" hidden>
           <input id="busca-input" type="search" aria-label="Buscar tema"
@@ -42,7 +41,7 @@
   <button id="btn-topo" title="Voltar ao topo" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})">↑</button>
 
   <footer class="rodape-site">
-    <p class="rodape-autoria">Criado e desenvolvido por Artur Vieira</p>
+    <p class="rodape-autoria">Criado e desenvolvido por Artur Vieira · <a href="#" class="rodape-sobre" onclick="abrirSobre(); return false;">Sobre mim</a></p>
     <p class="rodape-creditos">Com ajuda dos incríveis alunos <span id="alunos-creditos">[nomes a preencher]</span></p>
     <p id="rodape-privacidade" class="rodape-privacidade" hidden>Este site não coleta dados pessoais. Os flashcards criados ficam apenas no seu navegador (localStorage).</p>
   </footer>

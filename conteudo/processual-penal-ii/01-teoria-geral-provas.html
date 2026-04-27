@@ -197,6 +197,34 @@
   }
   .artigo strong { color: var(--blue); }
 
+  /* CARTÕES DE CLASSIFICAÇÃO */
+  .cc-card {
+    background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.2rem 1.4rem; transition: border-color 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .cc-card:hover { border-color: var(--blue); }
+  .cc-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 0.5rem; margin-bottom: 0.7rem;
+  }
+  .cc-header h3 { color: var(--blue); font-size: 1rem; margin: 0; flex: 1; }
+  .cc-header .tag { white-space: nowrap; flex-shrink: 0; }
+  .cc-card > p { color: var(--text2); font-size: 0.93rem; line-height: 1.6; margin-bottom: 0.8rem; }
+  .cc-legal, .cc-juris { margin-bottom: 0.7rem; }
+  .cc-section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: .05em;
+    color: var(--blue); margin-bottom: 0.3rem;
+  }
+  .cc-juris .cc-section-label { color: var(--text2); }
+  .cc-juris p { color: var(--text2); font-size: 0.9rem; margin: 0; }
+  .cc-obs {
+    background: var(--pp1-orange-lt); border: 1px solid var(--pp1-orange);
+    border-radius: 4px; padding: 0.55rem 0.85rem;
+    font-size: 0.88rem; color: var(--pp1-orange); margin-top: auto;
+  }
+  .cc-obs strong { color: var(--pp1-orange); }
+
   .pp1-wrap hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 
   @media(max-width:600px) {
@@ -237,6 +265,7 @@
   <button class="pp1-tab" onclick="pp1Tab(event,'pp1-casos')">⚖️ Casos Práticos</button>
   <button class="pp1-tab" onclick="pp1Tab(event,'pp1-relatorio')">📄 Relatório Geral</button>
   <button class="pp1-tab" onclick="pp1Tab(event,'pp1-resumido')">📝 Relatório Resumido</button>
+  <button class="pp1-tab" onclick="pp1Tab(event,'pp1-cartoes')">🃏 Cartões</button>
 </div>
 
 <!-- ============================================================ MAPA MENTAL -->
@@ -1366,6 +1395,242 @@
 
 </div>
 
+<!-- ============================================================ CARTÕES DE CLASSIFICAÇÃO -->
+<div id="pp1-cartoes" class="pp1-painel">
+  <div class="section-title" style="margin-top:0">Cartões de Classificação — Teoria Geral das Provas</div>
+  <p style="color:var(--text2); font-size:0.92rem; margin-bottom:1.2rem;">Conceitos, classificações, bases legais e jurisprudência</p>
+
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;" id="cc-filtros">
+    <button class="pp1-tab ativo" onclick="ccFiltro(event,'todos')">Todos</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'garantia-autenticidade')">Garantia de Autenticidade</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-antecipada')">Prova Antecipada</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-emprestada')">Prova Emprestada</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-ilegal')">Prova Ilegal (Inadmissível)</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'frutos-arvore')">Frutos da Árvore Envenenada</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'encontro-fortuito')">Encontro Fortuito de Provas</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-cautelar')">Prova Cautelar</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-nao-repetivel')">Prova Não Repetível</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-nominada')">Prova Nominada / Típica</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-inominada')">Prova Inominada / Atípica</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-direta')">Prova Direta</button>
+    <button class="pp1-tab" onclick="ccFiltro(event,'prova-indireta')">Prova Indireta</button>
+  </div>
+
+  <div class="grid-2" id="cc-grid">
+
+    <div class="cc-card" data-cat="garantia-autenticidade">
+      <div class="cc-header">
+        <h3>Cadeia de Custódia</h3>
+        <span class="tag tag-blue">Garantia de Autenticidade</span>
+      </div>
+      <p>Conjunto de procedimentos para manter e documentar a história cronológica do vestígio coletado em locais de crime.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-blue">Arts. 158-A a 158-F, CPP</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Lacre de recipientes; registro de manuseio de material biológico.</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Sua quebra pode gerar nulidade ou ilicitude da prova por falta de confiabilidade.</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-antecipada">
+      <div class="cc-header">
+        <h3>Prova Antecipada</h3>
+        <span class="tag tag-purple">Prova Antecipada</span>
+      </div>
+      <p>Provas produzidas com contraditório real perante autoridade judicial em momento processual distinto do previsto, em razão de urgência.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-purple">Art. 155, CPP</span>
+        <span class="tag tag-purple">Art. 156, I, CPP</span>
+        <span class="tag tag-purple">Art. 225, CPP</span>
+        <span class="tag tag-purple">Art. 366, CPP</span>
+        <span class="tag tag-purple">Súmula 455-STJ</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Depoimento de testemunha doente ou idosa (<em>ad perpetuam rei memoriam</em>).</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Exige autorização judicial prévia e fundamentação concreta sobre o risco da demora.</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-emprestada">
+      <div class="cc-header">
+        <h3>Prova Emprestada</h3>
+        <span class="tag tag-purple">Prova Emprestada</span>
+      </div>
+      <p>Utilização em um processo de prova produzida originalmente em outro processo distinto.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-purple">Súmula 591-STJ</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Uso de interceptação telefônica em processos cíveis (STF, RMS 28.774/DF).</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Exige que a parte contra quem será usada tenha participado do processo original.</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-ilegal">
+      <div class="cc-header">
+        <h3>Prova Ilícita</h3>
+        <span class="tag tag-red">Prova Ilegal (Inadmissível)</span>
+      </div>
+      <p>Provas obtidas em violação a normas constitucionais ou legais de direito material (normas de fundo).</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-red">Art. 5º, LVI, CF</span>
+        <span class="tag tag-red">Art. 157, CPP</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Confissão obtida sob tortura; invasão de domicílio sem mandado judicial.</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Devem ser desentranhadas dos autos e inutilizadas após o trânsito em julgado.</div>
+    </div>
+
+    <div class="cc-card" data-cat="frutos-arvore">
+      <div class="cc-header">
+        <h3>Prova Ilícita por Derivação</h3>
+        <span class="tag tag-orange">Frutos da Árvore Envenenada</span>
+      </div>
+      <p>Provas que, embora produzidas validamente, derivam diretamente de uma prova originariamente ilícita.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-orange">Art. 157, §1º, CPP</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Apreensão da arma após indicação obtida em confissão sob tortura.</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Inadmissível, salvo ausência de nexo causal ou obtenção por fonte independente.</div>
+    </div>
+
+    <div class="cc-card" data-cat="encontro-fortuito">
+      <div class="cc-header">
+        <h3>Serendipidade</h3>
+        <span class="tag tag-green">Encontro Fortuito de Provas</span>
+      </div>
+      <p>Encontro fortuito de provas relativas a crime diverso ou novos autores, não previstos no objeto inicial da diligência.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-green">Jurisprudencial (STF/STJ)</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Interceptação para tráfico que descobre plano de homicídio (STF, HC 129.678/SP).</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Admitida desde que a diligência originária tenha respeitado os requisitos legais.</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-cautelar">
+      <div class="cc-header">
+        <h3>Provas Cautelares</h3>
+        <span class="tag tag-blue">Prova Cautelar</span>
+      </div>
+      <p>Provas em que há risco de desaparecimento do objeto pelo decurso do tempo, realizadas sem contraditório prévio.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-blue">Art. 155, CPP</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Interceptação telefônica; busca e apreensão.</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> O contraditório é diferido (postergado para a fase judicial).</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-nao-repetivel">
+      <div class="cc-header">
+        <h3>Prova Não Repetível</h3>
+        <span class="tag tag-blue">Prova Não Repetível</span>
+      </div>
+      <p>Prova que, uma vez produzida, não pode ser coletada novamente devido ao desaparecimento natural ou destruição do objeto.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-blue">Art. 155, CPP</span>
+        <span class="tag tag-blue">Art. 158, CPP</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Exame de lesões que desaparecem; perícia em local de acidente.</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Geralmente não depende de autorização judicial imediata para sua realização.</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-nominada">
+      <div class="cc-header">
+        <h3>Prova Nominada (Típica)</h3>
+        <span class="tag tag-green">Prova Nominada / Típica</span>
+      </div>
+      <p>Provas que possuem previsão legal específica e rito procedimental estabelecido no ordenamento.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-green">Art. 158 e ss., CPP</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Prova documental, prova testemunhal, reconhecimento de pessoas.</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Típica quando há procedimento previsto; atípica quando não há rito específico fixado.</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-inominada">
+      <div class="cc-header">
+        <h3>Prova Inominada (Atípica)</h3>
+        <span class="tag tag-purple">Prova Inominada / Atípica</span>
+      </div>
+      <p>Prova não prevista expressamente no ordenamento, mas considerada lícita e moralmente legítima.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span class="tag tag-purple">Princípio da atipicidade das provas</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Autópsia psicológica (STJ, HC 740.431-DF).</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Admissível desde que respeite a dignidade da pessoa humana e os direitos fundamentais.</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-direta">
+      <div class="cc-header">
+        <h3>Prova Direta</h3>
+        <span class="tag tag-green">Prova Direta</span>
+      </div>
+      <p>Aquela que permite ao julgador conhecer o fato principal por meio de uma única operação inferencial.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span style="font-size:0.88rem;color:var(--text2);font-style:italic;">—</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Testemunha ocular que visualizou os disparos de arma de fogo.</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Proporciona conhecimento imediato e direto do fato delituoso.</div>
+    </div>
+
+    <div class="cc-card" data-cat="prova-indireta">
+      <div class="cc-header">
+        <h3>Prova Indireta</h3>
+        <span class="tag tag-green">Prova Indireta</span>
+      </div>
+      <p>Aquela que exige mais de uma operação lógica ou inferencial para se chegar à conclusão do fato principal.</p>
+      <div class="cc-legal">
+        <div class="cc-section-label">📊 BASE LEGAL</div>
+        <span style="font-size:0.88rem;color:var(--text2);font-style:italic;">—</span>
+      </div>
+      <div class="cc-juris">
+        <div class="cc-section-label">📋 JURISPRUDÊNCIA / EXEMPLOS</div>
+        <p>Testemunha que ouviu o disparo e viu o suspeito saindo armado do local.</p>
+      </div>
+      <div class="cc-obs"><strong>Obs.:</strong> Baseia-se na construção lógica de indícios para a prova do fato.</div>
+    </div>
+
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -1378,6 +1643,16 @@
     e.target.classList.add('ativo')
     var el = document.getElementById(id)
     if (el) el.classList.add('ativo')
+  }
+  window.ccFiltro = function (e, cat) {
+    var filtros = document.getElementById('cc-filtros')
+    var grid = document.getElementById('cc-grid')
+    if (!filtros || !grid) return
+    filtros.querySelectorAll('.pp1-tab').forEach(function(b) { b.classList.remove('ativo') })
+    e.target.classList.add('ativo')
+    grid.querySelectorAll('.cc-card').forEach(function(c) {
+      c.style.display = (cat === 'todos' || c.dataset.cat === cat) ? '' : 'none'
+    })
   }
 })()
 </script>

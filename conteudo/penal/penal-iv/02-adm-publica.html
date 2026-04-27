@@ -233,25 +233,19 @@
 <div class="ap-titulo">Crimes contra a Administração Pública</div>
 
 <div class="ap-tabs">
-  <button class="ap-tab ativo" onclick="apTab(event,'ap-mapa')">🗺 Mapa Mental</button>
-  <button class="ap-tab" onclick="apTab(event,'ap-conceitual')">🔗 Mapa Conceitual</button>
+  <button class="ap-tab ativo" onclick="apTab(event,'ap-conceitual')">🔗 Mapa Conceitual</button>
   <button class="ap-tab" onclick="apTab(event,'ap-sinoptico')">📋 Quadro Sinóptico</button>
   <button class="ap-tab" onclick="apTab(event,'ap-roteiro')">📖 Roteiro</button>
   <button class="ap-tab" onclick="apTab(event,'ap-caso')">⚖️ Estudo de Caso</button>
 </div>
 
-<!-- TAB: MAPA MENTAL -->
-<div id="tab-mapa" class="tab-content active">
-  <iframe src="adm-publica-mapa-mental.html" style="width:100%;height:80vh;border:none;border-radius:8px;"></iframe>
-</div>
-
 <!-- TAB: MAPA CONCEITUAL -->
-<div id="tab-conceitual" class="tab-content">
+<div id="ap-conceitual" class="ap-painel ativo">
   <iframe src="adm-publica-mapa-conceitual.html" style="width:100%;height:80vh;border:none;border-radius:8px;"></iframe>
 </div>
 
 <!-- TAB: QUADRO SINÓPTICO -->
-<div id="tab-sinoptico" class="tab-content">
+<div id="ap-sinoptico" class="ap-painel">
 
   <div class="qs-filter-bar">
     <button class="qs-fbtn active" onclick="qsFilter('all',this)">Todos</button>
@@ -616,7 +610,7 @@
 </div>
 
 <!-- TAB: ROTEIRO -->
-<div id="tab-roteiro" class="tab-content">
+<div id="ap-roteiro" class="ap-painel">
 
   <div class="rot-intro-box">
     <h2 id="roteiro-adm-publica">Roteiro de Estudo — Crimes contra a Administração Pública</h2>
@@ -864,7 +858,7 @@
 </div>
 
 <!-- TAB: ESTUDO DE CASO -->
-<div id="tab-caso" class="tab-content">
+<div id="ap-caso" class="ap-painel">
 
   <div class="ec-case-header">
     <div class="ec-op-label">Operação Erário Limpo</div>

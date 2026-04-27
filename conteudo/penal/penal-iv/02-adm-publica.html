@@ -119,13 +119,13 @@
   .rot-obj-list{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;}
   .rot-obj-tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:5px 12px;font-size:13px;}
   .rot-unit{margin-bottom:36px;}
-  .rot-unit-.ap-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer;user-select:none;}
+  .rot-unit-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;cursor:pointer;user-select:none;}
   .rot-unit-num{width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0;}
   .rot-unit-title{font-size:17px;color:var(--blue);flex:1;}
   .rot-unit-toggle{font-size:18px;color:var(--text2);transition:transform .2s;}
   .rot-unit-toggle.open{transform:rotate(180deg);}
-  .rot-unit-
-.rot-unit-body.open{display:block;}
+  .rot-unit-body{display:none;}
+  .rot-unit-body.open{display:block;}
   .rot-step{background:var(--ap-bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;}
   .rot-step-head{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;}
   .rot-step-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;margin-top:1px;}
@@ -155,9 +155,9 @@
   .rot-reset-btn:hover{border-color:var(--blue);color:var(--blue);}
 
   /* ESTUDO DE CASO INLINE STYLES */
-  .ec-case-.ap-header{background:var(--blue);border-radius:12px;padding:26px 30px;color:#fff;margin-bottom:28px;}
+  .ec-case-header{background:var(--blue);border-radius:12px;padding:26px 30px;color:#fff;margin-bottom:28px;}
   .ec-op-label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ap-yellow-lt);margin-bottom:6px;}
-  .ec-case-.ap-header h2{font-size:24px;margin-bottom:10px;}
+  .ec-case-header h2{font-size:24px;margin-bottom:10px;}
   .ec-case-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
   .ec-meta-tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:6px;padding:4px 12px;font-size:13px;}
   .ec-sec{margin-bottom:28px;}
@@ -179,8 +179,8 @@
   .ec-q-bloom{font-size:12px;color:var(--text2);margin-top:3px;font-weight:400;}
   .ec-q-arrow{color:var(--text2);font-size:16px;padding-top:2px;flex-shrink:0;transition:transform .2s;}
   .ec-q-arrow.open{transform:rotate(180deg);}
-  .ec-q-
-.ec-q-body.open{display:block;}
+  .ec-q-body{display:none;}
+  .ec-q-body.open{display:block;}
   .ec-q-body p{font-size:14px;line-height:1.65;margin-bottom:10px;color:var(--text);}
   .ec-q-body ul{margin-left:16px;font-size:14px;line-height:1.7;}
   .ec-q-body li{margin-bottom:5px;color:var(--text);}
@@ -1048,6 +1048,7 @@
 
 <script>
 (function () {
+  /* ── Abas ── */
   window.apTab = function (e, id) {
     var wrap = e.target.closest('.ap-wrap')
     if (!wrap) return
@@ -1056,6 +1057,72 @@
     e.target.classList.add('ativo')
     var el = document.getElementById(id)
     if (el) el.classList.add('ativo')
+  }
+
+  /* ── Roteiro: abrir/fechar unidade ── */
+  window.rotToggleUnit = function (id) {
+    var body = document.getElementById('rot-body-' + id)
+    var tog  = document.getElementById('rot-tog-' + id)
+    if (!body) return
+    var open = body.classList.contains('open')
+    body.classList.toggle('open', !open)
+    if (tog) tog.classList.toggle('open', !open)
+  }
+
+  /* ── Roteiro: expandir conteúdo do step ── */
+  window.rotExpand = function (id) {
+    var content = document.getElementById('rot-sc-' + id)
+    if (!content) return
+    var open = content.classList.contains('open')
+    content.classList.toggle('open', !open)
+    var head = content.previousElementSibling
+    if (head) {
+      var exp = head.querySelector('.rot-step-expand')
+      if (exp) exp.textContent = open ? '+' : '−'
+    }
+  }
+
+  /* ── Roteiro: marcar step como feito ── */
+  window.rotCheck = function (e, id) {
+    e.stopPropagation()
+    var step = document.getElementById(id)
+    if (!step) return
+    step.classList.toggle('done')
+  }
+
+  /* ── Roteiro: reiniciar progresso ── */
+  window.rotReset = function () {
+    document.querySelectorAll('.rot-step.done').forEach(function(s) { s.classList.remove('done') })
+    document.querySelectorAll('.rot-step-content.open').forEach(function(c) {
+      c.classList.remove('open')
+      var exp = c.previousElementSibling && c.previousElementSibling.querySelector('.rot-step-expand')
+      if (exp) exp.textContent = '+'
+    })
+  }
+
+  /* ── Quadro sinóptico: filtro ── */
+  window.qsFilter = function (cat, btn) {
+    document.querySelectorAll('.qs-fbtn').forEach(function(b) { b.classList.remove('active') })
+    btn.classList.add('active')
+    document.querySelectorAll('#qs-main-table tbody tr').forEach(function(tr) {
+      tr.style.display = (cat === 'all' || tr.dataset.cat === cat) ? '' : 'none'
+    })
+  }
+
+  /* ── Estudo de caso: abrir/fechar pergunta ── */
+  window.ecTog = function (id) {
+    var body = document.getElementById('ec-qb-' + id)
+    var arr  = document.getElementById('ec-arr-' + id)
+    if (!body) return
+    var open = body.classList.contains('open')
+    body.classList.toggle('open', !open)
+    if (arr) arr.classList.toggle('open', !open)
+  }
+
+  /* ── Estudo de caso: revelar gabarito ── */
+  window.ecShowAns = function (id) {
+    var ans = document.getElementById(id)
+    if (ans) ans.classList.add('show')
   }
 })()
 </script>

@@ -1,35 +1,49 @@
 <style>
-:root {
-  --ds-red:    #8a1a2e;
-  --ds-red-lt: #fce8ec;
+.ds-idx { padding: 1.5rem 0 2rem; }
+.ds-idx-h1 {
+  font-family: var(--serif); font-size: 1.55rem; font-weight: 700;
+  color: var(--blue); margin-bottom: 0.3rem;
 }
-.ds-wrap {
-  padding: 2rem 0;
-  font-family: var(--sans);
+.ds-idx-sub {
+  color: var(--text2); font-size: 0.88rem;
+  margin-bottom: 2rem; font-family: var(--sans);
 }
-.ds-titulo {
-  font-family: var(--serif);
-  font-size: 1.55rem; font-weight: 700;
-  color: var(--ds-red); margin-bottom: 0.4rem;
+.ds-idx-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
 }
-.ds-sub {
-  color: var(--text2); font-size: 0.88rem; margin-bottom: 2.5rem;
+.ds-idx-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.6rem; text-decoration: none;
+  color: var(--text); display: block;
+  transition: box-shadow .2s, transform .2s; cursor: pointer;
 }
-.ds-placeholder {
-  background: var(--ds-red-lt);
-  border: 1px solid var(--ds-red);
-  border-radius: 10px;
-  padding: 2rem 1.6rem;
-  color: var(--ds-red);
-  font-size: 1rem;
-  text-align: center;
+.ds-idx-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.ds-idx-num {
+  font-size: 0.72rem; font-family: var(--sans); font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 0.6rem;
 }
+.ds-idx-card h2 {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.ds-idx-card p {
+  color: var(--text2); font-size: 0.84rem;
+  line-height: 1.55; font-family: var(--sans);
+}
+.ds-idx-card-1 { border-top: 3px solid #8a1a2e; }
+.ds-idx-card-1 .ds-idx-num { color: #8a1a2e; }
 </style>
 
-<div class="ds-wrap">
-  <div class="ds-titulo">Crimes contra a Dignidade Sexual</div>
-  <p class="ds-sub">Direito Penal IV · Unidade 4 · Arts. 213–234 CP</p>
-  <div class="ds-placeholder">
-    Material em elaboração. Em breve disponível.
+<div class="ds-idx">
+  <div class="ds-idx-h1">Crimes contra a Dignidade Sexual</div>
+  <p class="ds-idx-sub">Direito Penal IV · Unidade 4 · Arts. 213–234 CP</p>
+  <div class="ds-idx-cards">
+    <a href="04a-comparativo-liberdade-sexual.html" class="ds-idx-card ds-idx-card-1">
+      <div class="ds-idx-num">Tópico 1</div>
+      <h2>Comparativo entre Crimes contra a Liberdade Sexual</h2>
+      <p>Tabela comparativa · Mapa mental · Roteiro de estudo · Estudo de caso · Arts. 213–216-A CP</p>
+    </a>
   </div>
 </div>

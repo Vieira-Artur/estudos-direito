@@ -1,56 +1,896 @@
 <style>
-.ds-idx { padding: 1.5rem 0 2rem; }
-.ds-idx-h1 {
-  font-family: var(--serif); font-size: 1.55rem; font-weight: 700;
-  color: var(--blue); margin-bottom: 0.3rem;
+/* ── Variáveis ───────────────────────────────────────── */
+:root {
+  --ds-red:        #8a1a2e;
+  --ds-red-lt:     #fce8ec;
+  --ds-navy:       #1a3a6a;
+  --ds-navy-lt:    #e5ebfb;
+  --ds-teal:       #0a5c4a;
+  --ds-teal-lt:    #d6f0e8;
+  --ds-orange:     #7a3800;
+  --ds-orange-lt:  #fdebd6;
+  --ds-amber:      #7a5800;
+  --ds-amber-lt:   #fdf5d6;
+  --ds-purple:     #4a1a8a;
+  --ds-purple-lt:  #ede5fb;
+  --ds-green:      #1a5c1a;
+  --ds-green-lt:   #d6f0d6;
 }
-.ds-idx-sub {
-  color: var(--text2); font-size: 0.88rem;
-  margin-bottom: 2rem; font-family: var(--sans);
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ds-red:        #f08080; --ds-red-lt:     #2e0d15;
+    --ds-navy:       #80a0e0; --ds-navy-lt:    #0d1a2e;
+    --ds-teal:       #60d8b8; --ds-teal-lt:    #072e22;
+    --ds-orange:     #f0a060; --ds-orange-lt:  #2e1500;
+    --ds-amber:      #f0d060; --ds-amber-lt:   #2e2200;
+    --ds-purple:     #c0a0f8; --ds-purple-lt:  #200a40;
+    --ds-green:      #6fd86f; --ds-green-lt:   #0d2e0d;
+  }
 }
-.ds-idx-cards {
+
+/* ── Abas principais ─────────────────────────────────── */
+.ds-tabs { display: flex; gap: 4px; margin-bottom: 22px; flex-wrap: wrap; }
+.ds-tab {
+  padding: 7px 18px; font-size: 14px; font-weight: 600; font-family: var(--sans);
+  border: 1.5px solid var(--blue); border-radius: 6px; cursor: pointer;
+  background: var(--surface); color: var(--blue);
+  transition: background .15s, color .15s;
+}
+.ds-tab:hover { background: var(--blue-hover); }
+.ds-tab.ativo { background: var(--blue); color: #fff; }
+.ds-painel { display: none; }
+.ds-painel.ativo { display: block; }
+
+/* ── Título ──────────────────────────────────────────── */
+.ds-titulo {
+  font-family: var(--serif); font-size: 19px; font-weight: 700;
+  color: var(--blue); margin-bottom: 18px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--border);
+}
+
+/* ── Section label ───────────────────────────────────── */
+.ds-sec {
+  font-family: var(--serif); font-size: 15px; font-weight: 700; color: var(--blue);
+  border-left: 3px solid var(--gold); padding-left: 10px; margin: 28px 0 12px;
+}
+.ds-sec:first-child { margin-top: 0; }
+
+/* ── Cabeçalho de capítulo ───────────────────────────── */
+.ds-cap {
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; color: #fff;
+}
+.ds-cap.c1 { background: var(--ds-red); }
+.ds-cap.c2 { background: var(--ds-navy); }
+.ds-cap.c3 { background: var(--ds-teal); }
+.ds-cap-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .75; margin-bottom: 3px; font-family: var(--sans); }
+.ds-cap h3   { font-family: var(--serif); font-size: 16px; margin-bottom: 2px; }
+.ds-cap p    { font-size: 12.5px; opacity: .85; font-family: var(--sans); }
+
+/* ── Tabelas ─────────────────────────────────────────── */
+.ds-tbl-wrap { overflow-x: auto; margin-bottom: 8px; border-radius: 8px; }
+.ds-tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 680px; }
+.ds-tbl thead tr.c1 th { background: var(--ds-red); }
+.ds-tbl thead tr.c2 th { background: var(--ds-navy); }
+.ds-tbl thead tr.c3 th { background: var(--ds-teal); }
+.ds-tbl thead tr.def th { background: var(--blue); }
+.ds-tbl thead th {
+  color: #fff; padding: 9px 12px; text-align: left;
+  font-weight: 600; font-family: var(--sans); font-size: 12px;
+}
+.ds-tbl tbody td {
+  padding: 9px 12px; border-bottom: 1px solid var(--border);
+  vertical-align: top; color: var(--text); line-height: 1.6; font-size: 13px;
+}
+.ds-tbl tbody tr:nth-child(even) td { background: var(--blue-light); }
+.ds-td-art  { font-weight: 700; white-space: nowrap; font-size: 12.5px; }
+.ds-td-art.c1 { color: var(--ds-red); }
+.ds-td-art.c2 { color: var(--ds-navy); }
+.ds-td-art.c3 { color: var(--ds-teal); }
+.ds-td-crime { font-weight: 700; font-family: var(--serif); font-size: 13.5px; color: var(--text); }
+.ds-obs { font-size: 12.5px; color: var(--text2); line-height: 1.6; }
+.ds-obs li { margin-bottom: 3px; }
+
+/* ── Badges ──────────────────────────────────────────── */
+.ds-b {
+  display: inline-block; font-size: 11.5px; font-weight: 600;
+  border-radius: 4px; padding: 2px 7px; margin: 1px 2px; white-space: nowrap;
+}
+.ds-b-rec { background: var(--ds-red-lt);    color: var(--ds-red); }
+.ds-b-det { background: var(--blue-light);   color: var(--blue); }
+.ds-b-nav { background: var(--ds-navy-lt);   color: var(--ds-navy); }
+.ds-b-tea { background: var(--ds-teal-lt);   color: var(--ds-teal); }
+.ds-b-amb { background: var(--ds-amber-lt);  color: var(--ds-amber); }
+.ds-b-pur { background: var(--ds-purple-lt); color: var(--ds-purple); }
+.ds-b-ok  { background: var(--ds-green-lt);  color: var(--ds-green); }
+.ds-b-hed { background: var(--ds-red-lt);    color: var(--ds-red); font-weight: 800; }
+
+/* ── Cards visuais dos crimes ────────────────────────── */
+.ds-crime-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px; margin-bottom: 22px;
 }
-.ds-idx-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: 1.6rem; text-decoration: none;
-  color: var(--text); display: block;
-  transition: box-shadow .2s, transform .2s; cursor: pointer;
+.ds-cc { border-radius: 10px; padding: 16px; border: 1px solid var(--border); font-family: var(--sans); }
+.ds-cc.c1 { background: var(--ds-red-lt);    border-top: 3px solid var(--ds-red); }
+.ds-cc.c2 { background: var(--ds-orange-lt); border-top: 3px solid var(--ds-orange); }
+.ds-cc.c3 { background: var(--ds-amber-lt);  border-top: 3px solid var(--ds-amber); }
+.ds-cc.c4 { background: var(--ds-navy-lt);   border-top: 3px solid var(--ds-navy); }
+.ds-cc-art  { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 3px; }
+.ds-cc.c1 .ds-cc-art { color: var(--ds-red); }
+.ds-cc.c2 .ds-cc-art { color: var(--ds-orange); }
+.ds-cc.c3 .ds-cc-art { color: var(--ds-amber); }
+.ds-cc.c4 .ds-cc-art { color: var(--ds-navy); }
+.ds-cc-nome { font-size: 13.5px; font-weight: 700; color: var(--text); margin-bottom: 6px; font-family: var(--serif); }
+.ds-cc-meio { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.ds-cc-cond { font-size: 12px; color: var(--text); line-height: 1.5; margin-bottom: 9px; }
+.ds-cc-pl   { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text2); margin-bottom: 2px; }
+.ds-cc-pv   { font-size: 12px; color: var(--text2); margin-bottom: 8px; line-height: 1.4; }
+.ds-cc-pen-l { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text2); margin-bottom: 1px; }
+.ds-cc-pen-v { font-size: 13px; font-weight: 700; color: var(--text); }
+
+/* ── Caixas de destaque ──────────────────────────────── */
+.ds-art-box {
+  background: var(--blue-light); border-left: 3px solid var(--blue);
+  border-radius: 0 5px 5px 0; padding: 9px 13px; margin: 8px 0;
+  font-size: 13px; line-height: 1.6; font-style: italic; color: var(--text);
 }
-.ds-idx-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.ds-idx-num {
-  font-size: 0.72rem; font-family: var(--sans); font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 0.6rem;
+.ds-jur-box {
+  background: var(--ds-navy-lt); border-left: 3px solid var(--ds-navy);
+  border-radius: 0 5px 5px 0; padding: 9px 13px; margin: 8px 0;
+  font-size: 13px; line-height: 1.6; color: var(--text);
 }
-.ds-idx-card h2 {
-  font-family: var(--serif); font-size: 1.1rem; font-weight: 700;
-  color: var(--text); margin-bottom: 0.5rem;
+.ds-jur-box strong { color: var(--ds-navy); }
+.ds-warn-box {
+  background: var(--ds-red-lt); border-left: 3px solid var(--ds-red);
+  border-radius: 0 5px 5px 0; padding: 9px 13px; margin: 8px 0;
+  font-size: 13px; line-height: 1.6; color: var(--text);
 }
-.ds-idx-card p {
-  color: var(--text2); font-size: 0.84rem;
-  line-height: 1.55; font-family: var(--sans);
+.ds-warn-box strong { color: var(--ds-red); }
+.ds-ok-box {
+  background: var(--ds-green-lt); border-left: 3px solid var(--ds-green);
+  border-radius: 0 5px 5px 0; padding: 9px 13px; margin: 8px 0;
+  font-size: 13px; line-height: 1.6; color: var(--text);
 }
-.ds-idx-card-1 { border-top: 3px solid #8a1a2e; }
-.ds-idx-card-1 .ds-idx-num { color: #8a1a2e; }
-.ds-idx-card-2 { border-top: 3px solid #1a3a6a; }
-.ds-idx-card-2 .ds-idx-num { color: #1a3a6a; }
+.ds-ok-box strong { color: var(--ds-green); }
+.ds-doc-box {
+  background: var(--ds-purple-lt); border-left: 3px solid var(--ds-purple);
+  border-radius: 0 5px 5px 0; padding: 9px 13px; margin: 8px 0;
+  font-size: 13px; line-height: 1.6; color: var(--text);
+}
+.ds-doc-box strong { color: var(--ds-purple); }
+.ds-amber-box {
+  background: var(--ds-amber-lt); border-left: 3px solid var(--ds-amber);
+  border-radius: 0 5px 5px 0; padding: 9px 13px; margin: 8px 0;
+  font-size: 13px; line-height: 1.6; color: var(--text);
+}
+.ds-amber-box strong { color: var(--ds-amber); }
+.ds-info-box {
+  background: var(--blue-light); border-left: 3px solid var(--blue);
+  border-radius: 0 6px 6px 0; padding: 10px 14px; margin: 8px 0;
+  font-size: 13px; line-height: 1.6; color: var(--text);
+}
+.ds-info-box strong { color: var(--blue); }
+
+/* ── Roteiro: unidades ───────────────────────────────── */
+.ds-unit { margin-bottom: 10px; }
+.ds-unit-hd {
+  display: flex; align-items: center; gap: 12px; padding: 13px 16px;
+  cursor: pointer; user-select: none;
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 10px; transition: border-color .15s;
+}
+.ds-unit-hd:hover { border-color: var(--blue); }
+.ds-unit-hd.aberto { border-radius: 10px 10px 0 0; border-color: var(--blue); }
+.ds-unit-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; flex-shrink: 0; font-family: var(--sans);
+}
+.ds-unit-title { font-size: 15px; font-weight: 700; color: var(--blue); flex: 1; font-family: var(--serif); }
+.ds-unit-tog   { font-size: 16px; color: var(--text2); transition: transform .2s; }
+.ds-unit-tog.aberto { transform: rotate(180deg); }
+.ds-unit-body {
+  display: none; padding: 18px 20px;
+  border: 1.5px solid var(--blue); border-top: none;
+  border-radius: 0 0 10px 10px;
+}
+.ds-unit-body.aberto { display: block; }
+
+/* ── Roteiro: steps ──────────────────────────────────── */
+.ds-step { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; margin-bottom: 10px; overflow: hidden; }
+.ds-step-hd { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; cursor: pointer; }
+.ds-step-chk {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--border); display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0; margin-top: 2px; transition: all .15s;
+}
+.ds-step-chk svg { display: none; width: 11px; height: 11px; }
+.ds-step.feito .ds-step-chk { background: var(--blue); border-color: var(--blue); }
+.ds-step.feito .ds-step-chk svg { display: block; }
+.ds-step-title { font-size: 14.5px; font-weight: 600; color: var(--text); flex: 1; line-height: 1.4; }
+.ds-step.feito .ds-step-title { text-decoration: line-through; color: var(--text2); }
+.ds-step-meta  { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.ds-step-exp   { font-size: 14px; color: var(--text2); flex-shrink: 0; padding-top: 2px; }
+.ds-step-body  { display: none; padding: 0 14px 14px 44px; border-top: 1px solid var(--border); }
+.ds-step-body.aberto { display: block; }
+.ds-step-body p  { font-size: 13.5px; line-height: 1.65; margin-bottom: 8px; color: var(--text); }
+.ds-step-body ul { margin-left: 14px; font-size: 13.5px; line-height: 1.65; color: var(--text); }
+.ds-step-body li { margin-bottom: 5px; }
+
+/* ── Cards de Jurisprudência ─────────────────────────── */
+.ds-jur-list { display: flex; flex-direction: column; gap: 14px; }
+.ds-jur-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; overflow: hidden; }
+.ds-jur-card-hd { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; }
+.ds-jur-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.ds-jur-icon.stj { background: var(--ds-navy-lt); }
+.ds-jur-icon.stf { background: var(--ds-purple-lt); }
+.ds-jur-icon.dou { background: var(--ds-green-lt); }
+.ds-jur-ref  { font-size: 11.5px; font-weight: 700; color: var(--text2); font-family: var(--sans); margin-bottom: 3px; }
+.ds-jur-tema { font-size: 14.5px; font-weight: 600; color: var(--text); line-height: 1.4; flex: 1; }
+.ds-jur-arr  { color: var(--text2); font-size: 15px; flex-shrink: 0; padding-top: 4px; transition: transform .2s; }
+.ds-jur-arr.aberto { transform: rotate(180deg); }
+.ds-jur-body { display: none; padding: 0 16px 16px 62px; border-top: 1px solid var(--border); }
+.ds-jur-body.aberto { display: block; }
+.ds-jur-body p  { font-size: 13.5px; line-height: 1.65; margin-bottom: 8px; color: var(--text); margin-top: 10px; }
+.ds-jur-body ul { margin-left: 14px; font-size: 13.5px; line-height: 1.7; color: var(--text); }
+.ds-jur-body li { margin-bottom: 4px; }
+.ds-ementa {
+  background: var(--ds-navy-lt); border-left: 3px solid var(--ds-navy);
+  border-radius: 0 5px 5px 0; padding: 9px 13px; margin: 10px 0;
+  font-size: 13px; line-height: 1.6; font-style: italic; color: var(--text);
+}
+.ds-ementa-stf {
+  background: var(--ds-purple-lt); border-left: 3px solid var(--ds-purple);
+  border-radius: 0 5px 5px 0; padding: 9px 13px; margin: 10px 0;
+  font-size: 13px; line-height: 1.6; font-style: italic; color: var(--text);
+}
 </style>
 
-<div class="ds-idx">
-  <div class="ds-idx-h1">Crimes contra a Dignidade Sexual</div>
-  <p class="ds-idx-sub">Direito Penal IV · Unidade 4 · Arts. 213–234 CP</p>
-  <div class="ds-idx-cards">
-    <a href="04a-comparativo-liberdade-sexual.html" class="ds-idx-card ds-idx-card-1">
-      <div class="ds-idx-num">Tópico 1</div>
-      <h2>Comparativo entre Crimes contra a Liberdade Sexual</h2>
-      <p>Tabela comparativa · Mapa mental · Roteiro de estudo · Estudo de caso · Arts. 213–216-A CP</p>
-    </a>
-    <a href="04b-relatorio-dignidade-sexual.html" class="ds-idx-card ds-idx-card-2">
-      <div class="ds-idx-num">Tópico 2</div>
-      <h2>Relatório Geral — Crimes contra a Dignidade Sexual</h2>
-      <p>Relatório técnico-científico · Doutrina · Jurisprudência · Aspectos processuais · Disposições especiais</p>
-    </a>
-  </div>
+<div class="ds-titulo">Crimes contra a Dignidade Sexual · Arts. 213–218-C CP</div>
+
+<div class="ds-tabs">
+  <button class="ds-tab ativo" onclick="dsTab('tabela', this)">Tabela Comparativa</button>
+  <button class="ds-tab" onclick="dsTab('guia', this)">Guia Comparativo</button>
+  <button class="ds-tab" onclick="dsTab('roteiro', this)">Roteiro de Estudo</button>
+  <button class="ds-tab" onclick="dsTab('jur', this)">Jurisprudência</button>
 </div>
+
+<!-- ══════════════════════════════════════════════════════
+     ABA 1 — TABELA COMPARATIVA
+══════════════════════════════════════════════════════ -->
+<div id="ds-tabela" class="ds-painel ativo">
+
+  <!-- Cap I -->
+  <div class="ds-cap c1">
+    <div class="ds-cap-label">Capítulo I</div>
+    <h3>Crimes contra a Liberdade Sexual</h3>
+    <p>Arts. 213–216-A · Bem jurídico: autodeterminação sexual</p>
+  </div>
+  <div class="ds-tbl-wrap">
+    <table class="ds-tbl">
+      <thead><tr class="c1">
+        <th style="width:14%">Crime</th>
+        <th style="width:32%">Conduta Principal</th>
+        <th style="width:13%">Pena Base</th>
+        <th>Observações</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="ds-td-art c1">Art. 213</div><div class="ds-td-crime">Estupro</div></td>
+          <td>Constranger alguém à <strong>conjunção carnal ou ato libidinoso</strong> mediante <strong>violência ou grave ameaça</strong></td>
+          <td><span class="ds-b ds-b-rec">Reclusão 6–10a</span></td>
+          <td class="ds-obs"><ul>
+            <li><span class="ds-b ds-b-hed">Crime hediondo</span></li>
+            <li>Homem ou mulher, qualquer sexo</li>
+            <li>Vítima &lt;14a / vulnerável: <span class="ds-b ds-b-rec">8–12a</span></li>
+            <li>Morte: <span class="ds-b ds-b-rec">12–30a</span></li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td><div class="ds-td-art c1">Art. 215</div><div class="ds-td-crime">Violação Sexual med. Fraude</div></td>
+          <td>Ter conjunção carnal ou ato libidinoso mediante <strong>fraude</strong> ou meio que impeça a livre vontade da vítima</td>
+          <td><span class="ds-b ds-b-rec">Reclusão 2–6a</span></td>
+          <td class="ds-obs"><ul>
+            <li>"Estelionato sexual" — consentimento <em>viciado</em> pelo erro</li>
+            <li>Vítima &lt;18a: <span class="ds-b ds-b-rec">+ metade</span></li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td><div class="ds-td-art c1">Art. 215-A</div><div class="ds-td-crime">Importunação Sexual</div></td>
+          <td>Praticar <strong>ato libidinoso sem anuência</strong> para satisfazer a própria lascívia</td>
+          <td><span class="ds-b ds-b-rec">Reclusão 1–5a</span></td>
+          <td class="ds-obs"><ul>
+            <li>Crime <strong>subsidiário</strong> — se não for crime mais grave</li>
+            <li>Ex: <em>frotteurismo</em> em ônibus (Lei 13.718/2018)</li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td><div class="ds-td-art c1">Art. 216-A</div><div class="ds-td-crime">Assédio Sexual</div></td>
+          <td>Constranger para obter <strong>vantagem sexual</strong> valendo-se de <strong>superioridade hierárquica</strong></td>
+          <td><span class="ds-b ds-b-det">Detenção 1–2a</span></td>
+          <td class="ds-obs"><ul>
+            <li>Crime <strong>"bipróprio"</strong>: exige hierarquia no trabalho/cargo/função</li>
+            <li>Ação penal condicionada à representação</li>
+            <li>Vítima &lt;18a: <span class="ds-b ds-b-det">+1/3</span></li>
+          </ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Cap II -->
+  <div class="ds-cap c2" style="margin-top:24px">
+    <div class="ds-cap-label">Capítulo II</div>
+    <h3>Crimes Sexuais contra Vulnerável</h3>
+    <p>Arts. 217-A–218-B · Bem jurídico: desenvolvimento sexual saudável</p>
+  </div>
+  <div class="ds-tbl-wrap">
+    <table class="ds-tbl">
+      <thead><tr class="c2">
+        <th style="width:14%">Crime</th>
+        <th style="width:32%">Conduta / Condição da Vítima</th>
+        <th style="width:13%">Pena Base</th>
+        <th>Observações</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="ds-td-art c2">Art. 217-A</div><div class="ds-td-crime">Estupro de Vulnerável</div></td>
+          <td>Ato sexual com <strong>menor de 14 anos</strong> ou pessoa sem discernimento/capacidade de resistência</td>
+          <td><span class="ds-b ds-b-nav">Reclusão 8–18a</span></td>
+          <td class="ds-obs"><ul>
+            <li><span class="ds-b ds-b-hed">Crime hediondo</span></li>
+            <li>Vulnerabilidade <strong>absoluta</strong> — consentimento e experiência anterior são irrelevantes</li>
+            <li>Lesão grave: <span class="ds-b ds-b-nav">10–20a</span> · Morte: <span class="ds-b ds-b-nav">12–30a</span></li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td><div class="ds-td-art c2">Art. 218</div><div class="ds-td-crime">Corrupção de Menores</div></td>
+          <td>Induzir <strong>menor de 14 anos</strong> a satisfazer a lascívia de <strong>outrem</strong></td>
+          <td><span class="ds-b ds-b-nav">Reclusão 2–5a</span></td>
+          <td class="ds-obs"><ul>
+            <li>Agente atua como <strong>intermediário</strong> (proxeneta)</li>
+            <li>O "outrem" pode responder por Art. 217-A</li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td><div class="ds-td-art c2">Art. 218-A</div><div class="ds-td-crime">Satisfação de Lascívia Presencial</div></td>
+          <td>Praticar ou induzir <strong>menor de 14 anos</strong> a <strong>presenciar</strong> ato sexual para satisfazer lascívia</td>
+          <td><span class="ds-b ds-b-nav">Reclusão 2–4a</span></td>
+          <td class="ds-obs"><ul>
+            <li>Presença pode ser <strong>via webcam em tempo real</strong></li>
+            <li>Não exige contato físico com a vítima</li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td><div class="ds-td-art c2">Art. 218-B</div><div class="ds-td-crime">Favorecimento da Prostituição de Vulnerável</div></td>
+          <td>Submeter, induzir ou atrair <strong>menor de 18 anos</strong> ou <strong>vulnerável</strong> à exploração sexual</td>
+          <td><span class="ds-b ds-b-nav">Reclusão 4–10a</span></td>
+          <td class="ds-obs"><ul>
+            <li><span class="ds-b ds-b-hed">Crime hediondo</span> em todas as modalidades</li>
+            <li>Inclui impedir ou dificultar o abandono da exploração</li>
+          </ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Cap I-A -->
+  <div class="ds-cap c3" style="margin-top:24px">
+    <div class="ds-cap-label">Capítulo I-A</div>
+    <h3>Exposição da Intimidade Sexual</h3>
+    <p>Arts. 216-B e 218-C · Bem jurídico: privacidade e intimidade sexual</p>
+  </div>
+  <div class="ds-tbl-wrap">
+    <table class="ds-tbl">
+      <thead><tr class="c3">
+        <th style="width:14%">Crime</th>
+        <th style="width:32%">Conduta Principal</th>
+        <th style="width:13%">Pena Base</th>
+        <th>Observações</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="ds-td-art c3">Art. 216-B</div><div class="ds-td-crime">Registro não Autorizado</div></td>
+          <td>Produzir, fotografar ou filmar <strong>cena de nudez ou ato sexual privado</strong> sem autorização</td>
+          <td><span class="ds-b ds-b-tea">Detenção 6m–1a + multa</span></td>
+          <td class="ds-obs"><ul>
+            <li>Tutela o <em>momento do registro</em></li>
+            <li>Cônjuge/companheiro: <span class="ds-b ds-b-tea">+1/3 a 2/3</span></li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td><div class="ds-td-art c3">Art. 218-C</div><div class="ds-td-crime">Divulgação de Cena de Estupro ou Sexo</div></td>
+          <td>Disponibilizar ou divulgar <strong>cena de estupro</strong> ou, sem consentimento, <strong>cena de sexo ou pornografia</strong></td>
+          <td><span class="ds-b ds-b-rec">Reclusão 1–5a</span></td>
+          <td class="ds-obs"><ul>
+            <li>Tutela a <em>divulgação</em> — "revenge porn"</li>
+            <li>Cônjuge/companheiro: <span class="ds-b ds-b-rec">+1/3 a 2/3</span></li>
+            <li>Retira o conteúdo imediatamente após pedido: <span class="ds-b ds-b-ok">−1/3 a 2/3</span></li>
+          </ul></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ds-info-box" style="margin-top:16px"><strong>Crimes hediondos neste Título (Lei 8.072/1990):</strong> Estupro (Art. 213) em todas as formas · Estupro de Vulnerável (Art. 217-A) em todas as formas · Favorecimento da Prostituição de Vulnerável (Art. 218-B) em todas as modalidades.</div>
+
+</div><!-- /tabela -->
+
+<!-- ══════════════════════════════════════════════════════
+     ABA 2 — GUIA COMPARATIVO
+══════════════════════════════════════════════════════ -->
+<div id="ds-guia" class="ds-painel">
+
+  <div class="ds-art-box" style="font-style:normal">
+    O Título VI protege a <strong>Dignidade Sexual</strong>, focando na tutela da liberdade de escolha e desenvolvimento do indivíduo. A diferenciação entre os tipos penais depende essencialmente do <strong>meio utilizado pelo agente</strong> (violência, fraude ou hierarquia) e da <strong>existência ou não de consentimento</strong>.
+  </div>
+
+  <!-- Cards visuais dos 4 crimes -->
+  <div class="ds-crime-grid" style="margin-top:16px">
+    <div class="ds-cc c1">
+      <div class="ds-cc-art">Art. 213</div>
+      <div class="ds-cc-nome">Estupro</div>
+      <div class="ds-cc-meio">⚡ Força / Violência</div>
+      <div class="ds-cc-cond">Constranger alguém, com violência ou grave ameaça, à conjunção carnal ou ato libidinoso.</div>
+      <div class="ds-cc-pl">Conduta Principal:</div>
+      <div class="ds-cc-pv">Constrangimento com violência ou grave ameaça.</div>
+      <div class="ds-cc-pen-l">Pena Base</div>
+      <div class="ds-cc-pen-v">Reclusão, 6 a 10 anos</div>
+    </div>
+    <div class="ds-cc c2">
+      <div class="ds-cc-art">Art. 215</div>
+      <div class="ds-cc-nome">Violação med. Fraude</div>
+      <div class="ds-cc-meio">🎭 Fraude / Vício de Vontade</div>
+      <div class="ds-cc-cond">Praticar ato sexual usando fraude ou meio que impeça a livre manifestação da vítima.</div>
+      <div class="ds-cc-pl">Conduta Principal:</div>
+      <div class="ds-cc-pv">Uso de fraude ou indução ao erro.</div>
+      <div class="ds-cc-pen-l">Pena Base</div>
+      <div class="ds-cc-pen-v">Reclusão, 2 a 6 anos</div>
+    </div>
+    <div class="ds-cc c3">
+      <div class="ds-cc-art">Art. 215-A</div>
+      <div class="ds-cc-nome">Importunação Sexual</div>
+      <div class="ds-cc-meio">🚫 Sem Anuência / Consenso</div>
+      <div class="ds-cc-cond">Praticar ato libidinoso sem anuência para satisfazer lascívia própria ou alheia.</div>
+      <div class="ds-cc-pl">Conduta Principal:</div>
+      <div class="ds-cc-pv">Ato libidinoso sem consentimento.</div>
+      <div class="ds-cc-pen-l">Pena Base</div>
+      <div class="ds-cc-pen-v">Reclusão, 1 a 5 anos</div>
+    </div>
+    <div class="ds-cc c4">
+      <div class="ds-cc-art">Art. 216-A</div>
+      <div class="ds-cc-nome">Assédio Sexual</div>
+      <div class="ds-cc-meio">👔 Hierarquia / Poder</div>
+      <div class="ds-cc-cond">Constranger para obter vantagem sexual valendo-se de superioridade hierárquica.</div>
+      <div class="ds-cc-pl">Conduta Principal:</div>
+      <div class="ds-cc-pv">Prevalecimento de hierarquia ou cargo.</div>
+      <div class="ds-cc-pen-l">Pena Base</div>
+      <div class="ds-cc-pen-v">Detenção, 1 a 2 anos</div>
+    </div>
+  </div>
+
+  <!-- Chave de identificação -->
+  <div class="ds-sec">Chave de Identificação do Crime</div>
+  <div class="ds-tbl-wrap">
+    <table class="ds-tbl">
+      <thead><tr class="def">
+        <th>Pergunta</th><th>Resposta</th><th>Crime</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>Houve violência ou grave ameaça?</td>
+          <td>Sim → constrangimento físico ou psicológico direto</td>
+          <td><span class="ds-b ds-b-rec">Art. 213 — Estupro</span></td>
+        </tr>
+        <tr>
+          <td>Houve fraude / engano da vítima?</td>
+          <td>Sim → consentimento viciado; a vítima foi induzida ao erro</td>
+          <td><span class="ds-b ds-b-rec">Art. 215 — Violação med. Fraude</span></td>
+        </tr>
+        <tr>
+          <td>Sem violência, sem fraude — mas sem anuência?</td>
+          <td>Sim → ato libidinoso sem consentimento, sem violência</td>
+          <td><span class="ds-b ds-b-amb">Art. 215-A — Importunação Sexual</span></td>
+        </tr>
+        <tr>
+          <td>Agente se aproveitou de cargo/hierarquia para obter favor sexual?</td>
+          <td>Sim → prevalecimento funcional</td>
+          <td><span class="ds-b ds-b-nav">Art. 216-A — Assédio Sexual</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Causas de aumento -->
+  <div class="ds-sec">Causas de Aumento — Arts. 226 e 234-A</div>
+  <div class="ds-tbl-wrap">
+    <table class="ds-tbl">
+      <thead><tr class="def">
+        <th>Dispositivo</th><th>Circunstância</th><th>Aumento</th><th>Referência</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>Art. 226, I</td>
+          <td>Concurso de agentes</td>
+          <td><span class="ds-b ds-b-rec">+ metade</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Art. 226, II</td>
+          <td>Relação de autoridade (ascendente, tutor, empregador, professor…)</td>
+          <td><span class="ds-b ds-b-rec">+ metade</span></td>
+          <td>STJ REsp 1730287/SC: inclui professor/aluno</td>
+        </tr>
+        <tr>
+          <td>Art. 226, IV</td>
+          <td>Estupro coletivo</td>
+          <td><span class="ds-b ds-b-rec">+1/3 a 2/3</span></td>
+          <td>Rogério Greco: exige efetiva facilitação</td>
+        </tr>
+        <tr>
+          <td>Art. 226, V</td>
+          <td>Estupro corretivo (motivação de "corrigir" orientação LBT)</td>
+          <td><span class="ds-b ds-b-rec">+1/3 a 2/3</span></td>
+          <td>Rogério Sanches: ódio e preconceito</td>
+        </tr>
+        <tr>
+          <td>Art. 234-A</td>
+          <td>Transmissão de IST/DST</td>
+          <td><span class="ds-b ds-b-rec">+1/3 a 2/3</span></td>
+          <td>Dolo de transmitir HIV → concurso formal c/ Art. 131 CP</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /guia -->
+
+<!-- ══════════════════════════════════════════════════════
+     ABA 3 — ROTEIRO DE ESTUDO
+══════════════════════════════════════════════════════ -->
+<div id="ds-roteiro" class="ds-painel">
+
+  <div style="background:var(--blue);border-radius:10px;padding:18px 22px;color:#fff;margin-bottom:20px">
+    <div style="font-family:var(--serif);font-size:16px;margin-bottom:6px;font-weight:700">Roteiro de Estudo — Crimes contra a Dignidade Sexual</div>
+    <div style="font-size:13.5px;opacity:.9;line-height:1.6">Análise técnico-científica · Arts. 213–234 CP · Doutrina e Jurisprudência consolidada. Expanda cada seção para aprofundar o estudo.</div>
+  </div>
+
+  <!-- 1 -->
+  <div class="ds-unit">
+    <div class="ds-unit-hd" onclick="dsUnit(this)">
+      <div class="ds-unit-num">1</div>
+      <div class="ds-unit-title">Transição de Paradigma — dos Costumes à Dignidade Sexual</div>
+      <div class="ds-unit-tog">▾</div>
+    </div>
+    <div class="ds-unit-body">
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Lei 12.015/2009 — ruptura paradigmática</div><div class="ds-step-meta">Título VI CP · bem jurídico individual</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <p>O antigo Título VI, "Crimes contra os Costumes", foi renomeado para <strong>"Crimes contra a Dignidade Sexual"</strong>. O bem jurídico deixou de ser a moralidade social coletiva e passou a ser a <strong>autodeterminação sexual</strong> e a integridade do indivíduo.</p>
+          <div class="ds-ok-box"><strong>Consequência interpretativa:</strong> A interpretação deve ser obrigatoriamente sistêmica e teleológica — o nome do Título orienta o intérprete a buscar a proteção da dignidade da pessoa humana, afastando preconceitos históricos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="ds-unit">
+    <div class="ds-unit-hd" onclick="dsUnit(this)">
+      <div class="ds-unit-num">2</div>
+      <div class="ds-unit-title">Relevância Probatória da Palavra da Vítima</div>
+      <div class="ds-unit-tog">▾</div>
+    </div>
+    <div class="ds-unit-body">
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Fundamentação do STJ — especial relevância</div><div class="ds-step-meta">AgRg no AREsp 1275114/DF · AgRg nos EDcl no AREsp 1256178/RS</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <p>Em razão da natureza clandestina desses crimes, o STJ firmou que a palavra da vítima possui <strong>especial relevância probatória</strong>, desde que em consonância com as demais provas.</p>
+          <div class="ds-jur-box"><strong>STJ, AgRg no AREsp 1275114/DF:</strong> "Em delitos sexuais, comumente praticados às ocultas, a palavra da vítima possui especial relevância, desde que esteja em consonância com as demais provas acostadas aos autos."</div>
+        </div>
+      </div>
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Síndrome da Mulher de Potifar — verossimilhança</div><div class="ds-step-meta">Palavra contra palavra · credibilidade · pilar decisivo</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <p>O magistrado deve verificar: <strong>coerência interna</strong> do relato, <strong>ausência de contradições relevantes</strong> e <strong>ausência de motivação espúria</strong> para a acusação. A verossimilhança é o pilar do decreto condenatório; a motivação espúria identificada fundamenta a absolvição.</p>
+          <div class="ds-warn-box"><strong>Atenção:</strong> A síndrome não pode ser invocada genericamente para desacreditar a vítima — exige identificação concreta de elementos que afastem a credibilidade.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="ds-unit">
+    <div class="ds-unit-hd" onclick="dsUnit(this)">
+      <div class="ds-unit-num">3</div>
+      <div class="ds-unit-title">Estupro — Art. 213 CP</div>
+      <div class="ds-unit-tog">▾</div>
+    </div>
+    <div class="ds-unit-body">
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Conjunção carnal, impotência e sadomasoquismo</div><div class="ds-step-meta">Nelson Hungria · coeundi × generandi · atipicidade consentida</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <div class="ds-doc-box"><strong>Nelson Hungria:</strong> Conjunção carnal é "a cópula secundum naturam, o ajuntamento do órgão genital do homem com o da mulher, a intromissão do pênis na cavidade vaginal."</div>
+          <ul>
+            <li><strong>Impotência coeundi</strong> (incapacidade de penetração): crime impossível quanto ao ato de penetração</li>
+            <li><strong>Impotência generandi</strong> (incapacidade de procriar): juridicamente irrelevante</li>
+            <li><strong>Sadomasoquismo consentido entre adultos:</strong> fato atípico se resultam apenas em lesões leves — disponibilidade do bem jurídico</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Sujeitos, consentimento e consumação</div><div class="ds-step-meta">Caso Mike Tyson · consentimento prévio imediato · crime único pós-2009</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <ul>
+            <li>Qualquer pessoa pode ser sujeito ativo ou passivo após a Lei 12.015/2009</li>
+            <li>Conjunção carnal exige sexos opostos; demais atos libidinosos: crime comum</li>
+          </ul>
+          <div class="ds-amber-box"><strong>Caso Mike Tyson:</strong> Atos de afeto prévios (beijos, abraços) não escusam a conduta forçada posterior. O único consentimento válido é o que precede <em>imediatamente</em> a conduta sexual — e pode ser revogado a qualquer momento.</div>
+          <p>Consumação ocorre com a penetração (total ou parcial), independentemente de ejaculação. Atos praticados no mesmo contexto configuram <strong>crime único</strong> (tipo misto alternativo).</p>
+        </div>
+      </div>
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Qualificadoras preterdolosas e concurso doloso</div><div class="ds-step-meta">Edgard Noronha · dolo eventual na morte → concurso · tentativa do qualificador</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <p>As qualificadoras dos §§1º e 2º (lesão grave ou morte) têm natureza <strong>preterdolosa</strong>: dolo no estupro + culpa no resultado.</p>
+          <div class="ds-jur-box"><strong>Edgard Noronha:</strong> Se o agente possui dolo (direto ou eventual) quanto à morte, não incide o §2º — ocorre <strong>concurso de crimes</strong>: Homicídio doloso + Estupro.</div>
+          <div class="ds-warn-box"><strong>Tentativa do resultado qualificador é inadmissível</strong> — o resultado mais grave decorre de culpa, e não se "tenta" resultado culposo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="ds-unit">
+    <div class="ds-unit-hd" onclick="dsUnit(this)">
+      <div class="ds-unit-num">4</div>
+      <div class="ds-unit-title">Violação Sexual mediante Fraude — Art. 215 CP</div>
+      <div class="ds-unit-tog">▾</div>
+    </div>
+    <div class="ds-unit-body">
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Classificação, omissão imprópria e tentativa</div><div class="ds-step-meta">Crime de mão própria × crime comum · plurissubsistência · exemplo do gêmeo</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <ul>
+            <li>Objetivo de CCC → <em>crime de mão própria</em> (sujeito ativo) e <em>próprio</em> (sujeito passivo)</li>
+            <li>Objetivo de ato libidinoso diverso → <em>crime comum</em></li>
+            <li>Admite omissão imprópria (Art. 13, §2º): garantidor que dolosamente permite o engano</li>
+          </ul>
+          <div class="ds-amber-box"><strong>Tentativa (exemplo clássico):</strong> Agente que finge ser o irmão gêmeo da vítima é descoberto por uma tatuagem antes do coito → tentativa de violação sexual mediante fraude.</div>
+          <div class="ds-doc-box"><strong>Rogério Sanches:</strong> Se a fraude anular <em>totalmente</em> a resistência da vítima (ex.: psicotrópicos), o crime será estupro de vulnerável (Art. 217-A), não o Art. 215.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="ds-unit">
+    <div class="ds-unit-hd" onclick="dsUnit(this)">
+      <div class="ds-unit-num">5</div>
+      <div class="ds-unit-title">Aspectos Processuais e Legislação Especial</div>
+      <div class="ds-unit-tog">▾</div>
+    </div>
+    <div class="ds-unit-body">
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Ação penal, medidas protetivas e não revitimização</div><div class="ds-step-meta">Art. 225 · Art. 350-A CPP · ADPF 1.107/DF</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <ul>
+            <li><strong>Art. 225:</strong> ação penal pública incondicionada</li>
+            <li><strong>Art. 234-B:</strong> segredo de justiça obrigatório</li>
+            <li><strong>Lei 15.280/2025 — Art. 350-A CPP:</strong> 5 medidas protetivas, incluindo monitoração eletrônica com dispositivo de alerta para a vítima</li>
+            <li><strong>Lei Henry Borel:</strong> afasta a Lei 9.099/95 para crimes contra crianças/adolescentes; veda penas de cesta básica ou multa isolada</li>
+          </ul>
+          <div class="ds-ementa-stf"><strong>ADPF 1.107/DF (STF):</strong> É inconstitucional desqualificar a vítima mencionando sua vida sexual pregressa. O histórico sexual da vítima não pode ser usado como elemento de defesa ou critério de credibilidade.</div>
+        </div>
+      </div>
+      <div class="ds-step">
+        <div class="ds-step-hd" onclick="dsStep(this)">
+          <div class="ds-step-chk"><svg viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><div class="ds-step-title">Prescrição, poder familiar, DNA e Cadastro Nacional</div><div class="ds-step-meta">Art. 111 V CP · Art. 1.638 CC · LEP · Lei 14.069/2020 · Estatuto do Índio</div></div>
+          <div class="ds-step-exp">›</div>
+        </div>
+        <div class="ds-step-body">
+          <ul>
+            <li><strong>Art. 111, V, CP:</strong> prescrição flui da maioridade (18 anos) da vítima, salvo se ação já proposta</li>
+            <li><strong>Art. 1.638, CC:</strong> condenação por estupro contra descendente gera perda do poder familiar</li>
+            <li><strong>LEP:</strong> extração obrigatória de DNA no ingresso ao sistema prisional (crimes hediondos)</li>
+            <li><strong>Lei 14.069/2020:</strong> Cadastro Nacional — foto + atividade laboral dos últimos 3 anos no livramento condicional</li>
+            <li><strong>Art. 59, Lei 6.001/73 (Estatuto do Índio):</strong> pena agravada em 1/3 se vítima for indígena não integrada</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /roteiro -->
+
+<!-- ══════════════════════════════════════════════════════
+     ABA 4 — JURISPRUDÊNCIA
+══════════════════════════════════════════════════════ -->
+<div id="ds-jur" class="ds-painel">
+
+  <div class="ds-jur-list">
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon stj">⚖️</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">STJ · AgRg no AREsp 1275114/DF</div>
+          <div class="ds-jur-tema">Palavra da vítima em crimes sexuais — especial relevância probatória</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">"Em delitos sexuais, comumente praticados às ocultas, a palavra da vítima possui especial relevância, desde que esteja em consonância com as demais provas acostadas aos autos."</div>
+        <ul>
+          <li>Não se exige corroboração absoluta — verossimilhança e coerência interna bastam</li>
+          <li>Fundamenta condenações em situações de "palavra contra palavra"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon stj">⚖️</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">STJ · AgRg nos EDcl no AREsp 1256178/RS</div>
+          <div class="ds-jur-tema">Palavra da vítima em ambiente doméstico — valor probatório reforçado</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">"Nos delitos praticados em ambiente doméstico e familiar, geralmente praticados à clandestinidade... a palavra da vítima possui especial relevância, notadamente quando corroborada por outros elementos probatórios."</div>
+        <ul>
+          <li>Aplicável em conjunto com a Lei Maria da Penha nos crimes intrafamiliares</li>
+          <li>"Notadamente quando corroborada" — corroboração potencializa, não é indispensável</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon stj">⚖️</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">STJ · REsp 1730287/SC</div>
+          <div class="ds-jur-tema">Relação professor/aluno como causa de aumento do Art. 226, II</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <p>A expressão "por qualquer outro título tiver autoridade sobre ela" (Art. 226, II) tem natureza <strong>exemplificativa</strong>. A relação pedagógica gera <em>autoridade fática</em> suficiente para o aumento de metade da pena.</p>
+        <ul>
+          <li>Abrange coordenadores, diretores, monitores e qualquer pessoa em posição de autoridade sobre o aluno</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon stf">🏛️</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">STF · ADPF 1.107/DF</div>
+          <div class="ds-jur-tema">Não revitimização — vida sexual pregressa da vítima é irrelevante</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa-stf">É inconstitucional desqualificar a vítima ou questionar sua credibilidade com base em sua vida sexual pregressa. O comportamento sexual passado é irrelevante para a análise da prova.</div>
+        <ul>
+          <li>Defensores não podem mencionar relacionamentos anteriores para enfraquecer o depoimento</li>
+          <li>Fundamento: dignidade humana (CF, art. 1º, III) e não discriminação (CF, art. 3º, IV)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon dou">📚</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">Doutrina · Caso Mike Tyson e Desiree Washington (EUA, 1992)</div>
+          <div class="ds-jur-tema">Consentimento prévio imediato — atos afetivos anteriores não escusam a conduta forçada</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <p>Mike Tyson foi condenado por estupro mesmo havendo atos de afeto prévios. Usado na doutrina para fixar o princípio do <strong>consentimento prévio imediato</strong>:</p>
+        <ul>
+          <li>Beijos e abraços anteriores não equivalem a consentimento para atos sexuais posteriores</li>
+          <li>O consentimento pode ser revogado a qualquer momento, inclusive no curso do ato</li>
+          <li>Refuta a tese "a vítima queria, pois estava voluntariamente com o agente"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon dou">📚</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">Doutrina · "Síndrome da Mulher de Potifar"</div>
+          <div class="ds-jur-tema">Verossimilhança como pilar decisivo — palavra contra palavra</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <p>Alusão ao episódio bíblico: designa situações em que a acusação pode ser falsa ou motivada por razões espúrias. Ferramenta de análise crítica do conjunto probatório — <strong>não</strong> presunção de falsidade.</p>
+        <ul>
+          <li>Coerência interna + ausência de motivação espúria → pilar condenatório</li>
+          <li>Motivações espúrias identificadas concretamente → fundamento absolutório</li>
+          <li>Não pode ser invocada genericamente para desacreditar a vítima</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /jur -->
+
+<script>
+;(function() {
+  window.dsTab = function(id, btn) {
+    const wrap = btn.closest('.ds-tabs').parentElement
+    wrap.querySelectorAll('.ds-painel').forEach(p => p.classList.remove('ativo'))
+    wrap.querySelectorAll('.ds-tab').forEach(b => b.classList.remove('ativo'))
+    wrap.querySelector('#ds-' + id).classList.add('ativo')
+    btn.classList.add('ativo')
+  }
+  window.dsUnit = function(hd) {
+    const body = hd.nextElementSibling
+    const tog  = hd.querySelector('.ds-unit-tog')
+    const open = body.classList.contains('aberto')
+    body.classList.toggle('aberto', !open)
+    tog.classList.toggle('aberto', !open)
+    hd.classList.toggle('aberto', !open)
+  }
+  window.dsStep = function(hd) {
+    const step = hd.parentElement
+    const body = hd.nextElementSibling
+    const exp  = hd.querySelector('.ds-step-exp')
+    const bodyOpen = body.classList.contains('aberto')
+    body.classList.toggle('aberto', !bodyOpen)
+    if (exp) exp.style.transform = bodyOpen ? '' : 'rotate(90deg)'
+    if (!bodyOpen) step.classList.toggle('feito')
+  }
+  window.dsJur = function(hd) {
+    const body = hd.nextElementSibling
+    const arr  = hd.querySelector('.ds-jur-arr')
+    const open = body.classList.contains('aberto')
+    body.classList.toggle('aberto', !open)
+    if (arr) arr.classList.toggle('aberto', !open)
+  }
+})()
+</script>

@@ -23,6 +23,11 @@ const materias = [
             titulo: "Crimes contra o Sentimento Religioso",
             descricao: "Tabela comparativa · Mapa mental · Roteiro de estudo · Estudo de caso",
             arquivo: "conteudo/penal/penal-iv/03-sentimento-religioso.html"
+          },
+          {
+            titulo: "Crimes contra a Dignidade Sexual",
+            descricao: "Em breve",
+            arquivo: "conteudo/penal/penal-iv/04-dignidade-sexual.html"
           }
         ],
         flashcards: [

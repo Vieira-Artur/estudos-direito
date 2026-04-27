@@ -26,8 +26,13 @@ const materias = [
           },
           {
             titulo: "Crimes contra a Dignidade Sexual",
-            descricao: "Em breve",
+            descricao: "Comparativo · Relatório geral · Doutrina · Jurisprudência",
             arquivo: "conteudo/penal/penal-iv/04-dignidade-sexual.html"
+          },
+          {
+            titulo: "Tabela Comparativa Geral",
+            descricao: "Todos os crimes contra a dignidade sexual · Caps. I, I-A e II",
+            arquivo: "conteudo/penal/penal-iv/05-tabela-comparativa-geral.html"
           }
         ],
         flashcards: [

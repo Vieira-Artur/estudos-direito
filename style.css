@@ -23,7 +23,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg:          #0f1923;
     --surface:     #162233;
     --border:      #1e3350;
@@ -33,6 +33,17 @@
     --blue-hover:  #1a3050;
     --gold-light:  #2a2010;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg:          #0f1923;
+  --surface:     #162233;
+  --border:      #1e3350;
+  --text:        #e8edf5;
+  --text2:       #8fa3bc;
+  --blue-light:  #1a3050;
+  --blue-hover:  #1a3050;
+  --gold-light:  #2a2010;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1121,6 +1132,30 @@ main {
 
 #btn-topo:hover {
   background: var(--blue-mid);
+}
+
+#btn-tema {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  z-index: 100;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: white;
+  border: none;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: background .18s;
+}
+#btn-tema:hover { background: var(--blue-mid); }
+
+@media (max-width: 540px) {
+  #btn-tema { right: 16px; }
+  #btn-topo { right: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

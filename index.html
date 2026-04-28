@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="meu-espaco.css">
 </head>
 <body>
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t})()</script>
   <a class="skip-link" href="#app">Ir para o conteúdo principal</a>
   <header>
     <div class="header-top">
@@ -38,6 +39,7 @@
   </header>
   <main id="app" aria-live="polite" aria-atomic="false"></main>
 
+  <button id="btn-tema" aria-label="Mudar para modo escuro" onclick="toggleTema()">🌙</button>
   <button id="btn-topo" title="Voltar ao topo" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})">↑</button>
 
   <footer class="rodape-site">
@@ -54,6 +56,32 @@
     window.addEventListener('scroll', () => {
       btnTopo.classList.toggle('visivel', window.scrollY > 320)
     }, { passive: true })
+
+    function _temaEscuro() {
+      const t = document.documentElement.dataset.theme
+      if (t === 'dark') return true
+      if (t === 'light') return false
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+
+    function _atualizarBtnTema() {
+      const btn = document.getElementById('btn-tema')
+      if (!btn) return
+      const escuro = _temaEscuro()
+      btn.textContent = escuro ? '☀️' : '🌙'
+      btn.setAttribute('aria-label', escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro')
+      btn.title = escuro ? 'Modo claro' : 'Modo escuro'
+    }
+
+    function toggleTema() {
+      const next = _temaEscuro() ? 'light' : 'dark'
+      document.documentElement.dataset.theme = next
+      localStorage.setItem('theme', next)
+      _atualizarBtnTema()
+    }
+
+    _atualizarBtnTema()
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', _atualizarBtnTema)
   </script>
 </body>
 </html>

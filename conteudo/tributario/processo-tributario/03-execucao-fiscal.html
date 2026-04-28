@@ -20,7 +20,7 @@
 /* ── Abas ────────────────────────────────────────────── */
 .pt-tabs { display:flex; gap:4px; margin-bottom:22px; flex-wrap:wrap; }
 .pt-tab {
-  padding:7px 18px; font-size:14px; font-weight:600;
+  padding:7px 18px; font-size:13px; font-weight:600;
   font-family:var(--sans); border:1.5px solid var(--blue);
   border-radius:6px; cursor:pointer;
   background:var(--surface); color:var(--blue);
@@ -190,6 +190,10 @@
 .pt-pergunta-body.open { display:block; }
 .pt-pergunta-body strong { color:var(--blue); }
 .pt-pergunta-body p { margin-bottom:8px; }
+
+@media (max-width: 540px) {
+  .pt-tab { padding: 4px 9px; font-size: 11.5px; }
+}
 </style>
 
 <h2 class="pt-titulo">A Execução Fiscal (LEF) — Do Nascimento ao Título à Satisfação do Crédito</h2>

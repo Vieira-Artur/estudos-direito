@@ -1,3 +1,40 @@
+// === Google Analytics 4 (GA4) — Estudos em Direito ===
+(function(){
+    var GA_ID = 'G-S3YX8G99TS';
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID, { send_page_view: false });
+    function sendPageView(){
+          gtag('event', 'page_view', {
+                  page_location: location.href,
+                  page_path: location.pathname + location.search + location.hash,
+                  page_title: document.title
+          });
+    }
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+          sendPageView();
+    } else {
+          window.addEventListener('DOMContentLoaded', sendPageView);
+    }
+    ['pushState','replaceState'].forEach(function(method){
+          var orig = history[method];
+          history[method] = function(){
+                  var ret = orig.apply(this, arguments);
+                  window.dispatchEvent(new Event('locationchange'));
+                  return ret;
+          };
+    });
+    window.addEventListener('popstate', function(){ window.dispatchEvent(new Event('locationchange')); });
+    window.addEventListener('hashchange', function(){ window.dispatchEvent(new Event('locationchange')); });
+    window.addEventListener('locationchange', function(){ setTimeout(sendPageView, 50); });
+})();
+
 // ── Utilitário de scroll suave respeitando prefers-reduced-motion ──
 function scrollSuave(el, opts = {}) {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches

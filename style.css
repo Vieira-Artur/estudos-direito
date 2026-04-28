@@ -22,6 +22,19 @@
   --shadow-lg:   0 8px 32px rgba(31,73,125,.18);
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:          #0f1923;
+    --surface:     #162233;
+    --border:      #1e3350;
+    --text:        #e8edf5;
+    --text2:       #8fa3bc;
+    --blue-light:  #1a3050;
+    --blue-hover:  #1a3050;
+    --gold-light:  #2a2010;
+  }
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {

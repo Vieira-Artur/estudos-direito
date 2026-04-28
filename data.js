@@ -72,7 +72,7 @@ const materias = [
         temas: [
           {
             titulo: "Teoria Geral das Provas",
-            descricao: "Mapa mental · Prova vs elemento informativo · Sistemas de avaliação · Prova ilícita · Cadeia de custódia",
+            descricao: "Revisão geral · Prova vs elemento informativo · Sistemas de avaliação · Prova ilícita · Cadeia de custódia",
             arquivo: "conteudo/processual-penal-ii/01-teoria-geral-provas.html"
           },
           {

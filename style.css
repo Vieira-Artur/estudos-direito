@@ -36,15 +36,50 @@
 }
 
 :root[data-theme="dark"] {
-  --bg:          #0f1923;
-  --surface:     #162233;
-  --border:      #1e3350;
-  --text:        #e8edf5;
-  --text2:       #8fa3bc;
-  --blue-light:  #1a3050;
-  --blue-hover:  #1a3050;
-  --gold-light:  #2a2010;
+  --blue:        #9ab4f8;
+  --blue-dark:   #1F497D;
+  --blue-mid:    #6a9fd4;
+  --blue-light:  #1a2550;
+  --blue-hover:  #1e3050;
+  --blue-accent: #6ABAFF;
+  --gold:        #e8c96a;
+  --gold-light:  #2a2000;
+  --bg:          #0d1b2e;
+  --surface:     #142238;
+  --border:      #2a4060;
+  --text:        #e8eef5;
+  --text2:       #a0b4cc;
+  --shadow-sm:   0 2px 8px rgba(0,0,0,.30);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.40);
+  --shadow-lg:   0 8px 32px rgba(0,0,0,.50);
+  --sk-base:     #1c2d42;
+  --sk-shine:    #243650;
 }
+
+/* Sobrescritas de elementos para o toggle manual — espelha o bloco @media abaixo */
+:root[data-theme="dark"] body::before {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(154,180,248,.09) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(232,201,106,.07) 0%, transparent 40%);
+}
+:root[data-theme="dark"] header {
+  background: linear-gradient(135deg, #060e1a 0%, #1F497D 100%);
+}
+:root[data-theme="dark"] .no-materia {
+  background: #1F497D;
+  box-shadow: 0 3px 12px rgba(0,0,0,.45);
+}
+:root[data-theme="dark"] .conector-v {
+  background: linear-gradient(to bottom, #1F497D, #1a2550);
+}
+:root[data-theme="dark"] .no-turma         { background: #1a2840; }
+:root[data-theme="dark"] .no-turma.vazia   { background: #181818; border-color: #333; color: #555; }
+:root[data-theme="dark"] .card-tema::after { background: var(--blue-accent); }
+:root[data-theme="dark"] #conteudo-area    { border: 1px solid var(--border); }
+:root[data-theme="dark"] .flash-btn-nao   { background: rgba(220,38,38,.2); color: #fca5a5; }
+:root[data-theme="dark"] .flash-btn-sim   { background: rgba(22,163,74,.2);  color: #86efac; }
+:root[data-theme="dark"] .flash-btn-deletar:hover { color: #fca5a5; }
+:root[data-theme="dark"] .busca-resultado-snippet mark { background: rgba(255,243,205,.2); }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1100,6 +1135,7 @@ main {
   .flash-btn-nao { background: rgba(220,38,38,.2); color: #fca5a5; }
   .flash-btn-sim { background: rgba(22,163,74,.2); color: #86efac; }
   .flash-btn-deletar:hover { color: #fca5a5; }
+  .busca-resultado-snippet mark { background: rgba(255,243,205,.2); }
 }
 
 /* ── Botão voltar ao topo ── */
@@ -1277,7 +1313,7 @@ main {
 #busca-painel {
   margin: 8px -28px -14px;
   padding: 10px 28px 14px;
-  background: #eef2f8;
+  background: var(--bg);
   border-top: 1px solid rgba(255,255,255,.12);
 }
 #busca-painel[hidden] { display: none; }
@@ -1296,7 +1332,7 @@ main {
 }
 
 .busca-resultado {
-  background: white;
+  background: var(--surface);
   border-radius: 6px;
   padding: 9px 12px;
   border-left: 3px solid var(--blue);

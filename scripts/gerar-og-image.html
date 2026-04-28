@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador og:image — Estudos Complementares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+      gap: 20px;
+      font-family: 'Source Sans 3', sans-serif;
+      color: #fff;
+      margin: 0;
+    }
+    p { font-size: 14px; color: rgba(255,255,255,.5); margin: 0; }
+    canvas { border-radius: 8px; max-width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,.6); }
+    button {
+      background: #1F497D;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 15px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    button:hover { background: #2c5f9e; }
+  </style>
+</head>
+<body>
+  <p>Aguarde as fontes carregarem — a imagem aparece abaixo.</p>
+  <canvas id="c" width="1200" height="630"></canvas>
+  <button onclick="download()">⬇ Baixar og-image.png</button>
+  <p>Salve o arquivo como <code>og-image.png</code> na raiz do repositório e faça commit.</p>
+  <script>
+    document.fonts.ready.then(draw)
+
+    function draw() {
+      const canvas = document.getElementById('c')
+      const ctx    = canvas.getContext('2d')
+      const W = 1200, H = 630
+
+      /* ── Fundo gradient ── */
+      const bg = ctx.createLinearGradient(0, 0, W, H)
+      bg.addColorStop(0, '#080f1a')
+      bg.addColorStop(0.45, '#162f52')
+      bg.addColorStop(1, '#1F497D')
+      ctx.fillStyle = bg
+      ctx.fillRect(0, 0, W, H)
+
+      /* ── Brilho dourado (canto superior direito) ── */
+      const glowGold = ctx.createRadialGradient(W * 0.88, H * 0.1, 0, W * 0.88, H * 0.1, 380)
+      glowGold.addColorStop(0, 'rgba(201,168,76,.16)')
+      glowGold.addColorStop(1, 'rgba(0,0,0,0)')
+      ctx.fillStyle = glowGold
+      ctx.fillRect(0, 0, W, H)
+
+      /* ── Brilho azul (canto inferior esquerdo) ── */
+      const glowBlue = ctx.createRadialGradient(W * 0.08, H * 0.9, 0, W * 0.08, H * 0.9, 280)
+      glowBlue.addColorStop(0, 'rgba(76,155,232,.14)')
+      glowBlue.addColorStop(1, 'rgba(0,0,0,0)')
+      ctx.fillStyle = glowBlue
+      ctx.fillRect(0, 0, W, H)
+
+      /* ── Ícone de balança (watermark, direita) ── */
+      ctx.save()
+      ctx.globalAlpha = 0.07
+      ctx.font = '320px serif'
+      ctx.fillStyle = '#fff'
+      ctx.fillText('⚖', 730, 500)
+      ctx.restore()
+
+      /* ── Barra vertical dourada (esquerda) ── */
+      ctx.fillStyle = '#C9A84C'
+      ctx.beginPath()
+      ctx.roundRect(80, 195, 4, 235, 2)
+      ctx.fill()
+
+      /* ── Rótulo superior ── */
+      ctx.fillStyle = '#4C9BE8'
+      ctx.font = '600 17px "Source Sans 3", sans-serif'
+      ctx.fillText('MATERIAL DE ESTUDOS COMPLEMENTARES', 100, 218)
+
+      /* ── Título principal ── */
+      ctx.fillStyle = '#ffffff'
+      ctx.font = '700 68px "Playfair Display", Georgia, serif'
+      ctx.fillText('Estudos Complementares', 100, 318)
+
+      /* ── Nome do professor ── */
+      ctx.fillStyle = 'rgba(255,255,255,.80)'
+      ctx.font = '600 30px "Source Sans 3", sans-serif'
+      ctx.fillText('Prof. Artur Vieira', 100, 363)
+
+      /* ── Linha separadora com gradiente ── */
+      const sep = ctx.createLinearGradient(100, 0, 680, 0)
+      sep.addColorStop(0, 'rgba(201,168,76,.8)')
+      sep.addColorStop(1, 'rgba(201,168,76,0)')
+      ctx.fillStyle = sep
+      ctx.fillRect(100, 393, 580, 1.5)
+
+      /* ── Matérias ── */
+      ctx.fillStyle = 'rgba(255,255,255,.48)'
+      ctx.font = '400 22px "Source Sans 3", sans-serif'
+      ctx.fillText('Direito Penal  ·  Processual Penal  ·  Tributário', 100, 430)
+
+      /* ── Barra de acento inferior ── */
+      const bottomBar = ctx.createLinearGradient(0, 0, W, 0)
+      bottomBar.addColorStop(0, '#4C9BE8')
+      bottomBar.addColorStop(0.5, '#C9A84C')
+      bottomBar.addColorStop(1, '#4C9BE8')
+      ctx.fillStyle = bottomBar
+      ctx.fillRect(0, H - 4, W, 4)
+
+      /* ── URL no rodapé ── */
+      ctx.fillStyle = 'rgba(255,255,255,.22)'
+      ctx.font = '400 17px "Source Sans 3", sans-serif'
+      ctx.fillText('prof-artur-vieira.github.io/estudos-direito', 100, H - 22)
+    }
+
+    function download() {
+      const canvas = document.getElementById('c')
+      const a = document.createElement('a')
+      a.download = 'og-image.png'
+      a.href = canvas.toDataURL('image/png')
+      a.click()
+    }
+  </script>
+</body>
+</html>

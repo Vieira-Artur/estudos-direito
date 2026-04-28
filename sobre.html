@@ -40,6 +40,25 @@
     .book-card a:hover,
     .article-list a:hover { background: #1F497D !important; color: #fff !important; }
   }
+  :root[data-theme="dark"] {
+    --blue:       #9ab4f8;
+    --blue-light: #1a2550;
+    --blue-mid:   #6a9fd4;
+    --gold:       #e8c96a;
+    --text:       #e8eef5;
+    --text2:      #a0b4cc;
+    --border:     #2a4060;
+    --bg:         #0d1b2e;
+    --bg2:        #142238;
+    --bg3:        #1a2840;
+  }
+  :root[data-theme="dark"] .page-header {
+    background: linear-gradient(135deg, #060e1a 0%, #1F497D 100%) !important;
+  }
+  :root[data-theme="dark"] .lattes-link { background: #1F497D !important; }
+  :root[data-theme="dark"] .lattes-link:hover { background: #2c5f9e !important; }
+  :root[data-theme="dark"] .book-card a:hover,
+  :root[data-theme="dark"] .article-list a:hover { background: #1F497D !important; color: #fff !important; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font-family:var(--serif); line-height:1.7; }
 

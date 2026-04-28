@@ -1,4 +1,4 @@
-﻿<style>
+<style>
 /* ── Cores extras ─────────────────────────────────────── */
 :root {
   --fp-green:  #1a5c1a; --fp-green-lt: #d6f0d6;
@@ -9,7 +9,7 @@
   --fp-teal:   #0a5c4a; --fp-teal-lt:  #d6f0e8;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --fp-green:  #6fd86f; --fp-green-lt:  #0d2e0d;
     --fp-red:    #f08080; --fp-red-lt:    #2e0d0d;
     --fp-orange: #f0a060; --fp-orange-lt: #2e1500;

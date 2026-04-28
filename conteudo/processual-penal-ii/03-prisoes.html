@@ -1,4 +1,4 @@
-﻿<style>
+<style>
 :root {
   --pp3-green:  #1a5c1a; --pp3-green-lt: #d6f0d6;
   --pp3-red:    #8b1a1a; --pp3-red-lt:   #fce8e8;
@@ -10,7 +10,7 @@
   --pp3-bg3:    #edf0f4;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --pp3-green:  #6fd86f; --pp3-green-lt:  #0d2e0d;
     --pp3-red:    #f08080; --pp3-red-lt:    #2e0d0d;
     --pp3-orange: #f0a060; --pp3-orange-lt: #2e1500;
@@ -143,7 +143,7 @@
     --tl-lw:          3px;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --tl-green:       #3fb950;
       --tl-green-light: #0f2d1a;
       --tl-green-line:  #3fb950;

@@ -1,4 +1,4 @@
-﻿<style>
+<style>
 :root {
   --pp1-green:  #1a5c1a; --pp1-green-lt: #d6f0d6;
   --pp1-red:    #8b1a1a; --pp1-red-lt:   #fce8e8;
@@ -10,7 +10,7 @@
   --pp1-bg3:    #edf0f4;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --pp1-green:  #6fd86f; --pp1-green-lt:  #0d2e0d;
     --pp1-red:    #f08080; --pp1-red-lt:    #2e0d0d;
     --pp1-orange: #f0a060; --pp1-orange-lt: #2e1500;

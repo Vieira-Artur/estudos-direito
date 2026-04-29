@@ -373,4 +373,4 @@ fix: descrições data.js e cor .tag-gold
 git push origin master
 ```
 
-- [ ] **Verificar no GitHub Pages** (aguardar ~1 min após push): Abrir `https://prof-artur-vieira.github.io/estudos-direito/` e confirmar que o site está funcionando normalmente.
+- [ ] **Verificar no GitHub Pages** (aguardar ~1 min após push): Abrir `https://vieira-artur.github.io/estudos-direito/` e confirmar que o site está funcionando normalmente.

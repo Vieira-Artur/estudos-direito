@@ -1,7 +1,7 @@
 # Busca de Temas — Design Spec
 
 **Data:** 2026-04-18  
-**Site:** SPA vanilla JS, GitHub Pages — `https://prof-artur-vieira.github.io/estudos-direito/`
+**Site:** SPA vanilla JS, GitHub Pages — `https://vieira-artur.github.io/estudos-direito/`
 
 ---
 

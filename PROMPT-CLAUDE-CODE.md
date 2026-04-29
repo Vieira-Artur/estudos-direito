@@ -1,6 +1,6 @@
 # Prompt para colar no Claude Code
 
-> **Como usar:** abra o terminal dentro da pasta do clone local de `Prof-Artur-Vieira/estudos-direito`, rode `claude`, e quando ele abrir cole **TUDO** que está abaixo da linha `=== INÍCIO DO PROMPT ===`. Pode confirmar com Enter.
+> **Como usar:** abra o terminal dentro da pasta do clone local de `Vieira-Artur/estudos-direito`, rode `claude`, e quando ele abrir cole **TUDO** que está abaixo da linha `=== INÍCIO DO PROMPT ===`. Pode confirmar com Enter.
 
 ---
 
@@ -66,7 +66,7 @@ EDITION_URL_TPL = STJ_BASE + "?acao=pesquisarumaedicao&livre=%270{n:04d}%27.cod.
 LISTING_URL     = STJ_BASE + "?acao=pesquisar"
 
 USER_AGENT      = ("Mozilla/5.0 (compatible; estudos-direito-bot/1.0; "
-                   "+https://prof-artur-vieira.github.io/estudos-direito/)")
+                   "+https://vieira-artur.github.io/estudos-direito/)")
 
 # Sempre comeca a partir desta edicao no primeiro run
 INITIAL_EDITION = 886
@@ -870,7 +870,7 @@ Não execute o workflow ainda — vou disparar o primeiro `Run workflow` manualm
 
 ## Depois que o Claude Code terminar
 
-1. Vá em `https://github.com/Prof-Artur-Vieira/estudos-direito/actions`.
+1. Vá em `https://github.com/Vieira-Artur/estudos-direito/actions`.
 2. Clique no workflow **"Informativos STJ - Processo Penal"** na lista da esquerda.
 3. Clique em **"Run workflow"** (verde, à direita), deixe os campos vazios e confirme.
 4. Acompanhe o run pela própria aba. Em ~1 minuto, se deu certo, vai aparecer um commit novo no repo (`Atualiza informativos STJ - ate a edicao 886` ou número maior).

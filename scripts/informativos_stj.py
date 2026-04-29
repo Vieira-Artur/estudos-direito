@@ -26,7 +26,7 @@ from pathlib import Path
 from typing import Optional
 from urllib.parse import quote, urljoin
 
-import requests
+from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup, Tag
 
 # --------------------------------------------------------------------- config
@@ -37,10 +37,7 @@ STATE_FILE      = TARGET_DIR / "_state.json"
 INDEX_FILE      = TARGET_DIR / "index.html"
 
 STJ_BASE        = "https://scon.stj.jus.br/jurisprudencia/externo/informativo/"
-# processo.stj.jus.br com &from=feed retorna HTML estático (sem JavaScript).
-# scon.stj.jus.br carrega o conteúdo via JS e não é acessível a scrapers.
-EDITION_URL_TPL = ("https://processo.stj.jus.br/jurisprudencia/externo/informativo/"
-                   "?acao=pesquisarumaedicao&livre={n:04d}.cod.&from=feed")
+EDITION_URL_TPL = STJ_BASE + "?acao=pesquisarumaedicao&livre=%27{n:04d}%27.cod."
 LISTING_URL     = STJ_BASE + "?acao=pesquisar"
 
 USER_AGENT      = ("Mozilla/5.0 (compatible; estudos-direito-bot/1.0; "
@@ -60,31 +57,46 @@ logging.basicConfig(
 )
 log = logging.getLogger("informativos-stj")
 
-# --------------------------------------------------------------------- HTTP
+# --------------------------------------------------------------------- Playwright
 
-_session: Optional[requests.Session] = None
+_pw = None
+_browser = None
 
 
-def session() -> requests.Session:
-    global _session
-    if _session is None:
-        s = requests.Session()
-        s.headers.update({
-            "User-Agent": USER_AGENT,
-            "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
-        })
-        _session = s
-    return _session
+def _ensure_browser():
+    global _pw, _browser
+    if _browser is None:
+        _pw = sync_playwright().start()
+        _browser = _pw.chromium.launch(
+            headless=True,
+            args=["--no-sandbox", "--disable-setuid-sandbox"],
+        )
+    return _browser
+
+
+def _close_browser() -> None:
+    global _pw, _browser
+    if _browser:
+        _browser.close()
+        _browser = None
+    if _pw:
+        _pw.stop()
+        _pw = None
 
 
 def fetch(url: str, *, retries: int = 3, sleep: float = 2.0) -> str:
     last_exc: Optional[Exception] = None
     for attempt in range(1, retries + 1):
         try:
-            r = session().get(url, timeout=30)
-            r.raise_for_status()
-            r.encoding = r.apparent_encoding or "utf-8"
-            return r.text
+            page = _ensure_browser().new_page(
+                user_agent=USER_AGENT,
+                extra_http_headers={"Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8"},
+            )
+            try:
+                page.goto(url, wait_until="networkidle", timeout=60_000)
+                return page.content()
+            finally:
+                page.close()
         except Exception as exc:                       # noqa: BLE001
             last_exc = exc
             log.warning("Tentativa %d falhou em %s: %s", attempt, url, exc)
@@ -424,7 +436,7 @@ def render_edicao(edicao: int, data_edicao: str, enunciados: list[dict]) -> str:
         f'<p class="inf-sub">{sub}</p>\n'
         f'{cards}\n'
         f'<div class="inf-rodape">Fonte oficial: '
-        f'<a href="{STJ_BASE}?acao=pesquisarumaedicao&amp;livre=%270{edicao:04d}%27.cod." '
+        f'<a href="{STJ_BASE}?acao=pesquisarumaedicao&amp;livre=%27{edicao:04d}%27.cod." '
         f'target="_blank" rel="noopener">Informativo {edicao} no portal do STJ</a>.'
         f'</div>\n'
     )
@@ -598,7 +610,13 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     state = load_state()
+    try:
+        return _main(args, state)
+    finally:
+        _close_browser()
 
+
+def _main(args: argparse.Namespace, state: dict) -> int:
     start = args.start or (state["ultima_edicao_processada"] + 1)
     log.info("Inicio em informativo %d.", start)
 

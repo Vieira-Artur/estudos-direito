@@ -1,5 +1,11 @@
 {
-  "ultima_edicao_processada": 885,
-  "edicoes": {},
-  "atualizado_em": null
+  "ultima_edicao_processada": 886,
+  "edicoes": {
+    "886": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0886.html"
+    }
+  },
+  "atualizado_em": "2026-04-29T10:15:12+00:00"
 }

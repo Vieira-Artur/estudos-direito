@@ -26,7 +26,7 @@ from pathlib import Path
 from typing import Optional
 from urllib.parse import quote, urljoin
 
-from playwright.sync_api import sync_playwright
+import requests
 from bs4 import BeautifulSoup, Tag
 
 # --------------------------------------------------------------------- config
@@ -37,7 +37,10 @@ STATE_FILE      = TARGET_DIR / "_state.json"
 INDEX_FILE      = TARGET_DIR / "index.html"
 
 STJ_BASE        = "https://scon.stj.jus.br/jurisprudencia/externo/informativo/"
-EDITION_URL_TPL = STJ_BASE + "?acao=pesquisarumaedicao&livre=%27{n:04d}%27.cod."
+PROCESSO_BASE   = "https://processo.stj.jus.br/jurisprudencia/externo/informativo/"
+# processo.stj.jus.br?from=feed retorna HTML estático (sem JS) e não bloqueia IPs de CI.
+# As aspas (%27) em volta do número são obrigatórias para retornar a edição completa.
+EDITION_URL_TPL = PROCESSO_BASE + "?acao=pesquisarumaedicao&livre=%27{n:04d}%27.cod.&from=feed"
 LISTING_URL     = STJ_BASE + "?acao=pesquisar"
 
 USER_AGENT      = ("Mozilla/5.0 (compatible; estudos-direito-bot/1.0; "
@@ -57,46 +60,31 @@ logging.basicConfig(
 )
 log = logging.getLogger("informativos-stj")
 
-# --------------------------------------------------------------------- Playwright
+# --------------------------------------------------------------------- HTTP
 
-_pw = None
-_browser = None
-
-
-def _ensure_browser():
-    global _pw, _browser
-    if _browser is None:
-        _pw = sync_playwright().start()
-        _browser = _pw.chromium.launch(
-            headless=True,
-            args=["--no-sandbox", "--disable-setuid-sandbox"],
-        )
-    return _browser
+_session: Optional[requests.Session] = None
 
 
-def _close_browser() -> None:
-    global _pw, _browser
-    if _browser:
-        _browser.close()
-        _browser = None
-    if _pw:
-        _pw.stop()
-        _pw = None
+def session() -> requests.Session:
+    global _session
+    if _session is None:
+        s = requests.Session()
+        s.headers.update({
+            "User-Agent": USER_AGENT,
+            "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
+        })
+        _session = s
+    return _session
 
 
 def fetch(url: str, *, retries: int = 3, sleep: float = 2.0) -> str:
     last_exc: Optional[Exception] = None
     for attempt in range(1, retries + 1):
         try:
-            page = _ensure_browser().new_page(
-                user_agent=USER_AGENT,
-                extra_http_headers={"Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8"},
-            )
-            try:
-                page.goto(url, wait_until="networkidle", timeout=60_000)
-                return page.content()
-            finally:
-                page.close()
+            r = session().get(url, timeout=30)
+            r.raise_for_status()
+            r.encoding = r.apparent_encoding or "utf-8"
+            return r.text
         except Exception as exc:                       # noqa: BLE001
             last_exc = exc
             log.warning("Tentativa %d falhou em %s: %s", attempt, url, exc)
@@ -142,15 +130,117 @@ def normalize(s: str) -> str:
 def parse_enunciados(html: str) -> list[dict]:
     soup = BeautifulSoup(html, "html.parser")
 
-    # estrategia 1: cada enunciado costuma ficar dentro de um container que
-    # contem um <a> com "CNOT=" no href.
+    # estrategia 1: div.resultado (processo.stj.jus.br?from=feed)
+    enunciados = parse_enunciados_resultado(soup)
+    if enunciados:
+        return enunciados
+
+    # estrategia 2: CNOT anchors (scon.stj.jus.br quando acessível)
+    enunciados = parse_enunciados_cnot(soup)
+    if enunciados:
+        return enunciados
+
+    # estrategia 3: tags <strong> como rótulos genéricos
+    enunciados = parse_enunciados_strong(soup)
+    if enunciados:
+        return enunciados
+
+    # estrategia 4: parse linear por rótulos (fallback)
+    return parse_enunciados_linear(soup)
+
+
+def parse_enunciados_resultado(soup: BeautifulSoup) -> list[dict]:
+    """Estratégia primária: processo.stj.jus.br?from=feed.
+
+    Estrutura observada:
+      <div class="resultado">
+        <a class="resultado-link" href="?livre=@CNOT=022275">
+          <p class="resultado-ementa">Tema do julgado...</p>
+        </a>
+        <div class="resultado-detalhes">
+          <p><strong>Processo:</strong> texto...</p>
+          <p><strong>Ramo do Direito:</strong> DIREITO PROCESSUAL PENAL</p>
+          <p><strong>Destaque:</strong> texto...</p>
+        </div>
+      </div>
+    """
+    divs = soup.find_all("div", class_="resultado")
+    if not divs:
+        return []
+
+    label_keys = {k.upper(): v for k, v in LABELS.items()}
+    out: list[dict] = []
+
+    for div in divs:
+        entry: dict[str, str] = {}
+
+        # CNOT e link
+        link_tag = div.find("a", class_="resultado-link")
+        if link_tag:
+            href = link_tag.get("href", "")
+            m = re.search(r"CNOT[^0-9]*(\d+)", href, re.IGNORECASE)
+            if m:
+                cnot = m.group(1)
+                entry["cnot"] = cnot
+                entry["link"] = urljoin(STJ_BASE,
+                    f"?aplicacao=informativo&acao=pesquisar&livre=@CNOT='{cnot}'")
+
+        # TEMA — <p class="resultado-ementa">
+        ementa = div.find("p", class_="resultado-ementa")
+        if ementa:
+            entry["tema"] = normalize(ementa.get_text(" ", strip=True))
+
+        # Campos <strong>Label:</strong> valor  dentro de resultado-detalhes
+        detalhes = div.find("div", class_="resultado-detalhes")
+        if detalhes:
+            for p_tag in detalhes.find_all("p"):
+                strong = p_tag.find("strong")
+                if not strong:
+                    continue
+                label_raw = normalize(strong.get_text()).rstrip(":").strip().upper()
+                if label_raw not in label_keys:
+                    continue
+                chave = label_keys[label_raw]
+                parts: list[str] = []
+                for child in p_tag.children:
+                    if child is strong:
+                        continue
+                    if hasattr(child, "get"):
+                        href_val = child.get("href", "")
+                        if href_val and "un.org" in href_val:
+                            continue
+                    if hasattr(child, "get_text"):
+                        t = child.get_text(" ", strip=True)
+                    elif isinstance(child, str):
+                        t = child.strip()
+                    else:
+                        continue
+                    if t:
+                        parts.append(t)
+                value = normalize(" ".join(parts))
+                if value:
+                    entry[chave] = value
+
+        if "ramo" not in entry or "destaque" not in entry:
+            continue
+        if "processo" not in entry:
+            entry["processo"] = entry.get("tema", "")
+        entry.setdefault("cnot", "")
+        entry.setdefault("link", "")
+        out.append(entry)
+
+    return out
+
+
+def parse_enunciados_cnot(soup: BeautifulSoup) -> list[dict]:
+    """Estratégia para scon.stj.jus.br renderizado: busca anchors com CNOT no href."""
     enunciados: list[dict] = []
     seen_cnots: set[str] = set()
 
-    anchors = soup.find_all("a", href=re.compile(r"CNOT=", re.I))
+    anchors = soup.find_all("a", href=re.compile(r"CNOT", re.I))
     for a in anchors:
         href = a.get("href") or ""
-        m = re.search(r"CNOT=%?27?([0-9]+)", href)
+        m = re.search(r"CNOT[^0-9]*(\d+)", href, re.IGNORECASE)
         if not m:
             continue
         cnot = m.group(1)
@@ -158,7 +248,6 @@ def parse_enunciados(html: str) -> list[dict]:
             continue
         seen_cnots.add(cnot)
 
-        # sobe ate achar o bloco do enunciado (heuristica)
         bloco = a
         for _ in range(8):
             if bloco.parent is None:
@@ -168,44 +257,25 @@ def parse_enunciados(html: str) -> list[dict]:
             if "RAMO DO DIREITO" in txt and "DESTAQUE" in txt:
                 break
 
-        dados = extract_fields(bloco)
-        if not dados:
+        text = bloco.get_text("\n", strip=True)
+        fields = parse_labelled(text)
+        if not all(k in fields for k in ("processo", "ramo", "tema", "destaque")):
             continue
-        dados["cnot"] = cnot
-        dados["link"] = urljoin(STJ_BASE,
-                                f"?aplicacao=informativo&acao=pesquisar"
-                                f"&livre=@CNOT='{cnot}'")
-        enunciados.append(dados)
+        fields["cnot"] = cnot
+        fields["link"] = urljoin(STJ_BASE,
+            f"?aplicacao=informativo&acao=pesquisar&livre=@CNOT='{cnot}'")
+        enunciados.append(fields)
 
-    if enunciados:
-        return enunciados
-
-    # estrategia 2: tags <strong> como rotulos (processo.stj.jus.br + from=feed)
-    enunciados = parse_enunciados_strong(soup)
-    if enunciados:
-        return enunciados
-
-    # estrategia 3: parse linear por rotulos (fallback)
-    return parse_enunciados_linear(soup)
-
-
-def extract_fields(bloco: Tag) -> Optional[dict]:
-    """Dado um bloco que parece um enunciado, extrai os 4 campos."""
-    text = bloco.get_text("\n", strip=True)
-    fields = parse_labelled(text)
-    if not all(k in fields for k in ("processo", "ramo", "tema", "destaque")):
-        return None
-    return fields
+    return enunciados
 
 
 def parse_enunciados_strong(soup: BeautifulSoup) -> list[dict]:
-    """Estratégia para processo.stj.jus.br: rótulos ficam em tags <strong>."""
+    """Estratégia genérica: rótulos em tags <strong> (com ou sem dois-pontos)."""
     label_keys = {k.upper(): v for k, v in LABELS.items()}
 
-    # Encontra todos os <strong> cujo texto é exatamente um rótulo conhecido
-    rotulos = [(normalize(s.get_text()).upper(), s)
+    rotulos = [(normalize(s.get_text()).rstrip(":").strip().upper(), s)
                for s in soup.find_all("strong")
-               if normalize(s.get_text()).upper() in label_keys]
+               if normalize(s.get_text()).rstrip(":").strip().upper() in label_keys]
 
     if not rotulos:
         return []
@@ -222,16 +292,16 @@ def parse_enunciados_strong(soup: BeautifulSoup) -> list[dict]:
                 resultado.append(dict(atual))
             atual = {}
 
-        # Coleta texto dos irmãos seguintes até o próximo rótulo
         partes: list[str] = []
         no = el.next_sibling
         while no is not None:
             if no is prox_el:
                 break
             if hasattr(no, "name"):
-                if no.name == "strong" and normalize(no.get_text()).upper() in label_keys:
-                    break
-                # Ignora links de ícones ODS (brasil.un.org)
+                if no.name == "strong":
+                    label_check = normalize(no.get_text()).rstrip(":").strip().upper()
+                    if label_check in label_keys:
+                        break
                 href = no.get("href", "") if callable(getattr(no, "get", None)) else ""
                 if href and "un.org" in href:
                     no = no.next_sibling
@@ -613,13 +683,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     state = load_state()
-    try:
-        return _main(args, state)
-    finally:
-        _close_browser()
 
-
-def _main(args: argparse.Namespace, state: dict) -> int:
     start = args.start or (state["ultima_edicao_processada"] + 1)
     log.info("Inicio em informativo %d.", start)
 

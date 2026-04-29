@@ -572,6 +572,9 @@ def fetch_edicao(numero: int) -> Optional[tuple[str, list[dict]]]:
     todos = parse_enunciados(html)
     log.info("Edição %d: %d enunciados no total.", numero, len(todos))
 
+    if not todos:
+        log.info("HTML snippet (primeiros 5000 chars):\n%s", html[:5000])
+
     filtrados = [e for e in todos if RAMO_REGEX.search(e.get("ramo", ""))]
     log.info("Edição %d: %d enunciados de Processo Penal.", numero, len(filtrados))
 

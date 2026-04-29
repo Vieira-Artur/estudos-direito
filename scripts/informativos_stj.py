@@ -40,7 +40,7 @@ STJ_BASE        = "https://scon.stj.jus.br/jurisprudencia/externo/informativo/"
 # processo.stj.jus.br com &from=feed retorna HTML estático (sem JavaScript).
 # scon.stj.jus.br carrega o conteúdo via JS e não é acessível a scrapers.
 EDITION_URL_TPL = ("https://processo.stj.jus.br/jurisprudencia/externo/informativo/"
-                   "?acao=pesquisarumaedicao&livre=0{n:04d}.cod.&from=feed")
+                   "?acao=pesquisarumaedicao&livre={n:04d}.cod.&from=feed")
 LISTING_URL     = STJ_BASE + "?acao=pesquisar"
 
 USER_AGENT      = ("Mozilla/5.0 (compatible; estudos-direito-bot/1.0; "
@@ -168,7 +168,12 @@ def parse_enunciados(html: str) -> list[dict]:
     if enunciados:
         return enunciados
 
-    # estrategia 2: parse linear por rotulos
+    # estrategia 2: tags <strong> como rotulos (processo.stj.jus.br + from=feed)
+    enunciados = parse_enunciados_strong(soup)
+    if enunciados:
+        return enunciados
+
+    # estrategia 3: parse linear por rotulos (fallback)
     return parse_enunciados_linear(soup)
 
 
@@ -179,6 +184,61 @@ def extract_fields(bloco: Tag) -> Optional[dict]:
     if not all(k in fields for k in ("processo", "ramo", "tema", "destaque")):
         return None
     return fields
+
+
+def parse_enunciados_strong(soup: BeautifulSoup) -> list[dict]:
+    """Estratégia para processo.stj.jus.br: rótulos ficam em tags <strong>."""
+    label_keys = {k.upper(): v for k, v in LABELS.items()}
+
+    # Encontra todos os <strong> cujo texto é exatamente um rótulo conhecido
+    rotulos = [(normalize(s.get_text()).upper(), s)
+               for s in soup.find_all("strong")
+               if normalize(s.get_text()).upper() in label_keys]
+
+    if not rotulos:
+        return []
+
+    resultado: list[dict] = []
+    atual: dict[str, str] = {}
+
+    for idx, (rotulo, el) in enumerate(rotulos):
+        chave = label_keys[rotulo]
+        prox_el = rotulos[idx + 1][1] if idx + 1 < len(rotulos) else None
+
+        if chave == "processo" and atual:
+            if all(k in atual for k in ("processo", "ramo", "tema", "destaque")):
+                resultado.append(dict(atual))
+            atual = {}
+
+        # Coleta texto dos irmãos seguintes até o próximo rótulo
+        partes: list[str] = []
+        no = el.next_sibling
+        while no is not None:
+            if no is prox_el:
+                break
+            if hasattr(no, "name"):
+                if no.name == "strong" and normalize(no.get_text()).upper() in label_keys:
+                    break
+                # Ignora links de ícones ODS (brasil.un.org)
+                href = no.get("href", "") if callable(getattr(no, "get", None)) else ""
+                if href and "un.org" in href:
+                    no = no.next_sibling
+                    continue
+                t = no.get_text(" ", strip=True)
+                if t:
+                    partes.append(t)
+            elif isinstance(no, str) and no.strip():
+                partes.append(no.strip())
+            no = no.next_sibling
+
+        conteudo = normalize(" ".join(partes))
+        if conteudo:
+            atual[chave] = conteudo
+
+    if atual and all(k in atual for k in ("processo", "ramo", "tema", "destaque")):
+        resultado.append(dict(atual))
+
+    return resultado
 
 
 def parse_enunciados_linear(soup: BeautifulSoup) -> list[dict]:

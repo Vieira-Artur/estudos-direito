@@ -343,6 +343,10 @@ function renderConteudoTurma(turma) {
             if (temaIndex !== -1) {
               a.href = '#'
               a.onclick = (e) => { e.preventDefault(); abrirTema(temaIndex) }
+            } else if (/\.html$/.test(href) && !href.includes('/')) {
+              // Link relativo a um HTML no mesmo diretório do índice (ex: informativos)
+              a.href = '#'
+              a.onclick = (e) => { e.preventDefault(); _abrirFragmentoDoIndice(arquivo) }
             }
           }
         })
@@ -374,6 +378,27 @@ function renderConteudoTurma(turma) {
       `).join('')}
     </div>
   `
+}
+
+function _abrirFragmentoDoIndice(arquivo) {
+  const area = document.getElementById('tab-area-conteudo')
+  if (!area) return
+  area.innerHTML = skeletonConteudo()
+  _fetchComTimeout(SITE_BASE + arquivo)
+    .then(r => { if (!r.ok) throw new Error(); return r.text() })
+    .then(html => {
+      const el = document.getElementById('conteudo-area')
+      if (!el) return
+      el.innerHTML = html
+      el.style.animation = 'none'
+      void el.offsetWidth
+      el.style.removeProperty('animation')
+      linkificarJulgados(el)
+    })
+    .catch(() => {
+      const el = document.getElementById('conteudo-area')
+      if (el) el.innerHTML = '<p style="color:#c00">Não foi possível carregar o conteúdo.</p>'
+    })
 }
 
 function mostrarTabConteudo() {

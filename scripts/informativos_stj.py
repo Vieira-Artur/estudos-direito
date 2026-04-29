@@ -37,7 +37,10 @@ STATE_FILE      = TARGET_DIR / "_state.json"
 INDEX_FILE      = TARGET_DIR / "index.html"
 
 STJ_BASE        = "https://scon.stj.jus.br/jurisprudencia/externo/informativo/"
-EDITION_URL_TPL = STJ_BASE + "?acao=pesquisarumaedicao&livre=%270{n:04d}%27.cod."
+# processo.stj.jus.br com &from=feed retorna HTML estático (sem JavaScript).
+# scon.stj.jus.br carrega o conteúdo via JS e não é acessível a scrapers.
+EDITION_URL_TPL = ("https://processo.stj.jus.br/jurisprudencia/externo/informativo/"
+                   "?acao=pesquisarumaedicao&livre=0{n:04d}.cod.&from=feed")
 LISTING_URL     = STJ_BASE + "?acao=pesquisar"
 
 USER_AGENT      = ("Mozilla/5.0 (compatible; estudos-direito-bot/1.0; "
@@ -448,7 +451,7 @@ def render_index(state: dict) -> str:
             f'<span class="inf-idx-num">Informativo {n}</span>'
             f'<span class="inf-idx-data">{h(d)}</span>'
             f'<span class="inf-idx-link">'
-            f'<a href="conteudo/processual-penal-informativos-stj/informativo-{n:04d}.html"'
+            f'<a href="informativo-{n:04d}.html"'
             f' data-tema="conteudo/processual-penal-informativos-stj/informativo-{n:04d}.html">'
             f'Ver enunciados</a></span>'
             f'<span class="inf-idx-qtd">{qtd} enunciado{"s" if qtd != 1 else ""}</span>'

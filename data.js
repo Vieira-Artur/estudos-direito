@@ -115,6 +115,12 @@ const materias = [
             arquivo: "conteudo/processual-penal-iii/01-procedimentos.html"
           }
         ]
+      },
+      {
+        id: "processual-penal-informativos-stj",
+        titulo: "Jurisprudência",
+        indice: "conteudo/processual-penal-informativos-stj/index.html",
+        temas: []
       }
     ]
   },

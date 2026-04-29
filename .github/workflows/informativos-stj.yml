@@ -39,13 +39,21 @@ jobs:
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+          pip install "requests[socks]" beautifulsoup4
+
+      - name: Iniciar Tor
+        run: |
+          sudo apt-get install -y tor
+          sudo service tor start
+          sleep 15
 
       - name: Rodar scraper
         id: run
         env:
-          FROM_ED: ${{ inputs.from_edition }}
-          TO_ED:   ${{ inputs.to_edition }}
+          FROM_ED:     ${{ inputs.from_edition }}
+          TO_ED:       ${{ inputs.to_edition }}
+          HTTPS_PROXY: socks5h://127.0.0.1:9050
+          HTTP_PROXY:  socks5h://127.0.0.1:9050
         run: |
           set -eo pipefail
           ARGS=""

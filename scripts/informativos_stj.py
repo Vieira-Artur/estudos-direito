@@ -43,8 +43,8 @@ PROCESSO_BASE   = "https://processo.stj.jus.br/jurisprudencia/externo/informativ
 EDITION_URL_TPL = PROCESSO_BASE + "?acao=pesquisarumaedicao&livre=%27{n:04d}%27.cod.&from=feed"
 LISTING_URL     = STJ_BASE + "?acao=pesquisar"
 
-USER_AGENT      = ("Mozilla/5.0 (compatible; estudos-direito-bot/1.0; "
-                   "+https://prof-artur-vieira.github.io/estudos-direito/)")
+USER_AGENT      = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                   "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
 # Sempre comeca a partir desta edicao no primeiro run
 INITIAL_EDITION = 886

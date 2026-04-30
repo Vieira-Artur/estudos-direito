@@ -511,15 +511,14 @@ PAGE_STYLE = """\
   color: var(--text2, #5f5f5f);
 }
 .inf-tema {
-  font-family: var(--serif, Georgia, serif);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text, #1a1a1a);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text2, #5f5f5f);
   margin: 4px 0 10px 0;
   line-height: 1.4;
 }
 .inf-destaque {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text, #1a1a1a);
   line-height: 1.65;
 }

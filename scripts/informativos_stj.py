@@ -48,7 +48,7 @@ USER_AGENT = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
 # cujo único ramo é a variante militar, mas inclui entradas com múltiplos ramos.
 MATERIAS: dict[str, dict] = {
     "processual-penal": {
-        "ramo_regex": re.compile(r"processual\s+penal(?!\s+militar)", re.IGNORECASE),
+        "ramo_regex": re.compile(r"DIREITO\s+PROCESSUAL\s+PENAL(?!\s+MILITAR)", re.IGNORECASE),
         "target_dir": REPO_ROOT / "conteudo" / "processual-penal-informativos-stj",
         "nome":       "Direito Processual Penal",
         "inicial":    886,
@@ -626,7 +626,7 @@ def render_edicao(edicao: int, data_edicao: str, enunciados: list[dict], cfg: di
     n = len(enunciados)
     sub = (f"Edição <strong>nº {edicao}</strong> · publicada em "
            f"<strong>{data_edicao}</strong> · "
-           f"{n} enunciado{'s' if n != 1 else ''} de {nome}.")
+           f"{n} enunciado{'s' if n != 1 else ''} de {h(nome)}.")
     cards = "\n".join(_render_card(e, i + 1) for i, e in enumerate(enunciados)) if enunciados \
             else f'<div class="inf-empty">Nenhum enunciado de {h(nome)} nesta edição.</div>'
     return (

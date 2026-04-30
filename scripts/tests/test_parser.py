@@ -67,3 +67,61 @@ def test_extrair_data_titulo_nao_encontrada():
     soup = BeautifulSoup("<html><head><title>Sem data</title></head></html>", "html.parser")
     data = extrair_data_titulo(soup, 886)
     assert data == "Data não identificada"
+
+
+def test_render_card_tem_wrapper_e_numero():
+    from scripts.informativos_stj import _render_card
+    e = {
+        "processo": "AgRg no HC 123-SP",
+        "link": "",
+        "ramo": "DIREITO PROCESSUAL PENAL",
+        "tema": "Tema do julgado.",
+        "destaque": "O STJ decidiu que X.",
+    }
+    html = _render_card(e, 2)
+    assert 'class="inf-card-wrap"' in html
+    assert 'class="inf-num"' in html
+    assert ">2<" in html
+
+
+def test_render_card_destaque_antes_de_processo():
+    from scripts.informativos_stj import _render_card
+    e = {
+        "processo": "AgRg no HC 123-SP",
+        "link": "",
+        "ramo": "DIREITO PROCESSUAL PENAL",
+        "tema": "Tema.",
+        "destaque": "O STJ decidiu que X.",
+    }
+    html = _render_card(e, 1)
+    pos_destaque = html.index("inf-destaque")
+    pos_processo = html.index("inf-processo")
+    assert pos_destaque < pos_processo, "destaque deve aparecer antes do processo no HTML"
+
+
+def test_render_card_sem_card_head():
+    from scripts.informativos_stj import _render_card
+    e = {
+        "processo": "AgRg no HC 123-SP",
+        "link": "",
+        "ramo": "DIREITO PROCESSUAL PENAL",
+        "tema": "Tema.",
+        "destaque": "O STJ decidiu que X.",
+    }
+    html = _render_card(e, 1)
+    assert "inf-card-head" not in html
+
+
+def test_render_card_rodape_tem_processo_e_ramo():
+    from scripts.informativos_stj import _render_card
+    e = {
+        "processo": "AgRg no HC 123-SP",
+        "link": "",
+        "ramo": "DIREITO PROCESSUAL PENAL",
+        "tema": "Tema.",
+        "destaque": "O STJ decidiu que X.",
+    }
+    html = _render_card(e, 1)
+    assert 'class="inf-card-foot"' in html
+    assert "AgRg no HC 123-SP" in html
+    assert "DIREITO PROCESSUAL PENAL" in html

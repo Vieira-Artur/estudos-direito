@@ -448,53 +448,67 @@ def parse_labelled(text: str) -> dict:
 # --------------------------------------------------------------------- gerador
 
 
-PAGE_STYLE = """\
-<style>
-:root { --inf-accent: #2563eb; }
+# Palette for the jurisprudência section. Both PAGE_STYLE and INDEX_STYLE embed
+# this block so every generated fragment is self-contained for dark mode.
+# To add a new subject area, copy _JUR_TOKENS_CSS and change the accent colour.
+_JUR_TOKENS_CSS = """\
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --inf-accent: #6abaff;
-    --surface: #162233;
-    --border: #253a58;
-    --text: #e8edf5;
-    --text2: #8fa3bc;
-    --blue-light: #1a3050;
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
   }
 }
 :root[data-theme="dark"] {
-  --inf-accent: #9ab4f8;
-  --surface: #142238;
-  --border: #2a4060;
-  --text: #e8eef5;
-  --text2: #a0b4cc;
-  --blue-light: #1a2550;
-}
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}"""
+
+PAGE_STYLE = "<style>\n" + _JUR_TOKENS_CSS + """
 .inf-titulo {
   font-family: var(--serif, Georgia, serif);
   font-size: 22px;
   font-weight: 700;
-  color: var(--inf-accent);
+  color: var(--jur-accent);
   margin: 0 0 6px 0;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--border, #e5e5e5);
+  border-bottom: 2px solid var(--jur-border);
 }
 .inf-titulo-data {
   font-size: 12px;
   font-weight: 400;
-  color: var(--text2, #5f5f5f);
+  color: var(--jur-text2);
   vertical-align: middle;
 }
 .inf-sub {
   font-size: 13px;
-  color: var(--text2, #5f5f5f);
+  color: var(--jur-text2);
   margin-bottom: 24px;
   line-height: 1.55;
 }
-.inf-sub strong { color: var(--text, #1a1a1a); }
+.inf-sub strong { color: var(--jur-text); }
 .inf-meta {
   display: inline-block;
-  background: var(--blue-light, #eef3ff);
-  color: var(--inf-accent);
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .08em;
@@ -514,7 +528,7 @@ PAGE_STYLE = """\
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--inf-accent);
+  background: var(--jur-accent);
   color: #fff;
   font-size: 13px;
   font-weight: 700;
@@ -525,21 +539,21 @@ PAGE_STYLE = """\
 }
 .inf-card {
   flex: 1;
-  background: var(--surface, #fff);
-  border: 1px solid var(--border, #e5e5e5);
-  border-left: 3px solid var(--inf-accent);
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
   border-radius: 10px;
   padding: 18px 20px;
   transition: box-shadow .15s, transform .15s;
 }
 .inf-card:hover {
-  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+  box-shadow: var(--jur-shadow);
   transform: translateY(-1px);
 }
 .inf-card-foot {
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px dashed var(--border, #e5e5e5);
+  border-top: 1px dashed var(--jur-border);
   display: flex;
   flex-wrap: wrap;
   gap: 6px 14px;
@@ -548,11 +562,11 @@ PAGE_STYLE = """\
 .inf-processo {
   font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
   font-size: 11px;
-  color: var(--text2, #5f5f5f);
+  color: var(--jur-text2);
 }
 .inf-processo a {
   font-weight: 700;
-  color: var(--inf-accent);
+  color: var(--jur-accent);
   text-decoration: none;
 }
 .inf-processo a:hover { text-decoration: underline; }
@@ -561,18 +575,18 @@ PAGE_STYLE = """\
   font-weight: 700;
   letter-spacing: .07em;
   text-transform: uppercase;
-  color: var(--text2, #5f5f5f);
+  color: var(--jur-text2);
 }
 .inf-tema {
   font-size: 13px;
   font-weight: 400;
-  color: var(--text2, #5f5f5f);
+  color: var(--jur-text2);
   margin: 4px 0 10px 0;
   line-height: 1.4;
 }
 .inf-destaque {
   font-size: 16px;
-  color: var(--text, #1a1a1a);
+  color: var(--jur-text);
   line-height: 1.65;
   text-align: justify;
   hyphens: auto;
@@ -583,15 +597,15 @@ PAGE_STYLE = """\
 .inf-rodape {
   margin-top: 32px;
   padding-top: 14px;
-  border-top: 1px solid var(--border, #e5e5e5);
+  border-top: 1px solid var(--jur-border);
   font-size: 12px;
-  color: var(--text2, #5f5f5f);
+  color: var(--jur-text2);
 }
-.inf-rodape a { color: var(--inf-accent); }
+.inf-rodape a { color: var(--jur-accent); }
 .inf-empty {
   text-align: center;
   padding: 40px 20px;
-  color: var(--text2, #5f5f5f);
+  color: var(--jur-text2);
   font-style: italic;
 }
 </style>
@@ -645,71 +659,52 @@ def _render_card(e: dict, idx: int) -> str:
     )
 
 
-INDEX_STYLE = """\
-<style>
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --surface: #162233;
-    --border: #253a58;
-    --text: #e8edf5;
-    --text2: #8fa3bc;
-    --blue: #6abaff;
-    --blue-light: #1a3050;
-  }
-}
-:root[data-theme="dark"] {
-  --surface: #142238;
-  --border: #2a4060;
-  --text: #e8eef5;
-  --text2: #a0b4cc;
-  --blue: #9ab4f8;
-  --blue-light: #1a2550;
-}
+INDEX_STYLE = "<style>\n" + _JUR_TOKENS_CSS + """
 .inf-idx-titulo {
   font-family: var(--serif, Georgia, serif);
   font-size: 22px;
   font-weight: 700;
-  color: var(--blue, #2563eb);
+  color: var(--jur-accent);
   margin: 0 0 6px 0;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--border, #e5e5e5);
+  border-bottom: 2px solid var(--jur-border);
 }
 .inf-idx-sub {
   font-size: 13px;
-  color: var(--text2, #5f5f5f);
+  color: var(--jur-text2);
   margin-bottom: 24px;
   line-height: 1.6;
 }
 .inf-idx-sub a {
-  color: var(--text, #1a1a1a);
+  color: var(--jur-text);
   text-decoration: underline;
 }
 .inf-idx-list { list-style: none; padding: 0; margin: 0; }
 .inf-idx-item {
   display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline;
   padding: 14px 0;
-  border-bottom: 1px solid var(--border, #e5e5e5);
+  border-bottom: 1px solid var(--jur-border);
 }
 .inf-idx-num {
   font-family: var(--mono, ui-monospace, monospace);
   font-size: 13px; font-weight: 700;
-  color: var(--blue, #2563eb);
+  color: var(--jur-accent);
   min-width: 110px;
 }
-.inf-idx-data { font-size: 12px; color: var(--text2, #5f5f5f); min-width: 110px; }
+.inf-idx-data { font-size: 12px; color: var(--jur-text2); min-width: 110px; }
 .inf-idx-link a {
-  color: var(--text, #1a1a1a);
+  color: var(--jur-text);
   text-decoration: none;
   font-weight: 600;
 }
-.inf-idx-link a:hover { color: var(--blue, #2563eb); text-decoration: underline; }
+.inf-idx-link a:hover { color: var(--jur-accent); text-decoration: underline; }
 .inf-idx-qtd {
-  font-size: 11px; color: var(--text2, #5f5f5f);
-  background: var(--blue-light, #eef3ff);
+  font-size: 11px; color: var(--jur-accent);
+  background: var(--jur-accent-dim);
   padding: 2px 8px; border-radius: 999px;
 }
 .inf-idx-vazio {
-  text-align: center; padding: 40px 20px; color: var(--text2, #5f5f5f);
+  text-align: center; padding: 40px 20px; color: var(--jur-text2);
   font-style: italic;
 }
 </style>

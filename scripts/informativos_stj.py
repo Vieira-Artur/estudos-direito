@@ -20,6 +20,7 @@ import logging
 import os
 import re
 import sys
+import subprocess
 import time
 from html import escape as h
 from pathlib import Path
@@ -130,7 +131,12 @@ def normalize(s: str) -> str:
 def parse_enunciados(html: str) -> list[dict]:
     soup = BeautifulSoup(html, "html.parser")
 
-    # estrategia 1: div.resultado (processo.stj.jus.br?from=feed)
+    # estrategia 1: clsInformativoBlocoItem (processo.stj.jus.br?from=feed — layout atual)
+    enunciados = parse_enunciados_cls(soup)
+    if enunciados:
+        return enunciados
+
+    # estrategia 2: div.resultado (processo.stj.jus.br?from=feed — layout anterior)
     enunciados = parse_enunciados_resultado(soup)
     if enunciados:
         return enunciados
@@ -147,6 +153,52 @@ def parse_enunciados(html: str) -> list[dict]:
 
     # estrategia 4: parse linear por rótulos (fallback)
     return parse_enunciados_linear(soup)
+
+
+def parse_enunciados_cls(soup: BeautifulSoup) -> list[dict]:
+    """Estratégia primária: processo.stj.jus.br?from=feed — classes clsInformativoBlocoItem."""
+    blocos = soup.find_all("div", class_="clsInformativoBlocoItem")
+    if not blocos:
+        return []
+
+    label_keys = {k.upper(): v for k, v in LABELS.items()}
+    out: list[dict] = []
+
+    for bloco in blocos:
+        entry: dict[str, str] = {"cnot": "", "link": ""}
+        labels = [normalize(l.get_text()).rstrip(":").upper()
+                  for l in bloco.find_all("div", class_="clsInformativoLabel")]
+        textos = bloco.find_all("div", class_="clsInformativoTexto")
+
+        texto_idx = 0
+        for label in labels:
+            chave = label_keys.get(label)
+            if label == "DESTAQUE":
+                for d in bloco.find_all("div", class_="clsDestaqueAzul"):
+                    t = normalize(d.get_text())
+                    if len(t) > 20:
+                        entry["destaque"] = t
+                        break
+            elif chave and chave in ("processo", "ramo", "tema"):
+                if texto_idx < len(textos):
+                    entry[chave] = normalize(textos[texto_idx].get_text())
+                    texto_idx += 1
+            elif texto_idx < len(textos):
+                texto_idx += 1
+
+        for a in bloco.find_all("a", href=True):
+            m = re.search(r"CNOT[^0-9]*(\d+)", a["href"], re.IGNORECASE)
+            if m:
+                cnot = m.group(1)
+                entry["cnot"] = cnot
+                entry["link"] = urljoin(STJ_BASE,
+                    f"?aplicacao=informativo&acao=pesquisar&livre=@CNOT='{cnot}'")
+                break
+
+        if entry.get("ramo") and entry.get("destaque") and RAMO_REGEX.search(entry["ramo"]):
+            out.append(entry)
+
+    return out
 
 
 def parse_enunciados_resultado(soup: BeautifulSoup) -> list[dict]:
@@ -615,6 +667,17 @@ def render_index(state: dict) -> str:
 # --------------------------------------------------------------------- STJ scrape
 
 
+def extrair_data_titulo(soup: BeautifulSoup, numero: int) -> str:
+    """Extrai a data da edição do <title> da página."""
+    title_tag = soup.find("title")
+    if not title_tag:
+        return "Data não identificada"
+    m = re.search(
+        rf"n\.\s*0*{numero}\s*[-–]\s*(\d{{1,2}}\s+de\s+\w+\s+de\s+\d{{4}})",
+        title_tag.get_text(), re.IGNORECASE)
+    return m.group(1) if m else "Data não identificada"
+
+
 def fetch_edicao(numero: int) -> Optional[tuple[str, list[dict]]]:
     """Retorna (data_edicao, enunciados) ou None se a edicao nao existe."""
     url = EDITION_URL_TPL.format(n=numero)
@@ -632,12 +695,7 @@ def fetch_edicao(numero: int) -> Optional[tuple[str, list[dict]]]:
     # tenta extrair a data da edicao (formato: "Informativo de Jurisprudencia
     # n. NNN - DD de MES de AAAA.")
     soup = BeautifulSoup(html, "html.parser")
-    titulo = soup.get_text(" ", strip=True)
-    m = re.search(
-        rf"n[.º°]\s*0*{numero}\s*[-–]\s*"
-        r"(\d{1,2}\s+de\s+\w+\s+de\s+\d{4})",
-        titulo, re.IGNORECASE)
-    data_edicao = m.group(1) if m else "Data não identificada"
+    data_edicao = extrair_data_titulo(soup, numero)
 
     todos = parse_enunciados(html)
     log.info("Edição %d: %d enunciados no total.", numero, len(todos))

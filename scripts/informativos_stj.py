@@ -576,7 +576,7 @@ def render_edicao(edicao: int, data_edicao: str, enunciados: list[dict]) -> str:
     sub = (f"Edição <strong>nº {edicao}</strong> · publicada em "
            f"<strong>{data_edicao}</strong> · "
            f"{n} enunciado{'s' if n != 1 else ''} de Direito Processual Penal.")
-    cards = "\n".join(_render_card(e) for e in enunciados) if enunciados \
+    cards = "\n".join(_render_card(e, i + 1) for i, e in enumerate(enunciados)) if enunciados \
             else '<div class="inf-empty">Nenhum enunciado de Direito Processual Penal nesta edição.</div>'
     return (
         f"{PAGE_STYLE}\n"
@@ -592,7 +592,7 @@ def render_edicao(edicao: int, data_edicao: str, enunciados: list[dict]) -> str:
     )
 
 
-def _render_card(e: dict) -> str:
+def _render_card(e: dict, idx: int) -> str:
     proc = h(e.get("processo", ""))
     link = e.get("link") or ""
     ramo = h(e.get("ramo", ""))
@@ -601,14 +601,17 @@ def _render_card(e: dict) -> str:
     proc_html = (f'<a href="{h(link)}" target="_blank" rel="noopener">{proc}</a>'
                  if link else proc)
     return (
-        '<article class="inf-card">'
-          '<div class="inf-card-head">'
-            f'<span class="inf-processo">{proc_html}</span>'
-            f'<span class="inf-ramo">{ramo}</span>'
-          '</div>'
-          f'<div class="inf-tema">{tema}</div>'
-          f'<div class="inf-destaque" lang="pt-BR"><p>{destaque}</p></div>'
-        '</article>'
+        '<div class="inf-card-wrap">'
+          f'<div class="inf-num">{idx}</div>'
+          '<article class="inf-card">'
+            f'<div class="inf-destaque" lang="pt-BR"><p>{destaque}</p></div>'
+            f'<div class="inf-tema">{tema}</div>'
+            '<div class="inf-card-foot">'
+              f'<span class="inf-processo">{proc_html}</span>'
+              f'<span class="inf-ramo">{ramo}</span>'
+            '</div>'
+          '</article>'
+        '</div>'
     )
 
 

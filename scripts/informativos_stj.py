@@ -606,6 +606,10 @@ INDEX_STYLE = """\
   margin-bottom: 24px;
   line-height: 1.6;
 }
+.inf-idx-sub a {
+  color: var(--text, #1a1a1a);
+  text-decoration: underline;
+}
 .inf-idx-list { list-style: none; padding: 0; margin: 0; }
 .inf-idx-item {
   display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline;

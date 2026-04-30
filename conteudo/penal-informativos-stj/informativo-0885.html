@@ -1,0 +1,164 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-titulo-data {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  vertical-align: middle;
+}
+.inf-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.inf-sub strong { color: var(--jur-text); }
+.inf-meta {
+  display: inline-block;
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--jur-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+.inf-card {
+  flex: 1;
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.inf-card:hover {
+  box-shadow: var(--jur-shadow);
+  transform: translateY(-1px);
+}
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jur-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.inf-processo {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--jur-text2);
+}
+.inf-processo a {
+  font-weight: 700;
+  color: var(--jur-accent);
+  text-decoration: none;
+}
+.inf-processo a:hover { text-decoration: underline; }
+.inf-ramo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--jur-text2);
+}
+.inf-tema {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  margin: 4px 0 10px 0;
+  line-height: 1.4;
+}
+.inf-destaque {
+  font-size: 16px;
+  color: var(--jur-text);
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.inf-destaque p { margin: 0 0 8px 0; }
+.inf-destaque p:last-child { margin-bottom: 0; }
+.inf-rodape {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jur-border);
+  font-size: 12px;
+  color: var(--jur-text2);
+}
+.inf-rodape a { color: var(--jur-accent); }
+.inf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-titulo">Informativo nº 885 <span class="inf-meta">STJ</span><span class="inf-titulo-data"> — 22 de abril de 2026</span></h2>
+<p class="inf-sub">Edição <strong>nº 885</strong> · publicada em <strong>22 de abril de 2026</strong> · 4 enunciados de Direito Penal.</p>
+<div class="inf-card-wrap"><div class="inf-num">1</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>A alteração da modalidade de pena restritiva de direitos para adequá-la à legislação específica de trânsito, em recurso exclusivo da defesa, não configura reformatio in pejus, desde que respeitado o quantum da sanção substitutiva.</p></div><div class="inf-tema">Art. 312-A do CTB. Substituição de pena restritiva de direitos. Tribunal que altera para prestação de serviços a comunidade. Recurso exclusivo da defesa. Reformatio in pejus. Inexistência. Legislação específica de trânsito.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;021710&#x27;" target="_blank" rel="noopener">AgRg no REsp 2.204.178-MG, Rel. Ministro Messod Azulay Neto, Quinta Turma, por maioria, julgado em 14/4/2026.</a></span><span class="inf-ramo">DIREITO PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">2</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>1. A justa causa para a ação penal exige não apenas indícios de autoria e materialidade, mas também o respeito ao direito fundamental à razoável duração do processo durante toda a persecução penal.<br><br>2. A demora injustificada e prolongada na conclusão de inquérito policial de baixa complexidade compromete a legitimidade da persecução penal e pode afastar a justa causa para o recebimento da denúncia.<br><br>3. Não se aplica, a situações de inércia estatal prolongada e injustificada, o entendimento de que o oferecimento e o recebimento da denúncia automaticamente superam o excesso de prazo na fase investigativa.</p></div><div class="inf-tema">Excesso injustificado de prazo na investigação. Justa causa para a ação penal. Ausência. Direito à razoável duração do processo. Violação configurada.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;019693&#x27;" target="_blank" rel="noopener">AgRg no AREsp 3.164.204-MG, Rel. Ministro Ribeiro Dantas, Quinta Turma, por unanimidade, julgado em 14/4/2026.</a></span><span class="inf-ramo">DIREITO PENAL, DIREITO PROCESSUAL PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">3</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>O Tema 506 do STF, relativo à descriminalização do porte de maconha para consumo pessoal, não afasta a tipificação da conduta como falta grave no âmbito da execução penal.</p></div><div class="inf-tema">Execução Penal. Posse de drogas para uso pessoal de detento. Interior de estabelecimento prisional. Falta grave.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;017566&#x27;" target="_blank" rel="noopener">AgRg no REsp 2.234.146-MG, Rel. Ministra Maria Marluce Caldas, Quinta Turma, por unanimidade, julgado em 25/3/2026, DJEN 30/3/2026.</a></span><span class="inf-ramo">DIREITO PENAL, EXECUÇÃO PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">4</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>A caracterização do crime previsto no art. 288-A do Código Penal exige vínculo estável e permanente entre os integrantes da milícia, o que pode ser deduzido da narrativa fática, mesmo que ausentes (i) a identificação nominal de todos os integrantes da organização; e (ii) o emprego literal das expressões &quot;estabilidade&quot; e &quot;permanência&quot; pelas instâncias ordinárias.</p></div><div class="inf-tema">Crime de constituição de milícia privada. Art. 288-A do CP. Estabilidade e permanência demonstradas. Identificação nominal dos integrantes. Não exigibilidade.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?livre=%28%28AGRHC+INPATH%28CLAS%29+OR+%22AgRg+no+HC%22+INPATH%28CLAP%29%29+AND+922420+INPATH%28NUM%29%29+OR+%28NEAR%28%28%28AGRHC+OR+%22AgRg+no+HC%22%29%2C922420%29%2C0%2CTRUE%29+INPATH%28SUCE%29%29" target="_blank" rel="noopener">AgRg no HC 922.420-RJ, Rel. Ministro Antonio Saldanha Palheiro, Sexta Turma, por unanimidade, julgado em 14/4/2026.</a></span><span class="inf-ramo">DIREITO PENAL</span></div></article></div>
+<div class="inf-rodape">Fonte oficial: <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisarumaedicao&amp;livre=%270885%27.cod." target="_blank" rel="noopener">Informativo 885 no portal do STJ</a>.</div>

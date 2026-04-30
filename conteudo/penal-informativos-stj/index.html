@@ -1,0 +1,85 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-idx-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-idx-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+.inf-idx-sub a {
+  color: var(--jur-text);
+  text-decoration: underline;
+}
+.inf-idx-list { list-style: none; padding: 0; margin: 0; }
+.inf-idx-item {
+  display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--jur-border);
+}
+.inf-idx-num {
+  font-family: var(--mono, ui-monospace, monospace);
+  font-size: 13px; font-weight: 700;
+  color: var(--jur-accent);
+  min-width: 110px;
+}
+.inf-idx-data { font-size: 12px; color: var(--jur-text2); min-width: 110px; }
+.inf-idx-link a {
+  color: var(--jur-text);
+  text-decoration: none;
+  font-weight: 600;
+}
+.inf-idx-link a:hover { color: var(--jur-accent); text-decoration: underline; }
+.inf-idx-qtd {
+  font-size: 11px; color: var(--jur-accent);
+  background: var(--jur-accent-dim);
+  padding: 2px 8px; border-radius: 999px;
+}
+.inf-idx-vazio {
+  text-align: center; padding: 40px 20px; color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-idx-titulo">Informativos do STJ — Direito Penal</h2>
+<p class="inf-idx-sub">Coletânea automática dos enunciados de Direito Penal publicados no <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/" target="_blank" rel="noopener">Informativo de Jurisprudência do STJ</a>. Atualizada toda 2ª-feira às 06:00 (Brasília).</p>
+<ul class="inf-idx-list">
+<li class="inf-idx-item"><span class="inf-idx-num">Informativo 886</span><span class="inf-idx-data">28 de abril de 2026</span><span class="inf-idx-link"><a href="informativo-0886.html" data-tema="conteudo/penal-informativos-stj/informativo-0886.html">Ver enunciados</a></span><span class="inf-idx-qtd">4 enunciados</span></li>
+<li class="inf-idx-item"><span class="inf-idx-num">Informativo 885</span><span class="inf-idx-data">22 de abril de 2026</span><span class="inf-idx-link"><a href="informativo-0885.html" data-tema="conteudo/penal-informativos-stj/informativo-0885.html">Ver enunciados</a></span><span class="inf-idx-qtd">4 enunciados</span></li>
+</ul>

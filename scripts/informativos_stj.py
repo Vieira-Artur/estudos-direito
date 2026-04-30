@@ -450,7 +450,25 @@ def parse_labelled(text: str) -> dict:
 
 PAGE_STYLE = """\
 <style>
-:root { --inf-accent: var(--blue, #2563eb); }
+:root { --inf-accent: #2563eb; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --inf-accent: #6abaff;
+    --surface: #162233;
+    --border: #253a58;
+    --text: #e8edf5;
+    --text2: #8fa3bc;
+    --blue-light: #1a3050;
+  }
+}
+:root[data-theme="dark"] {
+  --inf-accent: #9ab4f8;
+  --surface: #142238;
+  --border: #2a4060;
+  --text: #e8eef5;
+  --text2: #a0b4cc;
+  --blue-light: #1a2550;
+}
 .inf-titulo {
   font-family: var(--serif, Georgia, serif);
   font-size: 22px;
@@ -626,6 +644,24 @@ def _render_card(e: dict, idx: int) -> str:
 
 INDEX_STYLE = """\
 <style>
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #162233;
+    --border: #253a58;
+    --text: #e8edf5;
+    --text2: #8fa3bc;
+    --blue: #6abaff;
+    --blue-light: #1a3050;
+  }
+}
+:root[data-theme="dark"] {
+  --surface: #142238;
+  --border: #2a4060;
+  --text: #e8eef5;
+  --text2: #a0b4cc;
+  --blue: #9ab4f8;
+  --blue-light: #1a2550;
+}
 .inf-idx-titulo {
   font-family: var(--serif, Georgia, serif);
   font-size: 22px;

@@ -479,27 +479,47 @@ PAGE_STYLE = """\
   border-radius: 999px;
   margin-right: 8px;
 }
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--inf-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
 .inf-card {
+  flex: 1;
   background: var(--surface, #fff);
   border: 1px solid var(--border, #e5e5e5);
   border-left: 3px solid var(--inf-accent);
   border-radius: 10px;
   padding: 18px 20px;
-  margin-bottom: 18px;
   transition: box-shadow .15s, transform .15s;
 }
 .inf-card:hover {
   box-shadow: 0 6px 20px rgba(0,0,0,.06);
   transform: translateY(-1px);
 }
-.inf-card-head {
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border, #e5e5e5);
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 14px;
+  gap: 6px 14px;
   align-items: baseline;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed var(--border, #e5e5e5);
 }
 .inf-processo a {
   font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);

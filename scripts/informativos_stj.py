@@ -32,10 +32,7 @@ from bs4 import BeautifulSoup, Tag
 
 # --------------------------------------------------------------------- config
 
-REPO_ROOT       = Path(__file__).resolve().parent.parent
-TARGET_DIR      = REPO_ROOT / "conteudo" / "processual-penal-informativos-stj"
-STATE_FILE      = TARGET_DIR / "_state.json"
-INDEX_FILE      = TARGET_DIR / "index.html"
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 STJ_BASE        = "https://scon.stj.jus.br/jurisprudencia/externo/informativo/"
 PROCESSO_BASE   = "https://processo.stj.jus.br/jurisprudencia/externo/informativo/"
@@ -44,15 +41,25 @@ PROCESSO_BASE   = "https://processo.stj.jus.br/jurisprudencia/externo/informativ
 EDITION_URL_TPL = PROCESSO_BASE + "?acao=pesquisarumaedicao&livre=%27{n:04d}%27.cod.&from=feed"
 LISTING_URL     = STJ_BASE + "?acao=pesquisar"
 
-USER_AGENT      = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                   "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
+USER_AGENT = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36")
 
-# Sempre comeca a partir desta edicao no primeiro run
-INITIAL_EDITION = 886
-
-# Filtro de ramo do direito (case-insensitive). Inclusivo: aceita combinacoes
-# como "Direito Penal e Processual Penal", "Direito Processual Penal Militar".
-RAMO_REGEX = re.compile(r"processual\s+penal", re.IGNORECASE)
+# Configuração por matéria. Negative lookahead (?!\s+militar) exclui entradas
+# cujo único ramo é a variante militar, mas inclui entradas com múltiplos ramos.
+MATERIAS: dict[str, dict] = {
+    "processual-penal": {
+        "ramo_regex": re.compile(r"processual\s+penal(?!\s+militar)", re.IGNORECASE),
+        "target_dir": REPO_ROOT / "conteudo" / "processual-penal-informativos-stj",
+        "nome":       "Direito Processual Penal",
+        "inicial":    886,
+    },
+    "penal": {
+        "ramo_regex": re.compile(r"DIREITO\s+PENAL(?!\s+MILITAR)", re.IGNORECASE),
+        "target_dir": REPO_ROOT / "conteudo" / "penal-informativos-stj",
+        "nome":       "Direito Penal",
+        "inicial":    885,
+    },
+}
 
 logging.basicConfig(
     level=logging.INFO,
@@ -96,20 +103,22 @@ def fetch(url: str, *, retries: int = 3, sleep: float = 2.0) -> str:
 # --------------------------------------------------------------------- estado
 
 
-def load_state() -> dict:
-    if STATE_FILE.exists():
-        return json.loads(STATE_FILE.read_text(encoding="utf-8"))
+def load_state(cfg: dict) -> dict:
+    state_file = cfg["target_dir"] / "_state.json"
+    if state_file.exists():
+        return json.loads(state_file.read_text(encoding="utf-8"))
     return {
-        "ultima_edicao_processada": INITIAL_EDITION - 1,
-        "edicoes": {},   # "886" -> {"data": "2026-04-29", "qtd_enunciados": 5}
+        "ultima_edicao_processada": cfg["inicial"] - 1,
+        "edicoes": {},
         "atualizado_em": None,
     }
 
 
-def save_state(state: dict) -> None:
+def save_state(state: dict, cfg: dict) -> None:
     state["atualizado_em"] = dt.datetime.now(dt.UTC).isoformat(timespec="seconds")
-    TARGET_DIR.mkdir(parents=True, exist_ok=True)
-    STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2),
+    cfg["target_dir"].mkdir(parents=True, exist_ok=True)
+    state_file = cfg["target_dir"] / "_state.json"
+    state_file.write_text(json.dumps(state, ensure_ascii=False, indent=2),
                           encoding="utf-8")
 
 # --------------------------------------------------------------------- parsing
@@ -612,13 +621,14 @@ PAGE_STYLE = "<style>\n" + _JUR_TOKENS_CSS + """
 """
 
 
-def render_edicao(edicao: int, data_edicao: str, enunciados: list[dict]) -> str:
+def render_edicao(edicao: int, data_edicao: str, enunciados: list[dict], cfg: dict) -> str:
+    nome = cfg["nome"]
     n = len(enunciados)
     sub = (f"Edição <strong>nº {edicao}</strong> · publicada em "
            f"<strong>{data_edicao}</strong> · "
-           f"{n} enunciado{'s' if n != 1 else ''} de Direito Processual Penal.")
+           f"{n} enunciado{'s' if n != 1 else ''} de {nome}.")
     cards = "\n".join(_render_card(e, i + 1) for i, e in enumerate(enunciados)) if enunciados \
-            else '<div class="inf-empty">Nenhum enunciado de Direito Processual Penal nesta edição.</div>'
+            else f'<div class="inf-empty">Nenhum enunciado de {h(nome)} nesta edição.</div>'
     return (
         f"{PAGE_STYLE}\n"
         f'<h2 class="inf-titulo">Informativo nº {edicao} '
@@ -711,7 +721,9 @@ INDEX_STYLE = "<style>\n" + _JUR_TOKENS_CSS + """
 """
 
 
-def render_index(state: dict) -> str:
+def render_index(state: dict, cfg: dict) -> str:
+    nome = cfg["nome"]
+    dir_name = cfg["target_dir"].name
     edicoes = state.get("edicoes", {})
     items: list[str] = []
     for n_str, meta in sorted(edicoes.items(), key=lambda kv: int(kv[0]), reverse=True):
@@ -724,7 +736,7 @@ def render_index(state: dict) -> str:
             f'<span class="inf-idx-data">{h(d)}</span>'
             f'<span class="inf-idx-link">'
             f'<a href="informativo-{n:04d}.html"'
-            f' data-tema="conteudo/processual-penal-informativos-stj/informativo-{n:04d}.html">'
+            f' data-tema="conteudo/{dir_name}/informativo-{n:04d}.html">'
             f'Ver enunciados</a></span>'
             f'<span class="inf-idx-qtd">{qtd} enunciado{"s" if qtd != 1 else ""}</span>'
             f'</li>'
@@ -735,10 +747,10 @@ def render_index(state: dict) -> str:
     )
     return (
         f"{INDEX_STYLE}\n"
-        f'<h2 class="inf-idx-titulo">Informativos do STJ — Direito Processual Penal</h2>\n'
-        '<p class="inf-idx-sub">Coletânea automática dos enunciados de Direito Processual Penal '
-        'publicados no <a href="' + STJ_BASE + '" target="_blank" rel="noopener">Informativo de '
-        'Jurisprudência do STJ</a>. Atualizada toda 2ª-feira às 06:00 (Brasília).</p>\n'
+        f'<h2 class="inf-idx-titulo">Informativos do STJ — {h(nome)}</h2>\n'
+        f'<p class="inf-idx-sub">Coletânea automática dos enunciados de {h(nome)} '
+        f'publicados no <a href="{STJ_BASE}" target="_blank" rel="noopener">Informativo de '
+        f'Jurisprudência do STJ</a>. Atualizada toda 2ª-feira às 06:00 (Brasília).</p>\n'
         f'<ul class="inf-idx-list">\n{body}\n</ul>\n'
     )
 
@@ -756,7 +768,7 @@ def extrair_data_titulo(soup: BeautifulSoup, numero: int) -> str:
     return m.group(1) if m else "Data não identificada"
 
 
-def fetch_edicao(numero: int) -> Optional[tuple[str, list[dict]]]:
+def fetch_edicao(numero: int, cfg: dict) -> Optional[tuple[str, list[dict]]]:
     """Retorna (data_edicao, enunciados) ou None se a edicao nao existe."""
     url = EDITION_URL_TPL.format(n=numero)
     log.info("Buscando edição %d: %s", numero, url)
@@ -770,8 +782,6 @@ def fetch_edicao(numero: int) -> Optional[tuple[str, list[dict]]]:
         log.info("Edição %d não encontrada (ainda não publicada).", numero)
         return None
 
-    # tenta extrair a data da edicao (formato: "Informativo de Jurisprudencia
-    # n. NNN - DD de MES de AAAA.")
     soup = BeautifulSoup(html, "html.parser")
     data_edicao = extrair_data_titulo(soup, numero)
 
@@ -781,8 +791,8 @@ def fetch_edicao(numero: int) -> Optional[tuple[str, list[dict]]]:
     if not todos:
         log.info("HTML snippet (primeiros 5000 chars):\n%s", html[:5000])
 
-    filtrados = [e for e in todos if RAMO_REGEX.search(e.get("ramo", ""))]
-    log.info("Edição %d: %d enunciados de Processo Penal.", numero, len(filtrados))
+    filtrados = [e for e in todos if cfg["ramo_regex"].search(e.get("ramo", ""))]
+    log.info("Edição %d: %d enunciados de %s.", numero, len(filtrados), cfg["nome"])
 
     return data_edicao, filtrados
 
@@ -807,19 +817,21 @@ def fetch_latest_published_edition() -> Optional[int]:
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser()
+    p.add_argument("--materia", choices=list(MATERIAS), default="processual-penal",
+                   help="matéria a coletar (default: processual-penal)")
     p.add_argument("--from", dest="start", type=int, default=None,
-                   help="forca a edicao inicial (default: ultima_processada+1)")
+                   help="força a edição inicial (default: ultima_processada+1)")
     p.add_argument("--to", dest="end", type=int, default=None,
-                   help="edicao final (inclusive) — default: ultima publicada no STJ")
+                   help="edição final (inclusive) — default: última publicada no STJ")
     p.add_argument("--dry-run", action="store_true",
-                   help="nao escreve arquivos, so loga")
+                   help="não escreve arquivos, só loga")
     return p.parse_args()
 
 
-def git_push_edicoes(edicoes: list[int]) -> None:
+def git_push_edicoes(edicoes: list[int], cfg: dict) -> None:
     """Faz commit e push das edições novas geradas."""
     numeros = ", ".join(f"nº {n}" for n in sorted(edicoes))
-    rel_dir = str(TARGET_DIR.relative_to(REPO_ROOT))
+    rel_dir = str(cfg["target_dir"].relative_to(REPO_ROOT))
     try:
         subprocess.run(
             ["git", "-C", str(REPO_ROOT), "add", rel_dir],
@@ -838,25 +850,26 @@ def git_push_edicoes(edicoes: list[int]) -> None:
 
 def main() -> int:
     args = parse_args()
-    state = load_state()
+    cfg = MATERIAS[args.materia]
+    state = load_state(cfg)
 
     start = args.start or (state["ultima_edicao_processada"] + 1)
-    log.info("Inicio em informativo %d.", start)
+    log.info("Matéria: %s. Início em informativo %d.", cfg["nome"], start)
 
     end = args.end
     if end is None:
         end = fetch_latest_published_edition()
         if end is None:
-            log.warning("Sem listagem do STJ; tento ate %d.", start + 5)
+            log.warning("Sem listagem do STJ; tento até %d.", start + 5)
             end = start + 5
-    log.info("Tentando ate informativo %d.", end)
+    log.info("Tentando até informativo %d.", end)
 
     novos = 0
     edicoes_novas: list[int] = []
     erro_sequencial = 0
     n = start
     while n <= end:
-        result = fetch_edicao(n)
+        result = fetch_edicao(n, cfg)
         if result is None:
             erro_sequencial += 1
             if erro_sequencial >= 3:
@@ -867,8 +880,8 @@ def main() -> int:
         erro_sequencial = 0
         data_ed, enunciados = result
 
-        out_html = render_edicao(n, data_ed, enunciados)
-        target = TARGET_DIR / f"informativo-{n:04d}.html"
+        out_html = render_edicao(n, data_ed, enunciados, cfg)
+        target = cfg["target_dir"] / f"informativo-{n:04d}.html"
         if args.dry_run:
             log.info("[dry-run] geraria %s (%d enunciados)", target, len(enunciados))
         else:
@@ -886,17 +899,18 @@ def main() -> int:
         novos += 1
         edicoes_novas.append(n)
         n += 1
-        time.sleep(1.5)   # gentileza com o STJ
+        time.sleep(1.5)
 
     if novos == 0:
         log.info("Nenhuma edição nova hoje.")
         return 0
 
     if not args.dry_run:
-        INDEX_FILE.write_text(render_index(state), encoding="utf-8")
-        save_state(state)
+        index_file = cfg["target_dir"] / "index.html"
+        index_file.write_text(render_index(state, cfg), encoding="utf-8")
+        save_state(state, cfg)
         log.info("Index atualizado e estado gravado.")
-        git_push_edicoes(edicoes_novas)
+        git_push_edicoes(edicoes_novas, cfg)
 
     return 0
 

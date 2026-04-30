@@ -176,7 +176,7 @@ def parse_enunciados_cls(soup: BeautifulSoup) -> list[dict]:
             if label == "DESTAQUE":
                 for d in bloco.find_all("div", class_="clsDestaqueAzul"):
                     t = normalize(d.get_text())
-                    if len(t) > 20:
+                    if t.upper() != "DESTAQUE" and t:
                         entry["destaque"] = t
                         break
             elif chave and chave in ("processo", "ramo", "tema"):
@@ -195,7 +195,7 @@ def parse_enunciados_cls(soup: BeautifulSoup) -> list[dict]:
                     f"?aplicacao=informativo&acao=pesquisar&livre=@CNOT='{cnot}'")
                 break
 
-        if entry.get("ramo") and entry.get("destaque") and RAMO_REGEX.search(entry["ramo"]):
+        if entry.get("ramo") and entry.get("destaque"):
             out.append(entry)
 
     return out

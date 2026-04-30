@@ -36,12 +36,14 @@ FIXTURE_886 = """\
 """
 
 
-def test_parse_enunciados_cls_retorna_so_processual_penal():
+def test_parse_enunciados_cls_retorna_todos_os_blocos():
     from scripts.informativos_stj import parse_enunciados_cls
     soup = BeautifulSoup(FIXTURE_886, "html.parser")
     result = parse_enunciados_cls(soup)
-    assert len(result) == 1
-    assert result[0]["ramo"] == "DIREITO PROCESSUAL PENAL"
+    assert len(result) == 2
+    ramos = {e["ramo"] for e in result}
+    assert "DIREITO PROCESSUAL PENAL" in ramos
+    assert "DIREITO ADMINISTRATIVO" in ramos
 
 
 def test_parse_enunciados_cls_campos_corretos():

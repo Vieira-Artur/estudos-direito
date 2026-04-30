@@ -527,6 +527,9 @@ PAGE_STYLE = """\
   font-size: 16px;
   color: var(--text, #1a1a1a);
   line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 .inf-destaque p { margin: 0 0 8px 0; }
 .inf-destaque p:last-child { margin-bottom: 0; }
@@ -584,7 +587,7 @@ def _render_card(e: dict) -> str:
             f'<span class="inf-ramo">{ramo}</span>'
           '</div>'
           f'<div class="inf-tema">{tema}</div>'
-          f'<div class="inf-destaque"><p>{destaque}</p></div>'
+          f'<div class="inf-destaque" lang="pt-BR"><p>{destaque}</p></div>'
         '</article>'
     )
 

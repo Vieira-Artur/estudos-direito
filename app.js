@@ -133,7 +133,7 @@ function _atualizarOG(titulo, desc) {
 }
 
 // ── Estado ──────────────────────────────────────────────
-const estado = { materiaAtual: null, turmaAtual: null }
+const estado = { materiaAtual: null, turmaAtual: null, infoAtual: null }
 
 // ── Referências DOM ─────────────────────────────────────
 const app        = document.getElementById('app')
@@ -199,6 +199,25 @@ function inicializarRota() {
     }
   }
 
+  // Verifica rota de informativo: /materiaId/turmaId/numInfo
+  const segs = path.replace(/^\//, '').split('/')
+  if (segs.length === 3 && /^\d+$/.test(segs[2])) {
+    const [mId, tId, numInfo] = segs
+    const matInfo = materias.find(m => m.id === mId)
+    if (matInfo) {
+      const turInfo = matInfo.turmas.find(t => t.id === tId && t.indice)
+      if (turInfo) {
+        const base = turInfo.indice.substring(0, turInfo.indice.lastIndexOf('/') + 1)
+        const arquivo = base + 'informativo-' + String(numInfo).padStart(4, '0') + '.html'
+        estado.materiaAtual = matInfo
+        estado.turmaAtual   = turInfo
+        history.replaceState({ view: 'informativo', materiaId: mId, turmaId: tId, arquivo }, '', BASE_PATH + mId + '/' + tId + '/' + numInfo)
+        selecionarTurma(mId, tId, true, arquivo)
+        return
+      }
+    }
+  }
+
   history.replaceState({ view: 'materias' }, '', BASE_PATH)
   renderArvore(true)
 }
@@ -217,6 +236,8 @@ window.addEventListener('popstate', (e) => {
     selecionarMateria(s.materiaId, true)
   } else if (s.view === 'turma') {
     selecionarTurma(s.materiaId, s.turmaId, true)
+  } else if (s.view === 'informativo') {
+    selecionarTurma(s.materiaId, s.turmaId, true, s.arquivo)
   } else if (s.view === 'tema') {
     const materia = materias.find(m => m.id === s.materiaId)
     const turma   = materia.turmas.find(t => t.id === s.turmaId)
@@ -292,11 +313,12 @@ function selecionarMateria(id, fromPop = false) {
   `
 }
 
-function selecionarTurma(materiaId, turmaId, fromPop = false) {
+function selecionarTurma(materiaId, turmaId, fromPop = false, infoArquivo = null) {
   const materia = materias.find(m => m.id === materiaId)
   const turma   = materia.turmas.find(t => t.id === turmaId)
   estado.materiaAtual = materia
   estado.turmaAtual   = turma
+  estado.infoAtual    = null
   document.title = `${turma.titulo} — ${materia.titulo}`
   atualizarBreadcrumb()
   if (!fromPop) history.pushState({ view: 'turma', materiaId, turmaId }, '', BASE_PATH + materiaId + '/' + turmaId)
@@ -313,7 +335,11 @@ function selecionarTurma(materiaId, turmaId, fromPop = false) {
     <div id="tab-area-flash" style="display:none"></div>
   `
 
-  renderConteudoTurma(turma)
+  if (infoArquivo) {
+    _abrirFragmentoDoIndice(infoArquivo, true)
+  } else {
+    renderConteudoTurma(turma)
+  }
 }
 
 function renderConteudoTurma(turma) {
@@ -380,7 +406,23 @@ function renderConteudoTurma(turma) {
   `
 }
 
-function _abrirFragmentoDoIndice(arquivo) {
+function _abrirFragmentoDoIndice(arquivo, fromPop = false) {
+  estado.infoAtual = arquivo
+  const match = arquivo.match(/informativo-0*(\d+)\.html$/)
+  const numInfo = match ? match[1] : null
+  if (numInfo && estado.materiaAtual && estado.turmaAtual) {
+    const { materiaAtual: materia, turmaAtual: turma } = estado
+    if (!fromPop) {
+      history.pushState(
+        { view: 'informativo', materiaId: materia.id, turmaId: turma.id, arquivo },
+        '',
+        BASE_PATH + materia.id + '/' + turma.id + '/' + numInfo
+      )
+    }
+    document.title = `Informativo ${numInfo} — ${turma.titulo} — ${materia.titulo}`
+    _atualizarOG(`Informativo ${numInfo} — ${turma.titulo}`)
+    atualizarBreadcrumb(`Informativo ${numInfo}`)
+  }
   const area = document.getElementById('tab-area-conteudo')
   if (!area) return
   area.innerHTML = skeletonConteudo()

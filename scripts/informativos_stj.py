@@ -624,7 +624,10 @@ def _render_card(e: dict, idx: int) -> str:
     link = e.get("link") or ""
     ramo = h(e.get("ramo", ""))
     tema = h(e.get("tema", ""))
-    destaque = h(e.get("destaque", "")).replace("\n", "<br>")
+    destaque = h(e.get("destaque", ""))
+    if re.match(r'^\d+\.\s', destaque):
+        destaque = re.sub(r'\.(\s*)(\d+\.\s)', r'.<br><br>\2', destaque)
+    destaque = destaque.replace("\n", "<br>")
     proc_html = (f'<a href="{h(link)}" target="_blank" rel="noopener">{proc}</a>'
                  if link else proc)
     return (

@@ -186,14 +186,20 @@ def parse_enunciados_cls(soup: BeautifulSoup) -> list[dict]:
             elif texto_idx < len(textos):
                 texto_idx += 1
 
+        fallback_link = ""
         for a in bloco.find_all("a", href=True):
-            m = re.search(r"CNOT[^0-9]*(\d+)", a["href"], re.IGNORECASE)
+            href = a["href"]
+            m = re.search(r"CNOT[^0-9]*(\d+)", href, re.IGNORECASE)
             if m:
                 cnot = m.group(1)
                 entry["cnot"] = cnot
                 entry["link"] = urljoin(STJ_BASE,
                     f"?aplicacao=informativo&acao=pesquisar&livre=@CNOT='{cnot}'")
                 break
+            if not fallback_link and "scon.stj.jus.br/SCON" in href:
+                fallback_link = href
+        if not entry["link"] and fallback_link:
+            entry["link"] = fallback_link
 
         if entry.get("ramo") and entry.get("destaque"):
             out.append(entry)

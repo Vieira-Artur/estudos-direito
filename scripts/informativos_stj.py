@@ -454,6 +454,12 @@ PAGE_STYLE = """\
   padding-bottom: 10px;
   border-bottom: 2px solid var(--border, #e5e5e5);
 }
+.inf-titulo-data {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text2, #5f5f5f);
+  vertical-align: middle;
+}
 .inf-sub {
   font-size: 13px;
   color: var(--text2, #5f5f5f);
@@ -553,7 +559,7 @@ def render_edicao(edicao: int, data_edicao: str, enunciados: list[dict]) -> str:
         f"{PAGE_STYLE}\n"
         f'<h2 class="inf-titulo">'
         f'<span class="inf-meta">Informativo nº {edicao}</span>'
-        f'STJ — {data_edicao}</h2>\n'
+        f'STJ <span class="inf-titulo-data">— {data_edicao}</span></h2>\n'
         f'<p class="inf-sub">{sub}</p>\n'
         f'{cards}\n'
         f'<div class="inf-rodape">Fonte oficial: '

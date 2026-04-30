@@ -455,7 +455,7 @@ PAGE_STYLE = """\
   border-bottom: 2px solid var(--border, #e5e5e5);
 }
 .inf-titulo-data {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   color: var(--text2, #5f5f5f);
   vertical-align: middle;
@@ -521,9 +521,12 @@ PAGE_STYLE = """\
   gap: 6px 14px;
   align-items: baseline;
 }
-.inf-processo a {
+.inf-processo {
   font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-  font-size: 13px;
+  font-size: 11px;
+  color: var(--text2, #5f5f5f);
+}
+.inf-processo a {
   font-weight: 700;
   color: var(--inf-accent);
   text-decoration: none;
@@ -580,9 +583,9 @@ def render_edicao(edicao: int, data_edicao: str, enunciados: list[dict]) -> str:
             else '<div class="inf-empty">Nenhum enunciado de Direito Processual Penal nesta edição.</div>'
     return (
         f"{PAGE_STYLE}\n"
-        f'<h2 class="inf-titulo">'
-        f'<span class="inf-meta">Informativo nº {edicao}</span>'
-        f'STJ <span class="inf-titulo-data">— {data_edicao}</span></h2>\n'
+        f'<h2 class="inf-titulo">Informativo nº {edicao} '
+        f'<span class="inf-meta">STJ</span>'
+        f'<span class="inf-titulo-data"> — {data_edicao}</span></h2>\n'
         f'<p class="inf-sub">{sub}</p>\n'
         f'{cards}\n'
         f'<div class="inf-rodape">Fonte oficial: '

@@ -125,3 +125,41 @@ def test_render_card_rodape_tem_processo_e_ramo():
     assert 'class="inf-card-foot"' in html
     assert "AgRg no HC 123-SP" in html
     assert "DIREITO PROCESSUAL PENAL" in html
+
+
+# ---- testes de regex e MATERIAS ----------------------------------------
+
+def test_regex_proc_penal_exclui_somente_militar():
+    from scripts.informativos_stj import MATERIAS
+    regex = MATERIAS["processual-penal"]["ramo_regex"]
+    assert not regex.search("DIREITO PROCESSUAL PENAL MILITAR")
+
+
+def test_regex_proc_penal_inclui_misto():
+    from scripts.informativos_stj import MATERIAS
+    regex = MATERIAS["processual-penal"]["ramo_regex"]
+    assert regex.search("DIREITO PENAL MILITAR, DIREITO PROCESSUAL PENAL, DIREITO PROCESSUAL PENAL MILITAR")
+
+
+def test_regex_penal_exclui_somente_militar():
+    from scripts.informativos_stj import MATERIAS
+    regex = MATERIAS["penal"]["ramo_regex"]
+    assert not regex.search("DIREITO PENAL MILITAR")
+
+
+def test_regex_penal_nao_bate_processual_penal():
+    from scripts.informativos_stj import MATERIAS
+    regex = MATERIAS["penal"]["ramo_regex"]
+    assert not regex.search("DIREITO PROCESSUAL PENAL")
+
+
+def test_regex_penal_inclui_penal_puro():
+    from scripts.informativos_stj import MATERIAS
+    regex = MATERIAS["penal"]["ramo_regex"]
+    assert regex.search("DIREITO PENAL")
+
+
+def test_regex_penal_inclui_misto_com_processual():
+    from scripts.informativos_stj import MATERIAS
+    regex = MATERIAS["penal"]["ramo_regex"]
+    assert regex.search("DIREITO PENAL, DIREITO PROCESSUAL PENAL")

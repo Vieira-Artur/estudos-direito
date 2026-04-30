@@ -52,6 +52,12 @@ const materias = [
             verso: "Ocorre quando o funcionário facilita, por negligência, a subtração ou apropriação indevida por terceiro. Admite extinção da punibilidade pela reparação do dano antes da sentença irrecorrível."
           }
         ]
+      },
+      {
+        id: "penal-informativos-stj",
+        titulo: "Jurisprudência",
+        indice: "conteudo/penal-informativos-stj/index.html",
+        temas: []
       }
     ]
   },

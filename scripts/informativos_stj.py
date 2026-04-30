@@ -738,6 +738,26 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
+def git_push_edicoes(edicoes: list[int]) -> None:
+    """Faz commit e push das edições novas geradas."""
+    numeros = ", ".join(f"nº {n}" for n in sorted(edicoes))
+    rel_dir = str(TARGET_DIR.relative_to(REPO_ROOT))
+    try:
+        subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "add", rel_dir],
+            check=True, capture_output=True)
+        subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "commit", "-m",
+             f"feat: informativos STJ {numeros}"],
+            check=True, capture_output=True)
+        subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "push"],
+            check=True, capture_output=True)
+        log.info("Git push realizado: %s", numeros)
+    except subprocess.CalledProcessError as exc:
+        log.error("Falha no git push: %s", exc.stderr.decode(errors="replace"))
+
+
 def main() -> int:
     args = parse_args()
     state = load_state()
@@ -754,6 +774,7 @@ def main() -> int:
     log.info("Tentando ate informativo %d.", end)
 
     novos = 0
+    edicoes_novas: list[int] = []
     erro_sequencial = 0
     n = start
     while n <= end:
@@ -785,6 +806,7 @@ def main() -> int:
         state["ultima_edicao_processada"] = max(
             state["ultima_edicao_processada"], n)
         novos += 1
+        edicoes_novas.append(n)
         n += 1
         time.sleep(1.5)   # gentileza com o STJ
 
@@ -796,6 +818,7 @@ def main() -> int:
         INDEX_FILE.write_text(render_index(state), encoding="utf-8")
         save_state(state)
         log.info("Index atualizado e estado gravado.")
+        git_push_edicoes(edicoes_novas)
 
     return 0
 

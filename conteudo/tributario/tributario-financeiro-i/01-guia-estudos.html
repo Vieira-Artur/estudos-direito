@@ -5,6 +5,15 @@
   --tf-orange: #b84c0c; --tf-orange-lt:#fff5ee;
   --tf-red:    #8b1a1a; --tf-red-lt:   #fce8e8;
   --tf-teal:   #0d5c5c; --tf-teal-lt:  #e6f7f7;
+  --tf-purple: #3C3489; --tf-purple-lt: #eeedfe;
+  --tf-gold:   #7a5800; --tf-gold-lt:   #fdf6e3;
+  /* ramos do mapa mental */
+  --tf-br-az-bg: #E6F1FB; --tf-br-az-col: #0C447C; --tf-br-az-brd: #7aacdc;
+  --tf-br-vd-bg: #E1F5EE; --tf-br-vd-col: #085041; --tf-br-vd-brd: #5dcaa5;
+  --tf-br-la-bg: #FFF3E0; --tf-br-la-col: #7a3000; --tf-br-la-brd: #f0a060;
+  --tf-br-ro-bg: #EEEDFE; --tf-br-ro-col: #3C3489; --tf-br-ro-brd: #a09ae0;
+  --tf-br-te-bg: #E6F7F7; --tf-br-te-col: #0d5c5c; --tf-br-te-brd: #5dcaca;
+  --tf-br-ou-bg: #FDF6E3; --tf-br-ou-col: #7a5800; --tf-br-ou-brd: #d4aa40;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -12,6 +21,14 @@
     --tf-orange: #f0a060; --tf-orange-lt:#2e1500;
     --tf-red:    #f08080; --tf-red-lt:   #2e0d0d;
     --tf-teal:   #60d8b8; --tf-teal-lt:  #072e22;
+    --tf-purple: #a09ae0; --tf-purple-lt: #1e1a3e;
+    --tf-gold:   #e8c96a; --tf-gold-lt:   #2a2000;
+    --tf-br-az-bg: #1a2550; --tf-br-az-col: #9ab4f8; --tf-br-az-brd: #3a5090;
+    --tf-br-vd-bg: #0d2e0d; --tf-br-vd-col: #6fd86f; --tf-br-vd-brd: #2d7a2d;
+    --tf-br-la-bg: #2e1500; --tf-br-la-col: #f0a060; --tf-br-la-brd: #804020;
+    --tf-br-ro-bg: #1e1a3e; --tf-br-ro-col: #a09ae0; --tf-br-ro-brd: #504880;
+    --tf-br-te-bg: #072e22; --tf-br-te-col: #60d8b8; --tf-br-te-brd: #207060;
+    --tf-br-ou-bg: #2a2000; --tf-br-ou-col: #e8c96a; --tf-br-ou-brd: #806020;
   }
 }
 :root[data-theme="dark"] {
@@ -19,6 +36,14 @@
   --tf-orange: #f0a060; --tf-orange-lt:#2e1500;
   --tf-red:    #f08080; --tf-red-lt:   #2e0d0d;
   --tf-teal:   #60d8b8; --tf-teal-lt:  #072e22;
+  --tf-purple: #a09ae0; --tf-purple-lt: #1e1a3e;
+  --tf-gold:   #e8c96a; --tf-gold-lt:   #2a2000;
+  --tf-br-az-bg: #1a2550; --tf-br-az-col: #9ab4f8; --tf-br-az-brd: #3a5090;
+  --tf-br-vd-bg: #0d2e0d; --tf-br-vd-col: #6fd86f; --tf-br-vd-brd: #2d7a2d;
+  --tf-br-la-bg: #2e1500; --tf-br-la-col: #f0a060; --tf-br-la-brd: #804020;
+  --tf-br-ro-bg: #1e1a3e; --tf-br-ro-col: #a09ae0; --tf-br-ro-brd: #504880;
+  --tf-br-te-bg: #072e22; --tf-br-te-col: #60d8b8; --tf-br-te-brd: #207060;
+  --tf-br-ou-bg: #2a2000; --tf-br-ou-col: #e8c96a; --tf-br-ou-brd: #806020;
 }
 
 /* ── Sistema de abas ─────────────────────────────────────── */
@@ -113,7 +138,7 @@
 .tf-num.azul   { background: var(--blue-light); color: var(--blue); }
 .tf-num.verde  { background: var(--tf-green-lt); color: var(--tf-green); }
 .tf-num.laranja{ background: var(--tf-orange-lt);color: var(--tf-orange); }
-.tf-num.roxo   { background: #eeedfe; color: #3c3489; }
+.tf-num.roxo   { background: var(--tf-purple-lt); color: var(--tf-purple); }
 .tf-txt { flex:1; font-size:13.5px; color:var(--text); line-height:1.6; }
 .tf-quest {
   background: var(--surface); border-left: 3px solid var(--gold);
@@ -143,6 +168,12 @@
 }
 .tf-mm-branch:hover { transform: translateY(-2px); filter: brightness(1.06); }
 .tf-mm-branch span { font-weight: 400; font-size: 11.5px; display: block; margin-top: 2px; }
+.tf-mm-branch.az { background: var(--tf-br-az-bg); color: var(--tf-br-az-col); border-color: var(--tf-br-az-brd); }
+.tf-mm-branch.vd { background: var(--tf-br-vd-bg); color: var(--tf-br-vd-col); border-color: var(--tf-br-vd-brd); }
+.tf-mm-branch.la { background: var(--tf-br-la-bg); color: var(--tf-br-la-col); border-color: var(--tf-br-la-brd); }
+.tf-mm-branch.ro { background: var(--tf-br-ro-bg); color: var(--tf-br-ro-col); border-color: var(--tf-br-ro-brd); }
+.tf-mm-branch.te { background: var(--tf-br-te-bg); color: var(--tf-br-te-col); border-color: var(--tf-br-te-brd); }
+.tf-mm-branch.ou { background: var(--tf-br-ou-bg); color: var(--tf-br-ou-col); border-color: var(--tf-br-ou-brd); }
 .tf-mm-detail {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 8px; padding: 14px 18px; margin-top: 14px;
@@ -301,9 +332,9 @@
     <div class="tf-mm">
       <div class="tf-mm-cols" id="tf-col-esq">
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="tf-mm-branch" id="tfb-especies" style="background:#E6F1FB;color:#0C447C;border-color:#7aacdc" onclick="tfBranch('especies')">Espécies Tributárias<span>Impostos · Taxas · CM · EC · Contrib.</span></div>
-          <div class="tf-mm-branch" id="tfb-credito" style="background:#E1F5EE;color:#085041;border-color:#5dcaa5" onclick="tfBranch('credito')">Crédito Tributário<span>HI → FG → Obrigação → Lançamento</span></div>
-          <div class="tf-mm-branch" id="tfb-mod" style="background:#FFF3E0;color:#7a3000;border-color:#f0a060" onclick="tfBranch('mod')">Modificação do Crédito<span>Suspensão · Extinção · Exclusão</span></div>
+          <div class="tf-mm-branch az" id="tfb-especies" onclick="tfBranch('especies')">Espécies Tributárias<span>Impostos · Taxas · CM · EC · Contrib.</span></div>
+          <div class="tf-mm-branch vd" id="tfb-credito" onclick="tfBranch('credito')">Crédito Tributário<span>HI → FG → Obrigação → Lançamento</span></div>
+          <div class="tf-mm-branch la" id="tfb-mod" onclick="tfBranch('mod')">Modificação do Crédito<span>Suspensão · Extinção · Exclusão</span></div>
         </div>
       </div>
 
@@ -311,9 +342,9 @@
 
       <div class="tf-mm-cols" id="tf-col-dir">
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="tf-mm-branch" id="tfb-lim" style="background:#EEEDFE;color:#3C3489;border-color:#a09ae0" onclick="tfBranch('lim')">Limitações Constitucionais<span>Princípios · Imunidades</span></div>
-          <div class="tf-mm-branch" id="tfb-comp" style="background:#E6F7F7;color:#0d5c5c;border-color:#5dcaca" onclick="tfBranch('comp')">Competência e Repartição<span>Concorrente · FPE · FPM</span></div>
-          <div class="tf-mm-branch" id="tfb-extra" style="background:#FDF6E3;color:#7a5800;border-color:#d4aa40" onclick="tfBranch('extra')">Extrafiscalidade<span>Regulação · Welfare State</span></div>
+          <div class="tf-mm-branch ro" id="tfb-lim" onclick="tfBranch('lim')">Limitações Constitucionais<span>Princípios · Imunidades</span></div>
+          <div class="tf-mm-branch te" id="tfb-comp" onclick="tfBranch('comp')">Competência e Repartição<span>Concorrente · FPE · FPM</span></div>
+          <div class="tf-mm-branch ou" id="tfb-extra" onclick="tfBranch('extra')">Extrafiscalidade<span>Regulação · Welfare State</span></div>
         </div>
       </div>
     </div>

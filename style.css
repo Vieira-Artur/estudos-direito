@@ -80,6 +80,8 @@
 :root[data-theme="dark"] .flash-btn-sim   { background: rgba(22,163,74,.2);  color: #86efac; }
 :root[data-theme="dark"] .flash-btn-deletar:hover { color: #fca5a5; }
 :root[data-theme="dark"] .busca-resultado-snippet mark { background: rgba(255,243,205,.2); }
+:root[data-theme="dark"] #pwa-instalar { background: var(--bg); color: var(--text); }
+:root[data-theme="dark"] #pwa-instalar:hover { background: var(--surface); }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1067,7 +1069,7 @@ main {
 
 /* ── Dark mode ── */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --blue:        #9ab4f8;
     --blue-dark:   #1F497D;
     --blue-mid:    #6a9fd4;
@@ -1089,53 +1091,40 @@ main {
   }
 
   /* Textura de fundo ajustada para o tema escuro */
-  body::before {
+  :root:not([data-theme="light"]) body::before {
     background-image:
       radial-gradient(circle at 20% 50%, rgba(154,180,248,.09) 0%, transparent 50%),
       radial-gradient(circle at 80% 20%, rgba(232,201,106,.07) 0%, transparent 40%);
   }
 
   /* Header: gradiente mais fundo no escuro */
-  header {
+  :root:not([data-theme="light"]) header {
     background: linear-gradient(135deg, #060e1a 0%, #1F497D 100%);
   }
 
   /* .no-materia usa --blue como fundo; em dark mode --blue virou claro → manter azul sólido */
-  .no-materia {
+  :root:not([data-theme="light"]) .no-materia {
     background: #1F497D;
     box-shadow: 0 3px 12px rgba(0,0,0,.45);
   }
 
   /* Conector vertical */
-  .conector-v {
+  :root:not([data-theme="light"]) .conector-v {
     background: linear-gradient(to bottom, #1F497D, #1a2550);
   }
 
   /* Nó de turma */
-  .no-turma {
-    background: #1a2840;
-  }
+  :root:not([data-theme="light"]) .no-turma        { background: #1a2840; }
+  :root:not([data-theme="light"]) .no-turma.vazia  { background: #181818; border-color: #333; color: #555; }
+  :root:not([data-theme="light"]) .card-tema::after { background: var(--blue-accent); }
+  :root:not([data-theme="light"]) #conteudo-area    { border: 1px solid var(--border); }
 
-  .no-turma.vazia {
-    background: #181818;
-    border-color: #333;
-    color: #555;
-  }
-
-  /* Barra gradiente no rodapé dos cards de tema */
-  .card-tema::after {
-    background: var(--blue-accent);
-  }
-
-  /* Área de conteúdo: borda sutil para separar do fundo */
-  #conteudo-area {
-    border: 1px solid var(--border);
-  }
-
-  .flash-btn-nao { background: rgba(220,38,38,.2); color: #fca5a5; }
-  .flash-btn-sim { background: rgba(22,163,74,.2); color: #86efac; }
-  .flash-btn-deletar:hover { color: #fca5a5; }
-  .busca-resultado-snippet mark { background: rgba(255,243,205,.2); }
+  :root:not([data-theme="light"]) .flash-btn-nao { background: rgba(220,38,38,.2); color: #fca5a5; }
+  :root:not([data-theme="light"]) .flash-btn-sim { background: rgba(22,163,74,.2); color: #86efac; }
+  :root:not([data-theme="light"]) .flash-btn-deletar:hover { color: #fca5a5; }
+  :root:not([data-theme="light"]) .busca-resultado-snippet mark { background: rgba(255,243,205,.2); }
+  :root:not([data-theme="light"]) #pwa-instalar { background: var(--bg); color: var(--text); }
+  :root:not([data-theme="light"]) #pwa-instalar:hover { background: var(--surface); }
 }
 
 /* ── Botão voltar ao topo ── */

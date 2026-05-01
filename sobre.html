@@ -20,7 +20,7 @@
     --serif:      'Playfair Display', Georgia, serif;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --blue:       #9ab4f8;
       --blue-light: #1a2550;
       --blue-mid:   #6a9fd4;
@@ -32,13 +32,13 @@
       --bg2:        #142238;
       --bg3:        #1a2840;
     }
-    .page-header {
+    :root:not([data-theme="light"]) .page-header {
       background: linear-gradient(135deg, #060e1a 0%, #1F497D 100%) !important;
     }
-    .lattes-link { background: #1F497D !important; }
-    .lattes-link:hover { background: #2c5f9e !important; }
-    .book-card a:hover,
-    .article-list a:hover { background: #1F497D !important; color: #fff !important; }
+    :root:not([data-theme="light"]) .lattes-link { background: #1F497D !important; }
+    :root:not([data-theme="light"]) .lattes-link:hover { background: #2c5f9e !important; }
+    :root:not([data-theme="light"]) .book-card a:hover,
+    :root:not([data-theme="light"]) .article-list a:hover { background: #1F497D !important; color: #fff !important; }
   }
   :root[data-theme="dark"] {
     --blue:       #9ab4f8;

@@ -248,3 +248,16 @@
 
 /* ── Fabric.js canvas border override ─────────────────── */
 .fp-painel .canvas-container { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+
+/* ── Dark mode overrides ───────────────────────────────── */
+:root[data-theme="dark"] .me-apagar-btn          { border-color: #f08080; color: #f08080; }
+:root[data-theme="dark"] .me-apagar-btn:hover    { background: rgba(220,38,38,.15); }
+:root[data-theme="dark"] .me-limpar-btn:hover    { color: #f08080; border-color: #f08080; }
+:root[data-theme="dark"] .me-material-del:hover  { background: #c0392b; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .me-apagar-btn         { border-color: #f08080; color: #f08080; }
+  :root:not([data-theme="light"]) .me-apagar-btn:hover   { background: rgba(220,38,38,.15); }
+  :root:not([data-theme="light"]) .me-limpar-btn:hover   { color: #f08080; border-color: #f08080; }
+  :root:not([data-theme="light"]) .me-material-del:hover { background: #c0392b; }
+}

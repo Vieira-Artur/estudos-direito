@@ -72,8 +72,7 @@
 :root[data-theme="dark"] .conector-v {
   background: linear-gradient(to bottom, #1F497D, #1a2550);
 }
-:root[data-theme="dark"] .no-turma         { background: #1a2840; }
-:root[data-theme="dark"] .no-turma.vazia   { background: #181818; border-color: #333; color: #555; }
+:root[data-theme="dark"] .no-turma { background: #1a2840; }
 :root[data-theme="dark"] .card-tema::after { background: var(--blue-accent); }
 :root[data-theme="dark"] #conteudo-area    { border: 1px solid var(--border); }
 :root[data-theme="dark"] .flash-btn-nao   { background: rgba(220,38,38,.2); color: #fca5a5; }
@@ -82,6 +81,10 @@
 :root[data-theme="dark"] .busca-resultado-snippet mark { background: rgba(255,243,205,.2); }
 :root[data-theme="dark"] #pwa-instalar { background: var(--bg); color: var(--text); }
 :root[data-theme="dark"] #pwa-instalar:hover { background: var(--surface); }
+:root[data-theme="dark"] .btn-download-pdf,
+:root[data-theme="dark"] .btn-download-img { color: var(--bg); }
+:root[data-theme="dark"] .btn-download-pdf:hover,
+:root[data-theme="dark"] .btn-download-img:hover { background: #d4b85a; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -404,9 +407,9 @@ main {
 }
 
 .no-turma.vazia {
-  background: #f4f4f4;
-  border-color: #ccc;
-  color: #aaa;
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--text2);
   font-style: italic;
   font-weight: 400;
   font-size: 13px;
@@ -1114,8 +1117,7 @@ main {
   }
 
   /* Nó de turma */
-  :root:not([data-theme="light"]) .no-turma        { background: #1a2840; }
-  :root:not([data-theme="light"]) .no-turma.vazia  { background: #181818; border-color: #333; color: #555; }
+  :root:not([data-theme="light"]) .no-turma { background: #1a2840; }
   :root:not([data-theme="light"]) .card-tema::after { background: var(--blue-accent); }
   :root:not([data-theme="light"]) #conteudo-area    { border: 1px solid var(--border); }
 
@@ -1125,6 +1127,10 @@ main {
   :root:not([data-theme="light"]) .busca-resultado-snippet mark { background: rgba(255,243,205,.2); }
   :root:not([data-theme="light"]) #pwa-instalar { background: var(--bg); color: var(--text); }
   :root:not([data-theme="light"]) #pwa-instalar:hover { background: var(--surface); }
+  :root:not([data-theme="light"]) .btn-download-pdf,
+  :root:not([data-theme="light"]) .btn-download-img { color: var(--bg); }
+  :root:not([data-theme="light"]) .btn-download-pdf:hover,
+  :root:not([data-theme="light"]) .btn-download-img:hover { background: #d4b85a; }
 }
 
 /* ── Botão voltar ao topo ── */
@@ -1408,7 +1414,7 @@ main {
 }
 
 .btn-download-pdf {
-  background: #b8943f;
+  background: var(--gold);
   color: white;
   border: none;
   border-radius: 8px;
@@ -1423,7 +1429,7 @@ main {
   transition: background .2s;
 }
 
-.btn-download-pdf:hover { background: #9a7530; }
+.btn-download-pdf:hover { background: var(--gold-hover, #9a7530); }
 
 /* Botão de download de imagem individual */
 .img-download-wrap {
@@ -1435,7 +1441,7 @@ main {
 }
 
 .btn-download-img {
-  background: #b8943f;
+  background: var(--gold);
   color: white;
   border-radius: 6px;
   padding: 6px 14px;
@@ -1449,7 +1455,7 @@ main {
   transition: background .2s;
 }
 
-.btn-download-img:hover { background: #9a7530; }
+.btn-download-img:hover { background: var(--gold-hover, #9a7530); }
 
 /* Cabeçalho de identidade — visível só no PDF */
 #print-header { display: none; }
@@ -1492,7 +1498,7 @@ main {
     font-size: 16pt;
     font-weight: bold;
     color: #1F497D;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--serif);
     margin-bottom: 2px;
   }
   #print-header-turma {
@@ -1605,8 +1611,8 @@ main {
   top: -40px;
   left: 8px;
   padding: 8px 12px;
-  background: #1F497D;
-  color: #fff;
+  background: var(--blue-dark);
+  color: white;
   border-radius: 0 0 6px 6px;
   z-index: 1000;
   text-decoration: none;
@@ -1614,7 +1620,7 @@ main {
 }
 .skip-link:focus-visible {
   top: 0;
-  outline: 3px solid #C9A84C;
+  outline: 3px solid var(--gold);
   outline-offset: 2px;
 }
 

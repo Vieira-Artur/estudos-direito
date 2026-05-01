@@ -107,7 +107,7 @@ function _confirmar(msg) {
     const d = document.createElement('dialog')
     d.className = 'app-dlg'
     d.setAttribute('aria-modal', 'true')
-    d.innerHTML = `<p class="app-dlg-msg">${msg}</p><div class="app-dlg-btns"><button class="app-dlg-cancel">Cancelar</button><button class="app-dlg-ok">Confirmar</button></div>`
+    d.innerHTML = `<p class="app-dlg-msg">${esc(msg)}</p><div class="app-dlg-btns"><button class="app-dlg-cancel">Cancelar</button><button class="app-dlg-ok">Confirmar</button></div>`
     document.body.appendChild(d)
     d.showModal()
     const fim = v => { d.close(); d.remove(); resolve(v) }
@@ -269,8 +269,8 @@ function renderArvore(fromPop = false) {
       ${materias.map(m => `
           <div class="card-materia" role="button" tabindex="0"
                aria-label="Abrir ${m.titulo}"
-               onclick="selecionarMateria('${m.id}')"
-               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selecionarMateria('${m.id}')}">
+               onclick="selecionarMateria('${esc(m.id)}')"
+               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selecionarMateria('${esc(m.id)}')}">
             <div class="card-materia-icon">${m.icone}</div>
             <div class="card-materia-body">
               <div class="card-materia-titulo">${m.titulo}</div>
@@ -304,8 +304,8 @@ function selecionarMateria(id, fromPop = false) {
       ${materia.turmas.map(t => `
         <div class="card-turma" role="button" tabindex="0"
              aria-label="${t.titulo}"
-             onclick="selecionarTurma('${materia.id}', '${t.id}')"
-             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selecionarTurma('${materia.id}','${t.id}')}">
+             onclick="selecionarTurma('${esc(materia.id)}', '${esc(t.id)}')"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selecionarTurma('${esc(materia.id)}','${esc(t.id)}')}">
           ${t.titulo}
         </div>
       `).join('')}
@@ -377,6 +377,9 @@ function renderConteudoTurma(turma) {
           }
         })
         linkificarJulgados(el)
+        const focusEl = el.querySelector('h1, h2') || el
+        if (!focusEl.hasAttribute('tabindex')) focusEl.setAttribute('tabindex', '-1')
+        focusEl.focus({ preventScroll: true })
       })
       .catch(() => {
         const el = document.getElementById('conteudo-area')
@@ -436,6 +439,9 @@ function _abrirFragmentoDoIndice(arquivo, fromPop = false) {
       void el.offsetWidth
       el.style.removeProperty('animation')
       linkificarJulgados(el)
+      const focusEl = el.querySelector('h1, h2') || el
+      if (!focusEl.hasAttribute('tabindex')) focusEl.setAttribute('tabindex', '-1')
+      focusEl.focus({ preventScroll: true })
     })
     .catch(() => {
       const el = document.getElementById('conteudo-area')
@@ -889,6 +895,9 @@ function abrirTema(index, fromPop = false) {
 
       executarScripts(area)
       rolarParaAncora()
+      const focusEl = area.querySelector('h1, h2') || area
+      if (!focusEl.hasAttribute('tabindex')) focusEl.setAttribute('tabindex', '-1')
+      focusEl.focus({ preventScroll: true })
     })
     .catch(() => {
       document.getElementById('conteudo-area').innerHTML =
@@ -906,7 +915,7 @@ function atualizarBreadcrumb(tituloTema) {
   if (estado.materiaAtual) {
     partes.push(`<span class="sep">›</span>`)
     if (estado.turmaAtual || tituloTema) {
-      partes.push(`<button class="crumb" onclick="selecionarMateria('${estado.materiaAtual.id}')">${estado.materiaAtual.titulo}</button>`)
+      partes.push(`<button class="crumb" onclick="selecionarMateria('${esc(estado.materiaAtual.id)}')">${esc(estado.materiaAtual.titulo)}</button>`)
     } else {
       partes.push(`<span class="crumb-atual">${estado.materiaAtual.titulo}</span>`)
     }
@@ -915,7 +924,7 @@ function atualizarBreadcrumb(tituloTema) {
   if (estado.turmaAtual) {
     partes.push(`<span class="sep">›</span>`)
     if (tituloTema) {
-      partes.push(`<button class="crumb" onclick="selecionarTurma('${estado.materiaAtual.id}','${estado.turmaAtual.id}')">${estado.turmaAtual.titulo}</button>`)
+      partes.push(`<button class="crumb" onclick="selecionarTurma('${esc(estado.materiaAtual.id)}','${esc(estado.turmaAtual.id)}')">${esc(estado.turmaAtual.titulo)}</button>`)
     } else {
       partes.push(`<span class="crumb-atual">${estado.turmaAtual.titulo}</span>`)
     }

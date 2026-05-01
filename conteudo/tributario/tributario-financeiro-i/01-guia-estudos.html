@@ -165,6 +165,7 @@
   font-weight: 600; cursor: pointer; border: 1.5px solid;
   transition: transform .15s, filter .15s; min-width: 145px;
   text-align: center; line-height: 1.3;
+  font-family: var(--sans); background: none;
 }
 .tf-mm-branch:hover { transform: translateY(-2px); filter: brightness(1.06); }
 .tf-mm-branch span { font-weight: 400; font-size: 11.5px; display: block; margin-top: 2px; }
@@ -201,7 +202,8 @@
 .tf-pergunta-head {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 16px; cursor: pointer; user-select: none;
-  background: var(--bg);
+  background: var(--bg); width: 100%; border: none; font-family: var(--sans);
+  text-align: left;
 }
 .tf-pergunta-head:hover { background: var(--blue-hover); }
 .tf-pnum {
@@ -210,7 +212,7 @@
   display: flex; align-items: center; justify-content: center;
   font-size: 13px; font-weight: 700; flex-shrink: 0;
 }
-.tf-pergunta-head p { flex: 1; font-size: 13.5px; color: var(--text); font-weight: 600; margin: 0; }
+.tf-pergunta-head .tf-pq-txt { flex: 1; font-size: 13.5px; color: var(--text); font-weight: 600; margin: 0; }
 .tf-pergunta-head .tf-toggle { font-size: 18px; color: var(--text2); transition: transform .2s; }
 .tf-pergunta-body { display: none; padding: 14px 16px 14px 56px; font-size: 13px; color: var(--text2); line-height: 1.65; border-top: 1px solid var(--border); }
 .tf-pergunta-body.open { display: block; }
@@ -332,9 +334,9 @@
     <div class="tf-mm">
       <div class="tf-mm-cols" id="tf-col-esq">
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="tf-mm-branch az" id="tfb-especies" onclick="tfBranch('especies')">Espécies Tributárias<span>Impostos · Taxas · CM · EC · Contrib.</span></div>
-          <div class="tf-mm-branch vd" id="tfb-credito" onclick="tfBranch('credito')">Crédito Tributário<span>HI → FG → Obrigação → Lançamento</span></div>
-          <div class="tf-mm-branch la" id="tfb-mod" onclick="tfBranch('mod')">Modificação do Crédito<span>Suspensão · Extinção · Exclusão</span></div>
+          <button class="tf-mm-branch az" id="tfb-especies" onclick="tfBranch('especies')">Espécies Tributárias<span>Impostos · Taxas · CM · EC · Contrib.</span></button>
+          <button class="tf-mm-branch vd" id="tfb-credito" onclick="tfBranch('credito')">Crédito Tributário<span>HI → FG → Obrigação → Lançamento</span></button>
+          <button class="tf-mm-branch la" id="tfb-mod" onclick="tfBranch('mod')">Modificação do Crédito<span>Suspensão · Extinção · Exclusão</span></button>
         </div>
       </div>
 
@@ -342,9 +344,9 @@
 
       <div class="tf-mm-cols" id="tf-col-dir">
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div class="tf-mm-branch ro" id="tfb-lim" onclick="tfBranch('lim')">Limitações Constitucionais<span>Princípios · Imunidades</span></div>
-          <div class="tf-mm-branch te" id="tfb-comp" onclick="tfBranch('comp')">Competência e Repartição<span>Concorrente · FPE · FPM</span></div>
-          <div class="tf-mm-branch ou" id="tfb-extra" onclick="tfBranch('extra')">Extrafiscalidade<span>Regulação · Welfare State</span></div>
+          <button class="tf-mm-branch ro" id="tfb-lim" onclick="tfBranch('lim')">Limitações Constitucionais<span>Princípios · Imunidades</span></button>
+          <button class="tf-mm-branch te" id="tfb-comp" onclick="tfBranch('comp')">Competência e Repartição<span>Concorrente · FPE · FPM</span></button>
+          <button class="tf-mm-branch ou" id="tfb-extra" onclick="tfBranch('extra')">Extrafiscalidade<span>Regulação · Welfare State</span></button>
         </div>
       </div>
     </div>
@@ -361,27 +363,27 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:10px">
 
       <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
-        <img src="img/fundamentos-dir-financeiro.png" alt="Fundamentos do Direito Financeiro e Tributário" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <img src="img/fundamentos-dir-financeiro.png" alt="Fundamentos do Direito Financeiro e Tributário" width="2752" height="1536" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
         <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Fundamentos do Dir. Financeiro e Tributário</p>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
-        <img src="img/principios-constitucionais.png" alt="Princípios Constitucionais Tributários" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <img src="img/principios-constitucionais.png" alt="Princípios Constitucionais Tributários" width="1536" height="2752" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
         <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Princípios Constitucionais Tributários</p>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
-        <img src="img/imunidades-tributarias.png" alt="Imunidades Tributárias" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <img src="img/imunidades-tributarias.png" alt="Imunidades Tributárias" width="1536" height="2752" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
         <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Guia das Imunidades Tributárias</p>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
-        <img src="img/partilha-bolo.png" alt="Partilha do Bolo" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <img src="img/partilha-bolo.png" alt="Partilha do Bolo" width="1536" height="2752" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
         <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Repartição das Receitas Tributárias</p>
       </div>
 
       <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
-        <img src="img/jornada-tributo.png" alt="Jornada do Tributo" style="width:100%;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <img src="img/jornada-tributo.png" alt="Jornada do Tributo" width="1536" height="2752" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
         <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">A Jornada do Tributo: Do Papel à Cobrança</p>
       </div>
 
@@ -467,11 +469,11 @@
 
   <div class="tf-caso-perguntas">
     <div class="tf-pergunta">
-      <div class="tf-pergunta-head" onclick="tfToggle(this)">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
         <div class="tf-pnum">A</div>
-        <p>A "Contribuição de Serviços Essenciais" é constitucional?</p>
+        <span class="tf-pq-txt">A "Contribuição de Serviços Essenciais" é constitucional?</span>
         <span class="tf-toggle">▾</span>
-      </div>
+      </button>
       <div class="tf-pergunta-body">
         <p><strong>Vício de competência e de espécie tributária.</strong> A circulação de mercadorias é fato gerador do ICMS — tributo de competência <em>estadual</em> (art. 155, II CF). O Município não possui competência para instituir tributo sobre circulação de mercadorias, ainda que disfarçado de "contribuição".</p>
         <p>Além disso, a lei viola o <strong>princípio da anterioridade anual</strong> (art. 150, III, "b" CF): publicada em 15/3/2026, não pode ser cobrada ainda em 2026. Também viola a <strong>noventena</strong>, pois o prazo de 90 dias não seria cumprido até 1/4/2026.</p>
@@ -480,11 +482,11 @@
     </div>
 
     <div class="tf-pergunta">
-      <div class="tf-pergunta-head" onclick="tfToggle(this)">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
         <div class="tf-pnum">B</div>
-        <p>A isenção de ISS em favor do escritório do Vereador é válida?</p>
+        <span class="tf-pq-txt">A isenção de ISS em favor do escritório do Vereador é válida?</span>
         <span class="tf-toggle">▾</span>
-      </div>
+      </button>
       <div class="tf-pergunta-body">
         <p><strong>Violação de múltiplos princípios.</strong> Primeiro, o art. 150, §6º CF exige que isenções tributárias sejam concedidas por lei específica que regule exclusivamente a matéria isentiva — uma lei geral que "de passagem" concede a isenção é inconstitucional.</p>
         <p>Segundo, a isenção beneficiando individualmente o escritório de um Vereador, sem critério geral e abstrato, viola o <strong>princípio da isonomia tributária</strong> (art. 150, II CF) e caracteriza possível <strong>improbidade administrativa</strong>.</p>
@@ -494,11 +496,11 @@
     </div>
 
     <div class="tf-pergunta">
-      <div class="tf-pergunta-head" onclick="tfToggle(this)">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
         <div class="tf-pnum">C</div>
-        <p>O decreto que eleva a base de cálculo do IPTU por ato do Executivo é válido?</p>
+        <span class="tf-pq-txt">O decreto que eleva a base de cálculo do IPTU por ato do Executivo é válido?</span>
         <span class="tf-toggle">▾</span>
-      </div>
+      </button>
       <div class="tf-pergunta-body">
         <p><strong>Duplo vício: legalidade e anterioridade.</strong> A fixação e majoração da <em>base de cálculo</em> do IPTU exige lei em sentido formal (art. 97, IV CTN). Um decreto não pode fazê-lo — diferente das alíquotas de II, IE, IPI e IOF, o IPTU não está no rol das exceções à legalidade.</p>
         <p>Ademais, mesmo que houvesse lei, a elevação não poderia vigorar no mesmo exercício financeiro (anterioridade anual — art. 150, III, "b" CF). Exceção: a <strong>atualização monetária da BC por índice oficial</strong> (art. 97, §2º CTN e SV 50 STF) <em>não</em> depende de lei e <em>não</em> se sujeita à anterioridade — mas elevação real de 30% não é simples correção monetária.</p>
@@ -507,11 +509,11 @@
     </div>
 
     <div class="tf-pergunta">
-      <div class="tf-pergunta-head" onclick="tfToggle(this)">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
         <div class="tf-pnum">D</div>
-        <p>Questão integradora: o Município poderia, em uma única lei publicada em 20/12/2025, corretamente aumentar o IPTU para 2026?</p>
+        <span class="tf-pq-txt">Questão integradora: o Município poderia, em uma única lei publicada em 20/12/2025, corretamente aumentar o IPTU para 2026?</span>
         <span class="tf-toggle">▾</span>
-      </div>
+      </button>
       <div class="tf-pergunta-body">
         <p><strong>Análise completa das anterioridades.</strong> O IPTU sujeita-se à <strong>anterioridade anual</strong> mas é <em>exceção</em> à noventena (art. 150, §1º CF, segunda parte — alteração da BC do IPTU fica fora da noventena).</p>
         <p>Portanto: lei publicada em 20/12/2025 pode produzir efeitos a partir de 1/1/2026 (satisfaz anterioridade anual), independentemente de 90 dias (exceção à noventena). Desde que a majoração seja feita por <strong>lei formal</strong> (não decreto) e respeite a CF.</p>

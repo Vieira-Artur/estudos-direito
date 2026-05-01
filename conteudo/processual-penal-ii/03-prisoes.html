@@ -306,6 +306,7 @@
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-casos')">⚖️ Casos</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-guia')">📄 Guia Prático</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-timeline')">🕐 Linha do Tempo</button>
+  <button class="pp3-tab" onclick="pp3Tab(event,'pp3-relatorio')">📝 Relatório Geral</button>
 </div>
 
 <!-- MAPA MENTAL -->
@@ -1020,10 +1021,14 @@
   </div>
 </div>
 
+<!-- RELATÓRIO GERAL -->
+<div id="pp3-relatorio" class="pp3-painel"></div>
+
 </div>
 
 <script>
 (function () {
+  var relatorioCarregado = false
   window.pp3Tab = function (e, id) {
     var wrap = e.target.closest('.pp3-wrap')
     if (!wrap) return
@@ -1032,6 +1037,13 @@
     e.target.classList.add('ativo')
     var el = document.getElementById(id)
     if (el) el.classList.add('ativo')
+    if (id === 'pp3-relatorio' && !relatorioCarregado) {
+      relatorioCarregado = true
+      fetch('04-relatorio-prisoes.html')
+        .then(function(r) { return r.text() })
+        .then(function(html) { el.innerHTML = html })
+        .catch(function() { el.innerHTML = '<p style="color:var(--text2);padding:1rem">Erro ao carregar o relatório.</p>' })
+    }
   }
 })()
 </script>

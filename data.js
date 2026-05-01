@@ -90,6 +90,11 @@ const materias = [
             titulo: "Prisões e Cautelares",
             descricao: "Flagrante · Preventiva · Temporária · Medidas cautelares · Prisão domiciliar · Fiança · Audiência de custódia",
             arquivo: "conteudo/processual-penal-ii/03-prisoes.html"
+          },
+          {
+            titulo: "Relatório Geral",
+            descricao: "Relatório de Texto Base: Sistema de Prisões no Processo Penal Brasileiro · Fundamentos · Flagrante · Preventiva · Temporária · Domiciliar",
+            arquivo: "conteudo/processual-penal-ii/04-relatorio-prisoes.html"
           }
         ],
         flashcards: [

@@ -1,0 +1,278 @@
+<style>
+:root {
+  --rp-bg2:    #f5f7fa;
+  --rp-border: #dce3ec;
+  --rp-green:  #1a5c1a; --rp-green-lt: #d6f0d6;
+  --rp-red:    #8b1a1a; --rp-red-lt:   #fce8e8;
+  --rp-amber:  #7a3800; --rp-amber-lt: #fdebd6;
+  --rp-teal:   #0a5c4a; --rp-teal-lt:  #d6f0e8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --rp-bg2:    #1a2840;
+    --rp-border: #2a3a52;
+    --rp-green:  #6fd86f; --rp-green-lt: #0d2e0d;
+    --rp-red:    #f08080; --rp-red-lt:   #2e0d0d;
+    --rp-amber:  #f0a060; --rp-amber-lt: #2e1500;
+    --rp-teal:   #60d8b8; --rp-teal-lt:  #072e22;
+  }
+}
+:root[data-theme="dark"] {
+  --rp-bg2:    #1a2840;
+  --rp-border: #2a3a52;
+  --rp-green:  #6fd86f; --rp-green-lt: #0d2e0d;
+  --rp-red:    #f08080; --rp-red-lt:   #2e0d0d;
+  --rp-amber:  #f0a060; --rp-amber-lt: #2e1500;
+  --rp-teal:   #60d8b8; --rp-teal-lt:  #072e22;
+}
+
+.rp-titulo {
+  font-family: var(--serif); font-size: 19px; font-weight: 700;
+  color: var(--blue); margin-bottom: 4px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--border);
+}
+.rp-subtitulo {
+  font-family: var(--sans); font-size: 13px; color: var(--text2);
+  margin-bottom: 24px; font-style: italic;
+}
+
+.rp-secao {
+  margin-bottom: 28px;
+}
+.rp-secao-titulo {
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  color: var(--blue-dark, var(--blue)); margin-bottom: 10px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: baseline; gap: 10px;
+}
+.rp-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; min-width: 26px;
+  border-radius: 50%; background: var(--blue); color: #fff;
+  font-family: var(--sans); font-size: 12px; font-weight: 700;
+}
+.rp-texto {
+  font-family: var(--serif); font-size: 15px; line-height: 1.75;
+  color: var(--text); margin-bottom: 12px;
+}
+.rp-texto + .rp-texto { margin-top: 0; }
+
+.rp-lista {
+  margin: 10px 0 10px 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rp-lista li {
+  font-family: var(--serif); font-size: 15px; line-height: 1.7;
+  color: var(--text); padding-left: 20px; position: relative;
+}
+.rp-lista li::before {
+  content: "›"; position: absolute; left: 4px;
+  color: var(--blue); font-weight: 700;
+}
+.rp-lista li strong { color: var(--text); }
+
+.rp-sublista {
+  margin: 6px 0 0 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.rp-sublista li {
+  font-family: var(--serif); font-size: 14px; line-height: 1.65;
+  color: var(--text); padding-left: 20px; position: relative;
+}
+.rp-sublista li::before {
+  content: "–"; position: absolute; left: 4px; color: var(--text2);
+}
+
+.rp-destaque {
+  background: var(--rp-bg2); border-left: 3px solid var(--blue);
+  border-radius: 0 6px 6px 0; padding: 12px 14px; margin: 14px 0;
+  font-family: var(--serif); font-size: 14px; line-height: 1.7;
+  color: var(--text);
+}
+.rp-destaque strong { color: var(--blue); }
+
+.rp-atencao {
+  background: var(--rp-amber-lt); border-left: 3px solid var(--rp-amber);
+  border-radius: 0 6px 6px 0; padding: 12px 14px; margin: 14px 0;
+  font-family: var(--sans); font-size: 13px; line-height: 1.65;
+  color: var(--text);
+}
+
+/* Matriz / Tabela */
+.rp-table-wrap {
+  overflow-x: auto; margin: 14px 0;
+  border: 1px solid var(--border); border-radius: 8px;
+}
+.rp-table {
+  width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 13px;
+}
+.rp-table th {
+  background: var(--blue); color: #fff;
+  padding: 9px 12px; text-align: left; font-weight: 600;
+}
+.rp-table th:first-child { border-radius: 7px 0 0 0; }
+.rp-table th:last-child  { border-radius: 0 7px 0 0; }
+.rp-table td {
+  padding: 9px 12px; vertical-align: top; line-height: 1.55;
+  color: var(--text); border-top: 1px solid var(--border);
+}
+.rp-table tr:nth-child(even) td { background: var(--rp-bg2); }
+
+.rp-badge {
+  display: inline-block; font-family: var(--sans); font-size: 11px;
+  font-weight: 700; padding: 2px 8px; border-radius: 10px;
+  letter-spacing: .03em;
+}
+.rp-badge-cert  { background: var(--rp-green-lt);  color: var(--rp-green);  }
+.rp-badge-prob  { background: var(--rp-teal-lt);   color: var(--rp-teal);   }
+.rp-badge-conc  { background: var(--rp-amber-lt);  color: var(--rp-amber);  }
+</style>
+
+<div id="conteudo-area">
+
+<h1 class="rp-titulo">Relatório Geral — Prisões no Processo Penal</h1>
+<p class="rp-subtitulo">Relatório de Texto Base: Sistema de Prisões no Processo Penal Brasileiro</p>
+
+<!-- 1 -->
+<section class="rp-secao" aria-label="Fundamentos e Requisitos das Medidas Cautelares Pessoais">
+  <h2 class="rp-secao-titulo"><span class="rp-num">1</span> Fundamentos e Requisitos das Medidas Cautelares Pessoais</h2>
+
+  <p class="rp-texto">O ordenamento processual penal brasileiro contemporâneo projeta-se sob a égide do sistema acusatório, consolidado normativamente pelo Art. 3º-A do CPP. Este dispositivo consagra a separação rígida entre as funções de investigar, acusar e julgar, vedando expressamente a iniciativa do juiz na fase investigativa e a substituição da atuação probatória do órgão ministerial.</p>
+
+  <div class="rp-atencao">
+    <strong>Nota de cautela técnica:</strong> A eficácia do Art. 3º-A encontra-se atualmente <strong>suspensa por decisão liminar do Min. Luiz Fux (STF)</strong>, o que exige do aplicador do direito atenção redobrada quanto à dinâmica das competências funcionais.
+  </div>
+
+  <p class="rp-texto">O Art. 156, I, do CPP é alvo de severa crítica acadêmica. Conforme Aury Lopes Júnior, tal dispositivo é "substancialmente inconstitucional" ao facultar ao magistrado a ordenação de provas <em>ex officio</em> antes mesmo da ação penal, fundando um sistema inquisitório residual e maculando a imparcialidade judicial.</p>
+
+  <p class="rp-texto">A decretação de qualquer medida cautelar deve pautar-se pelo binômio <strong>fumus comissi delicti</strong> e <strong>periculum libertatis</strong>, observando-se os seguintes vetores:</p>
+
+  <ul class="rp-lista">
+    <li><strong>Necessidade:</strong> para garantir a aplicação da lei penal ou a instrução criminal.</li>
+    <li><strong>Adequação:</strong> compatibilidade da medida com a gravidade do crime e as circunstâncias do fato.</li>
+    <li><strong>Proporcionalidade:</strong> vedação do excesso, garantindo que a cautelar não se transmude em antecipação de pena.</li>
+  </ul>
+</section>
+
+<!-- 2 -->
+<section class="rp-secao" aria-label="Prisão em Flagrante">
+  <h2 class="rp-secao-titulo"><span class="rp-num">2</span> Prisão em Flagrante</h2>
+
+  <p class="rp-texto">A prisão em flagrante constitui medida de natureza <strong>precária e pré-cautelar</strong>. O sistema atual de persuasão racional afasta qualquer hierarquia probatória prévia, diferenciando-se do sistema de "prova tarifada" histórico.</p>
+
+  <p class="rp-texto">O procedimento deve seguir ritos estritos sob pena de ilegalidade:</p>
+
+  <ul class="rp-lista">
+    <li>
+      <strong>Espécies de Flagrante (Art. 302):</strong>
+      <ul class="rp-sublista">
+        <li>Flagrante próprio — incisos I e II</li>
+        <li>Flagrante impróprio ou quase-flagrante — inciso III</li>
+        <li>Flagrante presumido ou ficto — inciso IV</li>
+      </ul>
+    </li>
+    <li><strong>Nota de Culpa:</strong> formalidade essencial entregue ao custodiado em até 24 horas, com os motivos da prisão e identificação do condutor e testemunhas.</li>
+    <li><strong>Fé Pública das Autoridades:</strong> a presunção nos depoimentos policiais não constitui exceção ao livre convencimento motivado; o magistrado deve ponderar com o conjunto probatório, evitando validação acrítica.</li>
+  </ul>
+</section>
+
+<!-- 3 -->
+<section class="rp-secao" aria-label="Audiência de Custódia e Regras do Art. 310">
+  <h2 class="rp-secao-titulo"><span class="rp-num">3</span> Audiência de Custódia e Regras do Art. 310</h2>
+
+  <p class="rp-texto">A audiência de custódia é o instrumento de controle imediato da legalidade e necessidade da prisão. Pautado pelo Sistema do Convencimento Motivado (Art. 93, IX da CF e Art. 155 do CPP), o juiz deve proferir decisão fundamentada para:</p>
+
+  <ul class="rp-lista">
+    <li><strong>Relaxar a prisão</strong> — se houver vício de legalidade.</li>
+    <li><strong>Converter em preventiva</strong> — caso presentes os requisitos dos Arts. 312 e 313, e se as medidas cautelares alternativas se mostrarem insuficientes.</li>
+    <li><strong>Conceder liberdade provisória</strong> — com ou sem a imposição de fiança.</li>
+  </ul>
+
+  <div class="rp-destaque">
+    <strong>Atenção:</strong> elementos informativos da fase inquisitorial não possuem densidade para sustentar, de forma isolada, a manutenção de restrições de liberdade sem o devido crivo judicial e controle de cautelaridade.
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="rp-secao" aria-label="Prisão Preventiva">
+  <h2 class="rp-secao-titulo"><span class="rp-num">4</span> Prisão Preventiva: Legitimidade e Pressupostos (Arts. 312 e 313)</h2>
+
+  <p class="rp-texto">A prisão preventiva, enquanto medida de <em>extrema ratio</em>, exige o preenchimento cumulativo de fundamentos e pressupostos técnicos, operando sob diferentes níveis de convicção.</p>
+
+  <h3 style="font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px">Matriz de Cautelaridade e Quantum of Proof</h3>
+
+  <div class="rp-table-wrap">
+    <table class="rp-table">
+      <thead>
+        <tr>
+          <th>Eixo de Análise</th>
+          <th>Descrição Legal (Art. 312)</th>
+          <th>Standard Probatório Exigido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fundamentos</strong></td>
+          <td>Garantia da ordem pública, ordem econômica, instrução criminal ou aplicação da lei penal.</td>
+          <td><span class="rp-badge rp-badge-conc">Periculum Libertatis<br>(demonstração concreta)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Pressuposto — Materialidade</strong></td>
+          <td>Prova da existência do crime.</td>
+          <td><span class="rp-badge rp-badge-cert">Certeza</span></td>
+        </tr>
+        <tr>
+          <td><strong>Pressuposto — Autoria</strong></td>
+          <td>Indício suficiente de autoria.</td>
+          <td><span class="rp-badge rp-badge-prob">Probabilidade</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin:20px 0 8px">Art. 366 e Súmula 455 do STJ</h3>
+
+  <p class="rp-texto">Quando o acusado citado por edital não comparece nem constitui advogado, o Art. 366 autoriza a suspensão do processo e do prazo prescricional. O juiz poderá decretar a preventiva e a produção antecipada de provas, desde que preenchidos os requisitos do Art. 312. Contudo, conforme a <strong>Súmula 455 do STJ</strong>, a produção antecipada deve ser concretamente fundamentada — não se justifica unicamente pelo mero decurso do tempo.</p>
+
+  <div class="rp-destaque">
+    O magistrado possui <strong>dever de fundamentação contínua</strong>, devendo revisar a necessidade da medida a cada 90 dias, sob pena de tornar a custódia ilegal por ausência de contemporaneidade e perigo atual.
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="rp-secao" aria-label="Prisão Temporária">
+  <h2 class="rp-secao-titulo"><span class="rp-num">5</span> Prisão Temporária (Lei 7.960/89)</h2>
+
+  <p class="rp-texto">Diferente da preventiva, a prisão temporária é cabível <strong>exclusivamente na fase de investigação</strong>. Seu escopo é viabilizar diligências imprescindíveis do inquérito policial em crimes específicos previstos no rol legal.</p>
+
+  <ul class="rp-lista">
+    <li><strong>Prazos:</strong> 5 dias prorrogáveis (crimes comuns) ou 30 dias prorrogáveis (crimes hediondos ou equiparados — art. 2º, §4º).</li>
+    <li><strong>Fundamentação Concreta:</strong> sendo a liberdade a regra, exige elementos que demonstrem sua indispensabilidade para a elucidação dos fatos, vedando-se a decretação automática.</li>
+  </ul>
+</section>
+
+<!-- 6 -->
+<section class="rp-secao" aria-label="Prisão Domiciliar e Liberdade Provisória">
+  <h2 class="rp-secao-titulo"><span class="rp-num">6</span> Prisão Domiciliar e Liberdade Provisória</h2>
+
+  <p class="rp-texto">A substituição da preventiva pela domiciliar (Arts. 318 e 318-A) reflete o princípio da adequação e a proteção da dignidade humana, atendendo a gestantes, responsáveis por crianças menores de 12 anos ou pessoas extremamente debilitadas por doença grave.</p>
+
+  <div class="rp-destaque">
+    <strong>Ônus da Prova:</strong> pesa integralmente sobre a acusação. No sistema processual democrático, a defesa não possui o encargo de provar sua inocência, mas sim o interesse estratégico em demonstrar a ausência de <em>periculum libertatis</em> ou gerar dúvida razoável quanto à materialidade e autoria para alcançar a liberdade provisória.
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="rp-secao" aria-label="Conclusão">
+  <h2 class="rp-secao-titulo"><span class="rp-num">7</span> Conclusão: O Papel do Juiz e a Vedação do Excesso</h2>
+
+  <p class="rp-texto">O magistrado, no sistema acusatório, deve atuar como o garante dos direitos fundamentais, exercendo o que a jurisprudência do STJ denomina como <strong>filtragem epistêmica</strong>. Sua missão é impedir que conclusões irracionais ou elementos informativos não corroborados pelo contraditório judicial sustentem o cárcere.</p>
+
+  <p class="rp-texto">A vedação à substituição da atuação probatória (Art. 3º-A) é a salvaguarda contra o arbítrio. Respeitando-se o Art. 155 do CPP, qualquer restrição de liberdade baseada exclusivamente em elementos da fase inquisitorial é inadmissível.</p>
+
+  <div class="rp-destaque" style="border-color:var(--blue);background:var(--blue-light,var(--rp-bg2))">
+    <strong>Em suma:</strong> o juiz deve atuar como um filtro contra a inidoneidade epistêmica, assegurando que a prisão seja sempre a <em>exceção</em> e nunca um instrumento de antecipação de culpabilidade.
+  </div>
+</section>
+
+</div>

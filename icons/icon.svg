@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#1F497D"/>
+  <!-- post -->
+  <rect x="248" y="108" width="16" height="300" rx="8" fill="white"/>
+  <!-- cross bar -->
+  <rect x="120" y="116" width="272" height="14" rx="7" fill="white"/>
+  <!-- left arm chain -->
+  <line x1="156" y1="130" x2="156" y2="224" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <!-- right arm chain -->
+  <line x1="356" y1="130" x2="356" y2="224" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <!-- left pan -->
+  <path d="M106 224 Q156 252 206 224" fill="none" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <line x1="106" y1="224" x2="206" y2="224" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <!-- right pan -->
+  <path d="M306 224 Q356 252 406 224" fill="none" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <line x1="306" y1="224" x2="406" y2="224" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <!-- base -->
+  <rect x="196" y="396" width="120" height="14" rx="7" fill="white"/>
+  <!-- base legs -->
+  <rect x="200" y="396" width="14" height="26" rx="4" fill="white"/>
+  <rect x="298" y="396" width="14" height="26" rx="4" fill="white"/>
+</svg>

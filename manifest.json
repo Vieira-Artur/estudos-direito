@@ -1,0 +1,25 @@
+{
+  "name": "Estudos de Direito — Prof. Artur Vieira",
+  "short_name": "Estudos Direito",
+  "description": "Material de estudos complementares de Direito — Prof. Artur Vieira",
+  "lang": "pt-BR",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#1F497D",
+  "theme_color": "#1F497D",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

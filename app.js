@@ -1244,3 +1244,38 @@ function linkificarJulgados(el) {
     node.parentNode.replaceChild(frag, node)
   }
 }
+
+// ── PWA install prompt ──────────────────────────────────
+let _pwaPrompt = null
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault()
+  _pwaPrompt = e
+  const banner = document.getElementById('pwa-banner')
+  if (banner) banner.hidden = false
+})
+
+function pwaBannerInstalar() {
+  if (!_pwaPrompt) return
+  _pwaPrompt.prompt()
+  _pwaPrompt.userChoice.then(() => {
+    _pwaPrompt = null
+    pwaBannerDispensar()
+  })
+}
+
+function pwaBannerDispensar() {
+  const banner = document.getElementById('pwa-banner')
+  if (banner) banner.hidden = true
+}
+
+window.addEventListener('appinstalled', () => {
+  _pwaPrompt = null
+  pwaBannerDispensar()
+})
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+  })
+}

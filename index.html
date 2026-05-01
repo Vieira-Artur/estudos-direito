@@ -17,6 +17,13 @@
   <meta name="twitter:description" content="Material de estudos complementares de Direito — Prof. Artur Vieira. Penal, Processual Penal, Tributário e mais.">
   <meta name="twitter:image" content="https://vieira-artur.github.io/estudos-direito/og-image.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1F497D">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Estudos Direito">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
@@ -48,6 +55,12 @@
 
   <button id="btn-tema" aria-label="Mudar para modo escuro" onclick="toggleTema()">🌙</button>
   <button id="btn-topo" title="Voltar ao topo" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})">↑</button>
+
+  <div id="pwa-banner" role="status" aria-live="polite" hidden>
+    <span class="pwa-banner-texto">📲 Instalar como app</span>
+    <button id="pwa-instalar" onclick="pwaBannerInstalar()">Instalar</button>
+    <button id="pwa-dispensar" aria-label="Fechar" onclick="pwaBannerDispensar()">✕</button>
+  </div>
 
   <footer class="rodape-site">
     <p class="rodape-autoria">Criado e desenvolvido por Artur Vieira · <a href="#" class="rodape-sobre" onclick="abrirSobre(); return false;">Sobre mim</a></p>

@@ -163,8 +163,9 @@ header {
   border-radius: 0 4px 4px 0;
 }
 @media (prefers-color-scheme: dark) {
-  #tooltip .tt-stj { background: #2a2000; color: #e8c96a; }
+  :root:not([data-theme="light"]) #tooltip .tt-stj { background: #2a2000; color: #e8c96a; }
 }
+:root[data-theme="dark"] #tooltip .tt-stj { background: #2a2000; color: #e8c96a; }
 
 /* ── LEGEND ── */
 .legend {

@@ -308,6 +308,7 @@
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-timeline')">🕐 Linha do Tempo</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-relatorio')">📝 Relatório Geral</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-flagrante-relatorio')">📋 Prisão em Flagrante</button>
+  <button class="pp3-tab" onclick="pp3Tab(event,'pp3-preventiva-relatorio')">🔒 Relatório Prisão Preventiva</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-infografico')">🖼 Infográfico de Prisões</button>
 </div>
 
@@ -1371,6 +1372,166 @@
   <div class="juris">
     <div class="tribunal">Súmula 676 STJ</div>
     <p>Em razão da Lei 13.964/2019, não é mais possível ao juiz, de ofício, decretar ou converter prisão em flagrante em preventiva.</p>
+  </div>
+
+</div>
+
+<!-- RELATÓRIO PRISÃO PREVENTIVA -->
+<div id="pp3-preventiva-relatorio" class="pp3-painel">
+
+  <div class="section-title">1. Introdução: Conceito e Natureza Jurídica</div>
+  <div class="card">
+    <p>A prisão preventiva, enquanto medida de coerção pessoal de natureza cautelar, representa o ponto de maior tensão entre o poder punitivo estatal e a liberdade individual. Sob a ótica do Processo Penal Garantista, sua aplicação não pode ser transmudada em antecipação de pena, mas deve subsistir estritamente como um <strong>instrumento de excepcionalidade extrema</strong>.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">Doutrina · Renato Brasileiro</div>
+    <p>"Cuida-se de espécie de prisão cautelar decretada pela autoridade judiciária competente, mediante representação da autoridade policial ou requerimento do Ministério Público, do querelante ou do assistente, em qualquer fase das investigações ou do processo criminal, sempre que estiverem preenchidos os requisitos legais (CPP, art. 313) e ocorrerem os motivos autorizadores listados no art. 312 do CPP, e desde que se revelem inadequadas ou insuficientes as medidas cautelares diversas da prisão (CPP, art. 319)".</p>
+  </div>
+  <div class="card">
+    <h3>⚖️ Natureza Jurídica</h3>
+    <p>As prisões cautelares materializam-se como uma exceção às regras constitucionais de presunção de inocência. Conforme o entendimento consolidado no <strong>HC 497.006/MS</strong>, a segregação exige elementos que demonstrem a efetiva necessidade no contexto fático-probatório, sendo inadmissível sem razão sólida e individualizada.</p>
+  </div>
+
+  <div class="section-title">2. Momento Processual e Legitimidade (Art. 311, CPP)</div>
+  <div class="card">
+    <p>A segregação preventiva é cabível em todas as etapas da <em>persecutio criminis</em>, compreendendo tanto a fase inquisitorial quanto a instrução processual.</p>
+    <p style="margin-top:0.7rem">Sob o prisma do sistema acusatório, a <strong>Lei nº 13.964/2019 (Pacote Anticrime)</strong> operou uma viragem paradigmática ao expurgar do ordenamento a possibilidade de o magistrado decretar a prisão de ofício. A legitimidade para o requerimento é restrita ao <strong>Ministério Público, ao querelante, ao assistente</strong> ou mediante representação da <strong>autoridade policial</strong>.</p>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · AgRg RHC 136.708/MS — Crítica Técnica</div>
+    <p>A despeito do rigor do sistema acusatório, o STJ mitigou a nulidade da decretação de ofício ao entender que o vício pode ser "convalidado" se houver manifestação posterior favorável do Parquet ou da autoridade policial. Sob uma visão garantista, tal entendimento é controverso, pois tangencia a convalidação de um ato judicial originariamente nulo por ausência de pressuposto de existência (a provocação).</p>
+  </div>
+
+  <div class="section-title">3. Pressupostos e Fundamentos da Cautelaridade (Art. 312, CPP)</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>1 — <em>Fumus comissi delicti</em></h3>
+      <p>Prova da existência do crime e indícios suficientes de autoria. "Indício" exige <em>standard</em> probatório idôneo, de menor valor persuasivo que a certeza plena, mas que não se confunde com mera suspeita.</p>
+    </div>
+    <div class="card">
+      <h3>2 — <em>Periculum libertatis</em></h3>
+      <p>Risco concreto à <strong>ordem pública</strong>, <strong>ordem econômica</strong>, <strong>instrução criminal</strong> ou <strong>aplicação da lei penal</strong>. O Art. 312, §1º acrescenta o descumprimento de medida cautelar anterior como fundamento subsidiário.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>📋 Critérios de Periculosidade — Lei nº 15.272/2025 (Art. 312, §3º)</h3>
+    <ul style="margin-top:0.5rem">
+      <li><strong>I – Modus operandi:</strong> Uso reiterado de violência, grave ameaça ou premeditação acentuada.</li>
+      <li><strong>II – Organização Criminosa:</strong> Participação comprovada em estruturas criminosas.</li>
+      <li><strong>III – Materialidade de alto risco:</strong> Natureza, quantidade e variedade de drogas, armas ou munições.</li>
+      <li><strong>IV – Reiteração delitiva:</strong> Receio fundado de novos crimes baseado em inquéritos ou ações penais em curso.</li>
+    </ul>
+  </div>
+  <div class="warn">
+    <strong>⚠️ Vedação da Gravidade Abstrata e Clamor Público (Art. 312, §4º — Lei 15.272/2025):</strong>
+    <p>É nula a decisão baseada meramente em "clamor público" ou na suposta necessidade de restaurar a "credibilidade da justiça". Ratifica o <strong>HC 497.006/MS</strong>: esses conceitos não resistem ao escrutínio constitucional da fundamentação concreta.</p>
+  </div>
+  <div class="alert">
+    <strong>📌 Nota Técnica — Colaboração Premiada (STF, HC 138.207/PR):</strong>
+    <p>O descumprimento de acordo de colaboração premiada não autoriza a decretação automática de prisão preventiva. A quebra do acordo não é fundamento autônomo; deve-se demonstrar, no caso concreto, os requisitos do Art. 312.</p>
+  </div>
+
+  <div class="section-title">4. Requisitos de Admissibilidade (Art. 313, CPP)</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Hipótese Legal</th><th>Critérios Específicos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Crimes Dolosos</strong></td><td>Pena privativa de liberdade máxima superior a 4 anos.</td></tr>
+        <tr><td><strong>Reincidência</strong></td><td>Condenação anterior por crime doloso com trânsito em julgado (observado o período depurador).</td></tr>
+        <tr><td><strong>Violência Doméstica</strong></td><td>Crime contra mulher, criança, idoso ou vulnerável para assegurar medidas protetivas.</td></tr>
+        <tr><td><strong>Organizações Ultraviolentas</strong></td><td>Atuação em grupo paramilitar ou milícia (Art. 2º da Lei nº 15.358/2026).</td></tr>
+        <tr><td><strong>Dúvida de Identidade</strong></td><td>Falta de elementos para identificação civil. <span class="tag tag-orange">Liberação imediata após esclarecimento</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="warn">
+    <strong>⚠️ Princípio da Legalidade Estrita:</strong>
+    <p>A preventiva é absolutamente inadmissível em <strong>contravenções penais</strong>, ainda que no contexto de violência doméstica. O STJ (HC 437.535-SP) veda a analogia <em>in malam partem</em>, visto que o Art. 313, III menciona apenas "crime".</p>
+  </div>
+
+  <div class="section-title">5. Hipóteses de Não Cabimento e Excludentes (Art. 314, CPP)</div>
+  <div class="card">
+    <p>O magistrado está impedido de decretar a preventiva se verificar que o agente atuou sob o manto das <strong>excludentes de ilicitude</strong> do Art. 23 do CP (legítima defesa, estado de necessidade, estrito cumprimento de dever legal ou exercício regular de direito).</p>
+    <p style="margin-top:0.7rem">A doutrina garantista estende tal impedimento às <strong>excludentes de culpabilidade</strong> (ex: coação moral irresistível). Além disso, o <strong>Art. 313, §2º</strong> proíbe a utilização da prisão como antecipação de pena ou efeito automático do recebimento da denúncia.</p>
+  </div>
+
+  <div class="section-title">6. O Rigoroso Dever de Fundamentação (Art. 315, CPP)</div>
+  <div class="card">
+    <p>A fundamentação é condição de validade do ato decisório. Exige-se a demonstração de <strong>fatos novos ou contemporâneos</strong>; fundamentos pretéritos não justificam riscos presentes.</p>
+  </div>
+  <div class="card">
+    <h3>❌ Catálogo de Decisões Não Fundamentadas (Art. 315, §2º)</h3>
+    <p>Considera-se nula a decisão que:</p>
+    <ol style="padding-left:1.2rem;margin-top:0.5rem">
+      <li style="margin-bottom:0.35rem">Limita-se à indicação, reprodução ou paráfrase de ato normativo, sem explicar a relação com o caso.</li>
+      <li style="margin-bottom:0.35rem">Emprega conceitos jurídicos indeterminados sem motivação concreta.</li>
+      <li style="margin-bottom:0.35rem">Invoca motivos genéricos aplicáveis a qualquer outra decisão.</li>
+      <li style="margin-bottom:0.35rem">Não enfrenta todos os argumentos capazes de infirmar a conclusão.</li>
+      <li style="margin-bottom:0.35rem">Invoca precedente ou súmula sem identificar seus fundamentos determinantes.</li>
+      <li>Deixa de seguir súmula ou jurisprudência sem demonstrar <em>distinguishing</em> ou <em>overruling</em>.</li>
+    </ol>
+  </div>
+
+  <div class="section-title">7. Natureza Provisória e Revisão Periódica (Art. 316, CPP)</div>
+  <div class="card">
+    <p>A cláusula <em>rebus sic stantibus</em> rege a preventiva: desaparecendo os motivos, a prisão deve ser <strong>revogada</strong>; surgindo novos riscos, <strong>redecretada</strong>. O parágrafo único do Art. 316 impõe o dever de revisão a cada <strong>90 dias</strong>, de ofício, sob pena de ilegalidade.</p>
+  </div>
+  <div class="grid-2">
+    <div class="juris">
+      <div class="tribunal">STF · ADI 6581/6582</div>
+      <p>O transcurso do prazo não gera revogação automática. Embora a omissão configure ilegalidade, o relaxamento exige prévia provocação do juízo para que este se manifeste sobre a manutenção ou não dos requisitos.</p>
+    </div>
+    <div class="juris">
+      <div class="tribunal">STJ · RHC 153.528-SP</div>
+      <p>Inexiste o dever de revisão periódica de 90 dias quando o acusado encontra-se foragido, dada a sua recusa em submeter-se ao império da lei.</p>
+    </div>
+  </div>
+
+  <div class="section-title">8. Prisão Domiciliar Humanitária (Arts. 317 a 318-B, CPP)</div>
+  <div class="card">
+    <p>Trata-se de substituição da preventiva para mitigar a desumanidade do cárcere em situações de vulnerabilidade.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>🏠 Critérios do Art. 318 (Substituição)</h3>
+      <ul style="margin-top:0.5rem">
+        <li>Maior de 80 anos ou extremamente debilitado por doença grave (exige prova de incompatibilidade com tratamento na unidade prisional).</li>
+        <li>Imprescindível aos cuidados de menor de 6 anos ou pessoa com deficiência.</li>
+        <li>Gestante ou mulher com filho de até 12 anos incompletos.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>⚖️ Art. 318-A — Direito das Mães</h3>
+      <p>Define a domiciliar como <strong>direito</strong> para gestantes e mães de filhos até 12 anos incompletos, salvo se o crime envolveu:</p>
+      <ul style="margin-top:0.5rem">
+        <li>Violência ou grave ameaça à pessoa; ou</li>
+        <li>Crime praticado contra o próprio dependente.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="juris">
+    <div class="tribunal">STJ · AgRg no HC 1.035.233-PR</div>
+    <p>A substituição para mães de menores de 12 anos exige comprovação inequívoca da imprescindibilidade materna. Existe corrente em sentido contrário que defende a aplicação mais automática em prol da proteção integral da criança (Art. 227, CF).</p>
+  </div>
+
+  <div class="section-title">9. Casuística e Exercícios de Fixação</div>
+  <div class="card" style="border-left:3px solid var(--pp3-red)">
+    <h3 style="color:var(--pp3-red)">⛔ Crimes Culposos (Caso João Marcelo / Débora)</h3>
+    <p>A prisão preventiva é <strong>absolutamente ilegal</strong> em crimes culposos, independentemente da gravidade do resultado morte ou da repercussão social. Em tais casos (atropelamento por Porsche, caso OAB 42º), a prisão deve ser <strong>RELAXADA</strong> por manifesta ilegalidade e afronta à taxatividade do Art. 313, I.</p>
+  </div>
+  <div class="card" style="border-left:3px solid var(--pp3-teal)">
+    <h3 style="color:var(--pp3-teal)">📌 Dúvida de Identidade Civil (Caso TRF 6ª)</h3>
+    <p>O flagrante de furto por agente sem documentação autoriza a preventiva apenas para fins de identificação (Art. 313, §1º). Uma vez identificado, o réu deve ser posto <strong>imediatamente em liberdade</strong>, salvo se houver outro fundamento do Art. 312.</p>
+  </div>
+  <div class="card" style="border-left:3px solid var(--pp3-orange)">
+    <h3 style="color:var(--pp3-orange)">⚠️ Tráfico Internacional e Gestação (Caso Vanessa — Exame XL OAB)</h3>
+    <p>A quantidade de drogas ou a transnacionalidade <strong>não são óbices automáticos</strong> à domiciliar. Se a ré é gestante e o crime não envolveu violência ou grave ameaça à pessoa, a substituição é autorizada legalmente.</p>
+  </div>
+
+  <div class="section-title">10. Conclusão</div>
+  <div class="card">
+    <p>A prisão preventiva deve ser compreendida como a <em>ultima ratio</em> do sistema. A existência de condições favoráveis (primariedade, bons antecedentes), embora não impeça a prisão se os requisitos do Art. 312 estiverem presentes (STJ HC 516.672/SP), impõe ao magistrado o dever de demonstrar por que as medidas cautelares alternativas do Art. 319 são insuficientes.</p>
+    <p style="margin-top:0.7rem">O rigor formal e a <strong>fundamentação concreta</strong> são os únicos anteparos contra o arbítrio estatal.</p>
   </div>
 
 </div>

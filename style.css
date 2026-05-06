@@ -168,6 +168,19 @@ header {
   color: var(--blue);
 }
 
+.rodape-instagram {
+  color: var(--text2);
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: inherit;
+  transition: color .15s;
+}
+
+.rodape-instagram:hover {
+  color: #c13584;
+}
+
 /* ── Breadcrumb ── */
 #breadcrumb {
   font-size: 12.5px;

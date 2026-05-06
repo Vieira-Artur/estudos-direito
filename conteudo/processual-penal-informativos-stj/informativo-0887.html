@@ -1,0 +1,163 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-titulo-data {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  vertical-align: middle;
+}
+.inf-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.inf-sub strong { color: var(--jur-text); }
+.inf-meta {
+  display: inline-block;
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--jur-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+.inf-card {
+  flex: 1;
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.inf-card:hover {
+  box-shadow: var(--jur-shadow);
+  transform: translateY(-1px);
+}
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jur-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.inf-processo {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--jur-text2);
+}
+.inf-processo a {
+  font-weight: 700;
+  color: var(--jur-accent);
+  text-decoration: none;
+}
+.inf-processo a:hover { text-decoration: underline; }
+.inf-ramo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--jur-text2);
+}
+.inf-tema {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  margin: 4px 0 10px 0;
+  line-height: 1.4;
+}
+.inf-destaque {
+  font-size: 16px;
+  color: var(--jur-text);
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.inf-destaque p { margin: 0 0 8px 0; }
+.inf-destaque p:last-child { margin-bottom: 0; }
+.inf-rodape {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jur-border);
+  font-size: 12px;
+  color: var(--jur-text2);
+}
+.inf-rodape a { color: var(--jur-accent); }
+.inf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-titulo">Informativo nº 887 <span class="inf-meta">STJ</span><span class="inf-titulo-data"> — 5 de maio de 2026</span></h2>
+<p class="inf-sub">Edição <strong>nº 887</strong> · publicada em <strong>5 de maio de 2026</strong> · 3 enunciados de Direito Processual Penal.</p>
+<div class="inf-card-wrap"><div class="inf-num">1</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>Na fase do judicium accusationis, é vedado ao Tribunal de Justiça afastar, a partir da análise aprofundada e exauriente das provas, a possibilidade de dolo ou de culpa e desclassificar o crime doloso contra a vida, sob pena de usurpar a competência constitucional do Tribunal do Júri sobre o elemento subjetivo da conduta.</p></div><div class="inf-tema">Tribunal do Júri. Pronúncia. Elemento subjetivo da conduta. Fase do Judicium Accusationis. Limites da cognição. Preservação da competência do Conselho de Sentença.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;020271&#x27;" target="_blank" rel="noopener">Processo em segredo de justiça, Rel. Ministro Joel Ilan Paciornik, Quinta Turma, por unanimidade, julgado em 15/4/2026, DJE 22/4/2026.</a></span><span class="inf-ramo">DIREITO CONSTITUCIONAL, DIREITO PROCESSUAL PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">2</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>O prazo de 6 (seis) meses para o oferecimento da queixa ou da representação é peremptório, não se sujeitando a suspensão, interrupção ou prorrogação, ainda que ocorra alteração da capitulação jurídica.</p></div><div class="inf-tema">Queixa-crime. Decadência. Prazo peremptório. Alteração da capitulação jurídica. Suspensão, interrupção ou prorrogação do prazo decadencial. Impossibilidade.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?livre=%28%28AGARESP+INPATH%28CLAS%29+OR+%22AgRg+no+AREsp%22+INPATH%28CLAP%29%29+AND+3080643+INPATH%28NUM%29%29+OR+%28NEAR%28%28%28AGARESP+OR+%22AgRg+no+AREsp%22%29%2C3080643%29%2C0%2CTRUE%29+INPATH%28SUCE%29%29" target="_blank" rel="noopener">AgRg no AREsp 3.080.643-SE, Rel. Ministro Rogerio Schietti Cruz, Sexta Turma, por unanimidade, julgado em 14/4/2026, DJEN 23/4/2026.</a></span><span class="inf-ramo">DIREITO PENAL, DIREITO PROCESSUAL PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">3</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>A comunicação feita por profissional de saúde à autoridade policial de fatos protegidos pelo sigilo médico - notadamente em casos de aborto - constitui prova ilícita, contaminando, por derivação, todos os elementos de prova subsequentes.</p></div><div class="inf-tema">Aborto. Comunicação feita por médica que atendeu a paciente. Violação de sigilo médico. Configuração. Provas ilícitas reconhecidas. Restabelecimento da sentença de impronúncia.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;021279&#x27;" target="_blank" rel="noopener">HC 1.000.918-SP, Rel. Ministro Otávio de Almeida Toledo (Desembargador convocado do TJSP), Sexta Turma, por unanimidade, julgado em 15/4/2026.</a></span><span class="inf-ramo">DIREITO PENAL, DIREITO PROCESSUAL PENAL</span></div></article></div>
+<div class="inf-rodape">Fonte oficial: <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisarumaedicao&amp;livre=%270887%27.cod." target="_blank" rel="noopener">Informativo 887 no portal do STJ</a>.</div>

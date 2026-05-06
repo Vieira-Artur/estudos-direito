@@ -522,6 +522,28 @@ main {
   transform: translateY(-2px);
 }
 
+.card-turma--em-breve {
+  cursor: default;
+  opacity: .55;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.card-turma--em-breve:hover {
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transform: none;
+}
+
+.card-turma-em-breve {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text2);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card-turma {
     transition: background .18s, box-shadow .18s;

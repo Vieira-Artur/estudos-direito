@@ -301,7 +301,12 @@ function selecionarMateria(id, fromPop = false) {
   app.innerHTML = `
     <p class="secao-titulo">${materia.titulo} — Selecione a turma</p>
     <div class="cards-turmas">
-      ${materia.turmas.map(t => `
+      ${materia.turmas.map(t => t.emBreve ? `
+        <div class="card-turma card-turma--em-breve" aria-disabled="true" tabindex="-1">
+          ${t.titulo}
+          <span class="card-turma-em-breve">Em breve</span>
+        </div>
+      ` : `
         <div class="card-turma" role="button" tabindex="0"
              aria-label="${t.titulo}"
              onclick="selecionarTurma('${esc(materia.id)}', '${esc(t.id)}')"

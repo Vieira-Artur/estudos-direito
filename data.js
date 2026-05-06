@@ -69,6 +69,7 @@ const materias = [
       {
         id: "processual-penal-i",
         titulo: "Direito Processual Penal I",
+        emBreve: true,
         temas: []
       },
       {

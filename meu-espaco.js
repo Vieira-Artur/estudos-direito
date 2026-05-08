@@ -1,5 +1,6 @@
 const MeuEspaco = (() => {
-  const FABRIC_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js'
+  const FABRIC_CDN        = 'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js'
+  const FABRIC_INTEGRITY  = 'sha512-P6uimDKoj1nnPSo2sPmgbZy99pPq9nHXhLwddOnLi1DC+fEM83FEUcHPRPifbx1rlRkdMinViaWyDfG45G9BuA=='
 
   function storageKey(tipo, arquivo) {
     return `meu-espaco-${tipo}:${arquivo}`
@@ -97,6 +98,8 @@ const MeuEspaco = (() => {
     s = document.createElement('script')
     s.id = 'me-fabric-script'
     s.src = FABRIC_CDN
+    s.integrity = FABRIC_INTEGRITY
+    s.crossOrigin = 'anonymous'
     s.onload = () => { s.dataset.loaded = '1'; cb() }
     document.head.appendChild(s)
   }

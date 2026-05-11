@@ -277,16 +277,84 @@
     </table>
   </div>
 
-  <div id="modificacao-credito" class="tf-section-title">Modificação do Crédito (Suspensão · Extinção · Exclusão)</div>
+  <div id="modificacao-credito" class="tf-section-title">Modificação do Crédito Tributário</div>
+
   <div class="tf-table-wrap">
-    <table class="tf-table">
-      <thead><tr><th>Modalidade</th><th>Efeito</th><th>Hipóteses</th><th>Base</th></tr></thead>
+    <table class="tf-table" style="min-width:560px">
+      <thead>
+        <tr>
+          <th style="width:14%">Categoria</th>
+          <th style="width:26%">O que acontece?</th>
+          <th style="width:38%">Hipóteses</th>
+          <th style="width:10%">Base</th>
+          <th style="width:12%">Mnemônico</th>
+        </tr>
+      </thead>
       <tbody>
-        <tr><td>Suspensão</td><td>Crédito existe, mas é inexigível temporariamente</td><td><span class="tf-badge tf-b-blue">MODEPAR</span> Moratória · Depósito · Reclamações/Recursos · Liminares · Parcelamento</td><td>Art. 151 CTN</td></tr>
-        <tr><td>Extinção</td><td>Faz cessar a obrigação principal</td><td>Pagamento · Compensação · Transação · Remissão · Decadência · Prescrição</td><td>Art. 156 CTN</td></tr>
-        <tr><td>Exclusão</td><td>Impede a constituição do crédito (antes do lançamento)</td><td>Isenção · Anistia</td><td>Art. 175 CTN</td></tr>
+        <tr style="background:var(--tf-gold-lt)">
+          <td style="color:var(--tf-gold);font-weight:700">SUSPENSÃO</td>
+          <td>O crédito <strong>existe</strong>, mas a cobrança é <strong>pausada</strong>.<br><span style="font-size:12px;color:var(--text2)">O Fisco não pode exigir enquanto durar a causa.</span></td>
+          <td>
+            <ol style="padding-left:16px;margin:0;font-size:13px;line-height:1.7">
+              <li><strong>Mo</strong>ratória</li>
+              <li><strong>De</strong>pósito integral do montante</li>
+              <li><strong>Re</strong>clamações e recursos administrativos</li>
+              <li><strong>A</strong>ntecipação de tutela / <strong>L</strong>iminar</li>
+              <li><strong>Pa</strong>rcelamento</li>
+            </ol>
+          </td>
+          <td style="white-space:nowrap">Art. 151<br>CTN</td>
+          <td><span class="tf-badge tf-b-orange" style="font-size:12px;letter-spacing:.04em">MODERAPA</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--tf-red);font-weight:700">EXTINÇÃO</td>
+          <td>O crédito é <strong>finalizado</strong> e a obrigação acaba.<br><span style="font-size:12px;color:var(--text2)">A dívida deixa de existir para todos os efeitos.</span></td>
+          <td>
+            <ol style="padding-left:16px;margin:0;font-size:13px;line-height:1.7">
+              <li>Pagamento</li>
+              <li>Compensação</li>
+              <li>Transação</li>
+              <li>Remissão</li>
+              <li>Decadência</li>
+              <li>Prescrição</li>
+              <li>Conversão de depósito em renda</li>
+              <li>Consignação em pagamento</li>
+              <li>Decisão judicial / administrativa</li>
+              <li>Dação em pagamento de bens imóveis</li>
+            </ol>
+          </td>
+          <td style="white-space:nowrap">Art. 156<br>CTN</td>
+          <td style="font-size:12px;color:var(--text2);font-style:italic">10 hipóteses</td>
+        </tr>
+        <tr style="background:var(--tf-purple-lt)">
+          <td style="color:var(--tf-purple);font-weight:700">EXCLUSÃO</td>
+          <td>O crédito é <strong>impedido</strong> de ser cobrado — antes de nascer ou antes de a multa ser constituída.<br><span style="font-size:12px;color:var(--text2)">O crédito nem chega a se tornar exigível.</span></td>
+          <td>
+            <ol style="padding-left:16px;margin:0;font-size:13px;line-height:1.7">
+              <li><strong>I</strong>senção — dispensa do <em>tributo</em></li>
+              <li><strong>A</strong>nistia — perdão da <em>infração / multa</em></li>
+            </ol>
+          </td>
+          <td style="white-space:nowrap">Art. 175<br>CTN</td>
+          <td><span class="tf-badge tf-b-teal" style="font-size:12px;letter-spacing:.04em">IA</span></td>
+        </tr>
       </tbody>
     </table>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:10px 0 18px">
+    <div class="tf-alert atencao" style="margin:0">
+      <strong>⏸ Suspensão = "Pause"</strong>
+      O Fisco não pode bater na porta enquanto durar a causa de suspensão. O crédito continua vivo — só a cobrança está bloqueada.
+    </div>
+    <div class="tf-alert" style="margin:0;background:var(--tf-red-lt);border-color:var(--tf-red)">
+      <strong>🗑️ Extinção = "Delete"</strong>
+      A dívida morre. A obrigação é extinta definitivamente — o Fisco não tem mais o que cobrar.
+    </div>
+    <div class="tf-alert" style="margin:0;background:var(--tf-purple-lt);border-color:var(--tf-purple)">
+      <strong>🚫 Exclusão = "Bloqueio"</strong>
+      O crédito nem chega a se tornar exigível. Atua <em>antes</em> do lançamento — o Fisco não pode sequer constituí-lo.
+    </div>
   </div>
 
   <div id="principios" class="tf-section-title">Princípios Constitucionais e Exceções</div>

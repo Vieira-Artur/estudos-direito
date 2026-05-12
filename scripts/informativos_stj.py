@@ -834,13 +834,31 @@ def parse_args() -> argparse.Namespace:
     return p.parse_args()
 
 
+def bump_sw_cache() -> None:
+    """Atualiza a versão do cache em sw.js com a data de hoje."""
+    sw_path = REPO_ROOT / "sw.js"
+    if not sw_path.exists():
+        return
+    content = sw_path.read_text(encoding="utf-8")
+    today = dt.date.today().strftime("%Y%m%d")
+    new_content = re.sub(
+        r"(const CACHE\s*=\s*['\"])estudos-direito-[^'\"]*(['\"])",
+        rf"\g<1>estudos-direito-{today}\g<2>",
+        content,
+    )
+    if new_content != content:
+        sw_path.write_text(new_content, encoding="utf-8")
+        log.info("sw.js atualizado para estudos-direito-%s.", today)
+
+
 def git_push_edicoes(edicoes: list[int], cfg: dict) -> None:
     """Faz commit e push das edições novas geradas."""
     numeros = ", ".join(f"nº {n}" for n in sorted(edicoes))
     rel_dir = str(cfg["target_dir"].relative_to(REPO_ROOT))
+    bump_sw_cache()
     try:
         subprocess.run(
-            ["git", "-C", str(REPO_ROOT), "add", rel_dir],
+            ["git", "-C", str(REPO_ROOT), "add", rel_dir, "sw.js"],
             check=True, capture_output=True)
         subprocess.run(
             ["git", "-C", str(REPO_ROOT), "commit", "-m",

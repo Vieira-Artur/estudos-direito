@@ -59,6 +59,12 @@ MATERIAS: dict[str, dict] = {
         "nome":       "Direito Penal",
         "inicial":    885,
     },
+    "tributario": {
+        "ramo_regex": re.compile(r"DIREITO\s+TRIBUT[AÁ]RIO", re.IGNORECASE),
+        "target_dir": REPO_ROOT / "conteudo" / "tributario-informativos-stj",
+        "nome":       "Direito Tributário",
+        "inicial":    885,
+    },
 }
 
 logging.basicConfig(

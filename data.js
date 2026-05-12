@@ -187,6 +187,12 @@ const materias = [
             arquivo: "conteudo/tributario/processo-tributario/03-execucao-fiscal.html"
           }
         ]
+      },
+      {
+        id: "tributario-informativos-stj",
+        titulo: "Jurisprudência",
+        indice: "conteudo/tributario-informativos-stj/index.html",
+        temas: []
       }
     ]
   }

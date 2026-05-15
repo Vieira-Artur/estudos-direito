@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tipos de Flagrante</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    width: 820px;
+    padding: 36px 40px 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.10);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 28px;
+  }
+
+  /* ── Columns layout ── */
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .col {
+    border-radius: 12px;
+    padding: 18px 16px 20px;
+  }
+
+  .col-header {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .col-law {
+    font-size: 11px;
+    text-align: center;
+    margin-bottom: 14px;
+    font-weight: 600;
+    opacity: .8;
+  }
+
+  /* ── Blue col — Art. 302 ── */
+  .col-azul { background: #EBF3FB; }
+  .col-azul .col-header { background: #1F497D; color: white; }
+  .col-azul .col-law { color: #1F497D; }
+
+  /* ── Green col — Esperado ── */
+  .col-verde { background: #E8F5E9; }
+  .col-verde .col-header { background: #2E7D32; color: white; }
+  .col-verde .col-law { color: #2E7D32; }
+
+  /* ── Red col — Preparado ── */
+  .col-vermelha { background: #FDECEA; }
+  .col-vermelha .col-header { background: #C62828; color: white; }
+  .col-vermelha .col-law { color: #C62828; }
+
+  /* ── Items ── */
+  .item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+
+  .item-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .item-body {}
+
+  .item-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 2px;
+    line-height: 1.3;
+  }
+
+  .item-desc {
+    font-size: 11.5px;
+    color: #444;
+    line-height: 1.5;
+  }
+
+  /* ── Tag ── */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 4px;
+  }
+  .tag-azul   { background: #1F497D; color: white; }
+  .tag-verde  { background: #2E7D32; color: white; }
+  .tag-red    { background: #C62828; color: white; }
+  .tag-orange { background: #E65100; color: white; }
+
+  /* ── Alert boxes ── */
+  .alerts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .alert {
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .alert-azul   { background: #D6E8F9; border-left: 4px solid #1F497D; color: #1F497D; }
+  .alert-verde  { background: #C8E6C9; border-left: 4px solid #2E7D32; color: #2E7D32; }
+  .alert-red    { background: #FFCDD2; border-left: 4px solid #C62828; color: #B71C1C; }
+
+  .alert strong { display: block; font-size: 13px; margin-bottom: 3px; }
+
+  /* ── Súmula badge ── */
+  .sumula {
+    background: #FFF3E0;
+    border: 1.5px solid #F57C00;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 11.5px;
+    color: #4E342E;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+  .sumula strong { color: #BF360C; }
+
+  .divider {
+    border: none;
+    border-top: 1.5px solid #e8e8e8;
+    margin: 22px 0 18px;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 10.5px;
+    color: #999;
+    margin-top: 24px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <h1>Tipos de Flagrante — Prisão em Flagrante Delito</h1>
+  <div class="subtitle">Art. 302 do CPP e tipologia doutrinária · Direito Processual Penal</div>
+
+  <div class="cols">
+
+    <!-- ── Col 1: Art. 302 ── -->
+    <div class="col col-azul">
+      <div class="col-header">Flagrantes Legais</div>
+      <div class="col-law">Art. 302, CPP — Rol taxativo</div>
+
+      <div class="item">
+        <div class="item-icon">⚡</div>
+        <div class="item-body">
+          <div class="item-title">Flagrante Próprio<br><span style="font-weight:400;font-size:11px">(Perfeito · Real)</span></div>
+          <div class="item-desc">Agente <strong>está cometendo</strong> a infração penal <em>(inc. I)</em> ou <strong>acabou de cometê-la</strong> <em>(inc. II)</em>.</div>
+          <span class="tag tag-azul">Inc. I e II</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-icon">🏃</div>
+        <div class="item-body">
+          <div class="item-title">Flagrante Impróprio<br><span style="font-weight:400;font-size:11px">(Imperfeito · Quase-flagrante)</span></div>
+          <div class="item-desc">Agente é <strong>perseguido logo após</strong> pela autoridade, vítima ou qualquer pessoa em situação que o presuma autor.</div>
+          <span class="tag tag-azul">Inc. III</span>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-icon">🔍</div>
+        <div class="item-body">
+          <div class="item-title">Flagrante Presumido<br><span style="font-weight:400;font-size:11px">(Ficto · Assimilado)</span></div>
+          <div class="item-desc">Agente é <strong>encontrado logo depois</strong> com instrumentos, armas ou objetos que presumam sua autoria.</div>
+          <span class="tag tag-azul">Inc. IV</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Col 2: Esperado ── -->
+    <div class="col col-verde">
+      <div class="col-header">Flagrante Esperado</div>
+      <div class="col-law">Doutrina · Legal ✔</div>
+
+      <div class="item">
+        <div class="item-icon">👁️</div>
+        <div class="item-body">
+          <div class="item-title">Aguarda o momento do crime</div>
+          <div class="item-desc">Sem induzimento, instigação ou provocação. A autoridade ou terceiro <strong>limita-se a aguardar</strong> o cometimento do delito para efetuar a prisão.</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-icon">📡</div>
+        <div class="item-body">
+          <div class="item-title">Monitoramento prévio</div>
+          <div class="item-desc">A polícia tem notícia de que a infração será cometida e <strong>monitora o agente</strong> aguardando o melhor momento para agir.</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-icon">⚖️</div>
+        <div class="item-body">
+          <div class="item-title">Posição do STJ</div>
+          <div class="item-desc">Não há ilegalidade no flagrante esperado.</div>
+          <span class="tag tag-verde">Jurisprudência em Teses — STJ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Col 3: Preparado ── -->
+    <div class="col col-vermelha">
+      <div class="col-header">Flagrante Preparado</div>
+      <div class="col-law">Doutrina · Ilegal ✘</div>
+
+      <div class="item">
+        <div class="item-icon">🎭</div>
+        <div class="item-body">
+          <div class="item-title">Agente provocador induz o crime</div>
+          <div class="item-desc">Tb. chamado de <strong>flagrante provocado</strong>, crime de ensaio, delito de experiência ou delito putativo por obra do agente provocador.</div>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-icon">💬</div>
+        <div class="item-body">
+          <div class="item-title">Doutrina</div>
+          <div class="item-desc"><em>"O suposto autor não passa de um protagonista inconsciente de uma comédia."</em></div>
+        </div>
+      </div>
+
+      <div class="sumula">
+        📖 <strong>STF — Súmula 145</strong><br>
+        <span style="color:#333">Não há crime quando a preparação do flagrante pela polícia torna impossível a sua consumação.</span><br><br>
+        ↳ Crime impossível (art. 17 CP)<br>
+        ↳ Ilegalidade da prisão
+      </div>
+    </div>
+
+  </div><!-- /cols -->
+
+  <hr class="divider">
+
+  <div class="alerts">
+    <div class="alert alert-azul">
+      <strong>⚡ Flagrante Próprio = "Flagrado no ato"</strong>
+      Incs. I e II: o agente é surpreendido durante ou imediatamente após o crime.
+    </div>
+    <div class="alert alert-verde">
+      <strong>👁️ Esperado = "Aguarda sem provocar"</strong>
+      A polícia monitora mas não interfere na vontade do agente. Prisão válida.
+    </div>
+    <div class="alert alert-red">
+      <strong>🎭 Preparado = "Induz e prende"</strong>
+      O crime só ocorreu porque o agente foi provocado. Súmula 145 STF: crime impossível.
+    </div>
+  </div>
+
+  <div class="footer">Direito Processual Penal · Art. 302, CPP · Súmula 145, STF · STJ — Jurisprudência em Teses</div>
+
+</div>
+</body>
+</html>

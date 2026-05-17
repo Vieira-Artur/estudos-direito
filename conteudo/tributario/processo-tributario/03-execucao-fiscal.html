@@ -201,6 +201,98 @@
 @media (max-width: 540px) {
   .pt-tab { padding: 4px 9px; font-size: 11.5px; }
 }
+
+/* ── Linha do Tempo da LEF ───────────────────────────── */
+.lef-fase-hdr {
+  font-size:11.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; margin:18px 0 8px; padding:6px 10px;
+  border-radius:6px; background:var(--bg); border-left:3px solid currentColor;
+}
+.lef-fase-hdr:first-child { margin-top:4px; }
+.lef-step { margin-bottom:5px; }
+.lef-step-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:10px; overflow:hidden; border-left:4px solid;
+}
+.lef-step-card.lc-blue  { border-left-color:var(--blue); }
+.lef-step-card.lc-teal  { border-left-color:var(--pt-teal); }
+.lef-step-card.lc-green { border-left-color:var(--pt-green); }
+.lef-step-head {
+  display:flex; align-items:center; gap:10px;
+  padding:11px 14px; cursor:pointer; user-select:none;
+}
+.lef-step-head:hover { background:var(--bg); }
+.lef-step-num {
+  flex-shrink:0; width:26px; height:26px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:700;
+}
+.lef-step-info { flex:1; }
+.lef-step-title {
+  font-family:var(--serif); font-size:14.5px; font-weight:700; color:var(--text);
+}
+.lef-step-badge { font-size:12px; color:var(--text2); margin-top:1px; }
+.lef-toggle { font-size:14px; color:var(--text2); transition:transform .2s; flex-shrink:0; }
+.lef-step-body {
+  display:none; padding:13px 14px 15px; font-size:13.5px;
+  color:var(--text); line-height:1.65; border-top:1px solid var(--border);
+}
+.lef-step-body.open { display:block; }
+.lef-step-body ul { padding-left:16px; margin:5px 0; }
+.lef-step-body li { margin-bottom:3px; }
+.lef-step-body p { margin-bottom:6px; }
+.lef-step-body p:last-child { margin-bottom:0; }
+.lef-arrow { text-align:center; font-size:18px; color:var(--border); margin:2px 0; line-height:1; }
+
+.lef-fork-card {
+  background:#fffbf0; border:1.5px solid var(--gold);
+  border-radius:10px; padding:14px 16px; margin:4px 0;
+}
+.lef-fork-title {
+  font-family:var(--serif); font-size:14.5px; font-weight:700;
+  color:#7a5200; margin-bottom:10px;
+}
+.lef-fork-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(145px,1fr)); gap:7px;
+}
+.lef-fork-opt {
+  border-radius:8px; padding:9px 11px; font-size:12.5px; line-height:1.45; border:1px solid;
+}
+.lef-fo-label { font-weight:700; font-size:12px; display:block; margin-bottom:3px; }
+.lef-fo-green  { background:var(--pt-green-lt);  border-color:var(--pt-green);  color:var(--text); }
+.lef-fo-green  .lef-fo-label { color:var(--pt-green); }
+.lef-fo-blue   { background:var(--blue-light);   border-color:var(--blue);      color:var(--text); }
+.lef-fo-blue   .lef-fo-label { color:var(--blue); }
+.lef-fo-teal   { background:var(--pt-teal-lt);   border-color:var(--pt-teal);   color:var(--text); }
+.lef-fo-teal   .lef-fo-label { color:var(--pt-teal); }
+.lef-fo-orange { background:var(--pt-orange-lt); border-color:var(--pt-orange); color:var(--text); }
+.lef-fo-orange .lef-fo-label { color:var(--pt-orange); }
+.lef-fo-red    { background:var(--pt-red-lt);    border-color:var(--pt-red);    color:var(--text); }
+.lef-fo-red    .lef-fo-label { color:var(--pt-red); }
+.lef-fork-note {
+  margin-top:10px; font-size:12px; color:#7a5200;
+  padding:6px 10px; background:#fff8e1; border-radius:5px;
+}
+
+.lef-pi-box {
+  background:var(--pt-red-lt); border:1.5px solid var(--pt-red);
+  border-radius:10px; padding:14px 16px; margin-top:14px;
+}
+.lef-pi-title {
+  font-family:var(--serif); font-size:14px; font-weight:700;
+  color:var(--pt-red); margin-bottom:10px;
+}
+.lef-pi-row {
+  display:flex; align-items:flex-start; gap:9px;
+  font-size:13px; color:var(--text); padding:5px 0; line-height:1.5;
+}
+.lef-pi-row:not(:last-child) { border-bottom:1px solid rgba(139,26,26,.12); }
+.lef-pi-num {
+  flex-shrink:0; width:20px; height:20px; border-radius:50%;
+  background:var(--pt-red); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; margin-top:1px;
+}
 </style>
 
 <h2 class="pt-titulo">A Execução Fiscal (LEF) — Do Nascimento ao Título à Satisfação do Crédito</h2>
@@ -210,6 +302,7 @@
   <button class="pt-tab" onclick="ptTab3('infog', this)">Infográfico</button>
   <button class="pt-tab" onclick="ptTab3('roteiro', this)">Roteiro de Estudo</button>
   <button class="pt-tab" onclick="ptTab3('caso', this)">Estudo de Caso</button>
+  <button class="pt-tab" onclick="ptTab3('timeline', this)">Linha do Tempo</button>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -503,6 +596,267 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════════
+     ABA 5 — LINHA DO TEMPO
+═══════════════════════════════════════════════════════ -->
+<div id="pt3-timeline" class="pt-painel">
+
+  <div class="pt-alert info" style="margin-bottom:18px">
+    <strong>📋 Como usar esta linha do tempo</strong>
+    Fluxo processual da Execução Fiscal (LEF), do ajuizamento à satisfação do crédito. Clique em cada etapa para expandir os detalhes. O <strong>Ponto de Decisão</strong> após a citação mostra as 5 alternativas do executado.
+  </div>
+
+  <!-- FASE 1: INSTAURAÇÃO -->
+  <div class="lef-fase-hdr" style="color:var(--blue)">Fase 1 — Instauração</div>
+
+  <div class="lef-step">
+    <div class="lef-step-card lc-blue">
+      <div class="lef-step-head" onclick="lefStep(this)">
+        <div class="lef-step-num" style="background:var(--blue-light);color:var(--blue)">1</div>
+        <div class="lef-step-info">
+          <div class="lef-step-title">Ajuizamento da Execução Fiscal</div>
+          <div class="lef-step-badge">Art. 6º LEF — CDA como título executivo extrajudicial</div>
+        </div>
+        <span class="lef-toggle">▼</span>
+      </div>
+      <div class="lef-step-body">
+        <p>A <strong>Fazenda Pública</strong> (União, Estados, DF, Municípios, autarquias e fundações públicas) propõe a execução apresentando a CDA. A petição inicial é simples: basta a CDA e o pedido de citação.</p>
+        <ul>
+          <li><strong>Dispensável:</strong> demonstrativo de cálculo do débito (Súm. 559 STJ) e indicação de CPF/CNPJ (Súm. 558 STJ)</li>
+          <li><strong>CDA:</strong> presunção <em>relativa</em> de certeza e liquidez (art. 3º LEF) — ônus de ilidir é do executado</li>
+          <li><strong>LEF prevalece</strong> sobre o CPC em caso de conflito; CPC aplica-se subsidiariamente (art. 1º LEF)</li>
+          <li><strong>Substituição da CDA:</strong> permitida até a sentença dos embargos para correção de erro material ou formal, vedada mudança do sujeito passivo (Súm. 392 STJ)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="lef-arrow">↓</div>
+
+  <div class="lef-step">
+    <div class="lef-step-card lc-blue">
+      <div class="lef-step-head" onclick="lefStep(this)">
+        <div class="lef-step-num" style="background:var(--blue-light);color:var(--blue)">2</div>
+        <div class="lef-step-info">
+          <div class="lef-step-title">Citação do Executado</div>
+          <div class="lef-step-badge">Art. 8º LEF — Prazo: 5 dias para pagar ou garantir</div>
+        </div>
+        <span class="lef-toggle">▼</span>
+      </div>
+      <div class="lef-step-body">
+        <p>O executado é citado para, em <strong>5 dias</strong>, pagar a dívida (com juros, multa e encargos da CDA) ou garantir a execução.</p>
+        <ul>
+          <li>Citação preferencialmente pelo <strong>correio (AR)</strong>, salvo pedido da Fazenda por outra forma</li>
+          <li>Considera-se feita na data de entrega ou, se omitida, <strong>10 dias</strong> após entrega à agência postal</li>
+          <li>Executado ausente do país: citação por <strong>edital com 60 dias</strong></li>
+          <li><strong>⚠️ Marco da prescrição:</strong> o despacho que ordena a citação <em>interrompe</em> a prescrição quinquenal (art. 174, I CTN)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="lef-arrow">↓</div>
+
+  <!-- PONTO DE DECISÃO -->
+  <div class="lef-fork-card">
+    <div class="lef-fork-title">⚡ Ponto de Decisão — O que faz o executado após a citação?</div>
+    <div class="lef-fork-grid">
+      <div class="lef-fork-opt lef-fo-green">
+        <span class="lef-fo-label">A — Paga</span>
+        Extinção imediata do crédito e da execução (art. 156, I CTN).
+      </div>
+      <div class="lef-fork-opt lef-fo-blue">
+        <span class="lef-fo-label">B — Parcela</span>
+        Parcelamento suspende a exigibilidade (art. 151, VI CTN). Execução fica suspensa.
+      </div>
+      <div class="lef-fork-opt lef-fo-teal">
+        <span class="lef-fo-label">C — Garante o Juízo ★</span>
+        Depósito, fiança, seguro ou penhora (art. 9º LEF). Condição para os embargos. <strong>Caminho principal →</strong>
+      </div>
+      <div class="lef-fork-opt lef-fo-orange">
+        <span class="lef-fo-label">D — Exceção Pré-Exec.</span>
+        Sem garantia. Cabível apenas para matérias de <strong>ordem pública</strong>: prescrição, decadência, ilegitimidade.
+      </div>
+      <div class="lef-fork-opt lef-fo-red">
+        <span class="lef-fo-label">E — Permanece Inerte</span>
+        Penhora forçada sobre qualquer bem do devedor, exceto impenhoráveis (art. 10 LEF). Perde o direito de escolha.
+      </div>
+    </div>
+    <div class="lef-fork-note">★ O caminho abaixo descreve a trajetória principal (opção C): garantiu → embargou → expropriação → extinção.</div>
+  </div>
+
+  <div class="lef-arrow">↓</div>
+
+  <!-- FASE 2: GARANTIA E DEFESA -->
+  <div class="lef-fase-hdr" style="color:var(--pt-teal)">Fase 2 — Garantia e Defesa (opção C)</div>
+
+  <div class="lef-step">
+    <div class="lef-step-card lc-teal">
+      <div class="lef-step-head" onclick="lefStep(this)">
+        <div class="lef-step-num" style="background:var(--pt-teal-lt);color:var(--pt-teal)">3</div>
+        <div class="lef-step-info">
+          <div class="lef-step-title">Garantia do Juízo</div>
+          <div class="lef-step-badge">Art. 9º LEF — 4 modalidades de garantia</div>
+        </div>
+        <span class="lef-toggle">▼</span>
+      </div>
+      <div class="lef-step-body">
+        <p>O executado garante a execução pelo valor da dívida, juros, multa e encargos. Quatro modalidades:</p>
+        <ul>
+          <li><strong>I —</strong> Depósito em dinheiro (estabelecimento oficial de crédito, com atualização monetária)</li>
+          <li><strong>II —</strong> Fiança bancária ou seguro-garantia</li>
+          <li><strong>III —</strong> Nomeação de bens à penhora (obedece a ordem do art. 11 LEF)</li>
+          <li><strong>IV —</strong> Indicação de bens de terceiros aceitos pela Fazenda Pública</li>
+        </ul>
+        <p>O STJ admite embargos com garantia insuficiente quando comprovada a <strong>hipossuficiência patrimonial</strong> do executado (REsp 1.127.815/SP — repetitivo).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="lef-arrow">↓</div>
+
+  <div class="lef-step">
+    <div class="lef-step-card lc-teal">
+      <div class="lef-step-head" onclick="lefStep(this)">
+        <div class="lef-step-num" style="background:var(--pt-teal-lt);color:var(--pt-teal)">4</div>
+        <div class="lef-step-info">
+          <div class="lef-step-title">Embargos à Execução Fiscal</div>
+          <div class="lef-step-badge">Art. 16 LEF — Prazo: 30 dias úteis da garantia</div>
+        </div>
+        <span class="lef-toggle">▼</span>
+      </div>
+      <div class="lef-step-body">
+        <p><strong>Ação autônoma</strong> (não mera contestação), formando autos apartados apensados à execução. Objetivo: desconstituir o título ou extinguir o crédito.</p>
+        <p>Prazo de <strong>30 dias</strong>, contados (art. 16 LEF):</p>
+        <ul>
+          <li>Do <strong>depósito</strong> em dinheiro (inciso I)</li>
+          <li>Da juntada da prova da <strong>fiança bancária ou seguro-garantia</strong> (inciso II)</li>
+          <li>Da <strong>intimação da penhora</strong> (inciso III)</li>
+        </ul>
+        <p>Princípio da <strong>eventualidade</strong>: toda matéria útil deve ser alegada nos embargos — o que ficar de fora está precluso (art. 16, §2º LEF).</p>
+        <ul>
+          <li>Vedados: reconvenção e compensação (art. 16, §3º LEF)</li>
+          <li>Fazenda tem <strong>30 dias</strong> para impugnar os embargos (art. 17 LEF)</li>
+          <li>Interposição dos embargos <strong>suspende</strong> a execução fiscal</li>
+        </ul>
+        <p>Embargos <strong>acolhidos</strong> → extinção da execução. Embargos <strong>rejeitados</strong> → prossegue para expropriação.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="lef-arrow">↓</div>
+
+  <!-- FASE 3: EXPROPRIAÇÃO -->
+  <div class="lef-fase-hdr" style="color:var(--pt-green)">Fase 3 — Expropriação</div>
+
+  <div class="lef-step">
+    <div class="lef-step-card lc-green">
+      <div class="lef-step-head" onclick="lefStep(this)">
+        <div class="lef-step-num" style="background:var(--pt-green-lt);color:var(--pt-green)">5</div>
+        <div class="lef-step-info">
+          <div class="lef-step-title">Penhora e Avaliação</div>
+          <div class="lef-step-badge">Arts. 10–13 LEF — Ordem obrigatória do art. 11</div>
+        </div>
+        <span class="lef-toggle">▼</span>
+      </div>
+      <div class="lef-step-body">
+        <p>Aplicável quando o executado ficou inerte (opção E) ou teve os embargos rejeitados. O termo de penhora já inclui a avaliação pelo oficial de justiça (art. 13 LEF).</p>
+        <p><strong>Ordem obrigatória de penhora (art. 11 LEF):</strong></p>
+        <ul>
+          <li>I — Dinheiro</li>
+          <li>II — Títulos da dívida pública e títulos com cotação em bolsa</li>
+          <li>III — Pedras e metais preciosos</li>
+          <li>IV — Imóveis</li>
+          <li>V — Navios e aeronaves</li>
+          <li>VI — Veículos</li>
+          <li>VII — Móveis ou semoventes</li>
+          <li>VIII — Direitos e ações</li>
+        </ul>
+        <p><strong>Substituição da penhora (art. 15 LEF):</strong> executado pode substituir por depósito/fiança; Fazenda pode substituir por outros bens <em>independente</em> da ordem, ou pedir reforço da penhora insuficiente. Fazenda pode recusar substituição por precatório (Súm. 406 STJ).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="lef-arrow">↓</div>
+
+  <div class="lef-step">
+    <div class="lef-step-card lc-green">
+      <div class="lef-step-head" onclick="lefStep(this)">
+        <div class="lef-step-num" style="background:var(--pt-green-lt);color:var(--pt-green)">6</div>
+        <div class="lef-step-info">
+          <div class="lef-step-title">Hasta Pública ou Adjudicação</div>
+          <div class="lef-step-badge">Arts. 23–24 LEF — Alienação dos bens penhorados</div>
+        </div>
+        <span class="lef-toggle">▼</span>
+      </div>
+      <div class="lef-step-body">
+        <p>Os bens avaliados são levados a <strong>leilão público (hasta pública)</strong> para satisfação do crédito pelo produto da alienação.</p>
+        <p><strong>Adjudicação pela Fazenda (art. 24 LEF):</strong> prerrogativa de tomar o bem pelo preço da avaliação, em três hipóteses:</p>
+        <ul>
+          <li><strong>Antes do leilão:</strong> se a execução não for embargada ou os embargos forem rejeitados</li>
+          <li><strong>Findo o leilão sem licitantes:</strong> pelo preço da avaliação</li>
+          <li><strong>Findo o leilão com licitantes:</strong> com preferência em igualdade com a melhor oferta, no prazo de 30 dias</li>
+        </ul>
+        <p>⚠️ <strong>Sub-rogação em hasta pública:</strong> na arrematação de imóvel, os créditos tributários anteriores sub-rogam-se sobre o preço pago (art. 130, p.ú. CTN) — o arrematante recebe o bem livre de dívidas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="lef-arrow">↓</div>
+
+  <!-- ENCERRAMENTO -->
+  <div class="lef-fase-hdr" style="color:var(--pt-green)">Encerramento — Satisfação do Crédito</div>
+
+  <div class="lef-step">
+    <div class="lef-step-card lc-green">
+      <div class="lef-step-head" onclick="lefStep(this)">
+        <div class="lef-step-num" style="background:var(--pt-green-lt);color:var(--pt-green)">✓</div>
+        <div class="lef-step-info">
+          <div class="lef-step-title">Extinção da Execução Fiscal</div>
+          <div class="lef-step-badge">Crédito satisfeito — processo encerrado</div>
+        </div>
+        <span class="lef-toggle">▼</span>
+      </div>
+      <div class="lef-step-body">
+        <p>O produto da arrematação ou adjudicação satisfaz o crédito da Fazenda. Outras causas de extinção da execução:</p>
+        <ul>
+          <li>Pagamento voluntário pelo executado (art. 156, I CTN)</li>
+          <li>Cancelamento da inscrição em dívida ativa — extinção <em>sem ônus às partes</em> (art. 26 LEF)</li>
+          <li>Acolhimento dos embargos ou da exceção de pré-executividade</li>
+          <li>Prescrição intercorrente reconhecida (art. 40 LEF)</li>
+        </ul>
+        <p><strong>Redirecionamento aos sócios (art. 135, III CTN):</strong> se o patrimônio da PJ for insuficiente, a execução pode ser redirecionada aos sócios-gerentes que tenham praticado atos com excesso de poderes ou infração à lei/contrato/estatuto. Dissolução irregular presume a infração (Súm. 435 STJ).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRESCRIÇÃO INTERCORRENTE -->
+  <div class="lef-pi-box">
+    <div class="lef-pi-title">⏱️ Caminho Alternativo — Prescrição Intercorrente (Art. 40 LEF + Tema 444 STJ)</div>
+    <div class="lef-pi-row">
+      <div class="lef-pi-num">1</div>
+      <div>Devedor <strong>não é localizado</strong> ou bens suficientes <strong>não são encontrados</strong> → Juiz suspende o curso da execução</div>
+    </div>
+    <div class="lef-pi-row">
+      <div class="lef-pi-num">2</div>
+      <div>Após <strong>1 ano</strong> de suspensão sem manifestação das partes (Súm. 314 STJ) → processo arquivado</div>
+    </div>
+    <div class="lef-pi-row">
+      <div class="lef-pi-num">3</div>
+      <div>Corre o prazo de <strong>prescrição quinquenal intercorrente</strong> (5 anos) a partir do arquivamento</div>
+    </div>
+    <div class="lef-pi-row">
+      <div class="lef-pi-num">4</div>
+      <div>Transcorridos os 5 anos → Juiz <strong>intima a Fazenda</strong> para manifestação antes de decretar a prescrição</div>
+    </div>
+    <div class="lef-pi-row">
+      <div class="lef-pi-num">5</div>
+      <div>Sem manifestação → <strong>extinção da execução pela prescrição intercorrente</strong> com resolução do mérito</div>
+    </div>
+  </div>
+
+</div>
+
 <script>
 function ptTab3(id, btn) {
   document.querySelectorAll('.pt-painel').forEach(p => p.classList.remove('ativo'));
@@ -519,6 +873,12 @@ function ptPhase(head) {
 function ptPergunta3(head) {
   const body = head.nextElementSibling;
   const toggle = head.querySelector('.pt-toggle');
+  body.classList.toggle('open');
+  toggle.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+function lefStep(head) {
+  const body = head.nextElementSibling;
+  const toggle = head.querySelector('.lef-toggle');
   body.classList.toggle('open');
   toggle.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
 }

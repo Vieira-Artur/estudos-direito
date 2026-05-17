@@ -247,6 +247,8 @@
   <button class="ap-tab" onclick="apTab(event,'ap-sinoptico')">📋 Quadro Sinóptico</button>
   <button class="ap-tab" onclick="apTab(event,'ap-roteiro')">📖 Roteiro</button>
   <button class="ap-tab" onclick="apTab(event,'ap-caso')">⚖️ Estudo de Caso</button>
+  <button class="ap-tab" onclick="apTab(event,'ap-jur')">🏛️ Jurisprudência</button>
+  <button class="ap-tab" onclick="apTab(event,'ap-questoes')">📝 Questões</button>
 </div>
 
 <!-- TAB: MAPA CONCEITUAL -->
@@ -1053,6 +1055,371 @@
   </div>
 
 </div>
+
+<!-- TAB: JURISPRUDÊNCIA -->
+<div id="ap-jur" class="ap-painel">
+  <div class="ec-case-header">
+    <div class="ec-op-label">Jurisprudência</div>
+    <h2>Crimes contra a Administração Pública</h2>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">STF · STJ · Súmulas</span>
+      <span class="ec-meta-tag">Arts. 312–359 CP</span>
+      <span class="ec-meta-tag">Clique para expandir</span>
+    </div>
+  </div>
+  <div class="ec-q-list">
+
+    <div class="ec-q-item" id="jur1">
+      <div class="ec-q-head" onclick="ecTog('jur1')">
+        <div class="ec-q-num" style="background:var(--ap-yellow);color:#222;font-size:.75rem;">SUM</div>
+        <div style="flex:1">
+          <div class="ec-q-text">Súmula 599 STJ — Princípio da insignificância e crimes contra a Administração Pública</div>
+          <div class="ec-q-bloom" style="color:var(--ap-yellow)">Inaplicabilidade · moralidade administrativa · valor econômico</div>
+        </div>
+        <span class="ec-q-arrow" id="ec-arr-jur1">▾</span>
+      </div>
+      <div class="ec-q-body" id="ec-qb-jur1">
+        <div class="ec-stj-ref"><strong>STJ — Súmula 599:</strong> "O princípio da insignificância é inaplicável aos crimes contra a administração pública."</div>
+        <p><strong>Fundamento:</strong> O bem jurídico tutelado é a <em>moralidade administrativa</em>, insuscetível de valoração meramente econômica. Ainda que o valor subtraído seja ínfimo, a conduta lesiona a confiança e a probidade da Administração, o que justifica a punição.</p>
+        <p><strong>Exceção reconhecida pelo STF:</strong> No crime de <strong>descaminho</strong> (art. 334 CP), o STF admite a insignificância quando o valor sonegado for inferior ao mínimo para cobrança judicial (art. 20 da Lei 10.522/2002 — R$ 20.000,00 atualizado pelas Portarias 75/2012 e 130/2012 do MF), ressalvados casos de reincidência ou habitualidade delitiva.</p>
+        <div class="ec-art-ref">STJ, AgRg no AREsp 1.450.696/SP, 6ª T., DJe 17/09/2019 · STJ, AgRg no AREsp 2.814.682/SP, 5ª T., julgado em 1/4/2025</div>
+      </div>
+    </div>
+
+    <div class="ec-q-item" id="jur2">
+      <div class="ec-q-head" onclick="ecTog('jur2')">
+        <div class="ec-q-num" style="background:var(--ap-yellow);color:#222;font-size:.75rem;">SUM</div>
+        <div style="flex:1">
+          <div class="ec-q-text">Súmulas 208 e 209 STJ — Competência nos crimes de prefeito com desvio de verbas</div>
+          <div class="ec-q-bloom" style="color:var(--ap-yellow)">Competência Federal × Estadual · origem da verba</div>
+        </div>
+        <span class="ec-q-arrow" id="ec-arr-jur2">▾</span>
+      </div>
+      <div class="ec-q-body" id="ec-qb-jur2">
+        <div class="ec-stj-ref"><strong>Súmula 208 STJ:</strong> "Compete à Justiça Federal processar e julgar prefeito municipal por desvio de verba sujeita a prestação de contas perante órgão federal."</div>
+        <div class="ec-stj-ref"><strong>Súmula 209 STJ:</strong> "Compete à Justiça Estadual processar e julgar prefeito municipal por desvio de verba transferida e incorporada ao patrimônio municipal."</div>
+        <p><strong>Critério:</strong> A competência é definida pela <em>origem federal</em> da verba, não pela qualidade do agente. Se a verba veio de convênio federal e está sujeita à prestação de contas à União → Justiça Federal (art. 109, IV, CF). Se já incorporada ao patrimônio municipal → Justiça Estadual.</p>
+      </div>
+    </div>
+
+    <div class="ec-q-item" id="jur3">
+      <div class="ec-q-head" onclick="ecTog('jur3')">
+        <div class="ec-q-num" style="background:var(--ap-green);color:#fff;font-size:.75rem;">STJ</div>
+        <div style="flex:1">
+          <div class="ec-q-text">Peculato de uso — atipicidade penal e improbidade administrativa</div>
+          <div class="ec-q-bloom" style="color:var(--ap-green)">Art. 312 CP · bem de uso · sanção administrativa</div>
+        </div>
+        <span class="ec-q-arrow" id="ec-arr-jur3">▾</span>
+      </div>
+      <div class="ec-q-body" id="ec-qb-jur3">
+        <p>O <strong>peculato de uso</strong> (utilização temporária de bem público sem intenção de se apropriar) <strong>não é criminalmente punível</strong>. Analogia com os delitos de furto de uso e apropriação indébita de uso, também atípicos penalmente.</p>
+        <p>Entretanto, a conduta pode configurar <strong>ato de improbidade administrativa</strong> (art. 9.º, IV, da Lei 8.429/92), que prevê como ato de improbidade "utilizar, em obra ou serviço particular, qualquer bem móvel de propriedade ou à disposição de entidade pública, bem como o trabalho de servidores".</p>
+        <div class="ec-art-ref">Rogério Greco; art. 312 CP; art. 9.º, IV, Lei 8.429/92</div>
+      </div>
+    </div>
+
+    <div class="ec-q-item" id="jur4">
+      <div class="ec-q-head" onclick="ecTog('jur4')">
+        <div class="ec-q-num" style="background:var(--ap-green);color:#fff;font-size:.75rem;">STJ</div>
+        <div style="flex:1">
+          <div class="ec-q-text">Concussão — crime formal: consumação com a exigência, independentemente do recebimento</div>
+          <div class="ec-q-bloom" style="color:var(--ap-green)">Art. 316 CP · crime formal · exaurimento</div>
+        </div>
+        <span class="ec-q-arrow" id="ec-arr-jur4">▾</span>
+      </div>
+      <div class="ec-q-body" id="ec-qb-jur4">
+        <p>A <strong>concussão</strong> (art. 316 CP) é <strong>crime formal</strong>: consuma-se com a mera exigência da vantagem indevida, independentemente de o funcionário a receber. O recebimento efetivo constitui mero <em>exaurimento</em> do crime, sem reflexo na tipicidade.</p>
+        <p><strong>Consequência prática:</strong> Flagrante lavrado no momento da exigência (não apenas no recebimento) é válido. A tentativa é admissível apenas em tese, pois a exigência já consuma o delito.</p>
+        <div class="ec-art-ref">Art. 316 CP · doutrina majoritária e STJ</div>
+      </div>
+    </div>
+
+    <div class="ec-q-item" id="jur5">
+      <div class="ec-q-head" onclick="ecTog('jur5')">
+        <div class="ec-q-num" style="background:var(--ap-green);color:#fff;font-size:.75rem;">STJ</div>
+        <div style="flex:1">
+          <div class="ec-q-text">Peculato culposo (art. 312, §2.º) — reparação do dano: extinção da punibilidade e redução de pena</div>
+          <div class="ec-q-bloom" style="color:var(--ap-green)">Art. 312, §3.º CP · reparação integral · extinção × redução</div>
+        </div>
+        <span class="ec-q-arrow" id="ec-arr-jur5">▾</span>
+      </div>
+      <div class="ec-q-body" id="ec-qb-jur5">
+        <p>No peculato culposo (art. 312, §2.º), o art. 312, §3.º prevê tratamento especial para a reparação do dano:</p>
+        <ul>
+          <li><strong>Antes</strong> da sentença irrecorrível → <strong>extingue a punibilidade</strong></li>
+          <li><strong>Após</strong> a condenação → <strong>reduz de metade a pena imposta</strong></li>
+        </ul>
+        <p>O STJ exige <strong>reparação integral</strong> para a extinção da punibilidade — reparação parcial apenas autoriza redução da pena. Este benefício aplica-se <em>exclusivamente</em> ao peculato culposo, não ao doloso.</p>
+        <div class="ec-art-ref">Art. 312, §3.º CP · STJ pacífico</div>
+      </div>
+    </div>
+
+    <div class="ec-q-item" id="jur6">
+      <div class="ec-q-head" onclick="ecTog('jur6')">
+        <div class="ec-q-num" style="background:var(--ap-green);color:#fff;font-size:.75rem;">STJ</div>
+        <div style="flex:1">
+          <div class="ec-q-text">Corrupção passiva (art. 317) — ato regular não afasta o crime; proteção da moralidade administrativa</div>
+          <div class="ec-q-bloom" style="color:var(--ap-green)">Art. 317 CP · probidade · ato lícito recebido por propina</div>
+        </div>
+        <span class="ec-q-arrow" id="ec-arr-jur6">▾</span>
+      </div>
+      <div class="ec-q-body" id="ec-qb-jur6">
+        <p>A corrupção passiva (art. 317 CP) protege a <strong>moralidade e probidade administrativa</strong>, não apenas a legalidade do ato. O tipo abrange receber vantagem indevida para praticar ato de ofício ainda que regular — o crime subsiste mesmo que o ato praticado fosse obrigatório ou legítimo.</p>
+        <p>A <strong>qualificadora do §1.º</strong> (pena aumentada de 1/3) incide quando o funcionário <em>retarda</em> ou <em>deixa de praticar</em> o ato, ou o pratica infringindo dever funcional. Sem a qualificadora, pena base: 2–12 anos.</p>
+        <div class="ec-art-ref">Art. 317 CP, caput e §1.º · doutrina e STJ</div>
+      </div>
+    </div>
+
+    <div class="ec-q-item" id="jur7">
+      <div class="ec-q-head" onclick="ecTog('jur7')">
+        <div class="ec-q-num" style="background:var(--ap-green);color:#fff;font-size:.75rem;">STJ</div>
+        <div style="flex:1">
+          <div class="ec-q-text">Art. 327, §1.º CP — Equiparação ao funcionário público: médico do SUS, prestadores contratados e paras estatais</div>
+          <div class="ec-q-bloom" style="color:var(--ap-green)">Art. 327, §1.º CP · atividade típica da Adm. · sujeito ativo ampliado</div>
+        </div>
+        <span class="ec-q-arrow" id="ec-arr-jur7">▾</span>
+      </div>
+      <div class="ec-q-body" id="ec-qb-jur7">
+        <p>O art. 327, §1.º equipara ao funcionário público:</p>
+        <ul>
+          <li>Quem exerce cargo/função em <strong>entidade paraestatal</strong> (autarquias, empresas públicas, fundações, SEM)</li>
+          <li>Quem trabalha para <strong>empresa prestadora de serviço contratada/conveniada</strong> para execução de atividade típica da Administração</li>
+        </ul>
+        <p>Exemplos reconhecidos pelo STJ: <strong>médico credenciado ao SUS</strong>, cartório em delegação, empresa de saneamento com contrato público.</p>
+        <p>O §2.º aumenta a pena de 1/3 se o agente exerce <strong>cargo em comissão ou função de direção/assessoramento</strong>.</p>
+        <div class="ec-art-ref">Art. 327, §§1.º e 2.º CP · STJ — concussão de médico SUS (Dr. Paulo Régis)</div>
+      </div>
+    </div>
+
+    <div class="ec-q-item" id="jur8">
+      <div class="ec-q-head" onclick="ecTog('jur8')">
+        <div class="ec-q-num" style="background:var(--ap-teal);color:#fff;font-size:.75rem;">CP</div>
+        <div style="flex:1">
+          <div class="ec-q-text">Art. 30 CP — Comunicabilidade das elementares nos crimes funcionais: o particular pode ser coautor de peculato?</div>
+          <div class="ec-q-bloom" style="color:var(--ap-teal)">Art. 30 CP · circunstância pessoal · elementar do tipo · concurso de pessoas</div>
+        </div>
+        <span class="ec-q-arrow" id="ec-arr-jur8">▾</span>
+      </div>
+      <div class="ec-q-body" id="ec-qb-jur8">
+        <p>Regra do art. 30 CP: circunstâncias e condições de caráter pessoal <strong>não se comunicam</strong>, <em>salvo quando elementares do crime</em>.</p>
+        <p>A <strong>qualidade de funcionário público</strong> é <em>elementar</em> do peculato, concussão, corrupção passiva etc. — por isso, comunica-se ao coautor particular <strong>desde que este tenha conhecimento</strong> da qualidade funcional do outro agente.</p>
+        <p><strong>Consequência:</strong> O particular que, ciente da condição de funcionário público do comparsa, participa da subtração de bem público <strong>responde por peculato-furto</strong> (não por furto comum). Confirmado pelo STJ na questão envolvendo Maria e João (FGV 2024 - TJ-PE).</p>
+        <div class="ec-art-ref">Art. 30 CP · art. 312, §1.º CP · STJ, FGV 2024</div>
+      </div>
+    </div>
+
+  </div><!-- .ec-q-list -->
+</div><!-- #ap-jur -->
+
+<!-- TAB: QUESTÕES DE PROVA -->
+<div id="ap-questoes" class="ap-painel">
+  <div class="ec-case-header">
+    <div class="ec-op-label">Questões de Prova</div>
+    <h2>Crimes contra a Administração Pública</h2>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Arts. 312–359 CP</span>
+      <span class="ec-meta-tag">10 questões</span>
+      <span class="ec-meta-tag">Clique para revelar gabarito</span>
+    </div>
+  </div>
+  <div class="ec-q-list">
+
+
+      <div class="ec-q-item" id="qp1">
+        <div class="ec-q-head" onclick="ecTog('qp1')">
+          <div class="ec-q-num">1</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Servidor público que subtrai bem do próprio órgão onde trabalha comete peculato-furto ou furto? Qual a diferença para o peculato-apropriação?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Diferenciar</span> Art. 312 CP · peculato-furto × peculato-apropriação</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp1">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp1">
+          <div class="ec-art-ref">Art. 312, §1.º CP — CESPE · Delegado Federal</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa1')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa1">
+            <strong>Gabarito: Peculato-furto (art. 312, §1.º CP).</strong> O §1.º equipara ao peculato o ato do funcionário que, sem ter a posse do bem, o subtrai valendo-se da facilidade que lhe proporciona o cargo. Já no <strong>peculato-apropriação</strong> (caput), o funcionário já detém a posse lícita do bem e o incorpora ao patrimônio próprio. A chave é a posse prévia: quem tinha posse e se apropria → caput; quem não tinha e subtrai aproveitando o cargo → §1.º. Pena idêntica nos dois casos: reclusão 2–12 anos + multa.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp2">
+        <div class="ec-q-head" onclick="ecTog('qp2')">
+          <div class="ec-q-num">2</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Qual a diferença entre concussão (art. 316 CP) e corrupção passiva (art. 317 CP)? Pode haver coautoria do particular?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Comparar</span> Arts. 316 × 317 CP · iniciativa · coação</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp2">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp2">
+          <div class="ec-art-ref">Arts. 316 e 317 CP — Vunesp · Promotor</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa2')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa2">
+            <strong>Gabarito:</strong>
+            <table style="width:100%;border-collapse:collapse;margin-top:.5rem;font-size:.88rem;">
+              <tr style="background:var(--blue-light)"><th style="padding:.3rem .5rem;text-align:left">Aspecto</th><th style="padding:.3rem .5rem;text-align:left">Concussão (316)</th><th style="padding:.3rem .5rem;text-align:left">Corrupção Passiva (317)</th></tr>
+              <tr><td style="padding:.25rem .5rem">Conduta</td><td style="padding:.25rem .5rem">Exigir vantagem indevida</td><td style="padding:.25rem .5rem">Solicitar, receber ou aceitar promessa</td></tr>
+              <tr><td style="padding:.25rem .5rem">Coação</td><td style="padding:.25rem .5rem">Implícita/explícita — há coação moral</td><td style="padding:.25rem .5rem">Não há coação — acordo/aquiescência</td></tr>
+              <tr><td style="padding:.25rem .5rem">Pena</td><td style="padding:.25rem .5rem">Rec. 2–8 anos + multa</td><td style="padding:.25rem .5rem">Rec. 2–12 anos + multa</td></tr>
+            </table>
+            <p style="margin:.5rem 0 0;font-size:.88rem;">Na concussão, o particular que cede à exigência não comete crime; na corrupção passiva, o particular que oferece comete corrupção <em>ativa</em> (art. 333 CP).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp3">
+        <div class="ec-q-head" onclick="ecTog('qp3')">
+          <div class="ec-q-num">3</div>
+          <div style="flex:1">
+            <div class="ec-q-text">O prefeito que desvia verba federal repassada via convênio responde perante a Justiça Estadual ou Federal?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Aplicar</span> Art. 109, IV CF · Súmulas 208 e 209 STJ · competência</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp3">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp3">
+          <div class="ec-art-ref">Art. 109, IV CF · Súmulas 208 e 209 STJ — FCC · Magistratura Estadual</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa3')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa3">
+            <strong>Gabarito: Justiça Federal.</strong> Súmula 208 STJ: "Compete à Justiça Federal processar e julgar prefeito municipal por desvio de verba sujeita a prestação de contas perante órgão federal." Há lesão a bens/interesses da União → art. 109, IV, CF. Contraste: Súmula 209 STJ — desvio de verbas puramente municipais → Justiça Estadual. O critério é a <em>origem federal</em> da verba, não a qualidade do agente.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp4">
+        <div class="ec-q-head" onclick="ecTog('qp4')">
+          <div class="ec-q-num">4</div>
+          <div style="flex:1">
+            <div class="ec-q-text">O crime de prevaricação (art. 319 CP) admite forma culposa? Quais os elementos do tipo?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Identificar</span> Art. 319 CP · dolo específico · elemento subjetivo especial</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp4">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp4">
+          <div class="ec-art-ref">Art. 319 CP — OAB · Exame Unificado</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa4')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa4">
+            <strong>Gabarito: Não — crime doloso com elemento subjetivo especial.</strong> Art. 319: retardar ou deixar de praticar ato de ofício, ou praticá-lo contra disposição de lei, <em>para satisfazer interesse ou sentimento pessoal</em>. Sem esse especial fim de agir, a conduta pode configurar irregularidade administrativa, não crime. Pena: detenção 3 meses a 1 ano e multa. Não existe modalidade culposa.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp5">
+        <div class="ec-q-head" onclick="ecTog('qp5')">
+          <div class="ec-q-num">5</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Funcionário que facilita fuga de preso sob sua custódia — qual o crime? E se o preso for seu parente?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Analisar</span> Art. 351 CP · escusa familiar do art. 348, §2.º</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp5">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp5">
+          <div class="ec-art-ref">Arts. 351 e 348, §2.º CP — CESPE · Delegado</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa5')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa5">
+            <strong>Gabarito: Art. 351 CP — Facilitar fuga de preso.</strong> Pena: reclusão 6 meses a 2 anos; se com violência, pena aumentada (§3.º). A isenção de pena por favorecimento pessoal familiar (art. 348, §2.º) aplica-se apenas ao <em>particular</em> — não ao <em>funcionário público</em>. O dever funcional do agente afasta a escusa familiar. STJ: o cargo público é circunstância que prevalece sobre o vínculo familiar para fins de tipificação.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp6">
+        <div class="ec-q-head" onclick="ecTog('qp6')">
+          <div class="ec-q-num">6</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Médico credenciado ao SUS é funcionário público para fins penais? Qual o fundamento legal?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Identificar</span> Art. 327, §1.º CP · equiparação · sujeito ativo</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp6">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp6">
+          <div class="ec-art-ref">Art. 327, §1.º CP — MPF · Analista</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa6')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa6">
+            <strong>Gabarito: Sim — art. 327, §1.º CP.</strong> Equipara-se ao funcionário público quem trabalha para empresa prestadora de serviço contratada/conveniada para atividade típica da Administração. Médico credenciado ao SUS exerce função de saúde pública → sujeito ativo de peculato, concussão e corrupção passiva. Agravante: pena aumentada de 1/3 se exerce cargo em comissão ou função de direção/assessoramento (§2.º).
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp7">
+        <div class="ec-q-head" onclick="ecTog('qp7')">
+          <div class="ec-q-num">7</div>
+          <div style="flex:1">
+            <div class="ec-q-text">A lavagem de dinheiro (Lei 9.613/98) pode absorver o peculato pelo princípio da consunção?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Analisar</span> Lei 9.613/98 · consunção · concurso material</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp7">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp7">
+          <div class="ec-art-ref">Art. 1.º Lei 9.613/98 — Vunesp · Magistratura SP</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa7')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa7">
+            <strong>Gabarito: Não — concurso material.</strong> Lavagem e peculato tutelam bens jurídicos distintos (ordem econômico-financeira vs. Administração Pública). A consunção exige identidade de bem jurídico. O peculato é crime antecedente expressamente previsto no rol da Lei 9.613/98; o autor do antecedente pode responder também pela lavagem sem bis in idem (STF e STJ pacíficos).
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp8">
+        <div class="ec-q-head" onclick="ecTog('qp8')">
+          <div class="ec-q-num">8</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Compare advocacia administrativa (art. 321 CP) e tráfico de influência (art. 332 CP): sujeito ativo e elemento diferenciador.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Comparar</span> Arts. 321 × 332 CP · funcionário público × qualquer pessoa</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp8">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp8">
+          <div class="ec-art-ref">Arts. 321 e 332 CP — CESPE · Magistratura Federal</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa8')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa8">
+            <strong>Gabarito:</strong>
+            <table style="width:100%;border-collapse:collapse;margin-top:.5rem;font-size:.88rem;">
+              <tr style="background:var(--blue-light)"><th style="padding:.3rem .5rem;text-align:left">Aspecto</th><th style="padding:.3rem .5rem;text-align:left">Advocacia Adm. (321)</th><th style="padding:.3rem .5rem;text-align:left">Tráfico de Influência (332)</th></tr>
+              <tr><td style="padding:.25rem .5rem">Sujeito ativo</td><td style="padding:.25rem .5rem">Funcionário público</td><td style="padding:.25rem .5rem">Qualquer pessoa</td></tr>
+              <tr><td style="padding:.25rem .5rem">Conduta</td><td style="padding:.25rem .5rem">Patrocinar interesse privado perante a Adm.</td><td style="padding:.25rem .5rem">Solicitar/receber para influir em ato de funcionário</td></tr>
+              <tr><td style="padding:.25rem .5rem">Pena</td><td style="padding:.25rem .5rem">Det. 1–3 meses ou multa</td><td style="padding:.25rem .5rem">Rec. 2–5 anos + multa</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp9">
+        <div class="ec-q-head" onclick="ecTog('qp9')">
+          <div class="ec-q-num">9</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Funcionário que recebe propina para praticar ato regular — que praticaria de qualquer forma — responde por corrupção passiva?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Aplicar</span> Art. 317 CP · ato regular × probidade administrativa</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp9">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp9">
+          <div class="ec-art-ref">Art. 317 CP — FGV · OAB 2.ª Fase</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa9')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa9">
+            <strong>Gabarito: Sim — o crime subsiste.</strong> O art. 317 CP protege a <em>moralidade e probidade administrativa</em>, não apenas a legalidade do ato. O tipo abrange receber vantagem para praticar ato de ofício, ainda que regular. Pena: 2–12 anos. A qualificadora do §1.º (pena aumentada de 1/3) incide quando o funcionário retarda/deixa de praticar o ato ou o pratica infringindo dever funcional.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="qp10">
+        <div class="ec-q-head" onclick="ecTog('qp10')">
+          <div class="ec-q-num">10</div>
+          <div style="flex:1">
+            <div class="ec-q-text">O peculato culposo (art. 312, §2.º) admite extinção da punibilidade por reparação do dano? Em que momento?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Aplicar</span> Art. 312, §3.º CP · extinção da punibilidade · reparação integral</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-qp10">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-qp10">
+          <div class="ec-art-ref">Art. 312, §3.º CP — MPE-MG · Promotor</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('qpa10')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="qpa10">
+            <strong>Gabarito: Sim — art. 312, §3.º CP.</strong> Reparação <em>antes</em> da sentença irrecorrível → <strong>extingue a punibilidade</strong>. Reparação <em>após</em> a condenação → <strong>reduz pela metade a pena</strong>. Aplica-se exclusivamente ao peculato culposo (não ao doloso). STJ: exige reparação integral; reparação parcial apenas reduz a pena.
+          </div>
+        </div>
+      </div>
+
+  </div><!-- .ec-q-list -->
+</div><!-- #ap-questoes -->
 
 </div>
 

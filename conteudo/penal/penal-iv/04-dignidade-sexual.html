@@ -272,6 +272,7 @@
   <button class="ds-tab" onclick="dsTab('roteiro', this)">Roteiro de Estudo</button>
   <button class="ds-tab" onclick="dsTab('jur', this)">Jurisprudência</button>
   <button class="ds-tab" onclick="dsTab('relatorio', this)">Relatório Geral</button>
+  <button class="ds-tab" onclick="dsTab('questoes', this)">Questões</button>
 </div>
 
 <!-- ══════════════════════════════════════════════════════
@@ -874,6 +875,84 @@
       </div>
     </div>
 
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon dou" style="background:var(--ds-teal-lt);color:var(--ds-teal);font-size:11px;font-weight:700">SUM</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">STJ · Súmula 593</div>
+          <div class="ds-jur-tema">Vulnerabilidade absoluta do menor de 14 anos — estupro de vulnerável (art. 217-A)</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Súmula 593 STJ:</strong> "O crime de estupro de vulnerável se configura com a conjunção carnal ou prática de ato libidinoso com menor de 14 anos, sendo irrelevante eventual consentimento da vítima para a prática do ato, sua experiência sexual anterior ou existência de relacionamento amoroso com o agente."
+        </div>
+        <p>A <strong>presunção de vulnerabilidade</strong> do menor de 14 anos é <em>absoluta</em> — não admite prova em contrário, independentemente de experiência sexual prévia, consentimento, namoro ou apresentação de documentos falsos pela vítima. Posição consolidada frente à tese da vulnerabilidade relativa, que foi expressamente rejeitada pelo STJ.</p>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon dou" style="background:var(--ds-teal-lt);color:var(--ds-teal);font-size:11px;font-weight:700">SUM</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">STJ · Súmula 608</div>
+          <div class="ds-jur-tema">Crime único de estupro — conjunção carnal + atos libidinosos no mesmo contexto fático</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Súmula 608 STJ:</strong> "No crime de estupro praticado mediante violência real, a ação penal é pública incondicionada." <br><em>(Nota: parte da doutrina cita essa súmula no contexto histórico; com a Lei 13.718/2018, todos os crimes contra a dignidade sexual passaram a ter ação penal pública incondicionada.)</em>
+        </div>
+        <p>O STJ consolidou que, no <strong>mesmo contexto fático</strong>, a prática de conjunção carnal seguida de outro ato libidinoso (ou vice-versa) configura <strong>crime único</strong> de estupro, não concurso material. A pluralidade e variedade de atos deve ser valorada na fixação da pena-base (art. 59 CP). Contextos fáticos autônomos → concurso material de crimes.</p>
+        <p>Fundamento: STJ, HC 337.525/SP, Rel. Min. Nefi Cordeiro, 6ª T., DJe 28/06/2016.</p>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon dou" style="background:var(--ds-orange-lt);color:var(--ds-orange);font-size:11px;font-weight:700">LEI</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">Lei 13.718/2018 — art. 225 CP</div>
+          <div class="ds-jur-tema">Ação penal pública incondicionada para todos os crimes contra a dignidade sexual</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Art. 225 CP (redação atual):</strong> "Nos crimes definidos nos Capítulos I e II deste Título, procede-se mediante ação penal pública incondicionada."
+        </div>
+        <p>Antes da Lei 13.718/2018, a regra era: ação penal pública <em>condicionada à representação</em> (art. 225 anterior), salvo vítima menor de 18 anos ou vulnerável. A reforma eliminou essa distinção — <strong>todos</strong> os crimes contra a dignidade sexual, incluindo contra vítima adulta e capaz, passaram a ser de ação penal pública <strong>incondicionada</strong>.</p>
+        <p>Consequência prática: o Ministério Público pode oferecer denúncia independentemente de representação da vítima, e a vítima não pode mais retratar eventual representação anterior para extinguir a punibilidade.</p>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <div class="ds-jur-icon dou" style="background:var(--ds-amber-lt);color:var(--ds-amber);font-size:11px;font-weight:700">ART</div>
+        <div style="flex:1">
+          <div class="ds-jur-ref">Arts. 226 e 234-A CP — Causas de Aumento</div>
+          <div class="ds-jur-tema">Estupro coletivo, estupro corretivo, gravidez, DST, idoso e deficiente</div>
+        </div>
+        <div class="ds-jur-arr">▾</div>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Art. 226 CP — Pena aumentada:</strong><br>
+          II — de metade, se ascendente, padrasto/madrasta, tio, irmão, cônjuge, tutor, curador ou <em>qualquer outro título de autoridade</em> (inclui professor — STJ REsp 1730287/SC)<br>
+          IV — de 1/3 a 2/3 se: (a) <strong>estupro coletivo</strong> — concurso de 2 ou mais agentes; (b) <strong>estupro corretivo</strong> — para controlar comportamento social ou sexual da vítima (Lei 13.718/2018)
+        </div>
+        <p><strong>Art. 234-A CP — Pena aumentada:</strong></p>
+        <ul>
+          <li>De metade a 2/3 se resulta <strong>gravidez</strong></li>
+          <li>De 1/3 a 2/3 se transmite <strong>DST</strong> (sabendo ou devendo saber ser portador), ou se vítima é <strong>idosa</strong> ou pessoa com <strong>deficiência</strong></li>
+        </ul>
+        <p><strong>Estupro corretivo (226, IV, b):</strong> Rogério Sanches esclarece que abrange crimes contra mulheres lésbicas, bissexuais e transexuais em que o agente usa a violência como instrumento de "correção" da orientação sexual ou identidade de gênero da vítima.</p>
+      </div>
+    </div>
+
   </div>
 </div><!-- /jur -->
 
@@ -981,6 +1060,164 @@
   </ul>
 
 </div><!-- /relatorio -->
+
+<!-- TAB: QUESTÕES DE PROVA -->
+<div id="ds-questoes" class="ds-painel">
+  <div style="background:var(--ds-navy);color:#fff;border-radius:10px;padding:1rem 1.4rem;margin-bottom:1.4rem;">
+    <h2 style="margin:0 0 .25rem;font-size:1.15rem;">📝 Questões de Prova — Crimes contra a Dignidade Sexual</h2>
+    <p style="margin:0;font-size:.85rem;opacity:.85;">Clique em cada questão para revelar o gabarito comentado. Arts. 213–218-C CP.</p>
+  </div>
+  <div class="ds-jur-list">
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q1</span>
+        <span class="ds-jur-ref">OAB / Exame Unificado</span>
+        <span class="ds-jur-tema">O crime de estupro (art. 213 CP) pode ser praticado por homem contra mulher, por mulher contra homem e entre pessoas do mesmo sexo? Justifique à luz da redação dada pela Lei 12.015/2009.</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito: Sim.</strong> Com a Lei 12.015/2009, o art. 213 CP unificou os crimes de estupro e atentado violento ao pudor. O sujeito ativo passou a ser qualquer pessoa (<em>crime comum</em>), e o tipo penal abrange tanto a conjunção carnal quanto qualquer outro ato libidinoso grave. Portanto, homem × mulher, mulher × homem e relações homoafetivas são igualmente abarcadas. A pena é de 6 a 10 anos de reclusão; se resultar lesão corporal grave, 8 a 12 anos; se resultar morte, 12 a 30 anos.
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q2</span>
+        <span class="ds-jur-ref">CESPE — Delegado de Polícia</span>
+        <span class="ds-jur-tema">O agente que, durante o mesmo contexto fático, constrange a vítima à conjunção carnal e depois pratica ato libidinoso diverso responde por um ou dois crimes de estupro? Há concurso de crimes?</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito: Um único crime.</strong> O STJ consolidou o entendimento (Súmula 608) de que, na mesma situação fática, conjunção carnal e atos libidinosos constituem <em>crime único</em> de estupro — não concurso material. A quantidade e variedade dos atos libidinosos deve ser sopesada na fixação da pena-base (art. 59 CP). Se praticados em contextos autônomos e distintos, aí sim configura-se concurso material.
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q3</span>
+        <span class="ds-jur-ref">Vunesp — Promotor de Justiça</span>
+        <span class="ds-jur-tema">Qual a natureza da ação penal no crime de estupro quando a vítima for menor de 18 anos? Houve alteração com a Lei 13.718/2018?</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito: Ação penal pública incondicionada.</strong> A Lei 13.718/2018 alterou o art. 225 CP e tornou todos os crimes contra a dignidade sexual de ação penal pública incondicionada — inclusive quando a vítima for adulta capaz. Antes dessa reforma, a ação dependia de representação da vítima, salvo se menor de 18 anos ou vulnerável. A mudança eliminou a possibilidade de retratação da representação nesses crimes.
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q4</span>
+        <span class="ds-jur-ref">FCC — Defensoria Pública</span>
+        <span class="ds-jur-tema">O que configura "vulnerabilidade" para fins do art. 217-A CP (estupro de vulnerável)? A vulnerabilidade pode ser relativa ou é sempre absoluta?</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito: Vulnerabilidade absoluta — posição majoritária e do STJ.</strong> O art. 217-A presume de forma <em>absoluta</em> a vulnerabilidade do menor de 14 anos (Súmula 593 STJ). Também são vulneráveis os que, por enfermidade ou deficiência mental, não têm o necessário discernimento, e os que não podem oferecer resistência. O consentimento do menor de 14 anos é irrelevante; não importa experiência sexual prévia nem relacionamento estável. A tese da vulnerabilidade relativa, embora já defendida por alguns Tribunais, foi superada pelo STJ.
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q5</span>
+        <span class="ds-jur-ref">CESPE — Magistratura Federal</span>
+        <span class="ds-jur-tema">Diferencie "assédio sexual" (art. 216-A CP) de "importunação sexual" (art. 215-A CP). Cite os elementos que os distinguem.</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito:</strong>
+          <table style="width:100%;border-collapse:collapse;margin-top:.5rem;font-size:.88rem;">
+            <tr style="background:rgba(31,73,125,.15)"><th style="padding:.3rem .5rem;text-align:left">Aspecto</th><th style="padding:.3rem .5rem;text-align:left">Assédio Sexual (216-A)</th><th style="padding:.3rem .5rem;text-align:left">Importunação Sexual (215-A)</th></tr>
+            <tr><td style="padding:.25rem .5rem">Conduta</td><td style="padding:.25rem .5rem">Constranger alguém com o intuito de obter vantagem ou favorecimento sexual</td><td style="padding:.25rem .5rem">Praticar ato libidinoso sem violência ou grave ameaça, em local público ou privado</td></tr>
+            <tr><td style="padding:.25rem .5rem">Relação hierárquica</td><td style="padding:.25rem .5rem">Exige posição de superioridade (chefe × subordinado, ascendente × descendente etc.)</td><td style="padding:.25rem .5rem">Não exige relação hierárquica</td></tr>
+            <tr><td style="padding:.25rem .5rem">Meio executivo</td><td style="padding:.25rem .5rem">Prevalecendo-se de condição de superior hierárquico ou ascendência</td><td style="padding:.25rem .5rem">Sem violência ou ameaça (mas sem consentimento da vítima)</td></tr>
+            <tr><td style="padding:.25rem .5rem">Pena</td><td style="padding:.25rem .5rem">1 a 2 anos, ou multa (se não há violência)</td><td style="padding:.25rem .5rem">1 a 5 anos (acrescidos de 2/3 se menor de 18 anos)</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q6</span>
+        <span class="ds-jur-ref">MPE-SP — Promotor</span>
+        <span class="ds-jur-tema">O voyeurismo (art. 216-B CP) e o registro não autorizado de cena de sexo ou nudez (art. 216-B, §1.º) são crimes formais ou materiais? Qual bem jurídico protegido?</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito: Crimes formais (de mera conduta).</strong> Inseridos pela Lei 13.772/2018, ambos os tipos consumam-se com a captação/registro não autorizado, independentemente de divulgação posterior. Bem jurídico: <em>privacidade e liberdade sexual</em>. Pena: detenção de 6 meses a 1 ano e multa. Se a vítima é menor de 18 anos, a conduta pode caracterizar também o crime do art. 240 do ECA. Atenção: a divulgação do registro configura crime autônomo (art. 218-C, §1.º CP).
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q7</span>
+        <span class="ds-jur-ref">VUNESP — Delegado SP</span>
+        <span class="ds-jur-tema">Qual a diferença entre "lenocínio" (rufianismo — art. 230 CP) e "exploração sexual" no contexto do tráfico de pessoas (art. 149-A CP)? É possível concurso de crimes?</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito:</strong> O <strong>rufianismo</strong> (art. 230) consiste em tirar proveito da prostituição alheia, participando diretamente de seus lucros ou fazendo-se sustentar por pessoa que a exerça. Já o <strong>tráfico de pessoas</strong> (art. 149-A) envolve o <em>recrutamento, transporte, transferência, acolhimento ou alojamento</em> de pessoa mediante grave ameaça, violência, fraude ou abuso, com a finalidade (entre outras) de exploração sexual. <strong>Concurso material é possível</strong>: agente que traficou a vítima e depois explora sua prostituição pode responder por ambos os delitos, salvo entendimento de que o tráfico absorve o rufianismo como post factum impunível — tese minoritária.
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q8</span>
+        <span class="ds-jur-ref">CESPE — Delegado Federal</span>
+        <span class="ds-jur-tema">O crime de "divulgação de cena de estupro ou de cena de estupro de vulnerável, de cena de sexo ou de pornografia" (art. 218-C CP) exige finalidade especial de agir? Há causa de aumento?</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito: Não exige finalidade especial — é crime de mera conduta.</strong> Art. 218-C (inserido pela Lei 13.718/2018): oferecer, trocar, disponibilizar, transmitir, vender, distribuir, publicar ou divulgar, por qualquer meio, foto, vídeo ou outro registro audiovisual de conteúdo sexual sem consentimento da vítima. Pena: 1 a 5 anos e multa. <strong>Causa de aumento de 1/3 a 2/3</strong> (§1.º) se o agente mantinha ou manteve relação íntima de afeto com a vítima (ex: "revenge porn" entre ex-parceiros). Isenção de pena (§2.º) se a vítima consentiu expressamente com a divulgação.
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q9</span>
+        <span class="ds-jur-ref">FGV — OAB / 2.ª Fase</span>
+        <span class="ds-jur-tema">João, 30 anos, mantém relação sexual consensual com Ana, 13 anos, que se apresentou como tendo 16 anos e portava documentos falsos. João pode alegar erro de tipo? O crime de estupro de vulnerável estaria afastado?</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito: Posição majoritária — não afasta o crime.</strong> O STJ (Súmula 593) firmou que a presunção de vulnerabilidade do menor de 14 anos é <strong>absoluta</strong>, não podendo ser afastada por consentimento ou pelo fato de o agente ter sido enganado quanto à idade. Contudo, parte da doutrina e alguns julgados minoritários admitem o erro de tipo (art. 20 CP) quando o agente foi induzido em erro por documentos falsos, afastando o dolo e possibilitando enquadramento em tipo culposo — que, no caso do art. 217-A, não existe. Na prática forense prevalece a Súmula 593 STJ; deve-se ressalvar a corrente doutrinária divergente.
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-jur-card">
+      <div class="ds-jur-card-hd" onclick="dsJur(this)">
+        <span class="ds-jur-icon dou">Q10</span>
+        <span class="ds-jur-ref">CESPE — Magistratura Estadual</span>
+        <span class="ds-jur-tema">Pedro, professor de curso preparatório, envia mensagens de conteúdo sexual para Maria, aluna adulta, que os recebe com repulsa mas não responde. Pedro alega que não havia relação de hierarquia formal. Qual crime pode estar configurado, se algum?</span>
+        <span class="ds-jur-arr">▾</span>
+      </div>
+      <div class="ds-jur-body">
+        <div class="ds-ementa">
+          <strong>Gabarito: Assédio sexual (art. 216-A CP) — com análise cautelosa.</strong> O tipo exige: (i) constrangimento para obter vantagem ou favorecimento sexual; (ii) prevalecendo-se de condição de superior hierárquico ou ascendência inerente ao exercício de emprego, cargo ou função. Professor de curso preparatório pode configurar a "<em>ascendência inerente à função</em>" sobre o aluno, mesmo sem vínculo empregatício formal — posição admitida em julgados de Tribunais de Justiça. Se não restar caracterizado o elemento hierárquico, a conduta pode ser atípica no âmbito do art. 216-A, mas pode enquadrar-se em importunação sexual (art. 215-A) se houver ato libidinoso em presença física.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.ds-jur-list -->
+</div><!-- #ds-questoes -->
 
 <script>
 ;(function() {

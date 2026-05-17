@@ -130,6 +130,11 @@ const materias = [
             titulo: "Nulidades",
             descricao: "Escala de defeitos · Absoluta × relativa · Os 7 princípios · Arts. 563–573 CPP · Súmulas STF e STJ",
             arquivo: "conteudo/processual-penal-iii/02-nulidades.html"
+          },
+          {
+            titulo: "Recursos",
+            descricao: "Conceito · 8 Princípios · Pressupostos · Tabela de prazos · RESE · Apelação · Embargos",
+            arquivo: "conteudo/processual-penal-iii/03-recursos.html"
           }
         ]
       },

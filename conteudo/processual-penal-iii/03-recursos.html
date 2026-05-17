@@ -1,0 +1,139 @@
+<style>
+/* ── Cores extras ─────────────────────────────────── */
+:root {
+  --rc-green:  #276749; --rc-green-lt: #edfaf3;
+  --rc-amber:  #8a6000; --rc-amber-lt: #fff8e1;
+  --rc-red:    #8b1a1a; --rc-red-lt:   #fce8e8;
+  --rc-purple: #3c3489; --rc-purple-lt:#eeedfe;
+  --rc-teal:   #0d5c5c; --rc-teal-lt:  #e6f7f7;
+  --rc-gray:   #4a4a52; --rc-gray-lt:  #f2f2f5;
+  --rc-orange: #b84c0c; --rc-orange-lt:#fff5ee;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --rc-green:  #6fd86f; --rc-green-lt: #0d2e0d;
+    --rc-amber:  #f0c060; --rc-amber-lt: #2e1c00;
+    --rc-red:    #f08080; --rc-red-lt:   #2e0d0d;
+    --rc-purple: #a89cf7; --rc-purple-lt:#1a1840;
+    --rc-teal:   #60d8b8; --rc-teal-lt:  #072e22;
+    --rc-gray:   #b0b0b8; --rc-gray-lt:  #1e1e22;
+    --rc-orange: #f0a060; --rc-orange-lt:#2e1500;
+  }
+}
+:root[data-theme="dark"] {
+  --rc-green:  #6fd86f; --rc-green-lt: #0d2e0d;
+  --rc-amber:  #f0c060; --rc-amber-lt: #2e1c00;
+  --rc-red:    #f08080; --rc-red-lt:   #2e0d0d;
+  --rc-purple: #a89cf7; --rc-purple-lt:#1a1840;
+  --rc-teal:   #60d8b8; --rc-teal-lt:  #072e22;
+  --rc-gray:   #b0b0b8; --rc-gray-lt:  #1e1e22;
+  --rc-orange: #f0a060; --rc-orange-lt:#2e1500;
+}
+
+/* ── Abas ─────────────────────────────────────────── */
+.pt-tabs { display:flex; gap:4px; margin-bottom:22px; flex-wrap:wrap; }
+.pt-tab {
+  padding:7px 18px; font-size:13px; font-weight:600;
+  font-family:var(--sans); border:1.5px solid var(--blue);
+  border-radius:6px; cursor:pointer;
+  background:var(--surface); color:var(--blue);
+  transition:background .15s, color .15s;
+}
+.pt-tab:hover { background:var(--blue-hover); }
+.pt-tab.ativo { background:var(--blue); color:#fff; }
+.pt-painel { display:none; }
+.pt-painel.ativo { display:block; }
+
+/* ── Título e seções ──────────────────────────────── */
+.pt-titulo {
+  font-family:var(--serif); font-size:19px; font-weight:700;
+  color:var(--blue); margin-bottom:18px;
+  padding-bottom:10px; border-bottom:2px solid var(--border);
+}
+.pt-section-title {
+  font-family:var(--serif); font-size:15px; font-weight:700; color:var(--blue);
+  border-left:3px solid var(--gold); padding-left:10px; margin:24px 0 12px;
+}
+.pt-section-title:first-child { margin-top:0; }
+
+/* ── Cards ────────────────────────────────────────── */
+.pt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; margin:10px 0 18px; }
+.pt-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; padding:14px 16px; border-top:3px solid var(--blue);
+}
+.pt-card.verde   { border-top-color:var(--rc-green); }
+.pt-card.laranja { border-top-color:var(--rc-orange); }
+.pt-card.vermelho{ border-top-color:var(--rc-red); }
+.pt-card.roxo    { border-top-color:var(--rc-purple); }
+.pt-card.teal    { border-top-color:var(--rc-teal); }
+.pt-card.cinza   { border-top-color:var(--rc-gray); }
+.pt-card.amber   { border-top-color:var(--rc-amber); }
+.pt-card h4 { font-size:14.5px; color:var(--blue); margin-bottom:6px; font-weight:700; }
+.pt-card p, .pt-card li { font-size:13.5px; color:var(--text2); line-height:1.55; }
+.pt-card ul { padding-left:14px; margin-top:5px; }
+.pt-card .pt-art { font-size:12px; color:var(--text2); margin-top:6px; font-style:italic; }
+
+/* ── Alertas ──────────────────────────────────────── */
+.pt-alert {
+  border-radius:7px; padding:10px 14px; margin:10px 0;
+  font-size:14px; border-left:4px solid; line-height:1.55;
+}
+.pt-alert.info    { background:var(--blue-light);   border-color:var(--blue);      color:var(--text); }
+.pt-alert.atencao { background:var(--rc-orange-lt); border-color:var(--rc-orange); color:var(--text); }
+.pt-alert.ok      { background:var(--rc-green-lt);  border-color:var(--rc-green);  color:var(--text); }
+.pt-alert.erro    { background:var(--rc-red-lt);    border-color:var(--rc-red);    color:var(--text); }
+.pt-alert.roxo    { background:var(--rc-purple-lt); border-color:var(--rc-purple); color:var(--text); }
+.pt-alert strong  { display:block; margin-bottom:3px; }
+
+/* ── Tabela ───────────────────────────────────────── */
+.pt-table-wrap { overflow-x:auto; margin:10px 0 18px; }
+.pt-table { width:100%; border-collapse:collapse; font-size:13.5px; }
+.pt-table thead th {
+  background:var(--blue); color:#fff;
+  padding:8px 12px; text-align:left; font-weight:600;
+}
+.pt-table tbody td {
+  padding:7px 12px; border-bottom:1px solid var(--border);
+  vertical-align:top; color:var(--text); line-height:1.5;
+}
+.pt-table tbody tr:nth-child(even) td { background:var(--blue-light); }
+.pt-table tbody td:first-child { font-weight:600; color:var(--blue); white-space:nowrap; }
+
+.pt-divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+
+/* ── Lista RESE ───────────────────────────────────── */
+.rc-rese-list { list-style:none; padding:0; margin:8px 0 16px; }
+.rc-rese-list li {
+  display:flex; gap:8px; align-items:flex-start;
+  padding:5px 0; border-bottom:1px solid var(--border);
+  font-size:13.5px; color:var(--text); line-height:1.5;
+}
+.rc-rese-list li:last-child { border-bottom:none; }
+.rc-inc {
+  flex-shrink:0; min-width:34px;
+  font-weight:700; color:var(--blue); font-size:12.5px;
+  padding-top:2px;
+}
+</style>
+
+<div class="pt-titulo">Recursos</div>
+
+<div class="pt-tabs">
+  <button class="pt-tab ativo" onclick="ptAba(0)">Conceito &amp; Princípios</button>
+  <button class="pt-tab" onclick="ptAba(1)">Pressupostos</button>
+  <button class="pt-tab" onclick="ptAba(2)">Efeitos</button>
+  <button class="pt-tab" onclick="ptAba(3)">Recursos em Espécie</button>
+</div>
+
+<div class="pt-painel ativo" id="pt0"><!-- Aba 1 --></div>
+<div class="pt-painel" id="pt1"><!-- Aba 2 --></div>
+<div class="pt-painel" id="pt2"><!-- Aba 3 --></div>
+<div class="pt-painel" id="pt3"><!-- Aba 4 --></div>
+
+<script>
+function ptAba(n){
+  document.querySelectorAll('.pt-tab').forEach(function(t,i){ t.classList.toggle('ativo',i===n); });
+  document.querySelectorAll('.pt-painel').forEach(function(p,i){ p.classList.toggle('ativo',i===n); });
+}
+</script>

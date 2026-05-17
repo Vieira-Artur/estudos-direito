@@ -1,0 +1,695 @@
+<style>
+/* ── Cores extras ────────────────────────────────────── */
+:root {
+  --pt-green:  #276749; --pt-green-lt: #edfaf3;
+  --pt-orange: #b84c0c; --pt-orange-lt:#fff5ee;
+  --pt-red:    #8b1a1a; --pt-red-lt:   #fce8e8;
+  --pt-teal:   #0d5c5c; --pt-teal-lt:  #e6f7f7;
+  --pt-purple: #3c3489; --pt-purple-lt:#eeedfe;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pt-green:  #6fd86f; --pt-green-lt: #0d2e0d;
+    --pt-orange: #f0a060; --pt-orange-lt:#2e1500;
+    --pt-red:    #f08080; --pt-red-lt:   #2e0d0d;
+    --pt-teal:   #60d8b8; --pt-teal-lt:  #072e22;
+    --pt-purple: #a89cf7; --pt-purple-lt:#1a1840;
+  }
+}
+:root[data-theme="dark"] {
+  --pt-green:  #6fd86f; --pt-green-lt: #0d2e0d;
+  --pt-orange: #f0a060; --pt-orange-lt:#2e1500;
+  --pt-red:    #f08080; --pt-red-lt:   #2e0d0d;
+  --pt-teal:   #60d8b8; --pt-teal-lt:  #072e22;
+  --pt-purple: #a89cf7; --pt-purple-lt:#1a1840;
+}
+
+/* ── Abas ────────────────────────────────────────────── */
+.pt-tabs { display:flex; gap:4px; margin-bottom:22px; flex-wrap:wrap; }
+.pt-tab {
+  padding:7px 18px; font-size:13px; font-weight:600;
+  font-family:var(--sans); border:1.5px solid var(--blue);
+  border-radius:6px; cursor:pointer;
+  background:var(--surface); color:var(--blue);
+  transition:background .15s, color .15s;
+}
+.pt-tab:hover { background:var(--blue-hover); }
+.pt-tab.ativo { background:var(--blue); color:#fff; }
+.pt-painel { display:none; }
+.pt-painel.ativo { display:block; }
+
+/* ── Título ──────────────────────────────────────────── */
+.pt-titulo {
+  font-family:var(--serif); font-size:19px; font-weight:700;
+  color:var(--blue); margin-bottom:18px;
+  padding-bottom:10px; border-bottom:2px solid var(--border);
+}
+
+/* ── Componentes gerais ──────────────────────────────── */
+.pt-section-title {
+  font-family:var(--serif); font-size:15px; font-weight:700; color:var(--blue);
+  border-left:3px solid var(--gold); padding-left:10px; margin:24px 0 12px;
+}
+.pt-section-title:first-child { margin-top:0; }
+
+.pt-table-wrap { overflow-x:auto; margin:10px 0 18px; }
+.pt-table { width:100%; border-collapse:collapse; font-size:14px; }
+.pt-table thead th {
+  background:var(--blue); color:#fff;
+  padding:8px 12px; text-align:left; font-weight:600; font-family:var(--sans);
+}
+.pt-table tbody td {
+  padding:7px 12px; border-bottom:1px solid var(--border);
+  vertical-align:top; color:var(--text);
+}
+.pt-table tbody tr:nth-child(even) td { background:var(--blue-light); }
+.pt-table tbody td:first-child { font-weight:600; color:var(--blue); }
+
+.pt-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:10px; margin:10px 0 18px; }
+.pt-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; padding:14px 16px; border-top:3px solid var(--blue);
+}
+.pt-card.verde   { border-top-color:var(--pt-green); }
+.pt-card.laranja { border-top-color:var(--pt-orange); }
+.pt-card.teal    { border-top-color:var(--pt-teal); }
+.pt-card.roxo    { border-top-color:var(--pt-purple); }
+.pt-card.vermelho{ border-top-color:var(--pt-red); }
+.pt-card h4 { font-size:14.5px; color:var(--blue); margin-bottom:6px; font-weight:700; }
+.pt-card p, .pt-card li { font-size:13.5px; color:var(--text2); line-height:1.55; }
+.pt-card ul { padding-left:14px; margin-top:5px; }
+
+.pt-alert {
+  border-radius:7px; padding:10px 14px; margin:10px 0;
+  font-size:14px; border-left:4px solid; line-height:1.55;
+}
+.pt-alert.info    { background:var(--blue-light);   border-color:var(--blue);      color:var(--text); }
+.pt-alert.atencao { background:var(--pt-orange-lt); border-color:var(--pt-orange); color:var(--text); }
+.pt-alert.ok      { background:var(--pt-green-lt);  border-color:var(--pt-green);  color:var(--text); }
+.pt-alert.roxo    { background:var(--pt-purple-lt); border-color:var(--pt-purple); color:var(--text); }
+.pt-alert strong  { display:block; margin-bottom:3px; }
+
+.pt-badge {
+  display:inline-block; font-size:12px; font-weight:600;
+  border-radius:4px; padding:2px 7px; margin:2px 2px 0 0;
+}
+.pt-b-blue   { background:var(--blue-light);   color:var(--blue); }
+.pt-b-green  { background:var(--pt-green-lt);  color:var(--pt-green); }
+.pt-b-orange { background:var(--pt-orange-lt); color:var(--pt-orange); }
+.pt-b-red    { background:var(--pt-red-lt);    color:var(--pt-red); }
+.pt-b-purple { background:var(--pt-purple-lt); color:var(--pt-purple); }
+.pt-b-teal   { background:var(--pt-teal-lt);   color:var(--pt-teal); }
+
+/* ── Roteiro ─────────────────────────────────────────── */
+.pt-step { display:flex; gap:10px; margin-bottom:8px; align-items:flex-start; }
+.pt-num {
+  flex-shrink:0; width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12.5px; font-weight:600; margin-top:2px;
+}
+.pt-num.azul   { background:var(--blue-light);   color:var(--blue); }
+.pt-num.verde  { background:var(--pt-green-lt);  color:var(--pt-green); }
+.pt-num.laranja{ background:var(--pt-orange-lt); color:var(--pt-orange); }
+.pt-num.roxo   { background:var(--pt-purple-lt); color:var(--pt-purple); }
+.pt-num.teal   { background:var(--pt-teal-lt);   color:var(--pt-teal); }
+.pt-txt { flex:1; font-size:14.5px; color:var(--text); line-height:1.6; }
+.pt-quest {
+  background:var(--surface); border-left:3px solid var(--gold);
+  border-radius:0 6px 6px 0; padding:8px 12px;
+  margin:4px 0 14px 34px; font-size:14px; color:var(--text2);
+}
+.pt-divider { border:none; border-top:1px solid var(--border); margin:16px 0; }
+
+/* ── Estudo de Caso ──────────────────────────────────── */
+.pt-caso-header {
+  background:linear-gradient(135deg, var(--blue-dark,#162f52) 0%, var(--blue) 100%);
+  border-radius:10px; padding:22px 26px; color:#fff; margin-bottom:20px;
+}
+.pt-caso-header .pt-label {
+  font-size:12px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:5px;
+}
+.pt-caso-header h3 { font-family:var(--serif); font-size:20px; margin-bottom:8px; }
+.pt-caso-header p  { font-size:14px; opacity:.9; line-height:1.55; }
+.pt-pergunta {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; margin-bottom:12px; overflow:hidden;
+}
+.pt-pergunta-head {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 16px; cursor:pointer; user-select:none; background:var(--bg);
+}
+.pt-pergunta-head:hover { background:var(--blue-hover); }
+.pt-pnum {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--blue); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:700; flex-shrink:0;
+}
+.pt-pergunta-head p { flex:1; font-size:14.5px; color:var(--text); font-weight:600; margin:0; }
+.pt-pergunta-head .pt-toggle { font-size:18px; color:var(--text2); transition:transform .2s; }
+.pt-pergunta-body {
+  display:none; padding:14px 16px 14px 56px; font-size:14px;
+  color:var(--text2); line-height:1.65; border-top:1px solid var(--border);
+}
+.pt-pergunta-body.open { display:block; }
+.pt-pergunta-body strong { color:var(--blue); }
+.pt-pergunta-body p { margin-bottom:8px; }
+
+/* ── As 9 Hipóteses — visual ─────────────────────────── */
+.cf-grupo-wrap { margin-bottom:18px; }
+.cf-grupo-header {
+  font-family:var(--sans); font-size:11.5px; font-weight:700;
+  letter-spacing:.07em; text-transform:uppercase;
+  padding:6px 12px; border-radius:7px 7px 0 0;
+  border:1px solid; border-bottom:none;
+}
+.cf-grupo-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(195px,1fr));
+  gap:8px; padding:10px; border-radius:0 0 8px 8px; border:1px solid;
+}
+.cf-hip-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; overflow:hidden; border-top:3px solid;
+}
+.cf-hip-head {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 10px 6px; cursor:pointer; user-select:none;
+}
+.cf-hip-head:hover { filter:brightness(.97); }
+.cf-hip-inc {
+  font-size:11px; font-weight:700; letter-spacing:.04em;
+  padding:2px 7px; border-radius:10px; flex-shrink:0;
+}
+.cf-hip-resumo { font-size:13px; font-weight:600; color:var(--text); flex:1; line-height:1.35; }
+.cf-hip-toggle { font-size:13px; color:var(--text2); transition:transform .2s; flex-shrink:0; }
+.cf-hip-body {
+  display:none; padding:8px 10px 10px;
+  font-size:13px; color:var(--text2); line-height:1.55;
+  border-top:1px solid var(--border);
+}
+.cf-hip-body.open { display:block; }
+.cf-exc-badge {
+  display:inline-block; font-size:11px; font-weight:700;
+  background:#7a5200; color:#fff; border-radius:4px;
+  padding:2px 7px; margin-top:6px;
+}
+
+/* grupo azul */
+.cf-g-blue .cf-grupo-header { background:var(--blue-light); color:var(--blue); border-color:var(--blue); }
+.cf-g-blue .cf-grupo-grid   { background:rgba(31,73,125,.04); border-color:var(--blue); }
+.cf-g-blue .cf-hip-card     { border-top-color:var(--blue); }
+.cf-g-blue .cf-hip-inc      { background:var(--blue-light); color:var(--blue); }
+
+/* grupo laranja */
+.cf-g-orange .cf-grupo-header { background:var(--pt-orange-lt); color:var(--pt-orange); border-color:var(--pt-orange); }
+.cf-g-orange .cf-grupo-grid   { background:rgba(184,76,12,.03); border-color:var(--pt-orange); }
+.cf-g-orange .cf-hip-card     { border-top-color:var(--pt-orange); }
+.cf-g-orange .cf-hip-inc      { background:var(--pt-orange-lt); color:var(--pt-orange); }
+
+/* grupo roxo */
+.cf-g-purple .cf-grupo-header { background:var(--pt-purple-lt); color:var(--pt-purple); border-color:var(--pt-purple); }
+.cf-g-purple .cf-grupo-grid   { background:rgba(60,52,137,.03); border-color:var(--pt-purple); }
+.cf-g-purple .cf-hip-card     { border-top-color:var(--pt-purple); }
+.cf-g-purple .cf-hip-inc      { background:var(--pt-purple-lt); color:var(--pt-purple); }
+
+/* grupo teal */
+.cf-g-teal .cf-grupo-header { background:var(--pt-teal-lt); color:var(--pt-teal); border-color:var(--pt-teal); }
+.cf-g-teal .cf-grupo-grid   { background:rgba(13,92,92,.03); border-color:var(--pt-teal); }
+.cf-g-teal .cf-hip-card     { border-top-color:var(--pt-teal); }
+.cf-g-teal .cf-hip-inc      { background:var(--pt-teal-lt); color:var(--pt-teal); }
+
+@media (max-width: 540px) {
+  .pt-tab { padding:4px 9px; font-size:11.5px; }
+}
+</style>
+
+<h2 class="pt-titulo">Medida Cautelar Fiscal — Lei 8.397/1992</h2>
+
+<div class="pt-tabs">
+  <button class="pt-tab ativo" onclick="ptTab4('visao', this)">Visão Geral</button>
+  <button class="pt-tab" onclick="ptTab4('hipoteses', this)">As 9 Hipóteses</button>
+  <button class="pt-tab" onclick="ptTab4('roteiro', this)">Roteiro de Estudo</button>
+  <button class="pt-tab" onclick="ptTab4('caso', this)">Estudo de Caso</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 1 — VISÃO GERAL
+═══════════════════════════════════════════════════════ -->
+<div id="pt4-visao" class="pt-painel ativo">
+
+  <div class="pt-section-title">O que é a Medida Cautelar Fiscal?</div>
+  <div class="pt-alert info">
+    <strong>📌 Base Legal: Lei 8.397/1992 + art. 185 CTN</strong>
+    Ação de natureza cautelar proposta pela <em>Fazenda Pública</em> para tornar indisponíveis os bens do sujeito passivo, assegurando a efetividade da futura execução fiscal. Não cobra o tributo — <strong>garante patrimônio</strong> para cobrá-lo depois.
+  </div>
+
+  <div class="pt-grid">
+    <div class="pt-card">
+      <h4>🎯 Natureza</h4>
+      <p>Tutela cautelar específica — "instrumento ao quadrado": o processo é instrumento da solução; a cautelar instrumentaliza o instrumento.</p>
+      <p style="margin-top:6px">Subsiste como exceção autônoma ao CPC/2015, que extinguiu os processos cautelares gerais.</p>
+    </div>
+    <div class="pt-card teal">
+      <h4>⚖️ Legitimidade</h4>
+      <p><strong>Ativa:</strong> exclusiva da Fazenda Pública (crédito tributário <em>ou não tributário</em>).</p>
+      <p style="margin-top:6px"><strong>Passiva:</strong> o sujeito passivo do crédito fiscal — devedor, corresponsável, sucessor.</p>
+    </div>
+    <div class="pt-card laranja">
+      <h4>🔗 Relação com a Execução</h4>
+      <p>Sempre <strong>dependente</strong> da execução fiscal (art. 1º). Pode ser:</p>
+      <ul>
+        <li><strong>Preparatória:</strong> antes do ajuizamento da execução</li>
+        <li><strong>Incidental:</strong> no curso da execução já ajuizada</li>
+      </ul>
+    </div>
+    <div class="pt-card verde">
+      <h4>💡 Diferença da Execução</h4>
+      <p>Execução fiscal = <strong>cobra</strong> o tributo (título na CDA).</p>
+      <p style="margin-top:6px">Cautelar fiscal = <strong>não cobra</strong>, apenas <strong>trava</strong> o patrimônio para que exista algo a penhorar quando vier a execução.</p>
+    </div>
+  </div>
+
+  <div class="pt-section-title">Modalidades: Preparatória × Incidental</div>
+  <div class="pt-table-wrap">
+    <table class="pt-table">
+      <thead><tr><th>Aspecto</th><th>Preparatória</th><th>Incidental</th></tr></thead>
+      <tbody>
+        <tr><td>Momento</td><td>Antes do ajuizamento da execução fiscal</td><td>No curso da execução já ajuizada</td></tr>
+        <tr><td>Crédito constituído?</td><td>Sim (regra geral); Exceção: art. 2º, V-b e VII (dispensa)</td><td>Sim — a execução pressupõe CDA</td></tr>
+        <tr><td>Prazo p/ ajuizar exec.</td><td>60 dias após irrecorribilidade administrativa (art. 11)</td><td>Não aplicável — já ajuizada</td></tr>
+        <tr><td>Cessação por inércia</td><td>Sim — se Fazenda não propuser execução em 60 dias</td><td>Se execução for extinta (art. 13, III)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pt-section-title">Pressupostos e Provas Necessárias</div>
+  <div class="pt-grid">
+    <div class="pt-card roxo">
+      <h4>1 · Fumus Boni Iuris</h4>
+      <p><strong>Aparência do bom direito:</strong> prova literal da constituição do crédito fiscal (art. 3º, I).</p>
+      <p style="margin-top:6px">Em geral: CDA, auto de infração, notificação de lançamento.</p>
+    </div>
+    <div class="pt-card roxo">
+      <h4>2 · Periculum in Mora</h4>
+      <p><strong>Perigo na demora:</strong> prova documental de que o devedor está adotando conduta que frustre o adimplemento (art. 3º, II).</p>
+      <p style="margin-top:6px">Ex.: transferência de bens, contração de dívidas, abandono de domicílio fiscal.</p>
+    </div>
+  </div>
+
+  <div class="pt-section-title">Competência (Art. 5º)</div>
+  <div class="pt-grid">
+    <div class="pt-card">
+      <h4>🏛️ Regra Geral</h4>
+      <p>Juiz competente para a <strong>execução judicial da Dívida Ativa</strong> da Fazenda Pública requerente.</p>
+    </div>
+    <div class="pt-card teal">
+      <h4>📋 Recurso em Tribunal</h4>
+      <p>Se a execução já estiver em Tribunal (recurso pendente), a competência é do <strong>relator do recurso</strong>.</p>
+    </div>
+  </div>
+
+  <div class="pt-section-title">Liminar: Concessão sem Justificação (Art. 7º)</div>
+  <div class="pt-alert ok">
+    <strong>✅ Prerrogativa da Fazenda Pública</strong>
+    O Juiz concede a liminar <strong>dispensada a Fazenda de justificação prévia e de prestação de caução</strong> — prerrogativa excepcional em favor do Fisco. Do despacho que concede a liminar cabe <strong>agravo de instrumento</strong>.
+  </div>
+
+  <div class="pt-section-title">Efeito Principal: Indisponibilidade dos Bens (Art. 4º)</div>
+  <div class="pt-alert atencao">
+    <strong>⚠️ Proporcionalidade obrigatória</strong>
+    A indisponibilidade recai sobre os bens do devedor apenas <strong>até o limite da satisfação da obrigação</strong> — não abrange todo o patrimônio indiscriminadamente.
+  </div>
+  <div class="pt-grid">
+    <div class="pt-card">
+      <h4>👤 Pessoa Física</h4>
+      <p>Indisponibilidade sobre bens até o valor do débito. Todos os bens podem ser atingidos.</p>
+    </div>
+    <div class="pt-card laranja">
+      <h4>🏢 Pessoa Jurídica</h4>
+      <p>Indisponibilidade recai somente sobre os bens do <strong>ativo permanente</strong>.</p>
+      <p style="margin-top:6px">Pode ser <strong>estendida</strong> ao acionista controlador e aos administradores com poder de cumprir obrigações fiscais (ao tempo do FG ou do inadimplemento).</p>
+    </div>
+    <div class="pt-card teal">
+      <h4>📡 Comunicação Imediata</h4>
+      <p>Decretada a medida, comunica-se imediatamente a:</p>
+      <ul>
+        <li>Registro Público de Imóveis</li>
+        <li>Banco Central do Brasil</li>
+        <li>Comissão de Valores Mobiliários (CVM)</li>
+        <li>Demais repartições de registros de transferência</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pt-section-title">Contestação e Garantia (Art. 8º)</div>
+  <div class="pt-alert info">
+    <strong>📋 Prazo de contestação: 15 dias</strong>
+    O requerido é citado para contestar em 15 dias, indicando as provas que pretenda produzir. O prazo conta da juntada do mandado de citação ou da execução da liminar (se concedida). Se o requerido oferecer <strong>garantia equivalente ao débito</strong>, a cautelar perde seu objeto — o juízo está garantido.
+  </div>
+
+  <div class="pt-section-title">Cessação da Eficácia (Art. 13)</div>
+  <div class="pt-grid">
+    <div class="pt-card vermelho">
+      <h4>I — Inércia da Fazenda</h4>
+      <p>Fazenda não propõe a execução fiscal no prazo de <strong>60 dias</strong> após a irrecorribilidade do crédito na esfera administrativa (cautelar preparatória).</p>
+    </div>
+    <div class="pt-card vermelho">
+      <h4>II — Não executada</h4>
+      <p>A medida cautelar <strong>não for executada dentro de 30 dias</strong> da sua concessão.</p>
+    </div>
+    <div class="pt-card vermelho">
+      <h4>III — Execução extinta</h4>
+      <p>A <strong>execução judicial da Dívida Ativa for julgada extinta</strong> — a cautelar perde seu fundamento.</p>
+    </div>
+    <div class="pt-card vermelho">
+      <h4>IV — Quitação</h4>
+      <p>O requerido <strong>quita o débito</strong> que está sendo executado. Não há mais o que garantir.</p>
+    </div>
+  </div>
+  <div class="pt-alert atencao">
+    <strong>⚠️ Vedação de repetição (art. 13, p.ú.)</strong>
+    Se, por qualquer motivo, cessar a eficácia da medida, é <strong>vedado à Fazenda Pública repetir o pedido pelo mesmo fundamento</strong>.
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 2 — AS 9 HIPÓTESES
+═══════════════════════════════════════════════════════ -->
+<div id="pt4-hipoteses" class="pt-painel">
+
+  <div class="pt-alert info" style="margin-bottom:18px">
+    <strong>📋 Art. 2º, Lei 8.397/1992 — Hipóteses de cabimento</strong>
+    A cautelar fiscal pode ser requerida contra o sujeito passivo de crédito tributário <em>ou não tributário</em> em 9 hipóteses, agrupadas por tipo de conduta. Clique em cada card para ver o detalhe. <strong>Atenção especial</strong> para os incisos V-b e VII, que dispensam a prévia constituição do crédito.
+  </div>
+
+  <!-- GRUPO A: Evasão e Ausência -->
+  <div class="cf-grupo-wrap cf-g-blue">
+    <div class="cf-grupo-header">Grupo A — Evasão e Ausência (incisos I e II)</div>
+    <div class="cf-grupo-grid">
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. I</span>
+          <span class="cf-hip-resumo">Sem domicílio certo — tenta ausentar-se ou alienar bens</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Devedor <strong>sem domicílio certo</strong>: intenta ausentar-se, alienar bens que possui, ou deixa de pagar a obrigação no prazo fixado.
+        </div>
+      </div>
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. II</span>
+          <span class="cf-hip-resumo">Com domicílio certo — ausenta-se para elidir pagamento</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Devedor <strong>com domicílio certo</strong>: ausenta-se ou tenta se ausentar, visando a elidir o adimplemento da obrigação.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GRUPO B: Ameaça Patrimonial -->
+  <div class="cf-grupo-wrap cf-g-orange">
+    <div class="cf-grupo-header">Grupo B — Ameaça ao Patrimônio (incisos III e IV)</div>
+    <div class="cf-grupo-grid">
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. III</span>
+          <span class="cf-hip-resumo">Em insolvência — aliena ou tenta alienar bens</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Devedor <strong>em estado de insolvência</strong>: aliena ou tenta alienar bens, dilapidando o patrimônio que poderia responder pelo débito.
+        </div>
+      </div>
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. IV</span>
+          <span class="cf-hip-resumo">Contrai dívidas que comprometem a liquidez</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Devedor <strong>contrai ou tenta contrair dívidas</strong> que comprometam a liquidez do seu patrimônio, tornando-o insuficiente para satisfazer o crédito fiscal.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GRUPO C: Após Notificação -->
+  <div class="cf-grupo-wrap cf-g-purple">
+    <div class="cf-grupo-header">Grupo C — Condutas Após Notificação Fiscal (inciso V)</div>
+    <div class="cf-grupo-grid">
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. V-a</span>
+          <span class="cf-hip-resumo">Notificado — não paga no prazo legal</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Notificado pela Fazenda Pública para recolher o crédito fiscal, o devedor <strong>deixa de pagá-lo no prazo legal</strong>, salvo se suspensa a exigibilidade do crédito.
+          <p style="margin-top:6px">Exige que o crédito já esteja <strong>constituído</strong>.</p>
+        </div>
+      </div>
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. V-b</span>
+          <span class="cf-hip-resumo">Notificado — coloca bens em nome de terceiros</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Notificado pela Fazenda, o devedor <strong>põe ou tenta pôr seus bens em nome de terceiros</strong> para escapar da constrição.
+          <div><span class="cf-exc-badge">⚠️ Dispensa crédito constituído (art. 1º, p.ú.)</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GRUPO D: Situações Específicas -->
+  <div class="cf-grupo-wrap cf-g-teal">
+    <div class="cf-grupo-header">Grupo D — Situações Específicas (incisos VI a IX)</div>
+    <div class="cf-grupo-grid">
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. VI</span>
+          <span class="cf-hip-resumo">Débitos somados > 30% do patrimônio</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          O devedor possui débitos inscritos ou não em Dívida Ativa que, <strong>somados, ultrapassem 30% do seu patrimônio conhecido</strong> — sinal de insolvência iminente.
+        </div>
+      </div>
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. VII</span>
+          <span class="cf-hip-resumo">Aliena bens sem comunicar à Fazenda</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Devedor <strong>aliena bens ou direitos sem proceder à devida comunicação ao órgão fazendário</strong>, quando essa comunicação é exigível por lei.
+          <div><span class="cf-exc-badge">⚠️ Dispensa crédito constituído (art. 1º, p.ú.)</span></div>
+        </div>
+      </div>
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. VIII</span>
+          <span class="cf-hip-resumo">Inscrição no cadastro de contribuintes declarada inapta</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Devedor tem sua <strong>inscrição no cadastro de contribuintes declarada inapta</strong> pelo órgão fazendário — situação indicativa de irregularidade cadastral grave.
+        </div>
+      </div>
+
+      <div class="cf-hip-card">
+        <div class="cf-hip-head" onclick="cfHip(this)">
+          <span class="cf-hip-inc">Inc. IX</span>
+          <span class="cf-hip-resumo">Outros atos que dificultem a satisfação do crédito</span>
+          <span class="cf-hip-toggle">▼</span>
+        </div>
+        <div class="cf-hip-body">
+          Cláusula de encerramento: devedor <strong>pratica outros atos que dificultem ou impeçam a satisfação do crédito</strong> — hipótese aberta que complementa as demais.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="pt-alert atencao" style="margin-top:4px">
+    <strong>⚠️ Exceção importante — incisos V-b e VII</strong>
+    Nestas duas hipóteses, o requerimento da medida cautelar <strong>independe da prévia constituição do crédito tributário</strong> (art. 1º, p.ú.). A Fazenda pode agir antes mesmo de finalizar o processo administrativo de lançamento.
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 3 — ROTEIRO DE ESTUDO
+═══════════════════════════════════════════════════════ -->
+<div id="pt4-roteiro" class="pt-painel">
+
+  <div class="pt-section-title">Roteiro de Estudo — 5 Passos</div>
+
+  <div class="pt-step">
+    <div class="pt-num azul">1</div>
+    <div class="pt-txt"><strong>Natureza e posição no sistema.</strong> A cautelar fiscal é tutela cautelar específica — não é execução fiscal (não cobra), não é ação de conhecimento. Sua função é <em>assecuratória</em>: garante patrimônio para a execução futura. Memorize: "instrumento do instrumento".</div>
+  </div>
+  <div class="pt-quest">❓ Qual a diferença fundamental entre a cautelar fiscal e a execução fiscal? Podem ser propostas simultaneamente?</div>
+
+  <div class="pt-step">
+    <div class="pt-num azul">2</div>
+    <div class="pt-txt"><strong>Preparatória × Incidental e os prazos críticos.</strong> Preparatória = antes da execução (Fazenda tem 60 dias após a irrecorribilidade administrativa para ajuizar a execução). Incidental = no curso da execução. A não observância do prazo de 60 dias ou a não execução da cautelar em 30 dias extingue a medida.</div>
+  </div>
+  <div class="pt-quest">❓ A Fazenda obteve cautelar fiscal preparatória. O PAT durou mais 2 anos. Quando começa o prazo de 60 dias para propor a execução?</div>
+
+  <div class="pt-step">
+    <div class="pt-num laranja">3</div>
+    <div class="pt-txt"><strong>As 9 hipóteses — decore os grupos e as exceções.</strong> Grupos: A (fuga/ausência), B (ameaça patrimonial), C (após notificação), D (situações específicas). A chave da prova: incisos V-b e VII <em>dispensam</em> a constituição prévia do crédito. O inciso IX é a cláusula geral de encerramento.</div>
+  </div>
+  <div class="pt-quest">❓ Empresa transfere imóveis sem comunicar à Fazenda, enquanto o auto de infração ainda está sendo julgado no CARF. A cautelar fiscal é cabível?</div>
+
+  <div class="pt-step">
+    <div class="pt-num verde">4</div>
+    <div class="pt-txt"><strong>Efeitos: indisponibilidade proporcional.</strong> Não é o confisco de todo o patrimônio — apenas até o limite do débito. Para PJ: somente ativo permanente (pode estender-se aos sócios controladores). A comunicação ao BACEN, CRI e CVM é imediata e obrigatória. A liminar é concedida sem caução e sem justificação prévia pela Fazenda.</div>
+  </div>
+  <div class="pt-quest">❓ Decretada a cautelar fiscal, o Banco Central não foi comunicado e o devedor transferiu recursos. A Fazenda tem algum recurso contra a omissão?</div>
+
+  <div class="pt-step">
+    <div class="pt-num roxo">5</div>
+    <div class="pt-txt"><strong>Cessação — 4 hipóteses + vedação de repetição.</strong> Memorize o art. 13: (I) inércia da Fazenda no prazo de 60 dias; (II) não executada em 30 dias; (III) execução extinta; (IV) quitação pelo devedor. E a regra-sanção do p.ú.: vedado repetir o pedido pelo mesmo fundamento.</div>
+  </div>
+  <div class="pt-quest">❓ A execução fiscal foi extinta por nulidade da CDA. A medida cautelar incidental ainda vinculada a essa execução perde automaticamente a eficácia?</div>
+
+  <hr class="pt-divider">
+
+  <div class="pt-section-title">Mapa Legislativo Essencial</div>
+  <div class="pt-grid">
+    <div class="pt-card">
+      <h4>Lei 8.397/1992</h4>
+      <ul>
+        <li>Art. 1º — Cabimento e dependência</li>
+        <li>Art. 2º — As 9 hipóteses</li>
+        <li>Art. 3º — Provas necessárias</li>
+        <li>Art. 4º — Indisponibilidade</li>
+        <li>Art. 5º — Competência</li>
+        <li>Art. 7º — Liminar sem caução</li>
+        <li>Art. 8º — Contestação (15 dias)</li>
+        <li>Art. 11 — Prazo para executar (60 dias)</li>
+        <li>Art. 13 — Cessação da eficácia</li>
+      </ul>
+    </div>
+    <div class="pt-card teal">
+      <h4>CTN / LEF</h4>
+      <ul>
+        <li>Art. 185 CTN — Fraude à execução</li>
+        <li>Art. 185-A CTN — Indisponibilidade universal (remédio alternativo)</li>
+        <li>Lei 6.830/80 — LEF (execução dependente)</li>
+      </ul>
+    </div>
+    <div class="pt-card roxo">
+      <h4>STJ — Jurisprudência</h4>
+      <ul>
+        <li>REsp 689.472/SE: Cautelar antes do crédito constituído é possível nos casos V-b e VII</li>
+        <li>Cautelar fiscal e art. 185-A CTN: institutos distintos, mas com efeitos convergentes</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 4 — ESTUDO DE CASO
+═══════════════════════════════════════════════════════ -->
+<div id="pt4-caso" class="pt-painel">
+  <div class="pt-caso-header">
+    <div class="pt-label">Estudo de Caso</div>
+    <h3>Cautelar Fiscal contra a Construtora Ômega S/A</h3>
+    <p>A Receita Federal lavrou auto de infração contra a Construtora Ômega S/A cobrando R$ 4.800.000 em IRPJ/CSLL. O processo administrativo ainda está pendente no CARF. O auditor fiscal identifica que, nos últimos 60 dias, a empresa transferiu três imóveis do ativo permanente para o nome dos sócios, sem comunicar à Fazenda. O patrimônio remanescente da empresa é de R$ 1.200.000.</p>
+  </div>
+  <div>
+    <div class="pt-pergunta">
+      <div class="pt-pergunta-head" onclick="ptPerg4(this)">
+        <div class="pt-pnum">1</div>
+        <p>A Fazenda Nacional pode propor a cautelar fiscal mesmo sem o crédito tributário definitivamente constituído?</p>
+        <span class="pt-toggle">▼</span>
+      </div>
+      <div class="pt-pergunta-body">
+        <p>Sim. A transferência de imóveis sem comunicar à Fazenda se enquadra no <strong>inciso VII do art. 2º</strong> da Lei 8.397/1992, que é uma das duas hipóteses em que o requerimento da cautelar fiscal <strong>independe da prévia constituição do crédito tributário</strong> (art. 1º, p.ú.).</p>
+        <p>Além disso, o patrimônio remanescente (R$ 1,2 milhão) é muito inferior aos débitos (R$ 4,8 milhões), o que também configura o <strong>inciso VI</strong> — débitos que superam 30% do patrimônio conhecido.</p>
+        <p>Pressupostos presentes: <em>fumus boni iuris</em> = auto de infração (prova literal do crédito); <em>periculum in mora</em> = transferências suspeitas (prova documental das hipóteses).</p>
+      </div>
+    </div>
+
+    <div class="pt-pergunta">
+      <div class="pt-pergunta-head" onclick="ptPerg4(this)">
+        <div class="pt-pnum">2</div>
+        <p>Quais bens ficam indisponíveis e em que extensão? A indisponibilidade pode alcançar os sócios?</p>
+        <span class="pt-toggle">▼</span>
+      </div>
+      <div class="pt-pergunta-body">
+        <p>Para pessoa jurídica, a indisponibilidade recai <strong>somente sobre os bens do ativo permanente</strong>, até o limite de R$ 4.800.000 (art. 4º caput). Não abrange todos os bens indiscriminadamente.</p>
+        <p>A indisponibilidade <strong>pode ser estendida aos sócios</strong> que, por força do contrato social ou estatuto, tinham poderes para fazer a empresa cumprir suas obrigações fiscais ao tempo do fato gerador ou do inadimplemento (art. 4º, §1º) — o que é exatamente o que ocorreu neste caso: os próprios sócios receberam os imóveis transferidos.</p>
+        <p>A medida é comunicada imediatamente ao <strong>BACEN, CRI e CVM</strong>.</p>
+      </div>
+    </div>
+
+    <div class="pt-pergunta">
+      <div class="pt-pergunta-head" onclick="ptPerg4(this)">
+        <div class="pt-pnum">3</div>
+        <p>A cautelar é concedida como preparatória. O CARF demora 4 anos para julgar. A cautelar fica ativa todo esse tempo?</p>
+        <span class="pt-toggle">▼</span>
+      </div>
+      <div class="pt-pergunta-body">
+        <p>Sim, <strong>a cautelar conserva sua eficácia enquanto o crédito não se tornar irrecorrível na esfera administrativa</strong> e na pendência da execução judicial (art. 12). Não há prazo máximo de duração autônoma vinculado ao tempo do PAT.</p>
+        <p>O prazo de <strong>60 dias</strong> do art. 11 somente começa a correr <strong>a partir da data em que a exigência se tornar irrecorrível</strong> na esfera administrativa (ex.: decisão definitiva do CARF). Somente após esse marco é que a Fazenda precisa propor a execução fiscal no prazo de 60 dias, sob pena de cessação da eficácia da cautelar.</p>
+      </div>
+    </div>
+
+    <div class="pt-pergunta">
+      <div class="pt-pergunta-head" onclick="ptPerg4(this)">
+        <div class="pt-pnum">4</div>
+        <p>Após a citação na cautelar, a empresa oferece garantia equivalente ao débito. O processo da cautelar continua?</p>
+        <span class="pt-toggle">▼</span>
+      </div>
+      <div class="pt-pergunta-body">
+        <p>Não necessariamente. Se o requerido oferece, em sua resposta (contestação), <strong>garantia equivalente ao débito</strong>, a cautelar fiscal <strong>perde seu objeto principal</strong> — o juízo está garantido, que é exatamente o que ela objetivava.</p>
+        <p>A lógica é que a cautelar foi proposta para assegurar que haveria patrimônio para garantir a futura execução. Se o próprio devedor voluntariamente garante esse juízo, a medida de constrição torna-se desnecessária.</p>
+        <p>Note que essa situação também corresponde a uma das formas de cessação da eficácia previstas no art. 13, pois o objeto cautelar foi atingido.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function ptTab4(id, btn) {
+  document.querySelectorAll('.pt-painel').forEach(p => p.classList.remove('ativo'));
+  document.querySelectorAll('.pt-tab').forEach(b => b.classList.remove('ativo'));
+  document.getElementById('pt4-' + id).classList.add('ativo');
+  btn.classList.add('ativo');
+}
+function ptPerg4(head) {
+  const body = head.nextElementSibling;
+  const toggle = head.querySelector('.pt-toggle');
+  body.classList.toggle('open');
+  toggle.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+function cfHip(head) {
+  const body = head.nextElementSibling;
+  const toggle = head.querySelector('.cf-hip-toggle');
+  body.classList.toggle('open');
+  toggle.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+</script>

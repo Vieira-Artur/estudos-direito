@@ -185,6 +185,11 @@ const materias = [
             titulo: "A Execução Fiscal (LEF)",
             descricao: "Da obrigação à CDA · Citação · Embargos vs. Exceção de pré-executividade · Expropriação · Redirecionamento",
             arquivo: "conteudo/tributario/processo-tributario/03-execucao-fiscal.html"
+          },
+          {
+            titulo: "Medida Cautelar Fiscal",
+            descricao: "Natureza e cabimento · As 9 hipóteses do art. 2º · Indisponibilidade proporcional · Preparatória × incidental · Cessação da eficácia",
+            arquivo: "conteudo/tributario/processo-tributario/04-cautelar-fiscal.html"
           }
         ]
       },

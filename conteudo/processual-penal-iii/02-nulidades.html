@@ -1,0 +1,675 @@
+<style>
+/* ── Cores extras ────────────────────────────────────── */
+:root {
+  --nn-red:    #8b1a1a; --nn-red-lt:   #fce8e8;
+  --nn-orange: #b84c0c; --nn-orange-lt:#fff5ee;
+  --nn-amber:  #8a6000; --nn-amber-lt: #fff8e1;
+  --nn-green:  #276749; --nn-green-lt: #edfaf3;
+  --nn-teal:   #0d5c5c; --nn-teal-lt:  #e6f7f7;
+  --nn-purple: #3c3489; --nn-purple-lt:#eeedfe;
+  --nn-gray:   #4a4a52; --nn-gray-lt:  #f2f2f5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --nn-red:    #f08080; --nn-red-lt:   #2e0d0d;
+    --nn-orange: #f0a060; --nn-orange-lt:#2e1500;
+    --nn-amber:  #f0c060; --nn-amber-lt: #2e1c00;
+    --nn-green:  #6fd86f; --nn-green-lt: #0d2e0d;
+    --nn-teal:   #60d8b8; --nn-teal-lt:  #072e22;
+    --nn-purple: #a89cf7; --nn-purple-lt:#1a1840;
+    --nn-gray:   #b0b0b8; --nn-gray-lt:  #1e1e22;
+  }
+}
+:root[data-theme="dark"] {
+  --nn-red:    #f08080; --nn-red-lt:   #2e0d0d;
+  --nn-orange: #f0a060; --nn-orange-lt:#2e1500;
+  --nn-amber:  #f0c060; --nn-amber-lt: #2e1c00;
+  --nn-green:  #6fd86f; --nn-green-lt: #0d2e0d;
+  --nn-teal:   #60d8b8; --nn-teal-lt:  #072e22;
+  --nn-purple: #a89cf7; --nn-purple-lt:#1a1840;
+  --nn-gray:   #b0b0b8; --nn-gray-lt:  #1e1e22;
+}
+
+/* ── Abas ────────────────────────────────────────────── */
+.pt-tabs { display:flex; gap:4px; margin-bottom:22px; flex-wrap:wrap; }
+.pt-tab {
+  padding:7px 18px; font-size:13px; font-weight:600;
+  font-family:var(--sans); border:1.5px solid var(--blue);
+  border-radius:6px; cursor:pointer;
+  background:var(--surface); color:var(--blue);
+  transition:background .15s, color .15s;
+}
+.pt-tab:hover { background:var(--blue-hover); }
+.pt-tab.ativo { background:var(--blue); color:#fff; }
+.pt-painel { display:none; }
+.pt-painel.ativo { display:block; }
+
+/* ── Título ──────────────────────────────────────────── */
+.pt-titulo {
+  font-family:var(--serif); font-size:19px; font-weight:700;
+  color:var(--blue); margin-bottom:18px;
+  padding-bottom:10px; border-bottom:2px solid var(--border);
+}
+.pt-section-title {
+  font-family:var(--serif); font-size:15px; font-weight:700; color:var(--blue);
+  border-left:3px solid var(--gold); padding-left:10px; margin:24px 0 12px;
+}
+.pt-section-title:first-child { margin-top:0; }
+
+/* ── Componentes gerais ──────────────────────────────── */
+.pt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; margin:10px 0 18px; }
+.pt-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; padding:14px 16px; border-top:3px solid var(--blue);
+}
+.pt-card.verde   { border-top-color:var(--nn-green); }
+.pt-card.laranja { border-top-color:var(--nn-orange); }
+.pt-card.vermelho{ border-top-color:var(--nn-red); }
+.pt-card.roxo    { border-top-color:var(--nn-purple); }
+.pt-card.teal    { border-top-color:var(--nn-teal); }
+.pt-card.cinza   { border-top-color:var(--nn-gray); }
+.pt-card h4 { font-size:14.5px; color:var(--blue); margin-bottom:6px; font-weight:700; }
+.pt-card p, .pt-card li { font-size:13.5px; color:var(--text2); line-height:1.55; }
+.pt-card ul { padding-left:14px; margin-top:5px; }
+
+.pt-alert {
+  border-radius:7px; padding:10px 14px; margin:10px 0;
+  font-size:14px; border-left:4px solid; line-height:1.55;
+}
+.pt-alert.info    { background:var(--blue-light);    border-color:var(--blue);       color:var(--text); }
+.pt-alert.atencao { background:var(--nn-orange-lt);  border-color:var(--nn-orange);  color:var(--text); }
+.pt-alert.ok      { background:var(--nn-green-lt);   border-color:var(--nn-green);   color:var(--text); }
+.pt-alert.erro    { background:var(--nn-red-lt);     border-color:var(--nn-red);     color:var(--text); }
+.pt-alert.roxo    { background:var(--nn-purple-lt);  border-color:var(--nn-purple);  color:var(--text); }
+.pt-alert strong  { display:block; margin-bottom:3px; }
+
+.pt-table-wrap { overflow-x:auto; margin:10px 0 18px; }
+.pt-table { width:100%; border-collapse:collapse; font-size:13.5px; }
+.pt-table thead th {
+  background:var(--blue); color:#fff;
+  padding:8px 12px; text-align:left; font-weight:600;
+}
+.pt-table tbody td {
+  padding:7px 12px; border-bottom:1px solid var(--border);
+  vertical-align:top; color:var(--text); line-height:1.5;
+}
+.pt-table tbody tr:nth-child(even) td { background:var(--blue-light); }
+.pt-table tbody td:first-child { font-weight:600; color:var(--blue); white-space:nowrap; }
+
+.pt-divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+
+/* ── Roteiro ─────────────────────────────────────────── */
+.pt-step { display:flex; gap:10px; margin-bottom:8px; align-items:flex-start; }
+.pt-num {
+  flex-shrink:0; width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12.5px; font-weight:600; margin-top:2px;
+}
+.pt-num.azul   { background:var(--blue-light);  color:var(--blue); }
+.pt-num.laranja{ background:var(--nn-orange-lt);color:var(--nn-orange); }
+.pt-num.verde  { background:var(--nn-green-lt); color:var(--nn-green); }
+.pt-num.roxo   { background:var(--nn-purple-lt);color:var(--nn-purple); }
+.pt-num.teal   { background:var(--nn-teal-lt);  color:var(--nn-teal); }
+.pt-txt { flex:1; font-size:14.5px; color:var(--text); line-height:1.6; }
+.pt-quest {
+  background:var(--surface); border-left:3px solid var(--gold);
+  border-radius:0 6px 6px 0; padding:8px 12px;
+  margin:4px 0 14px 34px; font-size:14px; color:var(--text2);
+}
+
+/* ── Estudo de Caso ──────────────────────────────────── */
+.pt-caso-header {
+  background:linear-gradient(135deg,#162f52 0%,var(--blue) 100%);
+  border-radius:10px; padding:22px 26px; color:#fff; margin-bottom:20px;
+}
+.pt-caso-header .pt-label {
+  font-size:12px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:5px;
+}
+.pt-caso-header h3 { font-family:var(--serif); font-size:20px; margin-bottom:8px; }
+.pt-caso-header p  { font-size:14px; opacity:.9; line-height:1.55; }
+.pt-pergunta {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; margin-bottom:12px; overflow:hidden;
+}
+.pt-pergunta-head {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 16px; cursor:pointer; user-select:none; background:var(--bg);
+}
+.pt-pergunta-head:hover { background:var(--blue-hover); }
+.pt-pnum {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--blue); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:700; flex-shrink:0;
+}
+.pt-pergunta-head p { flex:1; font-size:14.5px; color:var(--text); font-weight:600; margin:0; }
+.pt-pergunta-head .pt-toggle { font-size:18px; color:var(--text2); transition:transform .2s; }
+.pt-pergunta-body {
+  display:none; padding:14px 16px 14px 56px; font-size:14px;
+  color:var(--text2); line-height:1.65; border-top:1px solid var(--border);
+}
+.pt-pergunta-body.open { display:block; }
+.pt-pergunta-body strong { color:var(--blue); }
+.pt-pergunta-body p { margin-bottom:8px; }
+
+/* ── Escala de Defeitos ──────────────────────────────── */
+.nn-escala { display:flex; flex-direction:column; gap:6px; margin:12px 0 20px; }
+.nn-nivel {
+  display:flex; align-items:flex-start; gap:12px;
+  border-radius:10px; padding:12px 16px; border:1px solid;
+}
+.nn-nivel-num {
+  flex-shrink:0; width:28px; height:28px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:700; color:#fff; margin-top:1px;
+}
+.nn-nivel-info { flex:1; }
+.nn-nivel-titulo { font-family:var(--serif); font-size:14px; font-weight:700; margin-bottom:3px; }
+.nn-nivel-desc   { font-size:13px; color:var(--text2); line-height:1.5; }
+.nn-nivel-ex     { font-size:12px; color:var(--text2); margin-top:4px; font-style:italic; }
+
+.nn-n1 { background:var(--nn-gray-lt);   border-color:var(--nn-gray); }
+.nn-n1 .nn-nivel-num  { background:var(--nn-gray); }
+.nn-n1 .nn-nivel-titulo { color:var(--nn-gray); }
+
+.nn-n2 { background:var(--nn-amber-lt);  border-color:var(--nn-amber); }
+.nn-n2 .nn-nivel-num  { background:var(--nn-amber); }
+.nn-n2 .nn-nivel-titulo { color:var(--nn-amber); }
+
+.nn-n3 { background:var(--nn-orange-lt); border-color:var(--nn-orange); }
+.nn-n3 .nn-nivel-num  { background:var(--nn-orange); }
+.nn-n3 .nn-nivel-titulo { color:var(--nn-orange); }
+
+.nn-n4 { background:var(--nn-red-lt);    border-color:var(--nn-red); }
+.nn-n4 .nn-nivel-num  { background:var(--nn-red); }
+.nn-n4 .nn-nivel-titulo { color:var(--nn-red); }
+
+/* ── Os 7 Princípios ─────────────────────────────────── */
+.nn-princ-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:10px; margin:10px 0;
+}
+.nn-princ-card {
+  border-radius:10px; padding:16px 16px 14px;
+  border:1px solid; position:relative; overflow:hidden;
+}
+.nn-princ-icon  { font-size:22px; margin-bottom:8px; display:block; }
+.nn-princ-num   {
+  position:absolute; top:10px; right:12px;
+  font-size:11px; font-weight:700; letter-spacing:.05em;
+  opacity:.5;
+}
+.nn-princ-title {
+  font-family:var(--serif); font-size:14.5px; font-weight:700; margin-bottom:6px;
+}
+.nn-princ-sub   { font-size:12.5px; line-height:1.55; color:var(--text2); }
+.nn-princ-art   {
+  display:inline-block; margin-top:8px; font-size:11.5px; font-weight:700;
+  padding:2px 7px; border-radius:4px;
+}
+.nn-princ-jurp  {
+  font-size:11.5px; margin-top:6px; padding:5px 8px;
+  border-radius:5px; font-style:italic; line-height:1.4;
+}
+
+.nn-p-blue   { background:var(--blue-light);    border-color:var(--blue); }
+.nn-p-blue   .nn-princ-title { color:var(--blue); }
+.nn-p-blue   .nn-princ-art   { background:var(--blue);    color:#fff; }
+.nn-p-blue   .nn-princ-jurp  { background:rgba(31,73,125,.08); color:var(--text2); }
+
+.nn-p-orange { background:var(--nn-orange-lt);  border-color:var(--nn-orange); }
+.nn-p-orange .nn-princ-title { color:var(--nn-orange); }
+.nn-p-orange .nn-princ-art   { background:var(--nn-orange); color:#fff; }
+.nn-p-orange .nn-princ-jurp  { background:rgba(184,76,12,.08); color:var(--text2); }
+
+.nn-p-green  { background:var(--nn-green-lt);   border-color:var(--nn-green); }
+.nn-p-green  .nn-princ-title { color:var(--nn-green); }
+.nn-p-green  .nn-princ-art   { background:var(--nn-green); color:#fff; }
+.nn-p-green  .nn-princ-jurp  { background:rgba(39,103,73,.08); color:var(--text2); }
+
+.nn-p-teal   { background:var(--nn-teal-lt);    border-color:var(--nn-teal); }
+.nn-p-teal   .nn-princ-title { color:var(--nn-teal); }
+.nn-p-teal   .nn-princ-art   { background:var(--nn-teal); color:#fff; }
+.nn-p-teal   .nn-princ-jurp  { background:rgba(13,92,92,.08); color:var(--text2); }
+
+.nn-p-purple { background:var(--nn-purple-lt);  border-color:var(--nn-purple); }
+.nn-p-purple .nn-princ-title { color:var(--nn-purple); }
+.nn-p-purple .nn-princ-art   { background:var(--nn-purple); color:#fff; }
+.nn-p-purple .nn-princ-jurp  { background:rgba(60,52,137,.08); color:var(--text2); }
+
+.nn-p-red    { background:var(--nn-red-lt);     border-color:var(--nn-red); }
+.nn-p-red    .nn-princ-title { color:var(--nn-red); }
+.nn-p-red    .nn-princ-art   { background:var(--nn-red); color:#fff; }
+.nn-p-red    .nn-princ-jurp  { background:rgba(139,26,26,.08); color:var(--text2); }
+
+.nn-p-amber  { background:var(--nn-amber-lt);   border-color:var(--nn-amber); }
+.nn-p-amber  .nn-princ-title { color:var(--nn-amber); }
+.nn-p-amber  .nn-princ-art   { background:var(--nn-amber); color:#fff; }
+.nn-p-amber  .nn-princ-jurp  { background:rgba(138,96,0,.08); color:var(--text2); }
+
+/* ── Sumula box ──────────────────────────────────────── */
+.nn-sum-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:8px; margin:10px 0 18px; }
+.nn-sum-card {
+  border-radius:8px; padding:10px 13px;
+  border:1px solid; font-size:13px; line-height:1.5;
+}
+.nn-sum-num  { font-weight:700; font-size:12px; display:block; margin-bottom:3px; }
+.nn-sum-blue   { background:var(--blue-light);   border-color:var(--blue); }
+.nn-sum-blue   .nn-sum-num { color:var(--blue); }
+.nn-sum-orange { background:var(--nn-orange-lt); border-color:var(--nn-orange); }
+.nn-sum-orange .nn-sum-num { color:var(--nn-orange); }
+
+@media (max-width:540px) {
+  .pt-tab { padding:4px 9px; font-size:11.5px; }
+  .nn-escala .nn-nivel { flex-direction:column; }
+}
+</style>
+
+<h2 class="pt-titulo">Nulidades no Processo Penal — Arts. 563–573 CPP</h2>
+
+<div class="pt-tabs">
+  <button class="pt-tab ativo" onclick="ptTabNN('visao', this)">Visão Geral</button>
+  <button class="pt-tab" onclick="ptTabNN('principios', this)">Os 7 Princípios</button>
+  <button class="pt-tab" onclick="ptTabNN('roteiro', this)">Roteiro de Estudo</button>
+  <button class="pt-tab" onclick="ptTabNN('caso', this)">Estudo de Caso</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 1 — VISÃO GERAL
+═══════════════════════════════════════════════════════ -->
+<div id="ptNN-visao" class="pt-painel ativo">
+
+  <div class="pt-alert info">
+    <strong>📌 Base Legal: Arts. 563–573 do CPP</strong>
+    A nulidade é a <strong>sanção aplicada ao ato processual defeituoso</strong>, privando-o de produzir seus efeitos regulares. O sistema foi pensado para compelir os sujeitos processuais à observância das formas legais, sem cair no excesso de formalismo — o ato não é um fim em si mesmo.
+  </div>
+
+  <div class="pt-section-title">Escala de Defeitos Processuais</div>
+  <div class="nn-escala">
+    <div class="nn-nivel nn-n1">
+      <div class="nn-nivel-num">1</div>
+      <div class="nn-nivel-info">
+        <div class="nn-nivel-titulo">Irregularidade sem consequência</div>
+        <div class="nn-nivel-desc">O defeito não afeta a validade do ato nem gera qualquer sanção processual.</div>
+        <div class="nn-nivel-ex">Ex.: juiz que deixa de assinar uma certidão de rotina.</div>
+      </div>
+    </div>
+    <div class="nn-nivel nn-n2">
+      <div class="nn-nivel-num">2</div>
+      <div class="nn-nivel-info">
+        <div class="nn-nivel-titulo">Irregularidade com sanção extraprocessual</div>
+        <div class="nn-nivel-desc">O ato em si permanece válido, mas o sujeito que o praticou pode sofrer sanção disciplinar ou administrativa.</div>
+        <div class="nn-nivel-ex">Ex.: perito que perde o prazo para apresentar laudo.</div>
+      </div>
+    </div>
+    <div class="nn-nivel nn-n3">
+      <div class="nn-nivel-num">3</div>
+      <div class="nn-nivel-info">
+        <div class="nn-nivel-titulo">Nulidade — absoluta ou relativa</div>
+        <div class="nn-nivel-desc">O ato é juridicamente existente, mas sujeito à declaração de ineficácia. Produz efeitos enquanto não declarada a nulidade pelo juiz.</div>
+        <div class="nn-nivel-ex">Ex.: sentença sem fundamentação (absoluta); citação com vício formal (relativa).</div>
+      </div>
+    </div>
+    <div class="nn-nivel nn-n4">
+      <div class="nn-nivel-num">4</div>
+      <div class="nn-nivel-info">
+        <div class="nn-nivel-titulo">Inexistência jurídica — jamais se convalida</div>
+        <div class="nn-nivel-desc">O ato sequer ingressa no mundo jurídico. Não produz efeitos em hipótese alguma e não precisa de declaração judicial para ser ineficaz.</div>
+        <div class="nn-nivel-ex">Ex.: sentença proferida por juiz absolutamente impedido.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-section-title">Nulidade Absoluta</div>
+  <div class="pt-alert erro">
+    <strong>🔴 Vício que atenta contra o interesse público</strong>
+    Viola norma constitucional, tratado de direitos humanos ou qualquer norma de natureza pública, comprometendo a legitimidade do processo como um todo.
+  </div>
+  <div class="pt-grid">
+    <div class="pt-card vermelho">
+      <h4>⚖️ Prejuízo — presumido (iuris tantum)</h4>
+      <p>O prejuízo é <strong>presumido relativamente</strong> — a parte contrária pode afastá-lo com prova. (Art. 563 CPP + STF HC 85.155/SP)</p>
+      <p style="margin-top:6px">Ex.: desembargador suspeito participou de votação, mas 22 dos 24 membros já seriam suficientes para o resultado — STJ HC 227.263/RJ.</p>
+    </div>
+    <div class="pt-card vermelho">
+      <h4>⏰ Arguição — a qualquer momento</h4>
+      <p>Pode ser alegada em <strong>qualquer fase processual</strong>, até o trânsito em julgado. Não se sujeita à preclusão.</p>
+      <p style="margin-top:6px">Na 2ª instância: a favor do réu pode sempre; contra o réu depende do efeito devolutivo do recurso (Súm. 160 STF).</p>
+    </div>
+    <div class="pt-card vermelho">
+      <h4>🚫 Não convalesce</h4>
+      <p>O ato afetado por nulidade absoluta <strong>não pode ser sanado</strong> pelas hipóteses do art. 572 do CPP, que só alcança as nulidades relativas.</p>
+    </div>
+  </div>
+
+  <div class="pt-alert atencao" style="margin-top:4px">
+    <strong>⚠️ Hipóteses de nulidade absoluta — art. 564 CPP (os que o art. 572 não ressalva)</strong>
+    Inc. I (incompetência, suspeição ou suborno do juiz) · Inc. II (ilegitimidade de parte) · Inc. III-a, b, c, f, i, j, k, l, m, n, o, p · Inc. IV (omissão de formalidade essencial) · Inc. V (decisão sem fundamentação — Lei 13.964/2019).
+  </div>
+
+  <div class="pt-section-title">Nulidade Relativa</div>
+  <div class="pt-alert ok">
+    <strong>🟡 Vício que atenta contra interesse preponderante das partes</strong>
+    Viola norma infraconstitucional que tutela principalmente o interesse das partes — não da ordem pública.
+  </div>
+  <div class="pt-grid">
+    <div class="pt-card laranja">
+      <h4>📋 Prejuízo — deve ser comprovado</h4>
+      <p>Não basta alegar a irregularidade: a parte <strong>precisa provar o efetivo prejuízo</strong> causado pelo vício formal.</p>
+      <p style="margin-top:6px">Alegações genéricas não batem (Súm. 523 STF; STJ REsp 1.348.978/SC).</p>
+    </div>
+    <div class="pt-card laranja">
+      <h4>⏱️ Arguição — oportuna (art. 571)</h4>
+      <p>Deve ser alegada no <strong>momento processual adequado</strong>, sob pena de <strong>preclusão</strong> e consequente convalidação.</p>
+      <ul>
+        <li>Preclusão <strong>temporal</strong>: prazo expirou</li>
+        <li>Preclusão <strong>lógica</strong>: aceitou tacitamente os efeitos</li>
+      </ul>
+    </div>
+    <div class="pt-card laranja">
+      <h4>✅ Convalesce — art. 572</h4>
+      <p>As nulidades dos arts. 564, III-d, e (2ª parte), g, h e IV são sanadas:</p>
+      <ul>
+        <li>Se não arguidas em tempo oportuno</li>
+        <li>Se o ato atingiu seu fim por outra forma</li>
+        <li>Se a parte aceitou os efeitos (tácita ou expressamente)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pt-section-title">Tabela Comparativa: Absoluta × Relativa</div>
+  <div class="pt-table-wrap">
+    <table class="pt-table">
+      <thead><tr><th>Aspecto</th><th>Nulidade Absoluta</th><th>Nulidade Relativa</th></tr></thead>
+      <tbody>
+        <tr><td>Interesse tutelado</td><td>Público — ordem pública, CF, tratados de DH</td><td>Preponderantemente das partes</td></tr>
+        <tr><td>Prejuízo</td><td>Presumido (iuris tantum) — pode ser ilidido</td><td>Deve ser <em>comprovado</em> pela parte</td></tr>
+        <tr><td>Arguição</td><td>A qualquer tempo, até o trânsito em julgado</td><td>No momento oportuno (art. 571 CPP)</td></tr>
+        <tr><td>Preclusão</td><td>Não há preclusão</td><td>Sujeita à preclusão temporal e lógica</td></tr>
+        <tr><td>Convalidação</td><td>Não convalesce (art. 572 não a alcança)</td><td>Convalesce nas hipóteses do art. 572</td></tr>
+        <tr><td>Reconhecimento ex officio</td><td>Sim — juiz pode declarar de ofício</td><td>Não — depende de arguição da parte interessada</td></tr>
+        <tr><td>Base normativa</td><td>CF, tratados de DH, norma de ordem pública</td><td>Norma infraconstitucional de interesse das partes</td></tr>
+        <tr><td>Exemplos</td><td>Interrogatório sem advogado; sentença sem fundamentação</td><td>Incompetência territorial; vício de citação não arguido</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pt-section-title">Reconhecimento das Nulidades nas Instâncias</div>
+  <div class="pt-grid">
+    <div class="pt-card">
+      <h4>🏛️ 1ª Instância</h4>
+      <p>O juiz é <strong>livre para conhecer de qualquer nulidade</strong> — absoluta ou relativa — de ofício ou mediante provocação das partes.</p>
+    </div>
+    <div class="pt-card teal">
+      <h4>📋 2ª Instância</h4>
+      <p>Limitado ao <strong>efeito devolutivo</strong> do recurso.</p>
+      <ul>
+        <li><em>A favor do réu</em>: pode conhecer sempre</li>
+        <li><em>Contra o réu</em>: exige efeito devolutivo do recurso da acusação</li>
+        <li>Em recurso de ofício: pode sempre</li>
+      </ul>
+      <p style="margin-top:6px"><strong>Súm. 160 STF:</strong> é nula a decisão do tribunal que acolhe, <em>contra o réu</em>, nulidade não arguida no recurso da acusação, ressalvados os casos de recurso de ofício.</p>
+    </div>
+  </div>
+
+  <div class="pt-section-title">Efeitos da Declaração (Arts. 567–573)</div>
+  <div class="pt-grid">
+    <div class="pt-card cinza">
+      <h4>Art. 567 — Incompetência</h4>
+      <p>Anula <strong>somente os atos decisórios</strong>. Os atos instrutórios são aproveitados. O processo é remetido ao juízo competente.</p>
+    </div>
+    <div class="pt-card cinza">
+      <h4>Art. 570 — Comparecimento sana</h4>
+      <p>A falta ou nulidade de citação, intimação ou notificação é <strong>sanada pelo comparecimento espontâneo</strong> do interessado, ainda que para arguir o vício.</p>
+    </div>
+    <div class="pt-card cinza">
+      <h4>Art. 573 — Efeito expansivo</h4>
+      <p>A nulidade declarada <strong>contamina os atos que dela diretamente dependam</strong> ou sejam consequência. O juiz declara os atos atingidos.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 2 — OS 7 PRINCÍPIOS
+═══════════════════════════════════════════════════════ -->
+<div id="ptNN-principios" class="pt-painel">
+
+  <div class="pt-alert info" style="margin-bottom:18px">
+    <strong>📋 Os 7 Princípios das Nulidades Processuais Penais</strong>
+    Regras que orientam o reconhecimento e a declaração das nulidades, evitando tanto o excesso de formalismo quanto a impunidade de vícios relevantes. Clique em cada card para expandir exemplos e jurisprudência.
+  </div>
+
+  <div class="nn-princ-grid">
+
+    <div class="nn-princ-card nn-p-blue">
+      <span class="nn-princ-num">P.1</span>
+      <span class="nn-princ-icon">📐</span>
+      <div class="nn-princ-title">Tipicidade das Formas</div>
+      <div class="nn-princ-sub">Todo ato processual deve ser praticado em conformidade com o modelo legal. A inobservância da forma prescrita abre espaço para a declaração de nulidade.</div>
+      <span class="nn-princ-art">Fundamento geral — CPP</span>
+      <div class="nn-princ-jurp">O modelo típico confere previsibilidade e segurança jurídica ao processo. (R. Brasileiro)</div>
+    </div>
+
+    <div class="nn-princ-card nn-p-orange">
+      <span class="nn-princ-num">P.2</span>
+      <span class="nn-princ-icon">⚖️</span>
+      <div class="nn-princ-title">Pas des Nullités sans Grief</div>
+      <div class="nn-princ-sub">Nenhum ato será declarado nulo se da nulidade não resultar prejuízo para a acusação ou para a defesa.</div>
+      <span class="nn-princ-art">Art. 563 CPP</span>
+      <div class="nn-princ-jurp">Absoluta: prejuízo presumido (iuris tantum). Relativa: prejuízo deve ser comprovado. Súm. 523 STF: falta da defesa = nulidade absoluta; deficiência = precisa de prova de prejuízo.</div>
+    </div>
+
+    <div class="nn-princ-card nn-p-green">
+      <span class="nn-princ-num">P.3</span>
+      <span class="nn-princ-icon">🎯</span>
+      <div class="nn-princ-title">Instrumentalidade das Formas</div>
+      <div class="nn-princ-sub">A forma não é um fim em si mesma. Se o ato, praticado de modo diverso, atingiu a finalidade para a qual foi criado, não há razão para declará-lo nulo.</div>
+      <span class="nn-princ-art">Art. 566 CPP · Art. 572, II CPP</span>
+      <div class="nn-princ-jurp">Súm. 366 STF: não é nula a citação por edital que indica o dispositivo penal, mesmo sem transcrever a denúncia, se cumpriu o objetivo de dar ciência ao réu.</div>
+    </div>
+
+    <div class="nn-princ-card nn-p-teal">
+      <span class="nn-princ-num">P.4</span>
+      <span class="nn-princ-icon">🔔</span>
+      <div class="nn-princ-title">Eficácia dos Atos Processuais</div>
+      <div class="nn-princ-sub">A nulidade não opera automaticamente. O ato viciado produz efeitos regulares enquanto não houver declaração judicial expressa de sua nulidade.</div>
+      <span class="nn-princ-art">Princípio geral</span>
+      <div class="nn-princ-jurp">Ex.: sentença condenatória sem fundamentação é nula (art. 93, IX CF), mas continua produzindo efeitos até que o tribunal a declare ineficaz.</div>
+    </div>
+
+    <div class="nn-princ-card nn-p-purple">
+      <span class="nn-princ-num">P.5</span>
+      <span class="nn-princ-icon">🌊</span>
+      <div class="nn-princ-title">Efeito Expansivo (Propagação)</div>
+      <div class="nn-princ-sub">A nulidade de um ato, uma vez declarada, contamina os atos subsequentes que dele diretamente dependam ou sejam consequência.</div>
+      <span class="nn-princ-art">Art. 573, §1º CPP</span>
+      <div class="nn-princ-jurp">O juiz declara expressamente quais atos são atingidos. Atos independentes do ato nulo são preservados — não há contaminação automática e universal.</div>
+    </div>
+
+    <div class="nn-princ-card nn-p-amber">
+      <span class="nn-princ-num">P.6</span>
+      <span class="nn-princ-icon">🎭</span>
+      <div class="nn-princ-title">Princípio do Interesse</div>
+      <div class="nn-princ-sub">Nenhuma parte pode arguir nulidade referente a formalidade cuja observância só interesse à parte contrária. Aplica-se somente às nulidades relativas.</div>
+      <span class="nn-princ-art">Art. 565 CPP</span>
+      <div class="nn-princ-jurp">Ex.: a defesa não pode arguir nulidade relativa criada no exclusivo interesse do Ministério Público. O contrário também vale.</div>
+    </div>
+
+    <div class="nn-princ-card nn-p-red">
+      <span class="nn-princ-num">P.7</span>
+      <span class="nn-princ-icon">🤝</span>
+      <div class="nn-princ-title">Lealdade (Boa-Fé Processual)</div>
+      <div class="nn-princ-sub">Nenhuma das partes pode arguir nulidade a que haja dado causa ou para a qual tenha concorrido — nemo auditur propriam turpitudinem allegans.</div>
+      <span class="nn-princ-art">Art. 565 CPP</span>
+      <div class="nn-princ-jurp">Ex.: defensor que não comparece à audiência sem justificativa não pode depois invocar a nulidade da audiência realizada na sua ausência.</div>
+    </div>
+
+  </div>
+
+  <div class="pt-section-title" style="margin-top:24px">Síntese: Princípios × Tipos de Nulidade</div>
+  <div class="pt-table-wrap">
+    <table class="pt-table">
+      <thead><tr><th>Princípio</th><th>Aplica-se à Absoluta?</th><th>Aplica-se à Relativa?</th></tr></thead>
+      <tbody>
+        <tr><td>Pas des nullités sans grief (P.2)</td><td>Sim — prejuízo presumido</td><td>Sim — prejuízo comprovado</td></tr>
+        <tr><td>Instrumentalidade das formas (P.3)</td><td>Sim (com restrições)</td><td>Sim (plenamente)</td></tr>
+        <tr><td>Efeito expansivo (P.5)</td><td>Sim</td><td>Sim</td></tr>
+        <tr><td>Interesse (P.6)</td><td>Não — ordem pública transcende</td><td>Sim</td></tr>
+        <tr><td>Lealdade / boa-fé (P.7)</td><td>Sim (aplica-se a ambas)</td><td>Sim</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 3 — ROTEIRO DE ESTUDO
+═══════════════════════════════════════════════════════ -->
+<div id="ptNN-roteiro" class="pt-painel">
+
+  <div class="pt-section-title">Roteiro de Estudo — 5 Passos</div>
+
+  <div class="pt-step">
+    <div class="pt-num azul">1</div>
+    <div class="pt-txt"><strong>A escala de defeitos.</strong> Memorize os 4 níveis: irregularidade sem consequência → sanção extraprocessual → nulidade (absoluta ou relativa) → inexistência jurídica. A inexistência jamais convalesce, independe de declaração. A nulidade existe mas é ineficaz até a declaração.</div>
+  </div>
+  <div class="pt-quest">❓ Qual a diferença entre ato nulo e ato juridicamente inexistente? O ato nulo produz efeitos antes da declaração de nulidade?</div>
+
+  <div class="pt-step">
+    <div class="pt-num azul">2</div>
+    <div class="pt-txt"><strong>Absoluta × Relativa — o quadro comparativo.</strong> A chave: interesse tutelado (público × das partes) define o tipo; daí decorre tudo — prejudizado presumido ou comprovado, arguição livre ou oportuna, sujeita ou não à preclusão. Grave a tabela comparativa.</div>
+  </div>
+  <div class="pt-quest">❓ Em que hipótese uma nulidade absoluta pode não ser declarada, mesmo existindo o vício?</div>
+
+  <div class="pt-step">
+    <div class="pt-num laranja">3</div>
+    <div class="pt-txt"><strong>Art. 564 e art. 572 — quais são relativas?</strong> Os incisos III-d, III-e (2ª parte), III-g, III-h e IV são as nulidades relativas (sanáveis pelo art. 572). Todos os demais são absolutos. Decore os 3 casos de sanação: não arguida, atingiu seu fim, parte aceitou os efeitos.</div>
+  </div>
+  <div class="pt-quest">❓ A falta de intervenção do MP em ação por ele intentada (art. 564, III-d) é nulidade absoluta ou relativa? E a falta de intimação das testemunhas (III-h)?</div>
+
+  <div class="pt-step">
+    <div class="pt-num verde">4</div>
+    <div class="pt-txt"><strong>Os 7 princípios — foco nas questões de concurso.</strong> Os mais cobrados: pas des nullités sans grief (art. 563), instrumentalidade (art. 566), interesse e lealdade (art. 565). Saiba que P.6 e P.7 se aplicam só às relativas. Súm. 523 STF é a mais cobrada.</div>
+  </div>
+  <div class="pt-quest">❓ O MP não compareceu à audiência de instrução. A defesa não reclamou na hora. Depois, invoca nulidade. É cabível? Qual princípio incide?</div>
+
+  <div class="pt-step">
+    <div class="pt-num roxo">5</div>
+    <div class="pt-txt"><strong>Efeitos especiais dos arts. 567–573.</strong> Art. 567: incompetência anula só atos <em>decisórios</em> (atos instrutórios são aproveitados). Art. 570: comparecimento espontâneo sana falta de citação. Art. 573: efeito expansivo — nulidade não contamina atos independentes.</div>
+  </div>
+  <div class="pt-quest">❓ Reconhecida a incompetência territorial do juízo após a instrução completa, os depoimentos das testemunhas devem ser repetidos no juízo competente?</div>
+
+  <hr class="pt-divider">
+
+  <div class="pt-section-title">Mapa de Súmulas Essenciais</div>
+
+  <p style="font-size:13px;color:var(--text2);margin-bottom:10px">STF — Súmulas mais cobradas em concurso</p>
+  <div class="nn-sum-grid">
+    <div class="nn-sum-card nn-sum-blue">
+      <span class="nn-sum-num">Súm. 160 STF</span>
+      É nula a decisão do tribunal que acolhe, <em>contra o réu</em>, nulidade não arguida no recurso da acusação, ressalvados os casos de recurso de ofício.
+    </div>
+    <div class="nn-sum-card nn-sum-blue">
+      <span class="nn-sum-num">Súm. 366 STF</span>
+      Não é nula a citação por edital que indica o dispositivo da lei penal, embora não transcreva a denúncia ou queixa, ou não resuma os fatos.
+    </div>
+    <div class="nn-sum-card nn-sum-blue">
+      <span class="nn-sum-num">Súm. 523 STF</span>
+      No processo penal, a falta da defesa constitui nulidade absoluta, mas a sua deficiência só o anulará se houver prova de prejuízo para o réu.
+    </div>
+    <div class="nn-sum-card nn-sum-blue">
+      <span class="nn-sum-num">Súm. 706 STF</span>
+      É <em>relativa</em> a nulidade decorrente da inobservância da competência penal por prevenção.
+    </div>
+    <div class="nn-sum-card nn-sum-blue">
+      <span class="nn-sum-num">Súm. 707 STF</span>
+      Constitui nulidade a falta de intimação do denunciado para oferecer contrarrazões ao recurso da rejeição da denúncia, não a suprindo a nomeação de defensor dativo.
+    </div>
+    <div class="nn-sum-card nn-sum-orange">
+      <span class="nn-sum-num">Súm. 273 STJ</span>
+      Intimada a defesa da expedição da carta precatória, torna-se desnecessária a intimação da data da audiência no juízo deprecado.
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 4 — ESTUDO DE CASO
+═══════════════════════════════════════════════════════ -->
+<div id="ptNN-caso" class="pt-painel">
+  <div class="pt-caso-header">
+    <div class="pt-label">Estudo de Caso</div>
+    <h3>Processo penal de Carlos — Da instrução ao recurso</h3>
+    <p>Carlos foi denunciado por furto qualificado. Durante o processo: (1) foi interrogado sem que lhe fosse nomeado defensor e sem que ele soubesse de seu direito; (2) o MP deixou de comparecer a uma audiência de instrução e o juiz colheu os depoimentos sozinho; (3) somente em sede de apelação a defesa alegou que o juiz sentenciante tinha suspeição por amizade íntima com a vítima; (4) o advogado, na audiência de instrução, não fez perguntas às testemunhas e não reclamou de nada.</p>
+  </div>
+  <div>
+    <div class="pt-pergunta">
+      <div class="pt-pergunta-head" onclick="ptPergNN(this)">
+        <div class="pt-pnum">1</div>
+        <p>O interrogatório de Carlos sem defensor gera que tipo de nulidade? Pode ser declarada de ofício?</p>
+        <span class="pt-toggle">▼</span>
+      </div>
+      <div class="pt-pergunta-body">
+        <p>Trata-se de <strong>nulidade absoluta</strong>. A nomeação de defensor ao réu presente que não o tiver é hipótese expressa do art. 564, III-c do CPP — não incluída no rol de nulidades sanáveis do art. 572. O vício atinge o interesse público de assegurar a ampla defesa (art. 5º, LV, CF).</p>
+        <p>Características: prejuízo <strong>presumido</strong> (iuris tantum); pode ser arguida a <strong>qualquer tempo</strong> até o trânsito em julgado; o juiz pode declará-la <strong>de ofício</strong>.</p>
+        <p>A defesa pode alegar em apelação mesmo sem ter reclamado no momento do interrogatório, pois nulidade absoluta não se sujeita à preclusão.</p>
+      </div>
+    </div>
+
+    <div class="pt-pergunta">
+      <div class="pt-pergunta-head" onclick="ptPergNN(this)">
+        <div class="pt-pnum">2</div>
+        <p>A ausência do MP na audiência e a colheita dos depoimentos pelo juiz sozinho geram nulidade? Quais princípios incidem?</p>
+        <span class="pt-toggle">▼</span>
+      </div>
+      <div class="pt-pergunta-body">
+        <p>A hipótese é mais complexa. A ausência do MP na audiência, quando intimado, <strong>não gera nulidade automática</strong> se o juiz condutor fez as perguntas sobre os fatos da denúncia e a defesa não se insurgiu no momento (STJ REsp 1.348.978/SC).</p>
+        <p>Dois princípios incidem: (a) <strong>Instrumentalidade das formas</strong> — o ato atingiu sua finalidade (depoimentos colhidos); (b) <strong>Lealdade / boa-fé</strong> e <strong>Interesse</strong> (art. 565) — se a defesa aceitou tacitamente os efeitos e não reclamou, configura preclusão lógica.</p>
+        <p>Se for relativa: precisa provar prejuízo concreto para a defesa. Alegações genéricas não bastam.</p>
+      </div>
+    </div>
+
+    <div class="pt-pergunta">
+      <div class="pt-pergunta-head" onclick="ptPergNN(this)">
+        <div class="pt-pnum">3</div>
+        <p>A suspeição do juiz só foi alegada em apelação. O tribunal pode reconhecer a nulidade contra Carlos? E a favor?</p>
+        <span class="pt-toggle">▼</span>
+      </div>
+      <div class="pt-pergunta-body">
+        <p>A suspeição do juiz é causa de <strong>nulidade absoluta</strong> (art. 564, I do CPP). Como toda absoluta, pode ser alegada a qualquer tempo até o trânsito em julgado e pode ser conhecida de ofício.</p>
+        <p>O tribunal <strong>pode reconhecê-la a favor de Carlos</strong> mesmo sem recurso da defesa, com base no princípio da fungibilidade e no controle de nulidades absolutas. Porém, se reconhecida, cassará a sentença.</p>
+        <p>Para reconhecê-la <strong>contra Carlos</strong> (ex.: em recurso exclusivo da acusação), aplica-se a <strong>Súmula 160 STF</strong>: só pode se essa nulidade foi arguida no recurso da acusação. Caso contrário, é nula a decisão do tribunal que a acolher contra o réu.</p>
+      </div>
+    </div>
+
+    <div class="pt-pergunta">
+      <div class="pt-pergunta-head" onclick="ptPergNN(this)">
+        <div class="pt-pnum">4</div>
+        <p>O advogado não fez perguntas às testemunhas e nada reclamou. Isso constitui nulidade? A falta e a deficiência de defesa têm o mesmo tratamento?</p>
+        <span class="pt-toggle">▼</span>
+      </div>
+      <div class="pt-pergunta-body">
+        <p>A <strong>Súmula 523 do STF</strong> é a regra central: <em>a falta da defesa constitui nulidade absoluta, mas a deficiência só anulará se houver prova de prejuízo para o réu</em>.</p>
+        <p>Neste caso, o advogado esteve presente mas não atuou ativamente — isso é <strong>deficiência</strong>, não falta. Portanto, é <strong>nulidade relativa</strong>: a defesa precisa provar que a omissão do advogado causou prejuízo concreto (ex.: testemunha favorável não foi inquirida sobre ponto decisivo).</p>
+        <p>Alegação genérica de que "a defesa foi falha" não basta. O ônus da prova do prejuízo é de quem alega.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function ptTabNN(id, btn) {
+  document.querySelectorAll('.pt-painel').forEach(p => p.classList.remove('ativo'));
+  document.querySelectorAll('.pt-tab').forEach(b => b.classList.remove('ativo'));
+  document.getElementById('ptNN-' + id).classList.add('ativo');
+  btn.classList.add('ativo');
+}
+function ptPergNN(head) {
+  const body = head.nextElementSibling;
+  const toggle = head.querySelector('.pt-toggle');
+  body.classList.toggle('open');
+  toggle.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : '';
+}
+</script>

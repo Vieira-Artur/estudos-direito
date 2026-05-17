@@ -125,6 +125,11 @@ const materias = [
             titulo: "Procedimentos",
             descricao: "Devido processo legal · Critério pela pena · Rito ordinário · AIJ · Alegações finais · Sentença",
             arquivo: "conteudo/processual-penal-iii/01-procedimentos.html"
+          },
+          {
+            titulo: "Nulidades",
+            descricao: "Escala de defeitos · Absoluta × relativa · Os 7 princípios · Arts. 563–573 CPP · Súmulas STF e STJ",
+            arquivo: "conteudo/processual-penal-iii/02-nulidades.html"
           }
         ]
       },

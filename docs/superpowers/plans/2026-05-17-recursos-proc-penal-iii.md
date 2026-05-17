@@ -1,0 +1,624 @@
+# Recursos — Processo Penal III — Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Criar a aba "Recursos" em Processo Penal III, adicionando `03-recursos.html` e registrando o tema em `data.js`.
+
+**Architecture:** Um único arquivo HTML de conteúdo (`03-recursos.html`) com 4 abas internas, seguindo o mesmo padrão de `02-nulidades.html` (CSS inline, `.pt-*` classes, JS de troca de abas no fim do arquivo). Nenhum novo arquivo CSS ou JS global é necessário. A entrada em `data.js` é uma adição de 5 linhas.
+
+**Tech Stack:** HTML + CSS + JavaScript vanilla, sem frameworks, sem build step.
+
+---
+
+## Task 1: Adicionar entrada em data.js
+
+**Files:**
+- Modify: `data.js` — turma `processual-penal-iii`, array `temas`
+
+- [ ] **Step 1: Localizar o ponto de inserção**
+
+Abrir `data.js`. Localizar o bloco:
+```js
+      {
+        id: "processual-penal-iii",
+        titulo: "Direito Processual Penal III",
+        temas: [
+          {
+            titulo: "Procedimentos",
+```
+O array `temas` termina após o objeto de "Nulidades". Inserir o novo objeto **após** a vírgula do objeto "Nulidades".
+
+- [ ] **Step 2: Inserir o objeto do tema**
+
+O trecho atual em `data.js` (linhas ~129–134):
+```js
+          {
+            titulo: "Nulidades",
+            descricao: "Escala de defeitos · Absoluta × relativa · Os 7 princípios · Arts. 563–573 CPP · Súmulas STF e STJ",
+            arquivo: "conteudo/processual-penal-iii/02-nulidades.html"
+          }
+        ]
+```
+
+Substituir por:
+```js
+          {
+            titulo: "Nulidades",
+            descricao: "Escala de defeitos · Absoluta × relativa · Os 7 princípios · Arts. 563–573 CPP · Súmulas STF e STJ",
+            arquivo: "conteudo/processual-penal-iii/02-nulidades.html"
+          },
+          {
+            titulo: "Recursos",
+            descricao: "Conceito · 8 Princípios · Pressupostos · Tabela de prazos · RESE · Apelação · Embargos",
+            arquivo: "conteudo/processual-penal-iii/03-recursos.html"
+          }
+        ]
+```
+
+- [ ] **Step 3: Verificar sintaxe**
+
+Abrir o site no navegador (arquivo `index.html`). Navegar até "Processo Penal III". Confirmar que o card "Recursos" aparece na lista de temas. Clicar nele — deve exibir erro de arquivo não encontrado (esperado, pois `03-recursos.html` ainda não existe).
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add data.js
+git commit -m "feat: adiciona entrada de Recursos em Proc. Penal III no data.js"
+```
+
+---
+
+## Task 2: Criar 03-recursos.html — CSS e esqueleto de abas
+
+**Files:**
+- Create: `conteudo/processual-penal-iii/03-recursos.html`
+
+- [ ] **Step 1: Criar o arquivo com CSS e estrutura de abas vazia**
+
+Criar `conteudo/processual-penal-iii/03-recursos.html` com o conteúdo a seguir. Os painéis das abas ficam vazios por ora (serão preenchidos nas tarefas seguintes).
+
+```html
+<style>
+/* ── Cores extras ─────────────────────────────────── */
+:root {
+  --rc-green:  #276749; --rc-green-lt: #edfaf3;
+  --rc-amber:  #8a6000; --rc-amber-lt: #fff8e1;
+  --rc-red:    #8b1a1a; --rc-red-lt:   #fce8e8;
+  --rc-purple: #3c3489; --rc-purple-lt:#eeedfe;
+  --rc-teal:   #0d5c5c; --rc-teal-lt:  #e6f7f7;
+  --rc-gray:   #4a4a52; --rc-gray-lt:  #f2f2f5;
+  --rc-orange: #b84c0c; --rc-orange-lt:#fff5ee;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --rc-green:  #6fd86f; --rc-green-lt: #0d2e0d;
+    --rc-amber:  #f0c060; --rc-amber-lt: #2e1c00;
+    --rc-red:    #f08080; --rc-red-lt:   #2e0d0d;
+    --rc-purple: #a89cf7; --rc-purple-lt:#1a1840;
+    --rc-teal:   #60d8b8; --rc-teal-lt:  #072e22;
+    --rc-gray:   #b0b0b8; --rc-gray-lt:  #1e1e22;
+    --rc-orange: #f0a060; --rc-orange-lt:#2e1500;
+  }
+}
+:root[data-theme="dark"] {
+  --rc-green:  #6fd86f; --rc-green-lt: #0d2e0d;
+  --rc-amber:  #f0c060; --rc-amber-lt: #2e1c00;
+  --rc-red:    #f08080; --rc-red-lt:   #2e0d0d;
+  --rc-purple: #a89cf7; --rc-purple-lt:#1a1840;
+  --rc-teal:   #60d8b8; --rc-teal-lt:  #072e22;
+  --rc-gray:   #b0b0b8; --rc-gray-lt:  #1e1e22;
+  --rc-orange: #f0a060; --rc-orange-lt:#2e1500;
+}
+
+/* ── Abas ─────────────────────────────────────────── */
+.pt-tabs { display:flex; gap:4px; margin-bottom:22px; flex-wrap:wrap; }
+.pt-tab {
+  padding:7px 18px; font-size:13px; font-weight:600;
+  font-family:var(--sans); border:1.5px solid var(--blue);
+  border-radius:6px; cursor:pointer;
+  background:var(--surface); color:var(--blue);
+  transition:background .15s, color .15s;
+}
+.pt-tab:hover { background:var(--blue-hover); }
+.pt-tab.ativo { background:var(--blue); color:#fff; }
+.pt-painel { display:none; }
+.pt-painel.ativo { display:block; }
+
+/* ── Título e seções ──────────────────────────────── */
+.pt-titulo {
+  font-family:var(--serif); font-size:19px; font-weight:700;
+  color:var(--blue); margin-bottom:18px;
+  padding-bottom:10px; border-bottom:2px solid var(--border);
+}
+.pt-section-title {
+  font-family:var(--serif); font-size:15px; font-weight:700; color:var(--blue);
+  border-left:3px solid var(--gold); padding-left:10px; margin:24px 0 12px;
+}
+.pt-section-title:first-child { margin-top:0; }
+
+/* ── Cards ────────────────────────────────────────── */
+.pt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; margin:10px 0 18px; }
+.pt-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:8px; padding:14px 16px; border-top:3px solid var(--blue);
+}
+.pt-card.verde   { border-top-color:var(--rc-green); }
+.pt-card.laranja { border-top-color:var(--rc-orange); }
+.pt-card.vermelho{ border-top-color:var(--rc-red); }
+.pt-card.roxo    { border-top-color:var(--rc-purple); }
+.pt-card.teal    { border-top-color:var(--rc-teal); }
+.pt-card.cinza   { border-top-color:var(--rc-gray); }
+.pt-card.amber   { border-top-color:var(--rc-amber); }
+.pt-card h4 { font-size:14.5px; color:var(--blue); margin-bottom:6px; font-weight:700; }
+.pt-card p, .pt-card li { font-size:13.5px; color:var(--text2); line-height:1.55; }
+.pt-card ul { padding-left:14px; margin-top:5px; }
+.pt-card .pt-art { font-size:12px; color:var(--text2); margin-top:6px; font-style:italic; }
+
+/* ── Alertas ──────────────────────────────────────── */
+.pt-alert {
+  border-radius:7px; padding:10px 14px; margin:10px 0;
+  font-size:14px; border-left:4px solid; line-height:1.55;
+}
+.pt-alert.info    { background:var(--blue-light);   border-color:var(--blue);      color:var(--text); }
+.pt-alert.atencao { background:var(--rc-orange-lt); border-color:var(--rc-orange); color:var(--text); }
+.pt-alert.ok      { background:var(--rc-green-lt);  border-color:var(--rc-green);  color:var(--text); }
+.pt-alert.erro    { background:var(--rc-red-lt);    border-color:var(--rc-red);    color:var(--text); }
+.pt-alert.roxo    { background:var(--rc-purple-lt); border-color:var(--rc-purple); color:var(--text); }
+.pt-alert strong  { display:block; margin-bottom:3px; }
+
+/* ── Tabela ───────────────────────────────────────── */
+.pt-table-wrap { overflow-x:auto; margin:10px 0 18px; }
+.pt-table { width:100%; border-collapse:collapse; font-size:13.5px; }
+.pt-table thead th {
+  background:var(--blue); color:#fff;
+  padding:8px 12px; text-align:left; font-weight:600;
+}
+.pt-table tbody td {
+  padding:7px 12px; border-bottom:1px solid var(--border);
+  vertical-align:top; color:var(--text); line-height:1.5;
+}
+.pt-table tbody tr:nth-child(even) td { background:var(--blue-light); }
+.pt-table tbody td:first-child { font-weight:600; color:var(--blue); white-space:nowrap; }
+
+.pt-divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+
+/* ── Lista RESE ───────────────────────────────────── */
+.rc-rese-list { list-style:none; padding:0; margin:8px 0 16px; }
+.rc-rese-list li {
+  display:flex; gap:8px; align-items:flex-start;
+  padding:5px 0; border-bottom:1px solid var(--border);
+  font-size:13.5px; color:var(--text); line-height:1.5;
+}
+.rc-rese-list li:last-child { border-bottom:none; }
+.rc-inc {
+  flex-shrink:0; min-width:34px;
+  font-weight:700; color:var(--blue); font-size:12.5px;
+  padding-top:2px;
+}
+</style>
+
+<div class="pt-titulo">Recursos</div>
+
+<div class="pt-tabs">
+  <button class="pt-tab ativo" onclick="ptAba(0)">Conceito &amp; Princípios</button>
+  <button class="pt-tab" onclick="ptAba(1)">Pressupostos</button>
+  <button class="pt-tab" onclick="ptAba(2)">Efeitos</button>
+  <button class="pt-tab" onclick="ptAba(3)">Recursos em Espécie</button>
+</div>
+
+<div class="pt-painel ativo" id="pt0"><!-- Aba 1 --></div>
+<div class="pt-painel" id="pt1"><!-- Aba 2 --></div>
+<div class="pt-painel" id="pt2"><!-- Aba 3 --></div>
+<div class="pt-painel" id="pt3"><!-- Aba 4 --></div>
+
+<script>
+function ptAba(n){
+  document.querySelectorAll('.pt-tab').forEach(function(t,i){ t.classList.toggle('ativo',i===n); });
+  document.querySelectorAll('.pt-painel').forEach(function(p,i){ p.classList.toggle('ativo',i===n); });
+}
+</script>
+```
+
+- [ ] **Step 2: Verificar no browser**
+
+Abrir o site, navegar para Processo Penal III → Recursos. A página deve carregar com as 4 abas visíveis mas sem conteúdo interno. Clicar em cada aba confirma que a troca funciona.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add conteudo/processual-penal-iii/03-recursos.html
+git commit -m "feat: esqueleto de 03-recursos.html com CSS e abas"
+```
+
+---
+
+## Task 3: Preencher Aba 1 — Conceito & Princípios
+
+**Files:**
+- Modify: `conteudo/processual-penal-iii/03-recursos.html` — substituir `<!-- Aba 1 -->` pelo conteúdo abaixo
+
+- [ ] **Step 1: Substituir o placeholder da Aba 1**
+
+Localizar `<div class="pt-painel ativo" id="pt0"><!-- Aba 1 --></div>` e substituir por:
+
+```html
+<div class="pt-painel ativo" id="pt0">
+
+<div class="pt-alert info">
+  <strong>Conceito (Renato Brasileiro de Lima)</strong>
+  "Recurso é o instrumento processual voluntário de impugnação de decisões judiciais, previsto em lei federal, utilizado antes da preclusão e na mesma relação jurídica processual, objetivando a <strong>reforma</strong>, a <strong>invalidação</strong>, a <strong>integração</strong> ou o <strong>esclarecimento</strong> da decisão judicial impugnada."
+</div>
+
+<div class="pt-section-title">Princípios dos Recursos</div>
+<div class="pt-grid">
+
+  <div class="pt-card">
+    <h4>Duplo grau de jurisdição</h4>
+    <p>Órgão jurisdicional <em>diverso</em> analisa a decisão recorrida. Deriva da falibilidade humana e do inconformismo das pessoas.</p>
+    <p>Não está expresso na CF — parte da doutrina extrai implicitamente do devido processo legal (art. 5º, LIV) e da ampla defesa (art. 5º, LV).</p>
+  </div>
+
+  <div class="pt-card verde">
+    <h4>Taxatividade</h4>
+    <p>Só há recurso se houver previsão em <strong>lei federal</strong>. O rol é taxativo — não se cria recurso por analogia ou costume.</p>
+  </div>
+
+  <div class="pt-card teal">
+    <h4>Unirrecorribilidade</h4>
+    <p>A cada decisão recorrível corresponde um <strong>único recurso</strong>. Impede a duplicidade de impugnações contra o mesmo ato.</p>
+  </div>
+
+  <div class="pt-card amber">
+    <h4>Fungibilidade</h4>
+    <p>A parte não é prejudicada por interpor o recurso errado, <em>salvo má-fé</em>. O juiz processa o recurso adequado.</p>
+    <ul>
+      <li><strong>Má-fé:</strong> não observar o prazo do recurso correto; ou erro grosseiro.</li>
+      <li>Decisão favorável em recurso de corréu aproveita os demais, se o motivo não for de caráter exclusivamente pessoal.</li>
+    </ul>
+    <p class="pt-art">Arts. 579–580 CPP</p>
+  </div>
+
+  <div class="pt-card laranja">
+    <h4>Voluntariedade</h4>
+    <p>Regra: a interposição cabe à parte. <em>Exceções</em> — recurso de ofício pelo juiz:</p>
+    <ul>
+      <li>Sentença que conceder habeas corpus (art. 574, I).</li>
+      <li>Absolvição com excludente de crime ou isenção de pena (art. 574, II).</li>
+      <li>Crimes contra a economia popular ou saúde pública (Lei 1.521/51, art. 7º).</li>
+    </ul>
+    <p class="pt-art">Art. 574 CPP</p>
+  </div>
+
+  <div class="pt-card vermelho">
+    <h4>Non reformatio in pejus</h4>
+    <p>Em recurso exclusivo da defesa (ou HC em favor do réu), é vedado agravar a situação do acusado — quantitativa ou qualitativamente.</p>
+    <ul>
+      <li><strong>Direta:</strong> o próprio tribunal não pode aumentar a pena.</li>
+      <li><strong>Indireta:</strong> o novo juiz, após anulação em recurso exclusivo da defesa, fica vinculado ao máximo da pena anterior.</li>
+      <li>Posição de R. Brasileiro: proibição prevalece mesmo nos casos de incompetência absoluta.</li>
+    </ul>
+    <p class="pt-art">Art. 617; Art. 626, § único CPP</p>
+  </div>
+
+  <div class="pt-card roxo">
+    <h4>Reformatio in mellius</h4>
+    <p>O tribunal pode melhorar a situação do réu mesmo sem recurso da defesa — seja de ofício, seja ao dar provimento a recurso da acusação.</p>
+  </div>
+
+  <div class="pt-card cinza">
+    <h4>Disponibilidade</h4>
+    <p>É possível <strong>desistir</strong> de recurso já interposto.</p>
+    <p><em>Distinção:</em> voluntariedade = liberdade de <em>não interpor</em>; disponibilidade = liberdade de <em>desistir após interpor</em>.</p>
+    <p>O <strong>MP não pode desistir</strong> de recurso que haja interposto.</p>
+    <p class="pt-art">Art. 576 CPP</p>
+  </div>
+
+</div>
+</div>
+```
+
+- [ ] **Step 2: Verificar no browser**
+
+Recarregar a página de Recursos. A Aba 1 deve mostrar o bloco azul de conceito e os 8 cards em grid. Verificar que o grid se adapta no mobile (reduzir janela até ~375px).
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add conteudo/processual-penal-iii/03-recursos.html
+git commit -m "feat: aba Conceito & Princípios em 03-recursos.html"
+```
+
+---
+
+## Task 4: Preencher Aba 2 — Pressupostos de Admissibilidade
+
+**Files:**
+- Modify: `conteudo/processual-penal-iii/03-recursos.html` — substituir `<!-- Aba 2 -->` pelo conteúdo abaixo
+
+- [ ] **Step 1: Substituir o placeholder da Aba 2**
+
+Localizar `<div class="pt-painel" id="pt1"><!-- Aba 2 --></div>` e substituir por:
+
+```html
+<div class="pt-painel" id="pt1">
+
+<div class="pt-alert atencao">
+  <strong>Recolhimento à prisão — art. 594 CPP (revogado)</strong>
+  O antigo art. 594 condicionava o direito de apelar ao recolhimento do réu à prisão ou à prestação de fiança. Esse dispositivo foi <strong>revogado</strong>. Hoje o recolhimento à prisão não é condição de admissibilidade recursal.
+</div>
+
+<div class="pt-section-title">Prazo Recursal — Regras Gerais</div>
+<div class="pt-alert info">
+  <strong>Art. 798 CPP — prazos contínuos e peremptórios</strong>
+  Todos os prazos correm em cartório e são <em>contínuos e peremptórios</em>, não se interrompendo por férias, domingo ou dia feriado (caput). Não correm se houver impedimento do juiz, força maior ou obstáculo judicial oposto pela parte contrária (§ 4º).
+  <br><br>
+  <strong>Início × Contagem:</strong> o prazo <em>inicia</em> na data da intimação; a <em>contagem</em> exclui o dia do começo e inclui o dia do vencimento. Prazo que terminar em domingo ou feriado prorroga-se ao próximo dia útil imediato.
+</div>
+
+<div class="pt-section-title">Legitimidade</div>
+<div class="pt-alert info">
+  <strong>Art. 577 CPP</strong>
+  O recurso pode ser interposto pelo <strong>Ministério Público</strong>, pelo <strong>querelante</strong>, pelo <strong>réu</strong>, seu <strong>procurador</strong> ou seu <strong>defensor</strong>. Não se admite recurso de parte sem interesse na reforma ou modificação da decisão (§ único).
+  <br><br>
+  <strong>Intimação do MP:</strong> a entrega do processo no setor administrativo do MP, formalizada a carga pelo servidor, configura intimação direta e pessoal — a data dessa entrega é o marco inicial do prazo. Se não encontrado: intimação por edital.
+</div>
+
+<div class="pt-section-title">Tabela de Prazos Recursais</div>
+<div class="pt-table-wrap">
+  <table class="pt-table">
+    <thead>
+      <tr>
+        <th>Prazo</th>
+        <th>Recurso / Hipótese</th>
+        <th>Base legal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>48 horas</td>
+        <td>Carta testemunhável. <em>Atenção:</em> contado em horas somente se o mandado registrar a hora exata da intimação; caso contrário, converte-se em 2 dias.</td>
+        <td>Art. 640 CPP</td>
+      </tr>
+      <tr>
+        <td>2 dias</td>
+        <td>Embargos de declaração em 1ª instância (art. 382) e 2ª instância (art. 619); embargos de declaração no STJ em matéria penal (art. 263 RISTJ).</td>
+        <td>Arts. 382 e 619 CPP</td>
+      </tr>
+      <tr>
+        <td>5 dias</td>
+        <td>Apelação (art. 593); RESE (art. 586); agravo em execução (Súmula 700 STF — LEP, art. 197); RO para STJ/STF contra HC denegatório; embargos de declaração nos JECrim e no STF.</td>
+        <td>Arts. 593, 586 CPP; LEP art. 197</td>
+      </tr>
+      <tr>
+        <td>10 dias</td>
+        <td>Embargos infringentes e de nulidade (art. 609, § único); apelação nos JECrim.</td>
+        <td>Art. 609, § único CPP; Lei 9.099/95, art. 82, §1º</td>
+      </tr>
+      <tr>
+        <td>15 dias</td>
+        <td>Recurso extraordinário e recurso especial; RO para STJ contra mandado de segurança denegatório; apelação subsidiária do ofendido não habilitado.</td>
+        <td>CPC, art. 1003, §5º; Art. 598, § único CPP</td>
+      </tr>
+      <tr>
+        <td>20 dias</td>
+        <td>RESE contra lista de jurados — prazo corre da publicação definitiva da lista.</td>
+        <td>Art. 586, § único CPP</td>
+      </tr>
+      <tr>
+        <td>Em dobro</td>
+        <td>Defensorias Públicas federal e estaduais.</td>
+        <td>LC 80/94, art. 44, I</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+```
+
+- [ ] **Step 2: Verificar no browser**
+
+Clicar na aba "Pressupostos". Verificar alerta laranja do art. 594, dois alertas azuis, e a tabela de prazos com 7 linhas. Verificar scroll horizontal na tabela em tela estreita.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add conteudo/processual-penal-iii/03-recursos.html
+git commit -m "feat: aba Pressupostos de Admissibilidade em 03-recursos.html"
+```
+
+---
+
+## Task 5: Preencher Aba 3 — Efeitos dos Recursos
+
+**Files:**
+- Modify: `conteudo/processual-penal-iii/03-recursos.html` — substituir `<!-- Aba 3 -->` pelo conteúdo abaixo
+
+- [ ] **Step 1: Substituir o placeholder da Aba 3**
+
+Localizar `<div class="pt-painel" id="pt2"><!-- Aba 3 --></div>` e substituir por:
+
+```html
+<div class="pt-painel" id="pt2">
+
+<div class="pt-grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+
+  <div class="pt-card">
+    <h4>Devolutivo</h4>
+    <p>Devolve ao órgão <em>ad quem</em> o conhecimento da matéria impugnada. Presente em <strong>todos</strong> os recursos. O tribunal só pode apreciar o que foi objeto do recurso (<em>tantum devolutum quantum appellatum</em>).</p>
+  </div>
+
+  <div class="pt-card vermelho">
+    <h4>Suspensivo</h4>
+    <p>Suspende a execução da decisão até o julgamento do recurso.</p>
+    <ul>
+      <li>Apelação de sentença <strong>condenatória</strong>: tem efeito suspensivo (art. 597).</li>
+      <li>Apelação de sentença <strong>absolutória</strong>: <em>sem</em> efeito suspensivo — réu posto em liberdade imediatamente (art. 596).</li>
+    </ul>
+  </div>
+
+  <div class="pt-card amber">
+    <h4>Regressivo / Iterativo / Diferido</h4>
+    <p>Devolve a matéria ao <strong>próprio juízo a quo</strong> para reexame — o mesmo órgão que prolatou a decisão pode se retratar antes de os autos subirem ao tribunal.</p>
+    <ul>
+      <li>RESE: juiz pode se retratar em 3 dias (art. 589).</li>
+      <li>Embargos de declaração: juiz ou relator integra/esclarece a própria decisão.</li>
+    </ul>
+  </div>
+
+  <div class="pt-card verde">
+    <h4>Extensivo / Comunicante</h4>
+    <p>A decisão do recurso interposto por um dos réus, se fundada em motivos <em>não exclusivamente pessoais</em>, aproveita aos demais corréus.</p>
+    <p class="pt-art">Art. 580 CPP</p>
+  </div>
+
+</div>
+
+<div class="pt-alert info">
+  <strong>Efeito regressivo na prática</strong>
+  No RESE, após a interposição o juiz é intimado e tem 3 dias para reformar sua decisão (retratação). Só se não houver retratação é que os autos seguem ao tribunal. Por isso o efeito também é chamado de <em>diferido</em> — o envio ao tribunal fica diferido à espera da retratação.
+</div>
+
+</div>
+```
+
+- [ ] **Step 2: Verificar no browser**
+
+Clicar na aba "Efeitos". Verificar os 4 cards e o alerta azul final.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add conteudo/processual-penal-iii/03-recursos.html
+git commit -m "feat: aba Efeitos dos Recursos em 03-recursos.html"
+```
+
+---
+
+## Task 6: Preencher Aba 4 — Recursos em Espécie
+
+**Files:**
+- Modify: `conteudo/processual-penal-iii/03-recursos.html` — substituir `<!-- Aba 4 -->` pelo conteúdo abaixo
+
+- [ ] **Step 1: Substituir o placeholder da Aba 4**
+
+Localizar `<div class="pt-painel" id="pt3"><!-- Aba 4 --></div>` e substituir por:
+
+```html
+<div class="pt-painel" id="pt3">
+
+<!-- RESE -->
+<div class="pt-section-title">Recurso em Sentido Estrito — RESE (art. 581)</div>
+<div class="pt-alert info">
+  <strong>Efeito regressivo:</strong> após a interposição, o juiz tem 3 dias para se retratar (art. 589). Se não reformar, os autos sobem ao tribunal.
+  <br><strong>Prazo geral:</strong> 5 dias · <strong>RESE contra lista de jurados:</strong> 20 dias (art. 586, § único).
+</div>
+<ul class="rc-rese-list">
+  <li><span class="rc-inc">I</span>Não receber a denúncia ou a queixa</li>
+  <li><span class="rc-inc">II</span>Concluir pela incompetência do juízo</li>
+  <li><span class="rc-inc">III</span>Julgar procedentes as exceções (salvo a de suspeição)</li>
+  <li><span class="rc-inc">IV</span>Pronunciar o réu</li>
+  <li><span class="rc-inc">V</span>Conceder, negar, arbitrar, cassar ou julgar inidônea a fiança; indeferir requerimento de prisão preventiva ou revogá-la; conceder liberdade provisória ou relaxar a prisão em flagrante</li>
+  <li><span class="rc-inc">VII</span>Julgar quebrada a fiança ou perdido o seu valor</li>
+  <li><span class="rc-inc">VIII</span>Decretar a prescrição ou julgar, por outro modo, extinta a punibilidade</li>
+  <li><span class="rc-inc">IX</span>Indeferir o pedido de reconhecimento da prescrição ou de outra causa extintiva da punibilidade</li>
+  <li><span class="rc-inc">X</span>Conceder ou negar a ordem de habeas corpus</li>
+  <li><span class="rc-inc">XI</span>Conceder, negar ou revogar a suspensão condicional da pena</li>
+  <li><span class="rc-inc">XII</span>Conceder, negar ou revogar o livramento condicional</li>
+  <li><span class="rc-inc">XIII</span>Anular o processo da instrução criminal, no todo ou em parte</li>
+  <li><span class="rc-inc">XIV</span>Incluir jurado na lista geral ou dela o excluir</li>
+  <li><span class="rc-inc">XV</span>Denegar a apelação ou a julgar deserta</li>
+  <li><span class="rc-inc">XVI</span>Ordenar a suspensão do processo em virtude de questão prejudicial</li>
+  <li><span class="rc-inc">XVII</span>Decidir sobre a unificação de penas</li>
+  <li><span class="rc-inc">XVIII</span>Decidir o incidente de falsidade</li>
+  <li><span class="rc-inc">XIX</span>Decretar medida de segurança, depois de transitar a sentença em julgado</li>
+  <li><span class="rc-inc">XX</span>Impuser medida de segurança por transgressão de outra</li>
+  <li><span class="rc-inc">XXI</span>Mantiver ou substituir a medida de segurança (art. 774)</li>
+  <li><span class="rc-inc">XXII</span>Revogar a medida de segurança</li>
+  <li><span class="rc-inc">XXIII</span>Deixar de revogar a medida de segurança nos casos em que a lei admite a revogação</li>
+  <li><span class="rc-inc">XXIV</span>Converter a multa em detenção ou em prisão simples</li>
+  <li><span class="rc-inc">XXV</span>Recusar homologação à proposta de acordo de não persecução penal (art. 28-A CPP)</li>
+</ul>
+
+<hr class="pt-divider">
+
+<!-- Apelação -->
+<div class="pt-section-title">Apelação (art. 593)</div>
+<div class="pt-alert info">
+  <strong>Prazo:</strong> 5 dias · <strong>Efeito devolutivo</strong> sempre presente.
+</div>
+<div class="pt-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); margin-top:10px;">
+  <div class="pt-card">
+    <h4>Inciso I — Juiz singular</h4>
+    <p>Sentenças definitivas de <strong>condenação ou absolvição</strong> proferidas por juiz singular.</p>
+    <p class="pt-art">Efeito suspensivo: sentença condenatória (art. 597). Sem efeito suspensivo: sentença absolutória — réu posto em liberdade imediatamente (art. 596).</p>
+  </div>
+  <div class="pt-card verde">
+    <h4>Inciso II — Decisões definitivas</h4>
+    <p>Decisões definitivas ou com força de definitivas proferidas por juiz singular, nos casos <em>não previstos</em> no capítulo do RESE.</p>
+  </div>
+  <div class="pt-card amber">
+    <h4>Inciso III — Tribunal do Júri</h4>
+    <p>Apenas em 4 hipóteses:</p>
+    <ul>
+      <li><strong>a)</strong> Nulidade posterior à pronúncia</li>
+      <li><strong>b)</strong> Sentença do juiz-presidente contrária à lei expressa ou à decisão dos jurados</li>
+      <li><strong>c)</strong> Erro ou injustiça na aplicação de pena ou medida de segurança</li>
+      <li><strong>d)</strong> Decisão dos jurados manifestamente contrária à prova dos autos — não se admite 2ª apelação pelo mesmo motivo (§ 3º)</li>
+    </ul>
+  </div>
+  <div class="pt-card teal">
+    <h4>Apelação subsidiária do ofendido</h4>
+    <p>Se o MP não apelar no prazo legal, o <strong>ofendido ou seu representante</strong> pode fazê-lo (art. 598).</p>
+    <ul>
+      <li>Prazo: 15 dias, correndo do fim do prazo do MP.</li>
+      <li>Sem efeito suspensivo.</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="pt-divider">
+
+<!-- Embargos de Declaração -->
+<div class="pt-section-title">Embargos de Declaração</div>
+<div class="pt-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); margin-top:10px;">
+  <div class="pt-card">
+    <h4>1ª instância — art. 382</h4>
+    <p>Qualquer das partes pode pedir ao juiz que <strong>declare</strong> a sentença quando houver <em>obscuridade, ambiguidade, contradição ou omissão</em>.</p>
+    <p class="pt-art">Prazo: 2 dias</p>
+  </div>
+  <div class="pt-card verde">
+    <h4>2ª instância — art. 619</h4>
+    <p>Cabem contra acórdãos proferidos pelos tribunais de apelação, câmaras ou turmas, nas mesmas hipóteses (obscuridade, ambiguidade, contradição ou omissão).</p>
+    <p class="pt-art">Prazo: 2 dias da publicação do acórdão</p>
+  </div>
+</div>
+
+<hr class="pt-divider">
+
+<!-- Embargos Infringentes -->
+<div class="pt-section-title">Embargos Infringentes e de Nulidade (art. 609, § único)</div>
+<div class="pt-alert roxo">
+  <strong>Requisito:</strong> decisão de 2ª instância <em>não unânime</em> e <em>desfavorável ao réu</em>.
+  <br><strong>Prazo:</strong> 10 dias da publicação do acórdão.
+  <br><strong>Abrangência:</strong> se o desacordo for parcial, os embargos ficam restritos à matéria objeto de divergência.
+  <br><strong>Objetivo:</strong> fazer prevalecer o voto minoritário mais favorável ao réu em 2ª instância.
+</div>
+
+</div>
+```
+
+- [ ] **Step 2: Verificar no browser**
+
+Clicar na aba "Recursos em Espécie". Verificar:
+- Lista RESE com 25 incisos e numeração azul alinhada.
+- 4 cards de Apelação em grid.
+- 2 cards de Embargos de Declaração.
+- Alerta roxo de Embargos Infringentes.
+
+- [ ] **Step 3: Commit final**
+
+```bash
+git add conteudo/processual-penal-iii/03-recursos.html
+git commit -m "feat: aba Recursos em Espécie — RESE, Apelação, Embargos"
+```

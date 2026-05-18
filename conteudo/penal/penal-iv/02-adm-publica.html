@@ -249,6 +249,7 @@
   <button class="ap-tab" onclick="apTab(event,'ap-caso')">⚖️ Estudo de Caso</button>
   <button class="ap-tab" onclick="apTab(event,'ap-jur')">🏛️ Jurisprudência</button>
   <button class="ap-tab" onclick="apTab(event,'ap-questoes')">📝 Questões</button>
+  <button class="ap-tab" onclick="apTab(event,'ap-resumo')">📑 Resumo</button>
 </div>
 
 <!-- TAB: MAPA CONCEITUAL -->
@@ -1420,6 +1421,669 @@
 
   </div><!-- .ec-q-list -->
 </div><!-- #ap-questoes -->
+
+<!-- ============================================================
+     ABA: RESUMO
+     ============================================================ -->
+<div id="ap-resumo" class="ap-painel">
+
+<style>
+/* ── Resumo: sub-abas ──────────────────────────────────── */
+.rp-tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap;}
+.rp-tab{
+  padding:5px 15px;font-size:12.5px;font-weight:600;font-family:var(--sans);
+  border:1.5px solid var(--border);border-radius:5px;cursor:pointer;
+  background:var(--ap-bg2);color:var(--text2);transition:all .15s;
+}
+.rp-tab:hover{border-color:var(--blue);color:var(--blue);}
+.rp-tab.ativo{background:var(--blue);color:#fff;border-color:var(--blue);}
+.rp-painel{display:none;}
+.rp-painel.ativo{display:block;}
+
+/* ── Seção ─────────────────────────────────────────────── */
+.rp-sec{
+  font-family:var(--serif);font-size:16px;font-weight:700;color:var(--blue);
+  border-left:3px solid var(--gold);padding-left:10px;margin:24px 0 12px;
+}
+.rp-sec:first-child{margin-top:0;}
+
+/* ── Crime cards ───────────────────────────────────────── */
+.rp-crime{border:1px solid var(--border);border-radius:9px;margin-bottom:12px;overflow:hidden;}
+.rp-crime-hd{
+  display:flex;align-items:center;gap:10px;padding:9px 14px;
+  background:var(--ap-bg2);border-bottom:1px solid var(--border);flex-wrap:wrap;
+}
+.rp-crime-art{
+  font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#fff;
+  background:var(--blue);border-radius:4px;padding:2px 8px;white-space:nowrap;flex-shrink:0;
+}
+.rp-crime-art.red{background:var(--ap-red);}
+.rp-crime-art.orange{background:var(--ap-orange);}
+.rp-crime-art.teal{background:var(--ap-teal);}
+.rp-crime-art.purple{background:var(--ap-purple);}
+.rp-crime-art.green{background:var(--ap-green);}
+.rp-crime-nome{font-size:15px;font-weight:700;color:var(--blue);flex:1;font-family:var(--serif);}
+.rp-crime-pena{font-size:12px;color:var(--text2);white-space:nowrap;flex-shrink:0;}
+.rp-crime-body{padding:12px 14px;}
+.rp-crime-body p{font-size:13.5px;line-height:1.6;color:var(--text);margin-bottom:8px;}
+.rp-crime-body ul{font-size:13.5px;line-height:1.6;color:var(--text);margin-left:16px;margin-bottom:8px;}
+.rp-crime-body li{margin-bottom:4px;}
+
+/* ── Boxes ─────────────────────────────────────────────── */
+.rp-art{background:var(--blue-light);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;padding:8px 12px;margin:6px 0;font-size:13px;line-height:1.6;font-style:italic;color:var(--text);}
+.rp-jur{background:var(--ap-yellow-lt);border-left:3px solid var(--ap-yellow);border-radius:0 5px 5px 0;padding:8px 12px;margin:6px 0;font-size:13px;line-height:1.6;color:var(--text);}
+.rp-jur strong{color:var(--ap-yellow);font-weight:700;}
+.rp-dist{background:var(--ap-orange-lt);border-left:3px solid var(--ap-orange);border-radius:0 5px 5px 0;padding:8px 12px;margin:6px 0;font-size:13px;line-height:1.6;color:var(--text);}
+.rp-dist strong{color:var(--ap-orange);font-weight:700;}
+.rp-ok{background:var(--ap-green-lt);border-left:3px solid var(--ap-green);border-radius:0 5px 5px 0;padding:8px 12px;margin:6px 0;font-size:13px;line-height:1.6;color:var(--text);}
+.rp-ok strong{color:var(--ap-green);font-weight:700;}
+.rp-warn{background:var(--ap-red-lt);border-left:3px solid var(--ap-red);border-radius:0 5px 5px 0;padding:8px 12px;margin:6px 0;font-size:13px;line-height:1.6;color:var(--text);}
+.rp-warn strong{color:var(--ap-red);font-weight:700;}
+
+/* ── Cards de comparação (distinções) ─────────────────── */
+.rp-vs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:14px;}
+.rp-vs-card{background:var(--ap-bg2);border:1.5px solid var(--border);border-radius:9px;padding:14px 16px;}
+.rp-vs-card h4{font-size:13.5px;font-weight:700;color:var(--blue);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border);}
+.rp-vs-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text2);margin-bottom:2px;}
+.rp-vs-val{font-size:13px;color:var(--text);line-height:1.5;margin-bottom:8px;}
+
+/* ── Mini-grid crimes menores ──────────────────────────── */
+.rp-mini-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:16px;}
+.rp-mini{background:var(--ap-bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;}
+.rp-mini-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.rp-mini-art{font-size:11px;font-weight:700;color:#fff;background:var(--blue);border-radius:4px;padding:2px 7px;white-space:nowrap;}
+.rp-mini-nome{font-size:13.5px;font-weight:700;color:var(--blue);font-family:var(--serif);}
+.rp-mini p{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:4px;}
+.rp-mini .rp-mini-pena{font-size:12px;color:var(--text2);font-style:italic;margin-top:4px;}
+</style>
+
+<div class="rp-tabs">
+  <button class="rp-tab ativo" onclick="rpAba(0)">Fundamentos</button>
+  <button class="rp-tab" onclick="rpAba(1)">Cap. I — Func. Público</button>
+  <button class="rp-tab" onclick="rpAba(2)">Cap. II — Particular</button>
+  <button class="rp-tab" onclick="rpAba(3)">Distinções Críticas</button>
+</div>
+
+<!-- ═══════════════════ FUNDAMENTOS ═══════════════════ -->
+<div class="rp-painel ativo" id="rp0">
+
+<div class="rp-sec">Conceito de Administração Pública</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art">Título XI</span>
+    <span class="rp-crime-nome">Administração Pública — sentido amplo</span>
+  </div>
+  <div class="rp-crime-body">
+    <p>Compreende tanto a <b>Administração Direta</b> (União, Estados, DF e Municípios) quanto a <b>Indireta</b> (autarquias, sociedades de economia mista, empresas públicas e fundações).</p>
+    <div class="rp-dist"><strong>Doutrina (Diogo de Figueiredo):</strong> "conjunto de atividades preponderantemente executórias, praticadas pelas pessoas jurídicas de direito público ou por suas delegatárias, gerindo interesses públicos."</div>
+    <div class="rp-warn"><strong>Gravidade:</strong> Rogério Greco — o autor de crime contra a Administração Pública pode causar mais dano do que um homicida, impedindo o Estado de cumprir funções sociais constitucionalmente atribuídas.</div>
+  </div>
+</div>
+
+<div class="rp-sec">Funcionário Público para fins penais (Art. 327)</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art">Art. 327</span>
+    <span class="rp-crime-nome">Conceito amplo de Funcionário Público</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Art. 327 — Considera-se funcionário público, para os efeitos penais, quem, <b>embora transitoriamente ou sem remuneração</b>, exerce <b>cargo, emprego ou função pública</b>.
+    <br>§1° — Equipara-se a funcionário público quem exerce cargo, emprego ou função em <b>entidade paraestatal</b>, e quem trabalha para <b>empresa prestadora de serviço contratada ou conveniada</b> para a execução de atividade típica da Administração Pública.
+    <br>§2° — A pena será aumentada de <b>1/3</b> quando os autores forem <b>ocupantes de cargos em comissão ou função de direção/assessoramento</b> de órgão da administração direta, sociedade de economia mista, empresa pública ou fundação.</div>
+    <ul>
+      <li><b>Médico conveniado ao SUS</b> → equiparado a funcionário público (§1°) → concussão se exige pagamento indevido.</li>
+      <li><b>Funcionário público estrangeiro</b> → Art. 337-D (crimes contra Administração Pública estrangeira).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rp-sec">Crimes Funcionais Próprios × Impróprios</div>
+<div class="rp-vs-grid">
+  <div class="rp-vs-card">
+    <h4>Funcionais Próprios</h4>
+    <div class="rp-vs-label">Conceito</div>
+    <div class="rp-vs-val">A qualidade de funcionário público é <b>essencial</b> à configuração do crime. Sem ela, o fato é atípico.</div>
+    <div class="rp-vs-label">Exemplo</div>
+    <div class="rp-vs-val">Prevaricação (Art. 319) — só pode ser cometida por funcionário público.</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Funcionais Impróprios</h4>
+    <div class="rp-vs-label">Conceito</div>
+    <div class="rp-vs-val">O crime pode ser praticado tanto por funcionário quanto por particular, mas recebe nome diverso quando praticado pelo funcionário.</div>
+    <div class="rp-vs-label">Exemplo</div>
+    <div class="rp-vs-val">Peculato-furto (Art. 312, §1°) vs Furto (Art. 155). A conduta é análoga, mas o agente tem qualidade especial.</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Comunicabilidade (Art. 30)</h4>
+    <div class="rp-vs-label">Regra</div>
+    <div class="rp-vs-val">As circunstâncias de caráter pessoal <b>não se comunicam</b>, <b>salvo quando elementares do crime</b>.</div>
+    <div class="rp-vs-label">Consequência</div>
+    <div class="rp-vs-val">O particular ciente da qualidade de funcionário do coautor responde pelo mesmo crime funcional. Ex.: peculato-furto (FGV–TJ-PE 2024, gabarito D).</div>
+  </div>
+</div>
+
+<div class="rp-sec">Princípio da Insignificância</div>
+<div class="rp-jur"><strong>Súmula 599 STJ:</strong> "O princípio da insignificância é <b>inaplicável</b> aos crimes contra a Administração Pública." — Bem jurídico tutelado: <em>moralidade administrativa</em>, insuscetível de valoração econômica.</div>
+<div class="rp-ok"><strong>Exceção — Descaminho:</strong> insignificância aplicável quando o valor sonegado for inferior a <b>R$ 20.000,00</b> (art. 20 da Lei 10.522/2002 + Portarias 75/2012 e 130/2012 do MF), salvo reincidência ou habitualidade delitiva (STF, HC 161.848).</div>
+
+<div class="rp-sec">Procedimento Especial</div>
+<div class="rp-art">CPP, arts. 513–518 — Crimes de responsabilidade de funcionários públicos processados perante <b>juízes de direito</b>. Aplica-se a crimes funcionais próprios e impróprios.</div>
+
+</div><!-- #rp0 -->
+
+<!-- ═══════════════════ CAP. I — FUNCIONÁRIO PÚBLICO ═══════════════════ -->
+<div class="rp-painel" id="rp1">
+
+<div class="rp-sec">Peculato — Art. 312</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art red">Art. 312</span>
+    <span class="rp-crime-nome">Peculato-Apropriação e Peculato-Desvio</span>
+    <span class="rp-crime-pena">Rec. 2–12 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art"><b>Caput — Peculato-Apropriação:</b> Apropriar-se o funcionário público de dinheiro, valor ou qualquer outro bem móvel, <b>público ou particular</b>, de que tem a <b>posse em razão do cargo</b>, ou desviá-lo em proveito próprio ou alheio.</div>
+    <ul>
+      <li><b>Peculato-apropriação (1ª parte):</b> agente tem a posse e dela se apropria ("liberdade desvigiada sobre a coisa").</li>
+      <li><b>Peculato-desvio (2ª parte):</b> agente dá ao bem destino diverso do correto, sem necessariamente apropriar-se para si.</li>
+    </ul>
+    <div class="rp-dist"><strong>Peculato de uso:</strong> <b>não punível penalmente</b>. O mero uso temporário do bem sem apropriação pode gerar responsabilidade administrativa ou ato de improbidade (Lei 8.429/92, art. 9°, IV), mas não crime de peculato.</div>
+  </div>
+</div>
+
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art red">Art. 312, §1°</span>
+    <span class="rp-crime-nome">Peculato-Furto (Impróprio)</span>
+    <span class="rp-crime-pena">Rec. 2–12 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Aplica-se a mesma pena se o funcionário público, <b>embora não tendo a posse</b> do dinheiro, valor ou bem, o <b>subtrai</b>, ou concorre para que seja subtraído, valendo-se de <b>facilidade que lhe proporciona a qualidade de funcionário</b>.</div>
+    <p>Crime funcional <b>impróprio</b> — diferença essencial para o peculato-apropriação: <em>ausência de posse prévia</em>. O agente aproveita-se das facilidades do cargo para subtrair.</p>
+    <div class="rp-jur"><strong>STJ (AgRg no AREsp 2.814.682/SP, 2025):</strong> Agente penitenciário que subtraiu objetos de visitante sob custódia implícita da Administração → peculato-furto. Insignificância afastada (Súm. 599). Coautor civil ciente da condição do agente → responde pelo mesmo crime (art. 30 CP).</div>
+  </div>
+</div>
+
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art orange">Art. 312, §2°</span>
+    <span class="rp-crime-nome">Peculato Culposo</span>
+    <span class="rp-crime-pena">Det. 3m–1 ano</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Se o funcionário <b>concorre culposamente</b> para o crime de outrem.</div>
+    <div class="rp-ok"><strong>§3° — Reparação do dano no peculato culposo:</strong>
+      <br>→ Antes da sentença irrecorrível: <b>extingue a punibilidade</b>.
+      <br>→ Após a condenação: <b>reduz pela metade a pena</b>.
+      <br><em>(Aplica-se apenas ao culposo; no doloso, a reparação antes da denúncia enseja arrependimento posterior — diminuição de 1 a 2/3.)</em></div>
+  </div>
+</div>
+
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art orange">Art. 313</span>
+    <span class="rp-crime-nome">Peculato Mediante Erro de Outrem</span>
+    <span class="rp-crime-pena">Rec. 1–4 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Apropriar-se de dinheiro ou qualquer utilidade que, <b>no exercício do cargo</b>, recebeu por <b>erro de outrem</b>.</div>
+    <p>Chamado de <b>peculato-estelionato</b>. A vítima entrega o bem ao funcionário por engano (ex.: paga tributo a quem não tinha competência para recebê-lo).</p>
+    <div class="rp-dist"><strong>Erro espontâneo × provocado:</strong> Majoritariamente exige-se erro espontâneo. Rogério Greco e Nucci discordam: a lei não restringe, e o importante é a <em>apropriação indevida</em>. Se o agente provocou o erro → possivelmente estelionato ou concussão.</div>
+  </div>
+</div>
+
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art teal">Art. 313-A</span>
+    <span class="rp-crime-nome">Inserção de Dados Falsos — Peculato Eletrônico</span>
+    <span class="rp-crime-pena">Rec. 2–12 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Inserir ou facilitar a inserção de <b>dados falsos</b>, alterar ou excluir indevidamente dados corretos nos sistemas informatizados ou bancos de dados da Administração Pública, com o fim de <b>obter vantagem indevida</b> ou <b>causar dano</b>.</div>
+    <p>Crime <b>próprio</b> (somente o funcionário autorizado). Exige <b>finalidade especial</b> (obter vantagem ou causar dano). Bem jurídico: integridade dos dados da Administração.</p>
+    <div class="rp-art"><b>Art. 313-B — Modificação não autorizada de sistema:</b> Modificar ou alterar sistema de informações ou programa sem autorização. Detenção 3m–2 anos. Pena aumentada de 1/3 a 1/2 se resultar dano para a Administração ou para o administrado.</div>
+  </div>
+</div>
+
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art orange">Art. 314</span>
+    <span class="rp-crime-nome">Extravio, Sonegação ou Inutilização de Livro ou Documento</span>
+    <span class="rp-crime-pena">Rec. 1–4 anos</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Extraviar livro oficial ou qualquer documento de que tem a guarda <b>em razão do cargo</b>; sonegá-lo ou inutilizá-lo, total ou parcialmente, se o fato não constitui crime mais grave.</div>
+    <p>Crime <b>próprio</b>. Exige que o agente tenha a guarda do documento <em>em razão do cargo</em>.</p>
+  </div>
+</div>
+
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art orange">Art. 315</span>
+    <span class="rp-crime-nome">Emprego Irregular de Verbas ou Rendas Públicas</span>
+    <span class="rp-crime-pena">Det. 1–3 meses ou multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Dar às verbas ou rendas públicas <b>aplicação diversa da estabelecida em lei</b>.</div>
+    <p><b>Norma penal em branco</b> (depende de lei orçamentária). Princípio: ao particular é permitido tudo que a lei não proíbe; o administrador público só pode fazer o que a lei determina.</p>
+    <div class="rp-dist"><strong>Se praticado por Prefeito:</strong> aplica-se o art. 1°, III do Decreto-Lei 201/67 (crime de responsabilidade).</div>
+  </div>
+</div>
+
+<div class="rp-sec">Concussão — Art. 316</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art red">Art. 316</span>
+    <span class="rp-crime-nome">Concussão</span>
+    <span class="rp-crime-pena">Rec. 2–12 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art"><b>Caput:</b> Exigir, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou <b>antes de assumi-la</b>, mas <b>em razão dela</b>, vantagem indevida.</div>
+    <p>Crime <b>formal e de consumação antecipada</b>: consuma-se com a mera <em>exigência</em>, independentemente da entrega da vantagem (mero exaurimento).</p>
+    <div class="rp-warn"><strong>Prisão em flagrante:</strong> inviável quando da entrega da vantagem, pois o crime já se consumou na exigência. O flagrante deve ocorrer no momento da exigência.</div>
+    <div class="rp-art"><b>§1° — Excesso de exação:</b> Exigir tributo ou contribuição social que sabe indevido, ou, quando devido, empregar na cobrança meio <b>vexatório ou gravoso</b> que a lei não autoriza. Rec. 3–8 anos.<br>
+    <b>§2° — Concussão-desvio:</b> Funcionário que desvia, em proveito próprio ou alheio, o que recebeu indevidamente para recolher aos cofres públicos. Rec. 2–12 anos.</div>
+    <div class="rp-jur"><strong>Médico conveniado ao SUS:</strong> exigir pagamento de paciente → concussão. Competência: Justiça Estadual (STJ, AgRg no RHC 87.068/SP — prejudica apenas o particular, não o SUS).</div>
+  </div>
+</div>
+
+<div class="rp-sec">Corrupção Passiva — Art. 317</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art red">Art. 317</span>
+    <span class="rp-crime-nome">Corrupção Passiva</span>
+    <span class="rp-crime-pena">Rec. 2–12 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art"><b>Caput:</b> Solicitar ou receber, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, mas <b>em razão dela</b>, vantagem indevida, ou <b>aceitar promessa de tal vantagem</b>.<br>
+    <b>§1°:</b> Pena aumentada de 1/3 se o funcionário <em>retarda</em> ou <em>deixa de praticar</em> ato de ofício ou o pratica infringindo dever funcional.<br>
+    <b>§2° — Privilegiada:</b> Se pratica, deixa de praticar ou retarda ato de ofício, cedendo a <b>pedido ou influência de outrem</b>. Det. 3m–1 ano ou multa.</div>
+    <p><b>Tipo misto alternativo</b> — praticar mais de uma conduta resulta em infração única.</p>
+    <p><b>3 momentos de consumação:</b></p>
+    <ul>
+      <li>Com a <em>solicitação</em> (ativo; entrega posterior = mero exaurimento).</li>
+      <li>Com o <em>recebimento</em> (sem prévia solicitação).</li>
+      <li>Com a <em>aceitação da promessa</em>.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="rp-sec">Facilitação de Contrabando ou Descaminho — Art. 318</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art purple">Art. 318</span>
+    <span class="rp-crime-nome">Facilitação de Contrabando ou Descaminho</span>
+    <span class="rp-crime-pena">Rec. 3–8 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Facilitar, com <b>infração de dever funcional</b>, a prática de contrabando ou descaminho.</div>
+    <p>Crime <b>próprio</b> — somente o funcionário com dever de <em>impedir</em> o contrabando/descaminho pode praticá-lo. Quebra a <b>teoria monista</b> (Art. 29): facilitador e executor respondem por tipos distintos.</p>
+    <div class="rp-jur"><strong>Competência:</strong> Justiça Federal. Súmula 151 STJ: define-se pela prevenção do Juízo Federal do lugar da apreensão dos bens.</div>
+    <div class="rp-warn"><strong>Pena maior que o delito facilitado:</strong> a facilitação (Rec. 3–8 anos) é punida mais severamente que o próprio contrabando (Rec. 2–5 anos).</div>
+  </div>
+</div>
+
+<div class="rp-sec">Prevaricação — Art. 319</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art orange">Art. 319</span>
+    <span class="rp-crime-nome">Prevaricação</span>
+    <span class="rp-crime-pena">Det. 3m–1 ano + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Retardar ou deixar de praticar, indevidamente, ato de ofício, ou praticá-lo <b>contra disposição expressa de lei</b>, para <b>satisfazer interesse ou sentimento pessoal</b>.</div>
+    <p>Crime <b>formal</b>. Exige <b>dolo específico</b> (satisfazer interesse/sentimento pessoal). <b>Não admite modalidade culposa</b>.</p>
+    <div class="rp-jur"><strong>STJ (AgRg no AREsp 2.693.820-SP, Info 846/2025):</strong> Exige-se dolo específico de satisfazer interesse ou sentimento pessoal de forma objetiva e concreta. <b>Mera negligência, comodismo ou descompromisso</b> não configuram prevaricação.</div>
+    <div class="rp-jur"><strong>STJ (APn 471/MG):</strong> Para caracterizar prevaricação, é imprescindível a indicação de qual seria o interesse ou sentimento pessoal a ser satisfeito.</div>
+    <div class="rp-art"><b>Art. 319-A — Omissão de dever de vedar acesso a aparelho telefônico:</b> Deixar o Diretor de Penitenciária e/ou agente público de cumprir o dever de vedar ao preso acesso a aparelho telefônico, de rádio ou similar. Det. 3m–1 ano. Crime próprio.
+    <br><b>Art. 349-A:</b> Ingressar, promover ou facilitar a entrada de aparelho sem autorização em estabelecimento prisional (crime comum). Det. 3m–1 ano.</div>
+  </div>
+</div>
+
+<div class="rp-sec">Condescendência Criminosa — Art. 320</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art green">Art. 320</span>
+    <span class="rp-crime-nome">Condescendência Criminosa</span>
+    <span class="rp-crime-pena">Det. 15d–1 mês ou multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Deixar o funcionário, <b>por indulgência</b>, de responsabilizar subordinado que cometeu infração no exercício do cargo ou, quando lhe falte competência, não levar o fato ao conhecimento da autoridade competente.</div>
+    <p>O agente <em>sabe</em> da infração do subordinado mas, por clemência/indulgência, omite-se. Distingue-se da prevaricação pelo elemento subjetivo: aqui é <em>indulgência</em> (sentimento altruísta); na prevaricação, é <em>interesse ou sentimento pessoal</em> egoístico.</p>
+    <div class="rp-dist"><strong>Admite modalidade culposa:</strong> Sim (diferente da prevaricação, que é apenas dolosa). Atenção: questão de concurso!</div>
+  </div>
+</div>
+
+<div class="rp-sec">Outros Crimes por Funcionário Público</div>
+<div class="rp-mini-grid">
+  <div class="rp-mini">
+    <div class="rp-mini-top">
+      <span class="rp-mini-art">Art. 321</span>
+      <span class="rp-mini-nome">Advocacia Administrativa</span>
+    </div>
+    <p>Patrocinar, direta ou indiretamente, interesse privado perante a Administração, valendo-se da qualidade de funcionário.</p>
+    <p><b>Qualificado (§ único):</b> se o interesse for ilegítimo → Det. 3m–1 ano + multa.</p>
+    <p class="rp-mini-pena">Pena base: Det. 1–3 meses ou multa</p>
+  </div>
+  <div class="rp-mini">
+    <div class="rp-mini-top">
+      <span class="rp-mini-art">Art. 322</span>
+      <span class="rp-mini-nome">Violência Arbitrária</span>
+    </div>
+    <p>Praticar violência no exercício da função ou a pretexto de exercê-la. Proíbe o uso <em>abusivo/arbitrário</em> da violência. Cumulação com pena da violência.</p>
+    <p class="rp-mini-pena">Det. 6m–3 anos + pena da violência</p>
+  </div>
+  <div class="rp-mini">
+    <div class="rp-mini-top">
+      <span class="rp-mini-art">Art. 323</span>
+      <span class="rp-mini-nome">Abandono de Função</span>
+    </div>
+    <p>Abandonar cargo público fora dos casos permitidos em lei. Crime de <b>perigo concreto</b>. Qualificado: §1° se resulta prejuízo público; §2° se ocorre em faixa de fronteira.</p>
+    <p class="rp-mini-pena">Det. 15d–1 mês (qualif. até Det. 1–3 anos)</p>
+  </div>
+  <div class="rp-mini">
+    <div class="rp-mini-top">
+      <span class="rp-mini-art">Art. 324</span>
+      <span class="rp-mini-nome">Exercício Funcional Antecipado ou Prolongado</span>
+    </div>
+    <p>Entrar no exercício de função antes de satisfeitas as exigências legais, ou continuar a exercê-la sem autorização após saber oficialmente que foi exonerado, removido, substituído ou suspenso.</p>
+    <p class="rp-mini-pena">Det. 15d–1 mês ou multa</p>
+  </div>
+  <div class="rp-mini">
+    <div class="rp-mini-top">
+      <span class="rp-mini-art">Art. 325</span>
+      <span class="rp-mini-nome">Violação de Sigilo Funcional</span>
+    </div>
+    <p>Revelar fato de que tem ciência em razão do cargo e que deva permanecer em segredo, ou facilitar-lhe a revelação. Crime de <b>perigo concreto</b>. Basta divulgar a uma única pessoa. §2°: se resultar dano à Adm → Rec. 2–6 anos + multa.</p>
+    <p class="rp-mini-pena">Det. 6m–2 anos ou multa (pena base)</p>
+  </div>
+  <div class="rp-mini">
+    <div class="rp-mini-top">
+      <span class="rp-mini-art">Art. 326</span>
+      <span class="rp-mini-nome">Violação do Sigilo de Proposta de Concorrência</span>
+    </div>
+    <p>Devassar o sigilo de proposta de concorrência pública, ou proporcionar a terceiro o ensejo de devassá-lo. Pode ser comissivo ou omissivo.</p>
+    <p class="rp-mini-pena">Det. 3m–1 ano + multa</p>
+  </div>
+</div>
+
+</div><!-- #rp1 -->
+
+<!-- ═══════════════════ CAP. II — PARTICULAR ═══════════════════ -->
+<div class="rp-painel" id="rp2">
+
+<div class="rp-sec">Usurpação de Função Pública — Art. 328</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art">Art. 328</span>
+    <span class="rp-crime-nome">Usurpação de Função Pública</span>
+    <span class="rp-crime-pena">Det. 3m–2 anos + multa / Rec. 2–5 anos (qualif.)</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Usurpar o exercício de função pública.<br>
+    <b>Parágrafo único:</b> se o agente aufere vantagem → Rec. 2–5 anos + multa.</div>
+    <p>Crime <b>comum</b>. Consuma-se com a efetiva prática de <em>atos de ofício</em> inerentes à função usurpada. Não basta apresentar-se como funcionário sem praticar ato algum.</p>
+    <div class="rp-dist"><strong>× Contravenção (Art. 45 LCP):</strong> "Fingir-se funcionário público" sem praticar qualquer ato funcional → contravenção, não crime.</div>
+    <div class="rp-warn"><strong>Funcionário público pode ser sujeito ativo?</strong> Há controvérsia (o art. 328 está no Cap. II — "por particular"). R. Greco admite: o funcionário que exerce função para a qual não tem atribuições também pode usurpar.</div>
+  </div>
+</div>
+
+<div class="rp-sec">Resistência — Art. 329</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art orange">Art. 329</span>
+    <span class="rp-crime-nome">Resistência</span>
+    <span class="rp-crime-pena">Det. 2m–2 anos (qualif.: Rec. 1–3 anos)</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Opor-se à execução de <b>ato legal</b>, mediante <b>violência ou ameaça</b> a funcionário competente para executá-lo ou a quem lhe esteja prestando auxílio.<br>
+    <b>§1°:</b> Se o ato não se executa em razão da resistência → Rec. 1–3 anos.<br>
+    <b>§2°:</b> Penas sem prejuízo das correspondentes à violência.</div>
+    <p>Hungria: "<b>desobediência belicosa</b>" — o agente usa violência ou ameaça para se opor ao ato. Distingue-se da desobediência (resistência passiva, sem violência/ameaça).</p>
+    <div class="rp-dist"><strong>× Desacato:</strong> Na resistência, o agente visa <em>impedir a execução</em> do ato; no desacato, visa <em>desprestigiar a função</em>. R. Greco admite concurso real entre ambos.</div>
+  </div>
+</div>
+
+<div class="rp-sec">Desobediência — Art. 330</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art orange">Art. 330</span>
+    <span class="rp-crime-nome">Desobediência</span>
+    <span class="rp-crime-pena">Det. 15d–6 meses + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Desobedecer a ordem legal de funcionário público.</div>
+    <p><b>Resistência passiva</b> — sem violência ou ameaça. Se a lei já prevê outra sanção (penal ou civil) para o descumprimento, o STJ tende a afastar a desobediência para evitar bis in idem.</p>
+    <div class="rp-art"><b>Desobediência a decisão judicial:</b> se versar sobre perda ou suspensão de direito → Art. 359 CP (princípio da especialidade): "Exercer função, atividade, direito, autoridade ou múnus, de que foi suspenso ou privado por decisão judicial" → Det. 3m–2 anos.</div>
+  </div>
+</div>
+
+<div class="rp-sec">Desacato — Art. 331</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art orange">Art. 331</span>
+    <span class="rp-crime-nome">Desacato</span>
+    <span class="rp-crime-pena">Det. 6m–2 anos ou multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Desacatar funcionário público no exercício da função ou em razão dela.</div>
+    <p>Exige a <b>presença do funcionário</b> no momento do ato. Não é necessário que a ofensa seja percebida pelo funcionário. Finalidade: <em>desprestigiar a função pública</em>.</p>
+  </div>
+</div>
+
+<div class="rp-sec">Tráfico de Influência — Art. 332</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art purple">Art. 332</span>
+    <span class="rp-crime-nome">Tráfico de Influência</span>
+    <span class="rp-crime-pena">Rec. 2–5 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Solicitar, exigir, cobrar ou obter, para si ou para outrem, vantagem ou promessa de vantagem, <b>a pretexto de influir em ato praticado por funcionário público</b> no exercício da função.</div>
+    <div class="rp-dist"><strong>× Exploração de prestígio (Art. 357):</strong> se o agente solicita vantagem a pretexto de influir em <em>juiz, jurado, órgão do MP, funcionário de justiça, perito, tradutor ou intérprete</em> → crime mais grave (Rec. 1–5 anos).</div>
+  </div>
+</div>
+
+<div class="rp-sec">Corrupção Ativa — Art. 333</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art red">Art. 333</span>
+    <span class="rp-crime-nome">Corrupção Ativa</span>
+    <span class="rp-crime-pena">Rec. 2–12 anos + multa</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Oferecer ou prometer vantagem indevida a funcionário público, para determiná-lo a praticar, omitir ou retardar ato de ofício.</div>
+    <p>Crime <b>formal</b>: consuma-se com a simples oferta ou promessa, independentemente de o funcionário aceitar.</p>
+    <div class="rp-ok"><strong>Atipicidade — vantagem dada em resposta à exigência do funcionário:</strong> Se o funcionário <em>exigiu</em> (concussão), quem paga é <em>vítima</em>, não coautor. Conduta atípica ou de favorecimento.</div>
+    <div class="rp-dist"><strong>Não há necessariamente corrupção ativa onde há corrupção passiva:</strong> Corrupção passiva pode ocorrer quando o funcionário recebe ou aceita promessa sem oferta do particular (parte passiva).</div>
+  </div>
+</div>
+
+<div class="rp-sec">Descaminho e Contrabando — Arts. 334 e 334-A</div>
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art teal">Art. 334</span>
+    <span class="rp-crime-nome">Descaminho</span>
+    <span class="rp-crime-pena">Rec. 1–4 anos</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Iludir, no todo ou em parte, o pagamento de direito ou imposto devido pela entrada, pela saída ou pelo consumo de mercadoria.</div>
+    <p>Mercadoria <b>lícita</b> — o ilícito está na <em>ilusão do pagamento do imposto</em>.</p>
+    <div class="rp-ok"><strong>Insignificância — STF (HC 161.848):</strong> aplicável quando o valor sonegado for inferior a <b>R$ 20.000,00</b> (Portarias 75/2012 e 130/2012 MF). Exceção: reincidência ou habitualidade delitiva.</div>
+    <div class="rp-jur"><strong>Competência:</strong> Justiça Federal. Súmula 151 STJ: juízo federal do lugar da apreensão.</div>
+  </div>
+</div>
+
+<div class="rp-crime">
+  <div class="rp-crime-hd">
+    <span class="rp-crime-art teal">Art. 334-A</span>
+    <span class="rp-crime-nome">Contrabando</span>
+    <span class="rp-crime-pena">Rec. 2–5 anos</span>
+  </div>
+  <div class="rp-crime-body">
+    <div class="rp-art">Importar ou exportar mercadoria <b>proibida</b>.</div>
+    <p>O ilícito está na <em>natureza da mercadoria</em> (absolutamente proibida), não no pagamento do imposto.</p>
+    <div class="rp-ok"><strong>Insignificância — Tema 1143 STJ:</strong> cigarros comuns → até <b>1.000 maços</b>. Reiteração em crimes da mesma natureza afasta. <b>Cigarros eletrônicos: Tema 1143 não se aplica</b> (proibição absoluta pela ANVISA).</div>
+  </div>
+</div>
+
+</div><!-- #rp2 -->
+
+<!-- ═══════════════════ DISTINÇÕES CRÍTICAS ═══════════════════ -->
+<div class="rp-painel" id="rp3">
+
+<div class="rp-sec">Concussão × Extorsão × Corrupção Passiva</div>
+<div class="rp-vs-grid">
+  <div class="rp-vs-card">
+    <h4>Concussão (Art. 316)</h4>
+    <div class="rp-vs-label">Sujeito ativo</div>
+    <div class="rp-vs-val">Funcionário público (próprio)</div>
+    <div class="rp-vs-label">Conduta</div>
+    <div class="rp-vs-val"><b>Exigir</b> — impor, ordenar. Sem violência/grave ameaça explícita, mas com a intimidação inerente à função.</div>
+    <div class="rp-vs-label">Vantagem</div>
+    <div class="rp-vs-val">Qualquer natureza (não precisa ser econômica)</div>
+    <div class="rp-vs-label">Consumação</div>
+    <div class="rp-vs-val">Com a mera exigência (formal)</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Extorsão (Art. 158)</h4>
+    <div class="rp-vs-label">Sujeito ativo</div>
+    <div class="rp-vs-val">Qualquer pessoa (comum)</div>
+    <div class="rp-vs-label">Conduta</div>
+    <div class="rp-vs-val"><b>Constranger</b> mediante <b>violência ou grave ameaça</b> explícita.</div>
+    <div class="rp-vs-label">Vantagem</div>
+    <div class="rp-vs-val">Deve ser econômica (indevida)</div>
+    <div class="rp-vs-label">Consumação</div>
+    <div class="rp-vs-val">Com o constrangimento (formal)</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Corrupção Passiva (Art. 317)</h4>
+    <div class="rp-vs-label">Sujeito ativo</div>
+    <div class="rp-vs-val">Funcionário público (próprio)</div>
+    <div class="rp-vs-label">Conduta</div>
+    <div class="rp-vs-val"><b>Solicitar, receber ou aceitar promessa.</b> Pedido — sem coação. Situação de passividade nas 2 últimas modalidades.</div>
+    <div class="rp-vs-label">Vantagem</div>
+    <div class="rp-vs-val">Qualquer natureza (indevida)</div>
+    <div class="rp-vs-label">Consumação</div>
+    <div class="rp-vs-val">Com a solicitação, recebimento ou aceitação</div>
+  </div>
+</div>
+<div class="rp-dist"><strong>Critério de Edmundo Oliveira:</strong> "o verdadeiro critério para diferenciar concussão e corrupção está na presença ou na ausência de coação; ela existe na primeira e inexiste na segunda. Naquela o funcionário <em>exige</em>; na outra ele apenas <em>solicita, recebe ou aceita promessa</em>."</div>
+<div class="rp-warn"><strong>Cuidado:</strong> Funcionário que usa <b>violência ou grave ameaça</b> para obter vantagem → <b>extorsão</b>, não concussão (STJ, HC 198.750/SP).</div>
+
+<div class="rp-sec">Prevaricação × Condescendência Criminosa</div>
+<div class="rp-vs-grid">
+  <div class="rp-vs-card">
+    <h4>Prevaricação (Art. 319)</h4>
+    <div class="rp-vs-label">Conduta</div>
+    <div class="rp-vs-val">Retardar, omitir ou praticar ato contra lei</div>
+    <div class="rp-vs-label">Dolo específico</div>
+    <div class="rp-vs-val">Satisfazer <b>interesse ou sentimento pessoal</b> (egoístico)</div>
+    <div class="rp-vs-label">Culposa?</div>
+    <div class="rp-vs-val"><b>Não.</b> Apenas dolosa.</div>
+    <div class="rp-vs-label">Pena</div>
+    <div class="rp-vs-val">Det. 3m–1 ano + multa</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Condescendência (Art. 320)</h4>
+    <div class="rp-vs-label">Conduta</div>
+    <div class="rp-vs-val">Deixar de responsabilizar subordinado</div>
+    <div class="rp-vs-label">Dolo</div>
+    <div class="rp-vs-val">Por <b>indulgência</b> (sentimento altruísta, clemência)</div>
+    <div class="rp-vs-label">Culposa?</div>
+    <div class="rp-vs-val"><b>Sim.</b> Admite modalidade culposa. (⚠️ ponto de prova)</div>
+    <div class="rp-vs-label">Pena</div>
+    <div class="rp-vs-val">Det. 15d–1 mês ou multa</div>
+  </div>
+</div>
+
+<div class="rp-sec">Resistência × Desobediência × Desacato</div>
+<div class="rp-vs-grid">
+  <div class="rp-vs-card">
+    <h4>Resistência (Art. 329)</h4>
+    <div class="rp-vs-label">Meio</div>
+    <div class="rp-vs-val"><b>Violência ou ameaça</b> ("desobediência belicosa")</div>
+    <div class="rp-vs-label">Finalidade</div>
+    <div class="rp-vs-val">Impedir a <b>execução de ato legal</b></div>
+    <div class="rp-vs-label">Pena</div>
+    <div class="rp-vs-val">Det. 2m–2 anos (+ Rec. 1–3 se o ato não se executa)</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Desobediência (Art. 330)</h4>
+    <div class="rp-vs-label">Meio</div>
+    <div class="rp-vs-val">Resistência <b>passiva</b> — sem violência/ameaça</div>
+    <div class="rp-vs-label">Finalidade</div>
+    <div class="rp-vs-val">Não cumprir ordem legal</div>
+    <div class="rp-vs-label">Pena</div>
+    <div class="rp-vs-val">Det. 15d–6 meses + multa</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Desacato (Art. 331)</h4>
+    <div class="rp-vs-label">Meio</div>
+    <div class="rp-vs-val">Qualquer ato (palavras, gestos, etc.)</div>
+    <div class="rp-vs-label">Finalidade</div>
+    <div class="rp-vs-val"><b>Desprestigiar a função</b> pública (não impedir ato)</div>
+    <div class="rp-vs-label">Pena</div>
+    <div class="rp-vs-val">Det. 6m–2 anos ou multa</div>
+  </div>
+</div>
+<div class="rp-jur"><strong>R. Greco — concurso entre resistência e desacato:</strong> é possível o concurso real, pois são motivações e objetivos distintos: resistência visa impedir o ato; desacato visa desprestigiar a função.</div>
+
+<div class="rp-sec">Peculato-Furto × Furto Comum</div>
+<div class="rp-vs-grid">
+  <div class="rp-vs-card">
+    <h4>Peculato-Furto (Art. 312, §1°)</h4>
+    <div class="rp-vs-label">Sujeito ativo</div>
+    <div class="rp-vs-val">Funcionário público (crime próprio). Coautor civil ciente da qualidade → responde pelo mesmo crime (art. 30).</div>
+    <div class="rp-vs-label">Diferencial</div>
+    <div class="rp-vs-val">Aproveita-se das <b>facilidades do cargo</b> para subtrair</div>
+    <div class="rp-vs-label">Pena</div>
+    <div class="rp-vs-val">Rec. 2–12 anos + multa</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Furto Comum (Art. 155)</h4>
+    <div class="rp-vs-label">Sujeito ativo</div>
+    <div class="rp-vs-val">Qualquer pessoa (crime comum)</div>
+    <div class="rp-vs-label">Diferencial</div>
+    <div class="rp-vs-val">Ausência da qualidade funcional ou do aproveitamento do cargo</div>
+    <div class="rp-vs-label">Pena</div>
+    <div class="rp-vs-val">Rec. 2–4 anos + multa (pena mais branda)</div>
+  </div>
+</div>
+<div class="rp-warn"><strong>Cuidado — vigia:</strong> funcionário público que subtrai bem de <em>outra repartição</em>, sem qualquer relação com seu cargo → <b>furto comum</b>, não peculato-furto (VUNESP–DPE-SP 2023 e Instituto Consulplan 2023, gabarito D).</div>
+
+<div class="rp-sec">Descaminho × Contrabando</div>
+<div class="rp-vs-grid">
+  <div class="rp-vs-card">
+    <h4>Descaminho (Art. 334)</h4>
+    <div class="rp-vs-label">Mercadoria</div>
+    <div class="rp-vs-val"><b>Lícita</b></div>
+    <div class="rp-vs-label">Ilícito</div>
+    <div class="rp-vs-val">Iludir o pagamento do <b>imposto</b></div>
+    <div class="rp-vs-label">Insignificância</div>
+    <div class="rp-vs-val">Sim → até R$ 20.000,00</div>
+  </div>
+  <div class="rp-vs-card">
+    <h4>Contrabando (Art. 334-A)</h4>
+    <div class="rp-vs-label">Mercadoria</div>
+    <div class="rp-vs-val"><b>Proibida</b></div>
+    <div class="rp-vs-label">Ilícito</div>
+    <div class="rp-vs-val">A própria <b>importação/exportação</b> da mercadoria é vedada</div>
+    <div class="rp-vs-label">Insignificância</div>
+    <div class="rp-vs-val">Cigarros comuns: até 1.000 maços (Tema 1143). Cigarros eletrônicos: <b>não</b>.</div>
+  </div>
+</div>
+
+</div><!-- #rp3 -->
+
+<script>
+function rpAba(n){
+  document.querySelectorAll('#ap-resumo .rp-tab').forEach(function(t,i){ t.classList.toggle('ativo',i===n); });
+  document.querySelectorAll('#ap-resumo .rp-painel').forEach(function(p,i){ p.classList.toggle('ativo',i===n); });
+}
+</script>
+
+</div><!-- #ap-resumo -->
 
 </div>
 

@@ -239,6 +239,86 @@
 @media (max-width: 540px) {
   .tf-tab { padding: 4px 9px; font-size: 11.5px; }
 }
+
+/* ── Relatório ───────────────────────────────────────────── */
+:root {
+  --rp-bg2:    #f5f7fa;
+  --rp-border: #dce3ec;
+  --rp-green:  #1a5c1a; --rp-green-lt: #d6f0d6;
+  --rp-red:    #8b1a1a; --rp-red-lt:   #fce8e8;
+  --rp-amber:  #7a3800; --rp-amber-lt: #fdebd6;
+  --rp-teal:   #0a5c4a; --rp-teal-lt:  #d6f0e8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --rp-bg2: #1a2840; --rp-border: #2a3a52;
+    --rp-green: #6fd86f; --rp-green-lt: #0d2e0d;
+    --rp-red: #f08080; --rp-red-lt: #2e0d0d;
+    --rp-amber: #f0a060; --rp-amber-lt: #2e1500;
+    --rp-teal: #60d8b8; --rp-teal-lt: #072e22;
+  }
+}
+:root[data-theme="dark"] {
+  --rp-bg2: #1a2840; --rp-border: #2a3a52;
+  --rp-green: #6fd86f; --rp-green-lt: #0d2e0d;
+  --rp-red: #f08080; --rp-red-lt: #2e0d0d;
+  --rp-amber: #f0a060; --rp-amber-lt: #2e1500;
+  --rp-teal: #60d8b8; --rp-teal-lt: #072e22;
+}
+.rp-titulo {
+  font-family: var(--serif); font-size: 19px; font-weight: 700;
+  color: var(--blue); margin-bottom: 4px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--border);
+}
+.rp-subtitulo {
+  font-family: var(--sans); font-size: 13px; color: var(--text2);
+  margin-bottom: 24px; font-style: italic;
+}
+.rp-secao { margin-bottom: 28px; }
+.rp-secao-titulo {
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  color: var(--blue-dark, var(--blue)); margin-bottom: 10px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: baseline; gap: 10px;
+}
+.rp-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; min-width: 26px;
+  border-radius: 50%; background: var(--blue); color: #fff;
+  font-family: var(--sans); font-size: 12px; font-weight: 700;
+}
+.rp-texto {
+  font-family: var(--serif); font-size: 15px; line-height: 1.75;
+  color: var(--text); margin-bottom: 12px;
+}
+.rp-lista {
+  margin: 10px 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rp-lista li {
+  font-family: var(--serif); font-size: 15px; line-height: 1.7;
+  color: var(--text); padding-left: 20px; position: relative;
+}
+.rp-lista li::before { content: "›"; position: absolute; left: 4px; color: var(--blue); font-weight: 700; }
+.rp-lista li strong { color: var(--text); }
+.rp-destaque {
+  background: var(--rp-bg2); border-left: 3px solid var(--blue);
+  border-radius: 0 6px 6px 0; padding: 12px 14px; margin: 14px 0;
+  font-family: var(--serif); font-size: 14px; line-height: 1.7; color: var(--text);
+}
+.rp-destaque strong { color: var(--blue); }
+.rp-atencao {
+  background: var(--rp-amber-lt); border-left: 3px solid var(--rp-amber);
+  border-radius: 0 6px 6px 0; padding: 12px 14px; margin: 14px 0;
+  font-family: var(--sans); font-size: 13px; line-height: 1.65; color: var(--text);
+}
+.rp-table-wrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--border); border-radius: 8px; }
+.rp-table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 13px; }
+.rp-table th { background: var(--blue); color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; }
+.rp-table th:first-child { border-radius: 7px 0 0 0; }
+.rp-table th:last-child  { border-radius: 0 7px 0 0; }
+.rp-table td { padding: 9px 12px; vertical-align: top; line-height: 1.55; color: var(--text); border-top: 1px solid var(--border); }
+.rp-table tr:nth-child(even) td { background: var(--rp-bg2); }
 </style>
 
 <h2 class="tf-titulo">Direito Tributário e Financeiro I — Princípios Tributários</h2>
@@ -249,6 +329,7 @@
   <button class="tf-tab" onclick="tfTab('pr-roteiro', this)">Roteiro de Estudo</button>
   <button class="tf-tab" onclick="tfTab('pr-caso', this)">Estudo de Caso</button>
   <button class="tf-tab" onclick="tfTab('pr-excecoes', this)">Exceções</button>
+  <button class="tf-tab" onclick="tfTab('pr-relatorio', this)">Relatório</button>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -718,6 +799,168 @@
     <strong>💡 Lembre-se: CIDE e ICMS-combustíveis têm exceção apenas para redução e restabelecimento de alíquota</strong>
     A exceção à anterioridade anual para CIDE-combustíveis (art. 177, §4°, I, b CF) e ICMS-combustíveis monofásico (art. 155, §4°, IV, c CF) aplica-se <em>somente</em> para reduzir ou restabelecer alíquotas — não para majorá-las além do patamar anterior. A majoração efetiva sujeita-se ao regime normal.
   </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 6 — RELATÓRIO
+═══════════════════════════════════════════════════════ -->
+<div id="tf-pr-relatorio" class="tf-painel">
+
+<h1 class="rp-titulo">Relatório Analítico — Princípios e Garantias Constitucionais do Direito Tributário Brasileiro</h1>
+<p class="rp-subtitulo">Análise doutrinária dos fundamentos constitucionais do Sistema Tributário Nacional</p>
+
+<!-- 1 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">1</span> Fundamentos da Atividade Financeira e Competência Tributária</h2>
+
+  <p class="rp-texto">A transição do Estado Liberal para o Estado Social (<em>Welfare State</em>) ressignificou a atuação estatal. Enquanto o modelo liberal pautava-se por finanças neutras e um Estado abstencionista — onde o tributo possuía caráter meramente fiscal (arrecadatório) —, o Estado Social introduziu as <em>finanças funcionais</em>. Nelas, o Estado intervém na economia para garantir direitos fundamentais de segunda geração (saúde, educação, assistência), utilizando-se da extrafiscalidade: o emprego de instrumentos tributários para estimular ou inibir comportamentos econômicos e sociais em prol do bem comum.</p>
+
+  <p class="rp-texto">Sob a ótica técnica, a atividade financeira é a atividade-meio do Estado, necessária para custear a atividade-fim (serviço público, poder de polícia, obras). Conforme a clássica lição de Aliomar Baleeiro, esta atividade consiste em: <strong>Obter</strong> (receitas), <strong>Criar</strong> (crédito público), <strong>Gerir</strong> (orçamento e patrimônio) e <strong>Despender</strong> (despesas públicas). Diferente das relações privadas, a relação jurídica tributária é marcada pela verticalidade e pela soberania estatal, caracterizando-se como uma invasão patrimonial compulsória autorizada pela Constituição.</p>
+
+  <div class="rp-table-wrap">
+    <table class="rp-table">
+      <thead>
+        <tr><th>Critério</th><th>Direito Financeiro</th><th>Direito Tributário</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Objeto de Estudo</td><td>Atividade financeira total: receita, despesa, orçamento e crédito público</td><td>Obtenção de receitas derivadas (tributos) especificamente</td></tr>
+        <tr><td>Abrangência</td><td>Gestão do dinheiro público, responsabilidade fiscal e receitas não tributárias</td><td>Instituição, fiscalização e arrecadação de tributos</td></tr>
+        <tr><td>Natureza da Relação</td><td>Gestão do patrimônio público e do orçamento estatal</td><td>Relação vertical "Estado vs. Contribuinte" (Poder de Império)</td></tr>
+        <tr><td>Foco na Receita</td><td>Cuida da destinação e gestão de todas as receitas</td><td>Cuida da instituição e cobrança das receitas tributárias</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="rp-texto">Com fulcro nos arts. 24, 30 e 32 da CF/88, a competência para legislar sobre Direito Tributário e Financeiro é concorrente entre os entes federados:</p>
+
+  <ul class="rp-lista">
+    <li><strong>União:</strong> limita-se a estabelecer normas gerais (art. 24, §1°).</li>
+    <li><strong>Estados e Distrito Federal:</strong> exercem competência suplementar; inexistindo norma geral federal, possuem competência plena. A superveniência de lei federal <em>suspende</em> a eficácia da lei estadual no que lhe for contrário — sem revogação (art. 24, §4°).</li>
+    <li><strong>Municípios:</strong> competência para suplementar a legislação federal e estadual no que couber (art. 30, II CF).</li>
+  </ul>
+</section>
+
+<!-- 2 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">2</span> Princípio da Legalidade e Tipicidade Tributária Estrita</h2>
+
+  <p class="rp-texto">Historicamente fundamentado na Magna Carta de 1215 (<em>no taxation without representation</em>), o princípio da legalidade (<em>nullum tributum sine lege</em>), previsto no art. 150, I CF, veda a exigência ou aumento de tributo sem lei que o estabeleça.</p>
+
+  <p class="rp-texto">A reserva legal exige que os elementos essenciais da obrigação tributária estejam previstos em lei. Segundo o art. 97 do CTN, somente lei pode estabelecer: instituição ou extinção; majoração ou redução; definição do fato gerador e do sujeito passivo; fixação de alíquota e base de cálculo; cominação de penalidades; e hipóteses de exclusão, suspensão e extinção do crédito tributário.</p>
+
+  <div class="rp-atencao">
+    <strong>Matérias reservadas à Lei Complementar — vedado o uso de Lei Ordinária ou MP (art. 62, §1°, III CF):</strong><br>
+    Imposto sobre Grandes Fortunas (IGF) · Empréstimos Compulsórios · Impostos Residuais (novas fontes de receita da União).
+  </div>
+
+  <p class="rp-texto">O Poder Executivo pode alterar as alíquotas dos seguintes tributos por ato infralegal (decreto), dada a sua natureza extrafiscal de reordenamento econômico (art. 153, §1° CF):</p>
+
+  <ul class="rp-lista">
+    <li><strong>II, IE, IPI e IOF:</strong> instrumentos de intervenção rápida no mercado e na indústria nacional.</li>
+    <li><strong>CIDE-Combustível:</strong> alíquotas podem ser reduzidas e restabelecidas por ato do Executivo (art. 177, §4°, I, b CF).</li>
+    <li><strong>ICMS-Combustível:</strong> alíquotas definidas mediante deliberação interestadual — convênio do CONFAZ (art. 155, §4°, IV, c CF).</li>
+  </ul>
+
+  <div class="rp-destaque">
+    <strong>Notas técnicas:</strong> A atualização monetária da base de cálculo por índices oficiais e a alteração do prazo de recolhimento (Súmula Vinculante 50) não se sujeitam à reserva de lei em sentido estrito, podendo ser tratadas por atos administrativos normativos.
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">3</span> Princípio da Irretroatividade e Segurança Jurídica</h2>
+
+  <p class="rp-texto">A vedação de cobrança sobre fatos geradores ocorridos antes da vigência da lei (art. 150, III, "a" CF) é um pilar da segurança jurídica. O art. 106 do CTN prevê as estritas exceções:</p>
+
+  <ul class="rp-lista">
+    <li><strong>Leis Expressamente Interpretativas:</strong> retroagem para esclarecer norma anterior, mas é vedada a aplicação de penalidade ao fato passado (art. 106, I CTN).</li>
+    <li><strong>Retroatividade In Mellius:</strong> aplica-se a ato não definitivamente julgado quando a nova lei deixa de definir o ato como infração ou comina penalidade menos severa (art. 106, II CTN).</li>
+  </ul>
+</section>
+
+<!-- 4 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">4</span> Anterioridade Tributária: Anual e Nonagesimal</h2>
+
+  <p class="rp-texto">A anterioridade é uma garantia individual — cláusula pétrea — contra a surpresa fiscal. Segundo o STF (AgR no RE 564.225/RS), a redução de um benefício fiscal equivale legalmente a um aumento de tributo, devendo respeitar os prazos de anterioridade.</p>
+
+  <ul class="rp-lista">
+    <li><strong>Anterioridade Anual (Exercício):</strong> vedada a cobrança no mesmo exercício financeiro (ano civil) da publicação da lei (art. 150, III, b CF).</li>
+    <li><strong>Anterioridade Nonagesimal (Noventena):</strong> vedada a cobrança antes de decorridos 90 dias da publicação da lei (art. 150, III, c CF — EC 42/2003).</li>
+  </ul>
+
+  <div class="rp-table-wrap">
+    <table class="rp-table">
+      <thead>
+        <tr><th>Tributo</th><th>Respeita Anterioridade Anual?</th><th>Respeita Noventena?</th><th>Justificativa Técnica</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>II, IE, IOF</td><td>Não</td><td>Não</td><td>Urgência extrafiscal / Reordenamento econômico imediato</td></tr>
+        <tr><td>IPI</td><td>Não</td><td>Sim</td><td>Ajuste econômico com mínima previsibilidade ao setor industrial</td></tr>
+        <tr><td>Imposto de Renda</td><td>Sim</td><td>Não</td><td>Base de cálculo anual — facilidade técnica de adaptação</td></tr>
+        <tr><td>Base de cálculo IPTU/IPVA</td><td>Sim</td><td>Não</td><td>Exceção constitucional específica (art. 150, §1° in fine CF)</td></tr>
+        <tr><td>CIDE/ICMS-Combustíveis*</td><td>Não</td><td>Sim</td><td>Flexibilidade na regulação de preços de combustíveis (restabelecimento de alíquota)</td></tr>
+        <tr><td>IEG e Emp. Compulsório (art. 148, I)</td><td>Não</td><td>Não</td><td>Situação de calamidade pública ou guerra — urgência absoluta</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">5</span> Isonomia Tributária e a Cláusula <em>Pecunia Non Olet</em></h2>
+
+  <p class="rp-texto">A isonomia tributária (art. 150, II CF) veda o tratamento desigual entre contribuintes que se encontrem em situação equivalente, proibindo qualquer distinção em razão de ocupação profissional ou função por eles exercida, independentemente da denominação jurídica dos rendimentos, títulos ou direitos.</p>
+
+  <p class="rp-texto">Desdobramento fundamental é o princípio do <em>Non Olet</em> ("o dinheiro não tem cheiro"): a tributação ocorre independentemente da licitude do ato praticado ou da validade jurídica do negócio. Se houver acréscimo patrimonial ou atividade econômica, o tributo é devido — ainda que a fonte seja o tráfico de entorpecentes ou jogos ilícitos — sob pena de privilegiar o infrator em detrimento do contribuinte honesto e romper com a isonomia material.</p>
+</section>
+
+<!-- 6 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">6</span> Capacidade Contributiva e Manifestações Técnicas</h2>
+
+  <p class="rp-texto">O art. 145, §1° CF determina que os impostos, sempre que possível, terão caráter pessoal e serão graduados segundo a capacidade econômica do contribuinte. A capacidade contributiva busca a justiça fiscal redistributiva, manifestando-se pelos seguintes institutos:</p>
+
+  <ul class="rp-lista">
+    <li><strong>Progressividade:</strong> alíquotas crescentes conforme a base de cálculo. No ITR, visa desestimular propriedades improdutivas; no IPTU, busca o adequado aproveitamento do solo urbano não edificado ou subutilizado (art. 182 CF); no IRPF, é intrínseca à estrutura do imposto.</li>
+    <li><strong>Proporcionalidade:</strong> alíquota fixa sobre base variável (ex.: ITBI — tributo real sem previsão constitucional expressa de progressividade). O valor absoluto cresce com a base, mas a alíquota permanece constante.</li>
+    <li><strong>Seletividade:</strong> variação de alíquotas conforme a essencialidade do bem. Obrigatória no IPI (art. 153, §3°, I CF); facultativa no ICMS (art. 155, §2°, III CF). Bens essenciais (cesta básica) têm alíquotas menores; supérfluos e nocivos, maiores.</li>
+  </ul>
+</section>
+
+<!-- 7 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">7</span> Vedação ao Confisco e Limites ao Poder de Tributar</h2>
+
+  <p class="rp-texto">O art. 150, IV da CF proíbe o efeito de confisco. Esta garantia protege o direito de propriedade contra a invasão patrimonial excessiva, impedindo que o Estado absorva parcela desproporcional da renda ou do patrimônio do contribuinte, inviabilizando sua subsistência ou atividade econômica. O STF estende o princípio às <strong>multas tributárias</strong>, submetendo-as ao mesmo crivo da proporcionalidade (ADI 551).</p>
+
+  <div class="rp-destaque">
+    <strong>Análise casuística:</strong> O STF não fixou percentual objetivo de confisco. O tribunal examina o caso concreto, considerando o conjunto da carga tributária incidente e a viabilidade econômica da atividade. Multas de 100% ou 200% sobre o tributo podem ser reduzidas por ofensa ao princípio.
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">8</span> Outros Princípios e Garantias</h2>
+
+  <ul class="rp-lista">
+    <li><strong>Não Limitação ao Tráfego (art. 150, V CF):</strong> veda tributos que limitem a circulação de pessoas ou bens entre entes federados, ressalvado expressamente o pedágio em vias conservadas pelo Poder Público.</li>
+    <li><strong>Uniformidade Geográfica (art. 151, I CF):</strong> veda à União instituir tributo que não seja uniforme em todo o território nacional ou que conceda incentivo a determinada região em detrimento de outra — salvo para equilíbrio do desenvolvimento socioeconômico regional.</li>
+    <li><strong>Não-discriminação por Origem/Destino (art. 152 CF):</strong> Estados e Municípios não podem estabelecer diferença tributária entre bens e serviços em razão de sua procedência ou destino — garantia da unidade do mercado interno.</li>
+  </ul>
+</section>
+
+<!-- 9 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">9</span> Conclusão e Síntese Interpretativa</h2>
+
+  <p class="rp-texto">Os princípios aqui analisados não são meras recomendações programáticas, mas sim <strong>cláusulas pétreas</strong> que estruturam o Sistema Tributário Nacional. Eles asseguram que a soberania estatal e o poder de império não se convertam em arbítrio, garantindo previsibilidade, isonomia e justiça.</p>
+
+  <div class="rp-destaque">
+    <strong>"As limitações ao poder de tributar são salvaguardas essenciais do contribuinte, destinadas a assegurar a manutenção da ordem social e do bem comum por meio da estrita legalidade e da justiça fiscal, erguendo barreiras intransponíveis contra a tributação arbitrária."</strong>
+  </div>
+</section>
 
 </div>
 

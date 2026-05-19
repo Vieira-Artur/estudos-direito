@@ -1,0 +1,759 @@
+<style>
+/* ── Cores extras ─────────────────────────────────────────── */
+:root {
+  --tf-green:  #276749; --tf-green-lt: #edfaf3;
+  --tf-orange: #b84c0c; --tf-orange-lt:#fff5ee;
+  --tf-red:    #8b1a1a; --tf-red-lt:   #fce8e8;
+  --tf-teal:   #0d5c5c; --tf-teal-lt:  #e6f7f7;
+  --tf-purple: #3C3489; --tf-purple-lt: #eeedfe;
+  --tf-gold:   #7a5800; --tf-gold-lt:   #fdf6e3;
+  --tf-br-az-bg: #E6F1FB; --tf-br-az-col: #0C447C; --tf-br-az-brd: #7aacdc;
+  --tf-br-vd-bg: #E1F5EE; --tf-br-vd-col: #085041; --tf-br-vd-brd: #5dcaa5;
+  --tf-br-la-bg: #FFF3E0; --tf-br-la-col: #7a3000; --tf-br-la-brd: #f0a060;
+  --tf-br-ro-bg: #EEEDFE; --tf-br-ro-col: #3C3489; --tf-br-ro-brd: #a09ae0;
+  --tf-br-te-bg: #E6F7F7; --tf-br-te-col: #0d5c5c; --tf-br-te-brd: #5dcaca;
+  --tf-br-ou-bg: #FDF6E3; --tf-br-ou-col: #7a5800; --tf-br-ou-brd: #d4aa40;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tf-green:  #6fd86f; --tf-green-lt: #0d2e0d;
+    --tf-orange: #f0a060; --tf-orange-lt:#2e1500;
+    --tf-red:    #f08080; --tf-red-lt:   #2e0d0d;
+    --tf-teal:   #60d8b8; --tf-teal-lt:  #072e22;
+    --tf-purple: #a09ae0; --tf-purple-lt: #1e1a3e;
+    --tf-gold:   #e8c96a; --tf-gold-lt:   #2a2000;
+    --tf-br-az-bg: #1a2550; --tf-br-az-col: #9ab4f8; --tf-br-az-brd: #3a5090;
+    --tf-br-vd-bg: #0d2e0d; --tf-br-vd-col: #6fd86f; --tf-br-vd-brd: #2d7a2d;
+    --tf-br-la-bg: #2e1500; --tf-br-la-col: #f0a060; --tf-br-la-brd: #804020;
+    --tf-br-ro-bg: #1e1a3e; --tf-br-ro-col: #a09ae0; --tf-br-ro-brd: #504880;
+    --tf-br-te-bg: #072e22; --tf-br-te-col: #60d8b8; --tf-br-te-brd: #207060;
+    --tf-br-ou-bg: #2a2000; --tf-br-ou-col: #e8c96a; --tf-br-ou-brd: #806020;
+  }
+}
+:root[data-theme="dark"] {
+  --tf-green:  #6fd86f; --tf-green-lt: #0d2e0d;
+  --tf-orange: #f0a060; --tf-orange-lt:#2e1500;
+  --tf-red:    #f08080; --tf-red-lt:   #2e0d0d;
+  --tf-teal:   #60d8b8; --tf-teal-lt:  #072e22;
+  --tf-purple: #a09ae0; --tf-purple-lt: #1e1a3e;
+  --tf-gold:   #e8c96a; --tf-gold-lt:   #2a2000;
+  --tf-br-az-bg: #1a2550; --tf-br-az-col: #9ab4f8; --tf-br-az-brd: #3a5090;
+  --tf-br-vd-bg: #0d2e0d; --tf-br-vd-col: #6fd86f; --tf-br-vd-brd: #2d7a2d;
+  --tf-br-la-bg: #2e1500; --tf-br-la-col: #f0a060; --tf-br-la-brd: #804020;
+  --tf-br-ro-bg: #1e1a3e; --tf-br-ro-col: #a09ae0; --tf-br-ro-brd: #504880;
+  --tf-br-te-bg: #072e22; --tf-br-te-col: #60d8b8; --tf-br-te-brd: #207060;
+  --tf-br-ou-bg: #2a2000; --tf-br-ou-col: #e8c96a; --tf-br-ou-brd: #806020;
+}
+
+/* ── Sistema de abas ─────────────────────────────────────── */
+.tf-tabs {
+  display: flex; gap: 4px; margin-bottom: 22px; flex-wrap: wrap;
+}
+.tf-tab {
+  padding: 7px 18px;
+  font-size: 13px; font-weight: 600;
+  font-family: var(--sans);
+  border: 1.5px solid var(--blue);
+  border-radius: 6px; cursor: pointer;
+  background: var(--surface); color: var(--blue);
+  transition: background .15s, color .15s;
+}
+.tf-tab:hover { background: var(--blue-hover); }
+.tf-tab.ativo  { background: var(--blue); color: #fff; }
+.tf-painel { display: none; }
+.tf-painel.ativo { display: block; }
+
+/* ── Título do tema ─────────────────────────────────────── */
+.tf-titulo {
+  font-family: var(--serif);
+  font-size: 19px; font-weight: 700;
+  color: var(--blue); margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+/* ── Componentes compartilhados ─────────────────────────── */
+.tf-section-title {
+  font-family: var(--serif);
+  font-size: 15px; font-weight: 700; color: var(--blue);
+  border-left: 3px solid var(--gold);
+  padding-left: 10px; margin: 24px 0 12px;
+}
+.tf-section-title:first-child { margin-top: 0; }
+
+.tf-table-wrap { overflow-x: auto; margin: 10px 0 18px; }
+.tf-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tf-table thead th {
+  background: var(--blue); color: #fff;
+  padding: 8px 12px; text-align: left; font-weight: 600;
+  font-family: var(--sans);
+}
+.tf-table tbody td {
+  padding: 7px 12px; border-bottom: 1px solid var(--border);
+  vertical-align: top; color: var(--text);
+}
+.tf-table tbody tr:nth-child(even) td { background: var(--blue-light); }
+.tf-table tbody td:first-child { font-weight: 600; color: var(--blue); }
+
+.tf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin: 10px 0 18px; }
+.tf-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 16px;
+  border-top: 3px solid var(--blue);
+}
+.tf-card.verde   { border-top-color: var(--tf-green); }
+.tf-card.laranja { border-top-color: var(--tf-orange); }
+.tf-card.teal    { border-top-color: var(--tf-teal); }
+.tf-card.roxo    { border-top-color: var(--tf-purple); }
+.tf-card.ouro    { border-top-color: var(--tf-gold); }
+.tf-card h4 { font-size: 14px; color: var(--blue); margin-bottom: 6px; font-weight: 700; }
+.tf-card p, .tf-card li { font-size: 13.5px; color: var(--text2); line-height: 1.55; }
+.tf-card ul { padding-left: 14px; margin-top: 5px; }
+
+.tf-alert {
+  border-radius: 7px; padding: 10px 14px; margin: 10px 0;
+  font-size: 13px; border-left: 4px solid; line-height: 1.55;
+}
+.tf-alert.info    { background: var(--blue-light);  border-color: var(--blue);      color: var(--text); }
+.tf-alert.atencao { background: var(--tf-orange-lt); border-color: var(--tf-orange); color: var(--text); }
+.tf-alert.ok      { background: var(--tf-green-lt);  border-color: var(--tf-green);  color: var(--text); }
+.tf-alert strong  { display: block; margin-bottom: 3px; }
+
+.tf-badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  border-radius: 4px; padding: 2px 7px; margin: 2px 2px 0 0;
+}
+.tf-b-blue   { background: var(--blue-light);  color: var(--blue); }
+.tf-b-green  { background: var(--tf-green-lt); color: var(--tf-green); }
+.tf-b-orange { background: var(--tf-orange-lt);color: var(--tf-orange); }
+.tf-b-red    { background: var(--tf-red-lt);   color: var(--tf-red); }
+.tf-b-teal   { background: var(--tf-teal-lt);  color: var(--tf-teal); }
+.tf-b-purple { background: var(--tf-purple-lt);color: var(--tf-purple); }
+
+/* ── Roteiro ─────────────────────────────────────────────── */
+.tf-step { display:flex; gap:10px; margin-bottom:8px; align-items:flex-start; }
+.tf-num {
+  flex-shrink:0; width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11.5px; font-weight:600; margin-top:2px;
+}
+.tf-num.azul   { background: var(--blue-light); color: var(--blue); }
+.tf-num.verde  { background: var(--tf-green-lt); color: var(--tf-green); }
+.tf-num.laranja{ background: var(--tf-orange-lt);color: var(--tf-orange); }
+.tf-num.roxo   { background: var(--tf-purple-lt); color: var(--tf-purple); }
+.tf-txt { flex:1; font-size:13.5px; color:var(--text); line-height:1.6; }
+.tf-quest {
+  background: var(--surface); border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0; padding: 8px 12px;
+  margin: 4px 0 14px 34px; font-size: 13px; color: var(--text2);
+}
+.tf-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+/* ── Mapa Mental ────────────────────────────────────────── */
+.tf-mm-wrap { overflow-x: auto; padding: 8px 0 16px; }
+.tf-mm { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; min-width: 460px; }
+.tf-mm-center {
+  width: 130px; height: 130px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; font-size: 12.5px; font-weight: 600;
+  line-height: 1.35; flex-shrink: 0; cursor: default;
+  box-shadow: 0 4px 16px rgba(31,73,125,.25);
+}
+.tf-mm-cols { display: flex; gap: 18px; }
+.tf-mm-col  { display: flex; flex-direction: column; gap: 10px; }
+.tf-mm-branch {
+  border-radius: 8px; padding: 10px 14px; font-size: 12.5px;
+  font-weight: 600; cursor: pointer; border: 1.5px solid;
+  transition: transform .15s, filter .15s; min-width: 145px;
+  text-align: center; line-height: 1.3;
+  font-family: var(--sans); background: none;
+}
+.tf-mm-branch:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.tf-mm-branch span { font-weight: 400; font-size: 11.5px; display: block; margin-top: 2px; }
+.tf-mm-branch.az { background: var(--tf-br-az-bg); color: var(--tf-br-az-col); border-color: var(--tf-br-az-brd); }
+.tf-mm-branch.vd { background: var(--tf-br-vd-bg); color: var(--tf-br-vd-col); border-color: var(--tf-br-vd-brd); }
+.tf-mm-branch.la { background: var(--tf-br-la-bg); color: var(--tf-br-la-col); border-color: var(--tf-br-la-brd); }
+.tf-mm-branch.ro { background: var(--tf-br-ro-bg); color: var(--tf-br-ro-col); border-color: var(--tf-br-ro-brd); }
+.tf-mm-branch.te { background: var(--tf-br-te-bg); color: var(--tf-br-te-col); border-color: var(--tf-br-te-brd); }
+.tf-mm-branch.ou { background: var(--tf-br-ou-bg); color: var(--tf-br-ou-col); border-color: var(--tf-br-ou-brd); }
+.tf-mm-detail {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 18px; margin-top: 14px;
+  font-size: 13px; color: var(--text); line-height: 1.65;
+  min-height: 60px;
+}
+.tf-mm-detail h4 { font-size: 14px; font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+.tf-mm-detail ul { padding-left: 16px; }
+.tf-mm-detail li { margin-bottom: 4px; color: var(--text2); }
+.tf-mm-hint { font-size: 12px; color: var(--text2); text-align: center; margin-top: 8px; }
+
+/* ── Estudo de Caso ─────────────────────────────────────── */
+.tf-caso-header {
+  background: linear-gradient(135deg, var(--blue-dark, #162f52) 0%, var(--blue) 100%);
+  border-radius: 10px; padding: 22px 26px; color: #fff; margin-bottom: 20px;
+}
+.tf-caso-header .tf-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.tf-caso-header h3 { font-family: var(--serif); font-size: 20px; margin-bottom: 8px; }
+.tf-caso-header p  { font-size: 13px; opacity: .9; line-height: 1.55; }
+.tf-caso-perguntas { margin-top: 20px; }
+.tf-pergunta {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 12px; overflow: hidden;
+}
+.tf-pergunta-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; cursor: pointer; user-select: none;
+  background: var(--bg); width: 100%; border: none; font-family: var(--sans);
+  text-align: left;
+}
+.tf-pergunta-head:hover { background: var(--blue-hover); }
+.tf-pnum {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.tf-pergunta-head .tf-pq-txt { flex: 1; font-size: 13.5px; color: var(--text); font-weight: 600; margin: 0; }
+.tf-pergunta-head .tf-toggle { font-size: 18px; color: var(--text2); transition: transform .2s; }
+.tf-pergunta-body { display: none; padding: 14px 16px 14px 56px; font-size: 13px; color: var(--text2); line-height: 1.65; border-top: 1px solid var(--border); }
+.tf-pergunta-body.open { display: block; }
+.tf-pergunta-body strong { color: var(--blue); }
+.tf-pergunta-body p { margin-bottom: 8px; }
+
+/* ── Imunidade: bloco de requisitos ────────────────────── */
+.im-req {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 16px; margin: 6px 0 14px;
+  font-size: 13px; color: var(--text2);
+}
+.im-req .im-req-title {
+  font-weight: 700; color: var(--blue); font-size: 13.5px; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.im-req ul { padding-left: 16px; margin: 0; }
+.im-req li { margin-bottom: 4px; line-height: 1.55; }
+
+@media (max-width: 540px) {
+  .tf-tab { padding: 4px 9px; font-size: 11.5px; }
+}
+</style>
+
+<h2 class="tf-titulo">Direito Tributário e Financeiro I — Imunidades Tributárias</h2>
+
+<div class="tf-tabs">
+  <button class="tf-tab ativo" onclick="tfTab('im-visao', this)">Visão Geral</button>
+  <button class="tf-tab" onclick="tfTab('im-mapa', this)">Mapa Mental</button>
+  <button class="tf-tab" onclick="tfTab('im-roteiro', this)">Roteiro de Estudo</button>
+  <button class="tf-tab" onclick="tfTab('im-caso', this)">Estudo de Caso</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 1 — VISÃO GERAL
+═══════════════════════════════════════════════════════ -->
+<div id="tf-im-visao" class="tf-painel ativo">
+
+  <div class="tf-alert info" style="margin-bottom:20px">
+    <strong>📌 O que é imunidade tributária?</strong>
+    Norma constitucional que delimita negativamente a competência tributária: o ente simplesmente <em>não tem poder</em> para instituir o tributo. Difere da isenção (lei infraconstitucional que dispensa o tributo após a competência surgir) e da não-incidência (FG não se verificou). Imunidade é cláusula pétrea — não pode ser suprimida nem por Emenda Constitucional (art. 60, §4º CF).
+  </div>
+
+  <div class="tf-section-title">Panorama das Imunidades do Art. 150, VI CF</div>
+  <div class="tf-table-wrap">
+    <table class="tf-table">
+      <thead>
+        <tr>
+          <th style="width:10%">Alínea</th>
+          <th style="width:22%">Denominação</th>
+          <th style="width:32%">Beneficiário / Objeto</th>
+          <th style="width:22%">Tipo</th>
+          <th style="width:14%">Tributo vedado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>(a)</td>
+          <td>Recíproca</td>
+          <td>União, Estados, DF, Municípios + autarquias e fundações públicas</td>
+          <td>Subjetiva (pela qualidade do sujeito)</td>
+          <td>Impostos</td>
+        </tr>
+        <tr>
+          <td>(b)</td>
+          <td>Religiosa</td>
+          <td>Templos de qualquer culto</td>
+          <td>Subjetiva (vinculada às finalidades essenciais)</td>
+          <td>Impostos</td>
+        </tr>
+        <tr>
+          <td>(c)</td>
+          <td>Condicionada</td>
+          <td>Partidos políticos e fundações, sindicatos de trabalhadores, entidades de educação/assistência social sem fins lucrativos</td>
+          <td>Subjetiva condicionada (exige requisitos do art. 14 CTN)</td>
+          <td>Impostos</td>
+        </tr>
+        <tr>
+          <td>(d)</td>
+          <td>Cultural (Imprensa)</td>
+          <td>Livros, jornais, periódicos e o papel destinado à impressão</td>
+          <td>Objetiva (recai sobre o bem, não sobre a pessoa)</td>
+          <td>Impostos</td>
+        </tr>
+        <tr>
+          <td>(e)</td>
+          <td>Musical</td>
+          <td>Fonogramas e videofonogramas musicais produzidos no Brasil com obras de autores nacionais</td>
+          <td>Objetiva (EC 75/2013)</td>
+          <td>Impostos</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tf-alert atencao">
+    <strong>⚠️ Apenas impostos — regra geral</strong>
+    O art. 150, VI CF veda exclusivamente <strong>impostos</strong>. Taxas e contribuições de melhoria podem ser cobrados mesmo dos beneficiários. Exceção: imunidades específicas em outros dispositivos da CF podem alcançar contribuições (ex.: art. 195, §7º CF — contribuições para a seguridade social de entidades beneficentes).
+  </div>
+
+  <div class="tf-section-title">Imunidade Recíproca — Art. 150, VI, (a) e §§ 2º e 3º CF</div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>🏛️ Núcleo da Imunidade</h4>
+      <p>Veda impostos sobre <strong>patrimônio, renda e serviços</strong> dos entes federativos entre si. Visa preservar a harmonia federativa (art. 18 CF).</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>✅ Extensão: autarquias e fundações</h4>
+      <p>Art. 150, §2º CF: a imunidade estende-se às autarquias e fundações públicas no que diz respeito ao seu <strong>patrimônio, renda e serviços vinculados às finalidades essenciais</strong>.</p>
+    </div>
+    <div class="tf-card laranja">
+      <h4>🚫 Atividade econômica — não abrangida</h4>
+      <p>Art. 150, §3º CF: a imunidade <strong>não se aplica</strong> a patrimônio, renda e serviços relacionados à <strong>exploração de atividade econômica</strong> regida pelo direito privado ou sujeita a regime concorrencial (art. 173, §2º CF).</p>
+    </div>
+    <div class="tf-card teal">
+      <h4>📮 Empresas públicas (STF)</h4>
+      <p>O STF reconheceu imunidade recíproca à EBCT (Correios — RE 601.392): empresa pública que presta <strong>serviço público com exclusividade</strong> equipara-se, para esse fim, a pessoa jurídica de direito público.</p>
+    </div>
+  </div>
+
+  <div class="tf-section-title">Imunidade Religiosa — Art. 150, VI, (b) e §4º CF</div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>⛪ Abrangência subjetiva</h4>
+      <p>Cobre qualquer culto, sem distinção de credo. Laicidade do Estado (art. 19, I CF) exige <strong>tratamento isonômico</strong> a todas as religiões.</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>📐 Extensão — finalidades essenciais</h4>
+      <p>A imunidade alcança todo o patrimônio, renda e serviços <strong>vinculados às finalidades essenciais</strong> da entidade religiosa, mesmo que não seja o templo físico (STF RE 325.822).</p>
+    </div>
+    <div class="tf-card laranja">
+      <h4>🏦 Imóvel alugado</h4>
+      <p>STF: imóvel de entidade religiosa alugado a terceiro <strong>mantém a imunidade</strong> se a renda for revertida para as finalidades religiosas — a imunidade segue a destinação, não o uso do bem.</p>
+    </div>
+    <div class="tf-card teal">
+      <h4>⚰️ Cemitério religioso (RE 578.562)</h4>
+      <p>Cemitério administrado por entidade religiosa como <strong>extensão de suas atividades</strong> faz jus à imunidade, pois a morte e os rituais fúnebres integram a prática religiosa.</p>
+    </div>
+  </div>
+
+  <div class="tf-section-title">Imunidade Condicionada — Art. 150, VI, (c) e §4º CF</div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>🗳️ Partidos políticos</h4>
+      <p>Partidos políticos e suas <strong>fundações</strong>. Finalidade: garantir o pluralismo democrático sem interferência fiscal do Estado sobre a oposição.</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>👷 Sindicatos de trabalhadores</h4>
+      <p>Apenas os sindicatos de <strong>trabalhadores</strong> (não os patronais). STF: a imunidade tutela o hipossuficiente na relação laboral.</p>
+    </div>
+    <div class="tf-card laranja">
+      <h4>🎓 Educação e assistência social</h4>
+      <p>Instituições de <strong>educação</strong> e <strong>assistência social</strong> sem fins lucrativos, desde que atendidos os requisitos do art. 14 CTN.</p>
+    </div>
+  </div>
+
+  <div class="im-req">
+    <div class="im-req-title">📋 Requisitos do Art. 14 CTN — condições cumulativas</div>
+    <ul>
+      <li><strong>I</strong> — Não distribuir qualquer parcela do patrimônio ou renda, a qualquer título (nem a título de gratificação, bonificação, participação de resultado etc.)</li>
+      <li><strong>II</strong> — Aplicar integralmente os recursos no País, na manutenção dos objetivos institucionais</li>
+      <li><strong>III</strong> — Manter escrituração contábil regular das receitas e despesas</li>
+    </ul>
+  </div>
+
+  <div class="tf-alert info">
+    <strong>💡 Imunidade condicionada e IPTU — art. 150, §4º CF</strong>
+    Se o imóvel da entidade estiver <strong>alugado a terceiro</strong>, mas a renda for <strong>revertida para as finalidades essenciais</strong> da entidade, a imunidade é mantida (Súmula 724 STF, convertida na Súmula Vinculante 52). O critério é a <em>destinação da renda</em>, não o uso físico do bem.
+  </div>
+
+  <div class="tf-section-title">Imunidade Cultural — Art. 150, VI, (d) CF</div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>📚 Objeto da imunidade</h4>
+      <p>Livros, jornais, periódicos e o <strong>papel destinado à sua impressão</strong>. É imunidade <em>objetiva</em>: incide sobre o bem, independentemente de quem o fabrica ou vende.</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>💻 E-books e leitores (RE 330.817)</h4>
+      <p>STF (Plenário): a imunidade abrange os <strong>livros eletrônicos</strong> e os <strong>aparelhos leitores de livros digitais</strong> (e-readers), por interpretação teleológica — a ratio é proteger a difusão do conhecimento.</p>
+    </div>
+    <div class="tf-card laranja">
+      <h4>🚫 O que não está abrangido</h4>
+      <p>Tinta para impressão, adesivos, plástico de embalagem, cola — insumos que não são "papel destinado à impressão". Lista meramente exemplificativa do STF: critério é a <strong>necessidade funcional</strong> ao veículo de informação.</p>
+    </div>
+    <div class="tf-card teal">
+      <h4>📰 Listas telefônicas (RE 199.183)</h4>
+      <p>STF reconheceu imunidade às listas telefônicas: veiculam informação e conhecimento de interesse público, ainda que também sirvam a fins publicitários.</p>
+    </div>
+  </div>
+
+  <div class="tf-section-title">Imunidade Musical — Art. 150, VI, (e) CF (EC 75/2013)</div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>🎵 Objeto</h4>
+      <p>Fonogramas e videofonogramas musicais produzidos no Brasil que contenham obras musicais ou literomusicais de <strong>autores brasileiros</strong> e/ou interpretadas por <strong>artistas brasileiros</strong>.</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>💿 Suporte físico e digital</h4>
+      <p>Abrange CDs, DVDs, Blu-rays e as correspondentes obras <strong>em mídia digital</strong> (streaming, downloads). A EC 75 teve como objetivo combater a pirataria e apoiar a indústria musical nacional.</p>
+    </div>
+  </div>
+
+  <div class="tf-section-title">Outras Imunidades Constitucionais Relevantes</div>
+  <div class="tf-table-wrap">
+    <table class="tf-table">
+      <thead><tr><th>Dispositivo</th><th>Imunidade</th><th>Tributo</th></tr></thead>
+      <tbody>
+        <tr><td>Art. 195, §7º CF</td><td>Entidades beneficentes de assistência social (EBAS) que atendam exigências legais</td><td>Contribuições para a Seguridade Social</td></tr>
+        <tr><td>Art. 149, §2º, I CF</td><td>Receitas decorrentes de exportação</td><td>Contribuições sociais e de intervenção no domínio econômico</td></tr>
+        <tr><td>Art. 153, §4º, II CF</td><td>Pequenas glebas rurais exploradas pelo proprietário que não possua outro imóvel</td><td>ITR</td></tr>
+        <tr><td>Art. 155, §2º, X, a CF</td><td>Operações que destinem mercadorias ao exterior</td><td>ICMS</td></tr>
+        <tr><td>Art. 156, §3º, II CF</td><td>Exportação de serviços para o exterior</td><td>ISS (LC 116/2003)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tf-section-title">Distinções Críticas para Prova</div>
+  <div class="tf-table-wrap">
+    <table class="tf-table">
+      <thead><tr><th>Confronto</th><th>Imunidade</th><th>Isenção</th><th>Não-incidência</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Fonte normativa</td>
+          <td>Constituição Federal</td>
+          <td>Lei infraconstitucional</td>
+          <td>Ausência de previsão legal / FG não ocorreu</td>
+        </tr>
+        <tr>
+          <td>Competência</td>
+          <td>Delimita a própria competência — ente <em>não pode</em> instituir o tributo</td>
+          <td>Pressupõe competência existente — ente <em>dispensa</em> o tributo</td>
+          <td>Questão fática — o FG simplesmente não se verificou</td>
+        </tr>
+        <tr>
+          <td>Revogação</td>
+          <td>Impossível por EC (cláusula pétrea)</td>
+          <td>Revogável por lei ordinária a qualquer tempo</td>
+          <td>Não há "revogação" — apenas o FG pode vir a ocorrer</td>
+        </tr>
+        <tr>
+          <td>Obrigação acessória</td>
+          <td>Mantida (art. 175, parágrafo único CTN por analogia)</td>
+          <td>Mantida, salvo disposição expressa em contrário</td>
+          <td>Mantida se prevista em lei</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 2 — MAPA MENTAL
+═══════════════════════════════════════════════════════ -->
+<div id="tf-im-mapa" class="tf-painel">
+
+  <div class="tf-mm-wrap">
+    <div class="tf-mm">
+      <div class="tf-mm-cols">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="tf-mm-branch az" id="imb-reciproca" onclick="imBranch('reciproca')">Imunidade Recíproca<span>Entes federativos · Autarquias</span></button>
+          <button class="tf-mm-branch vd" id="imb-religiosa" onclick="imBranch('religiosa')">Imunidade Religiosa<span>Templos · Finalidades essenciais</span></button>
+          <button class="tf-mm-branch la" id="imb-condicionada" onclick="imBranch('condicionada')">Imunidade Condicionada<span>Partidos · Sindicatos · Educação</span></button>
+        </div>
+      </div>
+
+      <div class="tf-mm-center">Imunidades<br>Tributárias<br><span style="font-size:11px;font-weight:400;opacity:.8">Art. 150, VI CF</span></div>
+
+      <div class="tf-mm-cols">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="tf-mm-branch ro" id="imb-cultural" onclick="imBranch('cultural')">Imunidade Cultural<span>Livros · Jornais · E-books</span></button>
+          <button class="tf-mm-branch te" id="imb-musical" onclick="imBranch('musical')">Imunidade Musical<span>Fonogramas · EC 75/2013</span></button>
+          <button class="tf-mm-branch ou" id="imb-outras" onclick="imBranch('outras')">Outras Imunidades<span>Art. 195 §7º · ITR · ICMS exports</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tf-mm-detail" id="im-detail">
+      <p style="color:var(--text2);text-align:center;font-size:13px">Clique em qualquer ramo para ver os detalhes.</p>
+    </div>
+    <p class="tf-mm-hint">Toque em um ramo para expandir</p>
+  </div>
+
+  <!-- Infográfico -->
+  <div style="margin-top:28px">
+    <div class="tf-section-title">Infográfico de Apoio</div>
+    <div style="margin-top:10px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface);max-width:420px">
+      <img src="img/imunidades-tributarias.png" alt="Guia das Imunidades Tributárias" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
+      <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Guia das Imunidades Tributárias</p>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="im-lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out" onclick="document.getElementById('im-lightbox').style.display='none'">
+    <img id="im-lightbox-img" src="" alt="" style="max-width:92vw;max-height:92vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.5)">
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 3 — ROTEIRO DE ESTUDO
+═══════════════════════════════════════════════════════ -->
+<div id="tf-im-roteiro" class="tf-painel">
+
+  <div class="tf-alert info" style="margin-bottom:18px">
+    <strong>Objetivo do roteiro</strong>
+    Guia passo a passo baseado na Taxonomia de Bloom. Siga a ordem; cada unidade conclui com uma questão reflexiva.
+  </div>
+
+  <div class="tf-section-title">Unidade 1 — Conceito e Natureza Jurídica</div>
+  <div class="tf-step"><div class="tf-num azul">1</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Recordar</span> Imunidade = norma constitucional que <em>delimita negativamente</em> a competência tributária. O ente simplesmente não possui poder para tributar — o tributo sequer pode ser instituído.</div></div>
+  <div class="tf-step"><div class="tf-num azul">2</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> Distinguir: imunidade (CF) × isenção (lei) × não-incidência (FG ausente). São cláusulas pétreas (art. 60, §4º CF) por protegerem direitos fundamentais e a forma federativa de Estado.</div></div>
+  <div class="tf-quest">❓ <em>(Recordar)</em> Por que uma Emenda Constitucional não pode suprimir a imunidade recíproca entre os entes federativos?</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 2 — Imunidade Recíproca (Art. 150, VI, a CF)</div>
+  <div class="tf-step"><div class="tf-num verde">A</div><div class="tf-txt"><span class="tf-badge tf-b-green">Aplicar</span> Identificar: quem é coberto (entes + autarquias + fundações públicas, art. 150 §2º CF) e quem não é (empresas públicas que exploram atividade econômica, art. 150 §3º CF).</div></div>
+  <div class="tf-step"><div class="tf-num verde">B</div><div class="tf-txt"><span class="tf-badge tf-b-orange">Jurisprudência</span> RE 601.392 (STF): Correios (EBCT) têm imunidade recíproca porque prestam <strong>serviço público com exclusividade</strong>. O critério é a natureza do serviço, não a forma jurídica do ente.</div></div>
+  <div class="tf-quest">❓ <em>(Analisar)</em> A Petrobras pode invocar imunidade recíproca para não pagar IPTU sobre seus imóveis? Justifique com base no art. 150, §3º CF e na jurisprudência do STF.</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 3 — Imunidade Religiosa (Art. 150, VI, b CF)</div>
+  <div class="tf-step"><div class="tf-num azul">A</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> A imunidade abrange todo o patrimônio, renda e serviços <em>vinculados às finalidades essenciais</em> do culto. Não se limita ao imóvel onde se realiza o culto.</div></div>
+  <div class="tf-step"><div class="tf-num azul">B</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Recordar</span> Imóvel alugado: a imunidade é mantida se a renda for aplicada nas finalidades religiosas (STF). Cemitério religioso: também imune (RE 578.562). A ratio é a laicidade e a pluralidade religiosa.</div></div>
+  <div class="tf-quest">❓ <em>(Avaliar)</em> Uma congregação religiosa possui três imóveis: um templo, um imóvel alugado para um restaurante (renda usada para custear missões sociais) e um imóvel desocupado especulativo. Qual a situação fiscal de cada um perante o IPTU?</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 4 — Imunidade Condicionada (Art. 150, VI, c CF)</div>
+  <div class="tf-step"><div class="tf-num laranja">A</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Recordar</span> Beneficiários: partidos políticos e fundações, sindicatos de <em>trabalhadores</em> (não patronais), instituições de educação e assistência social sem fins lucrativos.</div></div>
+  <div class="tf-step"><div class="tf-num laranja">B</div><div class="tf-txt"><span class="tf-badge tf-b-orange">Aplicar</span> Requisitos cumulativos do art. 14 CTN: (I) não distribuir patrimônio/renda; (II) aplicar integralmente os recursos no país; (III) escrituração regular. Descumprimento = perda da imunidade por ato declaratório da RFB (art. 14, §1º CTN).</div></div>
+  <div class="tf-step"><div class="tf-num laranja">C</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> SV 52 (ex-Súmula 724): imóvel alugado a terceiro por entidade imune, com renda aplicada nas finalidades essenciais, <strong>mantém a imunidade de IPTU</strong>.</div></div>
+  <div class="tf-quest">❓ <em>(Criar)</em> Uma entidade de assistência social descobre que, nos últimos 3 anos, seu diretor recebeu "pró-labore" mensal. Quais são as consequências tributárias e qual o procedimento previsto no art. 14, §1º CTN?</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 5 — Imunidade Cultural e Musical (Art. 150, VI, d e e CF)</div>
+  <div class="tf-step"><div class="tf-num roxo">A</div><div class="tf-txt"><span class="tf-badge tf-b-purple">Analisar</span> Imunidade cultural é <em>objetiva</em>: protege o bem (livro, jornal, periódico e papel para impressão), não a pessoa. Qualquer fabricante ou comerciante desses bens está coberto.</div></div>
+  <div class="tf-step"><div class="tf-num roxo">B</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Recordar</span> STF (RE 330.817, 2017, Plenário): e-books e aparelhos leitores (e-readers) são abrangidos pela imunidade cultural. Interpretação teleológica: proteger a difusão do conhecimento e da cultura.</div></div>
+  <div class="tf-step"><div class="tf-num roxo">C</div><div class="tf-txt"><span class="tf-badge tf-b-orange">Distinção</span> Imunidade musical (alínea e, EC 75/2013): fonogramas e videofonogramas de <em>conteúdo nacional</em>. Suporte físico ou digital. Objetivo: combater a pirataria e fomentar a produção cultural brasileira.</div></div>
+  <div class="tf-quest">❓ <em>(Avaliar)</em> Uma gráfica produz: (1) Bíblias impressas; (2) álbuns de figurinhas; (3) apostilas universitárias; (4) ink cartridges para impressoras de redações. Quais produtos gozam da imunidade cultural? Use os critérios do STF.</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 6 — Imunidade das Entidades Beneficentes (Art. 195, §7º CF)</div>
+  <div class="tf-step"><div class="tf-num verde">A</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> A imunidade do art. 195, §7º CF é materialmente uma imunidade, embora o texto use o vocábulo "isentas". STF pacificou: é norma constitucional de vedação, não isenção legal.</div></div>
+  <div class="tf-step"><div class="tf-num verde">B</div><div class="tf-txt"><span class="tf-badge tf-b-green">Aplicar</span> Alcança as <strong>contribuições para a seguridade social</strong> (CSLL, PIS, COFINS, patronal do INSS) das entidades beneficentes de assistência social que atendam aos requisitos da Lei 12.101/2009.</div></div>
+  <div class="tf-quest">❓ <em>(Analisar)</em> Uma entidade tem imunidade do art. 150, VI, c CF (condicionada) para impostos. Ela também tem imunidade para contribuições previdenciárias? São imunidades distintas? Qual a base normativa de cada uma?</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 4 — ESTUDO DE CASO
+═══════════════════════════════════════════════════════ -->
+<div id="tf-im-caso" class="tf-painel">
+
+  <div class="tf-caso-header">
+    <div class="tf-label">Caso Simulado · Imunidades Tributárias</div>
+    <h3>Instituto Educacional "Horizonte Livre" — Batalha das Imunidades</h3>
+    <p>O Instituto Educacional "Horizonte Livre" é uma associação sem fins lucrativos que mantém uma escola de ensino fundamental gratuita e um centro de assistência social no mesmo município. Analise as situações abaixo à luz das imunidades tributárias constitucionais.</p>
+  </div>
+
+  <div class="tf-alert atencao">
+    <strong>Fatos do caso</strong>
+    <strong>Situação A —</strong> O Município cobra IPTU sobre o imóvel-sede do Instituto, onde funciona a escola.<br><br>
+    <strong>Situação B —</strong> O Instituto possui um segundo imóvel que aluga a uma clínica odontológica. A renda do aluguel (R$ 8.000/mês) é integralmente destinada ao custeio das atividades educacionais e assistenciais.<br><br>
+    <strong>Situação C —</strong> A Receita Federal autuou o Instituto por falta de recolhimento de contribuição patronal ao INSS. O Instituto alega imunidade do art. 195, §7º CF.<br><br>
+    <strong>Situação D —</strong> O Município cobra Taxa de Coleta de Lixo (TCL) sobre o imóvel-sede. O Instituto recusa pagar, invocando imunidade tributária.
+  </div>
+
+  <div class="tf-caso-perguntas">
+
+    <div class="tf-pergunta">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
+        <div class="tf-pnum">A</div>
+        <span class="tf-pq-txt">O IPTU sobre o imóvel-sede da escola é legítimo?</span>
+        <span class="tf-toggle">▾</span>
+      </button>
+      <div class="tf-pergunta-body">
+        <p><strong>Imunidade condicionada — art. 150, VI, c e §4º CF.</strong> O Instituto de educação sem fins lucrativos que cumpra os requisitos do art. 14 CTN é imune a impostos sobre patrimônio, renda e serviços vinculados às suas finalidades essenciais.</p>
+        <p>O imóvel-sede, onde funciona a escola, está diretamente vinculado à finalidade essencial da entidade. Portanto, a cobrança do IPTU é <strong>inconstitucional</strong> — viola o art. 150, VI, c CF.</p>
+        <p>Condição: o Instituto deve demonstrar que atende cumulativamente aos requisitos do art. 14 CTN (não distribuição de lucros, aplicação dos recursos no País, escrituração regular).</p>
+        <p><span class="tf-badge tf-b-red">IPTU indevido</span> — imóvel vinculado a finalidade essencial de entidade imune.</p>
+      </div>
+    </div>
+
+    <div class="tf-pergunta">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
+        <div class="tf-pnum">B</div>
+        <span class="tf-pq-txt">O imóvel alugado para a clínica odontológica perde a imunidade de IPTU?</span>
+        <span class="tf-toggle">▾</span>
+      </button>
+      <div class="tf-pergunta-body">
+        <p><strong>Manutenção da imunidade — Súmula Vinculante 52.</strong> A SV 52 (originária da Súmula 724 STF) estabelece: "Ainda quando alugado a terceiros, permanece imune ao IPTU o imóvel pertencente a qualquer das entidades referidas pelo art. 150, VI, c da Constituição Federal, desde que o valor dos aluguéis seja aplicado nas atividades para as quais tais entidades foram constituídas."</p>
+        <p>No caso: a renda do aluguel (R$ 8.000/mês) é <strong>integralmente destinada às finalidades educacionais e assistenciais</strong>. O critério decisivo é a <em>destinação da renda</em>, não o uso direto do bem.</p>
+        <p>Portanto, o IPTU sobre esse imóvel também <strong>não é devido</strong>.</p>
+        <p><span class="tf-badge tf-b-green">IPTU indevido</span> — renda destinada às finalidades essenciais mantém a imunidade (SV 52).</p>
+      </div>
+    </div>
+
+    <div class="tf-pergunta">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
+        <div class="tf-pnum">C</div>
+        <span class="tf-pq-txt">A imunidade do art. 195, §7º CF cobre a contribuição patronal ao INSS?</span>
+        <span class="tf-toggle">▾</span>
+      </button>
+      <div class="tf-pergunta-body">
+        <p><strong>Imunidade distinta e específica — art. 195, §7º CF.</strong> O texto constitucional diz "são isentas de contribuição para a seguridade social as entidades beneficentes de assistência social que atendam às exigências estabelecidas em lei." O STF pacificou: trata-se de <em>imunidade</em>, não de mera isenção, pois é norma constitucional que veda a tributação.</p>
+        <p>Esta imunidade é <strong>autônoma</strong> em relação à do art. 150, VI, c CF: enquanto a segunda cobre apenas <em>impostos</em>, a do art. 195, §7º CF cobre <strong>contribuições para a seguridade social</strong> (INSS patronal, CSLL, PIS, COFINS).</p>
+        <p>Para fazer jus a ela, o Instituto deve cumprir os requisitos da Lei 12.101/2009 (certificação de entidade beneficente de assistência social — CEBAS) — regime mais exigente do que o art. 14 CTN.</p>
+        <p><span class="tf-badge tf-b-blue">Potencialmente imune</span> — se o Instituto possuir certificação CEBAS válida e atender aos requisitos da Lei 12.101/2009. Sem a certificação, a autuação é legítima.</p>
+      </div>
+    </div>
+
+    <div class="tf-pergunta">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
+        <div class="tf-pnum">D</div>
+        <span class="tf-pq-txt">O Instituto pode se recusar a pagar a Taxa de Coleta de Lixo invocando imunidade tributária?</span>
+        <span class="tf-toggle">▾</span>
+      </button>
+      <div class="tf-pergunta-body">
+        <p><strong>Não. A imunidade do art. 150, VI, c CF abrange apenas impostos.</strong> O art. 150 caput é expresso: "sem prejuízo de outras garantias asseguradas ao contribuinte, é vedado à União, aos Estados, ao Distrito Federal e aos Municípios: [...] VI — instituir <em>impostos</em> sobre..."</p>
+        <p>A Taxa de Coleta de Lixo (TCL) é uma <strong>taxa</strong> — tributo vinculado, cobrado em contraprestação a um serviço público específico e divisível (art. 77 CTN). Não está sujeita ao regime de imunidade do art. 150, VI CF.</p>
+        <p>O Instituto deve pagar a TCL normalmente, salvo se houver isenção específica prevista em lei municipal.</p>
+        <p><span class="tf-badge tf-b-orange">Taxa é devida</span> — imunidade do art. 150, VI CF não abrange taxas; apenas impostos estão vedados.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+;(function() {
+
+  /* ── Tabs ── */
+  window.tfTab = function(id, btn) {
+    const wrap = btn.closest('.tf-tabs').parentElement
+    wrap.querySelectorAll('.tf-painel').forEach(p => p.classList.remove('ativo'))
+    wrap.querySelectorAll('.tf-tab').forEach(b => b.classList.remove('ativo'))
+    wrap.querySelector('#tf-' + id).classList.add('ativo')
+    btn.classList.add('ativo')
+  }
+
+  /* ── Mapa Mental ── */
+  const imData = {
+    reciproca: {
+      title: 'Imunidade Recíproca — Art. 150, VI, a CF',
+      items: [
+        '<strong>Quem:</strong> União, Estados, DF e Municípios + autarquias e fundações públicas (art. 150, §2º CF)',
+        '<strong>Não abrangido:</strong> atividade econômica em regime privado (art. 150, §3º CF + art. 173, §2º CF)',
+        '<strong>STF RE 601.392:</strong> Correios (empresa pública) têm imunidade — prestam serviço público exclusivo',
+        '<strong>Fundamento:</strong> preservar a autonomia federativa e evitar interferência fiscal entre os entes',
+        'Não abrange taxas nem contribuições — apenas impostos'
+      ]
+    },
+    religiosa: {
+      title: 'Imunidade Religiosa — Art. 150, VI, b CF',
+      items: [
+        '<strong>Quem:</strong> templos de qualquer culto (todas as religiões, sem distinção)',
+        '<strong>Abrangência:</strong> patrimônio, renda e serviços vinculados às finalidades essenciais (art. 150, §4º CF)',
+        '<strong>Imóvel alugado:</strong> imune se renda revertida para finalidades religiosas (STF)',
+        '<strong>RE 578.562:</strong> cemitério administrado por entidade religiosa — imune',
+        '<strong>Fundamento:</strong> laicidade do Estado e pluralidade religiosa (art. 19, I CF)'
+      ]
+    },
+    condicionada: {
+      title: 'Imunidade Condicionada — Art. 150, VI, c CF',
+      items: [
+        '<strong>Partidos políticos</strong> e fundações; <strong>sindicatos de trabalhadores</strong>; entidades de educação e assistência social sem fins lucrativos',
+        '<strong>Requisitos art. 14 CTN:</strong> não distribuir renda, aplicar recursos no país, escrituração regular',
+        '<strong>SV 52:</strong> imóvel alugado mantém imunidade se renda destinada às finalidades essenciais',
+        'Descumprimento: perda da imunidade por ato declaratório da Receita Federal',
+        'Abrange apenas impostos — contribuições previdenciárias têm imunidade própria (art. 195, §7º CF)'
+      ]
+    },
+    cultural: {
+      title: 'Imunidade Cultural — Art. 150, VI, d CF',
+      items: [
+        '<strong>Objeto:</strong> livros, jornais, periódicos e o papel destinado à sua impressão',
+        '<strong>Imunidade objetiva</strong> — protege o bem, não a pessoa (qualquer produtor ou comerciante)',
+        '<strong>RE 330.817 (STF, 2017):</strong> e-books e aparelhos leitores (e-readers) são abrangidos',
+        '<strong>RE 199.183:</strong> listas telefônicas também imunes',
+        'Tinta, cola e outros insumos <em>não</em> são abrangidos — critério: necessidade funcional ao veículo de informação'
+      ]
+    },
+    musical: {
+      title: 'Imunidade Musical — Art. 150, VI, e CF (EC 75/2013)',
+      items: [
+        '<strong>Objeto:</strong> fonogramas e videofonogramas musicais produzidos no Brasil',
+        'Obras de <strong>autores brasileiros</strong> e/ou interpretadas por <strong>artistas brasileiros</strong>',
+        'Abrange suporte físico (CD, DVD) e <strong>mídia digital</strong> (streaming, download)',
+        '<strong>Objetivo da EC 75:</strong> combater pirataria e fomentar a produção musical nacional',
+        'Imunidade objetiva — não depende de quem comercializa o fonograma'
+      ]
+    },
+    outras: {
+      title: 'Outras Imunidades Constitucionais',
+      items: [
+        '<strong>Art. 195, §7º CF:</strong> entidades beneficentes de assistência social — contribuições para a Seguridade Social (CEBAS)',
+        '<strong>Art. 149, §2º, I CF:</strong> exportações isentas de contribuições sociais e de intervenção no domínio econômico',
+        '<strong>Art. 153, §4º, II CF:</strong> pequenas glebas rurais exploradas pelo proprietário sem outro imóvel — imunes ao ITR',
+        '<strong>Art. 155, §2º, X, a CF:</strong> operações de exportação de mercadorias — ICMS não incide',
+        'STF: imunidade é cláusula pétrea — não pode ser suprimida por EC (art. 60, §4º CF)'
+      ]
+    }
+  }
+
+  let imActive = null
+  window.imBranch = function(key) {
+    if (imActive === key) { imActive = null; imReset(); return }
+    imActive = key
+    Object.keys(imData).forEach(k => {
+      const el = document.getElementById('imb-' + k)
+      if (el) { el.style.opacity = k === key ? '1' : '0.4'; el.style.transform = k === key ? 'scale(1.04)' : 'scale(1)' }
+    })
+    const d = imData[key]
+    document.getElementById('im-detail').innerHTML =
+      '<h4>' + d.title + '</h4><ul>' + d.items.map(i => '<li>' + i + '</li>').join('') + '</ul>'
+  }
+  function imReset() {
+    Object.keys(imData).forEach(k => {
+      const el = document.getElementById('imb-' + k)
+      if (el) { el.style.opacity = '1'; el.style.transform = 'scale(1)' }
+    })
+    document.getElementById('im-detail').innerHTML = '<p style="color:var(--text2);text-align:center;font-size:13px">Clique em qualquer ramo para ver os detalhes.</p>'
+  }
+
+  /* ── Zoom de infográficos ── */
+  window.tfZoom = function(img) {
+    const lb = document.getElementById('im-lightbox')
+    document.getElementById('im-lightbox-img').src = img.src
+    document.getElementById('im-lightbox-img').alt = img.alt
+    lb.style.display = 'flex'
+  }
+
+  /* ── Estudo de Caso: acordeão ── */
+  window.tfToggle = function(head) {
+    const body = head.nextElementSibling
+    const toggle = head.querySelector('.tf-toggle')
+    const isOpen = body.classList.contains('open')
+    body.classList.toggle('open', !isOpen)
+    toggle.style.transform = isOpen ? '' : 'rotate(180deg)'
+  }
+
+})()
+</script>

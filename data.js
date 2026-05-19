@@ -159,6 +159,11 @@ const materias = [
             titulo: "Fundamentos e Crédito Tributário",
             descricao: "Visão geral · Mapa mental · Roteiro de estudo · Estudo de caso",
             arquivo: "conteudo/tributario/tributario-financeiro-i/01-guia-estudos.html"
+          },
+          {
+            titulo: "Imunidades Tributárias",
+            descricao: "Art. 150, VI CF · Recíproca · Religiosa · Condicionada · Cultural · Mapa mental · Estudo de caso",
+            arquivo: "conteudo/tributario/tributario-financeiro-i/02-imunidades.html"
           }
         ],
         flashcards: [

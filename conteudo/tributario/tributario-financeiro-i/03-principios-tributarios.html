@@ -1,0 +1,838 @@
+<style>
+/* ── Cores extras ─────────────────────────────────────────── */
+:root {
+  --tf-green:  #276749; --tf-green-lt: #edfaf3;
+  --tf-orange: #b84c0c; --tf-orange-lt:#fff5ee;
+  --tf-red:    #8b1a1a; --tf-red-lt:   #fce8e8;
+  --tf-teal:   #0d5c5c; --tf-teal-lt:  #e6f7f7;
+  --tf-purple: #3C3489; --tf-purple-lt: #eeedfe;
+  --tf-gold:   #7a5800; --tf-gold-lt:   #fdf6e3;
+  --tf-br-az-bg: #E6F1FB; --tf-br-az-col: #0C447C; --tf-br-az-brd: #7aacdc;
+  --tf-br-vd-bg: #E1F5EE; --tf-br-vd-col: #085041; --tf-br-vd-brd: #5dcaa5;
+  --tf-br-la-bg: #FFF3E0; --tf-br-la-col: #7a3000; --tf-br-la-brd: #f0a060;
+  --tf-br-ro-bg: #EEEDFE; --tf-br-ro-col: #3C3489; --tf-br-ro-brd: #a09ae0;
+  --tf-br-te-bg: #E6F7F7; --tf-br-te-col: #0d5c5c; --tf-br-te-brd: #5dcaca;
+  --tf-br-ou-bg: #FDF6E3; --tf-br-ou-col: #7a5800; --tf-br-ou-brd: #d4aa40;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --tf-green:  #6fd86f; --tf-green-lt: #0d2e0d;
+    --tf-orange: #f0a060; --tf-orange-lt:#2e1500;
+    --tf-red:    #f08080; --tf-red-lt:   #2e0d0d;
+    --tf-teal:   #60d8b8; --tf-teal-lt:  #072e22;
+    --tf-purple: #a09ae0; --tf-purple-lt: #1e1a3e;
+    --tf-gold:   #e8c96a; --tf-gold-lt:   #2a2000;
+    --tf-br-az-bg: #1a2550; --tf-br-az-col: #9ab4f8; --tf-br-az-brd: #3a5090;
+    --tf-br-vd-bg: #0d2e0d; --tf-br-vd-col: #6fd86f; --tf-br-vd-brd: #2d7a2d;
+    --tf-br-la-bg: #2e1500; --tf-br-la-col: #f0a060; --tf-br-la-brd: #804020;
+    --tf-br-ro-bg: #1e1a3e; --tf-br-ro-col: #a09ae0; --tf-br-ro-brd: #504880;
+    --tf-br-te-bg: #072e22; --tf-br-te-col: #60d8b8; --tf-br-te-brd: #207060;
+    --tf-br-ou-bg: #2a2000; --tf-br-ou-col: #e8c96a; --tf-br-ou-brd: #806020;
+  }
+}
+:root[data-theme="dark"] {
+  --tf-green:  #6fd86f; --tf-green-lt: #0d2e0d;
+  --tf-orange: #f0a060; --tf-orange-lt:#2e1500;
+  --tf-red:    #f08080; --tf-red-lt:   #2e0d0d;
+  --tf-teal:   #60d8b8; --tf-teal-lt:  #072e22;
+  --tf-purple: #a09ae0; --tf-purple-lt: #1e1a3e;
+  --tf-gold:   #e8c96a; --tf-gold-lt:   #2a2000;
+  --tf-br-az-bg: #1a2550; --tf-br-az-col: #9ab4f8; --tf-br-az-brd: #3a5090;
+  --tf-br-vd-bg: #0d2e0d; --tf-br-vd-col: #6fd86f; --tf-br-vd-brd: #2d7a2d;
+  --tf-br-la-bg: #2e1500; --tf-br-la-col: #f0a060; --tf-br-la-brd: #804020;
+  --tf-br-ro-bg: #1e1a3e; --tf-br-ro-col: #a09ae0; --tf-br-ro-brd: #504880;
+  --tf-br-te-bg: #072e22; --tf-br-te-col: #60d8b8; --tf-br-te-brd: #207060;
+  --tf-br-ou-bg: #2a2000; --tf-br-ou-col: #e8c96a; --tf-br-ou-brd: #806020;
+}
+
+/* ── Sistema de abas ─────────────────────────────────────── */
+.tf-tabs {
+  display: flex; gap: 4px; margin-bottom: 22px; flex-wrap: wrap;
+}
+.tf-tab {
+  padding: 7px 18px;
+  font-size: 13px; font-weight: 600;
+  font-family: var(--sans);
+  border: 1.5px solid var(--blue);
+  border-radius: 6px; cursor: pointer;
+  background: var(--surface); color: var(--blue);
+  transition: background .15s, color .15s;
+}
+.tf-tab:hover { background: var(--blue-hover); }
+.tf-tab.ativo  { background: var(--blue); color: #fff; }
+.tf-painel { display: none; }
+.tf-painel.ativo { display: block; }
+
+/* ── Título do tema ─────────────────────────────────────── */
+.tf-titulo {
+  font-family: var(--serif);
+  font-size: 19px; font-weight: 700;
+  color: var(--blue); margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+/* ── Componentes compartilhados ─────────────────────────── */
+.tf-section-title {
+  font-family: var(--serif);
+  font-size: 15px; font-weight: 700; color: var(--blue);
+  border-left: 3px solid var(--gold);
+  padding-left: 10px; margin: 24px 0 12px;
+}
+.tf-section-title:first-child { margin-top: 0; }
+
+.tf-table-wrap { overflow-x: auto; margin: 10px 0 18px; }
+.tf-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tf-table thead th {
+  background: var(--blue); color: #fff;
+  padding: 8px 12px; text-align: left; font-weight: 600;
+  font-family: var(--sans);
+}
+.tf-table tbody td {
+  padding: 7px 12px; border-bottom: 1px solid var(--border);
+  vertical-align: top; color: var(--text);
+}
+.tf-table tbody tr:nth-child(even) td { background: var(--blue-light); }
+.tf-table tbody td:first-child { font-weight: 600; color: var(--blue); }
+
+.tf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin: 10px 0 18px; }
+.tf-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 16px;
+  border-top: 3px solid var(--blue);
+}
+.tf-card.verde   { border-top-color: var(--tf-green); }
+.tf-card.laranja { border-top-color: var(--tf-orange); }
+.tf-card.teal    { border-top-color: var(--tf-teal); }
+.tf-card.roxo    { border-top-color: var(--tf-purple); }
+.tf-card.ouro    { border-top-color: var(--tf-gold); }
+.tf-card h4 { font-size: 14px; color: var(--blue); margin-bottom: 6px; font-weight: 700; }
+.tf-card p, .tf-card li { font-size: 13.5px; color: var(--text2); line-height: 1.55; }
+.tf-card ul { padding-left: 14px; margin-top: 5px; }
+
+.tf-alert {
+  border-radius: 7px; padding: 10px 14px; margin: 10px 0;
+  font-size: 13px; border-left: 4px solid; line-height: 1.55;
+}
+.tf-alert.info    { background: var(--blue-light);  border-color: var(--blue);      color: var(--text); }
+.tf-alert.atencao { background: var(--tf-orange-lt); border-color: var(--tf-orange); color: var(--text); }
+.tf-alert.ok      { background: var(--tf-green-lt);  border-color: var(--tf-green);  color: var(--text); }
+.tf-alert strong  { display: block; margin-bottom: 3px; }
+
+.tf-badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  border-radius: 4px; padding: 2px 7px; margin: 2px 2px 0 0;
+}
+.tf-b-blue   { background: var(--blue-light);  color: var(--blue); }
+.tf-b-green  { background: var(--tf-green-lt); color: var(--tf-green); }
+.tf-b-orange { background: var(--tf-orange-lt);color: var(--tf-orange); }
+.tf-b-red    { background: var(--tf-red-lt);   color: var(--tf-red); }
+.tf-b-teal   { background: var(--tf-teal-lt);  color: var(--tf-teal); }
+.tf-b-purple { background: var(--tf-purple-lt);color: var(--tf-purple); }
+
+/* ── Roteiro ─────────────────────────────────────────────── */
+.tf-step { display:flex; gap:10px; margin-bottom:8px; align-items:flex-start; }
+.tf-num {
+  flex-shrink:0; width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11.5px; font-weight:600; margin-top:2px;
+}
+.tf-num.azul   { background: var(--blue-light); color: var(--blue); }
+.tf-num.verde  { background: var(--tf-green-lt); color: var(--tf-green); }
+.tf-num.laranja{ background: var(--tf-orange-lt);color: var(--tf-orange); }
+.tf-num.roxo   { background: var(--tf-purple-lt); color: var(--tf-purple); }
+.tf-txt { flex:1; font-size:13.5px; color:var(--text); line-height:1.6; }
+.tf-quest {
+  background: var(--surface); border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0; padding: 8px 12px;
+  margin: 4px 0 14px 34px; font-size: 13px; color: var(--text2);
+}
+.tf-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+/* ── Mapa Mental ────────────────────────────────────────── */
+.tf-mm-wrap { overflow-x: auto; padding: 8px 0 16px; }
+.tf-mm { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; min-width: 460px; }
+.tf-mm-center {
+  width: 130px; height: 130px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; font-size: 12.5px; font-weight: 600;
+  line-height: 1.35; flex-shrink: 0; cursor: default;
+  box-shadow: 0 4px 16px rgba(31,73,125,.25);
+}
+.tf-mm-cols { display: flex; gap: 18px; }
+.tf-mm-col  { display: flex; flex-direction: column; gap: 10px; }
+.tf-mm-branch {
+  border-radius: 8px; padding: 10px 14px; font-size: 12.5px;
+  font-weight: 600; cursor: pointer; border: 1.5px solid;
+  transition: transform .15s, filter .15s; min-width: 145px;
+  text-align: center; line-height: 1.3;
+  font-family: var(--sans); background: none;
+}
+.tf-mm-branch:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.tf-mm-branch span { font-weight: 400; font-size: 11.5px; display: block; margin-top: 2px; }
+.tf-mm-branch.az { background: var(--tf-br-az-bg); color: var(--tf-br-az-col); border-color: var(--tf-br-az-brd); }
+.tf-mm-branch.vd { background: var(--tf-br-vd-bg); color: var(--tf-br-vd-col); border-color: var(--tf-br-vd-brd); }
+.tf-mm-branch.la { background: var(--tf-br-la-bg); color: var(--tf-br-la-col); border-color: var(--tf-br-la-brd); }
+.tf-mm-branch.ro { background: var(--tf-br-ro-bg); color: var(--tf-br-ro-col); border-color: var(--tf-br-ro-brd); }
+.tf-mm-branch.te { background: var(--tf-br-te-bg); color: var(--tf-br-te-col); border-color: var(--tf-br-te-brd); }
+.tf-mm-branch.ou { background: var(--tf-br-ou-bg); color: var(--tf-br-ou-col); border-color: var(--tf-br-ou-brd); }
+.tf-mm-detail {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px 18px; margin-top: 14px;
+  font-size: 13px; color: var(--text); line-height: 1.65;
+  min-height: 60px;
+}
+.tf-mm-detail h4 { font-size: 14px; font-weight: 700; color: var(--blue); margin-bottom: 8px; }
+.tf-mm-detail ul { padding-left: 16px; }
+.tf-mm-detail li { margin-bottom: 4px; color: var(--text2); }
+.tf-mm-hint { font-size: 12px; color: var(--text2); text-align: center; margin-top: 8px; }
+
+/* ── Estudo de Caso ─────────────────────────────────────── */
+.tf-caso-header {
+  background: linear-gradient(135deg, var(--blue-dark, #162f52) 0%, var(--blue) 100%);
+  border-radius: 10px; padding: 22px 26px; color: #fff; margin-bottom: 20px;
+}
+.tf-caso-header .tf-label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.tf-caso-header h3 { font-family: var(--serif); font-size: 20px; margin-bottom: 8px; }
+.tf-caso-header p  { font-size: 13px; opacity: .9; line-height: 1.55; }
+.tf-caso-perguntas { margin-top: 20px; }
+.tf-pergunta {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 12px; overflow: hidden;
+}
+.tf-pergunta-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; cursor: pointer; user-select: none;
+  background: var(--bg); width: 100%; border: none; font-family: var(--sans);
+  text-align: left;
+}
+.tf-pergunta-head:hover { background: var(--blue-hover); }
+.tf-pnum {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.tf-pergunta-head .tf-pq-txt { flex: 1; font-size: 13.5px; color: var(--text); font-weight: 600; margin: 0; }
+.tf-pergunta-head .tf-toggle { font-size: 18px; color: var(--text2); transition: transform .2s; }
+.tf-pergunta-body { display: none; padding: 14px 16px 14px 56px; font-size: 13px; color: var(--text2); line-height: 1.65; border-top: 1px solid var(--border); }
+.tf-pergunta-body.open { display: block; }
+.tf-pergunta-body strong { color: var(--blue); }
+.tf-pergunta-body p { margin-bottom: 8px; }
+
+/* ── Exceções: célula sim/não ────────────────────────────── */
+.exc-sim { color: var(--tf-green); font-weight: 700; }
+.exc-nao { color: var(--tf-red);   font-weight: 700; }
+.exc-table tbody td { text-align: center; }
+.exc-table tbody td:first-child { text-align: left; color: var(--blue); font-weight: 600; }
+.exc-table tbody td:last-child  { text-align: left; color: var(--text2); font-weight: 400; font-size: 12px; }
+
+/* ── Mnêmonico ───────────────────────────────────────────── */
+.pr-mnem {
+  background: var(--tf-gold-lt); border: 1.5px solid var(--tf-gold);
+  border-radius: 8px; padding: 14px 18px; margin: 16px 0;
+  font-size: 13px; color: var(--text); line-height: 1.65;
+}
+.pr-mnem strong { color: var(--tf-gold); }
+
+@media (max-width: 540px) {
+  .tf-tab { padding: 4px 9px; font-size: 11.5px; }
+}
+</style>
+
+<h2 class="tf-titulo">Direito Tributário e Financeiro I — Princípios Tributários</h2>
+
+<div class="tf-tabs">
+  <button class="tf-tab ativo" onclick="tfTab('pr-visao', this)">Visão Geral</button>
+  <button class="tf-tab" onclick="tfTab('pr-mapa', this)">Mapa Mental</button>
+  <button class="tf-tab" onclick="tfTab('pr-roteiro', this)">Roteiro de Estudo</button>
+  <button class="tf-tab" onclick="tfTab('pr-caso', this)">Estudo de Caso</button>
+  <button class="tf-tab" onclick="tfTab('pr-excecoes', this)">Exceções</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 1 — VISÃO GERAL
+═══════════════════════════════════════════════════════ -->
+<div id="tf-pr-visao" class="tf-painel ativo">
+
+  <div class="tf-alert info" style="margin-bottom:20px">
+    <strong>📌 O que são os princípios tributários constitucionais?</strong>
+    Os arts. 150 a 152 CF formam o chamado <em>Estatuto do Contribuinte</em>: um conjunto de limitações constitucionais ao poder de tributar que condicionam o exercício da competência tributária. Mesmo possuindo competência para instituir o tributo, o ente só pode fazê-lo nos limites e termos dessas garantias. São cláusulas pétreas (art. 60, §4º CF) na medida em que protegem direitos fundamentais e a forma federativa de Estado.
+  </div>
+
+  <div class="tf-section-title">Panorama dos Princípios — Arts. 150-152 CF</div>
+  <div class="tf-table-wrap">
+    <table class="tf-table">
+      <thead>
+        <tr>
+          <th style="width:22%">Princípio</th>
+          <th style="width:14%">Dispositivo</th>
+          <th style="width:42%">Conteúdo Essencial</th>
+          <th style="width:22%">Abrangência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Legalidade</td><td>Art. 150, I CF</td><td>Tributo só pode ser instituído ou majorado por lei</td><td>Todos os tributos</td></tr>
+        <tr><td>Isonomia</td><td>Art. 150, II CF</td><td>Veda tratamento desigual entre contribuintes em situação equivalente</td><td>Todos os tributos</td></tr>
+        <tr><td>Irretroatividade</td><td>Art. 150, III, a CF</td><td>Proibição de cobrança sobre FG ocorrido antes da lei instituidora/majoradora</td><td>Todos os tributos</td></tr>
+        <tr><td>Anterioridade Anual</td><td>Art. 150, III, b CF</td><td>Tributo só pode ser cobrado no exercício financeiro seguinte à publicação da lei</td><td>Maioria dos tributos</td></tr>
+        <tr><td>Noventena</td><td>Art. 150, III, c CF</td><td>Tributo só pode ser cobrado após 90 dias da publicação da lei</td><td>Maioria dos tributos</td></tr>
+        <tr><td>Vedação ao Confisco</td><td>Art. 150, IV CF</td><td>Tributo não pode ter efeito confiscatório — não pode comprometer o direito de propriedade de forma desproporcional</td><td>Todos os tributos e multas</td></tr>
+        <tr><td>Liberdade de Tráfego</td><td>Art. 150, V CF</td><td>Tributo não pode limitar o trânsito de pessoas ou bens entre Estados e Municípios</td><td>Todos os tributos</td></tr>
+        <tr><td>Capacidade Contributiva</td><td>Art. 145, §1° CF</td><td>Impostos devem ser graduados segundo a capacidade econômica do contribuinte</td><td>Impostos (com extensão)</td></tr>
+        <tr><td>Uniformidade Geográfica</td><td>Art. 151, I CF</td><td>União não pode tributar de forma diferente entre estados/regiões, salvo incentivos fiscais para reduzir desigualdades</td><td>Tributos federais</td></tr>
+        <tr><td>Não-discriminação</td><td>Art. 152 CF</td><td>Estados e Municípios não podem estabelecer diferença tributária baseada em procedência ou destino</td><td>Tributos estaduais e municipais</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tf-section-title">Princípio da Legalidade — Art. 150, I CF</div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>⚖️ "Nullum tributum sine lege"</h4>
+      <p>Nenhum tributo pode ser instituído ou majorado sem lei que o estabeleça. É a reserva de lei formal: não bastam regulamentos, portarias ou decretos para criar ou aumentar tributos.</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>📋 Legalidade estrita (art. 97 CTN)</h4>
+      <p>A lei deve fixar todos os elementos essenciais: fato gerador, base de cálculo, alíquota, sujeito passivo e penalidades. Não basta menção genérica — cada elemento exige previsão legal expressa.</p>
+    </div>
+    <div class="tf-card laranja">
+      <h4>🔓 Exceção: flexibilização de alíquotas</h4>
+      <p>Art. 153, §1° CF: o Poder Executivo pode alterar alíquotas de <strong>II, IE, IPI e IOF</strong> por ato infralegal (Decreto/Portaria), dentro dos limites fixados em lei. Função extrafiscal justifica a celeridade.</p>
+    </div>
+    <div class="tf-card teal">
+      <h4>📜 Medida Provisória</h4>
+      <p>O STF admite MP para instituir e majorar tributos, <em>salvo</em> os que exijam lei complementar (ex: empréstimo compulsório, IGF, ICMS, ISS). Convertida em lei, retroage à data da MP. Se rejeitada, efeitos são desfeitos.</p>
+    </div>
+  </div>
+
+  <div class="tf-section-title">Anterioridade Anual e Noventena — Art. 150, III, b e c CF</div>
+  <div class="tf-alert atencao">
+    <strong>⚠️ Sistema da dupla anterioridade — exigência CUMULATIVA</strong>
+    A CF/88 impõe os dois requisitos simultaneamente: (1) o tributo só pode ser cobrado no <em>exercício financeiro seguinte</em> à publicação da lei (anterioridade anual) E (2) só após <em>90 dias</em> da publicação (noventena). Ambos devem ser satisfeitos — vale o prazo que terminar <strong>mais tarde</strong>.
+  </div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>📅 Anterioridade Anual</h4>
+      <p>Lei publicada em 2025 → tributo só exigível a partir de 01/01/2026. A regra se aplica ao <em>exercício financeiro</em> (ano civil), não ao prazo de 12 meses. Lei de dezembro entra em vigor em 1° de janeiro do ano seguinte.</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>⏳ Noventena</h4>
+      <p>Independentemente do exercício financeiro, o tributo não pode ser cobrado antes de 90 dias da publicação da lei. Exemplo: lei publicada em 01/11/2025 com alíquota majorada — noventena termina em 30/01/2026. O tributo só pode ser cobrado a partir de 30/01/2026 (não de 01/01/2026).</p>
+    </div>
+    <div class="tf-card laranja">
+      <h4>🚫 Extinção de isenção condicionada</h4>
+      <p>STF: a revogação de isenção condicionada (onerosa, onde o contribuinte cumpriu encargos) equivale à criação de novo tributo, sujeitando-se à anterioridade. Isenção simples revogável produz efeitos imediatos (lei seguinte).</p>
+    </div>
+    <div class="tf-card teal">
+      <h4>🔢 Atualização da base de cálculo</h4>
+      <p>Mera atualização monetária da base de cálculo (sem aumento real) <strong>não</strong> é considerada majoração — não se sujeita à anterioridade nem à noventena. Exceção: base de cálculo do IPTU e IPVA — sujeita à anterioridade anual mas <em>exceção</em> à noventena (art. 150, §1° CF).</p>
+    </div>
+  </div>
+
+  <div class="tf-section-title">Capacidade Contributiva — Art. 145, §1° CF</div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>💰 Fundamento</h4>
+      <p>Art. 145, §1° CF: "Sempre que possível, os impostos terão caráter pessoal e serão graduados segundo a capacidade econômica do contribuinte." É o fundamento constitucional da progressividade fiscal.</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>📈 Progressividade</h4>
+      <p>Alíquota aumenta conforme a base cresce. Autorizada expressamente para: IRPF (art. 153, §2°, I CF), IPTU (art. 156, §1°, I CF), ITCMD (STF — RE 562.045), IPVA (art. 155, §6°, II CF). Impostos reais exigem autorização constitucional expressa.</p>
+    </div>
+    <div class="tf-card laranja">
+      <h4>🔄 Seletividade</h4>
+      <p>Alíquota inversamente proporcional à <em>essencialidade</em> do produto. <strong>Obrigatória</strong> no IPI (art. 153, §3°, I CF). <strong>Facultativa</strong> no ICMS (art. 155, §2°, III CF). Mercadorias essenciais têm alíquotas menores; supérfluas, maiores.</p>
+    </div>
+    <div class="tf-card roxo">
+      <h4>⚖️ Proporcionalidade</h4>
+      <p>Alíquota fixa, mas o valor do tributo cresce proporcionalmente à base. Não se confunde com progressividade. Tributos proporcionais são constitucionais — a capacidade contributiva não exige que todos os impostos sejam progressivos.</p>
+    </div>
+  </div>
+
+  <div class="tf-section-title">Vedação ao Confisco — Art. 150, IV CF</div>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <h4>🛑 Não há percentual fixo</h4>
+      <p>O STF analisa o efeito confiscatório caso a caso, sem fixar percentual objetivo. O critério é verificar se o tributo compromete a sobrevivência do contribuinte ou inviabiliza o exercício da atividade econômica.</p>
+    </div>
+    <div class="tf-card laranja">
+      <h4>💸 Multas também estão sujeitas</h4>
+      <p>STF (ADI 551): o princípio estende-se às <strong>multas tributárias</strong>. Multa de 100% sobre o tributo pode ser confiscatória. O excesso punitivo é igualmente vedado — a sanção deve ser proporcional à infração.</p>
+    </div>
+    <div class="tf-card verde">
+      <h4>🏭 Cumulatividade de tributos</h4>
+      <p>STF analisa o <em>conjunto</em> da carga tributária incidente sobre a mesma base/atividade. A soma de vários tributos moderados pode gerar efeito confiscatório global mesmo que cada um isoladamente pareça razoável.</p>
+    </div>
+  </div>
+
+  <div class="tf-section-title">Distinções Críticas para Prova</div>
+  <div class="tf-table-wrap">
+    <table class="tf-table">
+      <thead><tr><th>Confronto</th><th>Anterioridade Anual (art. 150, III, b)</th><th>Noventena (art. 150, III, c)</th></tr></thead>
+      <tbody>
+        <tr><td>Fundamento</td><td>Art. 150, III, b CF</td><td>Art. 150, III, c CF (EC 42/2003)</td></tr>
+        <tr><td>Marco temporal</td><td>01/01 do exercício seguinte</td><td>90 dias corridos da publicação</td></tr>
+        <tr><td>Lei de dezembro</td><td>Efeito: 01/01 do ano seguinte — prazo curto</td><td>Efeito: ~março do ano seguinte — prazo longo</td></tr>
+        <tr><td>Lei de outubro</td><td>Efeito: 01/01 do ano seguinte — prazo longo</td><td>Efeito: ~janeiro do mesmo ciclo — prazo curto</td></tr>
+        <tr><td>Cuida-se do</td><td>Planejamento fiscal anual do contribuinte</td><td>Prazo mínimo de adaptação</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 2 — MAPA MENTAL
+═══════════════════════════════════════════════════════ -->
+<div id="tf-pr-mapa" class="tf-painel">
+
+  <div class="tf-mm-wrap">
+    <div class="tf-mm">
+      <div class="tf-mm-cols">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="tf-mm-branch az" id="prb-legalidade"    onclick="prBranch('legalidade')">Legalidade<span>Nullum tributum sine lege</span></button>
+          <button class="tf-mm-branch vd" id="prb-anterioridade" onclick="prBranch('anterioridade')">Anterioridade e Noventena<span>Dupla proteção temporal</span></button>
+          <button class="tf-mm-branch la" id="prb-irretroatividade" onclick="prBranch('irretroatividade')">Irretroatividade<span>FG anterior à lei</span></button>
+        </div>
+      </div>
+
+      <div class="tf-mm-center">Princípios<br>Tributários<br><span style="font-size:11px;font-weight:400;opacity:.8">Arts. 150-152 CF</span></div>
+
+      <div class="tf-mm-cols">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="tf-mm-branch ro" id="prb-capacidade"    onclick="prBranch('capacidade')">Capacidade Contributiva<span>Isonomia · Progressividade</span></button>
+          <button class="tf-mm-branch te" id="prb-confisco"      onclick="prBranch('confisco')">Vedação ao Confisco<span>Razoabilidade fiscal</span></button>
+          <button class="tf-mm-branch ou" id="prb-trafego"       onclick="prBranch('trafego')">Tráfego e Uniformidade<span>Arts. 150, V · 151 · 152</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tf-mm-detail" id="pr-detail">
+      <p style="color:var(--text2);text-align:center;font-size:13px">Clique em qualquer ramo para ver os detalhes.</p>
+    </div>
+    <p class="tf-mm-hint">Toque em um ramo para expandir</p>
+  </div>
+
+  <!-- Infográfico -->
+  <div style="margin-top:28px">
+    <div class="tf-section-title">Infográfico de Apoio</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:10px">
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/escudo-contribuinte.png" alt="O Escudo do Contribuinte: Guia Essencial de Princípios e Imunidades Tributárias" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="prZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">O Escudo do Contribuinte: Princípios e Imunidades Tributárias</p>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/fundamentos-dir-financeiro.png" alt="Fundamentos do Direito Financeiro e Tributário" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="prZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Fundamentos do Direito Tributário e Financeiro</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="pr-lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out" onclick="document.getElementById('pr-lightbox').style.display='none'">
+    <img id="pr-lightbox-img" src="" alt="" style="max-width:92vw;max-height:92vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,.5)">
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 3 — ROTEIRO DE ESTUDO
+═══════════════════════════════════════════════════════ -->
+<div id="tf-pr-roteiro" class="tf-painel">
+
+  <div class="tf-alert info" style="margin-bottom:18px">
+    <strong>Objetivo do roteiro</strong>
+    Guia passo a passo baseado na Taxonomia de Bloom. Siga a ordem; cada unidade conclui com uma questão reflexiva.
+  </div>
+
+  <div class="tf-section-title">Unidade 1 — Conceito e Estatuto do Contribuinte</div>
+  <div class="tf-step"><div class="tf-num azul">1</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Recordar</span> Os arts. 150 a 152 CF compõem o chamado <em>Estatuto do Contribuinte</em>: limitações constitucionais ao poder de tributar. O ente pode ter competência para criar o tributo e mesmo assim ter essa competência condicionada pelos princípios.</div></div>
+  <div class="tf-step"><div class="tf-num azul">2</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> Distinguir: <strong>princípio</strong> (diretriz que condiciona o exercício da competência) × <strong>imunidade</strong> (vedação absoluta que delimita negativamente a competência) × <strong>isenção</strong> (dispensa legal do tributo já competente). A diferença tem implicações práticas: imunidade não pode ser revogada por lei; isenção pode.</div></div>
+  <div class="tf-quest">❓ <em>(Recordar)</em> Por que os arts. 150-152 CF são denominados "Estatuto do Contribuinte"? Eles criam ou suprimem competências tributárias?</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 2 — Legalidade (Art. 150, I CF)</div>
+  <div class="tf-step"><div class="tf-num verde">A</div><div class="tf-txt"><span class="tf-badge tf-b-green">Aplicar</span> Legalidade estrita (art. 97 CTN): lei deve estabelecer todos os elementos essenciais — fato gerador, base de cálculo, alíquota, sujeito passivo e penalidades. Regulamento não pode suprir lacuna sobre esses elementos.</div></div>
+  <div class="tf-step"><div class="tf-num verde">B</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> Exceção de alíquotas: art. 153, §1° CF autoriza o Poder Executivo a alterar alíquotas de II, IE, IPI e IOF por ato infralegal, dentro dos limites legais. Fundamento: extrafiscalidade e urgência. Essa é uma <em>exceção ao princípio da legalidade</em>, não à anterioridade.</div></div>
+  <div class="tf-quest">❓ <em>(Analisar)</em> O Presidente da República edita Decreto instituindo nova contribuição social, alegando urgência. É constitucional? Qual o vício? (considere: art. 146, III e art. 148 CF)</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 3 — Anterioridade e Noventena (Art. 150, III, b e c CF)</div>
+  <div class="tf-step"><div class="tf-num azul">A</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> Sistema cumulativo: o tributo deve respeitar <em>ambas</em> as exigências — anterioridade anual (01/01 do exercício seguinte) E noventena (90 dias). Aplica-se o prazo que terminar mais tarde.</div></div>
+  <div class="tf-step"><div class="tf-num azul">B</div><div class="tf-txt"><span class="tf-badge tf-b-orange">Aplicar</span> Extinção de isenção onerosa (condicionada): STF equipara à criação de novo tributo — sujeita à anterioridade. Isenção simples revogável produz efeitos no exercício seguinte à revogação, mas sem exigir noventena adicional para o FG.</div></div>
+  <div class="tf-step"><div class="tf-num azul">C</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Recordar</span> Atualização monetária da base de cálculo (recomposição do valor real sem aumento) <strong>não</strong> é majoração — não aciona as anterioridades. Mas a modificação dos índices de atualização além da inflação real já é majoração indireta.</div></div>
+  <div class="tf-quest">❓ <em>(Aplicar)</em> Lei municipal publicada em 15/11/2025 extingue isenção de ISSQN e majora a alíquota de 3% para 5%. Qual a data mais cedo em que o ISSQN na alíquota nova pode ser cobrado?</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 4 — Irretroatividade (Art. 150, III, a CF)</div>
+  <div class="tf-step"><div class="tf-num laranja">A</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Recordar</span> Proibição de cobrar tributo sobre fato gerador ocorrido antes da lei instituidora ou majoradora. Protege a segurança jurídica: o contribuinte não pode ser surpreendido retroativamente.</div></div>
+  <div class="tf-step"><div class="tf-num laranja">B</div><div class="tf-txt"><span class="tf-badge tf-b-orange">Aplicar</span> Exceções do art. 106 CTN: (I) lei interpretativa retroage sem penalidade adicional; (II) lei mais benigna em matéria de infrações e penalidades retroage para beneficiar o infrator (<em>retroatividade in bonam partem</em>).</div></div>
+  <div class="tf-quest">❓ <em>(Analisar)</em> O Fisco pretende aplicar nova multa, mais elevada, a infração cometida antes da lei nova. E se a multa nova for menor? Qual o fundamento constitucional e legal em cada hipótese?</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 5 — Capacidade Contributiva e Isonomia (Arts. 145, §1° e 150, II CF)</div>
+  <div class="tf-step"><div class="tf-num roxo">A</div><div class="tf-txt"><span class="tf-badge tf-b-purple">Analisar</span> Art. 145, §1° CF: caráter pessoal e graduação pela capacidade econômica — fundamento da progressividade. Para impostos <em>reais</em> (que incidem sobre bens, não sobre pessoas), a progressividade exige autorização constitucional expressa (STF — IPTU: art. 156, §1° CF; ITCMD: RE 562.045).</div></div>
+  <div class="tf-step"><div class="tf-num roxo">B</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> Isonomia (art. 150, II CF): veda tratamento desigual entre contribuintes em situação equivalente. Mas <strong>permite</strong> tratamento diferente para situações diferentes (isonomia material). Distinções baseadas em critérios razoáveis e objetivos são constitucionais.</div></div>
+  <div class="tf-quest">❓ <em>(Avaliar)</em> Uma lei estadual que isenta microempresas com faturamento abaixo de R$ 100 mil/ano de determinado imposto estadual viola o princípio da isonomia? Justifique com base nos arts. 145, §1° e 150, II CF.</div>
+  <hr class="tf-divider"/>
+
+  <div class="tf-section-title">Unidade 6 — Vedação ao Confisco e Liberdade de Tráfego (Arts. 150, IV e V CF)</div>
+  <div class="tf-step"><div class="tf-num verde">A</div><div class="tf-txt"><span class="tf-badge tf-b-blue">Compreender</span> Confisco: não há percentual fixo definido pelo STF. A análise é casuística, considerando se o tributo compromete a sobrevivência do contribuinte ou inviabiliza a atividade econômica. Multas excessivas também estão sujeitas ao princípio (ADI 551 STF).</div></div>
+  <div class="tf-step"><div class="tf-num verde">B</div><div class="tf-txt"><span class="tf-badge tf-b-orange">Distinguir</span> Liberdade de tráfego (art. 150, V CF): vedação ao uso do tributo como barreira ao trânsito de pessoas ou bens entre Estados e Municípios. <strong>Não</strong> veda o pedágio em rodovias conservadas pelo Poder Público (ressalva expressa no art. 150, V CF).</div></div>
+  <div class="tf-step"><div class="tf-num verde">C</div><div class="tf-txt"><span class="tf-badge tf-b-teal">Distinguir</span> Art. 152 CF (não-discriminação por origem/destino): proíbe que Estados e Municípios estabeleçam diferença tributária em razão da procedência ou destino de bens e serviços. Diferente da uniformidade geográfica (art. 151, I CF), que limita a União.</div></div>
+  <div class="tf-quest">❓ <em>(Avaliar)</em> Um Estado institui alíquota de ICMS de 30% sobre cervejas e destilados artesanais. É uma alíquota de 30% necessariamente confiscatória? Que outros princípios poderiam ser invocados para contestá-la?</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 4 — ESTUDO DE CASO
+═══════════════════════════════════════════════════════ -->
+<div id="tf-pr-caso" class="tf-painel">
+
+  <div class="tf-caso-header">
+    <div class="tf-label">Caso Simulado · Princípios Tributários</div>
+    <h3>Município de Araguari — Lei n° 5.800/2025</h3>
+    <p>A Câmara Municipal de Araguari aprova a Lei n° 5.800, publicada em <strong>20 de outubro de 2025</strong>, com as seguintes disposições. Analise a constitucionalidade de cada artigo à luz dos princípios tributários constitucionais.</p>
+  </div>
+
+  <div class="tf-alert atencao">
+    <strong>Fatos do caso</strong>
+    <strong>Art. 1° —</strong> Majora a alíquota do ISSQN de 3% para 5%, com vigência a partir de <strong>1° de janeiro de 2026</strong>.<br><br>
+    <strong>Art. 2° —</strong> Concede isenção de ISSQN exclusivamente para empresas com <strong>sede no Município de Araguari</strong>, não extensível a prestadores estabelecidos em outros Municípios.<br><br>
+    <strong>Art. 3° —</strong> Aplica a nova alíquota de 5% retroativamente a todos os serviços prestados <strong>desde 1° de julho de 2025</strong>.<br><br>
+    <strong>Art. 4° —</strong> Institui multa moratória equivalente a <strong>200% do valor do tributo</strong> não pago no prazo.
+  </div>
+
+  <div class="tf-caso-perguntas">
+
+    <div class="tf-pergunta">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
+        <div class="tf-pnum">1</div>
+        <span class="tf-pq-txt">O Art. 1° respeita a anterioridade anual e a noventena?</span>
+        <span class="tf-toggle">▾</span>
+      </button>
+      <div class="tf-pergunta-body">
+        <p><strong>Análise da dupla anterioridade — art. 150, III, b e c CF.</strong> O ISSQN não é exceção a nenhum dos dois princípios, portanto deve cumpri-los cumulativamente.</p>
+        <p><strong>Anterioridade anual:</strong> a lei foi publicada em outubro de 2025. A cobrança em 2026 respeita o exercício financeiro seguinte. ✔</p>
+        <p><strong>Noventena:</strong> 90 dias a partir de 20/10/2025 = <strong>18/01/2026</strong>. A vigência fixada na lei é 01/01/2026 — anterior ao término da noventena. ✘</p>
+        <p><strong>Conclusão:</strong> O Art. 1° viola a noventena. A nova alíquota de 5% só pode ser cobrada a partir de <strong>18/01/2026</strong>, não de 01/01/2026. Até essa data, aplica-se a alíquota anterior de 3%.</p>
+        <p><span class="tf-badge tf-b-green">Anterioridade anual ✔</span> <span class="tf-badge tf-b-red">Noventena ✘ — art. 150, III, c CF</span></p>
+      </div>
+    </div>
+
+    <div class="tf-pergunta">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
+        <div class="tf-pnum">2</div>
+        <span class="tf-pq-txt">O Art. 2° é constitucional? A isenção para empresas com sede local viola algum princípio?</span>
+        <span class="tf-toggle">▾</span>
+      </button>
+      <div class="tf-pergunta-body">
+        <p><strong>Violação do art. 152 CF (vedação de discriminação por origem/destino).</strong> O art. 152 CF proíbe expressamente que Estados e Municípios estabeleçam diferença tributária entre bens e serviços, de qualquer natureza, em razão de sua procedência ou destino.</p>
+        <p>A isenção restrita a empresas com <strong>sede no Município</strong> cria discriminação tributária baseada na origem do prestador — beneficia serviços "locais" e penaliza prestadores de fora. Isso viola diretamente o art. 152 CF.</p>
+        <p>Há também violação do art. 150, II CF (isonomia): contribuintes em situação equivalente (mesma atividade, mesmo FG) recebem tratamento radicalmente distinto com base em critério não objetivo (localização da sede).</p>
+        <p><span class="tf-badge tf-b-red">Inconstitucional</span> — viola art. 152 CF (discriminação por procedência) e art. 150, II CF (isonomia).</p>
+      </div>
+    </div>
+
+    <div class="tf-pergunta">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
+        <div class="tf-pnum">3</div>
+        <span class="tf-pq-txt">O Art. 3° é válido? A retroatividade da nova alíquota é permitida?</span>
+        <span class="tf-toggle">▾</span>
+      </button>
+      <div class="tf-pergunta-body">
+        <p><strong>Violação direta do art. 150, III, a CF (irretroatividade).</strong> É vedado cobrar tributo em relação a fatos geradores ocorridos antes da vigência da lei que o instituiu ou majorou.</p>
+        <p>Os serviços prestados entre julho e outubro de 2025 têm seus fatos geradores <em>consumados</em> antes da publicação da Lei n° 5.800/2025 (20/10/2025). A alíquota aplicável a esses fatos geradores é a lei vigente à época (3%) — a nova lei não pode alcançá-los retroativamente.</p>
+        <p>As exceções do art. 106 CTN não socorrem o Município: lei interpretativa retroage sem penalidade adicional, e lei mais benigna em matéria de infrações. A majoração de alíquota não se enquadra em nenhuma dessas hipóteses.</p>
+        <p><span class="tf-badge tf-b-red">Inconstitucional</span> — viola art. 150, III, a CF. Os FG anteriores a 20/10/2025 sujeitam-se à alíquota de 3%.</p>
+      </div>
+    </div>
+
+    <div class="tf-pergunta">
+      <button class="tf-pergunta-head" onclick="tfToggle(this)">
+        <div class="tf-pnum">4</div>
+        <span class="tf-pq-txt">A multa de 200% do Art. 4° pode ser considerada confiscatória?</span>
+        <span class="tf-toggle">▾</span>
+      </button>
+      <div class="tf-pergunta-body">
+        <p><strong>Muito provavelmente sim — art. 150, IV CF estendido a multas tributárias.</strong> O STF consolidou no julgamento da ADI 551 que o princípio da vedação ao confisco se aplica também às <strong>multas tributárias</strong>, não apenas ao tributo principal.</p>
+        <p>Embora o STF não fixe percentual objetivo de confisco, há precedentes relevantes: o tribunal considerou confiscatória multa isolada de 150% (RE 591.349) e multa de mora de 100% em determinados contextos. Uma multa de 200% sobre o valor do tributo é fortemente indicativa de efeito confiscatório.</p>
+        <p>O critério utilizado pelo STF é a <em>proporcionalidade</em>: a multa deve guardar relação razoável com a infração praticada. Multa moratória (por atraso no pagamento) de 200% é desproporcional à natureza do ilícito, que não é doloso.</p>
+        <p><span class="tf-badge tf-b-red">Potencialmente confiscatória</span> — viola art. 150, IV CF. O STF tende a reduzir multas desse patamar por ofensa ao princípio da vedação ao confisco e à proporcionalidade.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 5 — EXCEÇÕES
+═══════════════════════════════════════════════════════ -->
+<div id="tf-pr-excecoes" class="tf-painel">
+
+  <div class="tf-alert info" style="margin-bottom:18px">
+    <strong>Art. 150, §1° CF — Exceções taxativas às anterioridades</strong>
+    A CF/88 cria exceções específicas às anterioridades para tributos com <em>função extrafiscal</em> ou de arrecadação urgente (calamidade, guerra). As exceções são listadas diretamente no texto constitucional e não admitem interpretação extensiva.
+  </div>
+
+  <div class="tf-section-title">Tabela Completa de Exceções às Anterioridades</div>
+  <div class="tf-table-wrap">
+    <table class="tf-table exc-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Tributo</th>
+          <th style="width:22%">Exceção à Anterioridade Anual (art. 150, III, b)</th>
+          <th style="width:22%">Exceção à Noventena (art. 150, III, c)</th>
+          <th style="width:26%">Fundamento constitucional</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>II — Imposto de Importação</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td>Art. 153, I + art. 150, §1° CF</td>
+        </tr>
+        <tr>
+          <td>IE — Imposto de Exportação</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td>Art. 153, II + art. 150, §1° CF</td>
+        </tr>
+        <tr>
+          <td>IPI — Imp. Produtos Industrializados</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td><span class="exc-nao">❌ Não</span> (sujeito à noventena)</td>
+          <td>Art. 153, IV + art. 150, §1° CF</td>
+        </tr>
+        <tr>
+          <td>IOF — Imp. Operações Financeiras</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td>Art. 153, V + art. 150, §1° CF</td>
+        </tr>
+        <tr>
+          <td>IR — Imposto de Renda</td>
+          <td><span class="exc-nao">❌ Não</span> (sujeito à anterioridade anual)</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td>Art. 153, III + art. 150, §1° CF</td>
+        </tr>
+        <tr>
+          <td>IEG — Imp. Extraordinário de Guerra</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td>Art. 154, II + art. 150, §1° CF</td>
+        </tr>
+        <tr>
+          <td>Empréstimo Compulsório (calamidade / guerra — art. 148, I CF)</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td>Art. 148, I + art. 150, §1° CF</td>
+        </tr>
+        <tr>
+          <td>CIDE-combustíveis (redução / restabelecimento de alíquota)</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td><span class="exc-nao">❌ Não</span> (sujeito à noventena)</td>
+          <td>Art. 177, §4°, I, b CF</td>
+        </tr>
+        <tr>
+          <td>ICMS-combustíveis monofásico (redução / restabelecimento)</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td><span class="exc-nao">❌ Não</span> (sujeito à noventena)</td>
+          <td>Art. 155, §4°, IV, c CF</td>
+        </tr>
+        <tr>
+          <td>Base de cálculo do IPVA (art. 155, III CF)</td>
+          <td><span class="exc-nao">❌ Não</span> (sujeito à anterioridade anual)</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td>Art. 150, §1° in fine CF</td>
+        </tr>
+        <tr>
+          <td>Base de cálculo do IPTU (art. 156, I CF)</td>
+          <td><span class="exc-nao">❌ Não</span> (sujeito à anterioridade anual)</td>
+          <td><span class="exc-sim">✅ Sim</span></td>
+          <td>Art. 150, §1° in fine CF</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tf-section-title">Síntese: Grupos de Exceção</div>
+  <div class="tf-grid">
+    <div class="tf-card laranja">
+      <h4>🔴 Exceção a AMBAS</h4>
+      <p>Nem anterioridade anual nem noventena. Produzem efeitos imediatos:</p>
+      <ul>
+        <li><strong>II</strong> (Importação)</li>
+        <li><strong>IE</strong> (Exportação)</li>
+        <li><strong>IOF</strong></li>
+        <li><strong>IEG</strong> (Extraordinário de Guerra)</li>
+        <li><strong>EC</strong> (Empréstimo Compulsório — calamidade/guerra)</li>
+      </ul>
+    </div>
+    <div class="tf-card">
+      <h4>🟡 Exceção só à Anterioridade Anual</h4>
+      <p>Sujeito à noventena (90 dias), mas não precisa esperar o exercício seguinte:</p>
+      <ul>
+        <li><strong>IPI</strong></li>
+        <li><strong>CIDE-combustíveis</strong> (redução/restabelecimento)</li>
+        <li><strong>ICMS-combustíveis</strong> monofásico (redução/restabelecimento)</li>
+      </ul>
+    </div>
+    <div class="tf-card verde">
+      <h4>🟢 Exceção só à Noventena</h4>
+      <p>Sujeito à anterioridade anual (só no próximo exercício), mas sem prazo de 90 dias:</p>
+      <ul>
+        <li><strong>IR</strong> (Imposto de Renda)</li>
+        <li><strong>Base de cálculo do IPTU</strong></li>
+        <li><strong>Base de cálculo do IPVA</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pr-mnem">
+    <strong>Mnêmônico — Exceção a AMBAS as anterioridades:</strong><br>
+    "<strong>II IE IOF IEG EC</strong>"<br>
+    Importação · Exportação · Operações Financeiras · Extraordinário de Guerra · Empréstimo Compulsório (calamidade/guerra)<br><br>
+    <strong>Para incluir exceção só à anterioridade anual:</strong> acrescente "<strong>IPI + CIDE + ICMS combustíveis</strong>"<br>
+    <strong>Para exceção só à noventena:</strong> "<strong>IR + BC do IPTU + BC do IPVA</strong>"
+  </div>
+
+  <div class="tf-section-title">Pontos Críticos para Prova</div>
+  <div class="tf-table-wrap">
+    <table class="tf-table">
+      <thead><tr><th style="width:35%">Situação</th><th>Conclusão</th></tr></thead>
+      <tbody>
+        <tr><td>IPI majorado em decreto de janeiro</td><td>Sem anterioridade anual ✔ — mas deve aguardar 90 dias (noventena) ✔</td></tr>
+        <tr><td>IR com alíquota majorada em lei de dezembro/2025</td><td>Sem noventena ✔ — mas só cobra em 01/01/2026 (anterioridade anual) ✔</td></tr>
+        <tr><td>IOF majorado em portaria ministerial ontem</td><td>Sem anterioridade e sem noventena ✔ — efeito imediato ✔</td></tr>
+        <tr><td>IPTU com base de cálculo atualizada por lei de março/2025</td><td>Sujeito à anterioridade anual — só cobra em 2026. Sem exigência de noventena ✔</td></tr>
+        <tr><td>ICMS majorado por lei estadual de outubro/2025</td><td>Deve respeitar AMBAS: anterioridade anual (01/01/2026) E noventena (90 dias de outubro/2025 = ~janeiro/2026). Cobra a partir de quando o último prazo terminar.</td></tr>
+        <tr><td>Empréstimo compulsório para calamidade pública decretado hoje</td><td>Sem anterioridade e sem noventena — produz efeito imediato ✔</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tf-alert ok">
+    <strong>💡 Lembre-se: CIDE e ICMS-combustíveis têm exceção apenas para redução e restabelecimento de alíquota</strong>
+    A exceção à anterioridade anual para CIDE-combustíveis (art. 177, §4°, I, b CF) e ICMS-combustíveis monofásico (art. 155, §4°, IV, c CF) aplica-se <em>somente</em> para reduzir ou restabelecer alíquotas — não para majorá-las além do patamar anterior. A majoração efetiva sujeita-se ao regime normal.
+  </div>
+
+</div>
+
+<script>
+;(function() {
+
+  /* ── Tabs ── */
+  window.tfTab = function(id, btn) {
+    var wrap = btn.closest('.tf-tabs').parentElement
+    wrap.querySelectorAll('.tf-painel').forEach(function(p) { p.classList.remove('ativo') })
+    wrap.querySelectorAll('.tf-tab').forEach(function(b)   { b.classList.remove('ativo') })
+    wrap.querySelector('#tf-' + id).classList.add('ativo')
+    btn.classList.add('ativo')
+  }
+
+  /* ── Mapa Mental ── */
+  var prData = {
+    legalidade: {
+      title: 'Legalidade — Art. 150, I CF',
+      items: [
+        '<strong>Regra:</strong> Nenhum tributo sem lei — "nullum tributum sine lege"',
+        '<strong>Legalidade estrita (art. 97 CTN):</strong> FG, base de cálculo, alíquota, sujeito passivo e penalidades devem estar em lei',
+        '<strong>Exceção (art. 153, §1° CF):</strong> PE pode alterar alíquotas de II, IE, IPI e IOF por ato infralegal (dentro de limites legais)',
+        '<strong>MP:</strong> STF admite MP para tributos que não exijam LC; convertida retroage à data da edição',
+        'A legalidade é distinta da anterioridade — lei válida pode ainda não produzir efeitos por força da anterioridade'
+      ]
+    },
+    anterioridade: {
+      title: 'Anterioridade e Noventena — Art. 150, III, b e c CF',
+      items: [
+        '<strong>Dupla anterioridade:</strong> cumprimento cumulativo — anterioridade anual E noventena; vale o prazo que terminar mais tarde',
+        '<strong>Anterioridade anual:</strong> tributo só exigível no exercício financeiro seguinte à publicação da lei',
+        '<strong>Noventena:</strong> tributo só exigível 90 dias após a publicação da lei (EC 42/2003)',
+        '<strong>Extinção de isenção onerosa:</strong> STF equipara à criação de tributo → sujeita à anterioridade',
+        'Exceções: II, IE, IPI, IOF, IR (parcialmente), IEG, EC (calamidade/guerra), CIDE e ICMS combustíveis — ver aba Exceções'
+      ]
+    },
+    irretroatividade: {
+      title: 'Irretroatividade — Art. 150, III, a CF',
+      items: [
+        '<strong>Regra:</strong> lei tributária não alcança FG ocorridos antes de sua vigência',
+        '<strong>Proteção:</strong> segurança jurídica e previsibilidade — contribuinte não pode ser surpreendido retroativamente',
+        '<strong>Exceção (art. 106, I CTN):</strong> lei interpretativa retroage sem penalidade adicional',
+        '<strong>Exceção (art. 106, II CTN):</strong> lei mais benigna em matéria de infrações retroage in bonam partem',
+        'Majoração de alíquota retroativa é inconstitucional em qualquer hipótese'
+      ]
+    },
+    capacidade: {
+      title: 'Capacidade Contributiva — Art. 145, §1° CF',
+      items: [
+        '<strong>Fundamento:</strong> "Sempre que possível, os impostos terão caráter pessoal e serão graduados segundo a capacidade econômica do contribuinte"',
+        '<strong>Progressividade:</strong> alíquota cresce com a base — exige autorização constitucional expressa para impostos reais',
+        '<strong>Seletividade:</strong> alíquota inversamente proporcional à essencialidade — obrigatória no IPI, facultativa no ICMS',
+        '<strong>Isonomia (art. 150, II CF):</strong> veda tratamento desigual entre contribuintes equivalentes; permite distinguir situações diferentes',
+        'ITCMD progressivo: STF RE 562.045 — Constituição permite mesmo sem previsão expressa, pois art. 145, §1° CF se aplica'
+      ]
+    },
+    confisco: {
+      title: 'Vedação ao Confisco — Art. 150, IV CF',
+      items: [
+        '<strong>Regra:</strong> tributo não pode ter efeito confiscatório — não pode aniquilar o patrimônio ou inviabilizar atividade econômica',
+        '<strong>Análise casuística:</strong> STF não fixou percentual objetivo; avalia o caso concreto',
+        '<strong>Multas:</strong> STF (ADI 551) estendeu o princípio às multas tributárias — sanção deve ser proporcional à infração',
+        '<strong>Cumulatividade:</strong> conjunto da carga tributária pode ser confiscatório mesmo que tributos isolados sejam razoáveis',
+        'Proporcionalidade e razoabilidade são os critérios orientadores da análise'
+      ]
+    },
+    trafego: {
+      title: 'Liberdade de Tráfego e Uniformidade — Arts. 150, V; 151; 152 CF',
+      items: [
+        '<strong>Art. 150, V CF:</strong> tributo não pode limitar o tráfego de pessoas ou bens entre Estados e Municípios',
+        '<strong>Ressalva expressa:</strong> pedágio em rodovias conservadas pelo Poder Público é permitido (art. 150, V in fine CF)',
+        '<strong>Art. 151, I CF (Uniformidade Geográfica):</strong> União não pode usar tributos para diferenciar entre entes federativos, salvo incentivos para reduzir desigualdades regionais',
+        '<strong>Art. 152 CF (Não-discriminação):</strong> Estados e Municípios não podem estabelecer diferença tributária por procedência ou destino de bens e serviços',
+        'Arts. 151 e 152 CF são distintos: o primeiro limita a União; o segundo limita Estados e Municípios'
+      ]
+    }
+  }
+
+  var prActive = null
+  window.prBranch = function(key) {
+    if (prActive === key) { prActive = null; prReset(); return }
+    prActive = key
+    Object.keys(prData).forEach(function(k) {
+      var el = document.getElementById('prb-' + k)
+      if (el) { el.style.opacity = k === key ? '1' : '0.4'; el.style.transform = k === key ? 'scale(1.04)' : 'scale(1)' }
+    })
+    var d = prData[key]
+    document.getElementById('pr-detail').innerHTML =
+      '<h4>' + d.title + '</h4><ul>' + d.items.map(function(i) { return '<li>' + i + '</li>' }).join('') + '</ul>'
+  }
+  function prReset() {
+    Object.keys(prData).forEach(function(k) {
+      var el = document.getElementById('prb-' + k)
+      if (el) { el.style.opacity = '1'; el.style.transform = 'scale(1)' }
+    })
+    document.getElementById('pr-detail').innerHTML = '<p style="color:var(--text2);text-align:center;font-size:13px">Clique em qualquer ramo para ver os detalhes.</p>'
+  }
+
+  /* ── Zoom de infográficos ── */
+  window.prZoom = function(img) {
+    var lb = document.getElementById('pr-lightbox')
+    document.getElementById('pr-lightbox-img').src = img.src
+    document.getElementById('pr-lightbox-img').alt = img.alt
+    lb.style.display = 'flex'
+  }
+
+  /* ── Estudo de Caso: acordeão ── */
+  window.tfToggle = function(head) {
+    var body = head.nextElementSibling
+    var toggle = head.querySelector('.tf-toggle')
+    var isOpen = body.classList.contains('open')
+    body.classList.toggle('open', !isOpen)
+    toggle.style.transform = isOpen ? '' : 'rotate(180deg)'
+  }
+
+})()
+</script>

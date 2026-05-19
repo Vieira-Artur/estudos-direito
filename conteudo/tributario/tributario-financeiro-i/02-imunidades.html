@@ -237,6 +237,95 @@
 @media (max-width: 540px) {
   .tf-tab { padding: 4px 9px; font-size: 11.5px; }
 }
+
+/* ── Relatório ───────────────────────────────────────────── */
+:root {
+  --rp-bg2:    #f5f7fa;
+  --rp-border: #dce3ec;
+  --rp-green:  #1a5c1a; --rp-green-lt: #d6f0d6;
+  --rp-red:    #8b1a1a; --rp-red-lt:   #fce8e8;
+  --rp-amber:  #7a3800; --rp-amber-lt: #fdebd6;
+  --rp-teal:   #0a5c4a; --rp-teal-lt:  #d6f0e8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --rp-bg2: #1a2840; --rp-border: #2a3a52;
+    --rp-green: #6fd86f; --rp-green-lt: #0d2e0d;
+    --rp-red: #f08080; --rp-red-lt: #2e0d0d;
+    --rp-amber: #f0a060; --rp-amber-lt: #2e1500;
+    --rp-teal: #60d8b8; --rp-teal-lt: #072e22;
+  }
+}
+:root[data-theme="dark"] {
+  --rp-bg2: #1a2840; --rp-border: #2a3a52;
+  --rp-green: #6fd86f; --rp-green-lt: #0d2e0d;
+  --rp-red: #f08080; --rp-red-lt: #2e0d0d;
+  --rp-amber: #f0a060; --rp-amber-lt: #2e1500;
+  --rp-teal: #60d8b8; --rp-teal-lt: #072e22;
+}
+.rp-titulo {
+  font-family: var(--serif); font-size: 19px; font-weight: 700;
+  color: var(--blue); margin-bottom: 4px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--border);
+}
+.rp-subtitulo {
+  font-family: var(--sans); font-size: 13px; color: var(--text2);
+  margin-bottom: 24px; font-style: italic;
+}
+.rp-secao { margin-bottom: 28px; }
+.rp-secao-titulo {
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  color: var(--blue-dark, var(--blue)); margin-bottom: 10px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: baseline; gap: 10px;
+}
+.rp-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; min-width: 26px;
+  border-radius: 50%; background: var(--blue); color: #fff;
+  font-family: var(--sans); font-size: 12px; font-weight: 700;
+}
+.rp-texto {
+  font-family: var(--serif); font-size: 15px; line-height: 1.75;
+  color: var(--text); margin-bottom: 12px;
+}
+.rp-lista {
+  margin: 10px 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rp-lista li {
+  font-family: var(--serif); font-size: 15px; line-height: 1.7;
+  color: var(--text); padding-left: 20px; position: relative;
+}
+.rp-lista li::before { content: "›"; position: absolute; left: 4px; color: var(--blue); font-weight: 700; }
+.rp-lista li strong { color: var(--text); }
+.rp-sublista {
+  margin: 6px 0 0 0; padding: 0; list-style: none;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.rp-sublista li {
+  font-family: var(--serif); font-size: 14px; line-height: 1.65;
+  color: var(--text); padding-left: 20px; position: relative;
+}
+.rp-sublista li::before { content: "–"; position: absolute; left: 4px; color: var(--text2); }
+.rp-destaque {
+  background: var(--rp-bg2); border-left: 3px solid var(--blue);
+  border-radius: 0 6px 6px 0; padding: 12px 14px; margin: 14px 0;
+  font-family: var(--serif); font-size: 14px; line-height: 1.7; color: var(--text);
+}
+.rp-destaque strong { color: var(--blue); }
+.rp-atencao {
+  background: var(--rp-amber-lt); border-left: 3px solid var(--rp-amber);
+  border-radius: 0 6px 6px 0; padding: 12px 14px; margin: 14px 0;
+  font-family: var(--sans); font-size: 13px; line-height: 1.65; color: var(--text);
+}
+.rp-table-wrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--border); border-radius: 8px; }
+.rp-table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 13px; }
+.rp-table th { background: var(--blue); color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; }
+.rp-table th:first-child { border-radius: 7px 0 0 0; }
+.rp-table th:last-child  { border-radius: 0 7px 0 0; }
+.rp-table td { padding: 9px 12px; vertical-align: top; line-height: 1.55; color: var(--text); border-top: 1px solid var(--border); }
+.rp-table tr:nth-child(even) td { background: var(--rp-bg2); }
 </style>
 
 <h2 class="tf-titulo">Direito Tributário e Financeiro I — Imunidades Tributárias</h2>
@@ -246,6 +335,7 @@
   <button class="tf-tab" onclick="tfTab('im-mapa', this)">Mapa Mental</button>
   <button class="tf-tab" onclick="tfTab('im-roteiro', this)">Roteiro de Estudo</button>
   <button class="tf-tab" onclick="tfTab('im-caso', this)">Estudo de Caso</button>
+  <button class="tf-tab" onclick="tfTab('im-relatorio', this)">Relatório</button>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -498,12 +588,21 @@
     <p class="tf-mm-hint">Toque em um ramo para expandir</p>
   </div>
 
-  <!-- Infográfico -->
+  <!-- Infográficos -->
   <div style="margin-top:28px">
-    <div class="tf-section-title">Infográfico de Apoio</div>
-    <div style="margin-top:10px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface);max-width:420px">
-      <img src="img/imunidades-tributarias.png" alt="Guia das Imunidades Tributárias" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
-      <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Guia das Imunidades Tributárias</p>
+    <div class="tf-section-title">Infográficos de Apoio</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:10px">
+
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/escudo-contribuinte.png" alt="O Escudo do Contribuinte: Guia Essencial de Princípios e Imunidades Tributárias" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">O Escudo do Contribuinte: Princípios e Imunidades Tributárias</p>
+      </div>
+
+      <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--surface)">
+        <img src="img/imunidades-tributarias.png" alt="Guia das Imunidades Tributárias" loading="lazy" style="width:100%;height:auto;display:block;cursor:pointer" onclick="tfZoom(this)">
+        <p style="font-size:12px;padding:8px 10px;color:var(--text2);margin:0;font-family:var(--sans)">Guia das Imunidades Tributárias</p>
+      </div>
+
     </div>
   </div>
 
@@ -640,6 +739,109 @@
     </div>
 
   </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ABA 5 — RELATÓRIO
+═══════════════════════════════════════════════════════ -->
+<div id="tf-im-relatorio" class="tf-painel">
+
+<h1 class="rp-titulo">Relatório — Imunidades Tributárias</h1>
+<p class="rp-subtitulo">Relatório Jurídico: O Regime das Imunidades Tributárias no Ordenamento Brasileiro</p>
+
+<!-- 1 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">1</span> Introdução: Conceito e Natureza Jurídica</h2>
+
+  <p class="rp-texto">O estudo das imunidades tributárias exige, preliminarmente, a compreensão da atividade financeira do Estado. Segundo a clássica lição de Aliomar Baleeiro, esta consiste em <em>"obter, criar, gerir e despender o dinheiro indispensável às necessidades, cuja satisfação o Estado assumiu"</em>. Enquanto o Direito Financeiro se ocupa da gestão dessa atividade em sua totalidade — abrangendo receitas, despesas, orçamento e crédito público —, o Direito Tributário concentra-se especificamente na obtenção de receitas derivadas. Estas são as prestações pecuniárias extraídas compulsoriamente do patrimônio particular, fundamentadas na soberania estatal e no poder de tributar.</p>
+
+  <p class="rp-texto">Dada a natureza de verticalidade inerente às relações de Direito Público, a Constituição Federal de 1988 (CF/88) estabelece, nos Arts. 150 a 152, um plexo de limitações constitucionais ao poder de tributar. As imunidades representam a forma mais incisiva dessas limitações: são barreiras intransponíveis à invasão patrimonial do Estado, configurando-se como verdadeiras cláusulas pétreas. Como garantias individuais e institucionais, são insuscetíveis de supressão ou de excepcionalização, mesmo por via de Emenda Constitucional, atuando como salvaguarda contra o ímpeto arrecadatório ou a voracidade fiscal do Fisco.</p>
+</section>
+
+<!-- 2 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">2</span> A Imunidade Recíproca</h2>
+
+  <p class="rp-texto">A imunidade recíproca (Art. 150, VI, "a", CF) veda aos entes federativos — União, Estados, Distrito Federal e Municípios — a instituição de impostos sobre o patrimônio, a renda ou os serviços uns dos outros. Esta norma é o pilar de sustentação do Pacto Federativo, impedindo que um ente utilize o instrumental tributário para exaurir os recursos de outro e, consequentemente, comprometer sua autonomia política.</p>
+
+  <p class="rp-texto">Esta proteção projeta-se, por mandamento constitucional, às autarquias e fundações públicas, desde que vinculadas às suas finalidades essenciais. No plano jurisprudencial, o Supremo Tribunal Federal (STF) estendeu tal garantia à Empresa Brasileira de Correios e Telégrafos (ECT). O entendimento firmado é de que a ECT, embora seja uma empresa pública, presta um serviço público obrigatório e exclusivo do Estado. Assim, a imunidade visa evitar que a tributação sobre serviços essenciais onere indiretamente o Estado e prejudique a continuidade do serviço público.</p>
+</section>
+
+<!-- 3 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">3</span> Imunidade Religiosa (Templos de Qualquer Culto)</h2>
+
+  <p class="rp-texto">A imunidade destinada aos templos de qualquer culto visa resguardar a liberdade religiosa e o pluralismo confessional. Trata-se de uma proteção ampla que abrange não apenas o local físico de oração, mas o patrimônio, a renda e os serviços relacionados à organização religiosa.</p>
+
+  <p class="rp-texto">Contudo, a delimitação dogmática desse benefício exige rigor. No caso da Maçonaria, a jurisprudência do STF consolidou-se no sentido de que a instituição não faz jus à imunidade religiosa. A razão jurídica reside no fato de a Maçonaria ser uma entidade de caráter primordialmente filosófico, ético e fraternal, não se amoldando ao conceito de "culto". Uma vez que o rol de imunidades religiosas é interpretado de forma a proteger a liberdade de crença e liturgia, a natureza filosófica da instituição falha no teste de essencialidade religiosa necessário para o gozo da proteção constitucional do Art. 150, VI, "b".</p>
+</section>
+
+<!-- 4 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">4</span> Imunidades das Instituições de Caráter Social e Político</h2>
+
+  <p class="rp-texto">A Constituição concede imunidade a entes que desempenham papéis fundamentais para a estabilidade democrática e a justiça social. Estão compreendidos:</p>
+
+  <ul class="rp-lista">
+    <li>Partidos políticos e suas fundações;</li>
+    <li>Entidades sindicais dos trabalhadores;</li>
+    <li>Instituições de educação e de assistência social, sem fins lucrativos.</li>
+  </ul>
+
+  <p class="rp-texto">Embora o mandamento de imunidade venha diretamente do texto constitucional, o Art. 146, II, da CF exige que as limitações ao poder de tributar sejam reguladas por Lei Complementar. Atualmente, o Código Tributário Nacional (CTN) — recepcionado com status de Lei Complementar — cumpre esse papel. Conforme ratificado pelo STF no RE 566.622/RS, os requisitos para o gozo desse benefício devem observar estritamente o disposto no Art. 14 do CTN, de forma cumulativa:</p>
+
+  <ul class="rp-lista">
+    <li>Não distribuir qualquer parcela de seu patrimônio ou de suas rendas, a qualquer título;</li>
+    <li>Aplicar integralmente, no País, os seus recursos na manutenção dos seus objetivos institucionais;</li>
+    <li>Manter escrituração de suas receitas e despesas em livros revestidos de formalidades capazes de assegurar sua exatidão.</li>
+  </ul>
+</section>
+
+<!-- 5 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">5</span> Imunidade de Imprensa e Musical</h2>
+
+  <p class="rp-texto">Diferente das anteriores, estas imunidades possuem um caráter predominantemente objetivo, recaindo sobre determinados bens para proteger a liberdade de expressão e a cultura nacional.</p>
+
+  <ul class="rp-lista">
+    <li>
+      <strong>Imprensa:</strong> A imunidade sobre livros, jornais, periódicos e o papel destinado à sua impressão visa democratizar o acesso à informação. Acompanhando a evolução tecnológica, o STF equiparou o suporte eletrônico ao físico, estendendo o benefício a e-books e e-readers, sob o fundamento de que a proteção constitucional recai sobre o conteúdo e o valor social da informação, e não meramente sobre o suporte material de papel.
+    </li>
+    <li>
+      <strong>Musical:</strong> Abrange fonogramas e videofonogramas musicais produzidos no Brasil, contendo obras de autores brasileiros ou interpretadas por artistas brasileiros, funcionando como fomento à indústria fonográfica nacional.
+    </li>
+  </ul>
+</section>
+
+<!-- 6 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">6</span> Escopo de Aplicação e Obrigações Acessórias</h2>
+
+  <p class="rp-texto">É imperativo observar a distinção entre a obrigação tributária principal e os deveres instrumentais do contribuinte.</p>
+
+  <div class="rp-destaque">
+    <strong>Regra fundamental:</strong> O regime de imunidade tributária restringe-se exclusivamente aos <strong>IMPOSTOS</strong>.
+  </div>
+
+  <ul class="rp-lista">
+    <li>
+      <strong>Espécies tributárias:</strong> O benefício não alcança taxas ou contribuições de melhoria, que permanecem devidas em razão do exercício do Poder de Polícia ou da contraprestação por serviços públicos específicos e divisíveis.
+    </li>
+    <li>
+      <strong>Obrigações acessórias:</strong> A imunidade não dispensa o cumprimento das obrigações acessórias (deveres instrumentais como emissão de notas fiscais e declarações). Isso ocorre porque, embora a tipicidade tributária seja afastada pela imunidade — impedindo a ocorrência do fato gerador do imposto —, o Poder de Polícia e a competência administrativa de fiscalização permanecem íntegros. A legalidade estrita exigida para a instituição do tributo não se confunde com a discricionariedade administrativa necessária para o controle e a verificação do cumprimento dos requisitos que legitimam a própria imunidade.
+    </li>
+  </ul>
+</section>
+
+<!-- 7 -->
+<section class="rp-secao">
+  <h2 class="rp-secao-titulo"><span class="rp-num">7</span> Conclusão</h2>
+
+  <p class="rp-texto">O regime das imunidades tributárias é um instrumento de equilíbrio entre a soberania estatal e as liberdades fundamentais. Ao instituir limitações subjetivas (focadas na pessoa ou ente, como a recíproca e a religiosa) e objetivas (focadas no objeto, como a de imprensa), o constituinte assegurou que o poder de tributar não se torne um mecanismo de aniquilação de direitos.</p>
+
+  <p class="rp-texto">Sustentadas pelos pilares da legalidade e da tipicidade, as imunidades impedem que o Estado crie "fatos geradores" sobre áreas consideradas vitais para a dignidade humana, o pacto federativo e a democracia. Assim, a imunidade não é apenas um favor fiscal, mas uma garantia de segurança jurídica e um pressuposto para a efetivação da justiça social e do bem comum.</p>
+</section>
+
 </div>
 
 <script>

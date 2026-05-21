@@ -1,0 +1,163 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-titulo-data {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  vertical-align: middle;
+}
+.inf-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.inf-sub strong { color: var(--jur-text); }
+.inf-meta {
+  display: inline-block;
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--jur-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+.inf-card {
+  flex: 1;
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.inf-card:hover {
+  box-shadow: var(--jur-shadow);
+  transform: translateY(-1px);
+}
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jur-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.inf-processo {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--jur-text2);
+}
+.inf-processo a {
+  font-weight: 700;
+  color: var(--jur-accent);
+  text-decoration: none;
+}
+.inf-processo a:hover { text-decoration: underline; }
+.inf-ramo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--jur-text2);
+}
+.inf-tema {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  margin: 4px 0 10px 0;
+  line-height: 1.4;
+}
+.inf-destaque {
+  font-size: 16px;
+  color: var(--jur-text);
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.inf-destaque p { margin: 0 0 8px 0; }
+.inf-destaque p:last-child { margin-bottom: 0; }
+.inf-rodape {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jur-border);
+  font-size: 12px;
+  color: var(--jur-text2);
+}
+.inf-rodape a { color: var(--jur-accent); }
+.inf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-titulo">Informativo nº 889 <span class="inf-meta">STJ</span><span class="inf-titulo-data"> — 19 de maio de 2026</span></h2>
+<p class="inf-sub">Edição <strong>nº 889</strong> · publicada em <strong>19 de maio de 2026</strong> · 3 enunciados de Direito Tributário.</p>
+<div class="inf-card-wrap"><div class="inf-num">1</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>1. A reiteração automática de ordens de bloqueio via SISBAJUD (&quot;teimosinha&quot;) é medida legítima, voltada à efetividade da execução e compatível com o ordenamento processual, cabendo ao executado demonstrar causas impeditivas do gravame ou a existência de meio executivo igualmente eficaz e menos gravoso.<br><br>2. Após a triangularização da relação processual, o indeferimento da reiteração automática de ordens de bloqueio via SISBAJUD exige fundamentação concreta, não se admitindo negativa baseada em argumentos genéricos ou abstratos.</p></div><div class="inf-tema">Execução Fiscal. SISBAJUD. Reiteração automática de ordens de bloqueio de ativos financeiros (&quot;Teimosinha&quot;). Tema 1325.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;020837&#x27;" target="_blank" rel="noopener">REsp 2.147.428-RS, Rel. Ministro Sérgio Kukina, Primeira Seção, por unanimidade, julgado em 7/5/2026. (Tema 1325).REsp 2.147.843-SC, Rel. Ministro Sérgio Kukina, Primeira Seção, por unanimidade, julgado em 7/5/2026 (Tema 1325).REsp 2.193.695-RS, Rel. Ministro Sérgio Kukina, Primeira Seção, por unanimidade, julgado em 7/5/2026 (Tema 1325).</a></span><span class="inf-ramo">DIREITO PROCESSUAL CIVIL, DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">2</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>1. O precedente de repercussão geral do Supremo Tribunal Federal no Tema n. 985 impõe o reconhecimento da incidência da contribuição previdenciária patronal sobre o terço constitucional de férias gozadas, no âmbito do RGPS, com eficácia ex nunc a partir da publicação da ata de julgamento do mérito, ressalvadas as contribuições já pagas e não impugnadas judicialmente até essa data.<br><br>2. Quando o Supremo Tribunal Federal reconhece o caráter constitucional de determinada matéria e fixa tese de mérito em sentido oposto à tese repetitiva do Superior Tribunal de Justiça, cabe ao STJ, em juízo de retratação, cancelar o tema repetitivo correspondente, deixando às instâncias ordinárias a observância direta do precedente constitucional.<br><br>3. A tese do Tema 479/STJ, relativa à natureza indenizatória do terço constitucional de férias e à consequente não incidência de contribuição previdenciária patronal, fica cancelada em razão da superação pelo Tema n. 985/STF.<br><br>4. A tese do Tema 739/STJ, que afirmava a natureza salarial do salário-maternidade e sua inclusão na base de cálculo da contribuição previdenciária patronal, fica cancelada em razão da tese firmada no Tema n. 72/STF do empregador sobre essa verba.<br><br>5. Mantêm-se hígidas as teses repetitivas dos Temas 478, 737, 738 e 740/STJ, por se referirem a controvérsias de natureza infraconstitucional não alcançadas por superação constitucional.</p></div><div class="inf-tema">Juízo de retratação em repetitivo. Contribuição previdenciária patronal. Terço constitucional de férias gozadas. Salário-maternidade. Temas Repetitivos 478, 479, 737, 738, 739 e 740/STJ. Temas 72 e 985/STF. Cancelamento das teses 479 e 739/STJ.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;022201&#x27;" target="_blank" rel="noopener">REsp 1.230.957-RS, Rel. Ministro Marco Aurélio Bellizze, Primeira Seção, por unanimidade, julgado em 13/5/2026. (Tema 478/STJ, Tema 479/STJ, Tema 737/STJ, Tema 738/STJ, Tema 739/STJ e Tema 740/STJ).</a></span><span class="inf-ramo">DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">3</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>O adicional da COFINS-Importação é devido, ainda que a alíquota ordinária seja reduzida a 0 (zero) para determinados produtos químicos, farmacêuticos e os destinados ao uso em hospitais, clínicas e consultórios médicos e odontológicos, nos termos do art. 8º, §§ 21 e 21-A, da Lei n. 10.865/2004.</p></div><div class="inf-tema">COFINS-Importação. Adicional de alíquota. Produtos químicos, farmacêuticos e os destinados ao uso em hospitais, clínicas e consultórios médicos e odontológicos. Exigência. Legalidade. Tema 1380.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;020038&#x27;" target="_blank" rel="noopener">EREsp 2.090.133-SP, Rel. Ministro Gurgel de Faria, Primeira Seção, por unanimidade, julgado em 7/5/2026, DJE 18/5/2026. (Tema 1380).REsp 2.173.916-SP, Rel. Ministro Gurgel de Faria, Primeira Seção, por unanimidade, julgado em 7/5/2026, DJE 18/5/2026 (Tema 1380).</a></span><span class="inf-ramo">DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-rodape">Fonte oficial: <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisarumaedicao&amp;livre=%270889%27.cod." target="_blank" rel="noopener">Informativo 889 no portal do STJ</a>.</div>

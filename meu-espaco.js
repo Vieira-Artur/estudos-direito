@@ -221,6 +221,7 @@ const MeuEspaco = (() => {
       area.querySelectorAll('.fp-tab').forEach(b => b.classList.remove('ativo'))
       painel.classList.add('ativo')
       btn.classList.add('ativo')
+      _ga('tab_click', { materia: arquivo, aba: 'meu-espaco' })
     })
 
     wireAnotacoes(painel, arquivo)
@@ -238,6 +239,7 @@ const MeuEspaco = (() => {
       localStorage.setItem(storageKey('texto', arquivo), editor.innerHTML)
       salvoSpan.textContent = 'salvo ✓'
       setTimeout(() => { salvoSpan.textContent = '' }, 1500)
+      _ga('meu_espaco_uso', { acao: 'salvou', arquivo: arquivo, tipo: 'texto' })
     }, 500)
 
     editor.addEventListener('input', save)
@@ -272,6 +274,7 @@ const MeuEspaco = (() => {
         tab.classList.add('ativo')
         painel.querySelector(`[data-me-painel="${tab.dataset.meTab}"]`).classList.add('ativo')
         if (tab.dataset.meTab === 'diagrama') initDiagramaLazy(painel, arquivo)
+        _ga('tab_click', { materia: arquivo, aba: 'me-' + tab.dataset.meTab })
       })
     })
 
@@ -732,6 +735,7 @@ const MeuEspaco = (() => {
           const reader = new FileReader()
           reader.onload = async ev => {
             await MaterialDB.put({ id, arquivo, nome: file.name, dataUrl: ev.target.result, type: 'pdf', caption: '', order })
+            _ga('meu_espaco_uso', { acao: 'salvou', arquivo: arquivo, tipo: 'pdf' })
             if (--pending === 0) renderGaleria()
           }
           reader.readAsDataURL(file)
@@ -751,6 +755,7 @@ const MeuEspaco = (() => {
               tmp.getContext('2d').drawImage(img, 0, 0, w, h)
               const dataUrl = tmp.toDataURL('image/jpeg', 0.8)
               await MaterialDB.put({ id, arquivo, nome: file.name, dataUrl, type: 'image', caption: '', order })
+              _ga('meu_espaco_uso', { acao: 'salvou', arquivo: arquivo, tipo: 'imagem' })
               if (--pending === 0) renderGaleria()
             }
             img.src = ev.target.result

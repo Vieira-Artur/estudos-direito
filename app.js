@@ -35,6 +35,14 @@
     window.addEventListener('locationchange', function(){ setTimeout(sendPageView, 50); });
 })();
 
+function _ga(eventName, params) {
+  try {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, params || {});
+    }
+  } catch (e) {}
+}
+
 // ── Utilitário de scroll suave respeitando prefers-reduced-motion ──
 function scrollSuave(el, opts = {}) {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -460,6 +468,10 @@ function mostrarTabConteudo() {
   document.getElementById('tab-conteudo')?.classList.add('ativa')
   document.getElementById('tab-flash')?.classList.remove('ativa')
   document.getElementById('rodape-privacidade')?.setAttribute('hidden', '')
+  _ga('tab_click', {
+    materia: estado.materiaAtual ? estado.materiaAtual.id : '',
+    aba: 'conteudo'
+  })
 }
 
 // ── Meu Deck (localStorage) ──────────────────────────────
@@ -742,6 +754,10 @@ function mostrarTabFlash() {
   document.getElementById('tab-flash')?.classList.add('ativa')
   if (flashArea && !flashArea.hasChildNodes()) renderFlashSessao(estado.turmaAtual)
   document.getElementById('rodape-privacidade')?.removeAttribute('hidden')
+  _ga('tab_click', {
+    materia: estado.materiaAtual ? estado.materiaAtual.id : '',
+    aba: 'flashcards'
+  })
 }
 
 function executarScripts(container) {
@@ -876,6 +892,14 @@ function abrirTema(index, fromPop = false) {
             ⬇ Baixar imagem
           </a>
         `
+        wrap.querySelector('.btn-download-img').addEventListener('click', () => {
+          _ga('download_click', {
+            materia: estado.infoAtual ? estado.infoAtual.id : (estado.materiaAtual ? estado.materiaAtual.id : ''),
+            pagina: location.pathname,
+            tipo: 'imagem',
+            arquivo: filename
+          })
+        })
         if (link.parentElement) link.parentElement.appendChild(wrap)
       })
       // Cabeçalho de identidade para impressão (oculto na tela)
@@ -896,6 +920,13 @@ function abrirTema(index, fromPop = false) {
           ⬇ Salvar como PDF
         </button>
       `
+      downloadWrap.querySelector('.btn-download-pdf').addEventListener('click', () => {
+        _ga('download_click', {
+          materia: estado.materiaAtual ? estado.materiaAtual.id : '',
+          pagina: location.pathname,
+          tipo: 'pdf'
+        })
+      })
       area.appendChild(downloadWrap)
 
       executarScripts(area)

@@ -1,5 +1,5 @@
 {
-  "ultima_edicao_processada": 889,
+  "ultima_edicao_processada": 890,
   "edicoes": {
     "885": {
       "data": "22 de abril de 2026",
@@ -25,7 +25,12 @@
       "data": "19 de maio de 2026",
       "qtd_enunciados": 1,
       "arquivo": "informativo-0889.html"
+    },
+    "890": {
+      "data": "26 de maio de 2026",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0890.html"
     }
   },
-  "atualizado_em": "2026-05-21T17:59:31+00:00"
+  "atualizado_em": "2026-05-28T13:14:58+00:00"
 }

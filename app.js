@@ -109,6 +109,10 @@ function esc(str) {
 const SITE_BASE = new URL('./', document.baseURI).href
 const BASE_PATH = new URL('./', document.baseURI).pathname  // ex: "/estudos-direito/" ou "/"
 
+function urlDoTema(arquivo) {
+  return BASE_PATH + arquivo.replace('conteudo/', '').replace('.html', '')
+}
+
 // ── Helpers globais ─────────────────────────────────────
 function _confirmar(msg) {
   return new Promise(resolve => {
@@ -233,6 +237,62 @@ function inicializarRota() {
 inicializarRota()
 setTimeout(indexarConteudo, 2000) // indexa em background após carregamento inicial
 
+// ── Interceptador SPA para a[data-spa] ───────────────────
+document.addEventListener('click', function(e) {
+  const a = e.target.closest('a[data-spa]')
+  if (!a) return
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+  const url = new URL(a.href)
+  if (url.origin !== location.origin) return
+  e.preventDefault()
+  const rawPath = url.pathname
+  const path = '/' + (rawPath.startsWith(BASE_PATH)
+    ? rawPath.slice(BASE_PATH.length)
+    : rawPath.slice(1)
+  ).replace(/\/$/, '')
+
+  if (path === '/' || path === '') { renderArvore(); return }
+  if (path === '/sobre') { abrirSobre(); return }
+
+  for (const materia of materias) {
+    if (path === `/${materia.id}`) { selecionarMateria(materia.id); return }
+    for (const turma of materia.turmas) {
+      if (path === `/${materia.id}/${turma.id}`) {
+        estado.materiaAtual = materia
+        estado.turmaAtual   = turma
+        selecionarTurma(materia.id, turma.id)
+        return
+      }
+      for (let i = 0; i < turma.temas.length; i++) {
+        const tema = turma.temas[i]
+        if (path === `/${tema.arquivo.replace('conteudo/', '').replace('.html', '')}`) {
+          estado.materiaAtual = materia
+          estado.turmaAtual   = turma
+          abrirTema(i)
+          return
+        }
+      }
+    }
+  }
+
+  const segs = path.replace(/^\//, '').split('/')
+  if (segs.length === 3 && /^\d+$/.test(segs[2])) {
+    const [mId, tId, numInfo] = segs
+    const matInfo = materias.find(m => m.id === mId)
+    if (matInfo) {
+      const turInfo = matInfo.turmas.find(t => t.id === tId && t.indice)
+      if (turInfo) {
+        const base = turInfo.indice.substring(0, turInfo.indice.lastIndexOf('/') + 1)
+        const arquivo = base + 'informativo-' + String(numInfo).padStart(4, '0') + '.html'
+        estado.materiaAtual = matInfo
+        estado.turmaAtual   = turInfo
+        selecionarTurma(mId, tId, false, arquivo)
+        return
+      }
+    }
+  }
+})
+
 // ── Histórico do navegador ───────────────────────────────
 window.addEventListener('popstate', (e) => {
   const s = e.state
@@ -275,20 +335,20 @@ function renderArvore(fromPop = false) {
     <p class="secao-titulo">Matérias</p>
     <div class="materias-cards">
       ${materias.map(m => `
-          <div class="card-materia" role="button" tabindex="0"
-               aria-label="Abrir ${m.titulo}"
-               onclick="selecionarMateria('${esc(m.id)}')"
-               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selecionarMateria('${esc(m.id)}')}">
+          <a class="card-materia" href="${BASE_PATH}${m.id}" data-spa
+             aria-label="${esc(m.titulo)}">
             <div class="card-materia-icon">${m.icone}</div>
             <div class="card-materia-body">
               <div class="card-materia-titulo">${m.titulo}</div>
               <div class="card-materia-sub">${m.turmas.length} turma${m.turmas.length !== 1 ? 's' : ''}</div>
             </div>
             <div class="card-materia-arrow" aria-hidden="true">›</div>
-          </div>
+          </a>
         `).join('')}
     </div>
   `
+  const h1 = app.querySelector('h1')
+  if (h1) { if (!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }) }
 }
 
 function selecionarMateria(id, fromPop = false) {
@@ -315,15 +375,16 @@ function selecionarMateria(id, fromPop = false) {
           <span class="card-turma-em-breve">Em breve</span>
         </div>
       ` : `
-        <div class="card-turma" role="button" tabindex="0"
-             aria-label="${t.titulo}"
-             onclick="selecionarTurma('${esc(materia.id)}', '${esc(t.id)}')"
-             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selecionarTurma('${esc(materia.id)}','${esc(t.id)}')}">
+        <a class="card-turma" href="${BASE_PATH}${materia.id}/${t.id}" data-spa
+           aria-label="${esc(t.titulo)}">
           ${t.titulo}
-        </div>
+        </a>
       `).join('')}
     </div>
   `
+  const focusEl = app.querySelector('h1') || app.querySelector('p.secao-titulo') || app
+  if (!focusEl.hasAttribute('tabindex')) focusEl.setAttribute('tabindex', '-1')
+  focusEl.focus({ preventScroll: true })
 }
 
 function selecionarTurma(materiaId, turmaId, fromPop = false, infoArquivo = null) {
@@ -380,12 +441,17 @@ function renderConteudoTurma(turma) {
             const arquivo = base + href
             const temaIndex = turma.temas.findIndex(t => t.arquivo === arquivo)
             if (temaIndex !== -1) {
-              a.href = '#'
-              a.onclick = (e) => { e.preventDefault(); abrirTema(temaIndex) }
+              a.href = urlDoTema(arquivo)
+              a.setAttribute('data-spa', '')
             } else if (/\.html$/.test(href) && !href.includes('/')) {
-              // Link relativo a um HTML no mesmo diretório do índice (ex: informativos)
-              a.href = '#'
-              a.onclick = (e) => { e.preventDefault(); _abrirFragmentoDoIndice(arquivo) }
+              const matchInfo = arquivo.match(/informativo-0*(\d+)\.html$/)
+              if (matchInfo && estado.materiaAtual && estado.turmaAtual) {
+                a.href = BASE_PATH + estado.materiaAtual.id + '/' + estado.turmaAtual.id + '/' + matchInfo[1]
+                a.setAttribute('data-spa', '')
+              } else {
+                a.href = '#'
+                a.onclick = (e) => { e.preventDefault(); _abrirFragmentoDoIndice(arquivo) }
+              }
             }
           }
         })
@@ -408,15 +474,13 @@ function renderConteudoTurma(turma) {
 
   area.innerHTML = `
     <div class="cards-temas">
-      ${turma.temas.map((tema, i) => `
-        <div class="card-tema" role="button" tabindex="0"
-             aria-label="${tema.titulo}"
-             onclick="abrirTema(${i})"
-             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abrirTema(${i})}">
+      ${turma.temas.map((tema) => `
+        <a class="card-tema" href="${urlDoTema(tema.arquivo)}" data-spa
+           aria-label="${esc(tema.titulo)}">
           <div class="icone">📓</div>
           <div class="nome">${tema.titulo}</div>
           <div class="descricao">${tema.descricao}</div>
-        </div>
+        </a>
       `).join('')}
     </div>
   `
@@ -946,29 +1010,29 @@ function abrirTema(index, fromPop = false) {
 function atualizarBreadcrumb(tituloTema) {
   const partes = []
 
-  partes.push(`<button class="crumb" onclick="renderArvore()">Início</button>`)
+  partes.push(`<a class="crumb" href="${BASE_PATH}" data-spa>Início</a>`)
 
   if (estado.materiaAtual) {
     partes.push(`<span class="sep">›</span>`)
     if (estado.turmaAtual || tituloTema) {
-      partes.push(`<button class="crumb" onclick="selecionarMateria('${esc(estado.materiaAtual.id)}')">${esc(estado.materiaAtual.titulo)}</button>`)
+      partes.push(`<a class="crumb" href="${BASE_PATH}${estado.materiaAtual.id}" data-spa>${esc(estado.materiaAtual.titulo)}</a>`)
     } else {
-      partes.push(`<span class="crumb-atual">${estado.materiaAtual.titulo}</span>`)
+      partes.push(`<span class="crumb-atual" aria-current="page">${estado.materiaAtual.titulo}</span>`)
     }
   }
 
   if (estado.turmaAtual) {
     partes.push(`<span class="sep">›</span>`)
     if (tituloTema) {
-      partes.push(`<button class="crumb" onclick="selecionarTurma('${esc(estado.materiaAtual.id)}','${esc(estado.turmaAtual.id)}')">${esc(estado.turmaAtual.titulo)}</button>`)
+      partes.push(`<a class="crumb" href="${BASE_PATH}${estado.materiaAtual.id}/${estado.turmaAtual.id}" data-spa>${esc(estado.turmaAtual.titulo)}</a>`)
     } else {
-      partes.push(`<span class="crumb-atual">${estado.turmaAtual.titulo}</span>`)
+      partes.push(`<span class="crumb-atual" aria-current="page">${estado.turmaAtual.titulo}</span>`)
     }
   }
 
   if (tituloTema) {
     partes.push(`<span class="sep">›</span>`)
-    partes.push(`<span class="crumb-atual">${tituloTema}</span>`)
+    partes.push(`<span class="crumb-atual" aria-current="page">${tituloTema}</span>`)
   }
 
   breadcrumb.innerHTML = partes.join('')

@@ -520,6 +520,7 @@ main {
   font-weight: 700;
   font-size: 14px;
   color: var(--blue);
+  text-decoration: none;
   cursor: pointer;
   transition: background .18s, box-shadow .18s, transform .15s;
   box-shadow: var(--shadow-sm);
@@ -588,6 +589,9 @@ main {
   border-radius: 12px;
   padding: 16px 18px;
   cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: inherit;
   box-shadow: var(--shadow-sm);
   transition: transform .18s, box-shadow .18s, border-color .18s;
   position: relative;
@@ -714,6 +718,8 @@ main {
   display: flex;
   align-items: center;
   gap: 14px;
+  text-decoration: none;
+  color: inherit;
   transition: box-shadow .2s, transform .18s, border-color .18s;
   min-height: 72px;
 }

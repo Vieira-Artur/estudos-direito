@@ -1,39 +1,71 @@
 // === Google Analytics 4 (GA4) — Estudos em Direito ===
-(function(){
-    var GA_ID = 'G-S3YX8G99TS';
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-    document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', GA_ID, { send_page_view: false });
-    function sendPageView(){
-          gtag('event', 'page_view', {
-                  page_location: location.href,
-                  page_path: location.pathname + location.search + location.hash,
-                  page_title: document.title
-          });
-    }
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-          sendPageView();
-    } else {
-          window.addEventListener('DOMContentLoaded', sendPageView);
-    }
-    ['pushState','replaceState'].forEach(function(method){
-          var orig = history[method];
-          history[method] = function(){
-                  var ret = orig.apply(this, arguments);
-                  window.dispatchEvent(new Event('locationchange'));
-                  return ret;
-          };
+// Respeita Do Not Track (DNT) e Global Privacy Control (GPC):
+// se o visitante sinalizar "não rastrear", o GA não é carregado.
+// Consent Mode v2: armazenamento de anúncios completamente negado.
+(function () {
+  if (
+    navigator.doNotTrack === '1' ||
+    window.doNotTrack === '1' ||
+    navigator.globalPrivacyControl === true
+  ) return;
+
+  var GA_ID = 'G-S3YX8G99TS';
+
+  // dataLayer e gtag devem existir ANTES de qualquer chamada gtag()
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  window.gtag = gtag;
+
+  // Consent Mode v2 — deve ser definido ANTES de carregar o script do GA.
+  // Ads completamente negados; apenas contagem de acesso agregada.
+  // Para modo sem cookies (menor precisão, maior privacidade), troque
+  // analytics_storage para 'denied' — o professor pode ajustar aqui.
+  gtag('consent', 'default', {
+    ad_storage:            'denied',
+    ad_user_data:          'denied',
+    ad_personalization:    'denied',
+    analytics_storage:     'granted'
+  });
+
+  // Carrega o script do GA após definir o consent
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+
+  gtag('js', new Date());
+  gtag('config', GA_ID, {
+    send_page_view:                   false,
+    allow_google_signals:             false,  // desativa User-ID e sinais de audiência
+    allow_ad_personalization_signals: false   // desativa personalização de anúncios
+  });
+
+  function sendPageView() {
+    gtag('event', 'page_view', {
+      page_location: location.href,
+      page_path:     location.pathname + location.search + location.hash,
+      page_title:    document.title
     });
-    window.addEventListener('popstate', function(){ window.dispatchEvent(new Event('locationchange')); });
-    window.addEventListener('hashchange', function(){ window.dispatchEvent(new Event('locationchange')); });
-    window.addEventListener('locationchange', function(){ setTimeout(sendPageView, 50); });
-})();
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    sendPageView();
+  } else {
+    window.addEventListener('DOMContentLoaded', sendPageView);
+  }
+
+  ['pushState', 'replaceState'].forEach(function (method) {
+    var orig = history[method];
+    history[method] = function () {
+      var ret = orig.apply(this, arguments);
+      window.dispatchEvent(new Event('locationchange'));
+      return ret;
+    };
+  });
+  window.addEventListener('popstate',       function () { window.dispatchEvent(new Event('locationchange')); });
+  window.addEventListener('hashchange',     function () { window.dispatchEvent(new Event('locationchange')); });
+  window.addEventListener('locationchange', function () { setTimeout(sendPageView, 50); });
+}());
 
 function _ga(eventName, params) {
   try {
@@ -531,7 +563,6 @@ function mostrarTabConteudo() {
   document.getElementById('tab-area-flash').style.display = 'none'
   document.getElementById('tab-conteudo')?.classList.add('ativa')
   document.getElementById('tab-flash')?.classList.remove('ativa')
-  document.getElementById('rodape-privacidade')?.setAttribute('hidden', '')
   _ga('tab_click', {
     materia: estado.materiaAtual ? estado.materiaAtual.id : '',
     aba: 'conteudo'
@@ -817,7 +848,6 @@ function mostrarTabFlash() {
   document.getElementById('tab-conteudo')?.classList.remove('ativa')
   document.getElementById('tab-flash')?.classList.add('ativa')
   if (flashArea && !flashArea.hasChildNodes()) renderFlashSessao(estado.turmaAtual)
-  document.getElementById('rodape-privacidade')?.removeAttribute('hidden')
   _ga('tab_click', {
     materia: estado.materiaAtual ? estado.materiaAtual.id : '',
     aba: 'flashcards'

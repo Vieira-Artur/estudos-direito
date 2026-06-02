@@ -67,6 +67,13 @@
   window.addEventListener('locationchange', function () { setTimeout(sendPageView, 50); });
 }());
 
+// Capturado aqui, durante o parse, antes que o roteamento da SPA chame
+// history.replaceState e mude o baseURI. Garante o caminho absoluto do app
+// mesmo quando o usuário entra por um link direto (deep link).
+const APP_BASE = (document.currentScript && document.currentScript.src)
+  ? new URL('.', document.currentScript.src).pathname  // ex.: "/estudos-direito/"
+  : '/estudos-direito/';
+
 function _ga(eventName, params) {
   try {
     if (typeof window.gtag === 'function') {
@@ -1415,6 +1422,11 @@ window.addEventListener('appinstalled', () => {
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
+    // Usa caminho absoluto derivado de APP_BASE (definido no topo do arquivo)
+    // para que o registro funcione mesmo em deep links, onde o replaceState
+    // já mudou o baseURI e './sw.js' resolveria para o caminho errado.
+    navigator.serviceWorker
+      .register(APP_BASE + 'sw.js', { scope: APP_BASE })
+      .catch(err => console.error('Falha ao registrar o service worker:', err))
   })
 }

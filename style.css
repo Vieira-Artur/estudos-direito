@@ -1777,3 +1777,11 @@ main {
   #pwa-banner { animation: none; }
   #pwa-instalar { transition: none; }
 }
+
+/* Garante responsividade para imagens em conteúdo injetado.
+   width/height HTML servem como dica de proporção (evita CLS);
+   max-width:100% + height:auto mantêm o dimensionamento fluido. */
+#tab-area-conteudo img {
+  max-width: 100%;
+  height: auto;
+}

@@ -18,6 +18,20 @@ node scripts/gerar-sitemap.js
 
 O arquivo `sitemap.xml` gerado deve ser commitado junto com as alterações em `data.js`.
 
+## Otimizar imagens (AVIF/WebP)
+
+Os infográficos em `conteudo/` são servidos como `<picture>` com AVIF e WebP para reduzir o
+payload de rede. Sempre que adicionar um novo PNG em `conteudo/`, execute:
+
+```bash
+npm install          # apenas na primeira vez (instala sharp)
+npm run otimizar-imagens   # gera .avif e .webp ao lado de cada .png
+npm run atualizar-html     # atualiza os <img> para <picture> nos HTMLs
+```
+
+Ambos os scripts são **idempotentes** — pulam arquivos cujo derivado já é mais novo que o PNG.
+Comite os arquivos `.avif`, `.webp` e os HTMLs atualizados junto com o novo PNG.
+
 ## Estrutura de dados (`data.js`)
 
 Cada tema segue este formato:

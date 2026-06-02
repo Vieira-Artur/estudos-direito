@@ -39,6 +39,16 @@ para AVIF/WebP (ex.: SVGs ou PNGs pequenos), use:
 npm run normalizar-imagens   # normaliza atributos de <img> em conteudo/
 ```
 
+## Ícones de PWA
+
+Para regenerar os ícones do app (ex.: após trocar a marca em `icons/icon.svg`):
+
+```bash
+npm run gerar-icones   # gera icon-192.png, icon-512.png, icon-maskable-512.png, apple-touch-icon-180.png
+```
+
+Commite os PNGs gerados em `icons/` junto com qualquer alteração no SVG.
+
 ## Estrutura de dados (`data.js`)
 
 Cada tema segue este formato:

@@ -2,6 +2,11 @@
   "name": "estudos-direito",
   "private": true,
   "scripts": {
-    "sitemap": "node scripts/gerar-sitemap.js"
+    "sitemap": "node scripts/gerar-sitemap.js",
+    "otimizar-imagens": "node scripts/otimizar-imagens.js",
+    "atualizar-html": "node scripts/atualizar-html-imagens.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
   }
 }

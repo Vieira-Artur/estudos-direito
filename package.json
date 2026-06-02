@@ -4,9 +4,11 @@
   "scripts": {
     "sitemap": "node scripts/gerar-sitemap.js",
     "otimizar-imagens": "node scripts/otimizar-imagens.js",
-    "atualizar-html": "node scripts/atualizar-html-imagens.js"
+    "atualizar-html": "node scripts/atualizar-html-imagens.js",
+    "normalizar-imagens": "node scripts/normalizar-imagens.js"
   },
   "devDependencies": {
+    "image-size": "^1.1.1",
     "sharp": "^0.33.5"
   }
 }

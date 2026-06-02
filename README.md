@@ -32,6 +32,13 @@ npm run atualizar-html     # atualiza os <img> para <picture> nos HTMLs
 Ambos os scripts são **idempotentes** — pulam arquivos cujo derivado já é mais novo que o PNG.
 Comite os arquivos `.avif`, `.webp` e os HTMLs atualizados junto com o novo PNG.
 
+Se quiser apenas garantir `loading="lazy"`, `decoding="async"` e `width`/`height` sem converter
+para AVIF/WebP (ex.: SVGs ou PNGs pequenos), use:
+
+```bash
+npm run normalizar-imagens   # normaliza atributos de <img> em conteudo/
+```
+
 ## Estrutura de dados (`data.js`)
 
 Cada tema segue este formato:

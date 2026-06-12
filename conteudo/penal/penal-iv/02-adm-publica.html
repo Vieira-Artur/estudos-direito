@@ -246,7 +246,8 @@
   <button class="ap-tab ativo" onclick="apTab(event,'ap-conceitual')">🔗 Mapa Conceitual</button>
   <button class="ap-tab" onclick="apTab(event,'ap-sinoptico')">📋 Quadro Sinóptico</button>
   <button class="ap-tab" onclick="apTab(event,'ap-roteiro')">📖 Roteiro</button>
-  <button class="ap-tab" onclick="apTab(event,'ap-caso')">⚖️ Estudo de Caso</button>
+  <button class="ap-tab" onclick="apTab(event,'ap-caso')">⚖️ Caso I</button>
+  <button class="ap-tab" onclick="apTab(event,'ap-caso2')">⚖️ Caso II</button>
   <button class="ap-tab" onclick="apTab(event,'ap-jur')">🏛️ Jurisprudência</button>
   <button class="ap-tab" onclick="apTab(event,'ap-questoes')">📝 Questões</button>
   <button class="ap-tab" onclick="apTab(event,'ap-resumo')">📑 Resumo</button>
@@ -348,7 +349,7 @@
       <tr data-cat="cap1">
         <td>Concussão</td><td class="art">Art. 316</td>
         <td>Exigir, para si ou para outrem, vantagem indevida em razão da função (ainda que fora dela)</td>
-        <td><span class="qs-badge qs-b-rec">Rec. 2–8 anos</span> + multa</td>
+        <td><span class="qs-badge qs-b-rec">Rec. 2–12 anos</span> + multa</td>
         <td><span class="qs-chip">Próprio</span></td>
         <td>Com a exigência (crime formal)</td>
         <td><span class="qs-badge qs-b-jf">J. Federal</span> ou Estadual</td>
@@ -947,7 +948,7 @@
           <div class="ec-art-ref">Art. 316 CP (concussão) · Crime formal · Competência: Justiça Federal (servidor federal)</div>
           <button class="ec-q-show-btn" onclick="ecShowAns('eca1')">Revelar gabarito comentado</button>
           <div class="ec-answer" id="eca1">
-            <strong>Resposta:</strong> Sim. Rodrigo pratica concussão (art. 316 CP) no momento em que EXIGE a vantagem indevida. A concussão é crime FORMAL: consuma-se com a exigência, independentemente do recebimento. O recebimento seria mero exaurimento. Por isso, ainda que Fábio tenha acionado a Corregedoria antes da entrega, o crime já estava consumado. Rodrigo é auditor da Receita Federal — servidor público federal — logo a competência é da Justiça Federal (CF, art. 109, IV). Súmula 599 STJ: insignificância inaplicável. Pena: reclusão 2–8 anos + multa.
+            <strong>Resposta:</strong> Sim. Rodrigo pratica concussão (art. 316 CP) no momento em que EXIGE a vantagem indevida. A concussão é crime FORMAL: consuma-se com a exigência, independentemente do recebimento. O recebimento seria mero exaurimento. Por isso, ainda que Fábio tenha acionado a Corregedoria antes da entrega, o crime já estava consumado. Rodrigo é auditor da Receita Federal — servidor público federal — logo a competência é da Justiça Federal (CF, art. 109, IV). Súmula 599 STJ: insignificância inaplicável. Pena: reclusão 2–12 anos + multa.
           </div>
         </div>
       </div>
@@ -1045,14 +1046,278 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>Rodrigo (auditor)</td><td>Exigiu vantagem em razão do cargo (ameaça velada de autuação)</td><td>Concussão — Art. 316 CP</td><td>Rec. 2–8 anos + multa</td><td>Justiça Federal</td></tr>
+        <tr><td>Rodrigo (auditor)</td><td>Exigiu vantagem em razão do cargo (ameaça velada de autuação)</td><td>Concussão — Art. 316 CP</td><td>Rec. 2–12 anos + multa</td><td>Justiça Federal</td></tr>
         <tr><td>Fábio (particular)</td><td>Prometeu pagar em resposta à exigência do auditor</td><td>Discussão: atípico (art. 333 não prevê 'dar'; iniciativa foi do auditor)</td><td>—</td><td>—</td></tr>
         <tr><td>Marcelo (prefeito)</td><td>Desviou R$ 180.000,00 de verba municipal para empresa da esposa</td><td>Peculato-desvio — Art. 312, caput, 2.ª p., CP</td><td>Rec. 2–12 anos + multa</td><td>Justiça Estadual</td></tr>
         <tr><td>Eduardo (secretário)</td><td>Autorizou desvios sem verificação — dolo a ser provado</td><td>Coautoria peculato-desvio (se dolo) ou Peculato culposo §2.º (se culpa)</td><td>Rec. 2–12 anos ou Det. 3m–1 ano</td><td>Justiça Estadual</td></tr>
-        <tr><td>Dr. Paulo Régis</td><td>Exigiu pagamento de consultas cobertas pelo SUS</td><td>Concussão — Art. 316 c/c Art. 327, §1.º, CP</td><td>Rec. 2–8 anos + multa</td><td>Justiça Estadual (STJ)</td></tr>
+        <tr><td>Dr. Paulo Régis</td><td>Exigiu pagamento de consultas cobertas pelo SUS</td><td>Concussão — Art. 316 c/c Art. 327, §1.º, CP</td><td>Rec. 2–12 anos + multa</td><td>Justiça Estadual (STJ)</td></tr>
       </tbody>
     </table>
     </div>
+  </div>
+
+</div>
+
+<!-- TAB: ESTUDO DE CASO II -->
+<div id="ap-caso2" class="ap-painel">
+
+  <div class="ec-case-header">
+    <div class="ec-op-label">Operação Asfalto Limpo</div>
+    <h2>O caso do secretário de obras, do empresário e do caminhão-pipa</h2>
+    <p style="font-size:14.5px;opacity:.88;line-height:1.6;">Estudo de caso fictício sobre corrupção passiva e ativa, peculato em suas modalidades e a crítica técnica à capitulação da denúncia. Personagens, empresas e documentos inteiramente fictícios.</p>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Arts. 312, 317, 327 e 333 CP</span>
+      <span class="ec-meta-tag">Art. 30 CP (comunicabilidade)</span>
+      <span class="ec-meta-tag">Súmula 599 STJ · Peculato de uso</span>
+      <span class="ec-meta-tag">Arts. 383 e 397, III, CPP</span>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Narrativa dos fatos <span class="ec-badge">LEIA ATENTAMENTE</span></h2>
+    <div class="ec-narrative">
+      <p><strong>Fato 1 — O contrato e a propina.</strong> O Município de Santa Rita do Ribeirão/MG contratou, após licitação, a <strong>Salles Pavimentação Ltda.</strong> para recapeamento asfáltico de 14 vias urbanas (R$ 2.400.000,00), com pagamentos mediante boletins de medição atestados pela Secretaria de Obras. O sócio-administrador <strong>Ricardo Salles</strong> procurou o Secretário Municipal de Obras, <strong>Otávio Brandão</strong>, em reunião reservada, e ofereceu-lhe 5% sobre o valor de cada medição para que fossem atestados serviços em quantidade superior à executada. Otávio aceitou e, nos quatro meses seguintes, atestou boletins com sobrepreço acumulado de R$ 310.000,00, autorizando os pagamentos. Os repasses foram dissimulados: a empresa celebrou contrato fictício de "consultoria em engenharia" com a empresa individual de <strong>Marcelo Brandão, cunhado de Otávio</strong>, que recebia os valores e os transferia ao secretário como "empréstimo familiar".</p>
+      <p><strong>Fato 2 — O cimento do almoxarifado.</strong> <strong>Carla Nunes</strong>, servidora efetiva e chefe do almoxarifado municipal, retirou ao longo do semestre 120 sacos de cimento do estoque sob sua guarda e os destinou à obra de ampliação da casa de seu irmão.</p>
+      <p><strong>Fato 3 — O caminhão-pipa.</strong> <strong>Jair Mendes</strong>, motorista do quadro municipal, utilizou nos fins de semana o caminhão-pipa da Prefeitura para fretes particulares de água a sítios da região, cobrando R$ 150,00 por viagem. O veículo era devolvido na segunda-feira em perfeito estado e com o tanque reabastecido por Jair.</p>
+      <p><strong>Fato 4 — A descoberta e a denúncia.</strong> O Tribunal de Contas do Estado detectou o sobrepreço em auditoria ordinária e comunicou o Ministério Público, que requisitou inquérito policial e, ao final, ofereceu denúncia contra os investigados (DOC. 4).</p>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Documentos simulados</h2>
+
+    <div class="ec-doc-sim">
+      <div class="ec-doc-title">Doc. 1 — Relatório de Auditoria — TCE/MG (trecho)</div>
+      <table>
+        <tr><td>Objeto:</td><td>Contrato nº 087/2025 — recapeamento asfáltico. Jurisdicionado: Município de Santa Rita do Ribeirão.</td></tr>
+        <tr><td>Item 3.2:</td><td>Confronto entre os boletins de medição nº 02 a 05, atestados pelo Secretário de Obras, e o levantamento topográfico in loco: executados 9.870 m² de capa asfáltica, contra 14.260 m² atestados e pagos — pagamento sem contraprestação de R$ 310.412,18.</td></tr>
+        <tr><td>Item 3.3:</td><td>Os boletins contêm atesto exclusivo do Secretário, em desacordo com o edital, que exigia dupla conferência por engenheiro fiscal.</td></tr>
+        <tr><td>Encaminhamento:</td><td>Diante dos indícios de dano ao erário e de ilícito penal, comunicação ao Ministério Público de Minas Gerais.</td></tr>
+      </table>
+    </div>
+
+    <div class="ec-doc-sim">
+      <div class="ec-doc-title">Doc. 2 — Termo de Declarações — Polícia Civil (IP nº 1.025/2025)</div>
+      <table>
+        <tr><td>Declarante:</td><td>Vanessa Lopes, assistente financeira da Salles Pavimentação Ltda.</td></tr>
+        <tr><td>Relato:</td><td>"A partir de junho de 2025, recebi ordem direta do sócio Ricardo Salles para incluir nos pagamentos mensais a empresa M. BRANDÃO CONSULTORIA EM ENGENHARIA. Nunca vi qualquer relatório, projeto ou serviço prestado por essa consultoria. Os valores correspondiam sempre a cerca de 5% da medição recebida da Prefeitura no mesmo mês. Quando questionei, Ricardo disse que era 'custo da obra' e que eu 'não precisava entender'."</td></tr>
+        <tr><td>Observação:</td><td>A declarante reconheceu as transferências listadas no Doc. 3.</td></tr>
+      </table>
+    </div>
+
+    <div class="ec-doc-sim">
+      <div class="ec-doc-title">Doc. 3 — Quadro de movimentações — quebra de sigilo bancário (autorização judicial)</div>
+      <div style="overflow-x:auto;border-radius:8px;">
+      <table class="ec-summary-table">
+        <thead>
+          <tr><th>Data</th><th>Origem</th><th>Destino</th><th>Valor (R$)</th><th>Histórico</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>10/07/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>28.400,00</td><td>NF 014 — consultoria</td></tr>
+          <tr><td>12/07/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>25.500,00</td><td>TED — "empréstimo familiar"</td></tr>
+          <tr><td>11/08/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>31.150,00</td><td>NF 015 — consultoria</td></tr>
+          <tr><td>13/08/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>28.000,00</td><td>TED — "empréstimo familiar"</td></tr>
+          <tr><td>09/09/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>33.720,00</td><td>NF 016 — consultoria</td></tr>
+          <tr><td>11/09/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>30.300,00</td><td>TED — "empréstimo familiar"</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin-top:10px;font-size:13px;color:var(--text2);">Observação da análise: a empresa destinatária não possui empregados registrados nem estrutura operacional conhecida.</p>
+    </div>
+
+    <div class="ec-doc-sim">
+      <div class="ec-doc-title">Doc. 4 — Denúncia do MP — trecho da capitulação</div>
+      <table>
+        <tr><td>I — Otávio Brandão:</td><td>art. 317, <em>caput</em>, do Código Penal.</td></tr>
+        <tr><td>II — Ricardo Salles:</td><td>art. 333, <em>caput</em>, do Código Penal.</td></tr>
+        <tr><td>III — Carla Nunes:</td><td>art. 312, § 1º, do Código Penal (peculato-furto).</td></tr>
+        <tr><td>IV — Jair Mendes:</td><td>art. 312, <em>caput</em>, do Código Penal.</td></tr>
+        <tr><td>Nota didática:</td><td>A capitulação acima contém imprecisões propositais — identificá-las é parte do exercício (Pergunta 7).</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Perguntas para análise</h2>
+    <div class="ec-q-list">
+
+      <div class="ec-q-item" id="c2q1">
+        <div class="ec-q-head" onclick="ecTog('c2q1')">
+          <div class="ec-q-num">1</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Quem é funcionário público para fins penais neste caso? Ricardo, particular, pode praticar crime contra a Administração? E Marcelo, que não é servidor, pode responder por crime funcional?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Recordar</span> Art. 327 CP · Art. 30 CP · crime próprio e concurso de pessoas</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-c2q1">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-c2q1">
+          <p>Identifique os funcionários públicos (art. 327 CP) entre os personagens e analise a situação dos dois particulares: Ricardo (que ofereceu a vantagem) e Marcelo (que apenas recebeu e repassou os valores ao cunhado).</p>
+          <div class="ec-art-ref">Art. 327 CP — conceito penal de funcionário público · Art. 30 CP — comunicabilidade das elementares</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('c2a1')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="c2a1">
+            <strong>Resposta:</strong> O art. 327 adota conceito amplo: exerce cargo, emprego ou função pública, ainda que transitoriamente ou sem remuneração. Otávio (agente político no exercício de função administrativa), Carla e Jair são funcionários públicos. Ricardo NÃO pratica crime funcional próprio de funcionário — responde pelo crime próprio do particular contra a Administração: corrupção ativa (art. 333). Marcelo, embora não seja servidor, pode responder pela corrupção passiva em concurso de pessoas: a condição de funcionário público é ELEMENTAR do tipo e comunica-se ao partícipe que dela tem conhecimento (art. 30 CP). Marcelo sabia que recebia valores destinados ao cunhado secretário por contrato fictício — é partícipe da corrupção passiva.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="c2q2">
+        <div class="ec-q-head" onclick="ecTog('c2q2')">
+          <div class="ec-q-num">2</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Diferencie peculato-apropriação, peculato-desvio (art. 312, caput) e peculato-furto (§ 1º). Em qual modalidade se enquadra a conduta de Carla? Justifique a partir do elemento "posse em razão do cargo".</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Compreender</span> Art. 312 CP · modalidades · posse em razão do cargo</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-c2q2">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-c2q2">
+          <p>O critério decisivo é a relação do agente com o bem: ele já tinha a posse (lato sensu) em razão do cargo, ou subtraiu o bem valendo-se da facilidade que o cargo proporciona?</p>
+          <div class="ec-art-ref">Art. 312, caput e § 1º, CP</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('c2a2')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="c2a2">
+            <strong>Resposta:</strong> No caput, o agente TEM a posse (em sentido amplo, abrangendo a detenção) do bem em razão do cargo e (i) dele se apropria com animus de dono (peculato-apropriação) ou (ii) lhe dá destinação diversa, em proveito próprio ou alheio (peculato-desvio). No § 1º (peculato-furto), o agente NÃO tem a posse, mas subtrai o bem — ou concorre para a subtração — valendo-se da facilidade do cargo. Carla é chefe do almoxarifado: o cimento estava sob sua guarda funcional. Ao destiná-lo à obra do irmão (proveito alheio), pratica peculato-DESVIO do caput — e não peculato-furto, como capitulou a denúncia (ver Pergunta 7).
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="c2q3">
+        <div class="ec-q-head" onclick="ecTog('c2q3')">
+          <div class="ec-q-num">3</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Quanto a Otávio: (a) quais verbos do art. 317 foram realizados e quando se consumou a corrupção passiva? (b) o recebimento por meio da "consultoria" do cunhado afasta a tipicidade? (c) há causa de aumento aplicável?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Aplicar</span> Art. 317 CP · crime formal · "indiretamente" · § 1º</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-c2q3">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-c2q3">
+          <p>Atenção ao texto do tipo: "solicitar ou receber, para si ou para outrem, direta ou indiretamente, ainda que fora da função ou antes de assumi-la, mas em razão dela, vantagem indevida, ou aceitar promessa de tal vantagem". Considere que Otávio efetivamente atestou medições falsas.</p>
+          <div class="ec-art-ref">Art. 317, caput e § 1º, CP — pena de 2 a 12 anos e multa (Lei 10.763/2003); aumento de 1/3 se o funcionário pratica ato infringindo dever funcional</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('c2a3')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="c2a3">
+            <strong>Resposta:</strong> (a) Otávio ACEITOU PROMESSA na reunião e depois RECEBEU a vantagem. A corrupção passiva é crime FORMAL: consuma-se com a solicitação, o recebimento ou a aceitação da promessa, independentemente da prática do ato de ofício — aqui, consumou-se já na aceitação; os recebimentos posteriores integram o exaurimento. (b) Não: o tipo alcança expressamente o recebimento "direta ou INDIRETAMENTE" — a interposição do cunhado é exatamente essa hipótese e ainda evidencia a dissimulação. (c) Sim: como Otávio praticou ato de ofício INFRINGINDO DEVER FUNCIONAL (atesto de medições falsas), incide a majorante de 1/3 do art. 317, § 1º. Ponto para debate em aula: o desvio efetivo das verbas atestadas configura peculato-desvio em concurso com a corrupção, ou é por ela absorvido? Há defensores das duas soluções — a distinção dos bens jurídicos e dos momentos consumativos favorece o concurso.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="c2q4">
+        <div class="ec-q-head" onclick="ecTog('c2q4')">
+          <div class="ec-q-num">4</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Quanto a Ricardo: quando se consumou a corrupção ativa? A punição dependeria de Otávio ter aceitado a oferta? Há causa de aumento aplicável?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Aplicar</span> Art. 333 CP · crime formal · ausência de bilateralidade · parágrafo único</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-c2q4">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-c2q4">
+          <p>Compare com a Pergunta 2 do Caso I: lá se discutiu quem apenas cede à exigência; aqui, a iniciativa da oferta foi do particular.</p>
+          <div class="ec-art-ref">Art. 333, caput e parágrafo único, CP</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('c2a4')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="c2a4">
+            <strong>Resposta:</strong> A corrupção ativa consuma-se com o simples OFERECER ou PROMETER — crime formal, consumado já na reunião reservada, ainda que Otávio recusasse. Corrupção ativa e passiva são tipos AUTÔNOMOS: não há exigência de bilateralidade (pode existir uma sem a outra — o funcionário que solicita sem que o particular tenha oferecido pratica só a passiva; o particular que oferece a funcionário íntegro pratica só a ativa). No caso, como em razão da vantagem o funcionário praticou ato infringindo dever funcional, incide o aumento de 1/3 do parágrafo único do art. 333.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="c2q5">
+        <div class="ec-q-head" onclick="ecTog('c2q5')">
+          <div class="ec-q-num">5</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Inverta a dinâmica: Otávio comunica espontaneamente a Ricardo que "só libera as medições" mediante 5%, e Ricardo paga por temor de quebrar a empresa. Qual crime se configura para cada um?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Analisar</span> Art. 316 × 317 × 333 CP · o verbo muda tudo</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-c2q5">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-c2q5">
+          <p>Construa o quadro comparativo dos três tipos a partir dos verbos nucleares e da posição do particular (autor, vítima ou indiferente penal).</p>
+          <div class="ec-art-ref">Art. 316 CP (concussão) — pena de 2 a 12 anos e multa (Lei 13.964/2019)</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('c2a5')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="c2a5">
+            <strong>Resposta:</strong> EXIGIR vantagem indevida, valendo-se da função, é CONCUSSÃO (art. 316) — pena hoje de 2 a 12 anos e multa, elevada pela Lei 13.964/2019 (Pacote Anticrime). Ricardo, que paga sob a coação representada pela exigência, é considerado VÍTIMA, e não autor de corrupção ativa (o art. 333 não contém o verbo "dar"; quem cede à exigência não oferece nem promete por iniciativa própria — mesma lógica discutida no Caso I). Síntese dos três tipos: corrupção passiva = solicitar/receber/aceitar (iniciativa do funcionário, sem imposição); concussão = exigir (imposição com temor de represália pelo poder do cargo); corrupção ativa = oferecer/prometer (iniciativa do particular).
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="c2q6">
+        <div class="ec-q-head" onclick="ecTog('c2q6')">
+          <div class="ec-q-num">6</div>
+          <div style="flex:1">
+            <div class="ec-q-text">A defesa de Carla invoca a insignificância (120 sacos de cimento × orçamento municipal). Prospera? E Jair: sua conduta é típica? Mudaria algo se ele não reabastecesse o caminhão? E se Jair fosse o Prefeito?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Analisar</span> Súm. 599 STJ · peculato de uso · bem fungível × infungível · DL 201/67</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-c2q6">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-c2q6">
+          <p>São quatro perguntas encadeadas — e cada resposta depende de um conceito diferente: bem jurídico tutelado, tipicidade, fungibilidade do bem e condição pessoal do agente.</p>
+          <div class="ec-stj-ref"><strong>Súmula 599 STJ:</strong> "O princípio da insignificância é inaplicável aos crimes contra a administração pública."</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('c2a6')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="c2a6">
+            <strong>Resposta:</strong> (a) Carla: a tese esbarra na Súmula 599 do STJ — a objetividade jurídica desses crimes é a moralidade administrativa, não apenas o patrimônio. O próprio STJ admite mitigações excepcionalíssimas, mas a regra é a inaplicabilidade. (b) Jair: trata-se de PECULATO DE USO — uso momentâneo de bem INFUNGÍVEL com restituição íntegra —, conduta PENALMENTE ATÍPICA segundo a jurisprudência consolidada (v.g. STF, HC 108.433 AgR), sem prejuízo da responsabilização administrativa e por improbidade. (c) Se Jair consumisse combustível público (bem FUNGÍVEL, não restituído na mesma espécie), haveria peculato quanto ao combustível — por isso o detalhe do reabastecimento importa. (d) Se fosse PREFEITO, o uso indevido de bens ou serviços públicos configura o crime de responsabilidade do art. 1º, II, do Decreto-Lei 201/1967 — exceção legal expressa que pune o que, para o servidor comum, é atípico.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="c2q7">
+        <div class="ec-q-head" onclick="ecTog('c2q7')">
+          <div class="ec-q-num">7</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Avalie criticamente a capitulação da denúncia (Doc. 4). Aponte, fundamentadamente, ao menos três imprecisões e indique como o juiz deve proceder quanto a cada uma.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Avaliar</span> Emendatio libelli · absolvição sumária · majorantes omitidas</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-c2q7">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-c2q7">
+          <p>Releia o Doc. 4 à luz das suas respostas anteriores. Para cada imprecisão, identifique o instrumento processual adequado: emendatio libelli (art. 383 CPP), mutatio libelli (art. 384 CPP), rejeição da denúncia ou absolvição sumária (art. 397 CPP).</p>
+          <div class="ec-art-ref">Arts. 383, 384 e 397, III, CPP</div>
+          <button class="ec-q-show-btn" onclick="ecShowAns('c2a7')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="c2a7">
+            <strong>Resposta:</strong> (i) Otávio: omitida a majorante do art. 317, § 1º (atestou medições infringindo dever funcional); discutir também a ausência de Marcelo na denúncia (partícipe — art. 30 CP). (ii) Carla: capitulação errada — é peculato-DESVIO do caput, não § 1º, pois ela tinha a posse em razão do cargo; como os FATOS foram corretamente descritos, cabe emendatio libelli (art. 383 CPP), possível inclusive na sentença, sem necessidade de aditamento. (iii) Jair: conduta ATÍPICA (peculato de uso) — caso a denúncia seja recebida, a via adequada é a absolvição sumária do art. 397, III, CPP; antes do recebimento, a rejeição (art. 395, III). (iv) Ricardo: omitido o parágrafo único do art. 333. Gancho de revisão: emendatio (mesmos fatos, nova definição jurídica — art. 383) × mutatio (fato novo não contido na denúncia, exige aditamento — art. 384).
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="c2q8">
+        <div class="ec-q-head" onclick="ecTog('c2q8')">
+          <div class="ec-q-num">8</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Pergunta estratégica final: você assume a defesa de Jair. Esboce a estrutura da resposta à acusação (art. 396-A CPP): tese principal, fundamentos, pedido e pedido subsidiário — e antecipe o contra-argumento do MP.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> Simulação de peça · estratégia defensiva</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-c2q8">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-c2q8">
+          <p>Exercício de produção: redija em até uma página. Avalie sua peça pelos critérios: clareza da tese, força dos fundamentos, adequação dos pedidos e antecipação do contraditório.</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('c2a8')">Revelar estrutura esperada</button>
+          <div class="ec-answer" id="c2a8">
+            <strong>Estrutura esperada:</strong> (1) Tese principal: ATIPICIDADE da conduta — peculato de uso de bem infungível, com uso momentâneo e restituição íntegra, inclusive com reabastecimento; jurisprudência consolidada (v.g. STF, HC 108.433 AgR) e doutrina majoritária. (2) Fundamentos: ausência de animus de apropriação ou desvio definitivo; o art. 312 não criminaliza o uso; a punição do uso indevido foi reservada pelo legislador apenas ao Prefeito (DL 201/67, art. 1º, II) — interpretação sistemática que confirma a atipicidade para os demais servidores. (3) Pedido: absolvição sumária (art. 397, III, CPP). (4) Subsidiário: se superada a tese, produção de prova sobre o reabastecimento integral e o estado do veículo. (5) Contra-argumento provável do MP: o "frete cobrado" demonstraria proveito econômico e desvio de finalidade; resposta: o proveito do USO não transforma uso em apropriação — o bem público não saiu definitivamente da esfera da Administração, e a sanção adequada é administrativa e por improbidade, não penal (ultima ratio).
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Síntese — quadro dos crimes identificados</h2>
+    <div style="overflow-x:auto;border-radius:10px;">
+    <table class="ec-summary-table">
+      <thead>
+        <tr>
+          <th>Agente</th>
+          <th>Conduta</th>
+          <th>Tipo</th>
+          <th>Pena</th>
+          <th>Ponto-chave</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Otávio (secretário)</td><td>Aceitou promessa e recebeu 5% das medições; atestou serviços não executados</td><td>Corrupção passiva majorada — Art. 317, caput c/c § 1º, CP</td><td>Rec. 2–12 anos + 1/3 + multa</td><td>Crime formal; recebimento "indiretamente"; debate sobre concurso com peculato-desvio</td></tr>
+        <tr><td>Ricardo (empresário)</td><td>Ofereceu e pagou a vantagem; obteve atesto de medições falsas</td><td>Corrupção ativa majorada — Art. 333, caput c/c p. único, CP</td><td>Rec. 2–12 anos + 1/3 + multa</td><td>Consumação na oferta; independe da aceitação (sem bilateralidade)</td></tr>
+        <tr><td>Marcelo (cunhado)</td><td>Recebeu os valores por contrato fictício e os repassou ao secretário</td><td>Partícipe da corrupção passiva — Art. 317 c/c Art. 30 CP</td><td>Rec. 2–12 anos + multa</td><td>Elementar de funcionário público comunica-se ao partícipe ciente</td></tr>
+        <tr><td>Carla (almoxarifado)</td><td>Destinou 120 sacos de cimento sob sua guarda à obra do irmão</td><td>Peculato-desvio — Art. 312, caput, 2.ª p., CP</td><td>Rec. 2–12 anos + multa</td><td>Posse em razão do cargo (não é § 1º); Súm. 599 STJ barra a insignificância</td></tr>
+        <tr><td>Jair (motorista)</td><td>Usou o caminhão-pipa em fretes particulares, devolvendo-o íntegro e abastecido</td><td>Atípico — peculato de uso (bem infungível)</td><td>—</td><td>Responde na esfera administrativa/improbidade; se fosse Prefeito: DL 201/67, art. 1º, II</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:14px;font-size:12.5px;color:var(--text2);line-height:1.6;">Caso, pessoas e documentos inteiramente fictícios. Redação dos arts. 312, 316, 317 e 333 do CP conferida no texto consolidado do Planalto em junho/2026 — sem alterações recentes (a Lei 15.134/2025 não modificou esses tipos).</p>
   </div>
 
 </div>
@@ -1262,7 +1527,7 @@
               <tr style="background:var(--blue-light)"><th style="padding:.3rem .5rem;text-align:left">Aspecto</th><th style="padding:.3rem .5rem;text-align:left">Concussão (316)</th><th style="padding:.3rem .5rem;text-align:left">Corrupção Passiva (317)</th></tr>
               <tr><td style="padding:.25rem .5rem">Conduta</td><td style="padding:.25rem .5rem">Exigir vantagem indevida</td><td style="padding:.25rem .5rem">Solicitar, receber ou aceitar promessa</td></tr>
               <tr><td style="padding:.25rem .5rem">Coação</td><td style="padding:.25rem .5rem">Implícita/explícita — há coação moral</td><td style="padding:.25rem .5rem">Não há coação — acordo/aquiescência</td></tr>
-              <tr><td style="padding:.25rem .5rem">Pena</td><td style="padding:.25rem .5rem">Rec. 2–8 anos + multa</td><td style="padding:.25rem .5rem">Rec. 2–12 anos + multa</td></tr>
+              <tr><td style="padding:.25rem .5rem">Pena</td><td style="padding:.25rem .5rem">Rec. 2–12 anos + multa</td><td style="padding:.25rem .5rem">Rec. 2–12 anos + multa</td></tr>
             </table>
             <p style="margin:.5rem 0 0;font-size:.88rem;">Na concussão, o particular que cede à exigência não comete crime; na corrupção passiva, o particular que oferece comete corrupção <em>ativa</em> (art. 333 CP).</p>
           </div>

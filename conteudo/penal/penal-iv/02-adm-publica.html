@@ -214,6 +214,53 @@
   .ec-summary-table td{padding:10px 14px;vertical-align:top;color:var(--text2);border:none;background:var(--surface);}
   .ec-summary-table td:first-child{font-weight:600;color:var(--blue);}
 
+  /* GABARITO TOGGLE */
+  .ap-wrap:not(.gabarito-ativo) .ec-q-show-btn{display:none!important;}
+  .ap-wrap:not(.gabarito-ativo) .ec-answer{display:none!important;}
+  #btn-gabarito{padding:5px 14px;font-size:12px;font-weight:700;font-family:var(--sans);border:none;border-radius:5px;cursor:pointer;background:var(--ap-orange);color:#fff;transition:all .15s;letter-spacing:.03em;}
+  #btn-gabarito:hover{opacity:.85;}
+
+  /* OFFICIAL DOCUMENT STYLES */
+  .ec-doc-oficial{border-radius:4px;margin-bottom:20px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.12);}
+  .ec-doc-orgao-header{display:flex;align-items:center;gap:14px;padding:12px 18px;color:#fff;}
+  .ec-doc-orgao-sigla{font-size:20px;font-weight:900;letter-spacing:.04em;opacity:.9;flex-shrink:0;font-family:var(--serif);}
+  .ec-doc-orgao-info{flex:1;}
+  .ec-doc-orgao-nome{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.8;}
+  .ec-doc-orgao-titulo{font-size:14px;font-weight:700;margin-top:2px;font-family:var(--serif);}
+  .ec-doc-body{padding:16px 20px;background:#fff;font-size:13.5px;line-height:1.65;}
+  .ec-doc-body table{width:100%;border-collapse:collapse;font-size:13px;}
+  .ec-doc-body td{padding:4px 6px;vertical-align:top;border:none;background:transparent;color:var(--text);}
+  .ec-doc-body td:first-child{color:var(--text2);width:35%;font-weight:600;}
+  .ec-doc-rodape{padding:7px 18px;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.7);text-align:right;}
+  .ec-doc-rfb{border:2px solid #1B4C7B;}
+  .ec-doc-rfb .ec-doc-orgao-header{background:linear-gradient(135deg,#1B4C7B,#235FA0);}
+  .ec-doc-rfb .ec-doc-rodape{background:#1B4C7B;}
+  .ec-doc-ctrl{border:2px solid #2E5E3E;}
+  .ec-doc-ctrl .ec-doc-orgao-header{background:linear-gradient(135deg,#2E5E3E,#3A7A52);}
+  .ec-doc-ctrl .ec-doc-rodape{background:#2E5E3E;}
+  .ec-doc-pc{border:2px solid #1A2744;}
+  .ec-doc-pc .ec-doc-orgao-header{background:linear-gradient(135deg,#1A2744,#243660);}
+  .ec-doc-pc .ec-doc-rodape{background:#1A2744;}
+  .ec-doc-tce-mg{border:2px solid #7B1818;}
+  .ec-doc-tce-mg .ec-doc-orgao-header{background:linear-gradient(135deg,#7B1818,#9B2222);}
+  .ec-doc-tce-mg .ec-doc-rodape{background:#7B1818;}
+  .ec-doc-bacen{border:2px solid #0A5C4A;}
+  .ec-doc-bacen .ec-doc-orgao-header{background:linear-gradient(135deg,#0A5C4A,#127D65);}
+  .ec-doc-bacen .ec-doc-rodape{background:#0A5C4A;}
+  .ec-doc-mp-inst{border:2px solid #3A2870;}
+  .ec-doc-mp-inst .ec-doc-orgao-header{background:linear-gradient(135deg,#3A2870,#4D3690);}
+  .ec-doc-mp-inst .ec-doc-rodape{background:#3A2870;}
+  .ec-doc-mp-acusados{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:12px;}
+  .ec-doc-mp-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;background:var(--ap-bg2);border:1px solid var(--border);border-radius:6px;border-left:3px solid #3A2870;}
+  .ec-doc-mp-num{width:28px;height:28px;border-radius:50%;background:#3A2870;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;}
+  .ec-doc-mp-content{flex:1;}
+  .ec-doc-mp-nome{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
+  .ec-doc-mp-tipo{font-size:12.5px;color:#4D3690;font-weight:600;font-style:italic;margin-bottom:2px;}
+  .ec-doc-mp-crime{font-size:11.5px;color:var(--text2);}
+  .ec-doc-mp-nota{font-size:12.5px;color:var(--text2);padding:10px 12px;background:var(--ap-yellow-lt);border-left:3px solid var(--ap-yellow);border-radius:0 5px 5px 0;margin-top:8px;}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ec-doc-body{background:var(--ap-bg2);}}
+  :root[data-theme="dark"] .ec-doc-body{background:var(--ap-bg2);}
+
   @media(max-width:600px) {
     .ap-.ap-header-h1 { font-size: 1.4rem; }
     .ap-painel { padding: 1rem; }
@@ -251,6 +298,9 @@
   <button class="ap-tab" onclick="apTab(event,'ap-jur')">🏛️ Jurisprudência</button>
   <button class="ap-tab" onclick="apTab(event,'ap-questoes')">📝 Questões</button>
   <button class="ap-tab" onclick="apTab(event,'ap-resumo')">📑 Resumo</button>
+</div>
+<div style="text-align:right;margin:-10px 0 16px;">
+  <button id="btn-gabarito" onclick="toggleGabarito()">🔒 Habilitar Gabarito</button>
 </div>
 
 <!-- TAB: MAPA CONCEITUAL -->
@@ -899,34 +949,61 @@
 
   <div class="ec-sec">
     <h2 class="ec-sec-title">Documentos simulados</h2>
-    <div class="ec-doc-sim">
-      <div class="ec-doc-title">Termo de Depoimento — Fábio Lins (perante a Corregedoria da Receita Federal)</div>
-      <table>
-        <tr><td>Data:</td><td>22/04/2024</td></tr>
-        <tr><td>Depoente:</td><td>Fábio Lins Cavalcante, sócio-diretor</td></tr>
-        <tr><td>Relato:</td><td>"O auditor Rodrigo me disse que poderia encontrar irregularidades sérias se eu não colaborasse. Combinamos a entrega de R$ 30.000,00 para sexta-feira. Antes disso, procurei a Corregedoria."</td></tr>
-        <tr><td>Observação:</td><td>Fábio também relatou ter sugerido o pagamento ao auditor antes de ser exigido. O MP anotou essa declaração.</td></tr>
-      </table>
+    <div class="ec-doc-oficial ec-doc-rfb">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">RFB</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Receita Federal do Brasil · Corregedoria-Geral</div>
+          <div class="ec-doc-orgao-titulo">Termo de Depoimento</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data:</td><td>22/04/2024</td></tr>
+          <tr><td>Depoente:</td><td>Fábio Lins Cavalcante, sócio-diretor</td></tr>
+          <tr><td>Relato:</td><td>"O auditor Rodrigo me disse que poderia encontrar irregularidades sérias se eu não colaborasse. Combinamos a entrega de R$ 30.000,00 para sexta-feira. Antes disso, procurei a Corregedoria."</td></tr>
+          <tr><td>Observação:</td><td>Fábio também relatou ter sugerido o pagamento ao auditor antes de ser exigido. O MP anotou essa declaração.</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos · Operação Erário Limpo</div>
     </div>
-    <div class="ec-doc-sim">
-      <div class="ec-doc-title">Relatório de Controladoria — Município de Rio Vermelho/MG</div>
-      <table>
-        <tr><td>Período auditado:</td><td>Jan/2023 – Dez/2023</td></tr>
-        <tr><td>Irregularidade:</td><td>Transferências de R$ 180.000,00 a empresa "Saúde &amp; Vida Ltda." sem comprovação de serviço prestado.</td></tr>
-        <tr><td>Origem dos recursos:</td><td>Verba municipal própria (não federal).</td></tr>
-        <tr><td>Responsável direto:</td><td>Prefeito Marcelo Aguiar.</td></tr>
-        <tr><td>Responsável autorização:</td><td>Secretário Eduardo Pires (assinou ordens de pagamento).</td></tr>
-        <tr><td>Conclusão:</td><td>Indícios de desvio doloso. Eduardo Pires não apresentou motivação para as autorizações além de "confiança no chefe".</td></tr>
-      </table>
+    <div class="ec-doc-oficial ec-doc-ctrl">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">CGM</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Controladoria-Geral do Município · Rio Vermelho/MG</div>
+          <div class="ec-doc-orgao-titulo">Relatório de Auditoria Interna</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Período auditado:</td><td>Jan/2023 – Dez/2023</td></tr>
+          <tr><td>Irregularidade:</td><td>Transferências de R$ 180.000,00 a empresa "Saúde &amp; Vida Ltda." sem comprovação de serviço prestado.</td></tr>
+          <tr><td>Origem dos recursos:</td><td>Verba municipal própria (não federal).</td></tr>
+          <tr><td>Responsável direto:</td><td>Prefeito Marcelo Aguiar.</td></tr>
+          <tr><td>Responsável autorização:</td><td>Secretário Eduardo Pires (assinou ordens de pagamento).</td></tr>
+          <tr><td>Conclusão:</td><td>Indícios de desvio doloso. Eduardo Pires não apresentou motivação para as autorizações além de "confiança no chefe".</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
     </div>
-    <div class="ec-doc-sim">
-      <div class="ec-doc-title">Boletim de Ocorrência — Dr. Paulo Régis</div>
-      <table>
-        <tr><td>Data:</td><td>15/05/2024</td></tr>
-        <tr><td>Vítima:</td><td>José Geraldo Tavares, 58 anos, paciente do SUS.</td></tr>
-        <tr><td>Narração:</td><td>"O Dr. Paulo Régis exigiu R$ 200,00 por consulta, dizendo que sem pagamento não me atenderia. Paguei com medo de ficar sem atendimento."</td></tr>
-        <tr><td>Local:</td><td>Clínica particular conveniada ao SUS — município de Rio Vermelho/MG.</td></tr>
-      </table>
+    <div class="ec-doc-oficial ec-doc-pc">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">PC</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Polícia Civil do Estado de Minas Gerais · Delegacia de Rio Vermelho</div>
+          <div class="ec-doc-orgao-titulo">Boletim de Ocorrência</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data:</td><td>15/05/2024</td></tr>
+          <tr><td>Vítima:</td><td>José Geraldo Tavares, 58 anos, paciente do SUS.</td></tr>
+          <tr><td>Narração:</td><td>"O Dr. Paulo Régis exigiu R$ 200,00 por consulta, dizendo que sem pagamento não me atenderia. Paguei com medo de ficar sem atendimento."</td></tr>
+          <tr><td>Local:</td><td>Clínica particular conveniada ao SUS — município de Rio Vermelho/MG.</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
     </div>
   </div>
 
@@ -1086,54 +1163,118 @@
   <div class="ec-sec">
     <h2 class="ec-sec-title">Documentos simulados</h2>
 
-    <div class="ec-doc-sim">
-      <div class="ec-doc-title">Doc. 1 — Relatório de Auditoria — TCE/MG (trecho)</div>
-      <table>
-        <tr><td>Objeto:</td><td>Contrato nº 087/2025 — recapeamento asfáltico. Jurisdicionado: Município de Santa Rita do Ribeirão.</td></tr>
-        <tr><td>Item 3.2:</td><td>Confronto entre os boletins de medição nº 02 a 05, atestados pelo Secretário de Obras, e o levantamento topográfico in loco: executados 9.870 m² de capa asfáltica, contra 14.260 m² atestados e pagos — pagamento sem contraprestação de R$ 310.412,18.</td></tr>
-        <tr><td>Item 3.3:</td><td>Os boletins contêm atesto exclusivo do Secretário, em desacordo com o edital, que exigia dupla conferência por engenheiro fiscal.</td></tr>
-        <tr><td>Encaminhamento:</td><td>Diante dos indícios de dano ao erário e de ilícito penal, comunicação ao Ministério Público de Minas Gerais.</td></tr>
-      </table>
-    </div>
-
-    <div class="ec-doc-sim">
-      <div class="ec-doc-title">Doc. 2 — Termo de Declarações — Polícia Civil (IP nº 1.025/2025)</div>
-      <table>
-        <tr><td>Declarante:</td><td>Vanessa Lopes, assistente financeira da Salles Pavimentação Ltda.</td></tr>
-        <tr><td>Relato:</td><td>"A partir de junho de 2025, recebi ordem direta do sócio Ricardo Salles para incluir nos pagamentos mensais a empresa M. BRANDÃO CONSULTORIA EM ENGENHARIA. Nunca vi qualquer relatório, projeto ou serviço prestado por essa consultoria. Os valores correspondiam sempre a cerca de 5% da medição recebida da Prefeitura no mesmo mês. Quando questionei, Ricardo disse que era 'custo da obra' e que eu 'não precisava entender'."</td></tr>
-        <tr><td>Observação:</td><td>A declarante reconheceu as transferências listadas no Doc. 3.</td></tr>
-      </table>
-    </div>
-
-    <div class="ec-doc-sim">
-      <div class="ec-doc-title">Doc. 3 — Quadro de movimentações — quebra de sigilo bancário (autorização judicial)</div>
-      <div style="overflow-x:auto;border-radius:8px;">
-      <table class="ec-summary-table">
-        <thead>
-          <tr><th>Data</th><th>Origem</th><th>Destino</th><th>Valor (R$)</th><th>Histórico</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>10/07/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>28.400,00</td><td>NF 014 — consultoria</td></tr>
-          <tr><td>12/07/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>25.500,00</td><td>TED — "empréstimo familiar"</td></tr>
-          <tr><td>11/08/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>31.150,00</td><td>NF 015 — consultoria</td></tr>
-          <tr><td>13/08/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>28.000,00</td><td>TED — "empréstimo familiar"</td></tr>
-          <tr><td>09/09/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>33.720,00</td><td>NF 016 — consultoria</td></tr>
-          <tr><td>11/09/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>30.300,00</td><td>TED — "empréstimo familiar"</td></tr>
-        </tbody>
-      </table>
+    <div class="ec-doc-oficial ec-doc-tce-mg">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">TCE</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Tribunal de Contas do Estado de Minas Gerais · Diretoria de Controle Municipal</div>
+          <div class="ec-doc-orgao-titulo">Relatório de Auditoria — Contrato nº 087/2025 (trecho)</div>
+        </div>
       </div>
-      <p style="margin-top:10px;font-size:13px;color:var(--text2);">Observação da análise: a empresa destinatária não possui empregados registrados nem estrutura operacional conhecida.</p>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Objeto:</td><td>Contrato nº 087/2025 — recapeamento asfáltico. Jurisdicionado: Município de Santa Rita do Ribeirão.</td></tr>
+          <tr><td>Item 3.2:</td><td>Confronto entre os boletins de medição nº 02 a 05, atestados pelo Secretário de Obras, e o levantamento topográfico in loco: executados 9.870 m² de capa asfáltica, contra 14.260 m² atestados e pagos — pagamento sem contraprestação de R$ 310.412,18.</td></tr>
+          <tr><td>Item 3.3:</td><td>Os boletins contêm atesto exclusivo do Secretário, em desacordo com o edital, que exigia dupla conferência por engenheiro fiscal.</td></tr>
+          <tr><td>Encaminhamento:</td><td>Diante dos indícios de dano ao erário e de ilícito penal, comunicação ao Ministério Público de Minas Gerais.</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos · TCE/MG</div>
     </div>
 
-    <div class="ec-doc-sim">
-      <div class="ec-doc-title">Doc. 4 — Denúncia do MP — trecho da capitulação</div>
-      <table>
-        <tr><td>I — Otávio Brandão:</td><td>art. 317, <em>caput</em>, do Código Penal.</td></tr>
-        <tr><td>II — Ricardo Salles:</td><td>art. 333, <em>caput</em>, do Código Penal.</td></tr>
-        <tr><td>III — Carla Nunes:</td><td>art. 312, § 1º, do Código Penal (peculato-furto).</td></tr>
-        <tr><td>IV — Jair Mendes:</td><td>art. 312, <em>caput</em>, do Código Penal.</td></tr>
-        <tr><td>Nota didática:</td><td>A capitulação acima contém imprecisões propositais — identificá-las é parte do exercício (Pergunta 7).</td></tr>
-      </table>
+    <div class="ec-doc-oficial ec-doc-pc">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">PC</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Polícia Civil do Estado de Minas Gerais · IP nº 1.025/2025</div>
+          <div class="ec-doc-orgao-titulo">Termo de Declarações</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Declarante:</td><td>Vanessa Lopes, assistente financeira da Salles Pavimentação Ltda.</td></tr>
+          <tr><td>Relato:</td><td>"A partir de junho de 2025, recebi ordem direta do sócio Ricardo Salles para incluir nos pagamentos mensais a empresa M. BRANDÃO CONSULTORIA EM ENGENHARIA. Nunca vi qualquer relatório, projeto ou serviço prestado por essa consultoria. Os valores correspondiam sempre a cerca de 5% da medição recebida da Prefeitura no mesmo mês. Quando questionei, Ricardo disse que era 'custo da obra' e que eu 'não precisava entender'."</td></tr>
+          <tr><td>Observação:</td><td>A declarante reconheceu as transferências listadas no Doc. 3.</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <div class="ec-doc-oficial ec-doc-bacen">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">COAF</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Banco Central do Brasil · Análise judicial de movimentação financeira — quebra de sigilo autorizada</div>
+          <div class="ec-doc-orgao-titulo">Quadro de Movimentações Financeiras</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <div style="overflow-x:auto;border-radius:4px;margin-bottom:10px;">
+        <table class="ec-summary-table">
+          <thead>
+            <tr><th>Data</th><th>Origem</th><th>Destino</th><th>Valor (R$)</th><th>Histórico</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>10/07/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>28.400,00</td><td>NF 014 — consultoria</td></tr>
+            <tr><td>12/07/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>25.500,00</td><td>TED — "empréstimo familiar"</td></tr>
+            <tr><td>11/08/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>31.150,00</td><td>NF 015 — consultoria</td></tr>
+            <tr><td>13/08/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>28.000,00</td><td>TED — "empréstimo familiar"</td></tr>
+            <tr><td>09/09/2025</td><td>Salles Pavimentação</td><td>M. Brandão Consultoria</td><td>33.720,00</td><td>NF 016 — consultoria</td></tr>
+            <tr><td>11/09/2025</td><td>M. Brandão Consultoria</td><td>Otávio Brandão (PF)</td><td>30.300,00</td><td>TED — "empréstimo familiar"</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="font-size:12.5px;color:var(--text2);">Observação da análise: a empresa destinatária não possui empregados registrados nem estrutura operacional conhecida.</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos · autorização judicial</div>
+    </div>
+
+    <div class="ec-doc-oficial ec-doc-mp-inst">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">MP</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Ministério Público do Estado de Minas Gerais · Promotoria de Justiça</div>
+          <div class="ec-doc-orgao-titulo">Denúncia Criminal — Capitulação dos Fatos</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <div class="ec-doc-mp-acusados">
+          <div class="ec-doc-mp-item">
+            <div class="ec-doc-mp-num">I</div>
+            <div class="ec-doc-mp-content">
+              <div class="ec-doc-mp-nome">Otávio Brandão</div>
+              <div class="ec-doc-mp-tipo">Art. 317, <em>caput</em>, do Código Penal</div>
+              <div class="ec-doc-mp-crime">Corrupção Passiva</div>
+            </div>
+          </div>
+          <div class="ec-doc-mp-item">
+            <div class="ec-doc-mp-num">II</div>
+            <div class="ec-doc-mp-content">
+              <div class="ec-doc-mp-nome">Ricardo Salles</div>
+              <div class="ec-doc-mp-tipo">Art. 333, <em>caput</em>, do Código Penal</div>
+              <div class="ec-doc-mp-crime">Corrupção Ativa</div>
+            </div>
+          </div>
+          <div class="ec-doc-mp-item">
+            <div class="ec-doc-mp-num">III</div>
+            <div class="ec-doc-mp-content">
+              <div class="ec-doc-mp-nome">Carla Nunes</div>
+              <div class="ec-doc-mp-tipo">Art. 312, § 1º, do Código Penal</div>
+              <div class="ec-doc-mp-crime">Peculato-Furto</div>
+            </div>
+          </div>
+          <div class="ec-doc-mp-item">
+            <div class="ec-doc-mp-num">IV</div>
+            <div class="ec-doc-mp-content">
+              <div class="ec-doc-mp-nome">Jair Mendes</div>
+              <div class="ec-doc-mp-tipo">Art. 312, <em>caput</em>, do Código Penal</div>
+              <div class="ec-doc-mp-crime">Peculato</div>
+            </div>
+          </div>
+        </div>
+        <div class="ec-doc-mp-nota"><strong>Nota didática:</strong> A capitulação acima contém imprecisões propositais. Use o conhecimento acumulado nas perguntas anteriores para identificá-las.</div>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos · IP nº 1.025/2025</div>
     </div>
   </div>
 
@@ -1259,35 +1400,17 @@
         <div class="ec-q-head" onclick="ecTog('c2q7')">
           <div class="ec-q-num">7</div>
           <div style="flex:1">
-            <div class="ec-q-text">Avalie criticamente a capitulação da denúncia (Doc. 4). Aponte, fundamentadamente, ao menos três imprecisões e indique como o juiz deve proceder quanto a cada uma.</div>
-            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Avaliar</span> Emendatio libelli · absolvição sumária · majorantes omitidas</div>
+            <div class="ec-q-text">A defesa de Otávio argumenta que a corrupção passiva foi absorvida pelo peculato-desvio (princípio da consunção), pois o atesto falso das medições e o recebimento da propina formam um único projeto criminoso. Avalie a tese: os dois crimes são autônomos ou há relação de absorção?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Avaliar</span> Concurso formal impróprio · consunção · bens jurídicos distintos</div>
           </div>
           <span class="ec-q-arrow" id="ec-arr-c2q7">▾</span>
         </div>
         <div class="ec-q-body" id="ec-qb-c2q7">
-          <p>Releia o Doc. 4 à luz das suas respostas anteriores. Para cada imprecisão, identifique o instrumento processual adequado: emendatio libelli (art. 383 CPP), mutatio libelli (art. 384 CPP), rejeição da denúncia ou absolvição sumária (art. 397 CPP).</p>
-          <div class="ec-art-ref">Arts. 383, 384 e 397, III, CPP</div>
+          <p>Examine se há identidade de bem jurídico, se o peculato-desvio é meio necessário para a corrupção ou vice-versa, e qual a consequência prática para a dosimetria.</p>
+          <div class="ec-art-ref">Arts. 312 e 317 CP · arts. 69 e 70 CP · princípio da consunção</div>
           <button class="ec-q-show-btn" onclick="ecShowAns('c2a7')">Revelar gabarito comentado</button>
           <div class="ec-answer" id="c2a7">
-            <strong>Resposta:</strong> (i) Otávio: omitida a majorante do art. 317, § 1º (atestou medições infringindo dever funcional); discutir também a ausência de Marcelo na denúncia (partícipe — art. 30 CP). (ii) Carla: capitulação errada — é peculato-DESVIO do caput, não § 1º, pois ela tinha a posse em razão do cargo; como os FATOS foram corretamente descritos, cabe emendatio libelli (art. 383 CPP), possível inclusive na sentença, sem necessidade de aditamento. (iii) Jair: conduta ATÍPICA (peculato de uso) — caso a denúncia seja recebida, a via adequada é a absolvição sumária do art. 397, III, CPP; antes do recebimento, a rejeição (art. 395, III). (iv) Ricardo: omitido o parágrafo único do art. 333. Gancho de revisão: emendatio (mesmos fatos, nova definição jurídica — art. 383) × mutatio (fato novo não contido na denúncia, exige aditamento — art. 384).
-          </div>
-        </div>
-      </div>
-
-      <div class="ec-q-item" id="c2q8">
-        <div class="ec-q-head" onclick="ecTog('c2q8')">
-          <div class="ec-q-num">8</div>
-          <div style="flex:1">
-            <div class="ec-q-text">Pergunta estratégica final: você assume a defesa de Jair. Esboce a estrutura da resposta à acusação (art. 396-A CPP): tese principal, fundamentos, pedido e pedido subsidiário — e antecipe o contra-argumento do MP.</div>
-            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> Simulação de peça · estratégia defensiva</div>
-          </div>
-          <span class="ec-q-arrow" id="ec-arr-c2q8">▾</span>
-        </div>
-        <div class="ec-q-body" id="ec-qb-c2q8">
-          <p>Exercício de produção: redija em até uma página. Avalie sua peça pelos critérios: clareza da tese, força dos fundamentos, adequação dos pedidos e antecipação do contraditório.</p>
-          <button class="ec-q-show-btn" onclick="ecShowAns('c2a8')">Revelar estrutura esperada</button>
-          <div class="ec-answer" id="c2a8">
-            <strong>Estrutura esperada:</strong> (1) Tese principal: ATIPICIDADE da conduta — peculato de uso de bem infungível, com uso momentâneo e restituição íntegra, inclusive com reabastecimento; jurisprudência consolidada (v.g. STF, HC 108.433 AgR) e doutrina majoritária. (2) Fundamentos: ausência de animus de apropriação ou desvio definitivo; o art. 312 não criminaliza o uso; a punição do uso indevido foi reservada pelo legislador apenas ao Prefeito (DL 201/67, art. 1º, II) — interpretação sistemática que confirma a atipicidade para os demais servidores. (3) Pedido: absolvição sumária (art. 397, III, CPP). (4) Subsidiário: se superada a tese, produção de prova sobre o reabastecimento integral e o estado do veículo. (5) Contra-argumento provável do MP: o "frete cobrado" demonstraria proveito econômico e desvio de finalidade; resposta: o proveito do USO não transforma uso em apropriação — o bem público não saiu definitivamente da esfera da Administração, e a sanção adequada é administrativa e por improbidade, não penal (ultima ratio).
+            <strong>Resposta:</strong> A tese da consunção não prospera. (1) Bens jurídicos distintos: a corrupção passiva tutela a moralidade e probidade administrativa (o acordo corrompido em si); o peculato-desvio tutela o patrimônio público (a saída efetiva dos R$ 310.000,00 do erário). (2) Autonomia dos crimes: a corrupção passiva se consumou no momento em que Otávio ACEITOU A PROMESSA — antes de qualquer atesto; o peculato-desvio se consumou a cada boletim de medição falso assinado. Não há progressão necessária entre eles. (3) Momento consumativo diferente: se Otávio aceitasse a propina e não assinasse os boletins, existiria apenas a corrupção; se assinasse os boletins sem propina, somente o peculato-desvio. A existência de ambas as condutas evidencia concurso material (art. 69 CP). (4) Posição doutrinária: há vozes favoráveis à absorção quando o peculato é o único meio de execução da corrupção — mas no caso, o atesto falso é posterior ao acordo e representa ato autônomo. A solução majoritária e mais segura para provas é o concurso material.
           </div>
         </div>
       </div>
@@ -2429,6 +2552,22 @@ function rpAba(n){
   window.ecShowAns = function (id) {
     var ans = document.getElementById(id)
     if (ans) ans.classList.add('show')
+  }
+
+  /* ── Gabarito toggle ── */
+  window.gabaritoAtivo = false
+  window.toggleGabarito = function () {
+    window.gabaritoAtivo = !window.gabaritoAtivo
+    var wrap = document.querySelector('.ap-wrap')
+    if (wrap) wrap.classList.toggle('gabarito-ativo', window.gabaritoAtivo)
+    var btn = document.getElementById('btn-gabarito')
+    if (btn) {
+      btn.textContent = window.gabaritoAtivo ? '🔓 Ocultar Gabarito' : '🔒 Habilitar Gabarito'
+      btn.style.background = window.gabaritoAtivo ? 'var(--ap-green)' : 'var(--ap-orange)'
+    }
+    if (!window.gabaritoAtivo) {
+      document.querySelectorAll('.ec-answer.show').forEach(function (a) { a.classList.remove('show') })
+    }
   }
 })()
 </script>

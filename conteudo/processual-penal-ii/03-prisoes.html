@@ -288,6 +288,85 @@
   @media (max-width: 540px) {
     .pp3-tab { padding: 4px 9px; font-size: 11.5px; }
   }
+
+/* ===== Estudo de Caso — Operação Carta Contemplada ===== */
+#pp3-estudo-caso .ec-case-header{background:var(--blue);border-radius:12px;padding:24px 28px;color:#fff;margin-bottom:24px;}
+#pp3-estudo-caso .ec-op-label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffe9a8;margin-bottom:6px;}
+#pp3-estudo-caso .ec-case-header h2{font-size:23px;margin:0 0 10px;color:#fff;border:none;}
+#pp3-estudo-caso .ec-case-header p{color:#eef2f8;font-size:14.5px;line-height:1.6;margin:0;}
+#pp3-estudo-caso .ec-case-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+#pp3-estudo-caso .ec-meta-tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:6px;padding:4px 12px;font-size:12.5px;}
+#pp3-estudo-caso .ec-sec{margin-bottom:28px;}
+#pp3-estudo-caso .ec-sec-title{font-size:17px;color:var(--blue);margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid var(--blue);display:flex;align-items:center;gap:10px;}
+#pp3-estudo-caso .ec-badge{font-size:11px;background:var(--blue);color:#fff;padding:2px 10px;border-radius:4px;font-weight:600;letter-spacing:.04em;}
+#pp3-estudo-caso .ec-narrative{background:var(--pp3-bg2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;font-size:14px;line-height:1.75;}
+#pp3-estudo-caso .ec-narrative p{margin:0 0 12px;}
+#pp3-estudo-caso .ec-narrative p:last-child{margin-bottom:0;}
+#pp3-estudo-caso .ec-doc-oficial{border-radius:4px;margin-bottom:18px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.14);}
+#pp3-estudo-caso .ec-doc-orgao-header{display:flex;align-items:center;gap:14px;padding:12px 18px;color:#fff;}
+#pp3-estudo-caso .ec-doc-orgao-sigla{font-size:20px;font-weight:900;letter-spacing:.04em;opacity:.92;flex-shrink:0;font-family:var(--serif);}
+#pp3-estudo-caso .ec-doc-orgao-info{flex:1;}
+#pp3-estudo-caso .ec-doc-orgao-nome{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.82;}
+#pp3-estudo-caso .ec-doc-orgao-titulo{font-size:14px;font-weight:700;margin-top:2px;font-family:var(--serif);}
+#pp3-estudo-caso .ec-doc-body{padding:16px 20px;background:#fff;color:#22303f;font-size:13.5px;line-height:1.65;}
+#pp3-estudo-caso .ec-doc-body p{margin:0 0 8px;color:#22303f;}
+#pp3-estudo-caso .ec-doc-body p:last-child{margin-bottom:0;}
+#pp3-estudo-caso .ec-doc-body table{width:100%;border-collapse:collapse;font-size:13px;}
+#pp3-estudo-caso .ec-doc-body td{padding:4px 6px;vertical-align:top;border:none;background:transparent;color:#22303f;}
+#pp3-estudo-caso .ec-doc-body td:first-child{color:#5b6877;width:34%;font-weight:600;}
+#pp3-estudo-caso .ec-doc-rodape{padding:7px 18px;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.72);text-align:right;}
+#pp3-estudo-caso .ec-doc-pc{border:2px solid #1A2744;}
+#pp3-estudo-caso .ec-doc-pc .ec-doc-orgao-header{background:linear-gradient(135deg,#1A2744,#243660);}
+#pp3-estudo-caso .ec-doc-pc .ec-doc-rodape{background:#1A2744;}
+#pp3-estudo-caso .ec-doc-mp{border:2px solid #3A2870;}
+#pp3-estudo-caso .ec-doc-mp .ec-doc-orgao-header{background:linear-gradient(135deg,#3A2870,#4D3690);}
+#pp3-estudo-caso .ec-doc-mp .ec-doc-rodape{background:#3A2870;}
+#pp3-estudo-caso .ec-doc-tj{border:2px solid #6E1423;}
+#pp3-estudo-caso .ec-doc-tj .ec-doc-orgao-header{background:linear-gradient(135deg,#6E1423,#8A2433);}
+#pp3-estudo-caso .ec-doc-tj .ec-doc-rodape{background:#6E1423;}
+#pp3-estudo-caso .ec-summary-wrap{overflow-x:auto;}
+#pp3-estudo-caso .ec-summary-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px;}
+#pp3-estudo-caso .ec-summary-table thead th{background:var(--blue);color:#fff;padding:10px 14px;text-align:left;font-size:12.5px;font-weight:600;border:none;}
+#pp3-estudo-caso .ec-summary-table tbody tr{border-bottom:1px solid var(--border);}
+#pp3-estudo-caso .ec-summary-table td{padding:10px 14px;vertical-align:top;color:var(--text2);border:none;background:var(--surface);}
+#pp3-estudo-caso .ec-summary-table td:first-child{font-weight:600;color:var(--blue);white-space:nowrap;}
+#pp3-estudo-caso .ec-q-list{display:flex;flex-direction:column;gap:14px;}
+#pp3-estudo-caso .ec-q-item{background:var(--pp3-bg2);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+#pp3-estudo-caso .ec-q-head{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;cursor:pointer;}
+#pp3-estudo-caso .ec-q-num{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13.5px;flex-shrink:0;}
+#pp3-estudo-caso .ec-q-text{font-size:14px;line-height:1.5;font-weight:600;color:var(--text);}
+#pp3-estudo-caso .ec-q-bloom{font-size:11.5px;color:var(--text2);margin-top:4px;font-weight:400;}
+#pp3-estudo-caso .ec-q-arrow{color:var(--text2);font-size:16px;padding-top:2px;flex-shrink:0;transition:transform .2s;}
+#pp3-estudo-caso .ec-q-arrow.open{transform:rotate(180deg);}
+#pp3-estudo-caso .ec-q-body{display:none;padding:0 18px 16px 60px;}
+#pp3-estudo-caso .ec-q-body.open{display:block;}
+#pp3-estudo-caso .ec-q-body p{font-size:13.8px;line-height:1.65;margin:0 0 10px;color:var(--text);}
+#pp3-estudo-caso .ec-q-show-btn{margin-top:6px;padding:7px 16px;background:transparent;border:1.5px solid var(--border);border-radius:6px;color:var(--text2);font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s;}
+#pp3-estudo-caso .ec-q-show-btn:hover{border-color:var(--blue);color:var(--blue);}
+#pp3-estudo-caso .ec-answer{display:none;margin-top:12px;padding:12px 14px;background:var(--pp3-green-lt);border-radius:8px;font-size:13.8px;line-height:1.7;color:var(--text);}
+#pp3-estudo-caso .ec-answer.show{display:block;}
+#pp3-estudo-caso .ec-answer strong{color:var(--blue);}
+#pp3-estudo-caso .ec-art-ref{background:var(--blue-light);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;padding:8px 12px;margin:8px 0;font-size:13px;font-style:italic;line-height:1.55;color:var(--text);}
+#pp3-estudo-caso .ec-stj-ref{background:var(--pp3-yellow-lt);border-left:3px solid var(--pp3-yellow);border-radius:0 5px 5px 0;padding:8px 12px;margin:8px 0;font-size:13px;line-height:1.55;color:var(--text);}
+#pp3-estudo-caso .ec-stj-ref strong{color:var(--pp3-yellow);}
+#pp3-estudo-caso .ec-bl{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:700;margin-right:5px;}
+#pp3-estudo-caso .ec-bl-1{background:var(--blue-light);color:var(--blue);}
+#pp3-estudo-caso .ec-bl-2{background:var(--pp3-green-lt);color:var(--pp3-green);}
+#pp3-estudo-caso .ec-bl-3{background:var(--pp3-red-lt);color:var(--pp3-red);}
+#pp3-estudo-caso .ec-bl-4{background:var(--pp3-yellow-lt);color:var(--pp3-yellow);}
+#pp3-estudo-caso .ec-foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;line-height:1.6;color:var(--text2);}
+.pp3-wrap:not(.gabarito-ativo) #pp3-estudo-caso .ec-q-show-btn{display:none!important;}
+.pp3-wrap:not(.gabarito-ativo) #pp3-estudo-caso .ec-answer{display:none!important;}
+#pp3-estudo-caso #btn-gabarito{padding:5px 14px;font-size:12px;font-weight:700;border:none;border-radius:5px;cursor:pointer;background:var(--pp3-orange);color:#fff;transition:all .15s;letter-spacing:.03em;margin-left:auto;}
+#pp3-estudo-caso #btn-gabarito:hover{opacity:.85;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #pp3-estudo-caso .ec-doc-body,
+:root:not([data-theme="light"]) #pp3-estudo-caso .ec-doc-body p,
+:root:not([data-theme="light"]) #pp3-estudo-caso .ec-doc-body td{background:var(--pp3-bg2)!important;color:var(--text)!important;}}
+:root[data-theme="dark"] #pp3-estudo-caso .ec-doc-body,
+:root[data-theme="dark"] #pp3-estudo-caso .ec-doc-body p,
+:root[data-theme="dark"] #pp3-estudo-caso .ec-doc-body td{background:var(--pp3-bg2)!important;color:var(--text)!important;}
+:root[data-theme="dark"] #pp3-estudo-caso .ec-doc-body td:first-child{color:var(--text2)!important;}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #pp3-estudo-caso .ec-doc-body td:first-child{color:var(--text2)!important;}}
 </style>
 
 <div class="pp3-wrap">
@@ -312,6 +391,7 @@
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-infografico')">🖼 Infográfico de Prisões</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-custodia-infografico')">📋 Infográfico Audiência de Custódia</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-cautelares-pessoais-infografico')">⛓ Infográfico das Cautelares Pessoais</button>
+  <button class="pp3-tab" onclick="pp3Tab(event,'pp3-estudo-caso')">🗂 Estudo de Caso</button>
 </div>
 
 <!-- MAPA MENTAL -->
@@ -1601,6 +1681,261 @@
   </div>
 </div>
 
+<!-- ===== PAINEL: ESTUDO DE CASO — Operação Carta Contemplada ===== -->
+<div id="pp3-estudo-caso" class="pp3-painel">
+
+  <div class="ec-case-header">
+    <div class="ec-op-label">Operação Carta Contemplada</div>
+    <h2>O flagrante do falso consórcio e a audiência de custódia</h2>
+    <p>Estudo de caso fictício sobre a árvore de decisão da audiência de custódia (art. 310 CPP): relaxamento, conversão em preventiva ou liberdade provisória com medidas cautelares diversas. Personagens, empresas e documentos inteiramente fictícios, elaborados para fins didáticos.</p>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Estelionato · art. 171, caput, CP</span>
+      <span class="ec-meta-tag">Audiência de custódia · art. 310 CPP (Lei 15.358/2026)</span>
+      <span class="ec-meta-tag">Cautelares · arts. 282, 312, 313, 319 CPP</span>
+      <span class="ec-meta-tag">Súmula 676 STJ</span>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Narrativa dos fatos <span class="ec-badge">LEIA ATENTAMENTE</span></h2>
+    <div class="ec-narrative">
+      <p><strong>O golpe.</strong> Na Comarca de Vila dos Cedros/MG, <strong>Vinícius Caldeira Rangel</strong>, 33 anos, corretor autônomo, anunciava em jornal local e em sala comercial alugada a venda de <em>"cartas de crédito de consórcio de imóvel já contempladas"</em>. Recebia da vítima, presencialmente e em espécie, uma "taxa de transferência da cota" e entregava um contrato de cessão sem qualquer lastro — a administradora e a cota contemplada simplesmente não existiam.</p>
+      <p><strong>O flagrante.</strong> A aposentada <strong>Conceição Tavares de Lima</strong>, 58 anos, desconfiou após pagar a primeira parcela. Combinou a entrega final de <strong>R$ 9.500,00</strong> em espécie numa lanchonete e avisou a Polícia Civil. Em <strong>09/06/2026, às 14h10</strong>, ao receber o envelope, Vinícius foi preso. Apreenderam-se o dinheiro, o "contrato de cessão de cota" e cartões de visita.</p>
+      <p><strong>O contexto.</strong> Na delegacia surgiram mais <strong>duas vítimas</strong> do mesmo golpe, da mesma época. Vinícius é <strong>primário, sem antecedentes</strong>, casado, dois filhos menores, com endereço e atividade fixos. Por feriado regional, a audiência de custódia, por videoconferência, só ocorreu em <strong>10/06/2026, às 21h</strong> — cerca de <strong>31 horas</strong> após a prisão.</p>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Documentos do procedimento</h2>
+
+    <div class="ec-doc-oficial ec-doc-pc">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">PC</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Polícia Civil do Estado de Minas Gerais · Delegacia de Vila dos Cedros</div>
+          <div class="ec-doc-orgao-titulo">Auto de Prisão em Flagrante Delito</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data/hora da prisão</td><td>09/06/2026, 14h10</td></tr>
+          <tr><td>Lavratura do APF</td><td>09/06/2026, 18h05</td></tr>
+          <tr><td>Conduzido</td><td>Vinícius Caldeira Rangel — primário, sem antecedentes</td></tr>
+          <tr><td>Capitulação</td><td>Art. 171, caput, do Código Penal (estelionato)</td></tr>
+          <tr><td>Apreensões</td><td>R$ 9.500,00 em espécie; "contrato de cessão de cota contemplada" sem lastro; cartões</td></tr>
+          <tr><td>Nota de culpa</td><td>Entregue ao preso em 09/06/2026, 19h00 (art. 306, § 2º, CPP)</td></tr>
+          <tr><td>Comunicações</td><td>Família e juízo comunicados (art. 306, caput, CPP)</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <div class="ec-doc-oficial ec-doc-mp">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">MP</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Ministério Público do Estado de Minas Gerais · Promotoria de Vila dos Cedros</div>
+          <div class="ec-doc-orgao-titulo">Promoção — Audiência de Custódia</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <p>O Ministério Público, ciente do auto, <strong>requer a conversão da prisão em flagrante em prisão preventiva</strong>. Invoca a garantia da ordem pública: foram identificadas três vítimas do mesmo golpe, havendo risco de reiteração no exercício da atividade de corretagem. Subsidiariamente, não sendo o caso, manifesta-se pela imposição de medidas cautelares.</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <div class="ec-doc-oficial ec-doc-tj">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">TJ</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Tribunal de Justiça de Minas Gerais · Juízo de Garantias de Vila dos Cedros</div>
+          <div class="ec-doc-orgao-titulo">Termo de Audiência de Custódia (videoconferência)</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data/hora</td><td>10/06/2026, 21h00 (≈ 31h após a prisão)</td></tr>
+          <tr><td>Forma</td><td>Videoconferência em tempo real (art. 310, caput, CPP — Lei 15.358/2026)</td></tr>
+          <tr><td>Presentes</td><td>Juízo de garantias; Ministério Público; Defesa técnica; custodiado</td></tr>
+          <tr><td>Relato do custodiado</td><td>Nega o dolo de fraudar; alega que "repassaria os valores à administradora"; informa emprego e residência fixos na comarca</td></tr>
+          <tr><td>Defesa</td><td>Preliminar de relaxamento (excesso do prazo de 24h). No mérito: réu primário, sem periculum concreto; requer liberdade provisória com medidas cautelares (art. 319)</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <div class="ec-doc-oficial ec-doc-tj">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">TJ</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Tribunal de Justiça de Minas Gerais · Juízo de Garantias de Vila dos Cedros</div>
+          <div class="ec-doc-orgao-titulo">Decisão Interlocutória — para análise crítica</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <p>"Acolho o requerimento ministerial e <strong>converto a prisão em flagrante em preventiva</strong>. A gravidade do golpe, o número de vítimas e a necessidade de resguardar a credibilidade do mercado e a ordem pública recomendam a segregação. As medidas cautelares diversas mostram-se insuficientes ao caso. Expeça-se mandado."</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Quadro-síntese — as três saídas do art. 310 CPP</h2>
+    <div class="ec-summary-wrap">
+      <table class="ec-summary-table">
+        <thead>
+          <tr><th>Saída (art. 310)</th><th>Pressupostos</th><th>Aplicação ao caso</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>I — Relaxar</td>
+            <td>Prisão ilegal (vício formal ou material): flagrante incabível, descumprimento dos arts. 304/306, ilegalidade insanável.</td>
+            <td>Flagrante próprio íntegro (art. 302, I). O atraso da custódia (≈31h) é irregularidade; pela orientação majoritária, o mero atraso sem má-fé não relaxa, por si só, a prisão legal.</td>
+          </tr>
+          <tr>
+            <td>II — Converter em preventiva</td>
+            <td>Art. 312 (fumus + periculum concreto + contemporaneidade) + art. 313 (admissibilidade) + insuficiência das cautelares + requerimento (arts. 282, § 2º / 311) + fundamentação concreta (art. 315).</td>
+            <td>Admissível em tese (art. 313, I — pena máx. 5 > 4) e requerida pelo MP. Mas a decisão se ampara em gravidade abstrata — fundamentação frágil ao crivo do STF/STJ.</td>
+          </tr>
+          <tr>
+            <td>III — Liberdade com/sem cautelares</td>
+            <td>Resposta proporcional quando a prisão não é necessária (art. 282, I e II; § 6º — preventiva é ultima ratio).</td>
+            <td>Solução adequada: art. 319, I, IV e VI (suspensão da corretagem neutraliza a reiteração) + fiança (art. 322, § ún.).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Questões para discussão <button id="btn-gabarito" onclick="toggleGabarito()">🔒 Gabarito</button></h2>
+    <div class="ec-q-list">
+
+      <div class="ec-q-item" id="ppc1">
+        <div class="ec-q-head" onclick="ecTog('ppc1')">
+          <div class="ec-q-num">1</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Quais são as decisões possíveis na audiência de custódia e o pressuposto que autoriza cada uma?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Compreender</span> Art. 310 CPP · controle do flagrante</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ppc1">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ppc1">
+          <p>De memória, liste as saídas do art. 310 e associe, a cada uma, o seu pressuposto.</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('ppa1')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ppa1">
+            <strong>Resposta:</strong> são três, e o juiz deve optar de forma fundamentada: <strong>(I)</strong> relaxar a prisão ilegal; <strong>(II)</strong> converter o flagrante em preventiva, se presentes os requisitos do art. 312 e inadequadas/insuficientes as cautelares diversas; <strong>(III)</strong> conceder liberdade provisória, com ou sem fiança. O flagrante não se mantém por si: ou é convertido em outra medida, ou cessa.
+            <div class="ec-art-ref">Art. 310, I a III, CPP — redação atualizada pela Lei 15.358/2026, que tornou a custódia, em regra, por videoconferência em tempo real, mantido o prazo de 24h.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ppc2">
+        <div class="ec-q-head" onclick="ecTog('ppc2')">
+          <div class="ec-q-num">2</div>
+          <div style="flex:1">
+            <div class="ec-q-text">O flagrante e a custódia foram regulares? O atraso de ≈31h gera, por si só, o relaxamento?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Aplicar</span> Arts. 302, 306 e 310 CPP · prazo de 24h</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ppc2">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ppc2">
+          <p>Classifique o flagrante (art. 302) e avalie o efeito do atraso. O que a defesa pode arguir e qual o desfecho provável?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('ppa2')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ppa2">
+            <strong>Resposta:</strong> trata-se de flagrante <strong>próprio</strong> (art. 302, I), com APF lavrado, nota de culpa entregue e comunicações feitas (art. 306). O art. 310 fixa 24h. O atraso é irregularidade que a defesa pode suscitar, mas:
+            <div class="ec-stj-ref"><strong>Orientação majoritária:</strong> o mero atraso na realização da audiência de custódia, sem demonstração de má-fé ou prejuízo, não contamina, por si só, a prisão legal — não enseja relaxamento automático. A discussão se desloca para a necessidade da segregação.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ppc3">
+        <div class="ec-q-head" onclick="ecTog('ppc3')">
+          <div class="ec-q-num">3</div>
+          <div style="flex:1">
+            <div class="ec-q-text">A preventiva era admissível e os requisitos do art. 312 estavam presentes? A motivação da decisão se sustenta?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> Arts. 312, 313 e 315 CPP · gravidade abstrata</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ppc3">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ppc3">
+          <p>Separe duas perguntas: (a) cabe preventiva neste tipo penal? (b) há periculum concreto? Confronte a motivação do Doc. 4 com o entendimento dos tribunais.</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('ppa3')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ppa3">
+            <strong>Resposta:</strong> <strong>(a) Admissibilidade:</strong> a pena máxima do estelionato (art. 171, caput) é de 5 anos — superior a 4 —, logo cabe preventiva em abstrato (art. 313, I). <strong>(b) Requisitos:</strong> há fumus, mas o art. 312 exige periculum libertatis <em>concreto</em> e contemporaneidade. A decisão do Doc. 4 ampara-se em gravidade e credibilidade do mercado, sem apontar perigo concreto nem por que as cautelares seriam insuficientes.
+            <div class="ec-stj-ref"><strong>STF/STJ (consolidado):</strong> a gravidade abstrata do delito e o clamor social não bastam para a preventiva; primariedade e residência fixa não a impedem por si, mas, ausente periculum concreto, a segregação é desproporcional (motivação deficiente — art. 315, § 2º).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ppc4">
+        <div class="ec-q-head" onclick="ecTog('ppc4')">
+          <div class="ec-q-num">4</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Poderia o juiz converter de ofício? E a fiança: quem pode arbitrá-la neste caso?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> <span class="ec-bl ec-bl-4">Avaliar</span> Arts. 282, 311 e 322 CPP · Súmula 676 STJ</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ppc4">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ppc4">
+          <p>Quem pode provocar a preventiva? E quanto à fiança, observe o teto de pena que separa a competência do delegado e a do juiz.</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('ppa4')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ppa4">
+            <strong>Resposta:</strong> de ofício, <strong>não</strong> — toda cautelar, inclusive a preventiva, depende de requerimento do MP ou de representação da autoridade policial (arts. 282, § 2º, e 311). Aqui o MP requereu, então a conversão não viola a regra; se o juiz tivesse agido de ofício, seria nula.
+            <div class="ec-stj-ref"><strong>Súmula 676 STJ:</strong> em razão da Lei 13.964/2019, não é mais possível ao juiz, de ofício, decretar ou converter a prisão em flagrante em preventiva.</div>
+            <strong>Fiança:</strong> como a pena máxima (5 anos) é superior a 4, a autoridade policial não pode arbitrá-la — a competência é do <strong>juiz</strong> (art. 322 e § ún.).
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ppc5">
+        <div class="ec-q-head" onclick="ecTog('ppc5')">
+          <div class="ec-q-num">5</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Como advogado, esboce o pedido de liberdade provisória com as cautelares do art. 319 proporcionais ao risco.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> Arts. 282, § 6º, 319 e 321 CPP · proporcionalidade</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ppc5">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ppc5">
+          <p>O risco que o MP aponta é a reiteração na corretagem. Que medida do art. 319 ataca exatamente esse risco sem prender?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('ppa5')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ppa5">
+            <strong>Resposta:</strong> a tese é a da preventiva como <strong>ultima ratio</strong>: ela só cabe quando incabível a substituição por cautelar diversa (art. 282, § 6º). Pedido (núcleo): liberdade provisória (arts. 310, III, e 321) cumulando as cautelares do art. 319 —
+            <div class="ec-art-ref">Art. 319, <strong>I</strong> (comparecimento periódico); <strong>IV</strong> (proibição de contato com vítimas e testemunhas); <strong>VI</strong> (suspensão do exercício da atividade de corretagem/venda de cotas — ataca diretamente a reiteração); e, se necessário, fiança (art. 319, VIII).</div>
+            Fecho: réu primário, com vínculos comprovados; a suspensão da atividade usada na fraude elimina o periculum de forma proporcional, tornando a prisão desnecessária.
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="ppc6">
+        <div class="ec-q-head" onclick="ecTog('ppc6')">
+          <div class="ec-q-num">6</div>
+          <div style="flex:1">
+            <div class="ec-q-text">E se o contato com as vítimas tivesse sido por WhatsApp ou redes sociais? O que muda?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> Art. 171, § 2º-A e § 5º (Lei 15.397/2026) · direito intertemporal</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-ppc6">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-ppc6">
+          <p>Reclassifique a hipótese. Há tipo específico para fraude por meio eletrônico? E quanto à ação penal, o que mudou recentemente?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('ppa6')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ppa6">
+            <strong>Resposta:</strong> sim. A Lei 15.397/2026 inseriu o <strong>§ 2º-A no art. 171</strong> (fraude eletrônica — redes sociais, e-mail, aplicativos, clonagem de dispositivo ou meio análogo), com pena de <strong>4 a 8 anos</strong>. A admissibilidade da preventiva (art. 313, I) seguiria atendida, com folga, mas a lógica do art. 282, § 6º não muda: a necessidade concreta continua decisiva.
+            <div class="ec-stj-ref"><strong>Direito intertemporal:</strong> a mesma Lei 15.397/2026 revogou o § 5º do art. 171 — o estelionato voltou a ser de <strong>ação penal pública incondicionada</strong> (sem exigência de representação). Para fatos anteriores a 04/05/2026, aplica-se a regra mais benéfica vigente à época.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ec-foot">
+    Processo Penal II — Prof. Artur Vieira · Faculdades Integradas Vianna Júnior. Caso, pessoas e documentos inteiramente fictícios, para fins didáticos. Normas conferidas em jun./2026: Lei 15.397/2026 (estelionato — caput mantido em 1–5 anos; § 5º revogado, ação penal incondicionada; § 2º-A fraude eletrônica, 4–8 anos); Lei 15.358/2026 (audiência de custódia por videoconferência, art. 310 CPP); Súmula 676 STJ; arts. 282, 302, 304, 306, 310, 311, 312, 313, 315, 319, 321 e 322 do CPP.
+  </div>
+
+</div>
+
 </div>
 
 <script>
@@ -1613,6 +1948,38 @@
     e.target.classList.add('ativo')
     var el = document.getElementById(id)
     if (el) el.classList.add('ativo')
+  }
+})()
+</script>
+
+<script>
+(function () {
+  window.ecTog = function (id) {
+    var body = document.getElementById('ec-qb-' + id)
+    var arr  = document.getElementById('ec-arr-' + id)
+    if (!body) return
+    var open = body.classList.contains('open')
+    body.classList.toggle('open', !open)
+    if (arr) arr.classList.toggle('open', !open)
+  }
+  window.ecShowAns = function (id) {
+    var ans = document.getElementById(id)
+    if (ans) ans.classList.add('show')
+  }
+  window.gabaritoAtivo = false
+  window.toggleGabarito = function () {
+    if (!window.gabaritoAtivo) {
+      var senha = prompt('Senha do gabarito:')
+      if (senha !== 'Gabarito1') return
+      window.gabaritoAtivo = true
+    } else {
+      window.gabaritoAtivo = false
+      document.querySelectorAll('#pp3-estudo-caso .ec-answer.show').forEach(function (a) { a.classList.remove('show') })
+    }
+    var wrap = document.querySelector('.pp3-wrap')
+    if (wrap) wrap.classList.toggle('gabarito-ativo', window.gabaritoAtivo)
+    var btn = document.getElementById('btn-gabarito')
+    if (btn) btn.textContent = window.gabaritoAtivo ? '🔓 Gabarito' : '🔒 Gabarito'
   }
 })()
 </script>

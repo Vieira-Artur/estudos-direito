@@ -383,6 +383,7 @@
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-tabela')">📊 Tabelas</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-roteiro')">📖 Roteiro</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-casos')">⚖️ Casos</button>
+  <button class="pp3-tab" onclick="pp3Tab(event,'pp3-estudo-caso')">🗂 Estudo de Caso</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-guia')">📄 Guia Prático</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-timeline')">🕐 Linha do Tempo</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-relatorio')">📝 Relatório Geral</button>
@@ -391,7 +392,6 @@
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-infografico')">🖼 Infográfico de Prisões</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-custodia-infografico')">📋 Infográfico Audiência de Custódia</button>
   <button class="pp3-tab" onclick="pp3Tab(event,'pp3-cautelares-pessoais-infografico')">⛓ Infográfico das Cautelares Pessoais</button>
-  <button class="pp3-tab" onclick="pp3Tab(event,'pp3-estudo-caso')">🗂 Estudo de Caso</button>
 </div>
 
 <!-- MAPA MENTAL -->
@@ -1816,12 +1816,12 @@
           <div class="ec-q-num">1</div>
           <div style="flex:1">
             <div class="ec-q-text">Quais são as decisões possíveis na audiência de custódia e o pressuposto que autoriza cada uma?</div>
-            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Compreender</span> Art. 310 CPP · controle do flagrante</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Compreender</span> Art. 310 CPP</div>
           </div>
           <span class="ec-q-arrow" id="ec-arr-ppc1">▾</span>
         </div>
         <div class="ec-q-body" id="ec-qb-ppc1">
-          <p>De memória, liste as saídas do art. 310 e associe, a cada uma, o seu pressuposto.</p>
+          <p><em>Tente antes de revelar:</em> de memória, escreva as saídas possíveis e, ao lado de cada uma, a condição que a legitima.</p>
           <button class="ec-q-show-btn" onclick="ecShowAns('ppa1')">Revelar gabarito comentado</button>
           <div class="ec-answer" id="ppa1">
             <strong>Resposta:</strong> são três, e o juiz deve optar de forma fundamentada: <strong>(I)</strong> relaxar a prisão ilegal; <strong>(II)</strong> converter o flagrante em preventiva, se presentes os requisitos do art. 312 e inadequadas/insuficientes as cautelares diversas; <strong>(III)</strong> conceder liberdade provisória, com ou sem fiança. O flagrante não se mantém por si: ou é convertido em outra medida, ou cessa.
@@ -1835,12 +1835,12 @@
           <div class="ec-q-num">2</div>
           <div style="flex:1">
             <div class="ec-q-text">O flagrante e a custódia foram regulares? O atraso de ≈31h gera, por si só, o relaxamento?</div>
-            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Aplicar</span> Arts. 302, 306 e 310 CPP · prazo de 24h</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Aplicar</span> controle da legalidade do flagrante</div>
           </div>
           <span class="ec-q-arrow" id="ec-arr-ppc2">▾</span>
         </div>
         <div class="ec-q-body" id="ec-qb-ppc2">
-          <p>Classifique o flagrante (art. 302) e avalie o efeito do atraso. O que a defesa pode arguir e qual o desfecho provável?</p>
+          <p><em>Tente antes de revelar:</em> classifique a espécie de flagrante e decida — o que exatamente a defesa pode arguir do atraso, e isso basta para soltar? Justifique.</p>
           <button class="ec-q-show-btn" onclick="ecShowAns('ppa2')">Revelar gabarito comentado</button>
           <div class="ec-answer" id="ppa2">
             <strong>Resposta:</strong> trata-se de flagrante <strong>próprio</strong> (art. 302, I), com APF lavrado, nota de culpa entregue e comunicações feitas (art. 306). O art. 310 fixa 24h. O atraso é irregularidade que a defesa pode suscitar, mas:
@@ -1853,13 +1853,13 @@
         <div class="ec-q-head" onclick="ecTog('ppc3')">
           <div class="ec-q-num">3</div>
           <div style="flex:1">
-            <div class="ec-q-text">A preventiva era admissível e os requisitos do art. 312 estavam presentes? A motivação da decisão se sustenta?</div>
-            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> Arts. 312, 313 e 315 CPP · gravidade abstrata</div>
+            <div class="ec-q-text">A preventiva era cabível neste crime? Havia base concreta para decretá-la? A motivação da decisão se sustenta?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> admissibilidade × requisitos × fundamentação</div>
           </div>
           <span class="ec-q-arrow" id="ec-arr-ppc3">▾</span>
         </div>
         <div class="ec-q-body" id="ec-qb-ppc3">
-          <p>Separe duas perguntas: (a) cabe preventiva neste tipo penal? (b) há periculum concreto? Confronte a motivação do Doc. 4 com o entendimento dos tribunais.</p>
+          <p><em>Tente antes de revelar:</em> separe duas perguntas — este crime comporta preventiva? E, comportando, havia perigo concreto a justificá-la? Então avalie a decisão do Doc. 4.</p>
           <button class="ec-q-show-btn" onclick="ecShowAns('ppa3')">Revelar gabarito comentado</button>
           <div class="ec-answer" id="ppa3">
             <strong>Resposta:</strong> <strong>(a) Admissibilidade:</strong> a pena máxima do estelionato (art. 171, caput) é de 5 anos — superior a 4 —, logo cabe preventiva em abstrato (art. 313, I). <strong>(b) Requisitos:</strong> há fumus, mas o art. 312 exige periculum libertatis <em>concreto</em> e contemporaneidade. A decisão do Doc. 4 ampara-se em gravidade e credibilidade do mercado, sem apontar perigo concreto nem por que as cautelares seriam insuficientes.
@@ -1873,12 +1873,12 @@
           <div class="ec-q-num">4</div>
           <div style="flex:1">
             <div class="ec-q-text">Poderia o juiz converter de ofício? E a fiança: quem pode arbitrá-la neste caso?</div>
-            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> <span class="ec-bl ec-bl-4">Avaliar</span> Arts. 282, 311 e 322 CPP · Súmula 676 STJ</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> <span class="ec-bl ec-bl-4">Avaliar</span> legitimidade da cautelar · competência para a fiança</div>
           </div>
           <span class="ec-q-arrow" id="ec-arr-ppc4">▾</span>
         </div>
         <div class="ec-q-body" id="ec-qb-ppc4">
-          <p>Quem pode provocar a preventiva? E quanto à fiança, observe o teto de pena que separa a competência do delegado e a do juiz.</p>
+          <p><em>Tente antes de revelar:</em> há dois eixos — quem pode <strong>provocar</strong> a preventiva e quem pode <strong>conceder</strong> a fiança. Em cada um, qual é a regra e o que a condiciona?</p>
           <button class="ec-q-show-btn" onclick="ecShowAns('ppa4')">Revelar gabarito comentado</button>
           <div class="ec-answer" id="ppa4">
             <strong>Resposta:</strong> de ofício, <strong>não</strong> — toda cautelar, inclusive a preventiva, depende de requerimento do MP ou de representação da autoridade policial (arts. 282, § 2º, e 311). Aqui o MP requereu, então a conversão não viola a regra; se o juiz tivesse agido de ofício, seria nula.
@@ -1892,13 +1892,13 @@
         <div class="ec-q-head" onclick="ecTog('ppc5')">
           <div class="ec-q-num">5</div>
           <div style="flex:1">
-            <div class="ec-q-text">Como advogado, esboce o pedido de liberdade provisória com as cautelares do art. 319 proporcionais ao risco.</div>
-            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> Arts. 282, § 6º, 319 e 321 CPP · proporcionalidade</div>
+            <div class="ec-q-text">Como advogado, redija o núcleo do pedido de liberdade provisória, escolhendo as cautelares proporcionais ao risco apontado pelo MP.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> proporcionalidade · preventiva como ultima ratio</div>
           </div>
           <span class="ec-q-arrow" id="ec-arr-ppc5">▾</span>
         </div>
         <div class="ec-q-body" id="ec-qb-ppc5">
-          <p>O risco que o MP aponta é a reiteração na corretagem. Que medida do art. 319 ataca exatamente esse risco sem prender?</p>
+          <p><em>Tente antes de revelar:</em> o MP teme a reiteração no exercício da corretagem. Como neutralizar especificamente esse risco sem recorrer à prisão? Construa o pedido em torno dessa escolha.</p>
           <button class="ec-q-show-btn" onclick="ecShowAns('ppa5')">Revelar gabarito comentado</button>
           <div class="ec-answer" id="ppa5">
             <strong>Resposta:</strong> a tese é a da preventiva como <strong>ultima ratio</strong>: ela só cabe quando incabível a substituição por cautelar diversa (art. 282, § 6º). Pedido (núcleo): liberdade provisória (arts. 310, III, e 321) cumulando as cautelares do art. 319 —
@@ -1913,12 +1913,12 @@
           <div class="ec-q-num">6</div>
           <div style="flex:1">
             <div class="ec-q-text">E se o contato com as vítimas tivesse sido por WhatsApp ou redes sociais? O que muda?</div>
-            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> Art. 171, § 2º-A e § 5º (Lei 15.397/2026) · direito intertemporal</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> reclassificação típica · direito intertemporal</div>
           </div>
           <span class="ec-q-arrow" id="ec-arr-ppc6">▾</span>
         </div>
         <div class="ec-q-body" id="ec-qb-ppc6">
-          <p>Reclassifique a hipótese. Há tipo específico para fraude por meio eletrônico? E quanto à ação penal, o que mudou recentemente?</p>
+          <p><em>Tente antes de revelar:</em> existe figura típica específica para a fraude por meio eletrônico? E, no plano da ação penal, algo mudou recentemente que afete este caso?</p>
           <button class="ec-q-show-btn" onclick="ecShowAns('ppa6')">Revelar gabarito comentado</button>
           <div class="ec-answer" id="ppa6">
             <strong>Resposta:</strong> sim. A Lei 15.397/2026 inseriu o <strong>§ 2º-A no art. 171</strong> (fraude eletrônica — redes sociais, e-mail, aplicativos, clonagem de dispositivo ou meio análogo), com pena de <strong>4 a 8 anos</strong>. A admissibilidade da preventiva (art. 313, I) seguiria atendida, com folga, mas a lógica do art. 282, § 6º não muda: a necessidade concreta continua decisiva.

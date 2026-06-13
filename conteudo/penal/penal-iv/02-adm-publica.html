@@ -2555,16 +2555,20 @@ function rpAba(n){
   /* ── Gabarito toggle ── */
   window.gabaritoAtivo = false
   window.toggleGabarito = function () {
-    window.gabaritoAtivo = !window.gabaritoAtivo
+    if (!window.gabaritoAtivo) {
+      var senha = prompt('Senha do gabarito:')
+      if (senha !== 'Gabarito1') return
+      window.gabaritoAtivo = true
+    } else {
+      window.gabaritoAtivo = false
+      document.querySelectorAll('.ec-answer.show').forEach(function (a) { a.classList.remove('show') })
+    }
     var wrap = document.querySelector('.ap-wrap')
     if (wrap) wrap.classList.toggle('gabarito-ativo', window.gabaritoAtivo)
     var btn = document.getElementById('btn-gabarito')
     if (btn) {
       btn.textContent = window.gabaritoAtivo ? '🔓 Gabarito' : '🔒 Gabarito'
       btn.style.background = window.gabaritoAtivo ? 'var(--ap-green)' : 'var(--ap-orange)'
-    }
-    if (!window.gabaritoAtivo) {
-      document.querySelectorAll('.ec-answer.show').forEach(function (a) { a.classList.remove('show') })
     }
   }
 })()

@@ -298,9 +298,7 @@
   <button class="ap-tab" onclick="apTab(event,'ap-jur')">🏛️ Jurisprudência</button>
   <button class="ap-tab" onclick="apTab(event,'ap-questoes')">📝 Questões</button>
   <button class="ap-tab" onclick="apTab(event,'ap-resumo')">📑 Resumo</button>
-</div>
-<div style="text-align:right;margin:-10px 0 16px;">
-  <button id="btn-gabarito" onclick="toggleGabarito()">🔒 Habilitar Gabarito</button>
+  <button id="btn-gabarito" onclick="toggleGabarito()" style="margin-left:auto;">🔒 Gabarito</button>
 </div>
 
 <!-- TAB: MAPA CONCEITUAL -->
@@ -2562,7 +2560,7 @@ function rpAba(n){
     if (wrap) wrap.classList.toggle('gabarito-ativo', window.gabaritoAtivo)
     var btn = document.getElementById('btn-gabarito')
     if (btn) {
-      btn.textContent = window.gabaritoAtivo ? '🔓 Ocultar Gabarito' : '🔒 Habilitar Gabarito'
+      btn.textContent = window.gabaritoAtivo ? '🔓 Gabarito' : '🔒 Gabarito'
       btn.style.background = window.gabaritoAtivo ? 'var(--ap-green)' : 'var(--ap-orange)'
     }
     if (!window.gabaritoAtivo) {

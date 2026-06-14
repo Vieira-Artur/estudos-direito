@@ -169,6 +169,11 @@ const materias = [
             titulo: "Princípios Tributários",
             descricao: "Legalidade · Anterioridade · Noventena · Irretroatividade · Capacidade contributiva · Vedação ao confisco · Exceções",
             arquivo: "conteudo/tributario/tributario-financeiro-i/03-principios-tributarios.html"
+          },
+          {
+            titulo: "Caso: Operação ISS Relâmpago",
+            descricao: "Estudo de caso · Legalidade tributária · Anterioridade · Noventena · Parcelamento · ISS · Questões Bloom",
+            arquivo: "conteudo/tributario/tributario-financeiro-i/04-caso-iss-relampago.html"
           }
         ],
         flashcards: [

@@ -1,0 +1,818 @@
+<style>
+  :root {
+    --blue: #1F497D;
+    --blue-dark: #162f52;
+    --surface: #ffffff;
+    --border: #d0dcea;
+    --text: #1a1a2e;
+    --gold: #ffe9a8;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* ── EC: Case header ─────────────────────────────────── */
+  .ec-case-header {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+    border-radius: 12px;
+    padding: 26px 30px;
+    color: #fff;
+    margin-bottom: 26px;
+  }
+  .ec-op-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 7px;
+  }
+  .ec-case-header h1 {
+    font-size: 24px;
+    margin: 0 0 6px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .ec-case-header .ec-case-subtitle {
+    color: #c8d8ec;
+    font-size: 14px;
+    margin: 0 0 14px;
+    font-style: italic;
+  }
+  .ec-case-header p {
+    color: #ddeaf5;
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+  .ec-case-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ec-meta-tag {
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 6px;
+    padding: 3px 11px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  /* ── EC: Section ──────────────────────────────────────── */
+  .ec-sec {
+    margin-bottom: 30px;
+  }
+  .ec-sec-title {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .10em;
+    text-transform: uppercase;
+    color: #4a5568;
+    margin-bottom: 14px;
+    padding-bottom: 7px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ── EC: Narrative ────────────────────────────────────── */
+  .ec-narrative {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 1.78;
+    color: var(--text);
+  }
+  .ec-narrative p { margin: 0 0 13px; }
+  .ec-narrative p:last-child { margin-bottom: 0; }
+  .ec-narrative strong { color: var(--blue); }
+
+  /* ── EC: Documentos oficiais ──────────────────────────── */
+  .ec-doc-oficial {
+    border-radius: 9px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.09);
+  }
+  .ec-doc-orgao-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+  }
+  .ec-doc-orgao-sigla {
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    background: rgba(0,0,0,.22);
+    border-radius: 6px;
+    padding: 4px 8px;
+    white-space: nowrap;
+    text-align: center;
+    letter-spacing: .04em;
+  }
+  .ec-doc-orgao-info { flex: 1; }
+  .ec-doc-orgao-nome {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(255,255,255,.80);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    line-height: 1.3;
+  }
+  .ec-doc-orgao-titulo {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 3px;
+  }
+  .ec-doc-body {
+    padding: 14px 20px;
+    background: #f8fafd;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #22303f;
+  }
+  .ec-doc-body p { margin: 0 0 8px; }
+  .ec-doc-body p:last-child { margin-bottom: 0; }
+  .ec-doc-body table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ec-doc-body td { padding: 5px 6px; vertical-align: top; border: none; }
+  .ec-doc-body td:first-child {
+    color: #5b6877;
+    width: 32%;
+    font-weight: 600;
+    white-space: nowrap;
+    padding-right: 12px;
+  }
+  .ec-doc-body .ec-doc-nota {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #fff8e1;
+    border-left: 3px solid #f0a500;
+    font-size: 12.5px;
+    color: #7a5500;
+  }
+  .ec-doc-rodape {
+    padding: 6px 18px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.65);
+    text-align: right;
+  }
+
+  /* Cores por tipo de órgão */
+  .ec-doc-pref  { border: 2px solid #1a2744; }
+  .ec-doc-pref  .ec-doc-orgao-header { background: linear-gradient(135deg,#1a2744,#243660); }
+  .ec-doc-pref  .ec-doc-rodape       { background: #1a2744; }
+
+  .ec-doc-sefaz { border: 2px solid #14532d; }
+  .ec-doc-sefaz .ec-doc-orgao-header { background: linear-gradient(135deg,#14532d,#166534); }
+  .ec-doc-sefaz .ec-doc-rodape       { background: #14532d; }
+
+  .ec-doc-emp   { border: 2px solid #44403c; }
+  .ec-doc-emp   .ec-doc-orgao-header { background: linear-gradient(135deg,#44403c,#292524); }
+  .ec-doc-emp   .ec-doc-rodape       { background: #44403c; }
+
+  .ec-doc-deferido { border: 2px solid #1e3a5f; }
+  .ec-doc-deferido .ec-doc-orgao-header { background: linear-gradient(135deg,#1e3a5f,#1F497D); }
+  .ec-doc-deferido .ec-doc-rodape       { background: #1e3a5f; }
+
+  /* ── EC: Tabela síntese ────────────────────────────────── */
+  .ec-summary-wrap { overflow-x: auto; margin-bottom: 4px; }
+  .ec-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--surface);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,0,0,.07);
+  }
+  .ec-summary-table thead th {
+    background: var(--blue);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .ec-summary-table tbody tr { border-bottom: 1px solid var(--border); }
+  .ec-summary-table tbody tr:nth-child(even) { background: #f4f7fb; }
+  .ec-summary-table td { padding: 10px 14px; vertical-align: top; color: var(--text); font-size: 13px; }
+  .ec-summary-table td:first-child { font-weight: 700; color: var(--blue); white-space: nowrap; }
+
+  /* ── EC: Badge ─────────────────────────────────────────── */
+  .ec-badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  .ec-badge-red   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+  .ec-badge-green { background: #dcfce7; color: #14532d; border: 1px solid #86efac; }
+  .ec-badge-amber { background: #fef3c7; color: #78350f; border: 1px solid #fcd34d; }
+
+  /* ── EC: Questões ─────────────────────────────────────── */
+  #btn-gabarito-trib {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: .04em;
+  }
+  #btn-gabarito-trib:hover { opacity: .88; }
+
+  .ec-q-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 6px; }
+  .ec-q-item {
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .ec-q-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    transition: background .15s;
+  }
+  .ec-q-head:hover { background: #f0f5fb; }
+  .ec-q-num {
+    background: var(--blue);
+    color: #fff;
+    border-radius: 50%;
+    width: 27px; height: 27px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .ec-q-text { flex: 1; font-size: 14px; line-height: 1.55; color: var(--text); font-weight: 500; }
+  .ec-q-bloom {
+    font-size: 10.5px; font-weight: 700;
+    border: 1px solid; border-radius: 4px;
+    padding: 2px 7px; white-space: nowrap;
+    align-self: flex-start; margin-top: 3px; flex-shrink: 0;
+  }
+  .ec-q-arrow {
+    color: #9ba8b8; font-size: 14px;
+    align-self: flex-start; margin-top: 4px; flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .ec-q-arrow.open { transform: rotate(180deg); }
+
+  .ec-q-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .32s ease;
+  }
+  .ec-q-body.open { max-height: 1200px; }
+
+  .ec-q-context {
+    padding: 11px 16px 6px;
+    font-size: 13.5px;
+    color: #4a5568;
+    line-height: 1.65;
+    border-top: 1px solid var(--border);
+    background: #fafcff;
+    font-style: italic;
+  }
+
+  .ec-q-show-btn {
+    display: none;
+    margin: 6px 16px 12px;
+    padding: 5px 14px;
+    border: 1px solid #b8ccdf;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1F497D;
+    background: #eef4fc;
+    cursor: pointer;
+  }
+  .ec-q-show-btn:hover { background: #dceaf9; }
+
+  /* Quadro-síntese — visível só no gabarito */
+  .ec-gab-section { display: none; }
+  #tf-pr-caso-wrap.gabarito-ativo .ec-gab-section { display: block; }
+
+  /* When gabarito unlocked */
+  #tf-pr-caso-wrap.gabarito-ativo .ec-q-show-btn { display: inline-block; }
+  #tf-pr-caso-wrap.gabarito-ativo .ec-answer.show { display: block; }
+
+  .ec-answer {
+    display: none;
+    padding: 12px 18px 16px;
+    background: #f0f7ff;
+    border-top: 1px solid #c3d0e3;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .ec-answer strong { color: var(--blue); }
+  .ec-answer h4 {
+    font-size: 13px;
+    color: var(--blue);
+    margin: 12px 0 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .ec-art-ref {
+    display: inline-block;
+    background: #e8f0f9;
+    color: #1F497D;
+    border: 1px solid #b3cde0;
+    border-radius: 4px;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 1px 7px;
+    margin: 0 2px;
+    white-space: nowrap;
+  }
+  .ec-stj-ref {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 13px;
+    background: #fff8e1;
+    border-left: 3px solid #f0a500;
+    font-size: 13px;
+    border-radius: 0 4px 4px 0;
+  }
+  .ec-stj-ref strong { color: #8a5e00; }
+
+  /* Bloom levels */
+  .ec-bl-1 { background: #dce6f1; color: #1F497D; border-color: #1F497D; }
+  .ec-bl-2 { background: #d6f0d6; color: #1a5c1a; border-color: #1a5c1a; }
+  .ec-bl-3 { background: #ffe8cc; color: #7a3a00; border-color: #c86400; }
+  .ec-bl-4 { background: #fce8e8; color: #8b1a1a; border-color: #8b1a1a; }
+  .ec-bl-5 { background: #ede8fc; color: #4b1a8b; border-color: #4b1a8b; }
+  .ec-bl-6 { background: #2d3748; color: #fff;    border-color: #2d3748; }
+
+  /* ── EC: Rodapé do caso ────────────────────────────────── */
+  .ec-foot {
+    margin-top: 26px;
+    padding: 14px 20px;
+    background: #f5f8fc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 12px;
+    color: #6b7a8d;
+    line-height: 1.65;
+  }
+  .ec-foot strong { color: #4a5568; }
+
+  /* ── Legenda Bloom ─────────────────────────────────────── */
+  .ec-bloom-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .ec-bloom-legend span {
+    font-size: 11px;
+    font-weight: 700;
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+
+  /* ── Responsivo ────────────────────────────────────────── */
+  @media (max-width:600px) {
+    .ec-case-header { padding: 18px 18px; }
+    .ec-case-header h1 { font-size: 20px; }
+    .ec-doc-orgao-sigla { font-size: 11px; }
+    .ec-summary-table td:first-child { white-space: normal; }
+  }
+
+  @media print {
+    .ec-q-body { max-height: none !important; }
+    .ec-answer { display: block !important; }
+    .ec-q-show-btn { display: none !important; }
+    #btn-gabarito-trib { display: none; }
+  }
+</style>
+
+<div id="tf-pr-caso-wrap">
+
+  <!-- ══════════════════════════════════════════════════════════
+       CABEÇALHO DO CASO
+  ══════════════════════════════════════════════════════════ -->
+  <div class="ec-case-header">
+    <div class="ec-op-label">Caso Simulado · Direito Tributário e Financeiro I</div>
+    <h1>Operação ISS Relâmpago</h1>
+    <p class="ec-case-subtitle">O decreto que tentou chegar antes da lei — e o parcelamento que suspendeu tudo</p>
+    <p>Estudo de caso fictício sobre legalidade tributária, anterioridade anual, noventena e parcelamento como modalidade de suspensão do crédito tributário. Personagens, empresa e documentos inteiramente fictícios, elaborados para fins didáticos.</p>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Legalidade tributária</span>
+      <span class="ec-meta-tag">Anterioridade anual</span>
+      <span class="ec-meta-tag">Noventena</span>
+      <span class="ec-meta-tag">Parcelamento</span>
+      <span class="ec-meta-tag">ISS</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SEÇÃO 1 — NARRATIVA
+  ══════════════════════════════════════════════════════════ -->
+  <div class="ec-sec">
+    <div class="ec-sec-title">Narrativa dos fatos</div>
+    <div style="background:#fff8e8;border:1px solid #f0a500;border-radius:8px;padding:10px 16px;font-size:13px;color:#7a5000;margin-bottom:14px;">
+      <strong>Leia atentamente</strong>
+    </div>
+
+    <div class="ec-narrative">
+      <p><strong>A crise fiscal.</strong> O Município de São Lourenço do Planalto/MG atravessa grave desequilíbrio orçamentário em 2025. A arrecadação do ISSQN, principal tributo municipal, ficou 18% abaixo do previsto. Para elevar a receita, o Prefeito <strong>Renato Caetano de Mello</strong> assina, em <strong>10 de novembro de 2025</strong>, o <strong>Decreto Municipal nº 1.490/2025</strong>, majorando a alíquota do ISSQN incidente sobre serviços de desenvolvimento de software (subitem 1.01 da LC 116/2003) de <strong>2% para 5%</strong>, com vigência a partir de 1º de janeiro de 2026.</p>
+
+      <p><strong>O contribuinte.</strong> A <strong>DevSol Sistemas Ltda.</strong>, empresa de tecnologia sediada em São Lourenço do Planalto/MG, presta serviços de desenvolvimento de software para clientes em todo o país. Ao longo do 1º trimestre de 2026 (janeiro–março), a DevSol emitiu Notas Fiscais de Serviços totalizando <strong>R$ 800.000,00</strong> e recolheu o ISSQN à alíquota de <strong>2%</strong> — a alíquota fixada na legislação anterior (Lei Municipal nº 320/2018) —, totalizando R$ 16.000,00 pagos aos cofres do Município.</p>
+
+      <p><strong>O auto de infração.</strong> Em 15 de maio de 2026, a Secretaria Municipal de Fazenda lavrou o <strong>Auto de Infração e Notificação de Lançamento de Ofício nº 047/2026</strong>, cobrando a diferença de 3 pontos percentuais de alíquota sobre o faturamento do 1º trimestre. O crédito tributário exigido somou <strong>R$ 24.000,00</strong> (tributo) + multa moratória de 75% (R$ 18.000,00) + juros SELIC, totalizando aproximadamente R$ 45.000,00.</p>
+
+      <p><strong>A estratégia defensiva.</strong> Após consultar o advogado tributarista <strong>Dr. Marcos Assis Teixeira</strong>, a DevSol, preocupada com a possível inscrição no CADIN municipal e a perda da Certidão Negativa de Débitos — essencial para contratos com o poder público —, decide protocolar pedido de <strong>parcelamento</strong> do crédito tributário controvertido em 60 parcelas, com base na Lei Municipal nº 850/2023. O pedido foi deferido em 02 de junho de 2026.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SEÇÃO 2 — DOCUMENTOS OFICIAIS
+  ══════════════════════════════════════════════════════════ -->
+  <div class="ec-sec">
+    <div class="ec-sec-title">Documentos do procedimento</div>
+
+    <!-- Documento 1: Decreto Municipal -->
+    <div class="ec-doc-oficial ec-doc-pref">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">PMSLP</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Prefeitura Municipal de São Lourenço do Planalto · Estado de Minas Gerais</div>
+          <div class="ec-doc-orgao-titulo">Decreto Municipal nº 1.490/2025</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Publicação</td><td>10 de novembro de 2025 (Diário Oficial Municipal, ed. 1.842)</td></tr>
+          <tr><td>Vigência</td><td>1º de janeiro de 2026</td></tr>
+          <tr><td>Objeto</td><td>Majoração da alíquota do ISSQN sobre serviços de desenvolvimento de software (subitem 1.01, Anexo da Lei Complementar nº 116/2003)</td></tr>
+          <tr><td>Dispositivo</td><td>"<em>Art. 1º Fica elevada a alíquota do Imposto Sobre Serviços de Qualquer Natureza — ISSQN incidente sobre os serviços descritos no subitem 1.01 da LC 116/2003, de 2% (dois por cento) para 5% (cinco por cento), a vigorar a partir de 1º de janeiro de 2026.</em>"</td></tr>
+          <tr><td>Assinatura</td><td>Renato Caetano de Mello — Prefeito Municipal</td></tr>
+        </table>
+        <p class="ec-doc-nota">⚠ O ato foi publicado como <strong>Decreto</strong>, expedido pelo Chefe do Poder Executivo municipal, e não como lei aprovada pela Câmara Municipal.</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · Fins didáticos</div>
+    </div>
+
+    <!-- Documento 2: Auto de Infração -->
+    <div class="ec-doc-oficial ec-doc-sefaz">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">SEFAZ</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Secretaria Municipal de Fazenda · São Lourenço do Planalto/MG</div>
+          <div class="ec-doc-orgao-titulo">Auto de Infração e Notificação de Lançamento de Ofício nº 047/2026</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data de lavratura</td><td>15 de maio de 2026</td></tr>
+          <tr><td>Contribuinte</td><td>DevSol Sistemas Ltda. — CNPJ 45.678.901/0001-23</td></tr>
+          <tr><td>Período fiscalizado</td><td>1º trimestre de 2026 (jan.–mar.)</td></tr>
+          <tr><td>Faturamento apurado</td><td>R$ 800.000,00 (serviços de desenvolvimento de software)</td></tr>
+          <tr><td>Alíquota cobrada pelo contribuinte</td><td>2% → ISSQN recolhido: R$ 16.000,00</td></tr>
+          <tr><td>Alíquota exigida pelo Fisco</td><td>5% (Decreto Municipal nº 1.490/2025) → ISSQN devido: R$ 40.000,00</td></tr>
+          <tr><td>Diferença de tributo</td><td>R$ 24.000,00</td></tr>
+          <tr><td>Multa moratória (75%)</td><td>R$ 18.000,00</td></tr>
+          <tr><td>Juros (SELIC)</td><td>R$ 3.120,00 (apurados até 15/05/2026)</td></tr>
+          <tr><td>Total exigido</td><td><strong>R$ 45.120,00</strong></td></tr>
+          <tr><td>Prazo para defesa</td><td>30 dias corridos da notificação (art. 5º, Lei Municipal nº 612/2019)</td></tr>
+          <tr><td>Fundamento legal</td><td>Decreto Municipal nº 1.490/2025; art. 149, VII, do CTN</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · Fins didáticos</div>
+    </div>
+
+    <!-- Documento 3: Requerimento de Parcelamento -->
+    <div class="ec-doc-oficial ec-doc-emp">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">DevSol</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">DevSol Sistemas Ltda. · CNPJ 45.678.901/0001-23</div>
+          <div class="ec-doc-orgao-titulo">Requerimento de Parcelamento — Protocolo nº 3.891/2026</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data do protocolo</td><td>28 de maio de 2026</td></tr>
+          <tr><td>Dirigido à</td><td>Secretaria Municipal de Fazenda de São Lourenço do Planalto/MG</td></tr>
+          <tr><td>Crédito objeto</td><td>Auto de Infração nº 047/2026 — R$ 45.120,00</td></tr>
+          <tr><td>Modalidade requerida</td><td>Parcelamento em 60 (sessenta) parcelas mensais e consecutivas, nos termos da Lei Municipal nº 850/2023</td></tr>
+          <tr><td>Valor de cada parcela</td><td>R$ 752,00 (estimado, sujeito à atualização)</td></tr>
+          <tr><td>Representante</td><td>Sônia Regina Braga Drummond — Sócia-Administradora</td></tr>
+          <tr><td>Advogado</td><td>Marcos Assis Teixeira — OAB/MG 58.234</td></tr>
+        </table>
+        <p class="ec-doc-nota">⚠ A empresa registra, para todos os fins, que o pedido de parcelamento não implica reconhecimento da validade do lançamento, e que os fundamentos jurídicos que afastam a exigibilidade do crédito serão oportunamente arguidos.</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · Fins didáticos</div>
+    </div>
+
+    <!-- Documento 4: Termo de Deferimento do Parcelamento -->
+    <div class="ec-doc-oficial ec-doc-deferido">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">SEFAZ</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Secretaria Municipal de Fazenda · São Lourenço do Planalto/MG</div>
+          <div class="ec-doc-orgao-titulo">Termo de Deferimento de Parcelamento nº 112/2026 — para análise crítica</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data do deferimento</td><td>02 de junho de 2026</td></tr>
+          <tr><td>Contribuinte</td><td>DevSol Sistemas Ltda.</td></tr>
+          <tr><td>Crédito parcelado</td><td>Auto de Infração nº 047/2026 — R$ 45.120,00</td></tr>
+          <tr><td>Parcelas</td><td>60 × R$ 752,00 (primeira: 15/07/2026)</td></tr>
+          <tr><td>Efeito imediato</td><td>Suspensão da exigibilidade do crédito tributário (art. 151, VI, do CTN) e emissão de certidão positiva com efeitos de negativa (art. 206 do CTN)</td></tr>
+          <tr><td>Condição resolutória</td><td>Inadimplência de 3 parcelas consecutivas ou 6 alternadas rescinde o parcelamento e restaura a exigibilidade integral do crédito (art. 12, Lei Municipal nº 850/2023)</td></tr>
+        </table>
+        <p class="ec-doc-nota">⚠ Cláusula 5ª da Lei Municipal nº 850/2023: "<em>O contribuinte que aderir ao parcelamento não poderá impugnar, na esfera administrativa municipal, os créditos objeto do acordo.</em>" — <strong>Esta cláusula merece atenção crítica</strong>: discuta se ela é válida e suas consequências práticas.</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · Fins didáticos</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SEÇÃO 3 — QUESTÕES
+  ══════════════════════════════════════════════════════════ -->
+  <div class="ec-sec">
+    <div class="ec-sec-title">
+      Questões para discussão
+      <button id="btn-gabarito-trib" onclick="toggleGabaritoTrib()">🔒 Gabarito</button>
+    </div>
+
+    <!-- Quadro-síntese — visível apenas após senha do gabarito -->
+    <div class="ec-gab-section">
+      <div class="ec-sec-title" style="margin-top:18px;">Quadro-síntese — os vícios jurídicos e seus efeitos</div>
+      <div class="ec-summary-wrap" style="margin-bottom:22px;">
+        <table class="ec-summary-table">
+          <thead>
+            <tr>
+              <th>Ato / Situação</th>
+              <th>Natureza</th>
+              <th>Vício Jurídico</th>
+              <th>Aplicação ao caso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Decreto nº 1.490/2025</td>
+              <td>Ato normativo do Poder Executivo (Prefeito)</td>
+              <td><span class="ec-badge ec-badge-red">Inconstitucional</span> Viola legalidade: ISS só pode ter alíquota majorada por lei (art. 150, I CF + art. 97, IV CTN). Decreto não é lei.</td>
+              <td>Nulo de pleno direito. Não pode fundamentar lançamento nem obrigar contribuinte.</td>
+            </tr>
+            <tr>
+              <td>Auto de Infração nº 047/2026</td>
+              <td>Lançamento de ofício (art. 149, VII CTN)</td>
+              <td><span class="ec-badge ec-badge-red">Ilegal</span> Fundado em decreto inconstitucional; crédito viciado na origem. Sem lei válida, sem lançamento legítimo (art. 142 CTN).</td>
+              <td>Passível de anulação integral. ISS exigível apenas à alíquota de 2% (Lei Municipal nº 320/2018).</td>
+            </tr>
+            <tr>
+              <td>Se fosse Lei publicada em 10/11/2025 com vigência em 01/01/2026</td>
+              <td>Ato normativo do Poder Legislativo</td>
+              <td><span class="ec-badge ec-badge-amber">Parcialmente inconstitucional</span> Anterioridade anual ✓ (2025→2026). Noventena ✗: 10/11/2025 + 90 dias = <strong>08/02/2026</strong>. Vigência em 01/01/2026 viola art. 150, III, c CF.</td>
+              <td>Mesmo com lei, a cobrança de janeiro e início de fevereiro seria inconstitucional. Válida só a partir de 08/02/2026.</td>
+            </tr>
+            <tr>
+              <td>Parcelamento nº 112/2026</td>
+              <td>Suspensão da exigibilidade do crédito tributário (art. 151, VI CTN)</td>
+              <td><span class="ec-badge ec-badge-amber">Atenção</span> Suspende exigibilidade e garante CND (art. 206 CTN), mas não extingue o crédito (extinção: art. 156 CTN). Cláusula 5ª pode vedar impugnação administrativa.</td>
+              <td>Preserva a CND e evita CADIN — mas o crédito permanece vivo e a cláusula de renúncia é juridicamente questionável.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Legenda Bloom -->
+    <div class="ec-bloom-legend">
+      <span class="ec-bl-1">Recordar</span>
+      <span class="ec-bl-2">Compreender</span>
+      <span class="ec-bl-3">Aplicar</span>
+      <span class="ec-bl-4">Analisar</span>
+      <span class="ec-bl-5">Avaliar</span>
+      <span class="ec-bl-6">Criar</span>
+    </div>
+
+    <div class="ec-q-list">
+
+      <!-- Q1 — Recordar -->
+      <div class="ec-q-item">
+        <button class="ec-q-head" onclick="ecTogTrib(1)">
+          <div class="ec-q-num">1</div>
+          <span class="ec-q-text">Quais são as espécies de lançamento previstas no CTN? Qual espécie foi utilizada no Auto de Infração nº 047/2026 e por quê?</span>
+          <span class="ec-q-bloom ec-bl-1">Recordar</span>
+          <span class="ec-q-arrow" id="ec-arrt-1">▾</span>
+        </button>
+        <div class="ec-q-body" id="ec-qbt-1">
+          <p class="ec-q-context">Identifique e diferencie as modalidades de lançamento do CTN. Em seguida, enquadre a atuação da SEFAZ municipal no caso.</p>
+          <button class="ec-q-show-btn" onclick="ecShowAnsTrib('ec-ans-1')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ec-ans-1">
+            <h4>Gabarito — Recordar</h4>
+            <p>O CTN prevê três modalidades de lançamento:</p>
+            <p><strong>(i) Lançamento de ofício</strong> <span class="ec-art-ref">art. 149 CTN</span> — realizado pela autoridade administrativa por iniciativa própria, sem participação do sujeito passivo. É a regra nos casos de omissão, fraude, erro ou quando não há previsão de outra modalidade.</p>
+            <p><strong>(ii) Lançamento por declaração</strong> <span class="ec-art-ref">art. 147 CTN</span> — o sujeito passivo presta declaração de dados, e a autoridade, com base nelas, efetua o lançamento.</p>
+            <p><strong>(iii) Lançamento por homologação</strong> <span class="ec-art-ref">art. 150 CTN</span> — o contribuinte antecipa o pagamento sem exame prévio da autoridade. O Fisco, ao homologar (expressa ou tacitamente), extingue o crédito.</p>
+            <p><strong>No caso:</strong> foi utilizado o <strong>lançamento de ofício</strong> <span class="ec-art-ref">art. 149, VII CTN</span>. A SEFAZ Municipal constatou que a DevSol recolheu o ISS à alíquota de 2% quando, na visão do Fisco, a alíquota aplicável seria de 5% (Decreto nº 1.490/2025). Diante da "omissão" do contribuinte em recolher a diferença, a autoridade lavrou o auto de infração de ofício. Nota: o ISS é normalmente recolhido por homologação, mas quando o Fisco apura diferença e autua o contribuinte, o lançamento passa a ser de ofício (art. 149, V e VII CTN).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 — Compreender -->
+      <div class="ec-q-item">
+        <button class="ec-q-head" onclick="ecTogTrib(2)">
+          <div class="ec-q-num">2</div>
+          <span class="ec-q-text">Por que o Direito Tributário exige lei formal para fixar alíquotas de tributos? Explique o princípio da legalidade tributária e como ele se diferencia da legalidade geral do Direito Público.</span>
+          <span class="ec-q-bloom ec-bl-2">Compreender</span>
+          <span class="ec-q-arrow" id="ec-arrt-2">▾</span>
+        </button>
+        <div class="ec-q-body" id="ec-qbt-2">
+          <p class="ec-q-context">Explique a ratio do princípio e sua especificidade em relação à legalidade administrativa geral. Há exceções no próprio texto constitucional?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAnsTrib('ec-ans-2')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ec-ans-2">
+            <h4>Gabarito — Compreender</h4>
+            <p>O princípio da <strong>legalidade tributária</strong> <span class="ec-art-ref">art. 150, I CF</span> veda à União, Estados, DF e Municípios exigir ou aumentar tributo <em>sem lei que o estabeleça</em>. É um desdobramento qualificado do princípio da legalidade geral <span class="ec-art-ref">art. 5º, II CF</span>.</p>
+            <p>O art. 97 CTN densifica o mandamento: somente a lei pode: instituir ou extinguir tributos (inc. I), majorá-los ou reduzi-los (inc. II) e definir as alíquotas e bases de cálculo (inc. IV). Esses elementos são a <strong>reserva de lei estrita</strong> em matéria tributária.</p>
+            <p><strong>Distinção em relação à legalidade geral:</strong></p>
+            <p>Na legalidade administrativa geral, o Executivo pode agir <em>secundum legem</em> — dentro dos limites da lei, mas com liberdade de regulamentação. Em Direito Tributário, a exigência é mais rígida: a lei <em>ela mesma</em> deve definir os elementos essenciais da obrigação (fato gerador, base de cálculo, alíquota, sujeito passivo). Não basta lei que "autorize" o Executivo a fixar alíquotas — a fixação deve ser feita <em>pela própria lei</em>, salvo as exceções expressas na CF para II, IE, IPI e IOF <span class="ec-art-ref">art. 153, §1º CF</span>, que permitem ao Executivo alterar alíquotas por decreto, dentro de limites legais.</p>
+            <p>O ISS (art. 156, III CF) não está nessas exceções. Logo, a alíquota do ISS só pode ser majorada por lei municipal, e não por decreto do Prefeito.</p>
+            <div class="ec-stj-ref"><strong>Doutrina:</strong> Aliomar Baleeiro e Luciano Amaro apontam que a legalidade tributária é, em sua essência, uma garantia do contribuinte contra o arbítrio fiscal — o tributo deve nascer com o consentimento dos representantes do povo, não do poder unilateral do Executivo.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 — Aplicar -->
+      <div class="ec-q-item">
+        <button class="ec-q-head" onclick="ecTogTrib(3)">
+          <div class="ec-q-num">3</div>
+          <span class="ec-q-text">O Decreto Municipal nº 1.490/2025 é um instrumento normativo válido para majorar a alíquota do ISS? Fundamente com base nos princípios e normas tributárias aplicáveis e indique a consequência para o Auto de Infração nº 047/2026.</span>
+          <span class="ec-q-bloom ec-bl-3">Aplicar</span>
+          <span class="ec-q-arrow" id="ec-arrt-3">▾</span>
+        </button>
+        <div class="ec-q-body" id="ec-qbt-3">
+          <p class="ec-q-context">Faça a subsunção dos fatos às normas. Qual é a consequência para o Auto de Infração nº 047/2026?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAnsTrib('ec-ans-3')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ec-ans-3">
+            <h4>Gabarito — Aplicar</h4>
+            <p><strong>O Decreto nº 1.490/2025 é inválido para majorar a alíquota do ISS.</strong> Subsunção:</p>
+            <p><strong>Premissa normativa:</strong> <span class="ec-art-ref">art. 150, I CF</span> veda ao Município exigir ou aumentar tributo sem lei que o estabeleça. <span class="ec-art-ref">art. 97, IV CTN</span> reserva à lei a definição das alíquotas dos tributos.</p>
+            <p><strong>Premissa fática:</strong> O ISS é tributo municipal (art. 156, III CF). A alíquota do ISS sobre serviços de software foi majorada de 2% para 5% pelo Decreto Municipal nº 1.490/2025 — ato normativo editado pelo Prefeito, sem aprovação pela Câmara Municipal. Decreto não é lei em sentido formal.</p>
+            <p><strong>Conclusão:</strong> O Decreto nº 1.490/2025 viola o princípio da legalidade tributária. É nulo de pleno direito e não produz o efeito de alterar a alíquota do ISS. A alíquota aplicável permanece sendo 2%, fixada pela Lei Municipal nº 320/2018.</p>
+            <p><strong>Consequência para o Auto de Infração:</strong> O lançamento de ofício nº 047/2026 carece de fundamento legal. O art. 142 CTN estabelece que o lançamento deve "determinar a matéria tributável, calcular o montante do tributo devido" — mas essa determinação pressupõe norma legal válida. Ausente a lei que majore a alíquota para 5%, o crédito tributário exigido na diferença de alíquota não encontra base jurídica e deve ser anulado.</p>
+            <div class="ec-stj-ref"><strong>Nota:</strong> A alíquota máxima do ISS é de 5% (art. 8º, II, LC 116/2003) e a mínima de 2% (art. 8º-A, LC 116/2003, inserido pela LC 157/2016). Logo, uma lei municipal poderia elevar a alíquota até 5% — mas o instrumento para isso não é um decreto.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q4 — Analisar -->
+      <div class="ec-q-item">
+        <button class="ec-q-head" onclick="ecTogTrib(4)">
+          <div class="ec-q-num">4</div>
+          <span class="ec-q-text">Suponha que, em vez do decreto, a Câmara Municipal tivesse aprovado uma Lei publicada em 10 de novembro de 2025, com vigência em 1º de janeiro de 2026. Essa lei seria constitucional? Analise os princípios da anterioridade anual e da noventena.</span>
+          <span class="ec-q-bloom ec-bl-4">Analisar</span>
+          <span class="ec-q-arrow" id="ec-arrt-4">▾</span>
+        </button>
+        <div class="ec-q-body" id="ec-qbt-4">
+          <p class="ec-q-context">Analise cada limitação temporal separadamente e identifique qual seria violada. Calcule a data a partir da qual a lei poderia legitimamente produzir efeitos. O ISS goza de alguma exceção?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAnsTrib('ec-ans-4')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ec-ans-4">
+            <h4>Gabarito — Analisar</h4>
+            <p>Mesmo com lei formal, a vigência em 01/01/2026 ainda seria parcialmente inconstitucional.</p>
+            <p><strong>Anterioridade anual</strong> <span class="ec-art-ref">art. 150, III, b CF</span>: veda cobrar tributo no mesmo exercício financeiro em que publicada a lei que o instituiu ou majorou. Lei publicada em 10/11/2025 → exercício financeiro de publicação: 2025 → exercício seguinte: 2026. <span class="ec-badge ec-badge-green">✓ Respeita a anterioridade anual</span> — a lei poderia produzir efeitos a partir de 01/01/2026.</p>
+            <p><strong>Noventena</strong> <span class="ec-art-ref">art. 150, III, c CF</span>: veda cobrar tributo antes de decorridos 90 dias da data de publicação da lei. Publicação: 10/11/2025. Prazo de 90 dias: <strong>08/02/2026</strong>. Vigência pretendida: 01/01/2026. <span class="ec-badge ec-badge-red">✗ Viola a noventena</span> — há apenas ~52 dias entre publicação e vigência.</p>
+            <p><strong>Regra da concomitância:</strong> quando ambas as regras incidem (e o ISS não está nas exceções do art. 150, §1º CF), prevalece a data <em>mais tardia</em> — pois o contribuinte tem direito a ambas as proteções. Portanto, a lei publicada em 10/11/2025 só poderia produzir efeitos sobre alíquota do ISS a partir de <strong>08 de fevereiro de 2026</strong>.</p>
+            <p><strong>Consequência para o caso:</strong> Mesmo com uma lei formal, toda a cobrança de ISS sobre os serviços prestados em janeiro e nos primeiros dias de fevereiro de 2026 seria inconstitucional. No caso concreto, porém, o vício principal continua sendo a legalidade — pois nem sequer havia lei.</p>
+            <div class="ec-stj-ref"><strong>Exceções ao ISS:</strong> O ISS não consta das exceções à anterioridade anual (II, IE, IPI, IOF, IEG, EC — art. 150, §1º, 1ª parte CF) nem das exceções à noventena (II, IE, IR, IEG, EC; fixação da BC do IPTU e IPVA — art. 150, §1º, 2ª parte CF). Por isso, ambas as proteções se aplicam integralmente ao ISS.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q5 — Avaliar -->
+      <div class="ec-q-item">
+        <button class="ec-q-head" onclick="ecTogTrib(5)">
+          <div class="ec-q-num">5</div>
+          <span class="ec-q-text">A decisão da DevSol de solicitar o parcelamento foi juridicamente acertada? Avalie os benefícios e riscos dessa estratégia, considerando especialmente a Cláusula 5ª da Lei Municipal nº 850/2023 e os efeitos do parcelamento sobre o crédito tributário.</span>
+          <span class="ec-q-bloom ec-bl-5">Avaliar</span>
+          <span class="ec-q-arrow" id="ec-arrt-5">▾</span>
+        </button>
+        <div class="ec-q-body" id="ec-qbt-5">
+          <p class="ec-q-context">Pondere os prós e contras da estratégia de parcelamento frente à alternativa de resistir ao lançamento. Avalie também a legalidade da cláusula de renúncia à impugnação.</p>
+          <button class="ec-q-show-btn" onclick="ecShowAnsTrib('ec-ans-5')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ec-ans-5">
+            <h4>Gabarito — Avaliar</h4>
+            <h4>Benefícios do parcelamento</h4>
+            <p><strong>(1) Suspensão da exigibilidade</strong> <span class="ec-art-ref">art. 151, VI CTN</span>: o parcelamento deferido suspende imediatamente a exigibilidade do crédito tributário, impedindo o Fisco de executar a dívida enquanto as parcelas são adimplidas.</p>
+            <p><strong>(2) Certidão Positiva com Efeitos de Negativa</strong> <span class="ec-art-ref">art. 206 CTN</span>: com o crédito suspenso, a DevSol pode obter certidão que tem os mesmos efeitos da CND — essencial para assinar contratos com o poder público e participar de licitações.</p>
+            <p><strong>(3) Evita CADIN e protesto</strong>: o parcelamento deferido impede a inscrição da empresa no Cadastro Municipal de Inadimplentes e o protesto da Certidão da Dívida Ativa (CDA).</p>
+            <h4>Riscos da estratégia</h4>
+            <p><strong>(1) O crédito não é extinto</strong>: parcelamento é causa de <em>suspensão</em> <span class="ec-art-ref">art. 151 CTN</span>, não de extinção (art. 156 CTN). O crédito permanece vivo e, se a empresa inadimplir 3 parcelas consecutivas ou 6 alternadas, é rescindido com cobrança do saldo integral.</p>
+            <p><strong>(2) A Cláusula 5ª é o principal risco</strong>: a Lei Municipal nº 850/2023 condiciona o parcelamento à renúncia à impugnação administrativa. Isso é juridicamente questionável: o STJ tem entendido que a adesão ao parcelamento implica reconhecimento da dívida (Súmula 550 STJ — para parcelamento após inscrição em dívida ativa), mas a doutrina majoritária distingue o reconhecimento do crédito da renúncia ao direito de questionar sua origem ilegal. A cláusula pode limitar a defesa administrativa futura — por isso o requerimento da DevSol já faz a ressalva expressa de não reconhecimento da dívida.</p>
+            <p><strong>(3) Pagamento como extinção</strong> <span class="ec-art-ref">art. 156, I CTN</span>: se a empresa pagar todas as 60 parcelas, o crédito se extingue pelo pagamento — e recuperar os valores exigiria ação de repetição de indébito futura (art. 165 CTN), com prazo prescricional de 5 anos (LC 118/2005).</p>
+            <h4>Avaliação final</h4>
+            <p>A estratégia tem racionalidade prática (preserva a operação da empresa), mas jurídica e estrategicamente é subótima: a DevSol admite implicitamente uma obrigação que não existe. A alternativa recomendável seria a <strong>impugnação administrativa do lançamento</strong>, que também suspende a exigibilidade <span class="ec-art-ref">art. 151, III CTN</span> sem implicar reconhecimento da dívida nem sujeitar a empresa à cláusula de renúncia.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q6 — Criar -->
+      <div class="ec-q-item">
+        <button class="ec-q-head" onclick="ecTogTrib(6)">
+          <div class="ec-q-num">6</div>
+          <span class="ec-q-text">Na posição de advogado da DevSol, elabore os 3 argumentos centrais para impugnar o Auto de Infração nº 047/2026. Use exclusivamente institutos de Direito Tributário I — não mencione mandado de segurança, embargos à execução ou ação anulatória.</span>
+          <span class="ec-q-bloom ec-bl-6">Criar</span>
+          <span class="ec-q-arrow" id="ec-arrt-6">▾</span>
+        </button>
+        <div class="ec-q-body" id="ec-qbt-6">
+          <p class="ec-q-context">Construa a impugnação dentro dos limites de Direito Tributário I (constitucional tributário + CTN). Não é necessário escrever uma peça formal — apenas os 3 argumentos estruturados com fundamento e conclusão.</p>
+          <button class="ec-q-show-btn" onclick="ecShowAnsTrib('ec-ans-6')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="ec-ans-6">
+            <h4>Gabarito — Criar</h4>
+            <p><strong>1º Argumento — Violação do Princípio da Legalidade Tributária (argumento principal)</strong></p>
+            <p><em>Fundamento:</em> <span class="ec-art-ref">art. 150, I CF</span> + <span class="ec-art-ref">art. 97, IV CTN</span>. O Decreto Municipal nº 1.490/2025, ato normativo de competência exclusiva do Chefe do Poder Executivo, não é veículo normativo apto para majorar alíquota de tributo. A Constituição reserva à lei em sentido formal a instituição e majoração de tributos. O ISS não consta das exceções constitucionais que permitem ao Executivo alterar alíquotas por decreto <span class="ec-art-ref">art. 153, §1º CF</span>. Portanto, o Decreto nº 1.490/2025 é nulo e o lançamento que nele se ampara carece de fundamento legal (art. 142 CTN).</p>
+            <p><em>Conclusão:</em> O crédito tributário exigido na diferença de alíquota (3%) é indevido. A alíquota aplicável ao ISS da DevSol no 1º trimestre de 2026 é de 2%, conforme a Lei Municipal nº 320/2018, integralmente recolhida.</p>
+
+            <p><strong>2º Argumento — Violação da Noventena (subsidiário)</strong></p>
+            <p><em>Fundamento:</em> <span class="ec-art-ref">art. 150, III, c CF</span>. Mesmo que o Decreto equivalesse a lei — o que não se admite —, a vigência em 01/01/2026 violaria a anterioridade nonagesimal. Entre a publicação (10/11/2025) e o início de 2026 decorreram apenas ~52 dias, aquém do prazo constitucional de 90 dias. O art. 150, III, c CF proíbe a cobrança antes de 08/02/2026. Portanto, a totalidade do 1º trimestre de 2026 estaria protegida: janeiro e fevereiro (até o dia 7) por violação da noventena; março e demais datas pela inconstitucionalidade primária (legalidade).</p>
+            <p><em>Conclusão:</em> Ainda que se admitisse algum instrumento normativo válido (hipótese não reconhecida), nenhum tributo poderia ser exigido com base nessa majoração antes de 08/02/2026.</p>
+
+            <p><strong>3º Argumento — Impossibilidade de Constituição de Crédito Tributário sem Lei Prévia (argumento consequencial)</strong></p>
+            <p><em>Fundamento:</em> <span class="ec-art-ref">art. 142 CTN</span> + <span class="ec-art-ref">art. 3º CTN</span>. O tributo é prestação pecuniária instituída em lei (art. 3º CTN). O lançamento é o procedimento pelo qual a autoridade verifica a ocorrência do fato gerador, determina a matéria tributável e calcula o montante <em>nos termos da legislação aplicável</em>. Não existindo legislação válida que majore a alíquota do ISS para 5%, o "crédito tributário" exigido na diferença de alíquota é inexistente — a SEFAZ não pode constituir por lançamento um crédito que a lei não criou. O Auto de Infração nº 047/2026, em seus valores além da alíquota de 2%, deve ser inteiramente anulado.</p>
+            <p><em>Conclusão:</em> A DevSol Sistemas Ltda. recolheu corretamente o ISSQN à alíquota de 2%, totalizando R$ 16.000,00 no 1º trimestre de 2026. O auto de infração deve ser cancelado e os valores exigidos a título de tributo (R$ 24.000,00), multa (R$ 18.000,00) e juros (R$ 3.120,00) são indevidos.</p>
+
+            <div class="ec-stj-ref"><strong>Nota de gabarito:</strong> A questão excluiu processo tributário (mandado de segurança, embargos, ação anulatória) porque são instrumentos de Processo Tributário. A impugnação administrativa (Direito Tributário I) é o veículo adequado nesta fase — ela também suspende a exigibilidade <span class="ec-art-ref">art. 151, III CTN</span> sem os riscos do parcelamento.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /ec-q-list -->
+  </div><!-- /ec-sec -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       RODAPÉ DO CASO
+  ══════════════════════════════════════════════════════════ -->
+  <div class="ec-foot">
+    <strong>Direito Tributário e Financeiro I — Prof. Artur Vieira · Faculdades Integradas Vianna Júnior.</strong><br>
+    Caso, pessoas, empresas e documentos inteiramente fictícios, elaborados para fins didáticos.<br>
+    Normas conferidas em jun./2026: arts. 3º, 97 (I, II, IV), 142, 147, 149 (VII), 150, 151 (III e VI), 156 (I), 165, 206 do CTN; arts. 150 (I, III a/b/c, §1º) e 153 (§1º) da CF/88; LC 116/2003 (arts. 8º e 8º-A); Lei Municipal nº 850/2023 (fictícia).
+    <br><br>
+    <strong>Senha do gabarito:</strong> disponível com o professor.
+  </div>
+
+</div><!-- /tf-pr-caso-wrap -->
+
+<script>
+  /* ── Gabarito com senha ─────────────────────────────── */
+  function toggleGabaritoTrib() {
+    var wrap = document.getElementById('tf-pr-caso-wrap');
+    var btn  = document.getElementById('btn-gabarito-trib');
+    if (!window.gabaritoTribAtivo) {
+      var senha = prompt('Senha do gabarito:');
+      if (senha !== 'tributario1') return;
+      window.gabaritoTribAtivo = true;
+    } else {
+      window.gabaritoTribAtivo = false;
+      wrap.querySelectorAll('.ec-answer.show').forEach(function(a) {
+        a.classList.remove('show');
+      });
+    }
+    wrap.classList.toggle('gabarito-ativo', !!window.gabaritoTribAtivo);
+    if (btn) btn.textContent = window.gabaritoTribAtivo ? '🔓 Gabarito' : '🔒 Gabarito';
+  }
+
+  /* ── Toggle das questões ────────────────────────────── */
+  function ecTogTrib(id) {
+    var body = document.getElementById('ec-qbt-' + id);
+    var arr  = document.getElementById('ec-arrt-' + id);
+    if (!body) return;
+    var open = body.classList.contains('open');
+    body.classList.toggle('open', !open);
+    if (arr) arr.classList.toggle('open', !open);
+  }
+
+  /* ── Revelar resposta individual ────────────────────── */
+  function ecShowAnsTrib(id) {
+    var ans = document.getElementById(id);
+    if (ans) ans.classList.add('show');
+  }
+</script>

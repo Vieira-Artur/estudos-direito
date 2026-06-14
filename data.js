@@ -135,6 +135,11 @@ const materias = [
             titulo: "Recursos",
             descricao: "Conceito · 8 Princípios · Pressupostos · Tabela de prazos · RESE · Apelação · Embargos",
             arquivo: "conteudo/processual-penal-iii/03-recursos.html"
+          },
+          {
+            titulo: "Estudo de Caso",
+            descricao: "Operação Vitrine Limpa · Procedimento ordinário · Nulidade absoluta × relativa · Apelação",
+            arquivo: "conteudo/processual-penal-iii/04-estudo-de-caso.html"
           }
         ]
       },

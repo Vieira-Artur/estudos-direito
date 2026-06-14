@@ -1,0 +1,517 @@
+<style>
+/* ── Variáveis de cor (reaproveitadas de processual-penal-ii/03-prisoes) ── */
+:root {
+  --pp3-green:  #1a5c1a; --pp3-green-lt: #d6f0d6;
+  --pp3-red:    #8b1a1a; --pp3-red-lt:   #fce8e8;
+  --pp3-orange: #7a3800; --pp3-orange-lt:#fdebd6;
+  --pp3-purple: #4a1a8a; --pp3-purple-lt:#ede5fb;
+  --pp3-teal:   #0a5c4a; --pp3-teal-lt:  #d6f0e8;
+  --pp3-yellow: #5a4000; --pp3-yellow-lt:#fdf6d6;
+  --pp3-bg2:    #f5f7fa;
+  --pp3-bg3:    #edf0f4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pp3-green:  #6fd86f; --pp3-green-lt:  #0d2e0d;
+    --pp3-red:    #f08080; --pp3-red-lt:    #2e0d0d;
+    --pp3-orange: #f0a060; --pp3-orange-lt: #2e1500;
+    --pp3-purple: #c0a0f8; --pp3-purple-lt: #200a40;
+    --pp3-teal:   #60d8b8; --pp3-teal-lt:   #072e22;
+    --pp3-yellow: #f0d060; --pp3-yellow-lt: #2e2000;
+    --pp3-bg2:    #1a2840;
+    --pp3-bg3:    #1f3052;
+  }
+}
+:root[data-theme="dark"] {
+  --pp3-green:  #6fd86f; --pp3-green-lt:  #0d2e0d;
+  --pp3-red:    #f08080; --pp3-red-lt:    #2e0d0d;
+  --pp3-orange: #f0a060; --pp3-orange-lt: #2e1500;
+  --pp3-purple: #c0a0f8; --pp3-purple-lt: #200a40;
+  --pp3-teal:   #60d8b8; --pp3-teal-lt:   #072e22;
+  --pp3-yellow: #f0d060; --pp3-yellow-lt: #2e2000;
+  --pp3-bg2:    #1a2840;
+  --pp3-bg3:    #1f3052;
+}
+
+/* ── Abas ─────────────────────────────────────────────── */
+.pp3-titulo {
+  font-family: var(--serif); font-size: 19px; font-weight: 700;
+  color: var(--blue); margin-bottom: 16px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--border);
+}
+.pp3-tabs { display: flex; gap: 4px; margin-bottom: 22px; flex-wrap: wrap; }
+.pp3-tab {
+  padding: 7px 16px; font-size: 13px; font-weight: 600;
+  font-family: var(--sans);
+  border: 1.5px solid var(--blue); border-radius: 6px; cursor: pointer;
+  background: var(--surface); color: var(--blue);
+  transition: background .15s, color .15s;
+}
+.pp3-tab:hover { background: var(--blue-hover); }
+.pp3-tab.ativo  { background: var(--blue); color: #fff; }
+.pp3-painel { display: none; }
+.pp3-painel.ativo { display: block; }
+@media (max-width: 540px) { .pp3-tab { padding: 4px 9px; font-size: 11.5px; } }
+@media (max-width: 768px) {
+  .pp3-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .pp3-tab { white-space: nowrap; flex-shrink: 0; }
+}
+
+/* ── Estudo de Caso: classes .ec- (reaproveitadas de 03-prisoes) ── */
+#ec-vitrine .ec-case-header{background:var(--blue);border-radius:12px;padding:24px 28px;color:#fff;margin-bottom:24px;}
+#ec-vitrine .ec-op-label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffe9a8;margin-bottom:6px;}
+#ec-vitrine .ec-case-header h2{font-size:23px;margin:0 0 10px;color:#fff;border:none;}
+#ec-vitrine .ec-case-header p{color:#eef2f8;font-size:14.5px;line-height:1.6;margin:0;}
+#ec-vitrine .ec-case-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+#ec-vitrine .ec-meta-tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:6px;padding:4px 12px;font-size:12.5px;}
+#ec-vitrine .ec-sec{margin-bottom:28px;}
+#ec-vitrine .ec-sec-title{font-size:17px;color:var(--blue);margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid var(--blue);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+#ec-vitrine .ec-badge{font-size:11px;background:var(--blue);color:#fff;padding:2px 10px;border-radius:4px;font-weight:600;letter-spacing:.04em;}
+#ec-vitrine .ec-narrative{background:var(--pp3-bg2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;font-size:14px;line-height:1.75;}
+#ec-vitrine .ec-narrative p{margin:0 0 12px;}
+#ec-vitrine .ec-narrative p:last-child{margin-bottom:0;}
+
+/* Documentos oficiais */
+#ec-vitrine .ec-doc-oficial{border-radius:4px;margin-bottom:18px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.14);}
+#ec-vitrine .ec-doc-orgao-header{display:flex;align-items:center;gap:14px;padding:12px 18px;color:#fff;}
+#ec-vitrine .ec-doc-orgao-sigla{font-size:20px;font-weight:900;letter-spacing:.04em;opacity:.92;flex-shrink:0;font-family:var(--serif);}
+#ec-vitrine .ec-doc-orgao-info{flex:1;}
+#ec-vitrine .ec-doc-orgao-nome{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.82;}
+#ec-vitrine .ec-doc-orgao-titulo{font-size:14px;font-weight:700;margin-top:2px;font-family:var(--serif);}
+#ec-vitrine .ec-doc-body{padding:16px 20px;background:#fff;color:#22303f;font-size:13.5px;line-height:1.65;}
+#ec-vitrine .ec-doc-body p{margin:0 0 8px;color:#22303f;}
+#ec-vitrine .ec-doc-body p:last-child{margin-bottom:0;}
+#ec-vitrine .ec-doc-body table{width:100%;border-collapse:collapse;font-size:13px;}
+#ec-vitrine .ec-doc-body td{padding:4px 6px;vertical-align:top;border:none;background:transparent;color:#22303f;}
+#ec-vitrine .ec-doc-body td:first-child{color:#5b6877;width:34%;font-weight:600;}
+#ec-vitrine .ec-doc-rodape{padding:7px 18px;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.72);text-align:right;}
+
+/* Tipos de documento por órgão */
+#ec-vitrine .ec-doc-mp{border:2px solid #3A2870;}
+#ec-vitrine .ec-doc-mp .ec-doc-orgao-header{background:linear-gradient(135deg,#3A2870,#4D3690);}
+#ec-vitrine .ec-doc-mp .ec-doc-rodape{background:#3A2870;}
+
+#ec-vitrine .ec-doc-jud{border:2px solid #4a1a8a;}
+#ec-vitrine .ec-doc-jud .ec-doc-orgao-header{background:linear-gradient(135deg,#4a1a8a,#6030a8);}
+#ec-vitrine .ec-doc-jud .ec-doc-rodape{background:#4a1a8a;}
+
+#ec-vitrine .ec-doc-tj{border:2px solid #2c5c8a;}
+#ec-vitrine .ec-doc-tj .ec-doc-orgao-header{background:linear-gradient(135deg,#1e3d6b,#2c5c8a);}
+#ec-vitrine .ec-doc-tj .ec-doc-rodape{background:#1e3d6b;}
+
+#ec-vitrine .ec-doc-def{border:2px solid #0a5c4a;}
+#ec-vitrine .ec-doc-def .ec-doc-orgao-header{background:linear-gradient(135deg,#0a5c4a,#196b57);}
+#ec-vitrine .ec-doc-def .ec-doc-rodape{background:#0a5c4a;}
+
+/* Questões */
+#ec-vitrine .ec-q-list{display:flex;flex-direction:column;gap:14px;}
+#ec-vitrine .ec-q-item{background:var(--pp3-bg2);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+#ec-vitrine .ec-q-head{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;cursor:pointer;}
+#ec-vitrine .ec-q-num{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13.5px;flex-shrink:0;}
+#ec-vitrine .ec-q-text{font-size:14px;line-height:1.5;font-weight:600;color:var(--text);}
+#ec-vitrine .ec-q-bloom{font-size:11.5px;color:var(--text2);margin-top:4px;font-weight:400;}
+#ec-vitrine .ec-q-arrow{color:var(--text2);font-size:16px;padding-top:2px;flex-shrink:0;transition:transform .2s;}
+#ec-vitrine .ec-q-arrow.open{transform:rotate(180deg);}
+#ec-vitrine .ec-q-body{display:none;padding:0 18px 16px 60px;}
+#ec-vitrine .ec-q-body.open{display:block;}
+#ec-vitrine .ec-q-body p{font-size:13.8px;line-height:1.65;margin:0 0 10px;color:var(--text);}
+#ec-vitrine .ec-q-show-btn{margin-top:6px;padding:7px 16px;background:transparent;border:1.5px solid var(--border);border-radius:6px;color:var(--text2);font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s;}
+#ec-vitrine .ec-q-show-btn:hover{border-color:var(--blue);color:var(--blue);}
+#ec-vitrine .ec-answer{display:none;margin-top:12px;padding:12px 14px;background:var(--pp3-green-lt);border-radius:8px;font-size:13.8px;line-height:1.7;color:var(--text);}
+#ec-vitrine .ec-answer.show{display:block;}
+#ec-vitrine .ec-answer strong{color:var(--blue);}
+#ec-vitrine .ec-art-ref{background:var(--blue-light);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;padding:8px 12px;margin:8px 0;font-size:13px;font-style:italic;line-height:1.55;color:var(--text);}
+#ec-vitrine .ec-stj-ref{background:var(--pp3-yellow-lt);border-left:3px solid var(--pp3-yellow);border-radius:0 5px 5px 0;padding:8px 12px;margin:8px 0;font-size:13px;line-height:1.55;color:var(--text);}
+#ec-vitrine .ec-stj-ref strong{color:var(--pp3-yellow);}
+#ec-vitrine .ec-bl{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:700;margin-right:5px;}
+#ec-vitrine .ec-bl-1{background:var(--blue-light);color:var(--blue);}
+#ec-vitrine .ec-bl-2{background:var(--pp3-green-lt);color:var(--pp3-green);}
+#ec-vitrine .ec-bl-3{background:var(--pp3-red-lt);color:var(--pp3-red);}
+#ec-vitrine .ec-bl-4{background:var(--pp3-yellow-lt);color:var(--pp3-yellow);}
+#ec-vitrine .ec-foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;line-height:1.6;color:var(--text2);}
+
+/* Portão de gabarito */
+#ec-vitrine .ec-gate{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;padding:12px 16px;background:var(--pp3-bg2);border:1px solid var(--border);border-radius:8px;}
+#ec-vitrine .ec-gate input{padding:7px 12px;font-size:13px;border:1.5px solid var(--border);border-radius:6px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;}
+#ec-vitrine .ec-gate input:focus{border-color:var(--blue);}
+#ec-vitrine .ec-gate button{padding:7px 16px;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;background:var(--blue);color:#fff;font-family:inherit;transition:opacity .15s;}
+#ec-vitrine .ec-gate button:hover{opacity:.85;}
+#ec-vitrine .ec-gate-msg{font-size:13px;font-weight:600;}
+#ec-vitrine .ec-gate-msg.ok{color:var(--pp3-green);}
+#ec-vitrine .ec-gate-msg.err{color:var(--pp3-red);}
+
+/* Oculta botões e respostas quando gabarito não liberado */
+#ec-vitrine:not(.gab-ativo) .ec-q-show-btn{display:none!important;}
+#ec-vitrine:not(.gab-ativo) .ec-answer{display:none!important;}
+
+/* Dark mode: fundo de documentos */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) #ec-vitrine .ec-doc-body,
+  :root:not([data-theme="light"]) #ec-vitrine .ec-doc-body p,
+  :root:not([data-theme="light"]) #ec-vitrine .ec-doc-body td{background:var(--pp3-bg2)!important;color:var(--text)!important;}
+  :root:not([data-theme="light"]) #ec-vitrine .ec-doc-body td:first-child{color:var(--text2)!important;}
+}
+:root[data-theme="dark"] #ec-vitrine .ec-doc-body,
+:root[data-theme="dark"] #ec-vitrine .ec-doc-body p,
+:root[data-theme="dark"] #ec-vitrine .ec-doc-body td{background:var(--pp3-bg2)!important;color:var(--text)!important;}
+:root[data-theme="dark"] #ec-vitrine .ec-doc-body td:first-child{color:var(--text2)!important;}
+</style>
+
+<div class="pp3-wrap">
+
+<h1 class="pp3-titulo">Processo Penal III — Estudo de Caso</h1>
+
+<div class="pp3-tabs">
+  <button class="pp3-tab ativo" onclick="pp3TabVitrine(event,'ec-vitrine')">🗂 Estudo de Caso</button>
+</div>
+
+<!-- ===== PAINEL: ESTUDO DE CASO — Operação Vitrine Limpa ===== -->
+<div id="ec-vitrine" class="pp3-painel ativo">
+
+  <!-- 1. Cabeçalho do caso -->
+  <div class="ec-case-header">
+    <div class="ec-op-label">Operação Vitrine Limpa</div>
+    <h2>O furto qualificado na distribuidora e os vícios da instrução: nulidade absoluta, nulidade relativa e o recurso cabível.</h2>
+    <p>Estudo de caso fictício sobre o procedimento comum ordinário (arts. 394 e ss. do CPP), a distinção entre nulidade absoluta e relativa na audiência de instrução e julgamento (art. 400), o ônus de arguição no momento oportuno (art. 571) e a escolha do recurso cabível da sentença condenatória (art. 593). Personagens, empresas e documentos inteiramente fictícios, elaborados para fins didáticos.</p>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Furto qualificado · art. 155, §4º, CP</span>
+      <span class="ec-meta-tag">Procedimento comum ordinário · art. 394, §1º, I, CPP</span>
+      <span class="ec-meta-tag">Nulidades · arts. 563–573 CPP</span>
+      <span class="ec-meta-tag">Apelação · art. 593, I, CPP</span>
+    </div>
+  </div>
+
+  <!-- 2. Narrativa dos fatos -->
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Narrativa dos fatos <span class="ec-badge">LEIA ATENTAMENTE</span></h2>
+    <div class="ec-narrative">
+      <p>Na madrugada de 12 de março de 2026, a distribuidora <strong>Aurora Bebidas Ltda.</strong>, em Juiz de Fora/MG, teve seu galpão arrombado. Câmeras registraram dois indivíduos retirando caixas de destilados avaliadas em R$ 38.000,00. Dias depois, <strong>Rogério Salles</strong> foi preso preventivamente, apontado por um vigia como um dos autores, e <strong>Tiago Couto</strong> foi indiciado como comparsa que dirigia o veículo de fuga.</p>
+      <p>O Ministério Público ofereceu denúncia por <strong>furto qualificado</strong> (rompimento de obstáculo e concurso de pessoas — art. 155, §4º, I e IV, do CP), e o juiz recebeu a denúncia. Citados, os réus apresentaram resposta à acusação. Designada a <strong>audiência de instrução e julgamento</strong>, ocorreram três fatos relevantes:</p>
+      <p><strong>(a)</strong> O advogado constituído de Rogério não foi localizado e não compareceu; o juiz <strong>nomeou defensor dativo no ato</strong> e <strong>deu seguimento à audiência na mesma hora</strong>, sem conceder prazo para o dativo examinar os autos.</p>
+      <p><strong>(b)</strong> O juiz <strong>interrogou os réus logo no início da audiência</strong>, antes de ouvir as testemunhas de acusação e defesa. A defesa de Tiago <strong>nada falou sobre a ordem dos atos naquele momento</strong> e seguiu participando normalmente.</p>
+      <p><strong>(c)</strong> Uma testemunha de acusação foi ouvida por videoconferência, sem a intimação prévia das partes prevista para o ato.</p>
+      <p>Encerrada a instrução, sobreveio <strong>sentença condenatória</strong>. Na fundamentação, o juiz afirmou que a autoria estava demonstrada "<strong>pelo reconhecimento feito na fase policial e pelo depoimento dos policiais que conduziram a investigação</strong>", sem indicar prova produzida sob contraditório judicial que confirmasse a autoria de Tiago. Ambos foram condenados a 3 anos de reclusão, em regime aberto.</p>
+      <p>A sentença foi disponibilizada no Diário eletrônico em <strong>sexta-feira, 29 de maio de 2026</strong> (publicação considerada no primeiro dia útil seguinte). As defesas pretendem recorrer.</p>
+    </div>
+  </div>
+
+  <!-- 3. Documentos reais simulados -->
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Documentos do procedimento</h2>
+
+    <!-- Doc 1: Ministério Público -->
+    <div class="ec-doc-oficial ec-doc-mp">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">MP</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Ministério Público do Estado de Minas Gerais · 3ª Promotoria de Justiça Criminal de Juiz de Fora</div>
+          <div class="ec-doc-orgao-titulo">Denúncia — Autos nº 0123456-78.2026.8.13.0145</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <p>O <strong>Ministério Público do Estado de Minas Gerais</strong>, por seu Promotor de Justiça signatário, vem oferecer <strong>DENÚNCIA</strong> em face de <strong>ROGÉRIO SALLES</strong>, brasileiro, solteiro, e <strong>TIAGO COUTO</strong>, brasileiro, casado, como incursos no art. 155, §4º, incisos I e IV, do Código Penal.</p>
+        <p>Consta dos autos que, na madrugada de 12 de março de 2026, os denunciados, em concurso de agentes, após rompimento do obstáculo que protegia o galpão da <strong>Aurora Bebidas Ltda.</strong>, subtraíram mercadorias avaliadas em R$ 38.000,00 (trinta e oito mil reais). Rogério Salles adentrou o galpão e retirou os produtos, enquanto Tiago Couto aguardava no veículo de fuga. A conduta foi captada por câmeras de segurança e o vigia do estabelecimento reconheceu Rogério Salles.</p>
+        <p>Arrolam-se como testemunhas: 1) o vigia da distribuidora; 2) os policiais civis responsáveis pela investigação; 3) a sócia-proprietária da Aurora Bebidas Ltda. Requer-se o recebimento da denúncia e a citação dos réus para apresentar resposta à acusação nos termos do art. 396 do CPP.</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <!-- Doc 2: Termo de Audiência (TJ — var --pp3-purple) -->
+    <div class="ec-doc-oficial ec-doc-jud">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">TJ</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Tribunal de Justiça de Minas Gerais · 2ª Vara Criminal da Comarca de Juiz de Fora</div>
+          <div class="ec-doc-orgao-titulo">Termo de Audiência de Instrução e Julgamento — Autos nº 0123456-78.2026.8.13.0145</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data/Hora</td><td>14 de abril de 2026, às 13h30</td></tr>
+          <tr><td>Magistrado</td><td>Dr. Fernando Alves Corrêa (2ª Vara Criminal)</td></tr>
+          <tr><td>Réus presentes</td><td>Rogério Salles e Tiago Couto</td></tr>
+          <tr><td>Advogado de Rogério</td><td>Ausente (não localizado); nomeado defensor dativo Dr. Carlos Meireles, presente na serventia. Juízo determinou imediato prosseguimento do ato.</td></tr>
+          <tr><td>Advogada de Tiago</td><td>Dra. Patrícia Drummond (constituída)</td></tr>
+          <tr><td>Ordem dos atos</td><td><strong>Interrogatório dos réus realizado em primeiro lugar</strong>, antes da oitiva das testemunhas. Em seguida: testemunhas de acusação (3), incluindo uma por videoconferência. Testemunhas de defesa (2). <strong>Não houve registro de impugnação quanto à ordem dos atos</strong> por nenhuma das partes.</td></tr>
+          <tr><td>Debates</td><td>Convertidos em alegações finais escritas (memoriais) — prazo: 10 dias para cada parte.</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <!-- Doc 3: Sentença (TJ) -->
+    <div class="ec-doc-oficial ec-doc-jud">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">TJ</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">2ª Vara Criminal da Comarca de Juiz de Fora — TJMG</div>
+          <div class="ec-doc-orgao-titulo">Sentença — Autos nº 0123456-78.2026.8.13.0145</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <p><strong>Dispositivo:</strong> Julgo <strong>procedente</strong> a denúncia para condenar ROGÉRIO SALLES e TIAGO COUTO pela prática do crime de furto qualificado (art. 155, §4º, I e IV, do CP).</p>
+        <p><strong>Fundamentação (autoria):</strong> <em>"A autoria restou demonstrada pelo reconhecimento realizado na fase policial e pelo depoimento dos policiais responsáveis pela diligência."</em></p>
+        <p><strong>Pena:</strong> 3 (três) anos de reclusão em regime inicial aberto e multa. Concedido o direito de recorrer em liberdade. Transitada em julgado, expeçam-se as guias de recolhimento.</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <!-- Doc 4: Certidão de Publicação (DJe) -->
+    <div class="ec-doc-oficial ec-doc-tj">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">DJe</div>
+        <div class="ec-doc-orgao-info">
+          <div class="ec-doc-orgao-nome">Diário da Justiça Eletrônico — Tribunal de Justiça de Minas Gerais</div>
+          <div class="ec-doc-orgao-titulo">Certidão de Publicação — Autos nº 0123456-78.2026.8.13.0145</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Disponibilização no DJe</td><td>29/05/2026 (sexta-feira)</td></tr>
+          <tr><td>Data da publicação</td><td>02/06/2026 (segunda-feira — primeiro dia útil subsequente)</td></tr>
+          <tr><td>Ato publicado</td><td>Sentença proferida nos autos em epígrafe</td></tr>
+          <tr><td>Obs.</td><td>A publicação em DJe considera-se realizada no primeiro dia útil seguinte à disponibilização (art. 4º, Lei 11.419/2006).</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+  </div>
+
+  <!-- 4. Questões para discussão -->
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Questões para discussão</h2>
+
+    <!-- Portão de senha -->
+    <div class="ec-gate">
+      <input type="password" id="ecPassVitrine" placeholder="Senha do gabarito" autocomplete="off">
+      <button id="ecUnlockVitrine" onclick="ecLiberar()">Liberar gabaritos</button>
+      <span id="ecGateMsgVitrine" class="ec-gate-msg"></span>
+    </div>
+
+    <div class="ec-q-list">
+
+      <!-- Q1 -->
+      <div class="ec-q-item" id="vq1">
+        <div class="ec-q-head" onclick="ecTogV('vq1')">
+          <div class="ec-q-num">1</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Considerando a pena máxima cominada ao furto qualificado e a regra do art. 394 do CPP, qual o procedimento aplicável a este processo e qual a consequência prática dessa classificação para a sequência de atos?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Compreender</span> <em>rito aplicável</em></div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-vq1">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-vq1">
+          <p><em>Reflita antes de revelar: qual critério define o procedimento ordinário? Que ato a lei coloca por último na audiência e por quê?</em></p>
+          <button class="ec-q-show-btn" onclick="ecShowV('va1')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="va1">
+            <strong>Resposta:</strong> O procedimento aplicável é o <strong>comum ordinário</strong> (art. 394, §1º, I, do CPP), pois a pena máxima do art. 155, §4º, do CP é de 8 anos, ou seja, igual ou superior a 4 anos. A consequência prática é a submissão ao rito dos arts. 396 a 405: resposta à acusação em 10 dias (art. 396), possibilidade de absolvição sumária (art. 397) e <strong>audiência una de instrução e julgamento</strong> com o <strong>interrogatório como último ato</strong> (art. 400, caput), garantia de autodefesa qualificada.
+            <div class="ec-art-ref">Arts. 394, §1º, I; 396; 396-A; 399 e 400, caput, do CPP.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="ec-q-item" id="vq2">
+        <div class="ec-q-head" onclick="ecTogV('vq2')">
+          <div class="ec-q-num">2</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Na audiência, o juiz interrogou os réus antes de ouvir as testemunhas. Confronte essa conduta com a disciplina legal da audiência una e classifique o vício quanto à sua natureza.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Aplicar</span> <em>ordem dos atos na AIJ</em></div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-vq2">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-vq2">
+          <p><em>Identifique o dispositivo que fixa a posição do interrogatório e decida: o vício invalida automaticamente o ato ou exige algo mais?</em></p>
+          <button class="ec-q-show-btn" onclick="ecShowV('va2')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="va2">
+            <strong>Resposta:</strong> O art. 400 do CPP determina que o interrogatório seja o <strong>último ato</strong> da instrução (garantia de autodefesa — o réu conhece toda a prova antes de falar). Inverter a ordem configura vício procedimental, que a jurisprudência majoritária classifica como <strong>nulidade relativa</strong>: depende de <strong>demonstração de prejuízo concreto</strong> e de <strong>arguição no momento oportuno</strong>.
+            <div class="ec-art-ref">Art. 400, caput, do CPP.</div>
+            <div class="ec-stj-ref"><strong>STF/STJ (linha consolidada pós-Lei 11.719/2008):</strong> a inversão da ordem do interrogatório é <em>nulidade relativa</em>, sujeita à preclusão e à comprovação de prejuízo (STF, HC 127.900 — que também fixou o rito do art. 400 como regra para leis especiais).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="ec-q-item" id="vq3">
+        <div class="ec-q-head" onclick="ecTogV('vq3')">
+          <div class="ec-q-num">3</div>
+          <div style="flex:1">
+            <div class="ec-q-text">A defesa de Tiago não impugnou a ordem dos atos durante a audiência e seguiu participando. Que efeito o silêncio produz sobre a alegação de nulidade da inversão do interrogatório?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> <em>prejuízo e momento oportuno</em></div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-vq3">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-vq3">
+          <p><em>Considere o art. 571 e o princípio pas de nullité sans grief. O silêncio produz consequências diferentes conforme o tipo de nulidade?</em></p>
+          <button class="ec-q-show-btn" onclick="ecShowV('va3')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="va3">
+            <strong>Resposta:</strong> Tratando-se de <strong>nulidade relativa</strong>, a parte deve arguí-la no <strong>momento oportuno</strong> — em regra, ainda na própria audiência (art. 571 do CPP) — sob pena de <strong>preclusão/convalidação</strong> (art. 572). Além disso, vigora o princípio <em>pas de nullité sans grief</em>: sem demonstração de <strong>prejuízo concreto</strong>, não se declara a nulidade (art. 563). O silêncio da defesa de Tiago, somado à ausência de prejuízo demonstrado, tende a <strong>sanar</strong> o vício.
+            <div class="ec-art-ref">Arts. 563, 571 e 572 do CPP.</div>
+            <div class="ec-stj-ref"><strong>Súmula 523 do STF (parte final):</strong> "…a sua deficiência só o anulará se houver prova de prejuízo para o réu." — aplicado aqui por analogia para nulidade relativa de ato procedimental.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="ec-q-item" id="vq4">
+        <div class="ec-q-head" onclick="ecTogV('vq4')">
+          <div class="ec-q-num">4</div>
+          <div style="flex:1">
+            <div class="ec-q-text">A condenação apoiou-se no reconhecimento da fase policial e no depoimento dos policiais, sem prova de autoria produzida sob contraditório judicial quanto a Tiago. Avalie a regularidade dessa fundamentação à luz do art. 155 do CPP.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> <em>fundamentação da sentença</em></div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-vq4">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-vq4">
+          <p><em>Qual é a regra sobre o uso de elementos do inquérito para condenar? A fundamentação da sentença respeita essa regra?</em></p>
+          <button class="ec-q-show-btn" onclick="ecShowV('va4')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="va4">
+            <strong>Resposta:</strong> O art. 155 do CPP <strong>veda a condenação fundada exclusivamente em elementos informativos colhidos no inquérito</strong>, não confirmados em juízo sob o contraditório. A sentença que se apoia apenas no reconhecimento policial e em depoimentos não submetidos ao contraditório judicial padece de <strong>vício de fundamentação</strong> que toca o devido processo legal e a ampla defesa — passível de nulidade e de <strong>absolvição por insuficiência de provas</strong> (art. 386, V/VII). Esse vício difere qualitativamente da inversão do interrogatório (Q2): aqui a base probatória da condenação é ilegítima.
+            <div class="ec-art-ref">Arts. 155 e 386, V e VII, do CPP.</div>
+            <div class="ec-stj-ref"><strong>Jurisprudência consolidada do STJ:</strong> é nula/insubsistente a condenação lastreada exclusivamente em elementos do inquérito policial, sem confirmação em juízo sob contraditório (art. 155 do CPP).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="ec-q-item" id="vq5">
+        <div class="ec-q-head" onclick="ecTogV('vq5')">
+          <div class="ec-q-num">5</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Quanto ao réu Rogério, o juiz nomeou defensor dativo no ato e prosseguiu sem conceder prazo para exame dos autos. Compare a gravidade desse vício com a inversão do interrogatório (Q2) e julgue se ambos recebem o mesmo tratamento.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Avaliar</span> <em>absoluta × relativa · defesa</em></div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-vq5">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-vq5">
+          <p><em>A Súmula 523 do STF distingue "falta de defesa" de "deficiência de defesa". Em qual categoria se enquadra a situação de Rogério e que consequência isso gera?</em></p>
+          <button class="ec-q-show-btn" onclick="ecShowV('va5')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="va5">
+            <strong>Resposta:</strong> <strong>Não recebem o mesmo tratamento.</strong>
+            <p>A <strong>falta de defesa</strong> (ou defesa formal apenas aparente, sem preparo mínimo) é <strong>nulidade absoluta</strong> — o prejuízo é <strong>presumido</strong> e a matéria <strong>não preclui</strong>. Nomear dativo sem conceder prazo sequer mínimo para examinar os autos aproxima-se da deficiência tão grave que equipara à ausência de defesa técnica efetiva, gerando nulidade. Já a inversão do interrogatório é <strong>nulidade relativa</strong> (Q2/Q3), que preclui e exige demonstração de prejuízo.</p>
+            <p>A chave da distinção: <strong>vício que atinge garantia essencial (absoluta) × vício de forma sanável (relativa)</strong>.</p>
+            <div class="ec-art-ref">Art. 564, III, "c", e art. 565 do CPP.</div>
+            <div class="ec-stj-ref"><strong>Súmula 523 do STF:</strong> "No processo penal, a falta da defesa constitui nulidade absoluta, mas a sua deficiência só o anulará se houver prova de prejuízo para o réu."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="ec-q-item" id="vq6">
+        <div class="ec-q-head" onclick="ecTogV('vq6')">
+          <div class="ec-q-num">6</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Da sentença condenatória proferida por juiz singular, qual é o recurso cabível, qual o prazo de interposição e o de razões, e por que não se admite recurso em sentido estrito no mesmo ponto?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Aplicar</span> <em>recurso cabível e prazo</em></div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-vq6">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-vq6">
+          <p><em>Identifique o recurso previsto para sentença definitiva de condenação e os prazos específicos do CPP. Por que o RESE não se aplica aqui?</em></p>
+          <button class="ec-q-show-btn" onclick="ecShowV('va6')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="va6">
+            <strong>Resposta:</strong> Cabe <strong>apelação</strong> (art. 593, I, do CPP — sentença definitiva de condenação proferida por juiz singular). O prazo de <strong>interposição</strong> é de <strong>5 dias</strong> (art. 593, caput), e o prazo para <strong>razões</strong> é de <strong>8 dias</strong> (art. 600). O primeiro dia do prazo conta-se da publicação, que aqui ocorre em 02/06/2026 (segunda-feira).
+            <p>Não cabe RESE porque, sendo a apelação o recurso adequado, é <strong>vedado o RESE</strong>, ainda que se recorra apenas de parte da decisão (art. 593, §4º — <strong>princípio da unirrecorribilidade</strong>). As alegações de nulidade são veiculadas como <strong>preliminares dentro da apelação</strong>.</p>
+            <div class="ec-art-ref">Arts. 593, I e §4º, e 600 do CPP.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="ec-q-item" id="vq7">
+        <div class="ec-q-head" onclick="ecTogV('vq7')">
+          <div class="ec-q-num">7</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Na condição de defensor de Tiago, redija o tópico de <strong>preliminar de nulidade</strong> das razões de apelação, escolhendo e fundamentando a tese de maior força. Indique o pedido recursal correspondente.</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Criar</span> <em>redação de peça · preliminar</em></div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-vq7">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-vq7">
+          <p><em>Hierarquize as teses disponíveis: qual tem maior força e por quê? Estruture: (i) vício, (ii) fundamento legal e constitucional, (iii) prejuízo, (iv) pedido.</em></p>
+          <button class="ec-q-show-btn" onclick="ecShowV('va7')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="va7">
+            <strong>Critério de avaliação:</strong> espera-se que o aluno <strong>selecione a tese mais robusta</strong> — a fundamentação da condenação <strong>exclusivamente</strong> em elementos do IP (art. 155 do CPP), por atingir garantia constitucional e não ser susceptível de preclusão — em vez de apostar isoladamente na inversão do interrogatório (nulidade relativa, provavelmente preclusa pelo silêncio da defesa).
+            <p><strong>Estrutura esperada da preliminar:</strong></p>
+            <p><strong>(i) Síntese do vício:</strong> A sentença condenou Tiago Couto com base exclusivamente no reconhecimento policial e nos depoimentos dos policiais que investigaram, sem nenhuma prova de autoria produzida sob o contraditório judicial.</p>
+            <p><strong>(ii) Fundamento:</strong> O art. 155 do CPP veda expressamente a condenação fundada em elementos informativos do inquérito. Tal vício viola ainda o art. 5º, LV, da CF/88 (contraditório e ampla defesa).</p>
+            <p><strong>(iii) Prejuízo:</strong> Concretamente demonstrado — a única prova de autoria quanto a Tiago é o depoimento policial sobre elementos de IP, sem confirmação judicial contraditória.</p>
+            <p><strong>(iv) Pedido:</strong> Preliminarmente, a anulação da sentença e o retorno dos autos para nova instrução; ou, sucessivamente, a absolvição por insuficiência de provas (art. 386, VII, do CPP).</p>
+            <div class="ec-art-ref">Arts. 155, 386, VII, e 593 do CPP; art. 5º, LV, da CF/88.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 5. Rodapé -->
+  <div class="ec-foot">
+    Processo Penal III — Prof. Artur Vieira · Centro de Ensino Superior de Juiz de Fora (Vianna Júnior) · Caso e documentos fictícios, para fins didáticos. Normas conferidas em jun./2026: arts. 394, §1º, I; 396; 396-A; 399–400; 155; 386, V e VII; 563–573; 593, I e §4º; 600 do CPP. Jurisprudência: STF HC 127.900 (rito ordinário); Súmula 523 STF (defesa); STJ (art. 155 CPP — vedação de condenação por IP).
+  </div>
+
+</div><!-- #ec-vitrine -->
+</div><!-- .pp3-wrap -->
+
+<script>
+(function () {
+  /* Abas (só 1 aba nesta página, mas mantém a mecânica padrão) */
+  window.pp3TabVitrine = function (e, id) {
+    var wrap = e.target.closest('.pp3-wrap')
+    if (!wrap) return
+    wrap.querySelectorAll('.pp3-tab').forEach(function(b) { b.classList.remove('ativo') })
+    wrap.querySelectorAll('.pp3-painel').forEach(function(p) { p.classList.remove('ativo') })
+    e.target.classList.add('ativo')
+    var el = document.getElementById(id)
+    if (el) el.classList.add('ativo')
+  }
+
+  /* Accordion das questões */
+  window.ecTogV = function (id) {
+    var body = document.getElementById('ec-qb-' + id)
+    var arr  = document.getElementById('ec-arr-' + id)
+    if (!body) return
+    var open = body.classList.contains('open')
+    body.classList.toggle('open', !open)
+    if (arr) arr.classList.toggle('open', !open)
+  }
+
+  /* Revelação de gabarito individual */
+  window.ecShowV = function (id) {
+    var panel = document.getElementById('ec-vitrine')
+    if (!panel || !panel.classList.contains('gab-ativo')) {
+      alert('Gabarito bloqueado — informe a senha do professor.')
+      return
+    }
+    var ans = document.getElementById(id)
+    if (ans) ans.classList.add('show')
+  }
+
+  /* Portão de senha */
+  var SENHA = 'Gabarito1'
+  window.ecLiberar = function () {
+    var input = document.getElementById('ecPassVitrine')
+    var msg   = document.getElementById('ecGateMsgVitrine')
+    var panel = document.getElementById('ec-vitrine')
+    if (!input || !msg || !panel) return
+    if (input.value === SENHA) {
+      panel.classList.add('gab-ativo')
+      msg.textContent = '✓ Gabaritos liberados'
+      msg.className = 'ec-gate-msg ok'
+      document.getElementById('ecUnlockVitrine').textContent = 'Liberado'
+      document.getElementById('ecUnlockVitrine').disabled = true
+    } else {
+      msg.textContent = 'Senha incorreta'
+      msg.className = 'ec-gate-msg err'
+    }
+  }
+
+  /* Libera com Enter no campo de senha */
+  var passField = document.getElementById('ecPassVitrine')
+  if (passField) {
+    passField.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') window.ecLiberar()
+    })
+  }
+})()
+</script>

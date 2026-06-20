@@ -114,6 +114,7 @@ header {
 #canvas-wrap {
   position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
   overflow: hidden; cursor: grab;
+  touch-action: none;
 }
 #canvas-wrap:active { cursor: grabbing; }
 #canvas { position: absolute; transform-origin: 0 0; }
@@ -227,7 +228,8 @@ header {
 
 <div class="hint">
   🖱 Arraste para navegar &nbsp;|&nbsp; Scroll para zoom<br>
-  Clique nos nós para detalhes
+  📱 1 dedo para mover &nbsp;|&nbsp; 2 dedos para zoom<br>
+  Clique/toque nos nós para detalhes
 </div>
 
 <script>
@@ -332,6 +334,52 @@ wrap.addEventListener("wheel", e => {
   const delta = e.deltaY > 0 ? -0.08 : 0.08;
   zoomBy(delta, e.clientX, e.clientY);
 }, { passive: false });
+
+// ── TOUCH SUPPORT ──
+let pinchStartDist = 0, pinchStartZoom = 1;
+
+function _touchDist(t1, t2) {
+  const dx = t1.clientX - t2.clientX;
+  const dy = t1.clientY - t2.clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+wrap.addEventListener("touchstart", e => {
+  e.preventDefault();
+  if (e.touches.length === 1) {
+    dragging = true;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+  } else if (e.touches.length === 2) {
+    dragging = false;
+    pinchStartDist = _touchDist(e.touches[0], e.touches[1]);
+    pinchStartZoom = zoom;
+  }
+}, { passive: false });
+
+wrap.addEventListener("touchmove", e => {
+  e.preventDefault();
+  if (e.touches.length === 1 && dragging) {
+    panX += e.touches[0].clientX - lastX;
+    panY += e.touches[0].clientY - lastY;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+    applyTransform();
+  } else if (e.touches.length === 2) {
+    const dist = _touchDist(e.touches[0], e.touches[1]);
+    const newZoom = Math.max(0.3, Math.min(2.5, pinchStartZoom * (dist / pinchStartDist)));
+    const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    const old = zoom;
+    zoom = newZoom;
+    panX = cx - (cx - panX) * (zoom / old);
+    panY = cy - (cy - panY) * (zoom / old);
+    applyTransform();
+  }
+}, { passive: false });
+
+wrap.addEventListener("touchend", () => { dragging = false; });
+wrap.addEventListener("touchcancel", () => { dragging = false; });
 
 function applyTransform() {
   svg.style.transform = `translate(${panX}px,${panY}px) scale(${zoom})`;

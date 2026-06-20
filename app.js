@@ -1397,8 +1397,10 @@ let _pwaPrompt = null
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault()
   _pwaPrompt = e
-  const banner = document.getElementById('pwa-banner')
-  if (banner) banner.hidden = false
+  setTimeout(() => {
+    const banner = document.getElementById('pwa-banner')
+    if (banner && _pwaPrompt) banner.hidden = false
+  }, 30000)
 })
 
 function pwaBannerInstalar() {

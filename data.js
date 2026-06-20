@@ -20,7 +20,7 @@ const materias = [
             arquivo: "conteudo/penal/penal-iv/02-adm-publica.html"
           },
           {
-            titulo: "Crimes contra o Sentimento Religioso",
+            titulo: "Crimes contra o Sentimento Religioso e o Respeito aos Mortos",
             descricao: "Tabela comparativa · Mapa mental · Roteiro de estudo · Estudo de caso",
             arquivo: "conteudo/penal/penal-iv/03-sentimento-religioso.html"
           },

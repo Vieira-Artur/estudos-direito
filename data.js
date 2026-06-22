@@ -176,7 +176,7 @@ const materias = [
             arquivo: "conteudo/tributario/tributario-financeiro-i/03-principios-tributarios.html"
           },
           {
-            titulo: "Atividade da turma 9A — Caso: Operação ISS Relâmpago",
+            titulo: "Atividade da turma 9D — Caso: Operação ISS Relâmpago",
             descricao: "Estudo de caso · Legalidade tributária · Anterioridade · Noventena · Parcelamento · ISS · Questões Bloom",
             arquivo: "conteudo/tributario/tributario-financeiro-i/04-caso-iss-relampago.html"
           }

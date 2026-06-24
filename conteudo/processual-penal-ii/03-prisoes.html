@@ -1947,7 +1947,31 @@
     wrap.querySelectorAll('.pp3-painel').forEach(function(p) { p.classList.remove('ativo') })
     e.target.classList.add('ativo')
     var el = document.getElementById(id)
-    if (el) el.classList.add('ativo')
+    if (el) {
+      el.classList.add('ativo')
+      el.querySelectorAll('picture').forEach(function(pic) {
+        var orig = pic.querySelector('img')
+        if (!orig || orig.naturalWidth > 0) return
+        var baseSrc = orig.src.replace(/\.[^.]+$/, '')
+        var newPic = document.createElement('picture')
+        pic.querySelectorAll('source').forEach(function(s) {
+          var ns = document.createElement('source')
+          ns.type = s.type
+          var ext = s.getAttribute('srcset').match(/\.([^.?]+)(?:\?.*)?$/)
+          ns.srcset = ext ? baseSrc + '.' + ext[1] : s.getAttribute('srcset')
+          newPic.appendChild(ns)
+        })
+        var img = document.createElement('img')
+        img.src = orig.src
+        img.alt = orig.alt
+        img.style.cssText = orig.style.cssText
+        img.loading = 'eager'
+        if (orig.width) img.width = orig.width
+        if (orig.height) img.height = orig.height
+        newPic.appendChild(img)
+        pic.parentNode.replaceChild(newPic, pic)
+      })
+    }
   }
 })()
 </script>

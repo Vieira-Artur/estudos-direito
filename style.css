@@ -787,6 +787,128 @@ main {
   flex-shrink: 0;
 }
 
+/* ── Card de Jurisprudência expansível ── */
+.card-jur {
+  grid-column: 1 / -1;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow .2s, border-color .18s;
+}
+
+.card-jur--aberto {
+  border-color: var(--blue-accent);
+  box-shadow: var(--shadow-md);
+}
+
+.card-jur-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+  min-height: 72px;
+  transition: background .15s;
+}
+
+.card-jur-header:hover {
+  background: var(--blue-hover);
+}
+
+.card-jur-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--blue-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.card-jur-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-jur-titulo {
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 2px;
+}
+
+.card-jur-sub {
+  font-size: 11px;
+  color: var(--text2);
+}
+
+.card-jur-arrow {
+  color: var(--border);
+  font-size: 20px;
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+
+.card-jur--aberto .card-jur-arrow {
+  transform: rotate(90deg);
+}
+
+.card-jur-panel {
+  display: none;
+  padding: 0 18px 16px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.card-jur--aberto .card-jur-panel {
+  display: flex;
+}
+
+.card-jur-opcao {
+  flex: 1 1 140px;
+  padding: 10px 16px;
+  background: var(--blue-light);
+  border: 1px solid var(--blue-accent);
+  border-radius: 8px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, color .15s, transform .15s;
+  text-align: center;
+}
+
+.card-jur-opcao:hover {
+  background: var(--blue-accent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.card-jur-opcao:active {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-jur,
+  .card-jur-header,
+  .card-jur-arrow,
+  .card-jur-opcao {
+    transition: none;
+  }
+  .card-jur-opcao:hover {
+    transform: none;
+  }
+}
 
 /* ── Abas de turma ── */
 .turma-tabs {

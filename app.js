@@ -384,10 +384,65 @@ function renderArvore(fromPop = false) {
             <div class="card-materia-arrow" aria-hidden="true">›</div>
           </a>
         `).join('')}
+      <div class="card-jur" id="card-jur">
+        <button class="card-jur-header"
+                aria-expanded="false"
+                aria-controls="card-jur-panel"
+                onclick="toggleCardJur(event)">
+          <div class="card-jur-icon">📋</div>
+          <div class="card-jur-text">
+            <div class="card-jur-titulo">Jurisprudência</div>
+            <div class="card-jur-sub">Atualizada toda segunda-feira</div>
+          </div>
+          <div class="card-jur-arrow" aria-hidden="true">›</div>
+        </button>
+        <div class="card-jur-panel" id="card-jur-panel"
+             role="group" aria-label="Escolha a área">
+          <button class="card-jur-opcao"
+                  onclick="irJurisprudencia('penal','penal-informativos-stj')">Penal</button>
+          <button class="card-jur-opcao"
+                  onclick="irJurisprudencia('processual-penal','processual-penal-informativos-stj')">Proc. Penal</button>
+          <button class="card-jur-opcao"
+                  onclick="irJurisprudencia('tributario','tributario-informativos-stj')">Tributário</button>
+        </div>
+      </div>
     </div>
   `
   const h1 = app.querySelector('h1')
   if (h1) { if (!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex', '-1'); h1.focus({ preventScroll: true }) }
+}
+
+function toggleCardJur(event) {
+  if (event) event.stopPropagation()
+  const card = document.getElementById('card-jur')
+  if (!card) return
+  const isOpen = card.classList.toggle('card-jur--aberto')
+  card.querySelector('.card-jur-header').setAttribute('aria-expanded', String(isOpen))
+  if (isOpen) {
+    const first = card.querySelector('.card-jur-opcao')
+    if (first) first.focus()
+    document.addEventListener('click', _fecharCardJurFora)
+  } else {
+    document.removeEventListener('click', _fecharCardJurFora)
+  }
+}
+
+function _fecharCardJurFora(e) {
+  const card = document.getElementById('card-jur')
+  if (!card || card.contains(e.target)) return
+  card.classList.remove('card-jur--aberto')
+  const header = card.querySelector('.card-jur-header')
+  if (header) header.setAttribute('aria-expanded', 'false')
+  document.removeEventListener('click', _fecharCardJurFora)
+}
+
+function irJurisprudencia(materiaId, turmaId) {
+  document.removeEventListener('click', _fecharCardJurFora)
+  const materia = materias.find(m => m.id === materiaId)
+  const turma   = materia.turmas.find(t => t.id === turmaId)
+  estado.materiaAtual = materia
+  estado.turmaAtual   = turma
+  selecionarTurma(materiaId, turmaId)
 }
 
 function selecionarMateria(id, fromPop = false) {

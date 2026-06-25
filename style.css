@@ -890,7 +890,7 @@ main {
 
 .card-jur-opcao:hover {
   background: var(--blue-accent);
-  color: #fff;
+  color: var(--surface);
   transform: translateY(-1px);
 }
 

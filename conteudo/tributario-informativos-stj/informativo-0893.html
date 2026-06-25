@@ -1,0 +1,163 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-titulo-data {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  vertical-align: middle;
+}
+.inf-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.inf-sub strong { color: var(--jur-text); }
+.inf-meta {
+  display: inline-block;
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--jur-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+.inf-card {
+  flex: 1;
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.inf-card:hover {
+  box-shadow: var(--jur-shadow);
+  transform: translateY(-1px);
+}
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jur-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.inf-processo {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--jur-text2);
+}
+.inf-processo a {
+  font-weight: 700;
+  color: var(--jur-accent);
+  text-decoration: none;
+}
+.inf-processo a:hover { text-decoration: underline; }
+.inf-ramo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--jur-text2);
+}
+.inf-tema {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  margin: 4px 0 10px 0;
+  line-height: 1.4;
+}
+.inf-destaque {
+  font-size: 16px;
+  color: var(--jur-text);
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.inf-destaque p { margin: 0 0 8px 0; }
+.inf-destaque p:last-child { margin-bottom: 0; }
+.inf-rodape {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jur-border);
+  font-size: 12px;
+  color: var(--jur-text2);
+}
+.inf-rodape a { color: var(--jur-accent); }
+.inf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-titulo">Informativo nº 893 <span class="inf-meta">STJ</span><span class="inf-titulo-data"> — 23 de junho de 2026</span></h2>
+<p class="inf-sub">Edição <strong>nº 893</strong> · publicada em <strong>23 de junho de 2026</strong> · 3 enunciados de Direito Tributário.</p>
+<div class="inf-card-wrap"><div class="inf-num">1</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>Não são aplicáveis aos bloqueios do FPM, em razão de dívidas com contribuições previdenciárias, os limites de 9% (nove por cento) da cota-parte (art. 1º, caput, da Lei n. 9.639/1998) e de 15% (quinze por cento) da Receita Corrente Líquida (RCL) (art. 5º, § 4º, da Lei n. 9.639/1998).</p></div><div class="inf-tema">Fundo de Participação dos Municípios - FPM. Inadimplemento de contribuições previdenciárias. Bloqueio. Limitações. Impossibilidade. Tema 1041.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?livre=%28RESP+INPATH%28CLAS%29+AND+2238302+INPATH%28NUM%29%29+OR+%28NEAR%28%28RESP%2C2238302%29%2C0%2CTRUE%29+INPATH%28SUCE%29%29" target="_blank" rel="noopener">REsp 2.238.302-DF, Rel. Ministra Maria Thereza de Assis Moura, Primeira Seção, por unanimidade, julgado em 7/5/2026. (Tema 1401).REsp 2.177.031-PI, Rel. Ministra Maria Thereza de Assis Moura, Primeira Seção, por unanimidade, julgado em 7/5/2026 (Tema 1401).</a></span><span class="inf-ramo">DIREITO CONSTITUCIONAL, DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">2</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>Na pretensão de redimensionamento da base de cálculo de débito objeto de parcelamento ativo, a fluência do prazo prescricional não aguarda a quitação integral do programa, mas se processa a partir do ato de adesão ao parcelamento, na exata dicção do art. 1º do Decreto n. 20.910/1932.</p></div><div class="inf-tema">Pretensão de redimensionamento da base de cálculo de débito objeto de parcelamento ativo. Prescrição quinquenal. Art. 1º do Decreto n. 20.910/1932. Termo a quo. Data da adesão ao parcelamento.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?livre=%28RESP+INPATH%28CLAS%29+AND+1978133+INPATH%28NUM%29%29+OR+%28NEAR%28%28RESP%2C1978133%29%2C0%2CTRUE%29+INPATH%28SUCE%29%29" target="_blank" rel="noopener">REsp 1.978.133-SP, Rel. Ministra Regina Helena Costa, Primeira Turma, por unanimidade, julgado em 16/6/2026, DJEN 22/6/2026.</a></span><span class="inf-ramo">DIREITO PROCESSUAL CIVIL, DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">3</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>Durante o período em que vigorou a redação dada pela Lei n. 11.727/2008, por expressa disposição legal, o contribuinte distribuidor de combustível estava autorizado a apropriar-se de créditos da Contribuição ao PIS e da COFINS, referentes a aquisições de álcool para revenda, correspondentes aos valores devidos em decorrência dessa operação.</p></div><div class="inf-tema">Aquisição de álcool do tipo etanol etílico hidratado e álcool anidro para revenda pelos distribuidores de combustíveis. Apropriação de créditos da Contribuição ao PIS e da Cofins. Possibilidade. Inteligência do art. 5º, §§ 13 e 15, da Lei n. 9.718/1998, na redação conferida pela Lei n. 11.727/2008. Inaplicabilidade do Tema 1093 dos recursos repetitivos. Distinguishing. Possibilidade de creditamento no regime monofásico quando há autorização legal expressa.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?livre=%28RESP+INPATH%28CLAS%29+AND+1737359+INPATH%28NUM%29%29+OR+%28NEAR%28%28RESP%2C1737359%29%2C0%2CTRUE%29+INPATH%28SUCE%29%29" target="_blank" rel="noopener">REsp 1.737.359-PR, Rel. Ministra Regina Helena Costa, Primeira Turma, por unanimidade, julgado em 9/6/2026, DJEN 17/6/2026.</a></span><span class="inf-ramo">DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-rodape">Fonte oficial: <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisarumaedicao&amp;livre=%270893%27.cod." target="_blank" rel="noopener">Informativo 893 no portal do STJ</a>.</div>

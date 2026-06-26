@@ -429,7 +429,11 @@ function toggleCardJur(event) {
 
 function _fecharCardJurFora(e) {
   const card = document.getElementById('card-jur')
-  if (!card || card.contains(e.target)) return
+  if (!card) {
+    document.removeEventListener('click', _fecharCardJurFora)
+    return
+  }
+  if (card.contains(e.target)) return
   card.classList.remove('card-jur--aberto')
   const header = card.querySelector('.card-jur-header')
   if (header) header.setAttribute('aria-expanded', 'false')
@@ -438,10 +442,6 @@ function _fecharCardJurFora(e) {
 
 function irJurisprudencia(materiaId, turmaId) {
   document.removeEventListener('click', _fecharCardJurFora)
-  const materia = materias.find(m => m.id === materiaId)
-  const turma   = materia.turmas.find(t => t.id === turmaId)
-  estado.materiaAtual = materia
-  estado.turmaAtual   = turma
   selecionarTurma(materiaId, turmaId)
 }
 

@@ -392,7 +392,7 @@ function renderArvore(fromPop = false) {
           <div class="card-jur-icon">📋</div>
           <div class="card-jur-text">
             <div class="card-jur-titulo">Jurisprudência</div>
-            <div class="card-jur-sub">Atualizada toda segunda-feira</div>
+            <div class="card-jur-sub">Atualizado semanalmente</div>
           </div>
           <div class="card-jur-arrow" aria-hidden="true">›</div>
         </button>

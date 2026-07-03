@@ -230,5 +230,28 @@ const materias = [
         temas: []
       }
     ]
+  },
+  {
+    id: "medicina-legal",
+    titulo: "Medicina Legal",
+    icone: "🩺",
+    turmas: [
+      {
+        id: "medicina-legal-geral",
+        titulo: "Medicina Legal",
+        temas: [
+          {
+            titulo: "Atividade",
+            descricao: "Espaço reservado para a atividade da disciplina",
+            arquivo: "conteudo/medicina-legal/geral/01-atividade.html"
+          },
+          {
+            titulo: "Material de Estudo",
+            descricao: "Espaço reservado para o material de apoio da disciplina",
+            arquivo: "conteudo/medicina-legal/geral/02-material.html"
+          }
+        ]
+      }
+    ]
   }
 ]

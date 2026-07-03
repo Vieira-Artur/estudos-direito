@@ -241,12 +241,12 @@ const materias = [
         titulo: "Medicina Legal",
         temas: [
           {
-            titulo: "Atividade",
-            descricao: "Espaço reservado para a atividade da disciplina",
-            arquivo: "conteudo/medicina-legal/geral/01-atividade.html"
+            titulo: "Caso Prático",
+            descricao: "Espaço reservado para o caso prático da disciplina",
+            arquivo: "conteudo/medicina-legal/geral/01-caso-pratico.html"
           },
           {
-            titulo: "Material de Estudo",
+            titulo: "Material",
             descricao: "Espaço reservado para o material de apoio da disciplina",
             arquivo: "conteudo/medicina-legal/geral/02-material.html"
           }

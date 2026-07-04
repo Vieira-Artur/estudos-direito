@@ -789,7 +789,6 @@ main {
 
 /* ── Card de Jurisprudência expansível ── */
 .card-jur {
-  grid-column: 1 / -1;
   border-radius: 12px;
   border: 1px solid var(--border);
   background: var(--surface);

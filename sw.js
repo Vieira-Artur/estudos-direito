@@ -1,4 +1,4 @@
-const CACHE = 'estudos-direito-20260702'
+const CACHE = 'estudos-direito-20260704'
 const STATIC = [
   './',
   './index.html',

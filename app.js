@@ -447,6 +447,17 @@ function irJurisprudencia(materiaId, turmaId) {
 
 function selecionarMateria(id, fromPop = false) {
   const materia = materias.find(m => m.id === id)
+
+  // Matéria com uma única turma: pula a etapa de seleção e vai direto pra ela.
+  if (materia.turmas.length === 1 && !materia.turmas[0].emBreve) {
+    const turmaUnica = materia.turmas[0]
+    if (fromPop) {
+      history.replaceState({ view: 'turma', materiaId: id, turmaId: turmaUnica.id }, '', BASE_PATH + id + '/' + turmaUnica.id)
+    }
+    selecionarTurma(id, turmaUnica.id, fromPop)
+    return
+  }
+
   estado.materiaAtual = materia
   estado.turmaAtual   = null
   document.title = `${materia.titulo} — Estudos Complementares`

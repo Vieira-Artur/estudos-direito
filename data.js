@@ -247,7 +247,7 @@ const materias = [
           },
           {
             titulo: "Material",
-            descricao: "Espaço reservado para o material de apoio da disciplina",
+            descricao: "Apostila completa da pós-graduação em PDF, para baixar ou visualizar",
             arquivo: "conteudo/medicina-legal/geral/02-material.html"
           }
         ]

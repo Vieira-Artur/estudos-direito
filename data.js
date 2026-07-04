@@ -242,7 +242,7 @@ const materias = [
         temas: [
           {
             titulo: "Caso Prático",
-            descricao: "Espaço reservado para o caso prático da disciplina",
+            descricao: "Estudo de caso · Exame de corpo de delito · Perito oficial · Distância do disparo · Cronotanatognose · Questões comentadas",
             arquivo: "conteudo/medicina-legal/geral/01-caso-pratico.html"
           },
           {

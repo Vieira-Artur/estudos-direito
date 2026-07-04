@@ -1,29 +1,313 @@
 <style>
-  .ml-placeholder {
-    text-align: center;
-    padding: 56px 24px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+  :root{
+    --blue:#1F497D; --blue-light:#dce6f1; --border:#dde2ea; --text:#22303f; --text2:#5b6877;
+    --surface:#ffffff; --pp3-bg2:#f5f7fa; --pp3-green:#1a5c1a; --pp3-green-lt:#d6f0d6;
+    --pp3-yellow:#8a6d00; --pp3-yellow-lt:#fff3cd; --pp3-red:#8a1f1f; --pp3-red-lt:#f7d6d6; --pp3-orange:#b25a00;
+    --serif:'Playfair Display',Georgia,serif; --sans:'Source Sans 3',-apple-system,'Segoe UI',sans-serif;
   }
-  .ml-placeholder-icone { font-size: 42px; margin-bottom: 18px; }
-  .ml-placeholder h2 {
-    font-family: var(--serif);
-    color: var(--blue);
-    font-size: 24px;
-    margin: 0 0 12px;
-  }
-  .ml-placeholder p {
-    color: var(--text2);
-    font-size: 14.5px;
-    line-height: 1.7;
-    max-width: 460px;
-    margin: 0 auto;
-  }
+
+  .ec-case-header{background:var(--blue);border-radius:12px;padding:24px 28px;color:#fff;margin-bottom:24px;}
+  .ec-op-label{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#ffe9a8;margin-bottom:6px;}
+  .ec-case-header h2{font-size:23px;margin:0 0 10px;color:#fff;border:none;font-family:var(--serif);}
+  .ec-case-header p{color:#eef2f8;font-size:14.5px;line-height:1.6;margin:0;}
+  .ec-case-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+  .ec-meta-tag{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:6px;padding:4px 12px;font-size:12.5px;}
+
+  .ec-sec{margin-bottom:28px;}
+  .ec-sec-title{font-size:17px;color:var(--blue);margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid var(--blue);display:flex;align-items:center;gap:10px;font-family:var(--serif);}
+  .ec-badge{font-size:11px;background:var(--blue);color:#fff;padding:2px 10px;border-radius:4px;font-weight:600;letter-spacing:.04em;}
+  .ec-narrative{background:var(--pp3-bg2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;font-size:14px;line-height:1.75;}
+  .ec-narrative p{margin:0 0 12px;} .ec-narrative p:last-child{margin-bottom:0;}
+
+  .ec-doc-oficial{border-radius:4px;margin-bottom:18px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.14);}
+  .ec-doc-orgao-header{display:flex;align-items:center;gap:14px;padding:12px 18px;color:#fff;}
+  .ec-doc-orgao-sigla{font-size:20px;font-weight:900;letter-spacing:.04em;opacity:.92;flex-shrink:0;font-family:var(--serif);}
+  .ec-doc-orgao-nome{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.82;}
+  .ec-doc-orgao-titulo{font-size:14px;font-weight:700;margin-top:2px;font-family:var(--serif);}
+  .ec-doc-body{padding:16px 20px;background:#fff;color:#22303f;font-size:13.5px;line-height:1.65;}
+  .ec-doc-body p{margin:0 0 8px;color:#22303f;} .ec-doc-body p:last-child{margin-bottom:0;}
+  .ec-doc-body table{width:100%;border-collapse:collapse;font-size:13px;}
+  .ec-doc-body td{padding:4px 6px;vertical-align:top;color:#22303f;}
+  .ec-doc-body td:first-child{color:#5b6877;width:32%;font-weight:600;}
+  .ec-doc-body h4{margin:12px 0 4px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#0F6E5A;}
+  .ec-doc-pc .ec-doc-body h4{color:#1A2744;}
+  .ec-doc-rodape{padding:7px 18px;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.72);text-align:right;}
+  .ec-doc-pc{border:2px solid #1A2744;} .ec-doc-pc .ec-doc-orgao-header{background:linear-gradient(135deg,#1A2744,#243660);} .ec-doc-pc .ec-doc-rodape{background:#1A2744;}
+  .ec-doc-iml{border:2px solid #0F6E5A;} .ec-doc-iml .ec-doc-orgao-header{background:linear-gradient(135deg,#0F6E5A,#158a72);} .ec-doc-iml .ec-doc-rodape{background:#0F6E5A;}
+
+  .ec-q-list{display:flex;flex-direction:column;gap:14px;}
+  .ec-q-item{background:var(--pp3-bg2);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  .ec-q-head{display:flex;align-items:flex-start;gap:12px;padding:15px 18px;cursor:pointer;}
+  .ec-q-num{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13.5px;flex-shrink:0;}
+  .ec-q-text{font-size:14px;line-height:1.5;font-weight:600;color:var(--text);}
+  .ec-q-bloom{font-size:11.5px;color:var(--text2);margin-top:4px;font-weight:400;}
+  .ec-q-arrow{color:var(--text2);font-size:16px;padding-top:2px;flex-shrink:0;transition:transform .2s;}
+  .ec-q-arrow.open{transform:rotate(180deg);}
+  .ec-q-body{display:none;padding:0 18px 16px 60px;} .ec-q-body.open{display:block;}
+  .ec-q-body > p{font-size:13.8px;line-height:1.65;margin:0 0 10px;color:var(--text);}
+  .ec-q-show-btn{margin-top:6px;padding:7px 16px;background:transparent;border:1.5px solid var(--border);border-radius:6px;color:var(--text2);font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s;}
+  .ec-q-show-btn:hover{border-color:var(--blue);color:var(--blue);}
+  .ec-answer{display:none;margin-top:12px;padding:12px 14px;background:var(--pp3-green-lt);border-radius:8px;font-size:13.8px;line-height:1.7;color:var(--text);}
+  .ec-answer.show{display:block;} .ec-answer strong{color:var(--blue);}
+  .ec-art-ref{background:var(--blue-light);border-left:3px solid var(--blue);border-radius:0 5px 5px 0;padding:8px 12px;margin:8px 0;font-size:13px;font-style:italic;line-height:1.55;color:var(--text);}
+  .ec-stj-ref{background:var(--pp3-yellow-lt);border-left:3px solid var(--pp3-yellow);border-radius:0 5px 5px 0;padding:8px 12px;margin:8px 0;font-size:13px;line-height:1.55;color:var(--text);}
+  .ec-stj-ref strong{color:var(--pp3-yellow);}
+  .ec-bl{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:700;margin-right:5px;}
+  .ec-bl-1{background:var(--blue-light);color:var(--blue);} .ec-bl-2{background:var(--pp3-green-lt);color:var(--pp3-green);}
+  .ec-bl-3{background:var(--pp3-red-lt);color:var(--pp3-red);} .ec-bl-4{background:var(--pp3-yellow-lt);color:var(--pp3-yellow);}
+  .ec-foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;line-height:1.6;color:var(--text2);}
+
+  .ec-caso-wrap:not(.gabarito-ativo) .ec-q-show-btn{display:none!important;}
+  .ec-caso-wrap:not(.gabarito-ativo) .ec-answer{display:none!important;}
+  #btn-gabarito{padding:5px 14px;font-size:12px;font-weight:700;border:none;border-radius:5px;cursor:pointer;background:var(--pp3-orange);color:#fff;letter-spacing:.03em;margin-left:auto;}
+  #btn-gabarito:hover{opacity:.85;}
 </style>
 
-<div class="ml-placeholder">
-  <div class="ml-placeholder-icone">📝</div>
-  <h2>Caso Prático — Medicina Legal</h2>
-  <p>Este espaço está reservado para o caso prático da disciplina de Medicina Legal. O conteúdo será adicionado em breve.</p>
+<div class="ec-caso-wrap">
+
+  <div class="ec-case-header">
+    <div class="ec-op-label">Estudo de Caso · Medicina Legal &amp; Prova Pericial — arts. 158, 159 e 167 do CPP</div>
+    <h2>O corpo que guardava duas histórias</h2>
+    <p>Uma vítima espancada dias antes é encontrada morta por disparo de arma de fogo. O exame cadavérico terá de separar o que matou do que apenas antecedeu a morte, ler a distância do tiro e estimar há quanto tempo a morte ocorreu — enquanto, no plano processual, o caso testa a indispensabilidade e a regularidade do exame de corpo de delito. Personagens e documentos inteiramente fictícios, para fins didáticos.</p>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Exame de corpo de delito · art. 158 CPP</span>
+      <span class="ec-meta-tag">Perito oficial · art. 159 · Súmula 361 STF</span>
+      <span class="ec-meta-tag">Vestígios desaparecidos · art. 167 CPP</span>
+      <span class="ec-meta-tag">Distância do disparo</span>
+      <span class="ec-meta-tag">Legrand du Saulle · cronotanatognose</span>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Narrativa dos fatos <span class="ec-badge">LEIA ATENTAMENTE</span></h2>
+    <div class="ec-narrative">
+      <p><strong>A agressão anterior.</strong> Em <strong>02/06/2026</strong>, na Comarca de Vila dos Cedros/MG, <strong>Sérgio Aparício Belmonte</strong>, 41 anos, foi espancado a socos e pontapés por dois desafetos na saída de um bar. Registrou boletim de ocorrência por lesão corporal e ficou com equimoses pelo rosto, tórax e membros. Não houve internação e ele não compareceu ao IML.</p>
+      <p><strong>A morte.</strong> Onze dias depois, em <strong>13/06/2026</strong>, Sérgio foi atingido por um <strong>disparo de arma de fogo</strong> no tórax, em via pública, e morreu no local. <strong>Ivo Rangel Sampaio</strong>, 29 anos, primário, foi preso em flagrante. Admitiu o disparo, mas sustentou ter atirado <em>“de longe, em legítima defesa”</em>. O corpo foi encontrado e periciado ainda na mesma noite.</p>
+      <p><strong>A perícia.</strong> Como o médico-legista da regional estava de licença e não havia outro perito oficial na data, o exame cadavérico foi realizado e assinado por <strong>um único médico do hospital municipal</strong>, nomeado <em>ad hoc</em>. O laudo registra os <strong>sinais</strong> encontrados — do ferimento, das contusões e do próprio cadáver —, deixando as conclusões para quem for interpretá-los.</p>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Documentos do procedimento</h2>
+
+    <div class="ec-doc-oficial ec-doc-pc">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">PC</div>
+        <div>
+          <div class="ec-doc-orgao-nome">Polícia Civil do Estado de Minas Gerais · Delegacia de Vila dos Cedros</div>
+          <div class="ec-doc-orgao-titulo">Boletim de Ocorrência nº 1123/2026</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data do fato</td><td>02/06/2026, 23h40</td></tr>
+          <tr><td>Natureza</td><td>Lesão corporal (art. 129, CP)</td></tr>
+          <tr><td>Vítima</td><td>Sérgio Aparício Belmonte, 41 anos</td></tr>
+          <tr><td>Relato</td><td>Agressão a socos e pontapés por dois indivíduos; dores e hematomas em face, tórax e membros. Recusou remoção hospitalar.</td></tr>
+          <tr><td>Encaminhamento</td><td>Orientada a comparecer ao IML para exame de corpo de delito — não compareceu.</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <div class="ec-doc-oficial ec-doc-pc">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">PC</div>
+        <div>
+          <div class="ec-doc-orgao-nome">Polícia Civil do Estado de Minas Gerais · Delegacia de Vila dos Cedros</div>
+          <div class="ec-doc-orgao-titulo">Auto de Prisão em Flagrante Delito</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Data/hora</td><td>13/06/2026, 22h10</td></tr>
+          <tr><td>Conduzido</td><td>Ivo Rangel Sampaio, 29 anos — primário</td></tr>
+          <tr><td>Capitulação (provisória)</td><td>Art. 121 do Código Penal (homicídio)</td></tr>
+          <tr><td>Vítima</td><td>Sérgio Aparício Belmonte — óbito no local</td></tr>
+          <tr><td>Versão do conduzido</td><td>Admite o disparo; alega legítima defesa e afirma ter atirado “à distância”, sem se aproximar.</td></tr>
+          <tr><td>Apreensão</td><td>Revólver calibre .38; um estojo deflagrado</td></tr>
+        </table>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+
+    <div class="ec-doc-oficial ec-doc-iml">
+      <div class="ec-doc-orgao-header">
+        <div class="ec-doc-orgao-sigla">IML</div>
+        <div>
+          <div class="ec-doc-orgao-nome">Polícia Científica de Minas Gerais · Instituto Médico-Legal — Posto Regional</div>
+          <div class="ec-doc-orgao-titulo">Laudo de Exame Cadavérico (Necroscópico) nº 0471/2026</div>
+        </div>
+      </div>
+      <div class="ec-doc-body">
+        <table>
+          <tr><td>Examinando</td><td>Sérgio Aparício Belmonte, 41 anos</td></tr>
+          <tr><td>Início do exame</td><td>14/06/2026, 00h30</td></tr>
+          <tr><td>Signatário</td><td>Dr. ***, médico do Hospital Municipal, nomeado <em>ad hoc</em> — <strong>assinatura única</strong></td></tr>
+        </table>
+
+        <h4>1. Ferimento por projétil de arma de fogo</h4>
+        <p>Orifício na região torácica anterior esquerda, circular, de <strong>diâmetro inferior ao do projétil</strong>, com <strong>orla de escoriação</strong>, <strong>halo de enxugo</strong> e <strong>aréola equimótica</strong>; bordas invertidas. <strong>Não</strong> foram observadas zona de tatuagem nem zona de esfumaçamento. No dorso, orifício de maior diâmetro, irregular, de bordas evertidas. Trajeto ântero-posterior, transfixando o pulmão esquerdo. Causa da morte: hemorragia interna.</p>
+
+        <h4>2. Outras lesões contusas</h4>
+        <p>Múltiplas equimoses em face, tórax e membros, de coloração <strong>verde-amarelada</strong>, sem relação topográfica com o ferimento acima. À digitopressão, <strong>não</strong> desaparecem e não se deslocam (sangue fixado nas malhas dos tecidos).</p>
+
+        <h4>3. Fenômenos cadavéricos observados</h4>
+        <p>Livores cutâneos dorsais que <strong>ainda desaparecem à digitopressão</strong> e se deslocam com a mudança de decúbito; rigidez cadavérica presente <strong>na face, mandíbula e nuca</strong>, ainda não instalada nos membros; temperatura retal discretamente reduzida; <strong>ausência</strong> de mancha verde abdominal e de qualquer sinal de putrefação.</p>
+      </div>
+      <div class="ec-doc-rodape">Documento fictício · fins didáticos</div>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <h2 class="ec-sec-title">Questões para discussão <button id="btn-gabarito" onclick="toggleGabarito()">🔒 Gabarito</button></h2>
+    <div class="ec-q-list">
+
+      <div class="ec-q-item" id="mlc1">
+        <div class="ec-q-head" onclick="ecTog('mlc1')">
+          <div class="ec-q-num">1</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Por que o exame de corpo de delito é indispensável aqui, e a confissão do réu não o dispensa?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-1">Compreender</span> Art. 158 CPP</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-mlc1">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-mlc1">
+          <p><em>Tente antes de revelar:</em> o homicídio deixa vestígios? Se deixa, o que a confissão pode ou não substituir?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('mla1')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="mla1">
+            <strong>Resposta:</strong> o homicídio é crime <strong>não transeunte</strong> (deixa vestígios materiais). Nesses casos, o exame de corpo de delito — direto ou indireto — é <strong>indispensável</strong>, e a confissão do acusado <strong>não o supre</strong>. A falta do exame, quando o crime deixa vestígios, gera nulidade.
+            <div class="ec-art-ref">Art. 158 CPP (exame indispensável; confissão não supre) c/c art. 564, III, “b” (nulidade pela falta do exame nos crimes não transeuntes).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="mlc2">
+        <div class="ec-q-head" onclick="ecTog('mlc2')">
+          <div class="ec-q-num">2</div>
+          <div style="flex:1">
+            <div class="ec-q-text">O laudo foi assinado por um único médico não oficial. Isso é válido? Qual a consequência?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-2">Aplicar</span> Art. 159 CPP · Súmula 361 STF</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-mlc2">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-mlc2">
+          <p><em>Tente antes de revelar:</em> quantos peritos a lei exige quando não há perito oficial? E se comparecer só um?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('mla2')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="mla2">
+            <strong>Resposta:</strong> o exame deve ser feito por <strong>perito oficial</strong> (um), com diploma de curso superior. Na <strong>falta</strong> de perito oficial, exige-se <strong>duas pessoas idôneas</strong>, portadoras de diploma superior, preferencialmente na área. O exame firmado por <strong>um só</strong> perito não oficial é viciado.
+            <div class="ec-stj-ref"><strong>Súmula 361 STF:</strong> no processo penal, é nulo o exame realizado por um só perito não oficial. Trata-se de <strong>nulidade relativa</strong> — depende de arguição oportuna e de demonstração de prejuízo, podendo ser sanada/ratificada.</div>
+            <div class="ec-art-ref">Art. 159, <em>caput</em> e § 1º, CPP.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="mlc3">
+        <div class="ec-q-head" onclick="ecTog('mlc3')">
+          <div class="ec-q-num">3</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Pelos sinais do orifício de entrada, qual a distância do disparo? Isso confirma ou desmente a versão do réu?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> ferida de entrada · efeitos primários e secundários</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-mlc3">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-mlc3">
+          <p><em>Tente antes de revelar:</em> quais efeitos só aparecem quando o tiro é próximo? Eles constam do laudo? O que a ausência deles indica?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('mla3')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="mla3">
+            <strong>Resposta:</strong> o laudo descreve <strong>apenas os efeitos primários</strong> do projétil — orla de escoriação (anel de Fisch), halo de enxugo e aréola equimótica, com bordas invertidas —, <strong>sem</strong> zona de tatuagem nem de esfumaçamento. A ausência desses efeitos secundários aponta para <strong>disparo a longa distância</strong> (fora do cone de dispersão dos resíduos). Isso é <strong>compatível</strong> com a versão do réu de tiro à distância.
+            <div class="ec-stj-ref"><strong>Contraponto:</strong> se houvesse esfumaçamento (falsa tatuagem, sai à lavagem) e/ou tatuagem (grânulos incombustos, não sai), seria <strong>curta distância</strong>; sinais como câmara de mina de Hoffmann/Benassi indicariam <strong>encostado</strong> — o que contrariaria a versão.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="mlc4">
+        <div class="ec-q-head" onclick="ecTog('mlc4')">
+          <div class="ec-q-num">4</div>
+          <div style="flex:1">
+            <div class="ec-q-text">As equimoses verde-amareladas: que data indicam? Como distingui-las de livores? Concorreram para a morte?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> espectro de Legrand du Saulle · livor × equimose</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-mlc4">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-mlc4">
+          <p><em>Tente antes de revelar:</em> a cor situa a lesão no tempo? E o que, no cadáver, separa uma equimose de um livor?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('mla4')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="mla4">
+            <strong>Resposta:</strong> pelo <strong>espectro equimótico de Legrand du Saulle</strong>, a coloração <strong>verde-amarelada</strong> corresponde a cerca de <strong>11 a 12 dias</strong> de evolução — ou seja, lesões <strong>produzidas em vida</strong>, coincidentes com a agressão registrada no BO, e <strong>não</strong> com o disparo. Nas vítimas mortas, a equimose feita em vida conserva a cor até a putrefação.
+            <div class="ec-stj-ref"><strong>Livor × equimose:</strong> o <strong>livor</strong> cadavérico <strong>desaparece à digitopressão</strong> e ainda se desloca (não fixado); a <strong>equimose</strong> tem sangue <strong>fixado em coágulo</strong> e não some à pressão — exatamente o descrito no laudo. Logo, as equimoses <strong>não concorreram</strong> para a morte, cuja causa foi o PAF.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="mlc5">
+        <div class="ec-q-head" onclick="ecTog('mlc5')">
+          <div class="ec-q-num">5</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Pelos fenômenos cadavéricos descritos, há quanto tempo, aproximadamente, ocorreu a morte?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-3">Analisar</span> <span class="ec-bl ec-bl-4">Avaliar</span> cronotanatognose</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-mlc5">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-mlc5">
+          <p><em>Tente antes de revelar:</em> livores que ainda se deslocam e rigidez só na face contam uma cronologia — qual? E o que a ausência de mancha verde exclui?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('mla5')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="mla5">
+            <strong>Resposta:</strong> <strong>morte recente — poucas horas.</strong> Os livores cutâneos surgem 2–3h após o óbito e <strong>ainda se deslocam</strong> à mudança de posição até cerca de 8–12h (quando se fixam); no caso, ainda somem à digitopressão → <strong>abaixo desse limite</strong>. A rigidez apenas em <strong>face, mandíbula e nuca</strong> (Lei de Nysten-Sommer) indica <strong>fase inicial</strong>. A <strong>ausência de mancha verde abdominal</strong> exclui putrefação (que começa ~20–24h). Tudo converge para óbito de poucas horas — coerente com o corpo periciado na mesma noite.
+            <div class="ec-stj-ref"><strong>Nota:</strong> livores e rigidez são <strong>sinais afirmativos de morte</strong>; a estimativa é aproximada e influenciada por temperatura ambiente, compleição e causa do óbito.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item" id="mlc6">
+        <div class="ec-q-head" onclick="ecTog('mlc6')">
+          <div class="ec-q-num">6</div>
+          <div style="flex:1">
+            <div class="ec-q-text">Se o corpo só fosse examinado semanas depois, com as equimoses já desaparecidas, como provar a agressão anterior? E se faltasse o exame?</div>
+            <div class="ec-q-bloom"><span class="ec-bl ec-bl-4">Avaliar</span> <span class="ec-bl ec-bl-4">Criar</span> prova supletiva · nulidade</div>
+          </div>
+          <span class="ec-q-arrow" id="ec-arr-mlc6">▾</span>
+        </div>
+        <div class="ec-q-body" id="ec-qb-mlc6">
+          <p><em>Tente antes de revelar:</em> se os vestígios sumissem, a lei fecha a porta da prova? E a falta do exame, quando cabível, tem que consequência?</p>
+          <button class="ec-q-show-btn" onclick="ecShowAns('mla6')">Revelar gabarito comentado</button>
+          <div class="ec-answer" id="mla6">
+            <strong>Resposta:</strong> desaparecidos os vestígios (após ~22 dias não há mais equimose; a putrefação também os apaga), <strong>não sendo possível o exame direto</strong>, a <strong>prova testemunhal pode suprir-lhe a falta</strong> — aqui, as testemunhas da briga e o próprio BO. Já a <strong>falta</strong> do exame de corpo de delito, quando o crime deixa vestígios e ele era possível, acarreta <strong>nulidade absoluta</strong>.
+            <div class="ec-art-ref">Art. 167 CPP (prova testemunhal supletiva) c/c art. 564, III, “b”. O exame é a regra (art. 158); a testemunhal é subsidiária.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="ec-foot">
+    Medicina Legal (Pós-graduação) — Prof. Artur Vieira. Caso, pessoas e documentos inteiramente fictícios, para fins didáticos. Fontes: material da disciplina (espectro de Legrand du Saulle; sinais do orifício de entrada por PAF; tanatologia — livores, rigidez de Nysten-Sommer, putrefação) e Código de Processo Penal (arts. 158, 159, 160, 167 e 564, III, “b”; Súmula 361 STF).
+  </div>
+
 </div>
+
+<script>
+(function () {
+  window.ecTog = function (id) {
+    var b = document.getElementById('ec-qb-' + id), a = document.getElementById('ec-arr-' + id);
+    if (!b) return; var open = b.classList.contains('open');
+    b.classList.toggle('open', !open); if (a) a.classList.toggle('open', !open);
+  }
+  window.ecShowAns = function (id) { var e = document.getElementById(id); if (e) e.classList.add('show'); }
+  window.gabaritoAtivo = false;
+  window.toggleGabarito = function () {
+    if (!window.gabaritoAtivo) {
+      if (prompt('Senha do gabarito:') !== 'Gabarito1') return;
+      window.gabaritoAtivo = true;
+    } else {
+      window.gabaritoAtivo = false;
+      document.querySelectorAll('.ec-answer.show').forEach(function (a) { a.classList.remove('show') });
+    }
+    var w = document.querySelector('.ec-caso-wrap');
+    if (w) w.classList.toggle('gabarito-ativo', window.gabaritoAtivo);
+    var btn = document.getElementById('btn-gabarito');
+    if (btn) btn.textContent = window.gabaritoAtivo ? '🔓 Gabarito' : '🔒 Gabarito';
+  }
+})();
+</script>

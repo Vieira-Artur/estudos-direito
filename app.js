@@ -515,7 +515,9 @@ function selecionarTurma(materiaId, turmaId, fromPop = false, infoArquivo = null
   `
 
   if (infoArquivo) {
-    _abrirFragmentoDoIndice(infoArquivo, true)
+    // Propaga fromPop: em navegação nova (busca/clique) o pushState do
+    // informativo acontece e a URL ganha o /NNN; em popstate/deep link, não.
+    _abrirFragmentoDoIndice(infoArquivo, fromPop)
   } else {
     renderConteudoTurma(turma)
   }

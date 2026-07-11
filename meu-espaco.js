@@ -104,6 +104,18 @@ const MeuEspaco = (() => {
     document.head.appendChild(s)
   }
 
+  // Instância ativa (uma por tema aberto no SPA). O Fabric 5 não emite
+  // evento algum no dispose(), então a limpeza de listeners globais e
+  // canvases é feita aqui, ao abrir o próximo tema.
+  let _inst = null
+
+  function _limparInstanciaAnterior() {
+    if (!_inst) return
+    _inst.listeners.forEach(([alvo, ev, fn]) => alvo.removeEventListener(ev, fn))
+    _inst.canvases.forEach(fc => { try { fc.dispose() } catch { /* já descartado */ } })
+    _inst = null
+  }
+
   function sanitize(html) {
     const doc = new DOMParser().parseFromString(html, 'text/html')
     doc.querySelectorAll('script,style').forEach(el => el.remove())
@@ -178,6 +190,8 @@ const MeuEspaco = (() => {
 
   function init(area, arquivo) {
     if (!arquivo) return
+    _limparInstanciaAnterior()
+    _inst = { canvases: [], listeners: [] }
 
     let tabsBar = area.querySelector('.fp-tabs')
 
@@ -333,6 +347,7 @@ const MeuEspaco = (() => {
       width: w, height: 280, backgroundColor: '#fafafa'
     })
     painel._mesCanvases['mapa'] = fc
+    if (_inst) _inst.canvases.push(fc)
 
     let primeiroNo = null
 
@@ -412,7 +427,7 @@ const MeuEspaco = (() => {
 
     const onKey = makeDeleteHandler(fc, key)
     document.addEventListener('keydown', onKey)
-    fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
+    if (_inst) _inst.listeners.push([document, 'keydown', onKey])
 
     const saved = localStorage.getItem(key)
     if (saved) {
@@ -434,6 +449,7 @@ const MeuEspaco = (() => {
       width: w, height: 150, backgroundColor: '#fafafa'
     })
     painel._mesCanvases['linha'] = fc
+    if (_inst) _inst.canvases.push(fc)
 
     const yLinha = 70
 
@@ -493,7 +509,7 @@ const MeuEspaco = (() => {
 
     const onKey = makeDeleteHandler(fc, key)
     document.addEventListener('keydown', onKey)
-    fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
+    if (_inst) _inst.listeners.push([document, 'keydown', onKey])
 
     painel.querySelector('.me-limpar-btn[data-canvas="linha"]').addEventListener('click', async () => {
       if (!await _confirmar('Limpar toda a linha do tempo?')) return
@@ -513,6 +529,7 @@ const MeuEspaco = (() => {
       width: w, height: 280, backgroundColor: '#fafafa'
     })
     painel._mesCanvases['livre'] = fc
+    if (_inst) _inst.canvases.push(fc)
 
     let formaAtiva = 'caixa'
 
@@ -580,7 +597,7 @@ const MeuEspaco = (() => {
 
     const onKey = makeDeleteHandler(fc, key)
     document.addEventListener('keydown', onKey)
-    fc.on('canvas:disposed', () => document.removeEventListener('keydown', onKey))
+    if (_inst) _inst.listeners.push([document, 'keydown', onKey])
 
     painel.querySelector('.me-limpar-btn[data-canvas="livre"]').addEventListener('click', async () => {
       if (!await _confirmar('Limpar todo o canvas?')) return

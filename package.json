@@ -6,7 +6,9 @@
     "otimizar-imagens": "node scripts/otimizar-imagens.js",
     "atualizar-html": "node scripts/atualizar-html-imagens.js",
     "normalizar-imagens": "node scripts/normalizar-imagens.js",
-    "gerar-icones": "node scripts/gerar-icones.js"
+    "gerar-icones": "node scripts/gerar-icones.js",
+    "rotas": "node scripts/gerar-rotas-estaticas.js",
+    "build": "node scripts/gerar-rotas-estaticas.js && node scripts/gerar-sitemap.js"
   },
   "devDependencies": {
     "image-size": "^1.1.1",

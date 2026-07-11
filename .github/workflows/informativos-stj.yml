@@ -2,7 +2,7 @@ name: Informativos STJ
 
 on:
   schedule:
-    - cron: '0 9 * * 1'   # toda 2ª-feira às 09:00 UTC (06:00 BRT)
+    - cron: '23 9 * * 1'  # toda 2ª-feira às 09:23 UTC (06:23 BRT) — minuto fora da hora cheia para evitar picos de tráfego de bots no STJ
   workflow_dispatch:
 
 jobs:
@@ -26,8 +26,21 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      # Se uma matéria falhar (ex.: STJ bloqueando), as seguintes NÃO rodam —
+      # insistir contra um bloqueio só piora. As pausas de 90 s espaçam as
+      # consultas para manter o padrão de acesso discreto.
+
       - name: Coletar — Direito Processual Penal
         run: python scripts/informativos_stj.py --materia processual-penal
 
+      - name: Pausa 1 (gentileza com o STJ)
+        run: sleep 90
+
       - name: Coletar — Direito Penal
         run: python scripts/informativos_stj.py --materia penal
+
+      - name: Pausa 2 (gentileza com o STJ)
+        run: sleep 90
+
+      - name: Coletar — Direito Tributário
+        run: python scripts/informativos_stj.py --materia tributario

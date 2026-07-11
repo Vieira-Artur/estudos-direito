@@ -144,9 +144,10 @@ function esc(str) {
 }
 
 
-// ── Base URL (capturada antes de qualquer pushState) ────
-const SITE_BASE = new URL('./', document.baseURI).href
-const BASE_PATH = new URL('./', document.baseURI).pathname  // ex: "/estudos-direito/" ou "/"
+// ── Base URL (derivada de APP_BASE, que vem do src= do próprio script;
+// robusta mesmo em páginas-casca servidas em subcaminhos, ex. /penal/penal-iv/) ──
+const SITE_BASE = new URL(APP_BASE, location.origin).href
+const BASE_PATH = APP_BASE  // ex: "/estudos-direito/"
 
 function urlDoTema(arquivo) {
   return BASE_PATH + arquivo.replace('conteudo/', '').replace('.html', '')
@@ -274,7 +275,6 @@ function inicializarRota() {
 }
 
 inicializarRota()
-setTimeout(indexarConteudo, 2000) // indexa em background após carregamento inicial
 
 // ── Interceptador SPA para a[data-spa] ───────────────────
 document.addEventListener('click', function(e) {
@@ -506,12 +506,12 @@ function selecionarTurma(materiaId, turmaId, fromPop = false, infoArquivo = null
 
   app.innerHTML = `
     <p class="secao-titulo">${turma.titulo}</p>
-    <div class="turma-tabs" id="turma-tabs">
-      <button class="turma-tab ativa" id="tab-conteudo" onclick="mostrarTabConteudo()">📚 Conteúdo</button>
-      <button class="turma-tab" id="tab-flash" onclick="mostrarTabFlash()">🃏 Flashcards</button>
+    <div class="turma-tabs" id="turma-tabs" role="tablist">
+      <button class="turma-tab ativa" id="tab-conteudo" role="tab" aria-selected="true" aria-controls="tab-area-conteudo" onclick="mostrarTabConteudo()">📚 Conteúdo</button>
+      <button class="turma-tab" id="tab-flash" role="tab" aria-selected="false" aria-controls="tab-area-flash" onclick="mostrarTabFlash()">🃏 Flashcards</button>
     </div>
-    <div id="tab-area-conteudo"></div>
-    <div id="tab-area-flash" style="display:none"></div>
+    <div id="tab-area-conteudo" role="tabpanel"></div>
+    <div id="tab-area-flash" role="tabpanel" style="display:none"></div>
   `
 
   if (infoArquivo) {
@@ -636,6 +636,8 @@ function mostrarTabConteudo() {
   document.getElementById('tab-area-flash').style.display = 'none'
   document.getElementById('tab-conteudo')?.classList.add('ativa')
   document.getElementById('tab-flash')?.classList.remove('ativa')
+  document.getElementById('tab-conteudo')?.setAttribute('aria-selected', 'true')
+  document.getElementById('tab-flash')?.setAttribute('aria-selected', 'false')
   _ga('tab_click', {
     materia: estado.materiaAtual ? estado.materiaAtual.id : '',
     aba: 'conteudo'
@@ -920,6 +922,8 @@ function mostrarTabFlash() {
   if (flashArea) flashArea.style.display = ''
   document.getElementById('tab-conteudo')?.classList.remove('ativa')
   document.getElementById('tab-flash')?.classList.add('ativa')
+  document.getElementById('tab-conteudo')?.setAttribute('aria-selected', 'false')
+  document.getElementById('tab-flash')?.setAttribute('aria-selected', 'true')
   if (flashArea && !flashArea.hasChildNodes()) renderFlashSessao(estado.turmaAtual)
   _ga('tab_click', {
     materia: estado.materiaAtual ? estado.materiaAtual.id : '',
@@ -1061,7 +1065,7 @@ function abrirTema(index, fromPop = false) {
         `
         wrap.querySelector('.btn-download-img').addEventListener('click', () => {
           _ga('download_click', {
-            materia: estado.infoAtual ? estado.infoAtual.id : (estado.materiaAtual ? estado.materiaAtual.id : ''),
+            materia: estado.materiaAtual ? estado.materiaAtual.id : '',
             pagina: location.pathname,
             tipo: 'imagem',
             arquivo: filename
@@ -1103,7 +1107,8 @@ function abrirTema(index, fromPop = false) {
       focusEl.focus({ preventScroll: true })
     })
     .catch(() => {
-      document.getElementById('conteudo-area').innerHTML =
+      const el = document.getElementById('conteudo-area')
+      if (el) el.innerHTML =
         `<p style="color:#c00">Não foi possível carregar o conteúdo. Tente recarregar a página.</p>`
     })
 }
@@ -1191,6 +1196,34 @@ async function indexarConteudo() {
     }
   }
 
+  // Informativos de jurisprudência (turmas com índice e sem temas):
+  // enumera as edições pelo _state.json gerado pelo coletor.
+  const turmasInfo = []
+  for (const mat of materias) {
+    for (const turma of mat.turmas) {
+      if (turma.indice && turma.temas.length === 0) turmasInfo.push({ mat, turma })
+    }
+  }
+  await Promise.all(turmasInfo.map(async ({ mat, turma }) => {
+    try {
+      const base = turma.indice.substring(0, turma.indice.lastIndexOf('/') + 1)
+      const r = await fetch(SITE_BASE + base + '_state.json')
+      if (!r.ok) return
+      const state = await r.json()
+      for (const [num, ed] of Object.entries(state.edicoes || {})) {
+        if (!ed.qtd_enunciados) continue
+        entradas.push({
+          titulo:    `Informativo ${num} do STJ`,
+          materia:   mat.titulo,
+          materiaId: mat.id,
+          turmaId:   turma.id,
+          tipo:      'informativo',
+          arquivo:   base + ed.arquivo,
+        })
+      }
+    } catch { /* sem _state.json: segue sem informativos desta turma */ }
+  }))
+
   const parser = new DOMParser()
   window._searchIndex = await Promise.all(
     entradas.map(async entrada => {
@@ -1253,6 +1286,7 @@ function buscar(termo) {
 }
 
 function renderResultados(resultados, termo) {
+  window._buscaResultados = resultados
   const painel = document.getElementById('busca-painel')
   if (!resultados.length) {
     painel.innerHTML = `<p class="busca-vazio">Nenhum resultado para <strong>"${esc(termo)}"</strong>.</p>`
@@ -1261,12 +1295,12 @@ function renderResultados(resultados, termo) {
     painel.innerHTML = `
       <p class="busca-count">${resultados.length} ${label} para <strong>"${esc(termo)}"</strong></p>
       <div class="busca-resultados">
-        ${resultados.map(r => `
+        ${resultados.map((r, i) => `
           <div class="busca-resultado"
                role="button" tabindex="0"
                aria-label="${esc(r.titulo)}, ${esc(r.materia)}"
-               onclick="navegarParaResultado('${esc(r.materiaId)}','${esc(r.turmaId)}',${parseInt(r.temaIndex,10)})"
-               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navegarParaResultado('${esc(r.materiaId)}','${esc(r.turmaId)}',${parseInt(r.temaIndex,10)})}">
+               onclick="navegarParaResultado(${i})"
+               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navegarParaResultado(${i})}">
             <div class="busca-resultado-corpo">
               <div class="busca-resultado-materia">${esc(r.materia)}</div>
               <div class="busca-resultado-titulo">${esc(r.titulo)}</div>
@@ -1281,9 +1315,20 @@ function renderResultados(resultados, termo) {
   document.getElementById('app').classList.add('busca-ativa')
 }
 
-function navegarParaResultado(materiaId, turmaId, temaIndex) {
+function navegarParaResultado(i) {
+  const r = (window._buscaResultados || [])[i]
+  if (!r) return
   fecharBusca()
-  abrirTemaDaArvore(materiaId, turmaId, temaIndex)
+  if (r.tipo === 'informativo') {
+    const materia = materias.find(m => m.id === r.materiaId)
+    const turma   = materia && materia.turmas.find(t => t.id === r.turmaId)
+    if (!materia || !turma) return
+    estado.materiaAtual = materia
+    estado.turmaAtual   = turma
+    selecionarTurma(r.materiaId, r.turmaId, false, r.arquivo)
+    return
+  }
+  abrirTemaDaArvore(r.materiaId, r.turmaId, r.temaIndex)
 }
 
 let _buscaTimer = null

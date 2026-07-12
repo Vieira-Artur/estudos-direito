@@ -1906,3 +1906,40 @@ main {
   max-width: 100%;
   height: auto;
 }
+
+/* ── Dica de deslize em tabelas largas (ver marcarTabelasRolaveis) ── */
+.tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch }
+.tbl-hint-wrap { position: relative }
+.tbl-hint-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 38px;
+  background: linear-gradient(to left, var(--surface) 12%, transparent);
+  pointer-events: none;
+  opacity: .95;
+  transition: opacity .35s ease;
+}
+.tbl-hint {
+  position: absolute;
+  right: 8px;
+  bottom: 10px;
+  padding: 3px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--surface);
+  background: var(--blue-accent, #1F497D);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  pointer-events: none;
+  animation: tbl-hint-pulse 1.6s ease-in-out 3;
+  transition: opacity .35s ease;
+}
+@keyframes tbl-hint-pulse {
+  0%, 100% { transform: translateX(0) }
+  50%      { transform: translateX(-6px) }
+}
+.tbl-hint-off::after, .tbl-hint-off .tbl-hint { opacity: 0 }
+@media (prefers-reduced-motion: reduce) {
+  .tbl-hint { animation: none }
+}

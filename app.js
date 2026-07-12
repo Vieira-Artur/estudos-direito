@@ -88,6 +88,54 @@ function scrollSuave(el, opts = {}) {
   el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start', ...opts })
 }
 
+// ── Dica de deslize em tabelas largas ───────────────────
+// Tabelas mais largas que a tela (comum no celular) ganham uma sombra de
+// degradê na borda direita e o selo "deslize →", que somem ao primeiro
+// arrasto. Usa IntersectionObserver para avaliar só quando a tabela fica
+// visível — cobre tabelas dentro de abas inicialmente ocultas.
+function marcarTabelasRolaveis(root) {
+  if (!root || typeof IntersectionObserver === 'undefined') return
+  const candidatos = new Set()
+  root.querySelectorAll('table').forEach(t => {
+    let w = t.parentElement
+    while (w && w !== root) {
+      const ov = getComputedStyle(w).overflowX
+      if (ov === 'auto' || ov === 'scroll') break
+      w = w.parentElement
+    }
+    if (!w || w === root) {
+      // tabela sem invólucro rolável: embrulha para nunca estourar o layout
+      const s = document.createElement('div')
+      s.className = 'tbl-scroll'
+      t.parentNode.insertBefore(s, t)
+      s.appendChild(t)
+      w = s
+    }
+    candidatos.add(w)
+  })
+  if (!candidatos.size) return
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return
+      const w = en.target
+      io.unobserve(w)
+      if (w.scrollWidth <= w.clientWidth + 8) return
+      if (w.parentElement && w.parentElement.classList.contains('tbl-hint-wrap')) return
+      const outer = document.createElement('div')
+      outer.className = 'tbl-hint-wrap'
+      w.parentNode.insertBefore(outer, w)
+      outer.appendChild(w)
+      const selo = document.createElement('div')
+      selo.className = 'tbl-hint'
+      selo.setAttribute('aria-hidden', 'true')
+      selo.textContent = 'deslize →'
+      outer.appendChild(selo)
+      w.addEventListener('scroll', () => outer.classList.add('tbl-hint-off'), { once: true, passive: true })
+    })
+  }, { threshold: 0.05 })
+  candidatos.forEach(w => io.observe(w))
+}
+
 // ── Skeleton loaders ────────────────────────────────────
 
 function skeletonConteudo() {
@@ -563,6 +611,7 @@ function renderConteudoTurma(turma) {
           }
         })
         linkificarJulgados(el)
+        marcarTabelasRolaveis(el)
         const focusEl = el.querySelector('h1, h2') || el
         if (!focusEl.hasAttribute('tabindex')) focusEl.setAttribute('tabindex', '-1')
         focusEl.focus({ preventScroll: true })
@@ -623,6 +672,7 @@ function _abrirFragmentoDoIndice(arquivo, fromPop = false) {
       void el.offsetWidth
       el.style.removeProperty('animation')
       linkificarJulgados(el)
+      marcarTabelasRolaveis(el)
       const focusEl = el.querySelector('h1, h2') || el
       if (!focusEl.hasAttribute('tabindex')) focusEl.setAttribute('tabindex', '-1')
       focusEl.focus({ preventScroll: true })
@@ -1103,6 +1153,7 @@ function abrirTema(index, fromPop = false) {
       area.appendChild(downloadWrap)
 
       executarScripts(area)
+      marcarTabelasRolaveis(area)
       rolarParaAncora()
       const focusEl = area.querySelector('h1, h2') || area
       if (!focusEl.hasAttribute('tabindex')) focusEl.setAttribute('tabindex', '-1')

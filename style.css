@@ -1909,11 +1909,11 @@ main {
 
 /* ── Dica de deslize em tabelas largas (ver marcarTabelasRolaveis) ── */
 .tbl-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch }
-.tbl-hint-wrap { position: relative }
+.tbl-hint-wrap { position: relative; padding-top: 26px }
 .tbl-hint-wrap::after {
   content: '';
   position: absolute;
-  top: 0; right: 0; bottom: 0;
+  top: 26px; right: 0; bottom: 0;
   width: 38px;
   background: linear-gradient(to left, var(--surface) 12%, transparent);
   pointer-events: none;
@@ -1922,8 +1922,8 @@ main {
 }
 .tbl-hint {
   position: absolute;
-  right: 8px;
-  bottom: 10px;
+  right: 4px;
+  top: 0;
   padding: 3px 10px;
   font-size: 11.5px;
   font-weight: 600;

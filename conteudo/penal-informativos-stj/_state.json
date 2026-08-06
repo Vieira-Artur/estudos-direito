@@ -1,5 +1,5 @@
 {
-  "ultima_edicao_processada": 894,
+  "ultima_edicao_processada": 906,
   "edicoes": {
     "885": {
       "data": "22 de abril de 2026",
@@ -50,7 +50,67 @@
       "data": "30 de junho de 2026",
       "qtd_enunciados": 2,
       "arquivo": "informativo-0894.html"
+    },
+    "895": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0895.html"
+    },
+    "896": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0896.html"
+    },
+    "897": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0897.html"
+    },
+    "898": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0898.html"
+    },
+    "899": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0899.html"
+    },
+    "900": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0900.html"
+    },
+    "901": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0901.html"
+    },
+    "902": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0902.html"
+    },
+    "903": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0903.html"
+    },
+    "904": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0904.html"
+    },
+    "905": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0905.html"
+    },
+    "906": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0906.html"
     }
   },
-  "atualizado_em": "2026-07-02T09:00:24+00:00"
+  "atualizado_em": "2026-08-03T11:39:12+00:00"
 }

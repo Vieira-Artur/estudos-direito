@@ -1,5 +1,5 @@
 {
-  "ultima_edicao_processada": 900,
+  "ultima_edicao_processada": 906,
   "edicoes": {
     "885": {
       "data": "22 de abril de 2026",
@@ -80,7 +80,37 @@
       "data": "Data não identificada",
       "qtd_enunciados": 0,
       "arquivo": "informativo-0900.html"
+    },
+    "901": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0901.html"
+    },
+    "902": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0902.html"
+    },
+    "903": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0903.html"
+    },
+    "904": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0904.html"
+    },
+    "905": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0905.html"
+    },
+    "906": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0906.html"
     }
   },
-  "atualizado_em": "2026-07-20T17:15:07+00:00"
+  "atualizado_em": "2026-08-06T20:14:35+00:00"
 }

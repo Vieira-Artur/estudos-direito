@@ -19,6 +19,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import sys
 import subprocess
 import time
@@ -851,25 +852,64 @@ def bump_sw_cache() -> None:
         log.info("sw.js atualizado para estudos-direito-%s.", today)
 
 
+_git_exe_cache: Optional[str] = None
+
+
+def find_git_exe() -> Optional[str]:
+    """Localiza o executável git.
+
+    Em sessão interativa normalmente basta o PATH, mas a Tarefa Agendada do
+    Windows roda com um PATH mais enxuto e pode não enxergar o git ali. Nesta
+    máquina o único git.exe é o embutido no GitHub Desktop, numa pasta
+    versionada (app-X.Y.Z) que muda a cada auto-update — por isso procuramos
+    por padrão em vez de fixar uma versão.
+    """
+    global _git_exe_cache
+    if _git_exe_cache:
+        return _git_exe_cache
+
+    exe = shutil.which("git")
+    if not exe:
+        local_appdata = Path(os.environ.get("LOCALAPPDATA", ""))
+        candidatos = sorted(
+            local_appdata.glob("GitHubDesktop/app-*/resources/app/git/cmd/git.exe"),
+            reverse=True,  # maior versão primeiro
+        )
+        exe = str(candidatos[0]) if candidatos else None
+
+    _git_exe_cache = exe
+    return exe
+
+
 def git_push_edicoes(edicoes: list[int], cfg: dict) -> None:
     """Faz commit e push das edições novas geradas."""
     numeros = ", ".join(f"nº {n}" for n in sorted(edicoes))
     rel_dir = str(cfg["target_dir"].relative_to(REPO_ROOT))
     bump_sw_cache()
+
+    git_exe = find_git_exe()
+    if not git_exe:
+        log.error("git.exe não encontrado (nem no PATH, nem no GitHub Desktop) — "
+                   "edições %s geradas localmente mas NÃO enviadas ao GitHub.", numeros)
+        return
+
     try:
         subprocess.run(
-            ["git", "-C", str(REPO_ROOT), "add", rel_dir, "sw.js"],
+            [git_exe, "-C", str(REPO_ROOT), "add", rel_dir, "sw.js"],
             check=True, capture_output=True)
         subprocess.run(
-            ["git", "-C", str(REPO_ROOT), "commit", "-m",
+            [git_exe, "-C", str(REPO_ROOT), "commit", "-m",
              f"feat: informativos STJ {numeros}"],
             check=True, capture_output=True)
         subprocess.run(
-            ["git", "-C", str(REPO_ROOT), "push"],
+            [git_exe, "-C", str(REPO_ROOT), "push"],
             check=True, capture_output=True)
         log.info("Git push realizado: %s", numeros)
     except subprocess.CalledProcessError as exc:
         log.error("Falha no git push: %s", exc.stderr.decode(errors="replace"))
+    except OSError as exc:
+        log.error("Falha ao executar git (%s): %s — edições %s NÃO enviadas ao GitHub.",
+                   git_exe, exc, numeros)
 
 
 def main() -> int:
@@ -885,6 +925,14 @@ def main() -> int:
         end = fetch_latest_published_edition()
         if end is None:
             log.warning("Sem listagem do STJ; tento até %d.", start + 5)
+            end = start + 5
+        elif end < start:
+            # A listagem às vezes devolve um número desatualizado/perdido na
+            # página (menor do que a edição de onde já sabemos continuar).
+            # Confiar nele faria o loop abaixo não rodar nem uma vez e
+            # reportar "nenhuma edição nova" mesmo havendo edições reais.
+            log.warning("Listagem do STJ apontou edição %d, anterior ao início (%d) "
+                        "— ignorando e tentando até %d.", end, start, start + 5)
             end = start + 5
     log.info("Tentando até informativo %d.", end)
 

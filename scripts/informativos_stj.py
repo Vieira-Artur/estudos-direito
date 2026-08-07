@@ -775,24 +775,53 @@ def extrair_data_titulo(soup: BeautifulSoup, numero: int) -> str:
     return m.group(1) if m else "Data não identificada"
 
 
-def fetch_edicao(numero: int, cfg: dict) -> Optional[tuple[str, list[dict]]]:
-    """Retorna (data_edicao, enunciados) ou None se a edicao nao existe."""
+def fetch_edicao(numero: int, cfg: dict, *, verificar_tentativas: int = 3) -> Optional[tuple[str, list[dict]]]:
+    """Retorna (data_edicao, enunciados) ou None se a edicao nao existe/nao foi
+    possivel confirmar.
+
+    O STJ às vezes devolve, de forma intermitente, uma página-modelo genérica
+    (sem o número/data da edição no <title>) em vez do conteúdo real — sobretudo
+    quando várias edições são pedidas em sequência rápida. Aceitar essa página
+    como "edição vazia confirmada" publicaria dado errado (uma edição real
+    ficaria marcada, incorretamente, como sem enunciados). Por isso confirmamos
+    o título antes de aceitar um resultado com 0 enunciados, e tentamos de novo
+    (com backoff) quando a confirmação falha.
+    """
     url = EDITION_URL_TPL.format(n=numero)
     log.info("Buscando edição %d: %s", numero, url)
-    try:
-        html = fetch(url)
-    except Exception as exc:                              # noqa: BLE001
-        log.error("Falha ao buscar edição %d: %s", numero, exc)
+
+    for tentativa in range(1, verificar_tentativas + 1):
+        try:
+            html = fetch(url)
+        except Exception as exc:                          # noqa: BLE001
+            log.error("Falha ao buscar edição %d: %s", numero, exc)
+            return None
+
+        if "não encontrad" in html.lower() or "nao encontrad" in html.lower():
+            log.info("Edição %d não encontrada (ainda não publicada).", numero)
+            return None
+
+        soup = BeautifulSoup(html, "html.parser")
+        data_edicao = extrair_data_titulo(soup, numero)
+
+        todos = parse_enunciados(html)
+
+        if todos or data_edicao != "Data não identificada":
+            # Ou achamos enunciados, ou o título confirma que é mesmo a
+            # edição pedida (aí "0 enunciados" é uma edição real e vazia).
+            break
+
+        log.warning("Edição %d: página retornada não confirma o título esperado "
+                    "(tentativa %d/%d) — provável página genérica do STJ; refazendo.",
+                    numero, tentativa, verificar_tentativas)
+        if tentativa < verificar_tentativas:
+            time.sleep(3.0 * tentativa)
+    else:
+        log.error("Edição %d: não foi possível confirmar o conteúdo após %d "
+                   "tentativas — pulando sem marcar como processada.",
+                   numero, verificar_tentativas)
         return None
 
-    if "não encontrad" in html.lower() or "nao encontrad" in html.lower():
-        log.info("Edição %d não encontrada (ainda não publicada).", numero)
-        return None
-
-    soup = BeautifulSoup(html, "html.parser")
-    data_edicao = extrair_data_titulo(soup, numero)
-
-    todos = parse_enunciados(html)
     log.info("Edição %d: %d enunciados no total.", numero, len(todos))
 
     if not todos:

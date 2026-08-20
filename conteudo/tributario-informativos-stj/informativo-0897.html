@@ -1,0 +1,163 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-titulo-data {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  vertical-align: middle;
+}
+.inf-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.inf-sub strong { color: var(--jur-text); }
+.inf-meta {
+  display: inline-block;
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--jur-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+.inf-card {
+  flex: 1;
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.inf-card:hover {
+  box-shadow: var(--jur-shadow);
+  transform: translateY(-1px);
+}
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jur-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.inf-processo {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--jur-text2);
+}
+.inf-processo a {
+  font-weight: 700;
+  color: var(--jur-accent);
+  text-decoration: none;
+}
+.inf-processo a:hover { text-decoration: underline; }
+.inf-ramo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--jur-text2);
+}
+.inf-tema {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  margin: 4px 0 10px 0;
+  line-height: 1.4;
+}
+.inf-destaque {
+  font-size: 16px;
+  color: var(--jur-text);
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.inf-destaque p { margin: 0 0 8px 0; }
+.inf-destaque p:last-child { margin-bottom: 0; }
+.inf-rodape {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jur-border);
+  font-size: 12px;
+  color: var(--jur-text2);
+}
+.inf-rodape a { color: var(--jur-accent); }
+.inf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-titulo">Informativo nº 897 <span class="inf-meta">STJ</span><span class="inf-titulo-data"> — 18 de agosto de 2026</span></h2>
+<p class="inf-sub">Edição <strong>nº 897</strong> · publicada em <strong>18 de agosto de 2026</strong> · 3 enunciados de Direito Tributário.</p>
+<div class="inf-card-wrap"><div class="inf-num">1</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>É possível reconhecer a fraude à execução fiscal quando, embora o ato de transferência patrimonial tenha sido realizado antes da efetiva citação, os elementos probatórios comprovem ter o sócio-administrador plena ciência, por outros meios, da decisão de redirecionamento.</p></div><div class="inf-tema">Fraude à execução fiscal. Sócio cujo nome não consta da certidão de dívida ativa. Redirecionamento da execução fiscal. Doação de imóvel. Reconhecimento da fraude em momento anterior à citação, desde que comprovada a ciência inequívoca da decisão de redirecionamento. Possibilidade.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;020133&#x27;" target="_blank" rel="noopener">REsp 2.117.867-RS, Rel. Ministro Gurgel de Faria, Rel. para acórdão Ministra Regina Helena Costa, Primeira Turma, por maioria, julgado em 4/8/2026.</a></span><span class="inf-ramo">DIREITO PROCESSUAL CIVIL, DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">2</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>O art. 69, § 1º, da LC 109/2001, sem qualquer distinção quanto à abrangência dos beneficiários, passou a dispor expressamente que as contribuições destinadas ao custeio de benefícios de natureza previdenciária, vertidas a entidades de previdência complementar, não sofrem a incidência de contribuições de qualquer natureza, afastando, portanto, a limitação então prevista no art. 28, § 9º, p, da Lei n. 8.212/1991.</p></div><div class="inf-tema">Contribuições destinadas a entidades de previdência complementar restrita a diretores e dirigentes. Não incidência de contribuição previdenciária. Art. 69, § 1º, da LC n. 109/2001. Revogação tácita parcial do art. 28, § 9º, p, da Lei n. 8.212/1991. Aplicação do critério cronológico de solução de conflito de normas.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;021773&#x27;" target="_blank" rel="noopener">REsp 2.142.645-PE, Rel. Ministro Afrânio Vilela, Segunda Turma, por unanimidade, julgado em 17/3/2026, DJEN 23/3/2026.</a></span><span class="inf-ramo">DIREITO PREVIDENCIÁRIO, DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">3</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>O procedimento administrativo prévio previsto no art. 32 da Lei 9.430/1996 aplica-se à suspensão da imunidade tributária das contribuições sociais previstas no art. 195, § 7º, da Constituição Federal.</p></div><div class="inf-tema">Imunidade tributária. Contribuições sociais previstas no art. 195, § 7º, da CF. Suspensão. Procedimento administrativo prévio. Necessidade.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?livre=%28RESP+INPATH%28CLAS%29+AND+2165172+INPATH%28NUM%29%29+OR+%28NEAR%28%28RESP%2C2165172%29%2C0%2CTRUE%29+INPATH%28SUCE%29%29" target="_blank" rel="noopener">REsp 2.165.172-SP, Rel. Ministro Afrânio Vilela, Segunda Turma, por unanimidade, julgado em 17/3/2026, DJEN 23/3/2026.</a></span><span class="inf-ramo">DIREITO TRIBUTÁRIO</span></div></article></div>
+<div class="inf-rodape">Fonte oficial: <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisarumaedicao&amp;livre=%270897%27.cod." target="_blank" rel="noopener">Informativo 897 no portal do STJ</a>.</div>

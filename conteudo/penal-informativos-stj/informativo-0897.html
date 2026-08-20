@@ -1,0 +1,164 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-titulo-data {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  vertical-align: middle;
+}
+.inf-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.inf-sub strong { color: var(--jur-text); }
+.inf-meta {
+  display: inline-block;
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--jur-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+.inf-card {
+  flex: 1;
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.inf-card:hover {
+  box-shadow: var(--jur-shadow);
+  transform: translateY(-1px);
+}
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jur-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.inf-processo {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--jur-text2);
+}
+.inf-processo a {
+  font-weight: 700;
+  color: var(--jur-accent);
+  text-decoration: none;
+}
+.inf-processo a:hover { text-decoration: underline; }
+.inf-ramo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--jur-text2);
+}
+.inf-tema {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  margin: 4px 0 10px 0;
+  line-height: 1.4;
+}
+.inf-destaque {
+  font-size: 16px;
+  color: var(--jur-text);
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.inf-destaque p { margin: 0 0 8px 0; }
+.inf-destaque p:last-child { margin-bottom: 0; }
+.inf-rodape {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jur-border);
+  font-size: 12px;
+  color: var(--jur-text2);
+}
+.inf-rodape a { color: var(--jur-accent); }
+.inf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-titulo">Informativo nº 897 <span class="inf-meta">STJ</span><span class="inf-titulo-data"> — 18 de agosto de 2026</span></h2>
+<p class="inf-sub">Edição <strong>nº 897</strong> · publicada em <strong>18 de agosto de 2026</strong> · 4 enunciados de Direito Penal.</p>
+<div class="inf-card-wrap"><div class="inf-num">1</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>Em atenção aos princípios da legalidade, da taxatividade e do favor rei, a interpretação do art. 112, § 3°, V, da LEP deve se dar de modo restritivo. Portanto, organização criminosa é somente a hipótese de condenação nos termos da Lei n. 12.850/2013, não abrangendo apenada que tenha participado de associação criminosa (art. 288 do CP) ou associação para o tráfico (art. 35 da Lei n. 11.343/2006).</p></div><div class="inf-tema">Execução penal. Progressão de regime especial. Vedação quando integrar organização criminosa. Interpretação restritiva. Condenação por associação criminosa ou associação para o tráfico. Interpretação extensiva in malam partem. Impossibilidade. Tema 1374.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;021965&#x27;" target="_blank" rel="noopener">REsp 2.204.349-MG, Rel. Ministro Sebastião Reis Júnior, Terceira Seção, por unanimidade, julgado em 12/8/2026. (Tema 1374).</a></span><span class="inf-ramo">DIREITO PENAL, EXECUÇÃO PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">2</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>Em hipóteses excepcionalíssimas anteriores à Lei n. 15.353/2026, a jurisprudência admite realizar distinguishing rem relação à presunção de vulnerabilidade do art. 217-A do Código Penal, afastando a intervenção penal quando presentes circunstâncias como diferença etária reduzida, anuência familiar, relação afetiva estável, formação de família, geração de filho e inexistência de situação de violência ou abuso.</p></div><div class="inf-tema">Estupro de vulnerável. Conjunção carnal com menor de 14 anos. Presunção de vulnerabilidade. Tema 918/STJ e Súmula n. 593/STJ. Distinguishing em situação excepcional anterior à Lei n. 15.353/2026. Circunstâncias excepcionalíssimas. Interesse superior da vítima e do filho menor.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;022118&#x27;" target="_blank" rel="noopener">Processo em segredo de justiça, Rel. Ministro Messod Azulay Neto, Quinta Turma, por unanimidade, julgado em 9/6/2026, DJEN 15/6/2026.</a></span><span class="inf-ramo">DIREITO PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">3</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>A condenação pelo art. 311 do CTB exige prova segura e objetiva de que o agente trafegou em velocidade incompatível com a segurança, com extrapolação do limite aplicável à via, não bastando a constatação de condução perigosa por percepção testemunhal.</p></div><div class="inf-tema">Crime de trânsito do art. 311 do CTB. Necessidade de prova segura e objetiva do elemento típico &quot;velocidade incompatível&quot; com a segurança. Extrapolação do limite aplicável à via. Percepção testemunhal subjetiva. Insuficiente. Ausência de prova idônea.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/SCON/jurisprudencia/toc.jsp?livre=%28%28AGARESP+INPATH%28CLAS%29+OR+%22AgRg+no+AREsp%22+INPATH%28CLAP%29%29+AND+2295304+INPATH%28NUM%29%29+OR+%28NEAR%28%28%28AGARESP+OR+%22AgRg+no+AREsp%22%29%2C2295304%29%2C0%2CTRUE%29+INPATH%28SUCE%29%29" target="_blank" rel="noopener">AgRg no AREsp 2.295.304-DF, Rel. Ministro Ribeiro Dantas, Quinta Turma, por unanimidade, julgado em 9/6/2026, DJEN 17/6/2026.</a></span><span class="inf-ramo">DIREITO PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">4</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>É possível o reconhecimento da qualificadora do rompimento de obstáculo no furto quando, apesar de não ter sido realizado exame pericial, o arrombamento for claramente demonstrado por outros elementos probatórios, como fotografias da porta danificada, além do relato da vítima.</p></div><div class="inf-tema">Furto qualificado. Rompimento de obstáculo. Crime que deixa vestígios. Ausência de exame pericial. Outras provas que demonstram cabalmente a ocorrência da circunstância. Relato da vítima e fotografias da porta danificada. Manutenção da qualificadora.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;022304&#x27;" target="_blank" rel="noopener">REsp 2.204.445-SC, Rel. Ministro Sebastião Reis Júnior, Sexta Turma, por unanimidade, julgado em 3/6/2026, DJEN 10/6/2026.</a></span><span class="inf-ramo">DIREITO PENAL</span></div></article></div>
+<div class="inf-rodape">Fonte oficial: <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisarumaedicao&amp;livre=%270897%27.cod." target="_blank" rel="noopener">Informativo 897 no portal do STJ</a>.</div>

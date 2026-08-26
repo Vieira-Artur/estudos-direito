@@ -1,0 +1,865 @@
+<style>
+/* ============================================================
+   Processo Penal I — Unidade 1: Sistemas Processuais Penais
+   Escopo: .ppi1-   ·   Estilo alinhado ao padrao de Processo Penal II
+   ============================================================ */
+
+/* paleta local — mesmos nomes e valores usados em Processo Penal II */
+:root {
+  --pp1-green:#1a5c1a; --pp1-green-lt:#d6f0d6;
+  --pp1-red:#8b1a1a;   --pp1-red-lt:#fce8e8;
+  --pp1-orange:#7a3800;--pp1-orange-lt:#fdebd6;
+  --pp1-purple:#4a1a8a;--pp1-purple-lt:#ede5fb;
+  --pp1-teal:#0a5c4a;  --pp1-teal-lt:#d6f0e8;
+  --pp1-yellow:#5a4000;--pp1-yellow-lt:#fdf6d6;
+  --pp1-bg2:#f5f7fa;   --pp1-bg3:#edf0f4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+    --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+    --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+    --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+    --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+    --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+    --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+  }
+}
+:root[data-theme="dark"] {
+  --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+  --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+  --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+  --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+  --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+  --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+  --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+}
+
+.ppi1 { font-family: var(--sans); color: var(--text); padding-bottom: 2rem; }
+
+/* --- titulo (padrao .pp1-titulo de PP2) --- */
+.ppi1-head { margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+.ppi1-kicker { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+.ppi1-h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--blue); line-height: 1.25; margin: 0 0 .35rem; }
+.ppi1-sub { font-size: .9rem; color: var(--text2); line-height: 1.5; margin: 0 0 22px; }
+
+/* --- abas (padrao .pp1-tab de PP2) --- */
+.ppi1-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 22px; }
+.ppi1-tab { padding: 7px 16px; font-size: 13px; font-weight: 600; font-family: var(--sans);
+  border: 1.5px solid var(--blue); border-radius: 6px; background: var(--surface); color: var(--blue);
+  cursor: pointer; transition: background .15s, color .15s; }
+.ppi1-tab:hover { background: var(--blue-hover); }
+.ppi1-tab[aria-selected="true"] { background: var(--blue); color: #fff; }
+:root[data-theme="dark"] .ppi1-tab[aria-selected="true"],
+.ppi1-tab[aria-selected="true"] { color: #fff; }
+.ppi1-painel[hidden] { display: none; }
+
+/* --- tipografia (padrao PP2) --- */
+.ppi1 h2 { font-size: 1.3rem; color: var(--blue); border-left: 3px solid var(--gold);
+  padding-left: 1rem; margin: 2.5rem 0 1.5rem; }
+.ppi1 h2:first-child { margin-top: 0; }
+.ppi1 h3 { color: var(--blue); font-size: 1rem; margin: 1.2rem 0 .6rem; }
+.ppi1 p { color: var(--text2); font-size: .96rem; line-height: 1.65; margin: 0 0 .85rem; }
+.ppi1 ul, .ppi1 ol { padding-left: 1.2rem; margin: 0 0 .9rem; }
+.ppi1 li { margin-bottom: .3rem; color: var(--text2); font-size: .96rem; line-height: 1.6; }
+.ppi1 strong { color: var(--blue); font-weight: 700; }
+
+/* --- card (padrao .card de PP2) --- */
+.ppi1-card { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; transition: border-color .2s; }
+.ppi1-card:hover { border-color: var(--blue-mid); }
+.ppi1-card h3 { color: var(--blue); font-size: 1rem; margin: 0 0 .6rem; }
+.ppi1-card p, .ppi1-card li { color: var(--text2); font-size: .96rem; }
+.ppi1-card p:last-child { margin-bottom: 0; }
+
+/* --- lei seca (padrao .artigo de PP2) --- */
+.ppi1-lei { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 6px;
+  padding: .9rem 1.2rem; margin-bottom: .8rem; font-family: monospace; font-size: .91rem; color: var(--text); }
+.ppi1-lei-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace;
+  font-weight: bold; margin-bottom: .35rem; }
+.ppi1-lei p { color: var(--text); font-family: monospace; font-size: .91rem; line-height: 1.6; margin: 0 0 .5rem; }
+.ppi1-lei p:last-child { margin-bottom: 0; }
+.ppi1-lei strong { color: var(--blue); }
+
+/* --- jurisprudencia (padrao .juris de PP2) --- */
+.ppi1-juris { background: var(--blue-light); border-left: 3px solid var(--blue);
+  padding: 1rem 1.2rem; border-radius: 0 6px 6px 0; margin-bottom: 1rem; }
+.ppi1-juris-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace; font-weight: bold; }
+.ppi1-juris p { color: var(--text2); font-size: .94rem; margin: .3rem 0 .5rem; }
+.ppi1-juris p:last-child { margin-bottom: 0; }
+.ppi1-fonte { font-size: .84rem; color: var(--text2); font-family: monospace; margin: .3rem 0 0 !important; }
+
+/* --- alerta (padrao .alert de PP2 — paleta vermelha) --- */
+.ppi1-alerta { background: var(--pp1-red-lt); border: 1px solid var(--pp1-red); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi1-alerta-tag { display: block; color: var(--pp1-red); font-weight: 700; font-size: .84rem;
+  letter-spacing: .06em; text-transform: uppercase; }
+.ppi1-alerta p { color: var(--text2); font-size: .94rem; margin: .3rem 0 0; }
+.ppi1-alerta strong { color: var(--pp1-red); }
+
+/* --- doutrina (mesma gramatica do .alert, paleta amarela) --- */
+.ppi1-dout { background: var(--pp1-yellow-lt); border: 1px solid var(--pp1-yellow); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi1-dout p { color: var(--text2); font-size: .94rem; font-style: italic; line-height: 1.62; margin: 0 0 .45rem; }
+.ppi1-dout p:last-child { margin-bottom: 0; }
+.ppi1-dout strong { color: var(--pp1-yellow); }
+
+/* --- tabela (padrao PP2) --- */
+.ppi1-tabela-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; -webkit-overflow-scrolling: touch; }
+.ppi1-tabela { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 560px; }
+.ppi1-tabela th { background: var(--pp1-bg3); color: var(--blue); border: 1px solid var(--border);
+  border-bottom: 2px solid var(--blue-light); padding: .75rem 1rem; text-align: left; font-weight: 600; }
+.ppi1-tabela td { padding: .65rem 1rem; border: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.ppi1-tabela td:first-child { color: var(--blue); font-weight: 600; }
+
+/* --- grids (padrao PP2) --- */
+.ppi1-g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.ppi1-g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+
+/* --- diagramas (padrao .mapa de PP2) --- */
+.ppi1-mapa, .ppi1-svgbox { background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.2rem; overflow-x: auto; margin-bottom: 1.2rem; }
+.ppi1-mapa svg, .ppi1-svgbox svg { display: block; width: 100%; height: auto; }
+
+/* --- linha do tempo --- */
+.ppi1-lt { position: relative; margin: 1.2rem 0 1.5rem; padding-left: 1.7rem; }
+.ppi1-lt::before { content: ''; position: absolute; left: .4rem; top: .4rem; bottom: .4rem; width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--gold)); }
+.ppi1-lt-item { position: relative; background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 6px; padding: .9rem 1.2rem; margin-bottom: .8rem; }
+.ppi1-lt-item::before { content: ''; position: absolute; left: -1.62rem; top: 1rem; width: .68rem; height: .68rem;
+  border-radius: 50%; background: var(--surface); border: 2px solid var(--blue); }
+.ppi1-lt-ano { font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi1-lt-tit { font-size: .99rem; font-weight: 700; color: var(--text); margin: .2rem 0 .25rem; }
+.ppi1-lt-txt { font-size: .94rem; color: var(--text2); line-height: 1.55; margin: 0; }
+
+/* --- roteiro / check-in (padrao .roteiro-item de PP2) --- */
+.ppi1-check { list-style: none; padding-left: 0 !important; }
+.ppi1-check li { display: flex; gap: 1rem; align-items: flex-start; background: var(--pp1-bg2);
+  border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: .8rem;
+  transition: border-color .2s; color: var(--text2); font-size: .96rem; }
+.ppi1-check li:hover { border-color: var(--blue-mid); }
+.ppi1-check li::before { content: '☐'; font-size: 1.1rem; color: var(--blue); line-height: 1.25; flex-shrink: 0; }
+.ppi1-check b { color: var(--blue); }
+
+/* --- caso pratico (padrao .caso de PP2) --- */
+.ppi1-caso { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; margin-bottom: 1.5rem; }
+.ppi1-caso-n { display: block; background: var(--pp1-bg3); border-bottom: 1px solid var(--border);
+  padding: .7rem 1.4rem; font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi1-caso h3 { margin: 1.1rem 1.4rem .5rem; }
+.ppi1-caso p { margin: 0 1.4rem .85rem; }
+.ppi1-resp { margin: 0 1.4rem 1.2rem; background: var(--pp1-bg3); border-left: 3px solid var(--pp1-purple);
+  border-radius: 0 4px 4px 0; padding: .7rem 1rem; }
+.ppi1-resp summary { cursor: pointer; font-size: .94rem; font-weight: 700; color: var(--pp1-purple); list-style: none; }
+.ppi1-resp summary::-webkit-details-marker { display: none; }
+.ppi1-resp summary::before { content: '▸ '; }
+.ppi1-resp[open] summary::before { content: '▾ '; }
+.ppi1-resp p { margin: .55rem 0 0; font-size: .94rem; color: var(--text2); }
+
+/* --- guia resumido --- */
+.ppi1-guia { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; }
+.ppi1-guia h3 { color: var(--blue); margin-top: 0; }
+.ppi1-guia p { color: var(--text2); }
+.ppi1-pill { display: inline-block; background: var(--pp1-bg3); border: 1px solid var(--border);
+  border-radius: 20px; padding: .2rem .7rem; font-size: .84rem; font-family: monospace; font-weight: bold;
+  color: var(--blue); margin: 0 .3rem .35rem 0; }
+
+.ppi1-nota { font-size: .88rem; color: var(--text2); line-height: 1.55;
+  border-top: 1px solid var(--border); padding-top: .9rem; margin-top: 1.8rem; }
+</style>
+
+<div class="ppi1">
+
+  <div class="ppi1-head">
+    <div class="ppi1-kicker">Processo Penal I · Unidade 1</div>
+    <h1 class="ppi1-h1">Sistemas Processuais Penais</h1>
+    <p class="ppi1-sub">Do <em>ius puniendi</em> ao devido processo · Inquisitório, acusatório e misto · A estrutura acusatória do art.&nbsp;3º-A do CPP</p>
+  </div>
+
+  <div class="ppi1-tabs" role="tablist">
+    <button class="ppi1-tab" role="tab" aria-selected="true"  data-p="mapa">Mapa mental</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="fund">Fundamentos</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="inq">Inquisitório</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="acu">Acusatório</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="mis">Misto</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="comp">Quadro comparativo</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="bra">Sistema brasileiro</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="lt">Linha do tempo</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="rot">Roteiro de estudo</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="casos">Casos práticos</button>
+    <button class="ppi1-tab" role="tab" aria-selected="false" data-p="guia">Guia resumido</button>
+  </div>
+
+  <!-- ============================ MAPA MENTAL ============================ -->
+  <section class="ppi1-painel" data-p="mapa">
+    <h2>Visão geral da unidade</h2>
+    <p>O mapa abaixo organiza a unidade em três eixos: <strong>por que existe</strong> o processo penal, <strong>quais modelos</strong> a história produziu e <strong>qual modelo</strong> vigora no Brasil.</p>
+
+    <div class="ppi1-mapa">
+      <svg viewBox="0 0 900 500" role="img" aria-label="Mapa mental dos sistemas processuais penais">
+        <defs>
+          <style>
+            .n  { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
+            .nb { fill: var(--blue-dark); }
+            .ng { fill: var(--gold); }
+            .tt { font-family: 'Source Sans 3', sans-serif; font-size: 13px; font-weight: 600; fill: var(--text); }
+            .tw { font-family: 'Source Sans 3', sans-serif; font-size: 14px; font-weight: 700; fill: #fff; }
+            .ts { font-family: 'Source Sans 3', sans-serif; font-size: 11px; fill: var(--text2); }
+            .ln { stroke: var(--border); stroke-width: 1.6; fill: none; }
+          </style>
+        </defs>
+
+        <!-- centro -->
+        <rect class="nb" x="345" y="220" width="210" height="60" rx="10"/>
+        <text class="tw" x="450" y="245" text-anchor="middle">SISTEMAS</text>
+        <text class="tw" x="450" y="264" text-anchor="middle">PROCESSUAIS PENAIS</text>
+
+        <!-- linhas -->
+        <path class="ln" d="M345 240 C 280 240, 260 130, 205 130"/>
+        <path class="ln" d="M345 260 C 280 260, 260 370, 205 370"/>
+        <path class="ln" d="M555 240 C 620 240, 640 110, 695 110"/>
+        <path class="ln" d="M555 250 C 620 250, 640 250, 695 250"/>
+        <path class="ln" d="M555 260 C 620 260, 640 390, 695 390"/>
+
+        <!-- esquerda: fundamento -->
+        <rect class="n" x="30" y="105" width="175" height="52" rx="8"/>
+        <text class="tt" x="117" y="127" text-anchor="middle">Princípio da necessidade</text>
+        <text class="ts" x="117" y="145" text-anchor="middle">nulla poena sine iudicio</text>
+
+        <rect class="n" x="30" y="345" width="175" height="52" rx="8"/>
+        <text class="tt" x="117" y="367" text-anchor="middle">Dupla função</text>
+        <text class="ts" x="117" y="385" text-anchor="middle">punir + tutelar garantias</text>
+
+        <!-- direita: os três modelos -->
+        <rect class="n" x="695" y="85" width="175" height="52" rx="8" style="stroke:var(--blue-mid);stroke-width:2.5"/>
+        <text class="tt" x="782" y="107" text-anchor="middle">Inquisitório</text>
+        <text class="ts" x="782" y="125" text-anchor="middle">juiz gere a prova</text>
+
+        <rect class="n" x="695" y="225" width="175" height="52" rx="8" style="stroke:var(--gold);stroke-width:2.5"/>
+        <text class="tt" x="782" y="247" text-anchor="middle">Acusatório</text>
+        <text class="ts" x="782" y="265" text-anchor="middle">partes gerem a prova</text>
+
+        <rect class="n" x="695" y="365" width="175" height="52" rx="8" style="stroke:var(--blue-accent);stroke-width:2.5"/>
+        <text class="tt" x="782" y="387" text-anchor="middle">Misto (francês)</text>
+        <text class="ts" x="782" y="405" text-anchor="middle">duas fases</text>
+
+        <!-- rodapé: critério -->
+        <rect class="ng" x="300" y="420" width="300" height="46" rx="8"/>
+        <text class="tw" x="450" y="441" text-anchor="middle" style="fill:#1a1a2e">CRITÉRIO DECISIVO</text>
+        <text class="tt" x="450" y="458" text-anchor="middle" style="fill:#1a1a2e">Quem detém a gestão da prova?</text>
+        <path class="ln" d="M450 280 L 450 420" stroke-dasharray="4 4"/>
+
+        <!-- topo: art 3-A -->
+        <rect class="n" x="300" y="30" width="300" height="46" rx="8" style="stroke:var(--blue);stroke-width:2.5"/>
+        <text class="tt" x="450" y="50" text-anchor="middle">Brasil · CPP, art. 3º-A</text>
+        <text class="ts" x="450" y="67" text-anchor="middle">“estrutura acusatória” (Lei 13.964/19)</text>
+        <path class="ln" d="M450 220 L 450 76" stroke-dasharray="4 4"/>
+      </svg>
+    </div>
+
+    <div class="ppi1-alerta">
+      <span class="ppi1-alerta-tag">Chave de leitura</span>
+      <p>Separar as funções de acusar, defender e julgar é <strong>necessário, mas não suficiente</strong>. O que efetivamente distingue os sistemas é <strong>quem produz a prova</strong>. Guarde essa frase: ela resolve a maior parte das questões desta unidade.</p>
+    </div>
+  </section>
+
+  <!-- ============================ FUNDAMENTOS ============================ -->
+  <section class="ppi1-painel" data-p="fund" hidden>
+    <h2>Por que o processo penal é indispensável</h2>
+
+    <p>No momento em que alguém pratica a conduta descrita no tipo penal, o direito de punir do Estado deixa o plano abstrato e se converte em <strong>ius puniendi in concreto</strong>. Surge daí a <strong>pretensão punitiva</strong>: o poder do Estado de exigir de quem cometeu o delito a submissão à sanção penal.</p>
+
+    <p>Essa pretensão, porém, <strong>já nasce insatisfeita</strong>. O Direito Penal não é um direito de coação direta: ainda que o Estado seja titular do direito de punir, não se admite a imposição imediata da sanção sem um processo regular. Nem o Estado pode impor a pena, nem o infrator pode a ela se submeter voluntariamente fora do processo.</p>
+
+    <div class="ppi1-card">
+      <h3>Princípio da necessidade</h3>
+      <p>Sem processo não há como punir ninguém. É por esse caminho que o Estado supera a lógica da <strong>vingança privada</strong> e passa a operar por critérios de justiça.</p>
+    </div>
+
+    <div class="ppi1-dout">
+      <p>“O direito penal não tem realidade concreta fora do processo penal, ou seja, não se efetiva senão pela via processual. Quando alguém é vítima de um crime, a pena não se concretiza, não se efetiva imediatamente. Somente depois do processo penal teremos a possibilidade de aplicação da pena e realização plena do direito penal.”</p>
+      <p class="ppi1-fonte">Aury Lopes Jr., <em>Direito Processual Penal</em>, 17. ed., 2020, pp. 46-47.</p>
+    </div>
+
+    <p>O mesmo autor sintetiza: <em>“não existe delito sem pena, nem pena sem delito e processo, nem processo penal senão para determinar o delito e impor uma pena”</em>. É também nesse ponto que se rompe com a chamada “teoria geral do processo”: o Direito Civil se realiza todos os dias sem processo; o Direito Penal, nunca.</p>
+
+    <h3>Mitigações contemporâneas</h3>
+    <p>O princípio da necessidade vem sendo relativizado pela <strong>justiça penal negociada</strong> — transação penal e suspensão condicional do processo (Lei 9.099/95), colaboração premiada (Lei 12.850/13) e acordo de não persecução penal (CPP, art. 28-A). São espaços de solução consensual que reduzem o campo do processo em sentido tradicional.</p>
+
+    <h2>A dupla função do processo penal</h2>
+
+    <div class="ppi1-g2">
+      <div class="ppi1-card">
+        <h3>Instrumento do poder punitivo</h3>
+        <p>É o caminho, com regras próprias (devido processo legal), pelo qual o Estado exerce a pretensão punitiva.</p>
+      </div>
+      <div class="ppi1-card">
+        <h3>Escudo de direitos fundamentais</h3>
+        <p>Não serve apenas ao poder punitivo: é limite a ele. Como adverte <strong>Norberto Bobbio</strong>, a proteção do cidadão nos processos estatais é justamente o que separa um regime democrático de um totalitário.</p>
+      </div>
+    </div>
+
+    <div class="ppi1-alerta">
+      <span class="ppi1-alerta-tag">O dilema existencial do processo penal</span>
+      <p>De um lado, o respeito indispensável aos direitos fundamentais; de outro, a busca por um sistema criminal operante e eficiente. Todo o conteúdo desta disciplina se move nessa tensão.</p>
+    </div>
+
+    <h3>Por que estudar “sistemas”?</h3>
+    <p>O processo penal oscilou ao longo do tempo entre configurações mais e menos punitivas. <strong>Goldschmidt</strong> afirma que a estrutura do processo penal de um país funciona como um <strong>termômetro dos elementos democráticos ou autoritários de sua Constituição</strong>. Estudar os sistemas é, portanto, ler o próprio Estado.</p>
+  </section>
+
+  <!-- ============================ INQUISITÓRIO ============================ -->
+  <section class="ppi1-painel" data-p="inq" hidden>
+    <h2>Sistema inquisitorial</h2>
+
+    <p>Adotado pelo Direito canônico (Tribunal da Inquisição ou Santo Ofício) a partir do <strong>século XIII</strong>, propagou-se por toda a Europa e foi empregado inclusive pelos tribunais civis até o <strong>século XVIII</strong> (Revolução Francesa).</p>
+
+    <p>É típico dos sistemas ditatoriais. Sua característica central é a <strong>concentração das funções de acusar, defender e julgar em uma única pessoa</strong> — o <em>juiz inquisidor</em>, senhor soberano do processo. Essa concentração compromete, invariavelmente, a imparcialidade.</p>
+
+    <h3>Características</h3>
+    <ul>
+      <li><strong>Concentração de funções</strong> — acusar, defender e julgar em uma só figura.</li>
+      <li><strong>Ausência de contraditório</strong> — sequer é concebível, pois não há contraposição entre acusação e defesa.</li>
+      <li><strong>Sigilo</strong> — instrução escrita e secreta; o acusado costumava permanecer encarcerado preventivamente e incomunicável.</li>
+      <li><strong>Atuação de ofício</strong> — não há necessidade de acusação por órgão público ou pelo ofendido; o juiz desencadeia o processo <em>ex officio</em>.</li>
+      <li><strong>Gestão da prova nas mãos do juiz</strong> — dotado de amplos poderes instrutórios, investiga o fato e depois decide com base na prova que ele mesmo produziu.</li>
+      <li><strong>Acusado como objeto</strong> — não é sujeito de direitos; na busca da “verdade material”, admitia-se a tortura para obtenção da confissão.</li>
+    </ul>
+
+    <div class="ppi1-card">
+      <h3>Os vícios cognitivos do juiz inquisidor</h3>
+      <ul style="margin-bottom:0">
+        <li><strong>Quadros mentais paranoicos</strong> (a chamada “síndrome de Dom Casmurro”): o julgador decide primeiro e depois procura a prova que confirme a decisão já tomada.</li>
+        <li><strong>Efeito confirmatório</strong> (<em>confirmation bias</em>): parte de uma tese preestabelecida e só enxerga o que a sustenta.</li>
+        <li><strong>Desigualdade de armas</strong> e de oportunidades entre as partes.</li>
+      </ul>
+    </div>
+
+    <h3>Incompatibilidade com a ordem constitucional e convencional</h3>
+    <p>Sem um julgador equidistante das partes não há imparcialidade — e sem imparcialidade há violação à Constituição Federal e à Convenção Americana sobre Direitos Humanos.</p>
+
+    <div class="ppi1-lei">
+      <span class="ppi1-lei-tag">CADH — Pacto de São José da Costa Rica, art. 8º, 1</span>
+      <p>“Toda pessoa tem direito a ser ouvida, com as devidas garantias e dentro de um prazo razoável, por um juiz ou tribunal competente, <strong>independente e imparcial</strong>, estabelecido anteriormente por lei, na apuração de qualquer acusação penal formulada contra ela, ou para que se determinem seus direitos ou obrigações de natureza civil, trabalhista, fiscal ou de qualquer outra natureza.”</p>
+    </div>
+  </section>
+
+  <!-- ============================ ACUSATÓRIO ============================ -->
+  <section class="ppi1-painel" data-p="acu" hidden>
+    <h2>Sistema acusatório</h2>
+
+    <p>Vigorou durante quase toda a <strong>Antiguidade grega e romana</strong> e na Idade Média, nos domínios do direito germânico. A partir do século XIII entra em declínio, cedendo espaço ao inquisitivo, e volta a ganhar prevalência entre os <strong>séculos XVIII e XIX</strong>. Atualmente, o processo penal inglês é o que mais se aproxima de um sistema acusatório puro.</p>
+
+    <div class="ppi1-card">
+      <h3>Tríplice base do sistema acusatório</h3>
+      <p>Partes distintas — acusação e defesa contrapostas <strong>em igualdade de condições</strong> — e, sobrepondo-se a ambas, um <strong>juiz equidistante e imparcial</strong>. É o <em>actum trium personarum</em>: dois sujeitos parciais e um imparcial.</p>
+    </div>
+
+    <h3>Características</h3>
+    <ul>
+      <li><strong>Separação das funções</strong> de acusar, defender e julgar.</li>
+      <li><strong>Necessidade de acusação prévia</strong> — daí o nome: ninguém é chamado a juízo sem que o fato imputado seja narrado com todas as suas circunstâncias.</li>
+      <li><strong>Oralidade e publicidade</strong> dos atos.</li>
+      <li><strong>Presunção de inocência</strong> — regra é responder ao processo em liberdade.</li>
+      <li><strong>Paridade de armas</strong> entre acusação e defesa.</li>
+      <li><strong>Gestão da prova pelas partes</strong> — o juiz não determina prova de ofício; aspira-se a uma posição de passividade quanto à reconstrução dos fatos.</li>
+      <li><strong>Dever de motivação</strong> das decisões judiciais.</li>
+    </ul>
+
+    <div class="ppi1-alerta">
+      <span class="ppi1-alerta-tag">Ponto sensível de prova</span>
+      <p>A mera separação entre acusar e julgar <strong>não basta</strong>. A imparcialidade só está resguardada enquanto o juiz for estranho à atividade investigatória e instrutória. O traço peculiar mais importante é que <strong>o juiz não é o gestor da prova</strong>.</p>
+    </div>
+
+    <div class="ppi1-dout">
+      <p>Para <strong>Ferrajoli</strong>, são características do sistema acusatório a separação rígida entre juiz e acusação, a paridade entre acusação e defesa e a publicidade e oralidade do julgamento. São próprios do inquisitório, ao contrário, a iniciativa do juiz em campo probatório, a disparidade de poderes entre acusação e defesa e o caráter escrito e secreto da instrução.</p>
+    </div>
+
+    <h3>Base constitucional no Brasil</h3>
+    <p>O sistema acusatório foi acolhido de forma explícita pela Constituição de 1988, que tornou <strong>privativa do Ministério Público</strong> a propositura da ação penal pública. A relação processual só tem início mediante provocação de quem está encarregado de deduzir a pretensão punitiva.</p>
+
+    <div class="ppi1-lei">
+      <span class="ppi1-lei-tag">CF/88, art. 129, I</span>
+      <p>“São funções institucionais do Ministério Público: I – promover, privativamente, a ação penal pública, na forma da lei;”</p>
+    </div>
+
+    <p>Isso não retira do juiz o <strong>poder de impulso processual</strong> — o gerenciamento do andamento do feito —, mas impede que tome iniciativas incompatíveis com a equidistância que deve manter em relação ao interesse das partes.</p>
+
+    <div class="ppi1-alerta">
+      <span class="ppi1-alerta-tag">Reflexo prático no Pacote Anticrime</span>
+      <p>A Lei 13.964/2019 tornou isso expresso ao retirar do juiz, por exemplo, a possibilidade de decretar <strong>prisão preventiva de ofício</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ============================ MISTO ============================ -->
+  <section class="ppi1-painel" data-p="mis" hidden>
+    <h2>Sistema misto (ou francês)</h2>
+
+    <p>Depois de se disseminar pela Europa desde o século XIII, o sistema inquisitorial passa a sofrer alterações com a <strong>reforma napoleônica</strong>. Nasce um modelo novo, fusão dos dois anteriores, inaugurado pelo <strong><em>Code d'Instruction Criminelle</em> francês, de 1808</strong> — daí também ser chamado de sistema francês.</p>
+
+    <h3>As duas fases</h3>
+    <div class="ppi1-g2">
+      <div class="ppi1-card">
+        <h3>1ª fase — inquisitorial</h3>
+        <p>Investigação preliminar e instrução preparatória sob o comando do juiz, para apurar materialidade e autoria. Instrução <strong>escrita e secreta</strong>, sem publicidade, sem ampla defesa e — porque não há acusação formada — sem contraditório.</p>
+      </div>
+      <div class="ppi1-card">
+        <h3>2ª fase — acusatória</h3>
+        <p>O órgão acusador apresenta a acusação, o réu se defende e o juiz julga. Vigoram, em regra, a <strong>publicidade, a oralidade, a isonomia processual</strong> e o direito de a defesa se manifestar depois da acusação.</p>
+      </div>
+    </div>
+
+    <div class="ppi1-dout">
+      <p><strong>Aury Lopes Jr.</strong> critica a classificação: é raríssimo encontrar um sistema puro, e o que importa — o núcleo central — é a <strong>gestão da prova</strong>. Se ela não está com o juiz, vige o princípio dispositivo (ou acusatório), com o <em>juiz espectador</em>; se está com o juiz, vige o princípio inquisitivo, com o <em>juiz ator-inquisidor</em>.</p>
+    </div>
+
+    <h3>E o Brasil, era misto?</h3>
+    <p>Quando o Código de Processo Penal entrou em vigor, prevalecia o entendimento de que o sistema nele previsto era <strong>misto</strong>. E, de fato, não se trata de um sistema acusatório puro: o CPP de 1941 tem nítida inspiração no modelo fascista italiano (Código Rocco, de 1930) e entrou em vigor em pleno Estado Novo, em <strong>1º de janeiro de 1942</strong>.</p>
+
+    <div class="ppi1-dout">
+      <p>“Conhecemos uma história legislativa republicana sem que tenhamos um Código de Processo Penal integralmente nascido da atividade democrática parlamentar.”</p>
+      <p class="ppi1-fonte">Fauzi Hassan Choukr.</p>
+    </div>
+
+    <p>Daí a conclusão que atravessa toda a disciplina: é <strong>imperioso reler a legislação infraconstitucional à luz da nova ordem constitucional</strong> — e, hoje, também à luz do art. 3º-A do CPP.</p>
+  </section>
+
+  <!-- ============================ COMPARATIVO ============================ -->
+  <section class="ppi1-painel" data-p="comp" hidden>
+    <h2>Quadro comparativo dos três sistemas</h2>
+
+    <div class="ppi1-tabela-wrap">
+      <table class="ppi1-tabela">
+        <thead>
+          <tr>
+            <th>Critério</th>
+            <th>Inquisitório</th>
+            <th>Acusatório</th>
+            <th>Misto (francês)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Funções processuais</td>
+            <td>Concentradas no juiz inquisidor</td>
+            <td>Separadas: acusar, defender e julgar</td>
+            <td>Concentradas na 1ª fase; separadas na 2ª</td>
+          </tr>
+          <tr>
+            <td>Gestão da prova</td>
+            <td>Do juiz (princípio inquisitivo)</td>
+            <td>Das partes (princípio dispositivo)</td>
+            <td>Do juiz instrutor na 1ª fase; das partes na 2ª</td>
+          </tr>
+          <tr>
+            <td>Contraditório</td>
+            <td>Inexistente</td>
+            <td>Pleno</td>
+            <td>Ausente na 1ª fase; pleno na 2ª</td>
+          </tr>
+          <tr>
+            <td>Publicidade</td>
+            <td>Sigilo (instrução escrita e secreta)</td>
+            <td>Publicidade e oralidade</td>
+            <td>Sigilo na 1ª fase; publicidade na 2ª</td>
+          </tr>
+          <tr>
+            <td>Início do processo</td>
+            <td>De ofício pelo juiz</td>
+            <td>Só mediante acusação</td>
+            <td>Instrução de ofício; ação na 2ª fase</td>
+          </tr>
+          <tr>
+            <td>Posição do acusado</td>
+            <td>Objeto do processo</td>
+            <td>Sujeito de direitos</td>
+            <td>Objeto na 1ª fase; sujeito na 2ª</td>
+          </tr>
+          <tr>
+            <td>Liberdade no curso do feito</td>
+            <td>Regra: encarcerado e incomunicável</td>
+            <td>Regra: solto (presunção de inocência)</td>
+            <td>Variável</td>
+          </tr>
+          <tr>
+            <td>Imparcialidade</td>
+            <td>Comprometida</td>
+            <td>Preservada pela equidistância</td>
+            <td>Comprometida na 1ª fase</td>
+          </tr>
+          <tr>
+            <td>Marco histórico</td>
+            <td>Direito canônico, séc. XIII</td>
+            <td>Antiguidade grega e romana; retomada séc. XVIII-XIX</td>
+            <td><em>Code d'Instruction Criminelle</em>, 1808</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi1-alerta">
+      <span class="ppi1-alerta-tag">Como a banca cobra</span>
+      <p>O erro mais recorrente é atribuir ao acusatório a <strong>gestão da prova pelo juiz</strong> ou a <strong>atuação de ofício</strong>. Sempre que a alternativa colocar o magistrado produzindo prova ou instaurando o feito por conta própria, está descrevendo o <strong>inquisitório</strong>.</p>
+    </div>
+
+    <h3>Três pares que não podem ser confundidos</h3>
+    <div class="ppi1-g3">
+      <div class="ppi1-card">
+        <h3>Princípio dispositivo</h3>
+        <p>Iniciativa probatória <strong>exclusiva das partes</strong>. Rege o sistema acusatório.</p>
+      </div>
+      <div class="ppi1-card">
+        <h3>Princípio inquisitivo</h3>
+        <p>Atividade probatória <strong>a cargo do magistrado</strong>. Rege o sistema inquisitório.</p>
+      </div>
+      <div class="ppi1-card">
+        <h3>Poder de impulso</h3>
+        <p>Gerenciar o <strong>andamento</strong> do processo. Existe também no acusatório e não o desnatura.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ SISTEMA BRASILEIRO ============================ -->
+  <section class="ppi1-painel" data-p="bra" hidden>
+    <h2>O sistema brasileiro após a Lei 13.964/2019</h2>
+
+    <p>A Lei 13.964/2019 (Pacote Anticrime) foi publicada em <strong>24/12/2019</strong> e entrou em vigor em <strong>23/01/2020</strong>. Sua ambição foi adaptar a estrutura do processo penal à ordem constitucional e convencional — ao sistema acusatório (CF, art. 129, I) e à garantia da imparcialidade (CADH, art. 8º, 1).</p>
+
+    <div class="ppi1-lei">
+      <span class="ppi1-lei-tag">CPP, art. 3º-A (incluído pela Lei 13.964/2019)</span>
+      <p>“O processo penal terá <strong>estrutura acusatória</strong>, vedadas a iniciativa do juiz na fase de investigação e a substituição da atuação probatória do órgão de acusação.”</p>
+    </div>
+
+    <p>Teoricamente, o dispositivo não trouxe grandes novidades quanto à parte acusatória — ele explicita o que já decorria da Constituição. Seu impacto está no que passa a ser <strong>incompatível</strong> com ele.</p>
+
+    <h3>O problema do art. 156 do CPP</h3>
+
+    <div class="ppi1-lei">
+      <span class="ppi1-lei-tag">CPP, art. 156</span>
+      <p>“A prova da alegação incumbirá a quem a fizer, sendo, porém, facultado ao juiz de ofício:</p>
+      <p>I – ordenar, mesmo antes de iniciada a ação penal, a produção antecipada de provas consideradas urgentes e relevantes, observando a necessidade, adequação e proporcionalidade da medida;</p>
+      <p>II – determinar, no curso da instrução, ou antes de proferir sentença, a realização de diligências para dirimir dúvida sobre ponto relevante.”</p>
+    </div>
+
+    <p>Parte relevante da doutrina sustenta a <strong>revogação tácita</strong> desses incisos, com apoio na Lei de Introdução:</p>
+
+    <div class="ppi1-lei">
+      <span class="ppi1-lei-tag">LINDB, art. 2º, § 1º</span>
+      <p>“A lei posterior revoga a anterior quando expressamente o declare, quando seja com ela incompatível ou quando regule inteiramente a matéria de que tratava a lei anterior.”</p>
+    </div>
+
+    <div class="ppi1-dout">
+      <p>“Não se pode mais continuar a insistir, contra a Constituição, em manter um sistema inquisitorial porque assim o preveem os incisos I e II do art. 156 do CPP, em permanente conflito com o modelo acusatório extraído do art. 129, I, da Constituição Federal, e do próprio art. 3º-A do CPP.”</p>
+      <p class="ppi1-fonte">Renato Brasileiro de Lima, citando Jacinto Nelson de Miranda Coutinho.</p>
+    </div>
+
+    <p>O argumento de fundo: quando se confere ao juiz protagonismo probatório, ele põe em risco o alheamento aos interesses em jogo que é próprio da imparcialidade — e torna despicienda a própria existência do órgão acusatório, já que não é incomum que a iniciativa probatória seja exercida supostamente “em favor da sociedade”.</p>
+
+    <h3>O que o STF decidiu</h3>
+
+    <div class="ppi1-juris">
+      <span class="ppi1-juris-tag">STF — ADI 6.298, 6.299, 6.300 e 6.305</span>
+      <p>Ajuizadas contra a Lei 13.964/2019, tiveram a eficácia dos arts. 3º-A a 3º-F suspensa liminarmente em janeiro de 2020 (Min. Dias Toffoli, em 15/01/2020, e Min. Luiz Fux, relator, em 22 e 30/01/2020). Foram julgadas pelo Plenário em <strong>agosto de 2023</strong>.</p>
+      <p>Quanto ao art. 3º-A, o STF julgou parcialmente procedentes as ações para <strong>atribuir interpretação conforme a Constituição</strong>, assentando que o juiz, <strong>pontualmente e nos limites legalmente autorizados</strong>, pode determinar a realização de <strong>diligências suplementares</strong>, para dirimir dúvida sobre questão relevante para o julgamento do mérito.</p>
+      <p class="ppi1-fonte">STF, Plenário, ADI 6.298/DF e conexas, Rel. Min. Luiz Fux, julgamento concluído em agosto de 2023.</p>
+    </div>
+
+    <div class="ppi1-alerta">
+      <span class="ppi1-alerta-tag">Leitura consolidada</span>
+      <p>O poder instrutório do juiz é <strong>residual, supletivo ou subsidiário</strong>: só se exerce <em>depois</em> da atuação probatória das partes e com o papel de permitir um julgamento seguro. Assim compreendido, o art. 156, II, não fica prejudicado pelo art. 3º-A.</p>
+    </div>
+
+    <h3>Jurisprudência recente do STJ</h3>
+
+    <div class="ppi1-juris">
+      <span class="ppi1-juris-tag">STJ — o que o juiz NÃO pode fazer</span>
+      <p>A determinação, <strong>de ofício</strong>, pelo juiz, de busca e apreensão de dispositivos eletrônicos e de quebra de sigilo telemático, <strong>sem provocação</strong> dos órgãos de persecução penal, viola o sistema acusatório do art. 3º-A do CPP. Ainda que o art. 242 do CPP autorize, em tese, a busca de ofício, o dispositivo deve ser interpretado conforme a Constituição e à luz do modelo acusatório da Lei 13.964/2019, sendo inadmissível a iniciativa judicial de medidas invasivas na fase de investigação.</p>
+      <p class="ppi1-fonte">STJ, 6ª Turma, RHC 183.425-PR, Rel. Min. Sebastião Reis Júnior, j. 21/10/2025 (Info 868).</p>
+    </div>
+
+    <div class="ppi1-juris">
+      <span class="ppi1-juris-tag">STJ — o que o juiz PODE fazer</span>
+      <p>O magistrado pode realizar pessoalmente, ou determinar, diligências para dirimir dúvidas sobre questões relevantes. Pode acessar <strong>redes sociais públicas</strong> do investigado e usar as informações para fundamentar decisão de prisão preventiva e medidas cautelares, sem que isso configure violação ao sistema acusatório ou quebra de imparcialidade, desde que observados os limites legalmente autorizados.</p>
+      <p class="ppi1-fonte">STJ, 5ª Turma, AgRg no AREsp 2.655.165-SC, Rel. Min. Joel Ilan Paciornik, j. 1º/4/2025.</p>
+    </div>
+
+    <div class="ppi1-juris">
+      <span class="ppi1-juris-tag">STJ — art. 385 do CPP e o sistema acusatório</span>
+      <p>É possível a sentença condenatória ainda que o Ministério Público tenha pedido a absolvição em alegações finais. O art. 385 do CPP é <strong>compatível</strong> com o sistema acusatório e <strong>não foi tacitamente revogado</strong> pelo art. 3º-A do CPP.</p>
+      <p class="ppi1-fonte">STJ, 6ª Turma, REsp 2.022.413/PA, Rel. Min. Sebastião Reis Júnior, Rel. p/ acórdão Min. Rogerio Schietti Cruz, j. 14/02/2023, DJe 07/03/2023 (Info 765).</p>
+    </div>
+
+    <div class="ppi1-lei">
+      <span class="ppi1-lei-tag">CPP, art. 385</span>
+      <p>“Nos crimes de ação pública, o juiz poderá proferir sentença condenatória, ainda que o Ministério Público tenha opinado pela absolvição, bem como reconhecer agravantes, embora nenhuma tenha sido alegada.”</p>
+    </div>
+
+    <div class="ppi1-alerta">
+      <span class="ppi1-alerta-tag">Atenção</span>
+      <p>Há forte crítica doutrinária ao art. 385 — visto como resquício inquisitório —, mas a posição do STJ, até aqui, é pela sua compatibilidade com o modelo acusatório. Em prova objetiva, siga o entendimento do tribunal; em prova dissertativa ou peça, o debate merece ser enfrentado.</p>
+    </div>
+  </section>
+
+  <!-- ============================ LINHA DO TEMPO ============================ -->
+  <section class="ppi1-painel" data-p="lt" hidden>
+    <h2>Linha do tempo dos sistemas processuais</h2>
+
+    <div class="ppi1-lt">
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">Antiguidade e Idade Média</div>
+        <div class="ppi1-lt-tit">Predomínio acusatório</div>
+        <p class="ppi1-lt-txt">Vigora na Antiguidade grega e romana e, na Idade Média, nos domínios do direito germânico. Oralidade, publicidade e acusação prévia.</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">Século XIII</div>
+        <div class="ppi1-lt-tit">Virada inquisitorial</div>
+        <p class="ppi1-lt-txt">O Direito canônico institui o Tribunal da Inquisição (Santo Ofício). O modelo se propaga por toda a Europa e é adotado até pelos tribunais civis.</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">Século XVIII</div>
+        <div class="ppi1-lt-tit">Revolução Francesa</div>
+        <p class="ppi1-lt-txt">Fim do emprego do inquisitório pelos tribunais civis. Entre os séculos XVIII e XIX o acusatório volta a ganhar prevalência.</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">1808</div>
+        <div class="ppi1-lt-tit">Code d'Instruction Criminelle</div>
+        <p class="ppi1-lt-txt">A reforma napoleônica cria o sistema misto (ou francês): primeira fase inquisitorial, segunda fase acusatória.</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">1930 · 1941 · 1942</div>
+        <div class="ppi1-lt-tit">Do Código Rocco ao CPP brasileiro</div>
+        <p class="ppi1-lt-txt">O CPP é editado em 1941, sob o Estado Novo, com nítida inspiração no modelo fascista italiano do Código Rocco (1930). Entra em vigor em 1º/01/1942.</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">1988</div>
+        <div class="ppi1-lt-tit">Constituição Federal</div>
+        <p class="ppi1-lt-txt">Acolhe explicitamente o sistema acusatório ao tornar privativa do Ministério Público a ação penal pública (art. 129, I).</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">24/12/2019 · 23/01/2020</div>
+        <div class="ppi1-lt-tit">Lei 13.964/2019 — Pacote Anticrime</div>
+        <p class="ppi1-lt-txt">Publicada em 24/12/2019, com vigência em 23/01/2020. Insere o art. 3º-A e afirma a estrutura acusatória do processo penal.</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">Janeiro/2020</div>
+        <div class="ppi1-lt-tit">Suspensão liminar</div>
+        <p class="ppi1-lt-txt">Nas ADI 6.298, 6.299, 6.300 e 6.305, a eficácia dos arts. 3º-A a 3º-F é suspensa liminarmente no STF.</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">Agosto/2023</div>
+        <div class="ppi1-lt-tit">Julgamento das ADI</div>
+        <p class="ppi1-lt-txt">O STF dá interpretação conforme ao art. 3º-A: o juiz pode, pontualmente e nos limites legais, determinar diligências suplementares.</p>
+      </div>
+      <div class="ppi1-lt-item">
+        <div class="ppi1-lt-ano">2023 · 2025</div>
+        <div class="ppi1-lt-tit">Delimitação pelo STJ</div>
+        <p class="ppi1-lt-txt">O STJ fixa os contornos práticos: art. 385 compatível com o acusatório (2023); consulta a redes sociais públicas admitida (2025); busca e apreensão de ofício na investigação, vedada (2025).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ROTEIRO ============================ -->
+  <section class="ppi1-painel" data-p="rot" hidden>
+    <h2>Roteiro de estudo</h2>
+    <p>Percorra na ordem. Cada item fecha um bloco de compreensão antes de avançar.</p>
+
+    <h3>Etapa 1 — Fundamentos</h3>
+    <ul class="ppi1-check">
+      <li><span>Explicar, em uma frase, a diferença entre <b>ius puniendi</b> abstrato e concreto.</span></li>
+      <li><span>Justificar por que a pretensão punitiva <b>já nasce insatisfeita</b>.</span></li>
+      <li><span>Enunciar o <b>princípio da necessidade</b> e citar duas mitigações atuais.</span></li>
+      <li><span>Relacionar a lição de <b>Goldschmidt</b> (termômetro constitucional) ao objeto da unidade.</span></li>
+    </ul>
+
+    <h3>Etapa 2 — Os três modelos</h3>
+    <ul class="ppi1-check">
+      <li><span>Listar de memória <b>seis características</b> do sistema inquisitório.</span></li>
+      <li><span>Explicar os <b>quadros mentais paranoicos</b> e o <b>confirmation bias</b>.</span></li>
+      <li><span>Enunciar a <b>tríplice base</b> do sistema acusatório.</span></li>
+      <li><span>Reproduzir a distinção de <b>Ferrajoli</b> entre os dois modelos.</span></li>
+      <li><span>Descrever as <b>duas fases</b> do sistema misto e o marco de 1808.</span></li>
+    </ul>
+
+    <h3>Etapa 3 — O critério decisivo</h3>
+    <ul class="ppi1-check">
+      <li><span>Responder: o que diferencia efetivamente inquisitório e acusatório? (<b>gestão da prova</b>).</span></li>
+      <li><span>Distinguir <b>princípio dispositivo</b>, <b>princípio inquisitivo</b> e <b>poder de impulso</b>.</span></li>
+      <li><span>Justificar por que a separação de funções, sozinha, é insuficiente.</span></li>
+    </ul>
+
+    <h3>Etapa 4 — Direito positivo</h3>
+    <ul class="ppi1-check">
+      <li><span>Escrever de memória o <b>art. 3º-A do CPP</b>.</span></li>
+      <li><span>Ler o <b>art. 156, I e II, do CPP</b> e explicar a tese da revogação tácita (LINDB, art. 2º, § 1º).</span></li>
+      <li><span>Localizar o <b>art. 129, I, da CF</b> e o <b>art. 8º, 1, da CADH</b>.</span></li>
+      <li><span>Fixar as datas da <b>Lei 13.964/2019</b>: publicação e vigência.</span></li>
+    </ul>
+
+    <h3>Etapa 5 — Jurisprudência</h3>
+    <ul class="ppi1-check">
+      <li><span>Resumir o que o STF decidiu sobre o art. 3º-A nas <b>ADI 6.298 e conexas</b>.</span></li>
+      <li><span>Contrapor os dois julgados do STJ: o que o juiz <b>pode</b> e o que <b>não pode</b> fazer.</span></li>
+      <li><span>Posicionar-se sobre a compatibilidade do <b>art. 385 do CPP</b> com o modelo acusatório.</span></li>
+    </ul>
+  </section>
+
+  <!-- ============================ CASOS ============================ -->
+  <section class="ppi1-painel" data-p="casos" hidden>
+    <h2>Casos práticos</h2>
+    <p class="ppi1-sub" style="margin-bottom:1.2rem">Situações fictícias, construídas apenas para treinar a aplicação dos conceitos desta unidade. Nomes e fatos são inventados.</p>
+
+    <div class="ppi1-caso">
+      <div class="ppi1-caso-n">Caso 1</div>
+      <h3>O juiz que quis ajudar</h3>
+      <p>Em investigação sobre desvio de verbas no Município fictício de Vila Serena, o juiz da vara criminal, sem qualquer requerimento do Ministério Público ou da autoridade policial, expede de ofício mandado de busca e apreensão na residência do investigado e determina a quebra de sigilo telemático de seu celular. Fundamenta a decisão no art. 242 do CPP.</p>
+      <details class="ppi1-resp">
+        <summary>Resposta comentada</summary>
+        <p>A decisão viola a estrutura acusatória do art. 3º-A do CPP, que veda expressamente a iniciativa do juiz na fase de investigação. Ainda que o art. 242 do CPP, em sua literalidade, autorize a busca de ofício, o dispositivo deve ser lido conforme a Constituição e à luz do modelo acusatório introduzido pela Lei 13.964/2019. Ao determinar medida invasiva sem provocação, o magistrado substitui indevidamente os órgãos de persecução e compromete a própria imparcialidade. É exatamente a hipótese do <strong>RHC 183.425-PR</strong> (STJ, 6ª Turma, j. 21/10/2025).</p>
+      </details>
+    </div>
+
+    <div class="ppi1-caso">
+      <div class="ppi1-caso-n">Caso 2</div>
+      <h3>O perfil aberto</h3>
+      <p>Ao analisar representação por prisão preventiva formulada pela autoridade policial, a juíza consulta o perfil público de rede social do investigado e ali encontra publicações que indicam risco concreto de reiteração delitiva. Menciona expressamente esse material na decisão. A defesa alega quebra de imparcialidade e violação ao sistema acusatório.</p>
+      <details class="ppi1-resp">
+        <summary>Resposta comentada</summary>
+        <p>Não há violação. A medida foi <strong>provocada</strong> pela autoridade policial — o juízo não instaurou nada de ofício — e a diligência é suplementar, dentro dos limites legalmente autorizados, sobre informação de acesso <strong>público</strong>. É a linha do <strong>AgRg no AREsp 2.655.165-SC</strong> (STJ, 5ª Turma, j. 1º/4/2025) e coincide com a interpretação conforme dada pelo STF ao art. 3º-A nas ADI 6.298 e conexas: poder instrutório residual, supletivo, exercido para dirimir dúvida relevante.</p>
+      </details>
+    </div>
+
+    <div class="ppi1-caso">
+      <div class="ppi1-caso-n">Caso 3</div>
+      <h3>O Ministério Público pede a absolvição</h3>
+      <p>Encerrada a instrução em ação penal por peculato, o Ministério Público, em alegações finais, pede a absolvição do réu por insuficiência de provas. O juiz, contudo, entende que o conjunto probatório produzido em contraditório é robusto e profere sentença condenatória. A defesa sustenta que a condenação, sem pedido acusatório, rompe o sistema acusatório e que o art. 385 do CPP teria sido tacitamente revogado pelo art. 3º-A.</p>
+      <details class="ppi1-resp">
+        <summary>Resposta comentada</summary>
+        <p>Pela jurisprudência do STJ, a condenação é possível. O art. 385 do CPP permanece em vigor e é compatível com o sistema acusatório: não houve derrogação tácita pelo art. 3º-A. O fundamento é que a separação entre acusar e julgar já se consumou com o oferecimento da denúncia; o pedido de absolvição em alegações finais é opinião, não disposição sobre o objeto do processo. Precedente: <strong>REsp 2.022.413/PA</strong> (STJ, 6ª Turma, j. 14/02/2023, Info 765). Registre-se, porém, a crítica doutrinária que enxerga no dispositivo um resquício inquisitório.</p>
+      </details>
+    </div>
+
+    <div class="ppi1-caso">
+      <div class="ppi1-caso-n">Caso 4</div>
+      <h3>Classificando um sistema estrangeiro</h3>
+      <p>No país fictício de Aurília, um órgão de acusação independente do Judiciário formula as acusações criminais e detém a iniciativa probatória. O acusado é tratado como sujeito de direitos, os julgamentos são públicos e orais, e vigoram o juiz natural e a presunção de inocência.</p>
+      <details class="ppi1-resp">
+        <summary>Resposta comentada</summary>
+        <p>Trata-se de sistema com traços marcadamente <strong>acusatórios</strong>. Estão presentes os três elementos da tríplice base — acusação separada, defesa em paridade e juiz equidistante — somados à publicidade, à oralidade, à presunção de inocência e, sobretudo, à <strong>gestão da prova fora das mãos do julgador</strong>, que é o critério decisivo.</p>
+      </details>
+    </div>
+
+    <div class="ppi1-caso">
+      <div class="ppi1-caso-n">Caso 5</div>
+      <h3>A dúvida ao final da instrução</h3>
+      <p>Concluída a instrução, e já apresentadas as alegações finais por acusação e defesa, o juiz permanece em dúvida sobre um ponto decisivo: a data exata em que o objeto foi vendido pelo réu. Determina, então, a expedição de ofício ao estabelecimento comercial para esclarecer o ponto, invocando o art. 156, II, do CPP.</p>
+      <details class="ppi1-resp">
+        <summary>Resposta comentada</summary>
+        <p>A diligência é legítima. O poder instrutório remanescente do juiz é <strong>residual, supletivo e subsidiário</strong>: foi exercido <em>depois</em> da atuação probatória das partes, é pontual, está nos limites legalmente autorizados e serve a dirimir dúvida sobre questão relevante para o mérito. É precisamente o espaço preservado pela interpretação conforme dada pelo STF ao art. 3º-A do CPP. Diferente seria se o magistrado tivesse assumido a produção da prova em substituição ao órgão de acusação, ou agido na fase de investigação.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================ GUIA RESUMIDO ============================ -->
+  <section class="ppi1-painel" data-p="guia" hidden>
+    <h2>Guia resumido</h2>
+
+    <div class="ppi1-guia">
+      <h3>Em uma frase</h3>
+      <p style="margin-bottom:0">O que distingue os sistemas processuais penais não é apenas quem acusa e quem julga, mas <strong>quem detém a gestão da prova</strong> — e o Brasil, por força do art. 3º-A do CPP e do art. 129, I, da CF, adota a estrutura acusatória, com poder instrutório judicial apenas residual.</p>
+    </div>
+
+    <h3>Dispositivos que você precisa saber localizar</h3>
+    <div style="margin-bottom:1.1rem">
+      <span class="ppi1-pill">CF, art. 129, I</span>
+      <span class="ppi1-pill">CF, art. 5º, LV e LVII</span>
+      <span class="ppi1-pill">CADH, art. 8º, 1</span>
+      <span class="ppi1-pill">CPP, art. 3º-A</span>
+      <span class="ppi1-pill">CPP, art. 156, I e II</span>
+      <span class="ppi1-pill">CPP, art. 242</span>
+      <span class="ppi1-pill">CPP, art. 385</span>
+      <span class="ppi1-pill">LINDB, art. 2º, § 1º</span>
+    </div>
+
+    <h3>Dez proposições para revisão rápida</h3>
+    <ol>
+      <li>Sem processo não há pena: é o <strong>princípio da necessidade</strong>.</li>
+      <li>A pretensão punitiva nasce insatisfeita porque o Direito Penal não é direito de coação direta.</li>
+      <li>O processo penal tem dupla função: instrumento do poder punitivo e escudo dos direitos fundamentais.</li>
+      <li>No <strong>inquisitório</strong>, acusar, defender e julgar se concentram no juiz inquisidor; o acusado é objeto; a prova é gerida pelo juiz; a instrução é escrita e secreta.</li>
+      <li>No <strong>acusatório</strong>, há tríplice base, paridade de armas, publicidade, oralidade, presunção de inocência e gestão da prova pelas partes.</li>
+      <li>O <strong>misto</strong> (francês, 1808) tem primeira fase inquisitorial e segunda acusatória.</li>
+      <li>A separação de funções é necessária, mas <strong>não suficiente</strong>: o critério decisivo é a gestão da prova.</li>
+      <li>O CPP de 1941 nasceu sob o Estado Novo, inspirado no Código Rocco — daí a exigência de releitura constitucional.</li>
+      <li>O art. 3º-A do CPP, incluído pela Lei 13.964/2019, afirma a estrutura acusatória e veda a iniciativa judicial na investigação.</li>
+      <li>Pelo STF (ADI 6.298 e conexas, 2023), o juiz pode, <strong>pontualmente</strong>, determinar diligências suplementares — poder residual e supletivo.</li>
+    </ol>
+
+    <h3>Erros que mais derrubam em prova</h3>
+    <div class="ppi1-tabela-wrap">
+      <table class="ppi1-tabela">
+        <thead>
+          <tr><th>Afirmação</th><th>Correto?</th><th>Por quê</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gestão da prova nas mãos das partes é traço do inquisitório</td>
+            <td>Errado</td>
+            <td>É traço do <strong>acusatório</strong>. No inquisitório a prova é gerida pelo juiz.</td>
+          </tr>
+          <tr>
+            <td>No acusatório o acusado é mero objeto do processo</td>
+            <td>Errado</td>
+            <td>É <strong>sujeito de direitos</strong>. A coisificação é própria do inquisitório.</td>
+          </tr>
+          <tr>
+            <td>O sistema misto tem contraditório pleno nas duas fases</td>
+            <td>Errado</td>
+            <td>A primeira fase é inquisitorial: escrita, secreta e sem contraditório.</td>
+          </tr>
+          <tr>
+            <td>O art. 3º-A do CPP eliminou todo poder instrutório do juiz</td>
+            <td>Errado</td>
+            <td>O STF manteve o poder residual de diligências suplementares.</td>
+          </tr>
+          <tr>
+            <td>O art. 385 do CPP foi revogado pelo art. 3º-A</td>
+            <td>Errado</td>
+            <td>O STJ afirmou a compatibilidade e afastou a revogação tácita (Info 765).</td>
+          </tr>
+          <tr>
+            <td>A CF/88 adota, em regra, o modelo acusatório</td>
+            <td>Certo</td>
+            <td>Art. 129, I: ação penal pública privativa do Ministério Público.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ppi1-nota"><strong>Fontes desta unidade:</strong> material de aula do Prof. Artur Vieira (Processo Penal I); texto legal do CPP, da CF/88, da LINDB e da Convenção Americana sobre Direitos Humanos; STF, ADI 6.298/DF e conexas (Rel. Min. Luiz Fux, ago./2023); STJ, RHC 183.425-PR (6ª T., 21/10/2025, Info 868); STJ, AgRg no AREsp 2.655.165-SC (5ª T., 1º/4/2025); STJ, REsp 2.022.413/PA (6ª T., 14/02/2023, Info 765). Doutrina citada: Aury Lopes Jr., Renato Brasileiro de Lima, Luigi Ferrajoli, James Goldschmidt, Norberto Bobbio, Jacinto Nelson de Miranda Coutinho e Fauzi Hassan Choukr.</p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var raiz = document.currentScript.previousElementSibling
+  while (raiz && !raiz.classList.contains('ppi1')) raiz = raiz.previousElementSibling
+  if (!raiz) raiz = document.querySelector('.ppi1')
+  if (!raiz) return
+
+  var abas = raiz.querySelectorAll('.ppi1-tab')
+  var paineis = raiz.querySelectorAll('.ppi1-painel')
+
+  abas.forEach(function (aba) {
+    aba.addEventListener('click', function () {
+      var alvo = aba.dataset.p
+      abas.forEach(function (a) { a.setAttribute('aria-selected', String(a === aba)) })
+      paineis.forEach(function (p) { p.hidden = (p.dataset.p !== alvo) })
+      var topo = raiz.getBoundingClientRect().top + window.scrollY - 80
+      window.scrollTo({ top: topo, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+    })
+  })
+})()
+</script>

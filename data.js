@@ -69,8 +69,13 @@ const materias = [
       {
         id: "processual-penal-i",
         titulo: "Direito Processual Penal I",
-        emBreve: true,
-        temas: []
+        temas: [
+          {
+            titulo: "Sistemas Processuais Penais",
+            descricao: "Ius puniendi e devido processo · Inquisitório, acusatório e misto · Estrutura acusatória do art. 3º-A do CPP",
+            arquivo: "conteudo/processual-penal-i/01-sistemas-processuais-penais.html"
+          }
+        ]
       },
       {
         id: "processual-penal-ii",

@@ -79,6 +79,11 @@ const materias = [
             titulo: "Princípios Fundamentais do Processo Penal",
             descricao: "Presunção de inocência · Contraditório e ampla defesa · Publicidade · Provas ilícitas · Juiz natural · Nemo tenetur · Proporcionalidade",
             arquivo: "conteudo/processual-penal-i/02-principios-fundamentais.html"
+          },
+          {
+            titulo: "Lei Processual Penal no Tempo e no Espaço",
+            descricao: "Territorialidade e lex fori · As cinco ressalvas do art. 1º do CPP · Tempus regit actum · Normas mistas · Interpretação e analogia",
+            arquivo: "conteudo/processual-penal-i/03-lei-processual-tempo-espaco.html"
           }
         ]
       },

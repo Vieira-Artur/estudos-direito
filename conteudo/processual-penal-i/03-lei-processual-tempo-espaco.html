@@ -1,0 +1,901 @@
+<style>
+/* ============================================================
+   Processo Penal I - Unidade 3: Lei Processual Penal no Tempo e no Espaco
+   Escopo: .ppi3-   ·   Estilo alinhado ao padrao de Processo Penal II
+   ============================================================ */
+
+/* paleta local — mesmos nomes e valores usados em Processo Penal II */
+:root {
+  --pp1-green:#1a5c1a; --pp1-green-lt:#d6f0d6;
+  --pp1-red:#8b1a1a;   --pp1-red-lt:#fce8e8;
+  --pp1-orange:#7a3800;--pp1-orange-lt:#fdebd6;
+  --pp1-purple:#4a1a8a;--pp1-purple-lt:#ede5fb;
+  --pp1-teal:#0a5c4a;  --pp1-teal-lt:#d6f0e8;
+  --pp1-yellow:#5a4000;--pp1-yellow-lt:#fdf6d6;
+  --pp1-bg2:#f5f7fa;   --pp1-bg3:#edf0f4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+    --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+    --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+    --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+    --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+    --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+    --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+  }
+}
+:root[data-theme="dark"] {
+  --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+  --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+  --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+  --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+  --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+  --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+  --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+}
+
+.ppi3 { font-family: var(--sans); color: var(--text); padding-bottom: 2rem; }
+
+/* --- titulo (padrao .pp1-titulo de PP2) --- */
+.ppi3-head { margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+.ppi3-kicker { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+.ppi3-h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--blue); line-height: 1.25; margin: 0 0 .35rem; }
+.ppi3-sub { font-size: .9rem; color: var(--text2); line-height: 1.5; margin: 0 0 22px; }
+
+/* --- abas (padrao .pp1-tab de PP2) --- */
+.ppi3-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 22px; }
+.ppi3-tab { padding: 7px 16px; font-size: 13px; font-weight: 600; font-family: var(--sans);
+  border: 1.5px solid var(--blue); border-radius: 6px; background: var(--surface); color: var(--blue);
+  cursor: pointer; transition: background .15s, color .15s; }
+.ppi3-tab:hover { background: var(--blue-hover); }
+.ppi3-tab[aria-selected="true"] { background: var(--blue); color: #fff; }
+:root[data-theme="dark"] .ppi3-tab[aria-selected="true"],
+.ppi3-tab[aria-selected="true"] { color: #fff; }
+.ppi3-painel[hidden] { display: none; }
+
+/* --- tipografia (padrao PP2) --- */
+.ppi3 h2 { font-size: 1.3rem; color: var(--blue); border-left: 3px solid var(--gold);
+  padding-left: 1rem; margin: 2.5rem 0 1.5rem; }
+.ppi3 h2:first-child { margin-top: 0; }
+.ppi3 h3 { color: var(--blue); font-size: 1rem; margin: 1.2rem 0 .6rem; }
+.ppi3 p { color: var(--text2); font-size: .96rem; line-height: 1.65; margin: 0 0 .85rem; }
+.ppi3 ul, .ppi3 ol { padding-left: 1.2rem; margin: 0 0 .9rem; }
+.ppi3 li { margin-bottom: .3rem; color: var(--text2); font-size: .96rem; line-height: 1.6; }
+.ppi3 strong { color: var(--blue); font-weight: 700; }
+
+/* --- card (padrao .card de PP2) --- */
+.ppi3-card { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; transition: border-color .2s; }
+.ppi3-card:hover { border-color: var(--blue-mid); }
+.ppi3-card h3 { color: var(--blue); font-size: 1rem; margin: 0 0 .6rem; }
+.ppi3-card p, .ppi3-card li { color: var(--text2); font-size: .96rem; }
+.ppi3-card p:last-child { margin-bottom: 0; }
+
+/* --- lei seca (padrao .artigo de PP2) --- */
+.ppi3-lei { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 6px;
+  padding: .9rem 1.2rem; margin-bottom: .8rem; font-family: monospace; font-size: .91rem; color: var(--text); }
+.ppi3-lei-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace;
+  font-weight: bold; margin-bottom: .35rem; }
+.ppi3-lei p { color: var(--text); font-family: monospace; font-size: .91rem; line-height: 1.6; margin: 0 0 .5rem; }
+.ppi3-lei p:last-child { margin-bottom: 0; }
+.ppi3-lei strong { color: var(--blue); }
+
+/* --- jurisprudencia (padrao .juris de PP2) --- */
+.ppi3-juris { background: var(--blue-light); border-left: 3px solid var(--blue);
+  padding: 1rem 1.2rem; border-radius: 0 6px 6px 0; margin-bottom: 1rem; }
+.ppi3-juris-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace; font-weight: bold; }
+.ppi3-juris p { color: var(--text2); font-size: .94rem; margin: .3rem 0 .5rem; }
+.ppi3-juris p:last-child { margin-bottom: 0; }
+.ppi3-fonte { font-size: .84rem; color: var(--text2); font-family: monospace; margin: .3rem 0 0 !important; }
+
+/* --- alerta (padrao .alert de PP2 — paleta vermelha) --- */
+.ppi3-alerta { background: var(--pp1-red-lt); border: 1px solid var(--pp1-red); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi3-alerta-tag { display: block; color: var(--pp1-red); font-weight: 700; font-size: .84rem;
+  letter-spacing: .06em; text-transform: uppercase; }
+.ppi3-alerta p { color: var(--text2); font-size: .94rem; margin: .3rem 0 0; }
+.ppi3-alerta strong { color: var(--pp1-red); }
+
+/* --- doutrina (mesma gramatica do .alert, paleta amarela) --- */
+.ppi3-dout { background: var(--pp1-yellow-lt); border: 1px solid var(--pp1-yellow); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi3-dout p { color: var(--text2); font-size: .94rem; font-style: italic; line-height: 1.62; margin: 0 0 .45rem; }
+.ppi3-dout p:last-child { margin-bottom: 0; }
+.ppi3-dout strong { color: var(--pp1-yellow); }
+
+/* --- tabela (padrao PP2) --- */
+.ppi3-tabela-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; -webkit-overflow-scrolling: touch; }
+.ppi3-tabela { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 560px; }
+.ppi3-tabela th { background: var(--pp1-bg3); color: var(--blue); border: 1px solid var(--border);
+  border-bottom: 2px solid var(--blue-light); padding: .75rem 1rem; text-align: left; font-weight: 600; }
+.ppi3-tabela td { padding: .65rem 1rem; border: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.ppi3-tabela td:first-child { color: var(--blue); font-weight: 600; }
+
+/* --- grids (padrao PP2) --- */
+.ppi3-g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.ppi3-g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+
+/* --- diagramas (padrao .mapa de PP2) --- */
+.ppi3-mapa, .ppi3-svgbox { background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.2rem; overflow-x: auto; margin-bottom: 1.2rem; }
+.ppi3-mapa svg, .ppi3-svgbox svg { display: block; width: 100%; height: auto; }
+
+/* --- linha do tempo --- */
+.ppi3-lt { position: relative; margin: 1.2rem 0 1.5rem; padding-left: 1.7rem; }
+.ppi3-lt::before { content: ''; position: absolute; left: .4rem; top: .4rem; bottom: .4rem; width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--gold)); }
+.ppi3-lt-item { position: relative; background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 6px; padding: .9rem 1.2rem; margin-bottom: .8rem; }
+.ppi3-lt-item::before { content: ''; position: absolute; left: -1.62rem; top: 1rem; width: .68rem; height: .68rem;
+  border-radius: 50%; background: var(--surface); border: 2px solid var(--blue); }
+.ppi3-lt-ano { font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi3-lt-tit { font-size: .99rem; font-weight: 700; color: var(--text); margin: .2rem 0 .25rem; }
+.ppi3-lt-txt { font-size: .94rem; color: var(--text2); line-height: 1.55; margin: 0; }
+
+/* --- roteiro / check-in (padrao .roteiro-item de PP2) --- */
+.ppi3-check { list-style: none; padding-left: 0 !important; }
+.ppi3-check li { display: flex; gap: 1rem; align-items: flex-start; background: var(--pp1-bg2);
+  border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: .8rem;
+  transition: border-color .2s; color: var(--text2); font-size: .96rem; }
+.ppi3-check li:hover { border-color: var(--blue-mid); }
+.ppi3-check li::before { content: '☐'; font-size: 1.1rem; color: var(--blue); line-height: 1.25; flex-shrink: 0; }
+.ppi3-check b { color: var(--blue); }
+
+/* --- caso pratico (padrao .caso de PP2) --- */
+.ppi3-caso { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; margin-bottom: 1.5rem; }
+.ppi3-caso-n { display: block; background: var(--pp1-bg3); border-bottom: 1px solid var(--border);
+  padding: .7rem 1.4rem; font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi3-caso h3 { margin: 1.1rem 1.4rem .5rem; }
+.ppi3-caso p { margin: 0 1.4rem .85rem; }
+.ppi3-resp { margin: 0 1.4rem 1.2rem; background: var(--pp1-bg3); border-left: 3px solid var(--pp1-purple);
+  border-radius: 0 4px 4px 0; padding: .7rem 1rem; }
+.ppi3-resp summary { cursor: pointer; font-size: .94rem; font-weight: 700; color: var(--pp1-purple); list-style: none; }
+.ppi3-resp summary::-webkit-details-marker { display: none; }
+.ppi3-resp summary::before { content: '▸ '; }
+.ppi3-resp[open] summary::before { content: '▾ '; }
+.ppi3-resp p { margin: .55rem 0 0; font-size: .94rem; color: var(--text2); }
+
+/* --- guia resumido --- */
+.ppi3-guia { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; }
+.ppi3-guia h3 { color: var(--blue); margin-top: 0; }
+.ppi3-guia p { color: var(--text2); }
+.ppi3-pill { display: inline-block; background: var(--pp1-bg3); border: 1px solid var(--border);
+  border-radius: 20px; padding: .2rem .7rem; font-size: .84rem; font-family: monospace; font-weight: bold;
+  color: var(--blue); margin: 0 .3rem .35rem 0; }
+
+.ppi3-nota { font-size: .88rem; color: var(--text2); line-height: 1.55;
+  border-top: 1px solid var(--border); padding-top: .9rem; margin-top: 1.8rem; }
+</style>
+
+<div class="ppi3">
+
+  <div class="ppi3-head">
+    <div class="ppi3-kicker">Processo Penal I · Unidade 3</div>
+    <h1 class="ppi3-h1">Lei Processual Penal no Tempo e no Espaço</h1>
+  </div>
+  <p class="ppi3-sub">Territorialidade e <em>lex fori</em> · As cinco ressalvas do art. 1º do CPP · <em>Tempus regit actum</em> e o sistema do isolamento dos atos · Normas mistas · Interpretação extensiva e analogia</p>
+
+  <div class="ppi3-tabs" role="tablist">
+    <button class="ppi3-tab" role="tab" aria-selected="true"  data-p="mapa">Mapa mental</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="esp">No espaço</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="ress">As cinco ressalvas</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="tempo">No tempo</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="mista">Normas mistas</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="interp">Interpretação e analogia</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="quad">Quadros comparativos</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="rot">Roteiro de estudo</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="casos">Casos práticos</button>
+    <button class="ppi3-tab" role="tab" aria-selected="false" data-p="guia">Guia resumido</button>
+  </div>
+
+  <!-- ============================ MAPA ============================ -->
+  <section class="ppi3-painel" data-p="mapa">
+    <h2>As três perguntas desta unidade</h2>
+    <p>Toda a matéria se resolve com três perguntas: <strong>onde</strong> a lei processual penal se aplica, <strong>quando</strong> ela se aplica e <strong>como</strong> ela pode ser lida quando o texto é insuficiente.</p>
+
+    <div class="ppi3-mapa">
+      <svg viewBox="0 0 900 470" role="img" aria-label="Mapa mental da lei processual penal no tempo e no espaço">
+        <defs>
+          <style>
+            .n3  { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
+            .n3b { fill: var(--blue-dark); }
+            .t3  { font-family:'Source Sans 3',sans-serif; font-size:13px; font-weight:600; fill: var(--text); }
+            .t3w { font-family:'Source Sans 3',sans-serif; font-size:14px; font-weight:700; fill:#fff; }
+            .t3s { font-family:'Source Sans 3',sans-serif; font-size:11px; fill: var(--text2); }
+            .t3q { font-family:'Source Sans 3',sans-serif; font-size:11px; font-weight:700; letter-spacing:.08em; fill: var(--gold); }
+            .l3  { stroke: var(--border); stroke-width:1.6; fill:none; }
+          </style>
+        </defs>
+
+        <rect class="n3b" x="330" y="18" width="240" height="46" rx="10"/>
+        <text class="t3w" x="450" y="47" text-anchor="middle">LEI PROCESSUAL PENAL</text>
+
+        <path class="l3" d="M450 64 L 450 90"/>
+        <path class="l3" d="M160 90 L 740 90"/>
+        <path class="l3" d="M160 90 L 160 104"/>
+        <path class="l3" d="M450 90 L 450 104"/>
+        <path class="l3" d="M740 90 L 740 104"/>
+
+        <!-- ONDE -->
+        <text class="t3q" x="160" y="122" text-anchor="middle">ONDE?</text>
+        <rect class="n3" x="30" y="136" width="260" height="54" rx="8" style="stroke:var(--blue-mid);stroke-width:2"/>
+        <text class="t3"  x="160" y="160" text-anchor="middle">Territorialidade · lex fori</text>
+        <text class="t3s" x="160" y="178" text-anchor="middle">CPP, art. 1º — sem exceções de mérito</text>
+        <rect class="n3" x="30" y="202" width="260" height="54" rx="8"/>
+        <text class="t3"  x="160" y="226" text-anchor="middle">5 ressalvas do art. 1º</text>
+        <text class="t3s" x="160" y="244" text-anchor="middle">tratados · prerrogativas · militar · esp. · imprensa</text>
+        <rect class="n3" x="30" y="268" width="260" height="46" rx="8"/>
+        <text class="t3s" x="160" y="288" text-anchor="middle">Duas já são letra morta:</text>
+        <text class="t3s" x="160" y="304" text-anchor="middle">tribunal especial e crimes de imprensa</text>
+
+        <!-- QUANDO -->
+        <text class="t3q" x="450" y="122" text-anchor="middle">QUANDO?</text>
+        <rect class="n3" x="320" y="136" width="260" height="54" rx="8" style="stroke:var(--gold);stroke-width:2"/>
+        <text class="t3"  x="450" y="160" text-anchor="middle">Tempus regit actum</text>
+        <text class="t3s" x="450" y="178" text-anchor="middle">CPP, art. 2º — aplicação imediata</text>
+        <rect class="n3" x="320" y="202" width="260" height="54" rx="8"/>
+        <text class="t3"  x="450" y="226" text-anchor="middle">Isolamento dos atos processuais</text>
+        <text class="t3s" x="450" y="244" text-anchor="middle">valem os atos já praticados</text>
+        <rect class="n3" x="320" y="268" width="260" height="46" rx="8"/>
+        <text class="t3s" x="450" y="288" text-anchor="middle">Norma mista segue o Direito Penal:</text>
+        <text class="t3s" x="450" y="304" text-anchor="middle">retroage e é ultrativa se benéfica</text>
+
+        <!-- COMO -->
+        <text class="t3q" x="740" y="122" text-anchor="middle">COMO LER?</text>
+        <rect class="n3" x="610" y="136" width="260" height="54" rx="8" style="stroke:var(--blue-accent);stroke-width:2"/>
+        <text class="t3"  x="740" y="160" text-anchor="middle">CPP, art. 3º</text>
+        <text class="t3s" x="740" y="178" text-anchor="middle">extensiva · analógica · princípios gerais</text>
+        <rect class="n3" x="610" y="202" width="260" height="54" rx="8"/>
+        <text class="t3"  x="740" y="226" text-anchor="middle">Interpretação ≠ analogia</text>
+        <text class="t3s" x="740" y="244" text-anchor="middle">a 2ª é autointegração, não leitura</text>
+        <rect class="n3" x="610" y="268" width="260" height="46" rx="8"/>
+        <text class="t3s" x="740" y="288" text-anchor="middle">Limite: analogia in malam partem</text>
+        <text class="t3s" x="740" y="304" text-anchor="middle">quando reflete no ius puniendi</text>
+
+        <!-- base -->
+        <path class="l3" d="M160 314 L 160 344 L 740 344 L 740 314" stroke-dasharray="4 4"/>
+        <path class="l3" d="M450 314 L 450 344" stroke-dasharray="4 4"/>
+        <path class="l3" d="M450 344 L 450 364" stroke-dasharray="4 4"/>
+        <rect class="n3" x="230" y="364" width="440" height="52" rx="8" style="fill:var(--blue-light);stroke:none"/>
+        <text class="t3"  x="450" y="388" text-anchor="middle">O eixo de tudo: o processo penal é liberdade em jogo</text>
+        <text class="t3s" x="450" y="406" text-anchor="middle">onde há reflexo no direito de punir, valem as regras do Direito Penal</text>
+      </svg>
+    </div>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">Chave de leitura</span>
+      <p>Guarde a lógica, não a lista. Sempre que uma regra processual <strong>tocar o direito de punir ou a liberdade</strong>, ela deixa de seguir o art. 2º do CPP e passa a seguir o art. 5º, XL, da Constituição — retroage se beneficia, nunca se prejudica.</p>
+    </div>
+  </section>
+
+  <!-- ============================ ESPAÇO ============================ -->
+  <section class="ppi3-painel" data-p="esp" hidden>
+    <h2>Lei processual penal no espaço</h2>
+
+    <p>O Direito Penal trabalha com o princípio da <strong>territorialidade</strong> (CP, art. 5º) e com a <strong>extraterritorialidade</strong>, incondicionada e condicionada (CP, art. 7º). O Código de Processo Penal, não: adota apenas o princípio da <strong>territorialidade</strong>, também chamado de <em>lex fori</em>.</p>
+
+    <p>A razão é direta: a atividade jurisdicional é um dos aspectos da <strong>soberania nacional</strong>. Não pode, portanto, ser exercida além das fronteiras do respectivo Estado.</p>
+
+    <div class="ppi3-card">
+      <h3>A consequência prática</h3>
+      <p>Mesmo que um ato processual tenha de ser praticado no exterior — citação, intimação, interrogatório, oitiva de testemunha —, a lei processual aplicável é a <strong>do país onde o ato for realizado</strong>, e não a brasileira.</p>
+      <p>Na mesma linha, aplica-se a lei processual brasileira aos atos das relações jurisdicionais com autoridades estrangeiras que devam ser praticados <strong>em nosso país</strong>: cumprimento de carta rogatória (CPP, arts. 783 e seguintes), homologação de sentença estrangeira (CPP, arts. 787 e seguintes) e o procedimento de extradição (Lei 13.445/2017 — Lei de Migração).</p>
+    </div>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CPP, art. 1º</span>
+      <p>“O processo penal reger-se-á, em todo o território brasileiro, por este Código, ressalvados:</p>
+      <p>I – os tratados, as convenções e regras de direito internacional;</p>
+      <p>II – as prerrogativas constitucionais do Presidente da República, dos ministros de Estado, nos crimes conexos com os do Presidente da República, e dos ministros do Supremo Tribunal Federal, nos crimes de responsabilidade;</p>
+      <p>III – os processos da competência da Justiça Militar;</p>
+      <p>IV – os processos da competência do tribunal especial;</p>
+      <p>V – os processos por crimes de imprensa.</p>
+      <p>Parágrafo único. Aplicar-se-á, entretanto, este Código aos processos referidos nos incisos IV e V, quando as leis especiais que os regulam não dispuserem de modo diverso.”</p>
+    </div>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">Não confunda</span>
+      <p>As cinco ressalvas <strong>não são exceções à territorialidade</strong>. Elas não dizem que a lei brasileira deixa de valer no território brasileiro — dizem apenas que, naquelas hipóteses, o <strong>CPP</strong> cede lugar a outro diploma ou a outro foro. A <em>lex fori</em> permanece intacta.</p>
+    </div>
+  </section>
+
+  <!-- ============================ RESSALVAS ============================ -->
+  <section class="ppi3-painel" data-p="ress" hidden>
+    <h2>As cinco ressalvas do art. 1º, uma a uma</h2>
+
+    <h3>I — Tratados, convenções e regras de direito internacional</h3>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CF/88, art. 5º, § 4º</span>
+      <p>“O Brasil se submete à jurisdição de Tribunal Penal Internacional a cuja criação tenha manifestado adesão.”</p>
+    </div>
+
+    <p>A hipótese mais cobrada é a <strong>imunidade diplomática</strong>. Por força da Convenção de Viena sobre Relações Diplomáticas — aprovada pelo Decreto Legislativo 103/1964 e promulgada pelo Decreto 56.435/1965 —, gozam de imunidade:</p>
+
+    <ul>
+      <li>Chefes de Estado e de governo estrangeiros, suas famílias e membros das comitivas;</li>
+      <li>Embaixadores e suas famílias;</li>
+      <li>Funcionários estrangeiros do corpo diplomático e suas famílias;</li>
+      <li>Funcionários de organizações internacionais em serviço (ONU, OEA e outras).</li>
+    </ul>
+
+    <div class="ppi3-card">
+      <h3>O que a imunidade significa</h3>
+      <p>Não é impunidade. É a <strong>prerrogativa de responder no país de origem</strong> pelo delito praticado no Brasil. A lei processual penal brasileira deixa de ser aplicada a esses agentes no território nacional — cria-se um verdadeiro <strong>obstáculo processual</strong> à sua aplicação.</p>
+    </div>
+
+    <h3>II — Prerrogativas constitucionais do Presidente da República e de outras autoridades</h3>
+
+    <p>Trata-se da chamada <strong>Justiça Política</strong>: atividade jurisdicional exercida por órgãos políticos, alheios ao Poder Judiciário, cujo objetivo precípuo é o <strong>afastamento do agente público</strong> que comete crime de responsabilidade.</p>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CF/88, art. 52, I e II — competência privativa do Senado Federal</span>
+      <p>Processar e julgar o Presidente e o Vice-Presidente da República nos crimes de responsabilidade; os Ministros de Estado e os Comandantes da Marinha, do Exército e da Aeronáutica nos crimes da mesma natureza conexos com aqueles; e os Ministros do STF, os membros do CNJ e do CNMP, o Procurador-Geral da República e o Advogado-Geral da União nos crimes de responsabilidade.</p>
+      <p>Quanto ao Presidente da República e aos Ministros de Estado, observa-se a competência da <strong>Câmara dos Deputados</strong> para a admissibilidade e a formalização da acusação (CF, art. 51, I; CF, art. 86; Lei 1.079/1950, arts. 20 e seguintes).</p>
+    </div>
+
+    <h3>A distinção que decide a questão: dois sentidos de “crime de responsabilidade”</h3>
+
+    <div class="ppi3-tabela-wrap">
+      <table class="ppi3-tabela">
+        <thead><tr><th>&nbsp;</th><th>Sentido amplo</th><th>Sentido estrito</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Quem pratica</td>
+            <td>Funcionário público — a qualidade funcional é <strong>elementar</strong> do delito (CP, art. 327)</td>
+            <td>Somente determinados <strong>agentes políticos</strong></td>
+          </tr>
+          <tr>
+            <td>Onde estão</td>
+            <td>Crimes praticados por funcionário público contra a administração pública (CP, arts. 312 a 326)</td>
+            <td>Lei 1.079/1950 e legislação correlata</td>
+          </tr>
+          <tr>
+            <td>Natureza jurídica</td>
+            <td>São <strong>infrações penais</strong> — o que a Constituição chama de “crimes comuns” ou “infrações penais comuns”</td>
+            <td>Prevalece: <strong>infração político-administrativa</strong>, não infração penal</td>
+          </tr>
+          <tr>
+            <td>Sanção</td>
+            <td>Sanção criminal</td>
+            <td>Sanções político-administrativas (perda do cargo, inabilitação)</td>
+          </tr>
+          <tr>
+            <td>Quem julga</td>
+            <td>Poder Judiciário</td>
+            <td>Órgãos jurisdicionais políticos, normalmente mistos (parlamentares, ou parlamentares e magistrados)</td>
+          </tr>
+          <tr>
+            <td>Ramo</td>
+            <td>Direito Penal</td>
+            <td>Direito Constitucional</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">Consequência lógica</span>
+      <p>Como do crime de responsabilidade <strong>em sentido estrito</strong> não decorre sanção criminal, ele não pode ser qualificado como infração penal. É infração política, da alçada do Direito Constitucional — daí a ressalva do art. 1º, II, do CPP.</p>
+    </div>
+
+    <h3>III — Processos da competência da Justiça Militar</h3>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CF/88, art. 124</span>
+      <p>“À Justiça Militar compete processar e julgar os crimes militares definidos em lei.”</p>
+    </div>
+
+    <p>É a única das cinco ressalvas que permanece plenamente operante: esses processos seguem o <strong>Código de Processo Penal Militar</strong>, e não o CPP.</p>
+
+    <h3>IV — Processos da competência do tribunal especial</h3>
+
+    <p>O “tribunal especial” a que se refere o inciso é o antigo <strong>Tribunal de Segurança Nacional</strong>, que <strong>não existe mais</strong>: foi extinto pela Constituição de 1946. O inciso é, hoje, letra morta.</p>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">Atualização legislativa — atenção</span>
+      <p>A <strong>Lei de Segurança Nacional (Lei 7.170/1983) foi revogada</strong> pela Lei 14.197, de 1º de setembro de 2021, com <em>vacatio legis</em> de 90 dias. A matéria passou para o <strong>Título XII da Parte Especial do Código Penal</strong> — “Dos crimes contra o Estado Democrático de Direito”, arts. 359-I a 359-T. Materiais anteriores a 2021 ainda discutem o art. 30 da Lei 7.170/83 e a competência da Justiça Militar; esse debate está superado.</p>
+    </div>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CF/88, art. 109, IV e art. 102, II, “b”</span>
+      <p>Compete aos juízes federais processar e julgar “os crimes políticos e as infrações penais praticadas em detrimento de bens, serviços ou interesse da União ou de suas entidades autárquicas ou empresas públicas [...]”, cabendo ao STF julgar, em <strong>recurso ordinário</strong>, “o crime político”.</p>
+    </div>
+
+    <h3>V — Crimes de imprensa</h3>
+
+    <p>Os delitos de imprensa estavam previstos na <strong>Lei 5.250/1967</strong>, editada sob a ordem anterior. Ela <strong>não foi recepcionada</strong> pela Constituição de 1988 — o STF assim declarou no julgamento da <strong>ADPF 130</strong>, em 2009. O inciso V é, também, letra morta.</p>
+
+    <div class="ppi3-card">
+      <h3>Fora do art. 1º, há regimes próprios</h3>
+      <p>Outras leis trazem regras processuais específicas que se sobrepõem ao CPP em pontos determinados — a <strong>Lei Maria da Penha</strong> (Lei 11.340/2006) e a <strong>Lei de Drogas</strong> (Lei 11.343/2006) são os exemplos mais visíveis. Não são ressalvas do art. 1º, mas produzem efeito parecido: aplicação subsidiária do CPP.</p>
+    </div>
+
+    <div class="ppi3-tabela-wrap">
+      <table class="ppi3-tabela">
+        <thead><tr><th>Inciso</th><th>Hipótese</th><th>Situação hoje</th></tr></thead>
+        <tbody>
+          <tr><td>I</td><td>Tratados, convenções e regras de direito internacional</td><td>Vigente — imunidades diplomáticas e TPI</td></tr>
+          <tr><td>II</td><td>Prerrogativas constitucionais (crimes de responsabilidade)</td><td>Vigente — Justiça Política, Senado e Câmara</td></tr>
+          <tr><td>III</td><td>Justiça Militar</td><td>Vigente — aplica-se o CPPM</td></tr>
+          <tr><td>IV</td><td>Tribunal especial</td><td>Letra morta — órgão extinto pela CF/1946</td></tr>
+          <tr><td>V</td><td>Crimes de imprensa</td><td>Letra morta — Lei 5.250/67 não recepcionada (ADPF 130)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================ TEMPO ============================ -->
+  <section class="ppi3-painel" data-p="tempo" hidden>
+    <h2>Lei processual penal no tempo</h2>
+
+    <h3>O contraste com o Direito Penal</h3>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CF/88, art. 5º, XL</span>
+      <p>“a lei penal não retroagirá, salvo para beneficiar o réu;”</p>
+    </div>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CPP, art. 2º</span>
+      <p>“A lei processual penal aplicar-se-á desde logo, sem prejuízo da validade dos atos realizados sob a vigência da lei anterior.”</p>
+    </div>
+
+    <p>É o princípio <strong><em>tempus regit actum</em></strong>: cada ato processual é regido pela lei vigente no momento em que é praticado. A lei nova alcança o processo em andamento <strong>imediatamente</strong>, mas não desfaz o que já se fez.</p>
+
+    <h3>Qual dos três sistemas o Brasil adotou</h3>
+
+    <div class="ppi3-svgbox">
+      <svg viewBox="0 0 820 330" role="img" aria-label="Os três sistemas de aplicação da lei processual penal no tempo">
+        <defs><style>
+          .t5  { font-family:'Source Sans 3',sans-serif; font-size:12.5px; font-weight:700; fill: var(--text); }
+          .t5s { font-family:'Source Sans 3',sans-serif; font-size:11px; fill: var(--text2); }
+          .t5x { font-family:'Source Sans 3',sans-serif; font-size:11px; font-weight:700; fill: var(--pp1-red); }
+          .t5o { font-family:'Source Sans 3',sans-serif; font-size:11px; font-weight:700; fill: var(--pp1-green); }
+          .bx  { fill: var(--surface); stroke: var(--border); stroke-width:1.5; }
+        </style></defs>
+
+        <text class="t5"  x="30" y="30">1 · Unidade processual</text>
+        <text class="t5s" x="30" y="48">O processo é um bloco único: ou tudo pela lei velha, ou tudo pela nova.</text>
+        <rect class="bx" x="30" y="60" width="560" height="30" rx="5"/>
+        <text class="t5s" x="310" y="80" text-anchor="middle">um só regime para todo o processo</text>
+        <text class="t5x" x="610" y="80">não adotado</text>
+
+        <text class="t5"  x="30" y="130">2 · Fases processuais</text>
+        <text class="t5s" x="30" y="148">A lei nova só incide a partir da fase seguinte (postulatória, instrutória, decisória, recursal).</text>
+        <rect class="bx" x="30" y="160" width="180" height="30" rx="5"/>
+        <rect class="bx" x="220" y="160" width="180" height="30" rx="5"/>
+        <rect class="bx" x="410" y="160" width="180" height="30" rx="5"/>
+        <text class="t5s" x="120" y="180" text-anchor="middle">fase</text>
+        <text class="t5s" x="310" y="180" text-anchor="middle">fase</text>
+        <text class="t5s" x="500" y="180" text-anchor="middle">fase</text>
+        <text class="t5x" x="610" y="180">não adotado</text>
+
+        <text class="t5"  x="30" y="230">3 · Isolamento dos atos processuais</text>
+        <text class="t5s" x="30" y="248">Cada ato é regido pela lei do seu momento. Os já praticados permanecem válidos.</text>
+        <rect class="bx" x="30" y="260" width="80" height="30" rx="5" style="fill:var(--pp1-bg3)"/>
+        <rect class="bx" x="118" y="260" width="80" height="30" rx="5" style="fill:var(--pp1-bg3)"/>
+        <rect class="bx" x="206" y="260" width="80" height="30" rx="5" style="fill:var(--pp1-bg3)"/>
+        <rect class="bx" x="294" y="260" width="80" height="30" rx="5" style="stroke:var(--gold);stroke-width:2.5"/>
+        <rect class="bx" x="382" y="260" width="80" height="30" rx="5" style="stroke:var(--gold);stroke-width:2.5"/>
+        <rect class="bx" x="470" y="260" width="80" height="30" rx="5" style="stroke:var(--gold);stroke-width:2.5"/>
+        <text class="t5s" x="70"  y="280" text-anchor="middle">ato</text>
+        <text class="t5s" x="158" y="280" text-anchor="middle">ato</text>
+        <text class="t5s" x="246" y="280" text-anchor="middle">ato</text>
+        <text class="t5s" x="334" y="280" text-anchor="middle">ato</text>
+        <text class="t5s" x="422" y="280" text-anchor="middle">ato</text>
+        <text class="t5s" x="510" y="280" text-anchor="middle">ato</text>
+        <text class="t5s" x="294" y="312" style="font-weight:700;fill:var(--gold)">↑ a lei nova entra aqui — os atos anteriores permanecem válidos</text>
+        <text class="t5o" x="610" y="280">adotado no Brasil</text>
+      </svg>
+    </div>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">Ponto de prova</span>
+      <p>Na sucessão de leis <strong>genuinamente processuais</strong>, os processos em andamento seguem o <strong>sistema do isolamento dos atos processuais</strong>. Não é unidade processual, não é fases processuais, e não é <em>tempus delicti</em> — este último é critério do Direito Penal, ligado ao momento do crime, não ao do ato.</p>
+    </div>
+
+    <h3>Normas genuinamente processuais</h3>
+    <div class="ppi3-card">
+      <p>São as que cuidam de <strong>procedimentos, atos processuais e técnicas do processo</strong> — prazos, forma dos atos, competência recursal, rito. A elas se aplica o art. 2º do CPP em estado puro: incidência imediata, sem retroatividade e sem ultratividade.</p>
+    </div>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">Cuidado com a formulação da banca</span>
+      <p>É <strong>errado</strong> dizer que a norma processual penal “se aplica desde logo, atingindo até fatos praticados antes de sua vigência, ainda que em prejuízo do réu”. A norma processual não alcança o <strong>fato</strong> — ela alcança os <strong>atos processuais</strong> ainda não praticados. A diferença não é de estilo: é o que separa a resposta certa da errada.</p>
+    </div>
+  </section>
+
+  <!-- ============================ MISTAS ============================ -->
+  <section class="ppi3-painel" data-p="mista" hidden>
+    <h2>Normas processuais materiais (mistas ou híbridas)</h2>
+
+    <p>São as que abrigam <strong>naturezas diversas</strong>: têm, ao mesmo tempo, caráter penal e caráter processual penal. Sobre o que exatamente entra nessa categoria, <strong>não há consenso</strong>.</p>
+
+    <div class="ppi3-tabela-wrap">
+      <table class="ppi3-tabela">
+        <thead><tr><th>Corrente</th><th>Critério</th><th>O que abrange</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>1ª — restritiva</td>
+            <td>Norma que, embora disciplinada em diploma processual, dispõe sobre o <strong>conteúdo da pretensão punitiva</strong></td>
+            <td>Direito de queixa e de representação; prescrição e decadência; perdão; perempção</td>
+          </tr>
+          <tr>
+            <td>2ª — ampliativa</td>
+            <td>Toda norma cujo conteúdo seja <strong>direito ou garantia constitucional do cidadão</strong>, produzindo reflexos no direito de liberdade</td>
+            <td>Condições de procedibilidade; meios de prova; liberdade condicional; prisão preventiva; fiança; modalidade de execução da pena</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi3-card">
+      <h3>O que vale independentemente da corrente</h3>
+      <p>Qualquer que seja o critério adotado, às normas processuais materiais se aplica <strong>o mesmo regime do Direito Penal</strong>:</p>
+      <ul style="margin-bottom:0">
+        <li><strong>Ultratividade da lei mais benéfica</strong> — sendo benéfica ao agente, mesmo depois de revogada a lei continua a regular os fatos ocorridos durante sua vigência;</li>
+        <li><strong>Retroatividade da <em>novatio legis in mellius</em></strong> — a norma nova mais favorável retroage para alcançar fatos anteriores à sua vigência.</li>
+      </ul>
+    </div>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">O teste rápido</span>
+      <p>Pergunte-se: <strong>essa regra mexe no direito de punir ou na liberdade?</strong> Se sim, é mista — e segue o art. 5º, XL, da CF. Se cuida só da forma de andar do processo, é genuinamente processual — e segue o art. 2º do CPP.</p>
+    </div>
+
+    <p>O exemplo mais discutido nos últimos anos é o do <strong>acordo de não persecução penal</strong> (CPP, art. 28-A), tratado em unidade própria: reconhecida sua natureza híbrida, discute-se até que ponto pode alcançar processos iniciados antes da Lei 13.964/2019.</p>
+  </section>
+
+  <!-- ============================ INTERPRETAÇÃO ============================ -->
+  <section class="ppi3-painel" data-p="interp" hidden>
+    <h2>Interpretação da lei processual penal</h2>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CPP, art. 3º</span>
+      <p>“A lei processual penal admitirá interpretação extensiva e aplicação analógica, bem como o suplemento dos princípios gerais de direito.”</p>
+    </div>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">Não confunda com o Direito Penal</span>
+      <p>No Direito Penal <strong>não</strong> se admite ampliação hermenêutica dos preceitos incriminadores, muito menos o emprego da analogia em prejuízo do acusado (<em>in malam partem</em>). O art. 3º do CPP abre uma porta que o Direito Penal mantém fechada — mas, como se verá, não a abre inteiramente.</p>
+    </div>
+
+    <h3>Interpretação extensiva</h3>
+
+    <p>Quanto ao <strong>resultado</strong>, a interpretação pode ser declaratória, restritiva, extensiva ou progressiva (também dita evolutiva). É <strong>extensiva</strong> quando <strong>a lei disse menos do que deveria dizer</strong>, cabendo ao intérprete alargar o alcance do texto até o sentido que a norma efetivamente comporta.</p>
+
+    <div class="ppi3-card">
+      <h3>Exemplo clássico</h3>
+      <p>Prevalece o entendimento de que é possível a <strong>interpretação extensiva das hipóteses de cabimento do recurso em sentido estrito</strong> (CPP, art. 581), a despeito de o rol ser tradicionalmente apresentado como taxativo.</p>
+    </div>
+
+    <h3>Analogia (aplicação analógica)</h3>
+
+    <div class="ppi3-card">
+      <h3>Interpretação × analogia</h3>
+      <p>A aplicação analógica <strong>não é interpretação</strong>. É forma de <strong>autointegração</strong> da norma: aplica-se a uma hipótese <strong>não prevista em lei</strong> a disposição legal relativa a um caso semelhante. O fundamento é antigo — <em>onde impera a mesma razão, deve imperar o mesmo direito</em>.</p>
+      <p>Na interpretação extensiva a hipótese <strong>está</strong> na lei, apenas mal expressa. Na analogia a hipótese <strong>não está</strong> na lei, e se toma emprestada a solução de outra.</p>
+    </div>
+
+    <h3>O limite: o caso do art. 31 do CPP</h3>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CPP, art. 31</span>
+      <p>“No caso de morte do ofendido ou quando declarado ausente por decisão judicial, o direito de oferecer queixa ou prosseguir na ação passará ao cônjuge, ascendente, descendente ou irmão.”</p>
+    </div>
+
+    <div class="ppi3-lei">
+      <span class="ppi3-lei-tag">CF/88, art. 226, § 3º</span>
+      <p>“Para efeito da proteção do Estado, é reconhecida a união estável entre o homem e a mulher como entidade familiar, devendo a lei facilitar sua conversão em casamento.”</p>
+    </div>
+
+    <div class="ppi3-tabela-wrap">
+      <table class="ppi3-tabela">
+        <thead><tr><th>Posição</th><th>Argumento</th><th>Ordem de sucessores</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Inclui o companheiro</td>
+            <td>Grande parte da doutrina invoca o art. 226, § 3º, da CF: a união estável é entidade familiar protegida pelo Estado</td>
+            <td>Cônjuge <strong>ou companheiro</strong>, ascendente, descendente, irmão</td>
+          </tr>
+          <tr>
+            <td>Não inclui</td>
+            <td>Seria <strong>analogia <em>in malam partem</em></strong>: a inclusão produz reflexos no direito de punir do Estado</td>
+            <td>Cônjuge, ascendente, descendente, irmão</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi3-card">
+      <h3>Por que a segunda posição diz que há prejuízo</h3>
+      <p>O raciocínio é contraintuitivo e vale entender bem: <strong>quanto menos sucessores existirem, maior a chance</strong> de que o direito de representação ou de queixa não seja exercido no prazo legal — e, portanto, maior a chance de <strong>extinção da punibilidade pela decadência</strong>. Ampliar o rol, logo, joga contra o acusado. Daí a objeção de analogia <em>in malam partem</em>.</p>
+    </div>
+
+    <div class="ppi3-alerta">
+      <span class="ppi3-alerta-tag">Nota de conferência</span>
+      <p>No Direito Penal há precedente reconhecendo a <strong>equiparação da companheira ao cônjuge</strong> para efeito da agravante do art. 61, II, “e”, do Código Penal — o que reforça o argumento de quem defende a inclusão também no art. 31 do CPP. A referência de processo que circula em material de aula precisa ser conferida antes de ser citada em prova ou peça: o número não confere com a numeração de <em>habeas corpus</em> do STF no período indicado.</p>
+    </div>
+
+    <h3>Suplemento dos princípios gerais de direito</h3>
+    <p>É a terceira via aberta pelo art. 3º: esgotadas a interpretação e a analogia, o intérprete recorre aos princípios gerais de direito — inclusive, e sobretudo, aos princípios constitucionais do processo penal estudados na <strong>Unidade 2</strong>.</p>
+  </section>
+
+  <!-- ============================ QUADROS ============================ -->
+  <section class="ppi3-painel" data-p="quad" hidden>
+    <h2>Direito Penal × Direito Processual Penal</h2>
+
+    <div class="ppi3-tabela-wrap">
+      <table class="ppi3-tabela">
+        <thead><tr><th>Critério</th><th>Direito Penal</th><th>Direito Processual Penal</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>No espaço</td>
+            <td>Territorialidade (CP, art. 5º) <strong>e</strong> extraterritorialidade, incondicionada e condicionada (CP, art. 7º)</td>
+            <td>Somente territorialidade — <em>lex fori</em> (CPP, art. 1º)</td>
+          </tr>
+          <tr>
+            <td>Razão</td>
+            <td>Proteção de bens jurídicos, inclusive fora do território</td>
+            <td>A jurisdição é expressão da soberania e não se exerce além das fronteiras</td>
+          </tr>
+          <tr>
+            <td>No tempo</td>
+            <td>Irretroatividade, salvo para beneficiar o réu (CF, art. 5º, XL)</td>
+            <td>Aplicação imediata — <em>tempus regit actum</em> (CPP, art. 2º)</td>
+          </tr>
+          <tr>
+            <td>Marco temporal</td>
+            <td><em>Tempus delicti</em> — o momento do crime</td>
+            <td>O momento de cada <strong>ato processual</strong></td>
+          </tr>
+          <tr>
+            <td>Sistema adotado</td>
+            <td>—</td>
+            <td>Isolamento dos atos processuais</td>
+          </tr>
+          <tr>
+            <td>Interpretação extensiva</td>
+            <td>Vedada quanto a preceitos incriminadores</td>
+            <td>Admitida (CPP, art. 3º)</td>
+          </tr>
+          <tr>
+            <td>Analogia</td>
+            <td>Só <em>in bonam partem</em></td>
+            <td>Admitida (CPP, art. 3º), com o limite da <em>in malam partem</em> quando houver reflexo no <em>ius puniendi</em></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Norma genuinamente processual × norma mista</h2>
+
+    <div class="ppi3-tabela-wrap">
+      <table class="ppi3-tabela">
+        <thead><tr><th>&nbsp;</th><th>Genuinamente processual</th><th>Processual material (mista)</th></tr></thead>
+        <tbody>
+          <tr><td>Conteúdo</td><td>Procedimentos, atos processuais, técnicas do processo</td><td>Também dispõe sobre o conteúdo da pretensão punitiva ou reflete na liberdade</td></tr>
+          <tr><td>Regra aplicável</td><td>CPP, art. 2º</td><td>CF, art. 5º, XL — regime do Direito Penal</td></tr>
+          <tr><td>Retroage?</td><td>Não — incide desde logo sobre os atos futuros</td><td>Sim, se mais benéfica (<em>novatio legis in mellius</em>)</td></tr>
+          <tr><td>É ultrativa?</td><td>Não</td><td>Sim, se mais benéfica</td></tr>
+          <tr><td>Exemplos</td><td>Prazos, forma dos atos, rito, competência recursal</td><td>Queixa, representação, prescrição, decadência, perdão, perempção; para a corrente ampliativa, também prova, fiança, preventiva e execução da pena</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Interpretação extensiva × analogia</h2>
+
+    <div class="ppi3-g2">
+      <div class="ppi3-card">
+        <h3>Interpretação extensiva</h3>
+        <p>A hipótese <strong>está</strong> na lei — a lei apenas disse menos do que deveria. O intérprete alarga o texto até o sentido que ele comporta. É atividade de <strong>leitura</strong>.</p>
+      </div>
+      <div class="ppi3-card">
+        <h3>Analogia</h3>
+        <p>A hipótese <strong>não está</strong> na lei. Toma-se emprestada a disposição de um caso semelhante. É atividade de <strong>autointegração</strong>, não de interpretação.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ROTEIRO ============================ -->
+  <section class="ppi3-painel" data-p="rot" hidden>
+    <h2>Roteiro de estudo</h2>
+
+    <h3>Etapa 1 — No espaço</h3>
+    <ul class="ppi3-check">
+      <li><span>Explicar por que o CPP adota <b>só</b> a territorialidade, enquanto o CP adota também a extraterritorialidade.</span></li>
+      <li><span>Definir <b>lex fori</b> e dar um exemplo de ato processual praticado no exterior.</span></li>
+      <li><span>Citar os três institutos de cooperação regidos pela lei brasileira: <b>carta rogatória, homologação de sentença estrangeira e extradição</b>.</span></li>
+      <li><span>Justificar por que as ressalvas do art. 1º <b>não são</b> exceções à territorialidade.</span></li>
+    </ul>
+
+    <h3>Etapa 2 — As cinco ressalvas</h3>
+    <ul class="ppi3-check">
+      <li><span>Recitar de memória os <b>cinco incisos</b> do art. 1º do CPP.</span></li>
+      <li><span>Explicar o alcance da <b>imunidade diplomática</b> e por que ela não é impunidade.</span></li>
+      <li><span>Distinguir crime de responsabilidade em sentido <b>amplo</b> e em sentido <b>estrito</b>, com natureza jurídica e órgão julgador de cada um.</span></li>
+      <li><span>Apontar quais incisos são hoje <b>letra morta</b> e por quê.</span></li>
+      <li><span>Registrar a revogação da <b>Lei 7.170/83</b> pela Lei 14.197/2021 e onde a matéria está agora.</span></li>
+    </ul>
+
+    <h3>Etapa 3 — No tempo</h3>
+    <ul class="ppi3-check">
+      <li><span>Escrever de memória o <b>art. 2º do CPP</b> e nomear o princípio.</span></li>
+      <li><span>Descrever os <b>três sistemas</b> e dizer qual o Brasil adotou.</span></li>
+      <li><span>Explicar por que é errado dizer que a norma processual atinge <b>fatos</b> anteriores.</span></li>
+    </ul>
+
+    <h3>Etapa 4 — Normas mistas</h3>
+    <ul class="ppi3-check">
+      <li><span>Apresentar as <b>duas correntes</b> e o que cada uma abrange.</span></li>
+      <li><span>Enunciar as duas consequências comuns: <b>ultratividade</b> e <b>retroatividade</b> da mais benéfica.</span></li>
+      <li><span>Aplicar o teste rápido a cinco institutos diferentes.</span></li>
+    </ul>
+
+    <h3>Etapa 5 — Interpretação</h3>
+    <ul class="ppi3-check">
+      <li><span>Escrever de memória o <b>art. 3º do CPP</b> e suas três aberturas.</span></li>
+      <li><span>Distinguir <b>interpretação extensiva</b> de <b>analogia</b> em uma frase cada.</span></li>
+      <li><span>Explicar o debate do <b>art. 31 do CPP</b> e por que incluir o companheiro pode ser <em>in malam partem</em>.</span></li>
+    </ul>
+  </section>
+
+  <!-- ============================ CASOS ============================ -->
+  <section class="ppi3-painel" data-p="casos" hidden>
+    <h2>Casos práticos</h2>
+    <p class="ppi3-sub" style="margin-bottom:1.2rem">Situações fictícias, construídas apenas para treinar a aplicação dos conceitos desta unidade. Nomes e fatos são inventados.</p>
+
+    <div class="ppi3-caso">
+      <div class="ppi3-caso-n">Caso 1</div>
+      <h3>A testemunha em Lisboa</h3>
+      <p>Em ação penal por estelionato que tramita em Juiz de Fora, a única testemunha presencial reside em Portugal. O juízo expede carta rogatória para sua oitiva. A defesa sustenta que o depoimento deve seguir integralmente as formalidades do CPP brasileiro, sob pena de nulidade.</p>
+      <details class="ppi3-resp">
+        <summary>Resposta comentada</summary>
+        <p>A tese não procede. Pela <em>lex fori</em>, o ato praticado no exterior rege-se pela lei processual <strong>do país onde é realizado</strong> — a jurisdição é expressão da soberania e não se exerce além das fronteiras. A lei brasileira disciplina o que se passa <strong>aqui</strong>: a expedição e o processamento da carta rogatória (CPP, arts. 783 e seguintes) e o aproveitamento do que retornar.</p>
+      </details>
+    </div>
+
+    <div class="ppi3-caso">
+      <div class="ppi3-caso-n">Caso 2</div>
+      <h3>O adido cultural</h3>
+      <p>Um funcionário do corpo diplomático de país estrangeiro, em serviço no Brasil, é flagrado praticando crime de lesão corporal em Brasília. A autoridade policial instaura inquérito e representa por prisão preventiva.</p>
+      <details class="ppi3-resp">
+        <summary>Resposta comentada</summary>
+        <p>Incide o art. 1º, I, do CPP combinado com a Convenção de Viena sobre Relações Diplomáticas (Decreto 56.435/1965): o agente goza de <strong>imunidade diplomática</strong> e responderá no seu país de origem. Cria-se um <strong>obstáculo processual</strong> à aplicação da lei processual penal brasileira. Note que não é impunidade nem excludente — o fato continua sendo crime; muda o foro.</p>
+      </details>
+    </div>
+
+    <div class="ppi3-caso">
+      <div class="ppi3-caso-n">Caso 3</div>
+      <h3>O prazo que encolheu</h3>
+      <p>Em ação penal em curso, já encerrada a instrução, entra em vigor lei que reduz de dez para cinco dias o prazo de um recurso. A sentença é publicada dois dias depois da vigência da lei nova. A defesa sustenta que se aplica o prazo antigo, porque o processo começou sob a lei anterior e o crime é ainda mais antigo.</p>
+      <details class="ppi3-resp">
+        <summary>Resposta comentada</summary>
+        <p>Aplica-se o prazo <strong>novo</strong>. A norma é genuinamente processual e incide desde logo (CPP, art. 2º), pelo sistema do <strong>isolamento dos atos processuais</strong>: cada ato segue a lei do seu momento. Como o direito de recorrer só nasceu com a publicação da sentença — já sob a lei nova —, é ela que rege o prazo. Nem a data do crime (<em>tempus delicti</em>) nem a data da propositura da ação são o critério aqui.</p>
+      </details>
+    </div>
+
+    <div class="ppi3-caso">
+      <div class="ppi3-caso-n">Caso 4</div>
+      <h3>O recurso que deixou de existir</h3>
+      <p>No curso de uma ação penal, nova lei extingue um recurso que era exclusivo da defesa. A extinção ocorre <strong>antes</strong> de proferida a decisão que seria recorrível. A defesa pretende manejá-lo assim mesmo, alegando que o processo se iniciou sob a lei anterior e que a supressão a prejudica.</p>
+      <details class="ppi3-resp">
+        <summary>Resposta comentada</summary>
+        <p>O recurso não pode ser manejado. Trata-se de norma genuinamente processual, de aplicação imediata (CPP, art. 2º). Como a decisão recorrível ainda <strong>não havia sido proferida</strong>, o direito ao recurso não havia se incorporado ao patrimônio processual da defesa — não há ato praticado a preservar. Fosse a decisão anterior à lei nova, a solução seria outra: o ato já praticado permaneceria válido e o recurso, cabível.</p>
+      </details>
+    </div>
+
+    <div class="ppi3-caso">
+      <div class="ppi3-caso-n">Caso 5</div>
+      <h3>A companheira do ofendido morto</h3>
+      <p>Vítima de crime de ação penal privada morre antes de oferecer queixa. Convivia em união estável havia doze anos, sem deixar cônjuge, ascendentes, descendentes ou irmãos. A companheira pretende oferecer a queixa com base no art. 31 do CPP e no art. 226, § 3º, da Constituição.</p>
+      <details class="ppi3-resp">
+        <summary>Resposta comentada</summary>
+        <p>É exatamente o ponto de divergência. <strong>Grande parte da doutrina</strong> admite, por aplicação analógica amparada no art. 226, § 3º, da CF: a união estável é entidade familiar e não faria sentido excluí-la do rol. <strong>Renato Brasileiro</strong>, entre outros, resiste: ampliar o rol de sucessores reduz a chance de decadência e, portanto, produz reflexo no direito de punir do Estado — seria analogia <em>in malam partem</em>. Em prova dissertativa, apresente as duas posições e o argumento da decadência, que é o que revela domínio do tema.</p>
+      </details>
+    </div>
+
+    <div class="ppi3-caso">
+      <div class="ppi3-caso-n">Caso 6</div>
+      <h3>A lei nova sobre fiança</h3>
+      <p>Entra em vigor lei que passa a permitir fiança para determinado delito que antes a vedava. Há réu preso, processado por esse crime, cujo fato foi praticado antes da lei nova. A acusação sustenta que se trata de norma processual e, por isso, incide apenas dali para a frente, sem alcançar situação constituída.</p>
+      <details class="ppi3-resp">
+        <summary>Resposta comentada</summary>
+        <p>A tese não se sustenta. Fiança é matéria que reflete diretamente sobre a <strong>liberdade</strong> do acusado — para a corrente ampliativa é norma processual material típica, e mesmo pela corrente restritiva o regime aplicável seria o mesmo por dispor sobre o conteúdo da pretensão punitiva em seu aspecto cautelar. Sendo <em>novatio legis in mellius</em>, a norma <strong>retroage</strong> (CF, art. 5º, XL) e beneficia o réu, ainda que o fato seja anterior.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================ GUIA ============================ -->
+  <section class="ppi3-painel" data-p="guia" hidden>
+    <h2>Guia resumido</h2>
+
+    <div class="ppi3-guia">
+      <h3>Em uma frase</h3>
+      <p style="margin-bottom:0">No espaço, a lei processual penal vale só aqui, porque jurisdição é soberania; no tempo, ela vale <strong>desde já</strong>, ato por ato — salvo quando a regra toca a liberdade, caso em que troca de time e passa a seguir as regras do Direito Penal.</p>
+    </div>
+
+    <h3>Dispositivos que você precisa saber localizar</h3>
+    <div style="margin-bottom:1.1rem">
+      <span class="ppi3-pill">CPP, art. 1º</span>
+      <span class="ppi3-pill">CPP, art. 2º</span>
+      <span class="ppi3-pill">CPP, art. 3º</span>
+      <span class="ppi3-pill">CPP, art. 31</span>
+      <span class="ppi3-pill">CPP, art. 581</span>
+      <span class="ppi3-pill">CPP, arts. 783 e ss.</span>
+      <span class="ppi3-pill">CPP, arts. 787 e ss.</span>
+      <span class="ppi3-pill">CF, art. 5º, XL</span>
+      <span class="ppi3-pill">CF, art. 5º, § 4º</span>
+      <span class="ppi3-pill">CF, art. 51, I</span>
+      <span class="ppi3-pill">CF, art. 52, I e II</span>
+      <span class="ppi3-pill">CF, art. 86</span>
+      <span class="ppi3-pill">CF, art. 102, II, "b"</span>
+      <span class="ppi3-pill">CF, art. 109, IV</span>
+      <span class="ppi3-pill">CF, art. 124</span>
+      <span class="ppi3-pill">CF, art. 226, § 3º</span>
+      <span class="ppi3-pill">CP, art. 327</span>
+      <span class="ppi3-pill">Lei 1.079/50</span>
+      <span class="ppi3-pill">Lei 13.445/17</span>
+    </div>
+
+    <h3>Dez proposições para revisão rápida</h3>
+    <ol>
+      <li>O CPP adota <strong>só</strong> a territorialidade (<em>lex fori</em>); o CP adota territorialidade <strong>e</strong> extraterritorialidade.</li>
+      <li>A razão é a soberania: jurisdição não se exerce fora das fronteiras.</li>
+      <li>Ato praticado no exterior segue a lei <strong>do país onde é praticado</strong>.</li>
+      <li>As cinco ressalvas do art. 1º não excepcionam a territorialidade — apenas afastam o CPP.</li>
+      <li>Imunidade diplomática é <strong>obstáculo processual</strong>, não impunidade: responde no país de origem.</li>
+      <li>Crime de responsabilidade em sentido <strong>amplo</strong> é infração penal; em sentido <strong>estrito</strong>, infração político-administrativa.</li>
+      <li>Os incisos IV e V do art. 1º são <strong>letra morta</strong>: o Tribunal de Segurança Nacional foi extinto em 1946 e a Lei de Imprensa não foi recepcionada (ADPF 130).</li>
+      <li>No tempo, vale o <em>tempus regit actum</em> (CPP, art. 2º), pelo sistema do <strong>isolamento dos atos processuais</strong>.</li>
+      <li>Norma <strong>mista</strong> segue o Direito Penal: retroage se benéfica e é ultrativa se benéfica.</li>
+      <li>O art. 3º admite interpretação extensiva e analogia — mas a analogia esbarra na vedação <em>in malam partem</em> sempre que houver reflexo no direito de punir.</li>
+    </ol>
+
+    <h3>Erros que mais derrubam em prova</h3>
+    <div class="ppi3-tabela-wrap">
+      <table class="ppi3-tabela">
+        <thead><tr><th>Afirmação</th><th>Correto?</th><th>Por quê</th></tr></thead>
+        <tbody>
+          <tr><td>O CPP adota territorialidade e extraterritorialidade</td><td>Errado</td><td>Extraterritorialidade é do CP (art. 7º). O CPP adota só a territorialidade.</td></tr>
+          <tr><td>A norma processual atinge fatos anteriores, ainda que prejudique o réu</td><td>Errado</td><td>Ela atinge <strong>atos processuais</strong> futuros, não fatos.</td></tr>
+          <tr><td>Na sucessão de leis processuais adota-se o sistema das fases processuais</td><td>Errado</td><td>Adota-se o <strong>isolamento dos atos processuais</strong>.</td></tr>
+          <tr><td>Norma processual mista mais benéfica retroage</td><td>Certo</td><td>Segue o regime do Direito Penal (CF, art. 5º, XL).</td></tr>
+          <tr><td>Crime de responsabilidade em sentido estrito é infração penal</td><td>Errado</td><td>Prevalece que é infração político-administrativa.</td></tr>
+          <tr><td>A imunidade diplomática impede qualquer responsabilização</td><td>Errado</td><td>O agente responde no país de origem.</td></tr>
+          <tr><td>É possível interpretação extensiva do rol do art. 581 do CPP</td><td>Certo</td><td>É o entendimento que prevalece, apesar da taxatividade tradicional.</td></tr>
+          <tr><td>No processo penal a analogia é sempre livre</td><td>Errado</td><td>Barra-se a <em>in malam partem</em> quando há reflexo no <em>ius puniendi</em>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ppi3-nota"><strong>Fontes desta unidade:</strong> material de aula do Prof. Artur Vieira (Processo Penal I); texto legal do CPP, do CP, da CF/88, da Lei 1.079/1950, da Lei 13.445/2017, da Lei 14.197/2021 e do Decreto 56.435/1965 (Convenção de Viena sobre Relações Diplomáticas, aprovada pelo Decreto Legislativo 103/1964); STF, ADPF 130/DF (Lei de Imprensa não recepcionada, 2009). Doutrina: Renato Brasileiro de Lima. <br><br><strong>Atualização registrada:</strong> a Lei 7.170/1983 (Lei de Segurança Nacional) foi revogada pela Lei 14.197, de 1º/09/2021, que inseriu o Título XII na Parte Especial do Código Penal — “Dos crimes contra o Estado Democrático de Direito”, arts. 359-I a 359-T.</p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var raiz = document.currentScript.previousElementSibling
+  while (raiz && !raiz.classList.contains('ppi3')) raiz = raiz.previousElementSibling
+  if (!raiz) raiz = document.querySelector('.ppi3')
+  if (!raiz) return
+
+  var abas = raiz.querySelectorAll('.ppi3-tab')
+  var paineis = raiz.querySelectorAll('.ppi3-painel')
+
+  abas.forEach(function (aba) {
+    aba.addEventListener('click', function () {
+      var alvo = aba.dataset.p
+      abas.forEach(function (a) { a.setAttribute('aria-selected', String(a === aba)) })
+      paineis.forEach(function (p) { p.hidden = (p.dataset.p !== alvo) })
+      var topo = raiz.getBoundingClientRect().top + window.scrollY - 80
+      window.scrollTo({ top: topo, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+    })
+  })
+})()
+</script>

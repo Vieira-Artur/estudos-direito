@@ -74,6 +74,11 @@ const materias = [
             titulo: "Sistemas Processuais Penais",
             descricao: "Ius puniendi e devido processo · Inquisitório, acusatório e misto · Estrutura acusatória do art. 3º-A do CPP",
             arquivo: "conteudo/processual-penal-i/01-sistemas-processuais-penais.html"
+          },
+          {
+            titulo: "Princípios Fundamentais do Processo Penal",
+            descricao: "Presunção de inocência · Contraditório e ampla defesa · Publicidade · Provas ilícitas · Juiz natural · Nemo tenetur · Proporcionalidade",
+            arquivo: "conteudo/processual-penal-i/02-principios-fundamentais.html"
           }
         ]
       },

@@ -1,0 +1,1217 @@
+<style>
+/* ============================================================
+   Processo Penal I — Unidade 2: Principios Fundamentais
+   Escopo: .ppi2-   ·   Estilo alinhado ao padrao de Processo Penal II
+   ============================================================ */
+
+/* paleta local — mesmos nomes e valores usados em Processo Penal II */
+:root {
+  --pp1-green:#1a5c1a; --pp1-green-lt:#d6f0d6;
+  --pp1-red:#8b1a1a;   --pp1-red-lt:#fce8e8;
+  --pp1-orange:#7a3800;--pp1-orange-lt:#fdebd6;
+  --pp1-purple:#4a1a8a;--pp1-purple-lt:#ede5fb;
+  --pp1-teal:#0a5c4a;  --pp1-teal-lt:#d6f0e8;
+  --pp1-yellow:#5a4000;--pp1-yellow-lt:#fdf6d6;
+  --pp1-bg2:#f5f7fa;   --pp1-bg3:#edf0f4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+    --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+    --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+    --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+    --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+    --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+    --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+  }
+}
+:root[data-theme="dark"] {
+  --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+  --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+  --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+  --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+  --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+  --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+  --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+}
+
+.ppi2 { font-family: var(--sans); color: var(--text); padding-bottom: 2rem; }
+
+/* --- titulo (padrao .pp1-titulo de PP2) --- */
+.ppi2-head { margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+.ppi2-kicker { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+.ppi2-h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--blue); line-height: 1.25; margin: 0 0 .35rem; }
+.ppi2-sub { font-size: .9rem; color: var(--text2); line-height: 1.5; margin: 0 0 22px; }
+
+/* --- abas (padrao .pp1-tab de PP2) --- */
+.ppi2-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 22px; }
+.ppi2-tab { padding: 7px 16px; font-size: 13px; font-weight: 600; font-family: var(--sans);
+  border: 1.5px solid var(--blue); border-radius: 6px; background: var(--surface); color: var(--blue);
+  cursor: pointer; transition: background .15s, color .15s; }
+.ppi2-tab:hover { background: var(--blue-hover); }
+.ppi2-tab[aria-selected="true"] { background: var(--blue); color: #fff; }
+:root[data-theme="dark"] .ppi2-tab[aria-selected="true"],
+.ppi2-tab[aria-selected="true"] { color: #fff; }
+.ppi2-painel[hidden] { display: none; }
+
+/* --- tipografia (padrao PP2) --- */
+.ppi2 h2 { font-size: 1.3rem; color: var(--blue); border-left: 3px solid var(--gold);
+  padding-left: 1rem; margin: 2.5rem 0 1.5rem; }
+.ppi2 h2:first-child { margin-top: 0; }
+.ppi2 h3 { color: var(--blue); font-size: 1rem; margin: 1.2rem 0 .6rem; }
+.ppi2 p { color: var(--text2); font-size: .96rem; line-height: 1.65; margin: 0 0 .85rem; }
+.ppi2 ul, .ppi2 ol { padding-left: 1.2rem; margin: 0 0 .9rem; }
+.ppi2 li { margin-bottom: .3rem; color: var(--text2); font-size: .96rem; line-height: 1.6; }
+.ppi2 strong { color: var(--blue); font-weight: 700; }
+
+/* --- card (padrao .card de PP2) --- */
+.ppi2-card { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; transition: border-color .2s; }
+.ppi2-card:hover { border-color: var(--blue-mid); }
+.ppi2-card h3 { color: var(--blue); font-size: 1rem; margin: 0 0 .6rem; }
+.ppi2-card p, .ppi2-card li { color: var(--text2); font-size: .96rem; }
+.ppi2-card p:last-child { margin-bottom: 0; }
+
+/* --- lei seca (padrao .artigo de PP2) --- */
+.ppi2-lei { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 6px;
+  padding: .9rem 1.2rem; margin-bottom: .8rem; font-family: monospace; font-size: .91rem; color: var(--text); }
+.ppi2-lei-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace;
+  font-weight: bold; margin-bottom: .35rem; }
+.ppi2-lei p { color: var(--text); font-family: monospace; font-size: .91rem; line-height: 1.6; margin: 0 0 .5rem; }
+.ppi2-lei p:last-child { margin-bottom: 0; }
+.ppi2-lei strong { color: var(--blue); }
+
+/* --- jurisprudencia (padrao .juris de PP2) --- */
+.ppi2-juris { background: var(--blue-light); border-left: 3px solid var(--blue);
+  padding: 1rem 1.2rem; border-radius: 0 6px 6px 0; margin-bottom: 1rem; }
+.ppi2-juris-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace; font-weight: bold; }
+.ppi2-juris p { color: var(--text2); font-size: .94rem; margin: .3rem 0 .5rem; }
+.ppi2-juris p:last-child { margin-bottom: 0; }
+.ppi2-fonte { font-size: .84rem; color: var(--text2); font-family: monospace; margin: .3rem 0 0 !important; }
+
+/* --- alerta (padrao .alert de PP2 — paleta vermelha) --- */
+.ppi2-alerta { background: var(--pp1-red-lt); border: 1px solid var(--pp1-red); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi2-alerta-tag { display: block; color: var(--pp1-red); font-weight: 700; font-size: .84rem;
+  letter-spacing: .06em; text-transform: uppercase; }
+.ppi2-alerta p { color: var(--text2); font-size: .94rem; margin: .3rem 0 0; }
+.ppi2-alerta strong { color: var(--pp1-red); }
+
+/* --- doutrina (mesma gramatica do .alert, paleta amarela) --- */
+.ppi2-dout { background: var(--pp1-yellow-lt); border: 1px solid var(--pp1-yellow); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi2-dout p { color: var(--text2); font-size: .94rem; font-style: italic; line-height: 1.62; margin: 0 0 .45rem; }
+.ppi2-dout p:last-child { margin-bottom: 0; }
+.ppi2-dout strong { color: var(--pp1-yellow); }
+
+/* --- tabela (padrao PP2) --- */
+.ppi2-tabela-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; -webkit-overflow-scrolling: touch; }
+.ppi2-tabela { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 560px; }
+.ppi2-tabela th { background: var(--pp1-bg3); color: var(--blue); border: 1px solid var(--border);
+  border-bottom: 2px solid var(--blue-light); padding: .75rem 1rem; text-align: left; font-weight: 600; }
+.ppi2-tabela td { padding: .65rem 1rem; border: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.ppi2-tabela td:first-child { color: var(--blue); font-weight: 600; }
+
+/* --- grids (padrao PP2) --- */
+.ppi2-g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.ppi2-g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+
+/* --- diagramas (padrao .mapa de PP2) --- */
+.ppi2-mapa, .ppi2-svgbox { background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.2rem; overflow-x: auto; margin-bottom: 1.2rem; }
+.ppi2-mapa svg, .ppi2-svgbox svg { display: block; width: 100%; height: auto; }
+
+/* --- linha do tempo --- */
+.ppi2-lt { position: relative; margin: 1.2rem 0 1.5rem; padding-left: 1.7rem; }
+.ppi2-lt::before { content: ''; position: absolute; left: .4rem; top: .4rem; bottom: .4rem; width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--gold)); }
+.ppi2-lt-item { position: relative; background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 6px; padding: .9rem 1.2rem; margin-bottom: .8rem; }
+.ppi2-lt-item::before { content: ''; position: absolute; left: -1.62rem; top: 1rem; width: .68rem; height: .68rem;
+  border-radius: 50%; background: var(--surface); border: 2px solid var(--blue); }
+.ppi2-lt-ano { font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi2-lt-tit { font-size: .99rem; font-weight: 700; color: var(--text); margin: .2rem 0 .25rem; }
+.ppi2-lt-txt { font-size: .94rem; color: var(--text2); line-height: 1.55; margin: 0; }
+
+/* --- roteiro / check-in (padrao .roteiro-item de PP2) --- */
+.ppi2-check { list-style: none; padding-left: 0 !important; }
+.ppi2-check li { display: flex; gap: 1rem; align-items: flex-start; background: var(--pp1-bg2);
+  border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: .8rem;
+  transition: border-color .2s; color: var(--text2); font-size: .96rem; }
+.ppi2-check li:hover { border-color: var(--blue-mid); }
+.ppi2-check li::before { content: '☐'; font-size: 1.1rem; color: var(--blue); line-height: 1.25; flex-shrink: 0; }
+.ppi2-check b { color: var(--blue); }
+
+/* --- caso pratico (padrao .caso de PP2) --- */
+.ppi2-caso { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; margin-bottom: 1.5rem; }
+.ppi2-caso-n { display: block; background: var(--pp1-bg3); border-bottom: 1px solid var(--border);
+  padding: .7rem 1.4rem; font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi2-caso h3 { margin: 1.1rem 1.4rem .5rem; }
+.ppi2-caso p { margin: 0 1.4rem .85rem; }
+.ppi2-resp { margin: 0 1.4rem 1.2rem; background: var(--pp1-bg3); border-left: 3px solid var(--pp1-purple);
+  border-radius: 0 4px 4px 0; padding: .7rem 1rem; }
+.ppi2-resp summary { cursor: pointer; font-size: .94rem; font-weight: 700; color: var(--pp1-purple); list-style: none; }
+.ppi2-resp summary::-webkit-details-marker { display: none; }
+.ppi2-resp summary::before { content: '▸ '; }
+.ppi2-resp[open] summary::before { content: '▾ '; }
+.ppi2-resp p { margin: .55rem 0 0; font-size: .94rem; color: var(--text2); }
+
+/* --- guia resumido --- */
+.ppi2-guia { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; }
+.ppi2-guia h3 { color: var(--blue); margin-top: 0; }
+.ppi2-guia p { color: var(--text2); }
+.ppi2-pill { display: inline-block; background: var(--pp1-bg3); border: 1px solid var(--border);
+  border-radius: 20px; padding: .2rem .7rem; font-size: .84rem; font-family: monospace; font-weight: bold;
+  color: var(--blue); margin: 0 .3rem .35rem 0; }
+
+.ppi2-nota { font-size: .88rem; color: var(--text2); line-height: 1.55;
+  border-top: 1px solid var(--border); padding-top: .9rem; margin-top: 1.8rem; }
+</style>
+
+<div class="ppi2">
+
+  <div class="ppi2-head">
+    <div class="ppi2-kicker">Processo Penal I · Unidade 2</div>
+    <h1 class="ppi2-h1">Princípios Fundamentais do Processo Penal</h1>
+    <p class="ppi2-sub">Presunção de inocência · Contraditório e ampla defesa · Publicidade · Verdade real · Provas ilícitas · Juiz natural · Nemo tenetur se detegere · Proporcionalidade</p>
+  </div>
+
+  <div class="ppi2-tabs" role="tablist">
+    <button class="ppi2-tab" role="tab" aria-selected="true"  data-p="mapa">Mapa mental</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="inoc">Presunção de inocência</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="cont">Contraditório e ampla defesa</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="publ">Publicidade</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="verd">Verdade real</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="ilic">Provas ilícitas</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="jnat">Juiz natural</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="nemo">Nemo tenetur</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="prop">Proporcionalidade</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="quad">Quadros e súmulas</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="rot">Roteiro de estudo</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="casos">Casos práticos</button>
+    <button class="ppi2-tab" role="tab" aria-selected="false" data-p="guia">Guia resumido</button>
+  </div>
+
+  <!-- ============================ MAPA ============================ -->
+  <section class="ppi2-painel" data-p="mapa">
+    <h2>Os nove princípios em um só quadro</h2>
+    <p>Todos partem do mesmo tronco — o <strong>devido processo legal</strong> (CF, art. 5º, LIV) — e se distribuem em dois grandes ramos: princípios que <strong>protegem o acusado</strong> e princípios que <strong>estruturam o processo</strong>.</p>
+
+    <div class="ppi2-svgbox ppi2-mapa">
+      <svg viewBox="0 0 900 560" role="img" aria-label="Mapa mental dos princípios fundamentais do processo penal">
+        <defs>
+          <style>
+            .n2  { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
+            .n2b { fill: var(--blue-dark); }
+            .t2  { font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; font-weight: 600; fill: var(--text); }
+            .t2w { font-family: 'Source Sans 3', sans-serif; font-size: 14px; font-weight: 700; fill: #fff; }
+            .t2s { font-family: 'Source Sans 3', sans-serif; font-size: 10.5px; fill: var(--text2); }
+            .t2h { font-family: 'Source Sans 3', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .06em; fill: var(--gold); }
+            .l2  { stroke: var(--border); stroke-width: 1.6; fill: none; }
+          </style>
+        </defs>
+
+        <!-- tronco -->
+        <rect class="n2b" x="330" y="20" width="240" height="52" rx="10"/>
+        <text class="t2w" x="450" y="42" text-anchor="middle">DEVIDO PROCESSO LEGAL</text>
+        <text class="t2w" x="450" y="60" text-anchor="middle" style="font-size:11px;font-weight:600">CF, art. 5º, LIV</text>
+
+        <path class="l2" d="M450 72 L 450 100"/>
+        <path class="l2" d="M230 100 L 670 100"/>
+        <path class="l2" d="M230 100 L 230 106"/>
+        <path class="l2" d="M670 100 L 670 106"/>
+        <path class="l2" d="M230 128 L 230 140"/>
+        <path class="l2" d="M670 128 L 670 140"/>
+
+        <text class="t2h" x="230" y="122" text-anchor="middle">PROTEGEM O ACUSADO</text>
+        <text class="t2h" x="670" y="122" text-anchor="middle">ESTRUTURAM O PROCESSO</text>
+
+        <!-- coluna esquerda -->
+        <g>
+          <rect class="n2" x="60" y="140" width="340" height="48" rx="8" style="stroke:var(--blue-mid);stroke-width:2"/>
+          <text class="t2" x="78" y="162">Presunção de inocência</text>
+          <text class="t2s" x="78" y="178">CF, art. 5º, LVII · regra probatória + regra de tratamento</text>
+
+          <rect class="n2" x="60" y="200" width="340" height="48" rx="8" style="stroke:var(--blue-mid);stroke-width:2"/>
+          <text class="t2" x="78" y="222">Ampla defesa</text>
+          <text class="t2s" x="78" y="238">CF, art. 5º, LV · defesa técnica + autodefesa · favor rei</text>
+
+          <rect class="n2" x="60" y="260" width="340" height="48" rx="8" style="stroke:var(--blue-mid);stroke-width:2"/>
+          <text class="t2" x="78" y="282">Nemo tenetur se detegere</text>
+          <text class="t2s" x="78" y="298">CF, art. 5º, LXIII · autodefesa passiva · Miranda warnings</text>
+
+          <rect class="n2" x="60" y="320" width="340" height="48" rx="8" style="stroke:var(--blue-mid);stroke-width:2"/>
+          <text class="t2" x="78" y="342">Inadmissibilidade da prova ilícita</text>
+          <text class="t2s" x="78" y="358">CF, art. 5º, LVI · CPP, art. 157 · frutos da árvore envenenada</text>
+        </g>
+
+        <!-- coluna direita -->
+        <g>
+          <rect class="n2" x="500" y="140" width="340" height="48" rx="8" style="stroke:var(--gold);stroke-width:2"/>
+          <text class="t2" x="518" y="162">Contraditório</text>
+          <text class="t2s" x="518" y="178">CF, art. 5º, LV · informação + participação · real ou diferido</text>
+
+          <rect class="n2" x="500" y="200" width="340" height="48" rx="8" style="stroke:var(--gold);stroke-width:2"/>
+          <text class="t2" x="518" y="222">Publicidade</text>
+          <text class="t2s" x="518" y="238">CF, art. 93, IX · CPP, art. 792 · garantia de garantia</text>
+
+          <rect class="n2" x="500" y="260" width="340" height="48" rx="8" style="stroke:var(--gold);stroke-width:2"/>
+          <text class="t2" x="518" y="282">Juiz natural</text>
+          <text class="t2s" x="518" y="298">CF, art. 5º, LIII e XXXVII · vedação ao tribunal de exceção</text>
+
+          <rect class="n2" x="500" y="320" width="340" height="48" rx="8" style="stroke:var(--gold);stroke-width:2"/>
+          <text class="t2" x="518" y="342">Busca da verdade</text>
+          <text class="t2s" x="518" y="358">verdade real × formal · divisão hoje superada</text>
+        </g>
+
+        <!-- base -->
+        <path class="l2" d="M230 368 L 230 400 L 670 400 L 670 368" stroke-dasharray="4 4"/>
+        <path class="l2" d="M450 400 L 450 420" stroke-dasharray="4 4"/>
+        <rect class="n2" x="270" y="420" width="360" height="52" rx="8" style="stroke:var(--blue-accent);stroke-width:2.5"/>
+        <text class="t2" x="450" y="442" text-anchor="middle">Proporcionalidade</text>
+        <text class="t2s" x="450" y="459" text-anchor="middle">adequação · necessidade · proporcionalidade em sentido estrito</text>
+
+        <rect class="n2" x="230" y="496" width="440" height="40" rx="8" style="fill:var(--blue-light);stroke:none"/>
+        <text class="t2" x="450" y="521" text-anchor="middle">Filtro de compatibilidade de toda restrição a direito fundamental</text>
+      </svg>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Explícitos e implícitos</span>
+      <p>São <strong>explícitos</strong> na Constituição: presunção de inocência, contraditório, ampla defesa, publicidade, juiz natural, inadmissibilidade da prova ilícita, direito ao silêncio e duração razoável do processo. São <strong>implícitos</strong>: proporcionalidade, <em>favor rei</em>, paridade de armas, identidade física do juiz e a própria busca da verdade.</p>
+    </div>
+  </section>
+
+  <!-- ============================ PRESUNÇÃO DE INOCÊNCIA ============================ -->
+  <section class="ppi2-painel" data-p="inoc" hidden>
+    <h2>Presunção de inocência (ou da não culpabilidade)</h2>
+
+    <div class="ppi2-dout">
+      <p>“Um homem não pode ser chamado réu antes da sentença do juiz, e a sociedade só lhe pode retirar a proteção pública após ter decidido que ele violou os pactos por meio dos quais ela lhe foi outorgada.”</p>
+      <p class="ppi2-fonte">Cesare Beccaria, <em>Dos delitos e das penas</em>, 1764.</p>
+    </div>
+
+    <h3>Raízes normativas</h3>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">Declaração dos Direitos do Homem e do Cidadão (1789), art. 9º</span>
+      <p>“Todo acusado é considerado inocente até ser declarado culpado e, se julgar indispensável prendê-lo, todo o rigor desnecessário à guarda da sua pessoa deverá ser severamente reprimido pela lei.”</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">Declaração Universal dos Direitos Humanos (1948), art. 11, 1</span>
+      <p>“Todo ser humano acusado de um ato delituoso tem o direito de ser presumido inocente até que a sua culpabilidade tenha sido provada de acordo com a lei, em julgamento público no qual lhe tenham sido asseguradas todas as garantias necessárias à sua defesa.”</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 5º, LVII</span>
+      <p>“ninguém será considerado culpado até o trânsito em julgado de sentença penal condenatória;”</p>
+    </div>
+
+    <p>Antes da Constituição de 1988 o princípio era <strong>implícito</strong> no ordenamento brasileiro. Com a CF/88, tornou-se expresso — e dele se extraem <strong>duas regras</strong>.</p>
+
+    <div class="ppi2-g2">
+      <div class="ppi2-card">
+        <h3>1. Regra probatória (<em>in dubio pro reo</em>)</h3>
+        <p>O ônus de demonstrar a culpabilidade <strong>além de qualquer dúvida razoável</strong> é da parte acusadora — não cabe ao acusado provar sua inocência. Exige-se <strong>certeza</strong>: sem ela, absolve-se.</p>
+      </div>
+      <div class="ppi2-card">
+        <h3>2. Regra de tratamento</h3>
+        <p>A privação cautelar da liberdade é sempre <strong>excepcional</strong>. A regra é responder ao processo em liberdade; a exceção é estar preso. O Poder Público não pode tratar suspeito, indiciado, denunciado ou acusado como se já condenado definitivamente fosse.</p>
+      </div>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Cuidado</span>
+      <p>A regra de tratamento <strong>não impede as medidas cautelares</strong>. Ela exige que sejam excepcionais e fundamentadas — não que sejam impossíveis.</p>
+    </div>
+
+    <h3>Função externa ao processo</h3>
+    <p>Além de operar dentro do processo, a presunção de inocência funciona como <strong>proteção contra a publicidade abusiva e a estigmatização</strong> do acusado — limite democrático à exploração midiática do fato criminoso e do próprio processo.</p>
+
+    <h3>Dois pontos que costumam ser mal aplicados</h3>
+    <div class="ppi2-tabela-wrap">
+      <table class="ppi2-tabela">
+        <thead><tr><th>Situação</th><th>Como fica o ônus da prova</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Réu alega causa de exclusão da ilicitude</td>
+            <td>Pela teoria tradicional, à acusação basta provar o <strong>fato típico</strong>. Não lhe cabe provar a inexistência da excludente alegada pela defesa.</td>
+          </tr>
+          <tr>
+            <td>Roubo com uso de arma que o réu diz ser simulacro</td>
+            <td>Cabe à <strong>defesa</strong> o ônus de demonstrar que a arma empregada para intimidar a vítima era desprovida de potencial lesivo.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================ CONTRADITÓRIO E AMPLA DEFESA ============================ -->
+  <section class="ppi2-painel" data-p="cont" hidden>
+    <h2>Contraditório</h2>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 5º, LV</span>
+      <p>“aos litigantes, em processo judicial ou administrativo, e aos acusados em geral são assegurados o contraditório e ampla defesa, com os meios e recursos a ela inerentes;”</p>
+    </div>
+
+    <p>Contraditório é a <strong>ciência bilateral</strong> dos atos e termos do processo somada à <strong>possibilidade de contrariá-los</strong>.</p>
+
+    <div class="ppi2-g2">
+      <div class="ppi2-card">
+        <h3>Direito à informação</h3>
+        <p>As partes precisam saber o que se passa no processo. É desse elemento que decorre, inclusive, a possibilidade de exercer a ampla defesa.</p>
+      </div>
+      <div class="ppi2-card">
+        <h3>Direito de participação</h3>
+        <p>A possibilidade de reagir aos atos desfavoráveis. Exige-se contraditório <strong>efetivo e equilibrado</strong>, com paridade de tratamento (paridade de armas).</p>
+      </div>
+    </div>
+
+    <h3>Momento de incidência</h3>
+    <p>O contraditório existe <strong>apenas na fase processual</strong>. O inquérito policial é peça informativa e inquisitiva — o que não afasta o direito de acesso do defensor aos elementos já documentados.</p>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 155, caput</span>
+      <p>“O juiz formará sua convicção pela livre apreciação da prova produzida em contraditório judicial, não podendo fundamentar sua decisão exclusivamente nos elementos informativos colhidos na investigação, ressalvadas as provas cautelares, não repetíveis e antecipadas.”</p>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Leitura correta do art. 155</span>
+      <p>Elementos informativos <strong>não podem fundamentar exclusivamente</strong> a condenação — mas <strong>podem</strong> servir de base para decisões cautelares, como a decretação de prisão preventiva. É nula a sentença condenatória apoiada apenas no inquérito.</p>
+    </div>
+
+    <h3>Duas espécies</h3>
+    <div class="ppi2-g2">
+      <div class="ppi2-card">
+        <h3>Contraditório real (para a prova)</h3>
+        <p>As partes atuam <strong>na própria formação</strong> do elemento de prova. É a regra na instrução processual.</p>
+      </div>
+      <div class="ppi2-card">
+        <h3>Contraditório diferido ou postergado (sobre a prova)</h3>
+        <p>As partes atuam <strong>depois</strong> de produzida a prova. Exemplo clássico: a interceptação telefônica.</p>
+      </div>
+    </div>
+
+    <h2>Ampla defesa</h2>
+
+    <p>Está no mesmo inciso LV, mas não se confunde com o contraditório em dois pontos: a ampla defesa <strong>diz respeito apenas ao réu</strong> (o contraditório abrange ambas as partes) e só é possível em razão de um dos elementos do contraditório — o <strong>direito à informação</strong>.</p>
+
+    <div class="ppi2-card">
+      <h3>Favor rei</h3>
+      <p>Da ampla defesa decorrem privilégios deferidos à defesa em detrimento da acusação, reunidos sob o princípio do <em>favor rei</em>: recursos privativos da defesa, proibição da <em>reformatio in pejus</em>, regra do <em>in dubio pro reo</em> e revisão criminal exclusivamente <em>pro reo</em>.</p>
+    </div>
+
+    <h3>1. Defesa técnica</h3>
+    <p>Ninguém pode ser processado sem defensor dotado de capacidade postulatória.</p>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 261</span>
+      <p>“Nenhum acusado, ainda que ausente ou foragido, será processado ou julgado sem defensor.”</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 263</span>
+      <p>“Se o acusado não o tiver, ser-lhe-á nomeado defensor pelo juiz, ressalvado o seu direito de, a todo tempo, nomear outro de sua confiança, ou a si mesmo defender-se, caso tenha habilitação.”</p>
+    </div>
+
+    <p>A nomeação pelo juiz é <strong>subsidiária</strong>: só ocorre depois de o acusado permanecer inerte.</p>
+
+    <div class="ppi2-juris">
+      <span class="ppi2-juris-tag">STF — ADI 3.168/DF</span>
+      <p>O art. 10 da Lei 10.259/2001 (Juizados Especiais Federais), que permite às partes designar representantes “advogado ou não”, foi declarado constitucional, mas <strong>não se aplica à esfera criminal</strong>: em homenagem à ampla defesa, é imperativo que o acusado esteja acompanhado por profissional habilitado.</p>
+      <p class="ppi2-fonte">STF, Plenário, ADI 3.168/DF, j. 08/06/2006.</p>
+    </div>
+
+    <div class="ppi2-juris">
+      <span class="ppi2-juris-tag">Súmulas do STF sobre defesa técnica</span>
+      <p><strong>Súmula 523:</strong> “No processo penal, a falta da defesa constitui nulidade absoluta, mas a sua deficiência só o anulará se houver prova de prejuízo para o réu.”</p>
+      <p><strong>Súmula 707:</strong> “Constitui nulidade a falta de intimação do denunciado para oferecer contrarrazões ao recurso interposto da rejeição da denúncia, não a suprindo a nomeação de defensor dativo.”</p>
+      <p><strong>Súmula 708:</strong> “É nulo o julgamento da apelação se, após a manifestação nos autos da renúncia do único defensor, o réu não foi previamente intimado para constituir outro.”</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 564, III, “c”</span>
+      <p>“A nulidade ocorrerá nos seguintes casos: [...] III – por falta das fórmulas ou dos termos seguintes: [...] c) a nomeação de defensor ao réu presente, que o não tiver, ou ao ausente, e de curador ao menor de 21 anos;”</p>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Observação de leitura</span>
+      <p>A parte final do dispositivo — “curador ao menor de 21 anos” — está <strong>superada</strong>. A exigência de curador para o réu menor de 21 anos foi afastada pela redução da maioridade civil (Código Civil de 2002) e pela Lei 10.792/2003. O que subsiste é a nulidade pela falta de nomeação de defensor.</p>
+    </div>
+
+    <h3>2. Autodefesa</h3>
+    <p>Manifesta-se de várias formas no processo penal:</p>
+
+    <div class="ppi2-g3">
+      <div class="ppi2-card">
+        <h3>Direito de audiência</h3>
+        <p>Direito de apresentar pessoalmente sua defesa ao juiz. Materializa-se no <strong>interrogatório</strong>, que é meio de defesa e também meio de prova.</p>
+      </div>
+      <div class="ppi2-card">
+        <h3>Direito de presença</h3>
+        <p>Acompanhar, ao lado do defensor, os atos de instrução. Daí a obrigatoriedade de intimação do acusado e do defensor para todos os atos.</p>
+      </div>
+      <div class="ppi2-card">
+        <h3>Capacidade postulatória autônoma</h3>
+        <p>O próprio réu pode praticar certos atos: interpor recurso (art. 577), impetrar <em>habeas corpus</em> (art. 654) e ajuizar revisão criminal (art. 623).</p>
+      </div>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 217</span>
+      <p>“Se o juiz verificar que a presença do réu poderá causar humilhação, temor, ou sério constrangimento à testemunha ou ao ofendido, de modo que prejudique a verdade do depoimento, fará a inquirição por videoconferência e, somente na impossibilidade dessa forma, determinará a retirada do réu, prosseguindo na inquirição, com a presença do seu defensor.”</p>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Atenção</span>
+      <p>A retirada do réu é <strong>subsidiária</strong> à videoconferência. E, em qualquer hipótese, <strong>o defensor sempre permanece</strong>: o direito de presença do acusado é relativizável; a defesa técnica, não.</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 577</span>
+      <p>“O recurso poderá ser interposto pelo Ministério Público, ou pelo querelante, ou pelo réu, seu procurador ou seu defensor.”</p>
+    </div>
+  </section>
+
+  <!-- ============================ PUBLICIDADE ============================ -->
+  <section class="ppi2-painel" data-p="publ" hidden>
+    <h2>Princípio da publicidade</h2>
+
+    <p>O acesso de todo e qualquer cidadão aos atos praticados no curso do processo revela uma postura democrática. Seu objetivo é assegurar a <strong>transparência da atividade jurisdicional</strong>, permitindo a fiscalização não só pelas partes, mas por toda a comunidade. Processos secretos são típicos de Estados autoritários.</p>
+
+    <div class="ppi2-dout">
+      <p>A publicidade é uma <strong>garantia de segundo grau</strong> — uma “garantia de garantia”. Para que seja possível controlar a observância das garantias primárias (contestação da acusação, ônus da prova e contraditório), é indispensável que o processo se desenvolva em público.</p>
+      <p class="ppi2-fonte">Luigi Ferrajoli.</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 93, IX</span>
+      <p>“todos os julgamentos dos órgãos do Poder Judiciário serão públicos, e fundamentadas todas as decisões, sob pena de nulidade, podendo a lei limitar a presença, em determinados atos, às próprias partes e a seus advogados, ou somente a estes, em casos nos quais a preservação do direito à intimidade do interessado no sigilo não prejudique o interesse público à informação;”</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 792 e § 1º</span>
+      <p><strong>Caput:</strong> “As audiências, sessões e os atos processuais serão, em regra, públicos e se realizarão nas sedes dos juízos e tribunais, com assistência dos escrivães, do secretário, do oficial de justiça que servir de porteiro, em dia e hora certos, ou previamente designados.”</p>
+      <p><strong>§ 1º:</strong> “Se da publicidade da audiência, da sessão ou do ato processual, puder resultar escândalo, inconveniente grave ou perigo de perturbação da ordem, o juiz, ou o tribunal, câmara, ou turma, poderá, de ofício ou a requerimento da parte ou do Ministério Público, determinar que o ato seja realizado a portas fechadas, limitando o número de pessoas que possam estar presentes.”</p>
+    </div>
+
+    <h3>Publicidade ampla × publicidade restrita</h3>
+
+    <div class="ppi2-tabela-wrap">
+      <table class="ppi2-tabela">
+        <thead><tr><th>Modalidade</th><th>Alcance</th><th>Exemplo</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Ampla (geral)</td>
+            <td>Regra. Qualquer pessoa pode acompanhar os atos.</td>
+            <td>Audiência de instrução em processo comum.</td>
+          </tr>
+          <tr>
+            <td>Restrita (interna ou específica)</td>
+            <td>Limitada às partes e a seus advogados, ou somente a estes.</td>
+            <td>Processos por crimes contra a dignidade sexual, em que a publicidade ampla aumentaria o sofrimento e a exposição da vítima.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CP, art. 234-B</span>
+      <p>“Os processos em que se apuram crimes definidos neste Título correrão em segredo de justiça.”</p>
+    </div>
+  </section>
+
+  <!-- ============================ VERDADE REAL ============================ -->
+  <section class="ppi2-painel" data-p="verd" hidden>
+    <h2>Busca da verdade</h2>
+
+    <h3>A antiga dicotomia</h3>
+
+    <div class="ppi2-g2">
+      <div class="ppi2-card">
+        <h3>Verdade formal (processo civil)</h3>
+        <p>Discutindo-se em regra direitos disponíveis, vigorava o <strong>princípio dispositivo</strong>: só as partes levavam material probatório ao processo e ao juiz reservava-se postura passiva. Em caso de dúvida ao final, julgava-se segundo a verdade formal. Só quando a relação material fosse indisponível se admitia produção de prova de ofício.</p>
+      </div>
+      <div class="ppi2-card">
+        <h3>Verdade material ou real (processo penal)</h3>
+        <p>Estando em jogo a liberdade de locomoção — direito indisponível —, o magistrado seria dotado de <strong>amplos poderes instrutórios</strong>, podendo determinar provas de ofício. A descoberta da verdade, a qualquer preço, era tida como premissa da pretensão punitiva.</p>
+      </div>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Essa divisão não existe mais</span>
+      <p>A verdade não pode ser buscada a qualquer preço, e o limite está no próprio texto constitucional. Some-se a isso a estrutura acusatória do art. 3º-A do CPP, estudada na <strong>Unidade 1</strong>: o juiz não é o gestor da prova.</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 5º, LVI</span>
+      <p>“são inadmissíveis, no processo, as provas obtidas por meios ilícitos;”</p>
+    </div>
+
+    <h3>Verdade consensuada</h3>
+    <p>Há quem sustente que, ao lado da busca da verdade, o ordenamento passou a conviver com uma <strong>verdade consensuada</strong>, resultante dos espaços de justiça penal negociada — transação penal e suspensão condicional do processo nos Juizados, colaboração premiada e acordo de não persecução penal.</p>
+  </section>
+
+  <!-- ============================ PROVAS ILÍCITAS ============================ -->
+  <section class="ppi2-painel" data-p="ilic" hidden>
+    <h2>Inadmissibilidade das provas obtidas por meios ilícitos</h2>
+
+    <p>O direito à prova <strong>não é absoluto</strong>. Nem mesmo o Estado pode valer-se de métodos violadores de direitos fundamentais.</p>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 5º, LVI</span>
+      <p>“são inadmissíveis, no processo, as provas obtidas por meios ilícitos;”</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 157, caput</span>
+      <p>“São inadmissíveis, devendo ser desentranhadas do processo, as provas ilícitas, assim entendidas as obtidas em violação a normas constitucionais ou legais.”</p>
+    </div>
+
+    <h3>Prova ilegal: ilícita × ilegítima</h3>
+
+    <div class="ppi2-tabela-wrap">
+      <table class="ppi2-tabela">
+        <thead><tr><th>Espécie</th><th>Norma violada</th><th>Exemplo</th><th>Consequência</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Ilícita</td>
+            <td>Norma de <strong>direito material</strong></td>
+            <td>Violação de domicílio; confissão obtida sob tortura</td>
+            <td>Inadmissibilidade e desentranhamento (art. 157)</td>
+          </tr>
+          <tr>
+            <td>Ilegítima</td>
+            <td>Norma de <strong>direito processual</strong></td>
+            <td>Ouvir como testemunha compromissada quem deveria depor sem compromisso (art. 203, CPP)</td>
+            <td>Para uma corrente, nulidade (art. 573, CPP)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Divergência doutrinária</span>
+      <p>O art. 157 fala apenas em provas “ilícitas”. Para <strong>Nucci</strong> e <strong>Luiz Flávio Gomes</strong>, a expressão abrange as duas espécies de prova ilegal. Para <strong>Renato Brasileiro</strong> e <strong>Ada Pellegrini Grinover</strong>, alcança apenas as ilícitas: havendo prova ilegítima, o tratamento é o das nulidades.</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 573</span>
+      <p>“Os atos, cuja nulidade não tiver sido sanada, na forma dos artigos anteriores, serão renovados ou retificados.”</p>
+    </div>
+
+    <h3>Direito de exclusão e inutilização</h3>
+    <p>Por mais relevantes que sejam os fatos apurados, a prova ilícita não pode ser admitida. Se ainda assim for juntada, surge o <strong>direito de exclusão</strong> (<em>exclusionary rule</em>, com antecedente no caso <em>Boyd v. United States</em>, de 1886), materializado pelo desentranhamento dos autos.</p>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 157, § 3º</span>
+      <p>“Preclusa a decisão de desentranhamento da prova declarada inadmissível, esta será inutilizada por decisão judicial, facultado às partes acompanhar o incidente.”</p>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Limite da inutilização</span>
+      <p>Não se destrói o que pertence a terceiro nem o que constitua <strong>corpo de delito de outra infração penal</strong>.</p>
+    </div>
+
+    <h2>Prova ilícita por derivação</h2>
+
+    <p>Também chamada de <strong>teoria dos frutos da árvore envenenada</strong> (<em>fruits of the poisonous tree</em> ou <em>taint doctrine</em>). São meios probatórios produzidos validamente em momento posterior, mas afetados pelo vício da ilicitude originária, que a eles se transmite por efeito de repercussão causal. Exemplo: de uma confissão obtida sob tortura deriva a descoberta da arma do crime.</p>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 157, § 1º</span>
+      <p>“São também inadmissíveis as provas derivadas das ilícitas, salvo quando não evidenciado o nexo de causalidade entre umas e outras, ou quando as derivadas puderem ser obtidas por uma fonte independente das primeiras.”</p>
+    </div>
+
+    <div class="ppi2-card">
+      <h3>Origem norte-americana</h3>
+      <p>O princípio da contaminação tem origem em <strong><em>Silverthorne Lumber Co. v. United States</em> (1920)</strong>; a expressão <em>fruits of the poisonous tree</em> foi cunhada pelo Justice Frankfurter em <strong><em>Nardone v. United States</em></strong>. O ápice da teoria veio com <strong><em>Miranda v. Arizona</em> (1966)</strong>, em que a Suprema Corte firmou que nenhuma validade têm as declarações prestadas à polícia sem que a pessoa tenha sido claramente informada de que (1) tem o direito de não responder; (2) tudo o que disser pode ser usado contra ela; (3) tem direito à assistência de defensor escolhido ou nomeado.</p>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Nota de conferência</span>
+      <p>Parte da doutrina brasileira data o precedente <em>Nardone</em> de 1937. A expressão foi cunhada por Frankfurter no julgamento de <strong>1939</strong> (<em>Nardone II</em>, 308 U.S. 338) — há um julgado anterior, de 1937, entre as mesmas partes, o que explica a divergência de datas.</p>
+    </div>
+
+    <h3>As três limitações à contaminação</h3>
+
+    <div class="ppi2-tabela-wrap">
+      <table class="ppi2-tabela">
+        <thead><tr><th>Limitação</th><th>Conteúdo</th><th>Precedente norte-americano</th><th>No Brasil</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Fonte independente<br><em>independent source doctrine</em></td>
+            <td>Se a persecução provar que obteve legitimamente novos elementos a partir de fonte que não decorre da prova ilícita, esses dados são admissíveis. Deve-se provar inequivocamente a ausência de causalidade — na dúvida, <em>in dubio pro reo</em>.</td>
+            <td><em>Bynum v. United States</em> (1960) — caso das digitais; <em>Murray v. United States</em> (1988) — entrada ilegal seguida de mandado obtido apenas com os indícios iniciais.</td>
+            <td>Art. 157, § 1º, parte final. Já aplicada.</td>
+          </tr>
+          <tr>
+            <td>Descoberta inevitável<br><em>inevitable discovery</em></td>
+            <td>Se a prova derivada seria produzida de qualquer modo, independentemente da ilícita originária, é válida. Não pode assentar-se em mera especulação — e o ônus é da <strong>acusação</strong>.</td>
+            <td><em>Nix v. Williams</em> (1984) — o corpo da vítima seria encontrado por duzentos voluntários que já o procuravam.</td>
+            <td>Art. 157, § 2º. Já aplicada.</td>
+          </tr>
+          <tr>
+            <td>Mancha purgada<br><em>purged taint</em></td>
+            <td>O nexo entre a prova primária e a secundária é atenuado pelo decurso do tempo, por circunstâncias supervenientes, pela menor relevância da ilegalidade ou pela vontade de colaborar. Houve contaminação, mas um evento futuro expurga a mancha.</td>
+            <td><em>Wong Sun v. United States</em> (1963) — confissão voluntária dias depois da soltura e da advertência de direitos.</td>
+            <td>Sem previsão expressa; há quem a extraia do art. 157, § 1º. Ainda não aplicada.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 157, § 2º</span>
+      <p>“Considera-se fonte independente aquela que por si só, seguindo os trâmites típicos e de praxe, próprios da investigação ou instrução criminal, seria capaz de conduzir ao fato objeto da prova.”</p>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Descompasso terminológico</span>
+      <p>O § 2º diz “fonte independente”, mas o conteúdo que define é o da <strong>descoberta inevitável</strong>. A verdadeira fonte independente está na parte final do § 1º. É um ponto clássico de prova.</p>
+    </div>
+
+    <div class="ppi2-dout">
+      <p>“Ambas as teorias (fonte independente e encontro inevitável) atacam o nexo causal e servem para mitigar a teoria da contaminação, restringindo ao máximo sua eficácia, de modo que, como sintetiza Maria Thereza, se a prova ilícita não foi absolutamente determinante para a descoberta da prova derivada, ou se esta derivar de fonte própria, não fica contaminada e pode ser produzida em juízo.”</p>
+      <p class="ppi2-fonte">Aury Lopes Jr., <em>Direito Processual Penal</em>, 17. ed., 2020, pp. 629-630.</p>
+    </div>
+
+    <h3>O juiz contaminado: a história dos §§ 4º e 5º</h3>
+
+    <div class="ppi2-svgbox">
+      <svg viewBox="0 0 800 150" role="img" aria-label="Linha do tempo dos parágrafos 4 e 5 do artigo 157 do CPP">
+        <defs><style>
+          .t3  { font-family:'Source Sans 3',sans-serif; font-size:12px; font-weight:700; fill: var(--text); }
+          .t3s { font-family:'Source Sans 3',sans-serif; font-size:10.5px; fill: var(--text2); }
+          .t3a { font-family:'Source Sans 3',sans-serif; font-size:11px; font-weight:700; fill: var(--gold); }
+          .l3  { stroke: var(--border); stroke-width: 2; }
+        </style></defs>
+        <line class="l3" x1="60" y1="75" x2="740" y2="75"/>
+        <circle cx="140" cy="75" r="7" fill="var(--surface)" stroke="var(--blue)" stroke-width="3"/>
+        <circle cx="400" cy="75" r="7" fill="var(--surface)" stroke="var(--blue)" stroke-width="3"/>
+        <circle cx="660" cy="75" r="7" fill="var(--surface)" stroke="var(--gold)" stroke-width="3"/>
+        <text class="t3a" x="140" y="40" text-anchor="middle">2008</text>
+        <text class="t3"  x="140" y="57" text-anchor="middle">§ 4º vetado</text>
+        <text class="t3s" x="140" y="105" text-anchor="middle">Lei 11.690/08 previa</text>
+        <text class="t3s" x="140" y="119" text-anchor="middle">o afastamento do juiz;</text>
+        <text class="t3s" x="140" y="133" text-anchor="middle">veto presidencial</text>
+        <text class="t3a" x="400" y="40" text-anchor="middle">2019</text>
+        <text class="t3"  x="400" y="57" text-anchor="middle">§ 5º incluído</text>
+        <text class="t3s" x="400" y="105" text-anchor="middle">Lei 13.964/19 reintroduz</text>
+        <text class="t3s" x="400" y="119" text-anchor="middle">a regra: o juiz que conhecer</text>
+        <text class="t3s" x="400" y="133" text-anchor="middle">da prova não sentencia</text>
+        <text class="t3a" x="660" y="40" text-anchor="middle">24/08/2023</text>
+        <text class="t3"  x="660" y="57" text-anchor="middle">§ 5º inconstitucional</text>
+        <text class="t3s" x="660" y="105" text-anchor="middle">STF, ADI 6.298 e conexas:</text>
+        <text class="t3s" x="660" y="119" text-anchor="middle">viola legalidade, juiz natural</text>
+        <text class="t3s" x="660" y="133" text-anchor="middle">e razoabilidade</text>
+      </svg>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CPP, art. 157, § 5º (incluído pela Lei 13.964/2019)</span>
+      <p>“O juiz que conhecer do conteúdo da prova declarada inadmissível não poderá proferir a sentença ou acórdão.”</p>
+    </div>
+
+    <div class="ppi2-juris">
+      <span class="ppi2-juris-tag">STF — o § 5º do art. 157 é inconstitucional</span>
+      <p>A norma viola os princípios da legalidade, do juiz natural e da razoabilidade, já que ausentes elementos claros e objetivos para a seleção do juiz sentenciante, o que permitiria eventual manipulação da escolha do órgão julgador.</p>
+      <p class="ppi2-fonte">STF, Plenário, ADI 6.298/DF, ADI 6.299/DF, ADI 6.300/DF e ADI 6.305/DF, Rel. Min. Luiz Fux, j. 24/08/2023 (Info 1106).</p>
+    </div>
+
+    <div class="ppi2-dout">
+      <p>“Esse dispositivo representa uma grande evolução, rumo ao desvelamento do infantil (ou perverso?) cartesianismo vigente. O juiz, que teve contato com a prova ilícita, está contaminado e não pode julgar ou atuar no feito como juiz das garantias. Não basta desentranhar a prova; deve-se ‘desentranhar’ o juiz!”</p>
+      <p class="ppi2-fonte">Aury Lopes Jr., sobre o § 5º — posição doutrinária hoje contrariada pela decisão do STF.</p>
+    </div>
+
+    <h3>Proporcionalidade <em>pro reo</em></h3>
+    <p>Excepcionalmente, admite-se a valoração da prova ilícita <strong>quando favorável ao réu</strong>. Faz-se a ponderação: o direito de liberdade de um inocente prevalece sobre o direito eventualmente sacrificado na obtenção da prova que demonstra essa inocência.</p>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Não vale o inverso</span>
+      <p>Não se admite proporcionalidade <em>pro societate</em> como regra: o juiz <strong>não</strong> pode considerar prova ilícita apenas porque a reputa importante para a condenação. E prova ilícita não se convalida por confirmação posterior mediante prova lícita — a interceptação sem autorização judicial continua ilícita ainda que o teor seja depois confirmado.</p>
+    </div>
+
+    <div class="ppi2-card">
+      <h3>Síntese de Aury Lopes Jr. sobre o art. 157</h3>
+      <ul style="margin-bottom:0">
+        <li>Inadmissibilidade da prova derivada (princípio da contaminação);</li>
+        <li>Não há contaminação quando não ficar evidenciado o nexo de causalidade;</li>
+        <li>Não há contaminação quando a prova puder ser obtida por fonte independente da ilícita;</li>
+        <li>Desentranhamento e inutilização da prova considerada ilícita.</li>
+      </ul>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Cruzamento com Processo Penal II</span>
+      <p>O tratamento aprofundado da prova ilícita — cadeia de custódia, prova emprestada, serendipidade — está na <strong>Unidade 1 de Processo Penal II (Teoria Geral das Provas)</strong>. Aqui o tema é visto na sua dimensão principiológica.</p>
+    </div>
+  </section>
+
+  <!-- ============================ JUIZ NATURAL ============================ -->
+  <section class="ppi2-painel" data-p="jnat" hidden>
+    <h2>Princípio do juiz natural</h2>
+
+    <p>É o direito que cada cidadão tem de <strong>saber previamente</strong> qual autoridade irá processá-lo e julgá-lo caso venha a praticar conduta definida como infração penal. Juiz natural (ou juiz legal) é aquele constituído <strong>antes do fato delituoso</strong>, mediante regras taxativas de competência estabelecidas em lei.</p>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 5º, LIII</span>
+      <p>“ninguém será processado nem sentenciado senão pela autoridade competente;”</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 5º, XXXVII</span>
+      <p>“não haverá juízo ou tribunal de exceção;”</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CADH, art. 8º, 1</span>
+      <p>“Toda pessoa tem direito a ser ouvida, com as devidas garantias e dentro de um prazo razoável, por um juiz ou tribunal competente, independente e imparcial, estabelecido anteriormente por lei, na apuração de qualquer acusação penal formulada contra ela [...].”</p>
+    </div>
+
+    <div class="ppi2-g2">
+      <div class="ppi2-card">
+        <h3>Tribunal de exceção — vedado</h3>
+        <p>Juízo instituído <strong>depois</strong> da prática do delito, com o objetivo específico de julgá-lo. É o que a Constituição proíbe.</p>
+      </div>
+      <div class="ppi2-card">
+        <h3>Justiça especializada — permitida</h3>
+        <p>Órgãos criados <strong>previamente</strong> por regra abstrata de competência (Justiça Militar, Justiça Eleitoral, varas especializadas). Não violam o juiz natural.</p>
+      </div>
+    </div>
+
+    <div class="ppi2-juris">
+      <span class="ppi2-juris-tag">STJ — juiz cooperador e identidade física do juiz</span>
+      <p>Se o magistrado prolator da sentença estava designado por programa de cooperação da Corregedoria para atuar na respectiva vara, não há abalo ao princípio da identidade física do juiz.</p>
+      <p class="ppi2-fonte">STJ, 6ª Turma, AgRg no HC 523.501-SC, Rel. Min. Antonio Saldanha Palheiro, j. 14/11/2022.</p>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Ponto de prova</span>
+      <p>O princípio do juiz natural <strong>não impede o desaforamento</strong> de julgamentos do Tribunal do Júri para comarca que não seja circunvizinha. A alteração se dá por regra legal preexistente, e não por criação de juízo <em>ad hoc</em>.</p>
+    </div>
+  </section>
+
+  <!-- ============================ NEMO TENETUR ============================ -->
+  <section class="ppi2-painel" data-p="nemo" hidden>
+    <h2><em>Nemo tenetur se detegere</em></h2>
+
+    <p>Ninguém é obrigado a produzir prova contra si mesmo. O direito ao silêncio é apenas <strong>uma</strong> das decorrências desse princípio, que constitui modalidade de <strong>autodefesa passiva</strong> e vale tanto para quem está preso quanto para quem está solto.</p>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 5º, LXIII</span>
+      <p>“o preso será informado de seus direitos, entre os quais o de permanecer calado, sendo-lhe assegurada a assistência da família e de advogado;”</p>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Correção de citação</span>
+      <p>O inciso do direito ao silêncio é o <strong>LXIII</strong>. O inciso <strong>LVI</strong> é o da inadmissibilidade das provas ilícitas. É uma troca frequente em material de estudo — vale conferir na fonte.</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">Previsão convencional</span>
+      <p><strong>PIDCP, art. 14, 3, “g”</strong> — direito de não ser obrigado a depor contra si mesmo nem a confessar-se culpado.</p>
+      <p><strong>CADH, art. 8º, 2, “g”</strong> — direito de não ser obrigado a depor contra si mesma nem a declarar-se culpada.</p>
+    </div>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">Lei 7.960/1989, art. 2º, § 6º</span>
+      <p>“Efetuada a prisão, a autoridade policial informará o preso dos direitos previstos no art. 5º da Constituição Federal.”</p>
+    </div>
+
+    <h3>Miranda warnings</h3>
+    <p>O art. 5º, LXIII, é mandamento semelhante aos famosos <em>Miranda rights</em>, do direito norte-americano, firmados em <strong><em>Miranda v. Arizona</em> (1966)</strong>, por cinco votos a quatro: nenhuma validade têm as declarações à polícia se a pessoa não foi antes claramente informada de que tem o direito de não responder, de que tudo o que disser pode ser usado contra ela e de que tem direito à assistência de defensor escolhido ou nomeado.</p>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Consequência</span>
+      <p>A advertência prévia e formal quanto ao direito ao silêncio é <strong>obrigatória</strong>. Sem ela, a prova obtida é ilícita — precisamente para evitar autoincriminação involuntária por desconhecimento da lei.</p>
+    </div>
+
+    <h3>O que o princípio abrange</h3>
+    <ul>
+      <li>Direito ao silêncio ou de ficar calado;</li>
+      <li>Direito de não ser constrangido a confessar a prática de ilícito penal;</li>
+      <li>Inexigibilidade de dizer a verdade — não há, no Brasil, crime de perjúrio;</li>
+      <li>Direito de não praticar qualquer <strong>comportamento ativo</strong> que possa incriminá-lo: acareação, reconstituição do crime, exame grafotécnico, fornecimento de padrões vocais.</li>
+    </ul>
+
+    <div class="ppi2-juris">
+      <span class="ppi2-juris-tag">STF — testemunha e falso testemunho</span>
+      <p>Não é válido arrolar alguém como testemunha e, invocando o dever de dizer a verdade, forçá-la a responder pergunta que importe, ainda que indiretamente, em sua incriminação. A testemunha tem o dever de falar a verdade, sob pena do crime do art. 342 do CP, mas não está obrigada a responder sobre fato que possa, em tese, incriminá-la — e não comete falso testemunho quem, compromissado, deixa de revelar fatos que o incriminariam.</p>
+      <p class="ppi2-fonte">STF, HC 73.035/DF.</p>
+    </div>
+
+    <h3>O critério que resolve os casos: ativo × passivo</h3>
+
+    <div class="ppi2-tabela-wrap">
+      <table class="ppi2-tabela">
+        <thead><tr><th>Tipo de colaboração exigida</th><th>Pode ser imposta?</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Comportamento <strong>ativo</strong> do acusado</td>
+            <td>Não. Fere o <em>nemo tenetur</em>.</td>
+            <td>Acareação; reconstituição do crime; fornecer material para exame grafotécnico; fornecer padrões vocais; soprar o etilômetro.</td>
+          </tr>
+          <tr>
+            <td>Mera <strong>tolerância</strong> (cooperação passiva)</td>
+            <td>Sim. O acusado é mero objeto de verificação.</td>
+            <td>Reconhecimento pessoal — admite-se execução coercitiva ainda que o acusado não queira participar voluntariamente.</td>
+          </tr>
+          <tr>
+            <td>Material <strong>descartado</strong> pelo investigado</td>
+            <td>Sim. É impertinente invocar o princípio.</td>
+            <td>Orgânico (saliva, suor, fio de cabelo) ou inorgânico (copo ou garrafa com saliva). Não se retira um fio de cabelo à força, mas nada impede apreendê-lo em um salão de beleza.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Alternativa à recusa</span>
+      <p>Se a pessoa se recusa a fornecer material de próprio punho para exame grafotécnico, nada impede que a autoridade judiciária determine a <strong>apreensão de papéis e documentos</strong> que possam suprir esse material.</p>
+    </div>
+
+    <div class="ppi2-juris">
+      <span class="ppi2-juris-tag">STF — caso da coleta da placenta</span>
+      <p>Confirmou-se a legalidade da determinação de coleta da placenta no procedimento médico do parto, para posterior exame de DNA destinado a dirimir dúvida sobre a paternidade. A intervenção médica era necessária e não houve coleta à força: a placenta é expelida do corpo como consequência natural do parto.</p>
+      <p class="ppi2-fonte">STF, Tribunal Pleno, Rcl-QO 2.040/DF, Rel. Min. Néri da Silveira, DJ 27/06/2003.</p>
+    </div>
+
+    <div class="ppi2-juris">
+      <span class="ppi2-juris-tag">STJ — interrogatório e perguntas do defensor</span>
+      <p>Não se pode negar ao acusado o direito ao interrogatório judicial — verdadeiro meio de defesa — pelo simples fato de ter optado por responder exclusivamente às perguntas formuladas por seu defensor, sob pena de flagrante nulidade da instrução probatória.</p>
+      <p class="ppi2-fonte">STJ, HC 628.224/MG, j. 07/12/2020.</p>
+    </div>
+  </section>
+
+  <!-- ============================ PROPORCIONALIDADE ============================ -->
+  <section class="ppi2-painel" data-p="prop" hidden>
+    <h2>Princípio da proporcionalidade</h2>
+
+    <p>Não está previsto de maneira expressa na Constituição, mas tem <em>sedes materiae</em> na própria Carta: está inserido no aspecto <strong>material</strong> do devido processo legal (<em>substantive due process of law</em>).</p>
+
+    <div class="ppi2-lei">
+      <span class="ppi2-lei-tag">CF/88, art. 5º, LIV</span>
+      <p>“ninguém será privado da liberdade ou de seus bens sem o devido processo legal;”</p>
+    </div>
+
+    <h3>Os três subprincípios</h3>
+
+    <div class="ppi2-svgbox ppi2-prop">
+      <svg viewBox="0 0 760 300" role="img" aria-label="Os três subprincípios da proporcionalidade">
+        <defs><style>
+          .t4  { font-family:'Source Sans 3',sans-serif; font-size:13px; font-weight:700; fill: var(--text); }
+          .t4s { font-family:'Source Sans 3',sans-serif; font-size:11px; fill: var(--text2); }
+          .t4n { font-family:'Source Sans 3',sans-serif; font-size:22px; font-weight:700; fill: var(--gold); }
+          .b4  { fill: var(--surface); stroke: var(--blue-mid); stroke-width: 2; }
+          .a4  { stroke: var(--border); stroke-width: 2; fill: none; marker-end: url(#seta); }
+        </style>
+        <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--border)"/>
+        </marker>
+        </defs>
+
+        <rect class="b4" x="20" y="60" width="200" height="130" rx="10"/>
+        <text class="t4n" x="40" y="95">1</text>
+        <text class="t4"  x="40" y="122">Adequação</text>
+        <text class="t4s" x="40" y="142">(ou idoneidade)</text>
+        <text class="t4s" x="40" y="163">O meio escolhido contribui</text>
+        <text class="t4s" x="40" y="178">para o fim pretendido?</text>
+
+        <path class="a4" d="M228 125 L 268 125"/>
+
+        <rect class="b4" x="278" y="60" width="200" height="130" rx="10"/>
+        <text class="t4n" x="298" y="95">2</text>
+        <text class="t4"  x="298" y="122">Necessidade</text>
+        <text class="t4s" x="298" y="142">(intervenção mínima)</text>
+        <text class="t4s" x="298" y="163">Entre as opções idôneas,</text>
+        <text class="t4s" x="298" y="178">é a menos restritiva?</text>
+
+        <path class="a4" d="M486 125 L 526 125"/>
+
+        <rect class="b4" x="536" y="60" width="200" height="130" rx="10"/>
+        <text class="t4n" x="556" y="95">3</text>
+        <text class="t4"  x="556" y="122">Proporcionalidade</text>
+        <text class="t4"  x="556" y="140">em sentido estrito</text>
+        <text class="t4s" x="556" y="161">As vantagens superam</text>
+        <text class="t4s" x="556" y="176">as desvantagens?</text>
+
+        <text class="t4s" x="380" y="240" text-anchor="middle">Falhando em qualquer etapa, a restrição ao direito fundamental é desproporcional.</text>
+        <text class="t4s" x="380" y="260" text-anchor="middle">A análise é sequencial: só se passa à seguinte se a anterior for superada.</text>
+      </svg>
+    </div>
+
+    <div class="ppi2-dout">
+      <p>“Resumidamente, pode-se dizer que uma medida é adequada, se atinge o fim almejado; exigível, por causar o menor prejuízo possível; e, finalmente, proporcional em sentido estrito, se as vantagens que trará superarem as desvantagens.”</p>
+      <p class="ppi2-fonte">Willis Santiago Guerra Filho.</p>
+    </div>
+
+    <h3>Detalhamento</h3>
+    <ol>
+      <li><strong>Adequação (ou idoneidade)</strong> — há uma relação de meio e fim. Questiona-se se o meio escolhido contribui para a obtenção do resultado pretendido. Não se permite o ataque a um direito fundamental se o meio adotado não se mostrar apropriado à consecução do resultado.</li>
+      <li><strong>Necessidade</strong> — entre diversas opções idôneas a atingir determinado fim, deve o magistrado buscar aquela que produza menos restrições (intervenção mínima).</li>
+      <li><strong>Proporcionalidade em sentido estrito</strong> — juízo de ponderação entre o ônus imposto e o benefício trazido. Indaga-se se o gravame imposto ao titular do direito fundamental guarda relação de proporcionalidade com a importância do bem jurídico que se pretende tutelar.</li>
+    </ol>
+
+    <div class="ppi2-alerta">
+      <span class="ppi2-alerta-tag">Onde este princípio aparece na prática</span>
+      <p>É o filtro de toda medida restritiva de direitos: prisões cautelares e medidas diversas da prisão, busca e apreensão, interceptação telefônica, quebras de sigilo — e, no campo probatório, a admissibilidade excepcional da prova ilícita <em>pro reo</em>.</p>
+    </div>
+  </section>
+
+  <!-- ============================ QUADROS ============================ -->
+  <section class="ppi2-painel" data-p="quad" hidden>
+    <h2>Quadro geral dos princípios</h2>
+
+    <div class="ppi2-tabela-wrap">
+      <table class="ppi2-tabela">
+        <thead><tr><th>Princípio</th><th>Base normativa</th><th>Núcleo</th></tr></thead>
+        <tbody>
+          <tr><td>Presunção de inocência</td><td>CF, art. 5º, LVII; DUDH, art. 11; DDHC, art. 9º</td><td>Regra probatória (<em>in dubio pro reo</em>) + regra de tratamento (liberdade como regra)</td></tr>
+          <tr><td>Contraditório</td><td>CF, art. 5º, LV; CPP, art. 155</td><td>Informação + participação; real ou diferido; só na fase processual</td></tr>
+          <tr><td>Ampla defesa</td><td>CF, art. 5º, LV; CPP, arts. 261, 263, 564, III, “c”</td><td>Defesa técnica (indisponível) + autodefesa (disponível); <em>favor rei</em></td></tr>
+          <tr><td>Publicidade</td><td>CF, art. 93, IX; CPP, art. 792; CP, art. 234-B</td><td>Regra é a publicidade ampla; restrita por intimidade ou ordem pública</td></tr>
+          <tr><td>Busca da verdade</td><td>Implícito; limitado pela CF, art. 5º, LVI</td><td>A dicotomia verdade real × formal está superada</td></tr>
+          <tr><td>Inadmissibilidade da prova ilícita</td><td>CF, art. 5º, LVI; CPP, art. 157</td><td>Exclusão e inutilização; contaminação por derivação e suas três limitações</td></tr>
+          <tr><td>Juiz natural</td><td>CF, art. 5º, LIII e XXXVII; CADH, art. 8º, 1</td><td>Juízo preconstituído por lei; vedação ao tribunal de exceção</td></tr>
+          <tr><td><em>Nemo tenetur se detegere</em></td><td>CF, art. 5º, LXIII; PIDCP, art. 14, 3, “g”; CADH, art. 8º, 2, “g”</td><td>Autodefesa passiva; recusa a comportamento ativo</td></tr>
+          <tr><td>Proporcionalidade</td><td>Implícito — CF, art. 5º, LIV</td><td>Adequação, necessidade e proporcionalidade em sentido estrito</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Súmulas que caem</h2>
+
+    <div class="ppi2-tabela-wrap">
+      <table class="ppi2-tabela">
+        <thead><tr><th>Enunciado</th><th>Conteúdo</th></tr></thead>
+        <tbody>
+          <tr><td>Súmula 523/STF</td><td>No processo penal, a <strong>falta</strong> da defesa constitui nulidade <strong>absoluta</strong>, mas a sua <strong>deficiência</strong> só o anulará se houver prova de <strong>prejuízo</strong> para o réu.</td></tr>
+          <tr><td>Súmula 707/STF</td><td>Constitui nulidade a falta de intimação do denunciado para oferecer contrarrazões ao recurso interposto da rejeição da denúncia, não a suprindo a nomeação de defensor dativo.</td></tr>
+          <tr><td>Súmula 708/STF</td><td>É nulo o julgamento da apelação se, após a manifestação nos autos da renúncia do único defensor, o réu não foi previamente intimado para constituir outro.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Explícitos × implícitos</h2>
+
+    <div class="ppi2-g2">
+      <div class="ppi2-card">
+        <h3>Explícitos na CF/88</h3>
+        <p>Presunção de inocência (LVII) · Contraditório e ampla defesa (LV) · Juiz natural (LIII e XXXVII) · Inadmissibilidade da prova ilícita (LVI) · Direito ao silêncio (LXIII) · Devido processo legal (LIV) · Publicidade (art. 93, IX) · Duração razoável do processo (LXXVIII)</p>
+      </div>
+      <div class="ppi2-card">
+        <h3>Implícitos</h3>
+        <p>Proporcionalidade · <em>Favor rei</em> · Paridade de armas · Identidade física do juiz · Busca da verdade · Impulso oficial</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ROTEIRO ============================ -->
+  <section class="ppi2-painel" data-p="rot" hidden>
+    <h2>Roteiro de estudo</h2>
+
+    <h3>Etapa 1 — Presunção de inocência</h3>
+    <ul class="ppi2-check">
+      <li><span>Escrever de memória o <b>art. 5º, LVII, da CF</b>.</span></li>
+      <li><span>Distinguir a <b>regra probatória</b> da <b>regra de tratamento</b>.</span></li>
+      <li><span>Explicar por que a regra de tratamento não impede medidas cautelares.</span></li>
+      <li><span>Resolver os dois casos de ônus da prova: excludente de ilicitude e simulacro de arma.</span></li>
+    </ul>
+
+    <h3>Etapa 2 — Contraditório e ampla defesa</h3>
+    <ul class="ppi2-check">
+      <li><span>Nomear os <b>dois elementos</b> do contraditório.</span></li>
+      <li><span>Diferenciar contraditório <b>real</b> e <b>diferido</b>, com um exemplo de cada.</span></li>
+      <li><span>Ler o <b>art. 155 do CPP</b> e explicar por que elementos informativos servem à preventiva mas não à condenação.</span></li>
+      <li><span>Separar <b>defesa técnica</b> (indisponível) de <b>autodefesa</b> (disponível).</span></li>
+      <li><span>Decorar as três súmulas: <b>523, 707 e 708 do STF</b>.</span></li>
+      <li><span>Listar os três atos de <b>capacidade postulatória autônoma</b> do réu.</span></li>
+    </ul>
+
+    <h3>Etapa 3 — Publicidade e verdade</h3>
+    <ul class="ppi2-check">
+      <li><span>Explicar a publicidade como <b>garantia de segundo grau</b> (Ferrajoli).</span></li>
+      <li><span>Citar uma hipótese legal de <b>publicidade restrita</b>.</span></li>
+      <li><span>Justificar por que a dicotomia <b>verdade real × formal</b> está superada.</span></li>
+    </ul>
+
+    <h3>Etapa 4 — Provas ilícitas</h3>
+    <ul class="ppi2-check">
+      <li><span>Distinguir prova <b>ilícita</b> de prova <b>ilegítima</b> e apontar a divergência doutrinária.</span></li>
+      <li><span>Reproduzir o <b>art. 157, §§ 1º, 2º, 3º e 5º</b> do CPP.</span></li>
+      <li><span>Nomear as <b>três limitações</b> à contaminação e o precedente norte-americano de cada uma.</span></li>
+      <li><span>Explicar o descompasso terminológico do <b>§ 2º</b> (diz fonte independente, define descoberta inevitável).</span></li>
+      <li><span>Resumir a decisão do STF sobre o <b>§ 5º</b> e seus três fundamentos.</span></li>
+      <li><span>Definir a <b>proporcionalidade pro reo</b> e seu limite.</span></li>
+    </ul>
+
+    <h3>Etapa 5 — Juiz natural, nemo tenetur e proporcionalidade</h3>
+    <ul class="ppi2-check">
+      <li><span>Diferenciar <b>tribunal de exceção</b> de <b>justiça especializada</b>.</span></li>
+      <li><span>Aplicar o critério <b>ativo × passivo</b> a cinco diligências diferentes.</span></li>
+      <li><span>Explicar por que material <b>descartado</b> pode ser apreendido.</span></li>
+      <li><span>Enunciar os <b>três subprincípios</b> da proporcionalidade na ordem correta.</span></li>
+    </ul>
+  </section>
+
+  <!-- ============================ CASOS ============================ -->
+  <section class="ppi2-painel" data-p="casos" hidden>
+    <h2>Casos práticos</h2>
+    <p class="ppi2-sub" style="margin-bottom:1.2rem">Situações fictícias, construídas apenas para treinar a aplicação dos conceitos desta unidade. Nomes e fatos são inventados.</p>
+
+    <div class="ppi2-caso">
+      <div class="ppi2-caso-n">Caso 1</div>
+      <h3>A sentença apoiada no inquérito</h3>
+      <p>Encerrada a instrução em ação penal por furto, a única prova produzida em juízo foi o depoimento de uma testemunha que nada esclareceu. A sentença condenatória fundamenta-se integralmente no reconhecimento fotográfico e nos depoimentos colhidos na delegacia, não repetidos em juízo.</p>
+      <details class="ppi2-resp">
+        <summary>Resposta comentada</summary>
+        <p>A sentença é nula. O art. 155 do CPP veda que o juiz fundamente a decisão <strong>exclusivamente</strong> nos elementos informativos colhidos na investigação, ressalvadas apenas as provas cautelares, não repetíveis e antecipadas — que não é o caso de depoimentos e reconhecimento fotográfico repetíveis em juízo. Viola-se o contraditório, que só existe na fase processual, e a regra probatória da presunção de inocência.</p>
+      </details>
+    </div>
+
+    <div class="ppi2-caso">
+      <div class="ppi2-caso-n">Caso 2</div>
+      <h3>A acareação recusada</h3>
+      <p>Em ação penal por estelionato, uma testemunha de acusação apresenta versão conflitante com a da defesa. O Ministério Público requer acareação entre o réu e a testemunha. A defesa informa que o acusado não participará. O MP insiste para que o juízo determine a submissão do réu ao ato, sob pena de responder por desobediência.</p>
+      <details class="ppi2-resp">
+        <summary>Resposta comentada</summary>
+        <p>A pretensão do réu está amparada pelo <em>nemo tenetur se detegere</em>. A acareação exige <strong>comportamento ativo</strong> do acusado, e ninguém é obrigado a produzir prova contra si mesmo. Não há crime de desobediência: a recusa é exercício regular de direito constitucional (CF, art. 5º, LXIII; CADH, art. 8º, 2, “g”). Diferente seria o reconhecimento pessoal, que exige mera tolerância.</p>
+      </details>
+    </div>
+
+    <div class="ppi2-caso">
+      <div class="ppi2-caso-n">Caso 3</div>
+      <h3>O fio de cabelo</h3>
+      <p>Investiga-se homicídio cuja cena contém material genético não identificado. A autoridade policial pretende obter DNA do principal suspeito, que se recusa a fornecer qualquer material. Diante disso, dois policiais o acompanham até uma barbearia e, ao término do corte, recolhem fios de cabelo deixados no chão do estabelecimento.</p>
+      <details class="ppi2-resp">
+        <summary>Resposta comentada</summary>
+        <p>A apreensão é legítima. Não se pode retirar à força um fio de cabelo do suspeito, porque isso exigiria comportamento ativo ou intervenção invasiva; mas o princípio é <strong>impertinente</strong> quando se trata de material <strong>descartado</strong> pelo investigado, seja orgânico (saliva, suor, cabelo) ou inorgânico (copo ou garrafa com saliva). A lógica é a mesma do caso da coleta da placenta (STF, Rcl-QO 2.040/DF): não houve coleta forçada.</p>
+      </details>
+    </div>
+
+    <div class="ppi2-caso">
+      <div class="ppi2-caso-n">Caso 4</div>
+      <h3>A escuta sem autorização, depois “confirmada”</h3>
+      <p>Policiais interceptam conversas telefônicas de um suspeito de tráfico sem autorização judicial. Meses depois, com base em campana regularmente autorizada e em depoimentos de vizinhos, obtêm prova autônoma dos mesmos fatos. O Ministério Público sustenta que a interceptação deve ser aproveitada, porque seu conteúdo foi confirmado por prova lícita superveniente.</p>
+      <details class="ppi2-resp">
+        <summary>Resposta comentada</summary>
+        <p>A interceptação continua <strong>ilícita</strong> e deve ser desentranhada: prova ilícita não se convalida por confirmação posterior. O que pode ser aproveitado é a <strong>prova autônoma</strong>, se a acusação demonstrar inequivocamente que a campana e os depoimentos derivaram de <strong>fonte independente</strong>, sem nexo causal com a escuta (art. 157, § 1º, parte final). Na dúvida sobre o nexo, aplica-se o <em>in dubio pro reo</em>.</p>
+      </details>
+    </div>
+
+    <div class="ppi2-caso">
+      <div class="ppi2-caso-n">Caso 5</div>
+      <h3>O juiz que leu a prova excluída</h3>
+      <p>Em ação penal por corrupção, o juízo declara inadmissível e determina o desentranhamento de mensagens obtidas por acesso ilegal ao celular do réu. A defesa então requer o afastamento do magistrado, sustentando que, tendo conhecido o conteúdo da prova excluída, ele não pode sentenciar, nos termos do art. 157, § 5º, do CPP.</p>
+      <details class="ppi2-resp">
+        <summary>Resposta comentada</summary>
+        <p>O pedido não procede. O § 5º do art. 157 foi declarado <strong>inconstitucional</strong> pelo STF no julgamento das ADI 6.298, 6.299, 6.300 e 6.305 (24/08/2023, Info 1106), por violar a legalidade, o juiz natural e a razoabilidade — faltavam elementos claros e objetivos para a seleção do juiz sentenciante, o que abriria espaço para manipulação do órgão julgador. Registre-se a crítica de Aury Lopes Jr., para quem não bastaria desentranhar a prova, sendo preciso “desentranhar” o juiz.</p>
+      </details>
+    </div>
+
+    <div class="ppi2-caso">
+      <div class="ppi2-caso-n">Caso 6</div>
+      <h3>A busca de madrugada</h3>
+      <p>Para localizar um aparelho celular furtado, avaliado em valor equivalente a meio salário mínimo, a autoridade policial representa por mandado de busca e apreensão em quatro residências de um mesmo condomínio, a ser cumprido de madrugada, com arrombamento das portas.</p>
+      <details class="ppi2-resp">
+        <summary>Resposta comentada</summary>
+        <p>A medida não passa no filtro da proporcionalidade. Ainda que se admita a <strong>adequação</strong> (a busca pode levar ao aparelho), falha na <strong>necessidade</strong> — há meios menos gravosos, como a individualização prévia do endereço e o cumprimento diurno — e na <strong>proporcionalidade em sentido estrito</strong>, pois o gravame imposto (violação de domicílio de quatro famílias, com arrombamento, à noite) não guarda relação com o bem jurídico tutelado. O fundamento é o art. 5º, LIV, da CF, em sua dimensão material.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================ GUIA RESUMIDO ============================ -->
+  <section class="ppi2-painel" data-p="guia" hidden>
+    <h2>Guia resumido</h2>
+
+    <div class="ppi2-guia">
+      <h3>Em uma frase</h3>
+      <p style="margin-bottom:0">Os princípios do processo penal traduzem, em regras operativas, a ideia de que o poder de punir só é legítimo quando exercido com <strong>limites conhecidos de antemão</strong> — quem julga, como se prova, o que se pode exigir do acusado e até onde vai cada restrição.</p>
+    </div>
+
+    <h3>Dispositivos que você precisa saber localizar</h3>
+    <div style="margin-bottom:1.1rem">
+      <span class="ppi2-pill">CF, art. 5º, LIII</span>
+      <span class="ppi2-pill">CF, art. 5º, LIV</span>
+      <span class="ppi2-pill">CF, art. 5º, LV</span>
+      <span class="ppi2-pill">CF, art. 5º, LVI</span>
+      <span class="ppi2-pill">CF, art. 5º, LVII</span>
+      <span class="ppi2-pill">CF, art. 5º, LXIII</span>
+      <span class="ppi2-pill">CF, art. 5º, XXXVII</span>
+      <span class="ppi2-pill">CF, art. 93, IX</span>
+      <span class="ppi2-pill">CPP, art. 155</span>
+      <span class="ppi2-pill">CPP, art. 157</span>
+      <span class="ppi2-pill">CPP, art. 217</span>
+      <span class="ppi2-pill">CPP, art. 261</span>
+      <span class="ppi2-pill">CPP, art. 263</span>
+      <span class="ppi2-pill">CPP, art. 573</span>
+      <span class="ppi2-pill">CPP, art. 577</span>
+      <span class="ppi2-pill">CPP, art. 792</span>
+      <span class="ppi2-pill">CP, art. 234-B</span>
+      <span class="ppi2-pill">CADH, art. 8º</span>
+    </div>
+
+    <h3>Doze proposições para revisão rápida</h3>
+    <ol>
+      <li>Da presunção de inocência extraem-se duas regras: <strong>probatória</strong> (<em>in dubio pro reo</em>) e <strong>de tratamento</strong> (liberdade é regra) — e ela não impede cautelares.</li>
+      <li>Contraditório = <strong>informação + participação</strong>; existe apenas na fase processual.</li>
+      <li>Elementos informativos <strong>não sustentam sozinhos a condenação</strong>, mas sustentam decisões cautelares.</li>
+      <li>Contraditório <strong>diferido</strong>: a interceptação telefônica é o exemplo canônico.</li>
+      <li>A ampla defesa é só do réu; o contraditório é das duas partes.</li>
+      <li>Defesa <strong>técnica</strong> é indisponível; <strong>autodefesa</strong> é disponível — o réu pode calar-se, mas não pode ficar sem advogado.</li>
+      <li>Súmula 523/STF: falta de defesa = nulidade absoluta; deficiência = precisa de prova de prejuízo.</li>
+      <li>Publicidade é <strong>garantia de garantia</strong>; a restrição protege intimidade ou ordem pública.</li>
+      <li>A dicotomia verdade real × formal está <strong>superada</strong>: a verdade não se busca a qualquer preço.</li>
+      <li>Prova <strong>ilícita</strong> viola norma material; <strong>ilegítima</strong>, norma processual. As três limitações à contaminação são fonte independente, descoberta inevitável e mancha purgada — esta última ainda não aplicada no Brasil.</li>
+      <li>O § 5º do art. 157 foi declarado <strong>inconstitucional</strong> pelo STF em 24/08/2023.</li>
+      <li><em>Nemo tenetur</em>: veda-se o <strong>comportamento ativo</strong>; admite-se a <strong>tolerância passiva</strong> e a apreensão de material <strong>descartado</strong>.</li>
+    </ol>
+
+    <h3>Erros que mais derrubam em prova</h3>
+    <div class="ppi2-tabela-wrap">
+      <table class="ppi2-tabela">
+        <thead><tr><th>Afirmação</th><th>Correto?</th><th>Por quê</th></tr></thead>
+        <tbody>
+          <tr><td>Elementos do inquérito não podem fundamentar prisão preventiva</td><td>Errado</td><td>Podem. O art. 155 veda apenas a fundamentação <strong>exclusiva</strong> da condenação.</td></tr>
+          <tr><td>É nula a sentença condenatória fundada só no inquérito</td><td>Certo</td><td>Art. 155 do CPP, salvo provas cautelares, não repetíveis e antecipadas.</td></tr>
+          <tr><td>O juiz pode usar prova ilícita se a considerar importante para condenar</td><td>Errado</td><td>Não há proporcionalidade <em>pro societate</em> nesses termos. Só se admite <em>pro reo</em>.</td></tr>
+          <tr><td>Prova ilícita pode ser admitida se beneficiar o réu</td><td>Certo</td><td>Proporcionalidade <em>pro reo</em>: liberdade do inocente prevalece.</td></tr>
+          <tr><td>Interceptação sem autorização vale se depois confirmada por prova lícita</td><td>Errado</td><td>Não há convalidação. Só se aproveita a prova de fonte efetivamente independente.</td></tr>
+          <tr><td>O juiz que conheceu prova inadmissível não pode sentenciar</td><td>Errado</td><td>O § 5º do art. 157 foi declarado inconstitucional (ADI 6.298 e conexas, 2023).</td></tr>
+          <tr><td>O juiz natural impede o desaforamento para comarca não circunvizinha</td><td>Errado</td><td>Não impede: a hipótese decorre de regra legal preexistente.</td></tr>
+          <tr><td>O réu pode ser obrigado a participar de acareação</td><td>Errado</td><td>Exige comportamento ativo — protegido pelo <em>nemo tenetur</em>.</td></tr>
+          <tr><td>O réu pode ser submetido coercitivamente a reconhecimento pessoal</td><td>Certo</td><td>Exige mera tolerância: o acusado é objeto de verificação.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ppi2-nota"><strong>Fontes desta unidade:</strong> material de aula do Prof. Artur Vieira (Processo Penal I); texto legal da CF/88, do CPP, do CP, da Lei 7.960/1989, da DUDH, da Declaração dos Direitos do Homem e do Cidadão de 1789, do PIDCP e da Convenção Americana sobre Direitos Humanos; STF, ADI 6.298/DF e conexas (Rel. Min. Luiz Fux, j. 24/08/2023, Info 1106); STF, ADI 3.168/DF (Plenário, j. 08/06/2006); STF, Rcl-QO 2.040/DF (Rel. Min. Néri da Silveira, DJ 27/06/2003); STF, HC 73.035/DF; STF, Súmulas 523, 707 e 708; STJ, AgRg no HC 523.501-SC (6ª T., j. 14/11/2022); STJ, HC 628.224/MG (j. 07/12/2020). Precedentes norte-americanos citados: <em>Boyd</em> (1886), <em>Silverthorne Lumber</em> (1920), <em>Nardone</em> (1939), <em>Bynum</em> (1960), <em>Wong Sun</em> (1963), <em>Miranda v. Arizona</em> (1966), <em>Nix v. Williams</em> (1984) e <em>Murray</em> (1988). Doutrina: Cesare Beccaria, Aury Lopes Jr., Renato Brasileiro de Lima, Luigi Ferrajoli, Guilherme de Souza Nucci, Luiz Flávio Gomes, Ada Pellegrini Grinover e Willis Santiago Guerra Filho.</p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var raiz = document.currentScript.previousElementSibling
+  while (raiz && !raiz.classList.contains('ppi2')) raiz = raiz.previousElementSibling
+  if (!raiz) raiz = document.querySelector('.ppi2')
+  if (!raiz) return
+
+  var abas = raiz.querySelectorAll('.ppi2-tab')
+  var paineis = raiz.querySelectorAll('.ppi2-painel')
+
+  abas.forEach(function (aba) {
+    aba.addEventListener('click', function () {
+      var alvo = aba.dataset.p
+      abas.forEach(function (a) { a.setAttribute('aria-selected', String(a === aba)) })
+      paineis.forEach(function (p) { p.hidden = (p.dataset.p !== alvo) })
+      var topo = raiz.getBoundingClientRect().top + window.scrollY - 80
+      window.scrollTo({ top: topo, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+    })
+  })
+})()
+</script>

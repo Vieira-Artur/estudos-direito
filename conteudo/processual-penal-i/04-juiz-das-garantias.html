@@ -1,0 +1,846 @@
+<style>
+/* ============================================================
+   Processo Penal I - Unidade 4: Juiz das Garantias
+   Escopo: .ppi4-   ·   Estilo alinhado ao padrao de Processo Penal II
+   ============================================================ */
+
+/* paleta local — mesmos nomes e valores usados em Processo Penal II */
+:root {
+  --pp1-green:#1a5c1a; --pp1-green-lt:#d6f0d6;
+  --pp1-red:#8b1a1a;   --pp1-red-lt:#fce8e8;
+  --pp1-orange:#7a3800;--pp1-orange-lt:#fdebd6;
+  --pp1-purple:#4a1a8a;--pp1-purple-lt:#ede5fb;
+  --pp1-teal:#0a5c4a;  --pp1-teal-lt:#d6f0e8;
+  --pp1-yellow:#5a4000;--pp1-yellow-lt:#fdf6d6;
+  --pp1-bg2:#f5f7fa;   --pp1-bg3:#edf0f4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+    --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+    --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+    --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+    --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+    --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+    --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+  }
+}
+:root[data-theme="dark"] {
+  --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+  --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+  --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+  --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+  --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+  --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+  --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+}
+
+.ppi4 { font-family: var(--sans); color: var(--text); padding-bottom: 2rem; }
+
+/* --- titulo (padrao .pp1-titulo de PP2) --- */
+.ppi4-head { margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+.ppi4-kicker { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+.ppi4-h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--blue); line-height: 1.25; margin: 0 0 .35rem; }
+.ppi4-sub { font-size: .9rem; color: var(--text2); line-height: 1.5; margin: 0 0 22px; }
+
+/* --- abas (padrao .pp1-tab de PP2) --- */
+.ppi4-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 22px; }
+.ppi4-tab { padding: 7px 16px; font-size: 13px; font-weight: 600; font-family: var(--sans);
+  border: 1.5px solid var(--blue); border-radius: 6px; background: var(--surface); color: var(--blue);
+  cursor: pointer; transition: background .15s, color .15s; }
+.ppi4-tab:hover { background: var(--blue-hover); }
+.ppi4-tab[aria-selected="true"] { background: var(--blue); color: #fff; }
+:root[data-theme="dark"] .ppi4-tab[aria-selected="true"],
+.ppi4-tab[aria-selected="true"] { color: #fff; }
+.ppi4-painel[hidden] { display: none; }
+
+/* --- tipografia (padrao PP2) --- */
+.ppi4 h2 { font-size: 1.3rem; color: var(--blue); border-left: 3px solid var(--gold);
+  padding-left: 1rem; margin: 2.5rem 0 1.5rem; }
+.ppi4 h2:first-child { margin-top: 0; }
+.ppi4 h3 { color: var(--blue); font-size: 1rem; margin: 1.2rem 0 .6rem; }
+.ppi4 p { color: var(--text2); font-size: .96rem; line-height: 1.65; margin: 0 0 .85rem; }
+.ppi4 ul, .ppi4 ol { padding-left: 1.2rem; margin: 0 0 .9rem; }
+.ppi4 li { margin-bottom: .3rem; color: var(--text2); font-size: .96rem; line-height: 1.6; }
+.ppi4 strong { color: var(--blue); font-weight: 700; }
+
+/* --- card (padrao .card de PP2) --- */
+.ppi4-card { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; transition: border-color .2s; }
+.ppi4-card:hover { border-color: var(--blue-mid); }
+.ppi4-card h3 { color: var(--blue); font-size: 1rem; margin: 0 0 .6rem; }
+.ppi4-card p, .ppi4-card li { color: var(--text2); font-size: .96rem; }
+.ppi4-card p:last-child { margin-bottom: 0; }
+
+/* --- lei seca (padrao .artigo de PP2) --- */
+.ppi4-lei { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 6px;
+  padding: .9rem 1.2rem; margin-bottom: .8rem; font-family: monospace; font-size: .91rem; color: var(--text); }
+.ppi4-lei-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace;
+  font-weight: bold; margin-bottom: .35rem; }
+.ppi4-lei p { color: var(--text); font-family: monospace; font-size: .91rem; line-height: 1.6; margin: 0 0 .5rem; }
+.ppi4-lei p:last-child { margin-bottom: 0; }
+.ppi4-lei strong { color: var(--blue); }
+
+/* --- jurisprudencia (padrao .juris de PP2) --- */
+.ppi4-juris { background: var(--blue-light); border-left: 3px solid var(--blue);
+  padding: 1rem 1.2rem; border-radius: 0 6px 6px 0; margin-bottom: 1rem; }
+.ppi4-juris-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace; font-weight: bold; }
+.ppi4-juris p { color: var(--text2); font-size: .94rem; margin: .3rem 0 .5rem; }
+.ppi4-juris p:last-child { margin-bottom: 0; }
+.ppi4-fonte { font-size: .84rem; color: var(--text2); font-family: monospace; margin: .3rem 0 0 !important; }
+
+/* --- alerta (padrao .alert de PP2 — paleta vermelha) --- */
+.ppi4-alerta { background: var(--pp1-red-lt); border: 1px solid var(--pp1-red); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi4-alerta-tag { display: block; color: var(--pp1-red); font-weight: 700; font-size: .84rem;
+  letter-spacing: .06em; text-transform: uppercase; }
+.ppi4-alerta p { color: var(--text2); font-size: .94rem; margin: .3rem 0 0; }
+.ppi4-alerta strong { color: var(--pp1-red); }
+
+/* --- doutrina (mesma gramatica do .alert, paleta amarela) --- */
+.ppi4-dout { background: var(--pp1-yellow-lt); border: 1px solid var(--pp1-yellow); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi4-dout p { color: var(--text2); font-size: .94rem; font-style: italic; line-height: 1.62; margin: 0 0 .45rem; }
+.ppi4-dout p:last-child { margin-bottom: 0; }
+.ppi4-dout strong { color: var(--pp1-yellow); }
+
+/* --- tabela (padrao PP2) --- */
+.ppi4-tabela-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; -webkit-overflow-scrolling: touch; }
+.ppi4-tabela { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 560px; }
+.ppi4-tabela th { background: var(--pp1-bg3); color: var(--blue); border: 1px solid var(--border);
+  border-bottom: 2px solid var(--blue-light); padding: .75rem 1rem; text-align: left; font-weight: 600; }
+.ppi4-tabela td { padding: .65rem 1rem; border: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.ppi4-tabela td:first-child { color: var(--blue); font-weight: 600; }
+
+/* --- grids (padrao PP2) --- */
+.ppi4-g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.ppi4-g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+
+/* --- diagramas (padrao .mapa de PP2) --- */
+.ppi4-mapa, .ppi4-svgbox { background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1.2rem; overflow-x: auto; margin-bottom: 1.2rem; }
+.ppi4-mapa svg, .ppi4-svgbox svg { display: block; width: 100%; height: auto; }
+
+/* --- linha do tempo --- */
+.ppi4-lt { position: relative; margin: 1.2rem 0 1.5rem; padding-left: 1.7rem; }
+.ppi4-lt::before { content: ''; position: absolute; left: .4rem; top: .4rem; bottom: .4rem; width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--gold)); }
+.ppi4-lt-item { position: relative; background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 6px; padding: .9rem 1.2rem; margin-bottom: .8rem; }
+.ppi4-lt-item::before { content: ''; position: absolute; left: -1.62rem; top: 1rem; width: .68rem; height: .68rem;
+  border-radius: 50%; background: var(--surface); border: 2px solid var(--blue); }
+.ppi4-lt-ano { font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi4-lt-tit { font-size: .99rem; font-weight: 700; color: var(--text); margin: .2rem 0 .25rem; }
+.ppi4-lt-txt { font-size: .94rem; color: var(--text2); line-height: 1.55; margin: 0; }
+
+/* --- roteiro / check-in (padrao .roteiro-item de PP2) --- */
+.ppi4-check { list-style: none; padding-left: 0 !important; }
+.ppi4-check li { display: flex; gap: 1rem; align-items: flex-start; background: var(--pp1-bg2);
+  border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: .8rem;
+  transition: border-color .2s; color: var(--text2); font-size: .96rem; }
+.ppi4-check li:hover { border-color: var(--blue-mid); }
+.ppi4-check li::before { content: '☐'; font-size: 1.1rem; color: var(--blue); line-height: 1.25; flex-shrink: 0; }
+.ppi4-check b { color: var(--blue); }
+
+/* --- caso pratico (padrao .caso de PP2) --- */
+.ppi4-caso { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; margin-bottom: 1.5rem; }
+.ppi4-caso-n { display: block; background: var(--pp1-bg3); border-bottom: 1px solid var(--border);
+  padding: .7rem 1.4rem; font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi4-caso h3 { margin: 1.1rem 1.4rem .5rem; }
+.ppi4-caso p { margin: 0 1.4rem .85rem; }
+.ppi4-resp { margin: 0 1.4rem 1.2rem; background: var(--pp1-bg3); border-left: 3px solid var(--pp1-purple);
+  border-radius: 0 4px 4px 0; padding: .7rem 1rem; }
+.ppi4-resp summary { cursor: pointer; font-size: .94rem; font-weight: 700; color: var(--pp1-purple); list-style: none; }
+.ppi4-resp summary::-webkit-details-marker { display: none; }
+.ppi4-resp summary::before { content: '▸ '; }
+.ppi4-resp[open] summary::before { content: '▾ '; }
+.ppi4-resp p { margin: .55rem 0 0; font-size: .94rem; color: var(--text2); }
+
+/* --- guia resumido --- */
+.ppi4-guia { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; }
+.ppi4-guia h3 { color: var(--blue); margin-top: 0; }
+.ppi4-guia p { color: var(--text2); }
+.ppi4-pill { display: inline-block; background: var(--pp1-bg3); border: 1px solid var(--border);
+  border-radius: 20px; padding: .2rem .7rem; font-size: .84rem; font-family: monospace; font-weight: bold;
+  color: var(--blue); margin: 0 .3rem .35rem 0; }
+
+.ppi4-nota { font-size: .88rem; color: var(--text2); line-height: 1.55;
+  border-top: 1px solid var(--border); padding-top: .9rem; margin-top: 1.8rem; }
+</style>
+
+<div class="ppi4">
+
+  <div class="ppi4-head">
+    <div class="ppi4-kicker">Processo Penal I · Unidade 4</div>
+    <h1 class="ppi4-h1">Juiz das Garantias</h1>
+  </div>
+  <p class="ppi4-sub">Imparcialidade objetiva · Competência do art. 3º-B · Alcance e cessação · Autos acautelados · Impedimento · O que o STF decidiu nas ADI 6.298, 6.299, 6.300 e 6.305</p>
+
+  <div class="ppi4-tabs" role="tablist">
+    <button class="ppi4-tab" role="tab" aria-selected="true"  data-p="mapa">Mapa mental</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="conc">Conceito e fundamento</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="comp">Competência (art. 3º-B)</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="alc">Alcance e cessação</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="autos">Autos acautelados</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="imp">Impedimento</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="dez">Designação e presos</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="stf">O que o STF decidiu</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="rot">Roteiro de estudo</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="casos">Casos práticos</button>
+    <button class="ppi4-tab" role="tab" aria-selected="false" data-p="guia">Guia resumido</button>
+  </div>
+
+  <!-- ============================ MAPA ============================ -->
+  <section class="ppi4-painel" data-p="mapa">
+    <h2>A ideia em uma linha do tempo</h2>
+    <p>O juiz das garantias é <strong>competência funcional por fase do processo</strong>: um juízo cuida da investigação, outro cuida da instrução e do julgamento. O ponto de corte é o que muda tudo.</p>
+
+    <div class="ppi4-svgbox">
+      <svg viewBox="0 0 860 330" role="img" aria-label="Linha do tempo da atuação do juiz das garantias e do juiz da instrução e julgamento">
+        <defs><style>
+          .t6  { font-family:'Source Sans 3',sans-serif; font-size:13px; font-weight:700; fill: var(--text); }
+          .t6s { font-family:'Source Sans 3',sans-serif; font-size:11px; fill: var(--text2); }
+          .t6w { font-family:'Source Sans 3',sans-serif; font-size:13px; font-weight:700; fill:#fff; }
+          .t6g { font-family:'Source Sans 3',sans-serif; font-size:11px; font-weight:700; fill: var(--gold); }
+          .b6  { fill: var(--surface); stroke: var(--border); stroke-width:1.5; }
+          .l6  { stroke: var(--border); stroke-width:2; fill:none; }
+        </style></defs>
+
+        <!-- faixa 1 -->
+        <rect x="30" y="70" width="380" height="58" rx="8" fill="var(--blue-dark)"/>
+        <text class="t6w" x="220" y="95" text-anchor="middle">JUIZ DAS GARANTIAS</text>
+        <text class="t6s" x="220" y="115" text-anchor="middle" style="fill:#cfe0f5">controle da legalidade da investigação</text>
+
+        <!-- faixa 2 -->
+        <rect x="450" y="70" width="380" height="58" rx="8" fill="var(--pp1-bg3)" stroke="var(--blue)" stroke-width="2"/>
+        <text class="t6" x="640" y="95" text-anchor="middle">JUIZ DA INSTRUÇÃO E JULGAMENTO</text>
+        <text class="t6s" x="640" y="115" text-anchor="middle">instrução, mérito e sentença</text>
+
+        <!-- marcos -->
+        <line class="l6" x1="30" y1="160" x2="830" y2="160"/>
+        <circle cx="30"  cy="160" r="6" fill="var(--surface)" stroke="var(--blue)" stroke-width="3"/>
+        <circle cx="430" cy="160" r="7" fill="var(--gold)" stroke="var(--gold)" stroke-width="3"/>
+        <circle cx="830" cy="160" r="6" fill="var(--surface)" stroke="var(--blue)" stroke-width="3"/>
+
+        <text class="t6"  x="30"  y="192">Instauração</text>
+        <text class="t6s" x="30"  y="208">da investigação criminal</text>
+
+        <text class="t6g" x="430" y="192" text-anchor="middle">PONTO DE CORTE</text>
+        <text class="t6"  x="430" y="210" text-anchor="middle">Oferecimento da denúncia ou queixa</text>
+        <text class="t6s" x="430" y="226" text-anchor="middle">o texto do art. 3º-C dizia “recebimento”</text>
+        <text class="t6s" x="430" y="240" text-anchor="middle">o STF fixou o oferecimento</text>
+
+        <text class="t6"  x="830" y="192" text-anchor="end">Trânsito em julgado</text>
+        <text class="t6s" x="830" y="208" text-anchor="end">da sentença</text>
+
+        <!-- barra vertical do corte -->
+        <line x1="430" y1="60" x2="430" y2="170" stroke="var(--gold)" stroke-width="2" stroke-dasharray="5 4"/>
+
+        <!-- rodapé -->
+        <rect class="b6" x="130" y="266" width="600" height="46" rx="8" style="fill:var(--blue-light);stroke:none"/>
+        <text class="t6"  x="430" y="288" text-anchor="middle">Quem atua antes do corte fica impedido de julgar depois</text>
+        <text class="t6s" x="430" y="304" text-anchor="middle">é a lógica da imparcialidade objetiva — mas veja a aba “Impedimento”</text>
+      </svg>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">O que você precisa fixar antes de tudo</span>
+      <p>Três coisas: <strong>o que</strong> o juiz das garantias faz (controle de legalidade, não instrução), <strong>até quando</strong> ele atua (oferecimento da denúncia) e <strong>onde</strong> ele não se aplica (as quatro exclusões). O resto é detalhamento.</p>
+    </div>
+  </section>
+
+  <!-- ============================ CONCEITO ============================ -->
+  <section class="ppi4-painel" data-p="conc" hidden>
+    <h2>Conceito</h2>
+
+    <p>O juiz das garantias é o responsável pelo <strong>controle da legalidade da investigação criminal</strong> e pela <strong>salvaguarda dos direitos individuais</strong> cuja franquia tenha sido reservada à autorização prévia do Poder Judiciário.</p>
+
+    <div class="ppi4-card">
+      <h3>A definição em termos de competência</h3>
+      <p>Consiste na <strong>outorga exclusiva, a um determinado órgão jurisdicional, da competência para exercer a função de garantidor dos direitos fundamentais na fase investigatória</strong> da persecução penal — órgão que ficará, na sequência, impedido de funcionar no processo judicial desse mesmo caso penal.</p>
+      <p>Tecnicamente: trata-se de <strong>competência funcional por fase do processo</strong>.</p>
+    </div>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-B, caput</span>
+      <p>“O juiz das garantias é responsável pelo controle da legalidade da investigação criminal e pela salvaguarda dos direitos individuais cuja franquia tenha sido reservada à autorização prévia do Poder Judiciário, competindo-lhe especialmente: [...]”</p>
+    </div>
+
+    <div class="ppi4-dout">
+      <p>Tanto no modelo italiano como no brasileiro, “a atuação do juiz de garantias é ocasional, sem funções de instrução, limitada ao controle da legalidade e à garantia dos direitos fundamentais”.</p>
+      <p class="ppi4-fonte">Daniel Kessler Oliveira.</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">A frase que resume tudo</span>
+      <p>O juiz das garantias é o <strong>guardião das regras do jogo</strong>, e não o senhor da investigação preliminar.</p>
+    </div>
+
+    <h2>O fundamento: imparcialidade objetiva</h2>
+
+    <p>A pergunta que dá origem ao instituto é esta: até que ponto o julgamento proferido <strong>pela mesma pessoa</strong> que atuou na investigação preliminar daquele caso penal — tendo contato com elementos informativos produzidos ao arrepio do contraditório e da ampla defesa, produzindo provas de ofício, decretando medidas cautelares — teria o condão de suscitar dúvidas quanto à sua indispensável imparcialidade?</p>
+
+    <div class="ppi4-dout">
+      <p>“Se não se pode afirmar, categoricamente, que prejuízo não há, parece evidente que a atuação do magistrado na fase investigatória do processo é, no mínimo, capaz de gerar uma certa dúvida, razoável, no jurisdicionado, quanto à imparcialidade do magistrado.”</p>
+    </div>
+
+    <h3>Os dois precedentes do Tribunal Europeu de Direitos Humanos</h3>
+
+    <div class="ppi4-juris">
+      <span class="ppi4-juris-tag">TEDH — Piersack vs. Bélgica (1982)</span>
+      <p>Há de ser verificado se o magistrado <strong>oferece garantias suficientes de exclusão de qualquer dúvida razoável</strong> sobre sua imparcialidade, devendo oferecer confiança e segurança quanto a ela. É a formulação clássica da imparcialidade em seu <strong>aspecto objetivo</strong>: não basta ser imparcial, é preciso não haver dúvida razoável a respeito.</p>
+    </div>
+
+    <div class="ppi4-juris">
+      <span class="ppi4-juris-tag">TEDH — De Cubber vs. Bélgica</span>
+      <p>Discutiu-se a legitimidade de julgamento proferido por Corte composta por três juízes, um dos quais havia conduzido a investigação do caso por quase dois anos — decretando a prisão do suspeito, interrogando-o e indeferindo requerimentos de liberdade e de trancamento da investigação.</p>
+      <p>Para o TEDH, esse juiz investigador teria, na prática, <strong>o mesmo status de um oficial de investigação da polícia</strong>, cuja atuação é subordinada à supervisão do Ministério Público. Tendo adquirido extenso conhecimento sobre os fatos, permitiria crer — tanto ao acusado quanto à sociedade — que já formara convicção sobre a culpabilidade antes do julgamento.</p>
+      <p>Conclusão: houve <strong>violação da imparcialidade no aspecto objetivo</strong>, pois o exercício sucessivo das funções de juiz investigador e de magistrado julgador justifica a dúvida sobre a perda da imparcialidade.</p>
+    </div>
+
+    <h3>O quadro cronológico do instituto no Brasil</h3>
+
+    <div class="ppi4-lt">
+      <div class="ppi4-lt-item">
+        <div class="ppi4-lt-ano">24/12/2019</div>
+        <div class="ppi4-lt-tit">Publicação da Lei 13.964/2019</div>
+        <p class="ppi4-lt-txt">O Pacote Anticrime insere no CPP os arts. 3º-A a 3º-F, criando o juiz das garantias.</p>
+      </div>
+      <div class="ppi4-lt-item">
+        <div class="ppi4-lt-ano">23/01/2020</div>
+        <div class="ppi4-lt-tit">Entrada em vigor</div>
+        <p class="ppi4-lt-txt">Encerrada a <em>vacatio legis</em> de 30 dias.</p>
+      </div>
+      <div class="ppi4-lt-item">
+        <div class="ppi4-lt-ano">Janeiro/2020</div>
+        <div class="ppi4-lt-tit">Suspensão liminar</div>
+        <p class="ppi4-lt-txt">Nas ADI 6.298, 6.299, 6.300 e 6.305, o Min. Dias Toffoli suspende a eficácia em 15/01/2020 e o Min. Luiz Fux, relator, suspende <em>sine die</em>, <em>ad referendum</em> do Plenário, a implantação do juiz das garantias e de seus consectários (arts. 3º-A a 3º-F). A cautelar não interfere nem suspende os inquéritos e processos em andamento.</p>
+      </div>
+      <div class="ppi4-lt-item">
+        <div class="ppi4-lt-ano">Agosto/2023</div>
+        <div class="ppi4-lt-tit">Julgamento do mérito</div>
+        <p class="ppi4-lt-txt">O Plenário julga as ações parcialmente procedentes, mantendo o instituto com ajustes relevantes — detalhados na aba “O que o STF decidiu”.</p>
+      </div>
+    </div>
+
+    <div class="ppi4-card">
+      <h3>Por que a reforma era necessária</h3>
+      <p>Nosso CPP entrou em vigor em pleno Estado Novo, em <strong>1º/01/1942</strong>, com nítida inspiração no modelo fascista italiano que deu origem ao Código Rocco de 1930. Daí a observação de <strong>Fauzi Hassan Choukr</strong>: “conhecemos uma história legislativa republicana sem que tenhamos um Código de Processo Penal integralmente nascido da atividade democrática parlamentar”.</p>
+      <p>O objetivo declarado era adaptar a estrutura processual à ordem constitucional e convencional — ao sistema acusatório (CF, art. 129, I) e à garantia da imparcialidade (CADH, art. 8º, 1). O processo penal deixa de ser mero instrumento da pretensão punitiva para ser também <strong>forma de tutela dos direitos fundamentais</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ============================ COMPETÊNCIA ============================ -->
+  <section class="ppi4-painel" data-p="comp" hidden>
+    <h2>Competência do juiz das garantias — art. 3º-B</h2>
+
+    <p>São dezoito incisos. Decorá-los em ordem é pouco produtivo; organizá-los por <strong>função</strong> resolve praticamente qualquer questão.</p>
+
+    <h3>Grupo 1 — Prisão e liberdade</h3>
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-B, I a III, V, VI</span>
+      <p><strong>I</strong> – receber a comunicação imediata da prisão, nos termos do inciso LXII do caput do art. 5º da Constituição Federal;</p>
+      <p><strong>II</strong> – receber o auto da prisão em flagrante para o controle da legalidade da prisão, observado o disposto no art. 310 deste Código;</p>
+      <p><strong>III</strong> – zelar pela observância dos direitos do preso, podendo determinar que este seja conduzido à sua presença, a qualquer tempo;</p>
+      <p><strong>V</strong> – decidir sobre o requerimento de prisão provisória ou outra medida cautelar, observado o disposto no § 1º deste artigo;</p>
+      <p><strong>VI</strong> – prorrogar a prisão provisória ou outra medida cautelar, bem como substituí-las ou revogá-las, assegurado, no primeiro caso, o exercício do contraditório em audiência pública e oral, na forma do disposto neste Código ou em legislação especial pertinente;</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Ajuste do STF no inciso VI</span>
+      <p>O contraditório para a <strong>prorrogação</strong> da cautelar deve ocorrer <strong>preferencialmente</strong> em audiência pública e oral — não obrigatoriamente.</p>
+    </div>
+
+    <h3>Grupo 2 — Controle sobre a investigação</h3>
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-B, IV, VIII, IX, X</span>
+      <p><strong>IV</strong> – ser informado sobre a instauração de qualquer investigação criminal;</p>
+      <p><strong>VIII</strong> – prorrogar o prazo de duração do inquérito, estando o investigado preso, em vista das razões apresentadas pela autoridade policial e observado o disposto no § 2º deste artigo;</p>
+      <p><strong>IX</strong> – determinar o trancamento do inquérito policial quando não houver fundamento razoável para sua instauração ou prosseguimento;</p>
+      <p><strong>X</strong> – requisitar documentos, laudos e informações ao delegado de polícia sobre o andamento da investigação;</p>
+    </div>
+
+    <h3>Grupo 3 — Medidas invasivas e meios de obtenção de prova</h3>
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-B, VII e XI</span>
+      <p><strong>VII</strong> – decidir sobre o requerimento de produção antecipada de provas consideradas urgentes e não repetíveis, assegurados o contraditório e a ampla defesa em audiência pública e oral;</p>
+      <p><strong>XI</strong> – decidir sobre os requerimentos de:</p>
+      <p>a) interceptação telefônica, do fluxo de comunicações em sistemas de informática e telemática ou de outras formas de comunicação;</p>
+      <p>b) afastamento dos sigilos fiscal, bancário, de dados e telefônico;</p>
+      <p>c) busca e apreensão domiciliar;</p>
+      <p>d) acesso a informações sigilosas;</p>
+      <p>e) outros meios de obtenção da prova que restrinjam direitos fundamentais do investigado;</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Ajuste do STF no inciso VII</span>
+      <p>O juiz <strong>pode deixar de realizar a audiência</strong> quando houver risco para o processo, ou diferi-la quando necessário.</p>
+    </div>
+
+    <h3>Grupo 4 — Tutela dos direitos do investigado</h3>
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-B, XII, XIII, XV, XVI</span>
+      <p><strong>XII</strong> – julgar o habeas corpus impetrado antes do oferecimento da denúncia;</p>
+      <p><strong>XIII</strong> – determinar a instauração de incidente de insanidade mental;</p>
+      <p><strong>XV</strong> – assegurar prontamente, quando se fizer necessário, o direito outorgado ao investigado e ao seu defensor de acesso a todos os elementos informativos e provas produzidos no âmbito da investigação criminal, salvo no que concerne, estritamente, às diligências em andamento;</p>
+      <p><strong>XVI</strong> – deferir pedido de admissão de assistente técnico para acompanhar a produção da perícia;</p>
+    </div>
+
+    <h3>Grupo 5 — Justiça penal negociada e cláusula de encerramento</h3>
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-B, XIV, XVII, XVIII</span>
+      <p><strong>XIV</strong> – decidir sobre o recebimento da denúncia ou queixa, nos termos do art. 399 deste Código;</p>
+      <p><strong>XVII</strong> – decidir sobre a homologação de acordo de não persecução penal ou os de colaboração premiada, quando formalizados durante a investigação;</p>
+      <p><strong>XVIII</strong> – outras matérias inerentes às atribuições definidas no caput deste artigo.</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">O inciso XIV caiu</span>
+      <p>O STF declarou a <strong>inconstitucionalidade</strong> do inciso XIV e fixou que a competência do juiz das garantias <strong>cessa com o oferecimento da denúncia</strong>. Logo, quem decide sobre o recebimento da peça acusatória é o <strong>juiz da instrução e julgamento</strong>.</p>
+    </div>
+
+    <div class="ppi4-dout">
+      <p>“A Corte entendeu que a atuação do juiz das garantias deveria ficar restrita apenas e tão somente à etapa de investigação criminal. Todavia, esse posicionamento do STF poderá produzir um efeito prático indesejado. É que, para que o juiz da etapa processual decida se receberá ou não a petição inicial, deverá necessariamente se debruçar sobre todo o material colhido na fase de investigação. Ora, se um dos interesses na adoção do juiz das garantias é evitar que o juiz da fase processual tenha qualquer contato com tudo o que foi produzido na investigação, pois esse contato poderia contaminar a sua imparcialidade, a opção assumida pelo STF poderá esvaziar, na prática, tal objetivo, minimizando (ou até anulando) a importância de toda a atuação do juiz das garantias até aquele momento.”</p>
+      <p class="ppi4-fonte">Márcio André Lopes Cavalcante.</p>
+    </div>
+
+    <div class="ppi4-tabela-wrap">
+      <table class="ppi4-tabela">
+        <thead><tr><th>Função</th><th>Incisos</th><th>Palavra-chave</th></tr></thead>
+        <tbody>
+          <tr><td>Prisão e liberdade</td><td>I, II, III, V, VI</td><td>Comunicação, flagrante, cautelares</td></tr>
+          <tr><td>Controle da investigação</td><td>IV, VIII, IX, X</td><td>Ser informado, prorrogar, trancar, requisitar</td></tr>
+          <tr><td>Medidas invasivas</td><td>VII, XI</td><td>Produção antecipada, interceptação, sigilos, busca domiciliar</td></tr>
+          <tr><td>Direitos do investigado</td><td>XII, XIII, XV, XVI</td><td><em>Habeas corpus</em>, insanidade, acesso aos autos, assistente técnico</td></tr>
+          <tr><td>Negociada e encerramento</td><td>XVII, XVIII</td><td>ANPP, colaboração premiada</td></tr>
+          <tr><td>Recebimento da denúncia</td><td>XIV</td><td><strong>Inconstitucional</strong> — passou ao juiz da instrução</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================ ALCANCE ============================ -->
+  <section class="ppi4-painel" data-p="alc" hidden>
+    <h2>Alcance e cessação — art. 3º-C</h2>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-C, caput</span>
+      <p>“A competência do juiz das garantias abrange todas as infrações penais, exceto as de menor potencial ofensivo, e cessa com o recebimento da denúncia ou queixa na forma do art. 399 deste Código.”</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Leitura pós-STF</span>
+      <p>A expressão “recebimento da denúncia” foi declarada <strong>inconstitucional</strong>. A competência do juiz das garantias cessa com o <strong>oferecimento</strong> da denúncia ou queixa.</p>
+    </div>
+
+    <h3>Onde o juiz das garantias NÃO se aplica</h3>
+
+    <div class="ppi4-tabela-wrap">
+      <table class="ppi4-tabela">
+        <thead><tr><th>Exclusão</th><th>Fonte</th><th>Razão</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Infrações de menor potencial ofensivo</td>
+            <td>Texto expresso do art. 3º-C, caput</td>
+            <td>Ressalva legal desde a origem — as normas do juiz das garantias não se aplicam aos procedimentos de competência dos Juizados Especiais Criminais.</td>
+          </tr>
+          <tr>
+            <td>Competência originária dos tribunais</td>
+            <td>Decisão do STF</td>
+            <td>Nos tribunais o julgamento é colegiado, o que por si só reforça a imparcialidade.</td>
+          </tr>
+          <tr>
+            <td>Tribunal do Júri</td>
+            <td>Decisão do STF</td>
+            <td>“Deve ser afastada a aplicação do juiz de garantias dos processos de competência do Tribunal do Júri, visto que, nesses casos, o veredicto fica a cargo de um órgão coletivo, o Conselho de Sentença. Portanto, opera-se uma lógica semelhante à dos Tribunais: o julgamento coletivo, por si só, é fator de reforço da imparcialidade.”</td>
+          </tr>
+          <tr>
+            <td>Violência doméstica e familiar contra a mulher</td>
+            <td>Decisão do STF</td>
+            <td>“A violência doméstica é um fenômeno dinâmico, caracterizado por uma linha temporal que inicia com a comunicação da agressão. Depois dessa comunicação, sucede-se, no decorrer do tempo, ou a minoração ou o agravamento do quadro. Uma cisão rígida entre as fases de investigação e de instrução/julgamento impediria que o juiz conhecesse toda a dinâmica do contexto de agressão.”</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi4-card">
+      <h3>O argumento comum às três primeiras</h3>
+      <p>Nos tribunais e no júri, o que dispensa a cisão é o <strong>julgamento colegiado</strong> — a pluralidade de julgadores já funciona como reforço da imparcialidade. Na violência doméstica, o argumento é oposto: é justamente a <strong>continuidade do conhecimento do caso</strong> que protege a vítima, exigindo um procedimento mais dinâmico e apto ao pronto amparo.</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Ponto de prova frequente</span>
+      <p>As normas relativas ao juiz das garantias <strong>não se aplicam</strong> aos procedimentos de competência dos juizados especiais criminais. Essa é a única exclusão que vem do próprio texto legal — as demais vieram da decisão do STF.</p>
+    </div>
+
+    <h3>A transição entre os dois juízos</h3>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-C, § 1º</span>
+      <p>“Recebida a denúncia ou queixa, as questões pendentes serão decididas pelo juiz da instrução e julgamento.”</p>
+    </div>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-C, § 2º</span>
+      <p>“As decisões proferidas pelo juiz das garantias não vinculam o juiz da instrução e julgamento, que, após o recebimento da denúncia ou queixa, deverá reexaminar a necessidade das medidas cautelares em curso, no prazo máximo de 10 (dez) dias.”</p>
+    </div>
+
+    <div class="ppi4-card">
+      <h3>Duas consequências do § 2º</h3>
+      <ul style="margin-bottom:0">
+        <li><strong>Não vinculação:</strong> o juiz da instrução não está preso ao que o juiz das garantias decidiu.</li>
+        <li><strong>Reexame obrigatório em 10 dias:</strong> das medidas cautelares em curso — inclusive para <strong>relaxar prisão ilegal</strong>, se for o caso.</li>
+      </ul>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Imprecisão legislativa que vale conhecer</span>
+      <p>O art. 3º-C remete ao <strong>art. 399</strong> do CPP para definir o momento do recebimento. No procedimento comum ordinário, porém, o recebimento da denúncia ocorre no <strong>art. 396</strong>; o art. 399 cuida do momento posterior à resposta à acusação. A remissão legal é, portanto, tecnicamente equivocada — e a discussão perdeu boa parte da relevância prática depois que o STF fixou o <strong>oferecimento</strong> como marco.</p>
+    </div>
+  </section>
+
+  <!-- ============================ AUTOS ============================ -->
+  <section class="ppi4-painel" data-p="autos" hidden>
+    <h2>Os autos acautelados — art. 3º-C, §§ 3º e 4º</h2>
+
+    <p>Aqui estava o coração operacional do instituto: se o objetivo é impedir que o juiz do processo tenha contato com o material da investigação, os autos precisam <strong>ficar para trás</strong>.</p>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-C, § 3º</span>
+      <p>“Os autos que compõem as matérias de competência do juiz das garantias ficarão acautelados na secretaria desse juízo, à disposição do Ministério Público e da defesa, e não serão apensados aos autos do processo enviados ao juiz da instrução e julgamento, ressalvados os documentos relativos às provas irrepetíveis, medidas de obtenção de provas ou de antecipação de provas, que deverão ser remetidos para apensamento em apartado.”</p>
+    </div>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-C, § 4º</span>
+      <p>“Fica assegurado às partes o amplo acesso aos autos acautelados na secretaria do juízo das garantias.”</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Decisão do STF</span>
+      <p>O STF declarou a <strong>inconstitucionalidade dos §§ 3º e 4º</strong> nesse ponto: os autos da investigação <strong>acompanham</strong> a denúncia ou queixa e são remetidos ao juiz da instrução e julgamento. Não há acautelamento em secretaria apartada.</p>
+    </div>
+
+    <h3>A leitura doutrinária do problema</h3>
+
+    <div class="ppi4-dout">
+      <p>“Apesar de não nos parecer a solução mais técnica, porquanto põe em risco a própria eficácia da nova sistemática decorrente da adoção do juiz das garantias, o ideal é concluir que, pelo menos em regra, não mais se deverá permitir ao juiz da instrução e julgamento manter qualquer contato com os elementos informativos produzidos no curso da investigação preliminar. Porém, para fins de análise de possível absolvição sumária (CPP, art. 397), revisão da necessidade das cautelares em curso e da prisão preventiva a cada 90 dias (CPP, arts. 3º-C, § 2º, e 316, parágrafo único, respectivamente), outro caminho não há senão se admitir o acesso do juiz da instrução e julgamento aos atos investigatórios, principalmente quando o substrato necessário para a formação de seu convencimento não constar exclusivamente das provas irrepetíveis, antecipadas e meios de obtenção de provas.”</p>
+    </div>
+
+    <div class="ppi4-card">
+      <h3>A tensão, resumida</h3>
+      <p>De um lado, o ideal do instituto pede que o juiz do processo <strong>não veja</strong> a investigação. De outro, três tarefas legais o obrigam a vê-la: decidir sobre <strong>absolvição sumária</strong> (art. 397), <strong>reexaminar cautelares</strong> em 10 dias (art. 3º-C, § 2º) e <strong>revisar a preventiva a cada 90 dias</strong> (art. 316, parágrafo único). É essa tensão que a decisão do STF resolveu — em favor da remessa dos autos.</p>
+    </div>
+  </section>
+
+  <!-- ============================ IMPEDIMENTO ============================ -->
+  <section class="ppi4-painel" data-p="imp" hidden>
+    <h2>Impedimento — art. 3º-D</h2>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-D, caput</span>
+      <p>“O juiz que, na fase de investigação, praticar qualquer ato incluído nas competências dos arts. 4º e 5º deste Código ficará impedido de funcionar no processo.”</p>
+    </div>
+
+    <div class="ppi4-card">
+      <h3>O que é impedimento</h3>
+      <p>As causas de impedimento são <strong>circunstâncias objetivas</strong>, relacionadas a fatos internos ao processo, capazes de prejudicar a imparcialidade do magistrado. Costuma-se dizer que dão ensejo à <strong>incapacidade objetiva</strong> do juiz: os vínculos que as geram são objetivos e afastam o magistrado <strong>independentemente de seu ânimo subjetivo</strong>.</p>
+      <p>É o oposto da suspeição, cujas causas são de ordem subjetiva — matéria da Unidade 9.</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Decisão do STF</span>
+      <p>O <strong>caput do art. 3º-D foi declarado inconstitucional</strong>. Este é o ponto mais contraintuitivo de toda a unidade — e o mais cobrado: o instituto do juiz das garantias sobreviveu, mas a regra que expressamente impedia o juiz da investigação de funcionar no processo, não.</p>
+    </div>
+
+    <h3>O parágrafo único e o sistema de rodízio</h3>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-D, parágrafo único</span>
+      <p>“Nas comarcas em que funcionar apenas um juiz, os tribunais criarão um sistema de rodízio de magistrados, a fim de atender às disposições deste Capítulo.”</p>
+    </div>
+
+    <p>Também declarado <strong>inconstitucional</strong>. Dois fundamentos:</p>
+
+    <ol>
+      <li><strong>Inamovibilidade</strong> — o rodízio compulsório de magistrados esbarra na garantia constitucional da inamovibilidade.</li>
+      <li><strong>Autonomia dos tribunais</strong> — ao determinar a forma pela qual o instituto deveria ser implementado nas comarcas de juiz único, o dispositivo cria obrigação quanto à organização interna dos tribunais, violando o poder de <strong>auto-organização</strong> (CF, art. 96) e usurpando a <strong>iniciativa para dispor sobre organização judiciária</strong> (CF, art. 125, § 1º).</li>
+    </ol>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CF/88, art. 96 e art. 125, § 1º</span>
+      <p>Competem privativamente aos tribunais a eleição de seus órgãos diretivos, a elaboração de seus regimentos internos e a organização de suas secretarias e serviços auxiliares; e a competência dos tribunais estaduais será definida na Constituição do Estado, sendo a lei de organização judiciária de iniciativa do Tribunal de Justiça.</p>
+    </div>
+  </section>
+
+  <!-- ============================ DESIGNAÇÃO ============================ -->
+  <section class="ppi4-painel" data-p="dez" hidden>
+    <h2>Designação do juiz das garantias — art. 3º-E</h2>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-E</span>
+      <p>“O juiz das garantias será designado conforme as normas de organização judiciária da União, dos Estados e do Distrito Federal, observando critérios objetivos a serem periodicamente divulgados pelo respectivo tribunal.”</p>
+    </div>
+
+    <div class="ppi4-card">
+      <h3>Por que os critérios objetivos importam</h3>
+      <p>A exigência de <strong>critérios objetivos periodicamente divulgados</strong> é o que impede que a definição de quem será o juiz das garantias, em cada caso, se torne uma escolha discricionária — o que reintroduziria, pela porta dos fundos, o risco que o princípio do <strong>juiz natural</strong> existe para evitar (Unidade 2).</p>
+    </div>
+
+    <h2>Tratamento dos presos e imprensa — art. 3º-F</h2>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-F, caput</span>
+      <p>“O juiz das garantias deverá assegurar o cumprimento das regras para o tratamento dos presos, impedindo o acordo ou ajuste de qualquer autoridade com órgãos da imprensa para explorar a imagem da pessoa submetida à prisão, sob pena de responsabilidade civil, administrativa e penal.”</p>
+    </div>
+
+    <div class="ppi4-lei">
+      <span class="ppi4-lei-tag">CPP, art. 3º-F, parágrafo único</span>
+      <p>“Por meio de regulamento, as autoridades deverão disciplinar, em 180 (cento e oitenta) dias, o modo pelo qual as informações sobre a realização da prisão e a identidade do preso serão, de modo padronizado e respeitada a programação normativa aludida no caput deste artigo, transmitidas à imprensa, assegurados a efetividade da persecução penal, o direito à informação e a dignidade da pessoa submetida à prisão.”</p>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Decisão do STF</span>
+      <p>O art. 3º-F foi declarado <strong>constitucional</strong>. É o dispositivo que saiu mais intacto do julgamento.</p>
+    </div>
+
+    <div class="ppi4-card">
+      <h3>A ligação com a presunção de inocência</h3>
+      <p>O art. 3º-F é a face processual daquela <strong>função externa</strong> da presunção de inocência estudada na Unidade 2: proteção contra a publicidade abusiva e a estigmatização, funcionando como limite democrático à exploração midiática do fato criminoso e do próprio processo.</p>
+    </div>
+  </section>
+
+  <!-- ============================ STF ============================ -->
+  <section class="ppi4-painel" data-p="stf" hidden>
+    <h2>Quadro consolidado do julgamento</h2>
+    <p>Julgamento das <strong>ADI 6.298, 6.299, 6.300 e 6.305</strong>, pelo Plenário do STF, relatoria do Min. Luiz Fux, concluído em <strong>agosto de 2023</strong>. As ações foram julgadas <strong>parcialmente procedentes</strong>.</p>
+
+    <div class="ppi4-tabela-wrap">
+      <table class="ppi4-tabela">
+        <thead><tr><th>Dispositivo</th><th>Resultado</th><th>Conteúdo</th></tr></thead>
+        <tbody>
+          <tr><td>Art. 3º-A</td><td>Interpretação conforme</td><td>O juiz pode, pontualmente e nos limites legalmente autorizados, determinar diligências suplementares para dirimir dúvida sobre questão relevante ao mérito.</td></tr>
+          <tr><td>Art. 3º-B, caput</td><td>Constitucional</td><td>Mantida a função de controle da legalidade da investigação e salvaguarda dos direitos individuais.</td></tr>
+          <tr><td>Art. 3º-B, VI</td><td>Interpretação conforme</td><td>O contraditório para prorrogação de cautelar ocorre <strong>preferencialmente</strong> em audiência pública e oral.</td></tr>
+          <tr><td>Art. 3º-B, VII</td><td>Interpretação conforme</td><td>O juiz pode deixar de realizar a audiência havendo risco para o processo, ou diferi-la quando necessário.</td></tr>
+          <tr><td>Art. 3º-B, XIV</td><td><strong>Inconstitucional</strong></td><td>A competência do juiz das garantias cessa com o <strong>oferecimento</strong> da denúncia — o recebimento cabe ao juiz da instrução e julgamento.</td></tr>
+          <tr><td>Art. 3º-C, caput (2ª parte)</td><td><strong>Inconstitucional</strong></td><td>Cai a expressão “recebimento da denúncia”; o marco passa a ser o oferecimento.</td></tr>
+          <tr><td>Art. 3º-C, caput (alcance)</td><td>Interpretação conforme</td><td>Não se aplica aos processos de competência originária dos tribunais, ao Tribunal do Júri, à violência doméstica e familiar e às infrações de menor potencial ofensivo.</td></tr>
+          <tr><td>Art. 3º-C, §§ 1º e 2º</td><td>Inconstitucionalidade parcial</td><td>Ajuste do marco temporal, de “recebimento” para oferecimento; mantido o reexame das cautelares em até 10 dias.</td></tr>
+          <tr><td>Art. 3º-C, §§ 3º e 4º</td><td><strong>Inconstitucionais</strong> (com redução de texto)</td><td>Não há autos acautelados: a investigação acompanha a denúncia e é remetida ao juiz da instrução e julgamento.</td></tr>
+          <tr><td>Art. 3º-D, caput</td><td><strong>Inconstitucional</strong></td><td>Cai a regra expressa de impedimento do juiz que atuou na investigação.</td></tr>
+          <tr><td>Art. 3º-D, parágrafo único</td><td><strong>Inconstitucional</strong></td><td>O sistema de rodízio viola a inamovibilidade, a auto-organização dos tribunais (CF, art. 96) e a iniciativa em organização judiciária (CF, art. 125, § 1º).</td></tr>
+          <tr><td>Art. 3º-E</td><td>Interpretação conforme</td><td>O juiz é investido conforme as normas de organização judiciária, com critérios objetivos periodicamente divulgados.</td></tr>
+          <tr><td>Art. 3º-F</td><td>Constitucional</td><td>Mantido integralmente o dever de assegurar o tratamento adequado dos presos e coibir a exploração midiática da imagem.</td></tr>
+          <tr><td>Art. 157, § 5º</td><td><strong>Inconstitucional</strong></td><td>O juiz que conheceu prova declarada inadmissível <strong>pode</strong> sentenciar. Ver Unidade 2.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi4-alerta">
+      <span class="ppi4-alerta-tag">Como memorizar o resultado</span>
+      <p>Sobreviveram <strong>o instituto e sua função</strong> (3º-B caput, 3º-E, 3º-F). Caíram <strong>os mecanismos de blindagem</strong> (3º-C §§ 3º e 4º, 3º-D caput e parágrafo único) e o <strong>marco final</strong> foi antecipado do recebimento para o oferecimento da denúncia.</p>
+    </div>
+  </section>
+
+  <!-- ============================ ROTEIRO ============================ -->
+  <section class="ppi4-painel" data-p="rot" hidden>
+    <h2>Roteiro de estudo</h2>
+
+    <h3>Etapa 1 — Conceito e fundamento</h3>
+    <ul class="ppi4-check">
+      <li><span>Definir juiz das garantias em uma frase, usando a expressão <b>competência funcional por fase do processo</b>.</span></li>
+      <li><span>Explicar a diferença entre imparcialidade <b>subjetiva</b> e <b>objetiva</b>.</span></li>
+      <li><span>Resumir <b>Piersack</b> e <b>De Cubber</b>, e dizer o que cada um acrescenta.</span></li>
+      <li><span>Justificar por que o juiz das garantias é o <b>guardião das regras do jogo</b> e não o senhor da investigação.</span></li>
+    </ul>
+
+    <h3>Etapa 2 — Competência</h3>
+    <ul class="ppi4-check">
+      <li><span>Agrupar os incisos do art. 3º-B nas <b>cinco funções</b> e citar dois incisos de cada grupo.</span></li>
+      <li><span>Explicar o ajuste do STF nos incisos <b>VI</b> e <b>VII</b>.</span></li>
+      <li><span>Dizer quem decide sobre o <b>recebimento</b> da denúncia e por quê.</span></li>
+      <li><span>Reproduzir a crítica de <b>Márcio Cavalcante</b> ao efeito prático dessa escolha.</span></li>
+    </ul>
+
+    <h3>Etapa 3 — Alcance e cessação</h3>
+    <ul class="ppi4-check">
+      <li><span>Listar as <b>quatro exclusões</b> e a razão de cada uma.</span></li>
+      <li><span>Separar a exclusão que vem do <b>texto legal</b> das que vieram da <b>decisão do STF</b>.</span></li>
+      <li><span>Enunciar o marco de cessação da competência: <b>oferecimento</b>, não recebimento.</span></li>
+      <li><span>Explicar a imprecisão da remissão ao <b>art. 399</b> em vez do art. 396.</span></li>
+      <li><span>Citar as duas consequências do <b>§ 2º</b>: não vinculação e reexame em 10 dias.</span></li>
+    </ul>
+
+    <h3>Etapa 4 — Autos e impedimento</h3>
+    <ul class="ppi4-check">
+      <li><span>Descrever o que os <b>§§ 3º e 4º</b> previam e o que restou deles.</span></li>
+      <li><span>Nomear as <b>três tarefas legais</b> que obrigam o juiz do processo a ver a investigação.</span></li>
+      <li><span>Definir <b>impedimento</b> e contrapô-lo à suspeição.</span></li>
+      <li><span>Registrar que o <b>caput do art. 3º-D</b> foi declarado inconstitucional.</span></li>
+      <li><span>Apresentar os <b>dois fundamentos</b> da inconstitucionalidade do rodízio.</span></li>
+    </ul>
+
+    <h3>Etapa 5 — Consolidação</h3>
+    <ul class="ppi4-check">
+      <li><span>Reconstruir de memória o <b>quadro do julgamento</b>, dispositivo por dispositivo.</span></li>
+      <li><span>Resumir em uma frase o que <b>sobreviveu</b> e o que <b>caiu</b>.</span></li>
+      <li><span>Ligar o art. 3º-F à função externa da <b>presunção de inocência</b> (Unidade 2).</span></li>
+    </ul>
+  </section>
+
+  <!-- ============================ CASOS ============================ -->
+  <section class="ppi4-painel" data-p="casos" hidden>
+    <h2>Casos práticos</h2>
+    <p class="ppi4-sub" style="margin-bottom:1.2rem">Situações fictícias, construídas apenas para treinar a aplicação dos conceitos desta unidade. Nomes e fatos são inventados.</p>
+
+    <div class="ppi4-caso">
+      <div class="ppi4-caso-n">Caso 1</div>
+      <h3>Quem recebe a denúncia</h3>
+      <p>Concluída a investigação sobre suposto crime de peculato, o Ministério Público oferece denúncia. Os autos são conclusos ao juiz das garantias, que profere decisão recebendo a peça acusatória e determinando a citação do réu. A defesa argui nulidade.</p>
+      <details class="ppi4-resp">
+        <summary>Resposta comentada</summary>
+        <p>A arguição procede. O STF declarou inconstitucional o inciso XIV do art. 3º-B e fixou que a competência do juiz das garantias <strong>cessa com o oferecimento</strong> da denúncia. A partir daí, quem decide — inclusive sobre o recebimento — é o <strong>juiz da instrução e julgamento</strong>. É exatamente o ponto criticado por Márcio Cavalcante: para decidir sobre o recebimento, esse juiz terá de se debruçar sobre todo o material da investigação, o que enfraquece na prática o objetivo do instituto.</p>
+      </details>
+    </div>
+
+    <div class="ppi4-caso">
+      <div class="ppi4-caso-n">Caso 2</div>
+      <h3>A comarca de vara única</h3>
+      <p>Em comarca do interior onde atua um único magistrado, o tribunal edita ato instituindo rodízio quinzenal com juízes de comarcas vizinhas, exclusivamente para o exercício da função de juiz das garantias, invocando o art. 3º-D, parágrafo único, do CPP. Um dos magistrados designados impugna a medida.</p>
+      <details class="ppi4-resp">
+        <summary>Resposta comentada</summary>
+        <p>O parágrafo único do art. 3º-D foi declarado <strong>inconstitucional</strong> pelo STF. São dois os fundamentos: o rodízio compulsório colide com a garantia da <strong>inamovibilidade</strong>; e, ao impor aos tribunais como organizar o serviço, o dispositivo viola o poder de <strong>auto-organização</strong> (CF, art. 96) e usurpa a iniciativa para dispor sobre <strong>organização judiciária</strong> (CF, art. 125, § 1º). O tribunal pode organizar-se, mas não por imposição desse dispositivo.</p>
+      </details>
+    </div>
+
+    <div class="ppi4-caso">
+      <div class="ppi4-caso-n">Caso 3</div>
+      <h3>A denúncia por lesão corporal no âmbito doméstico</h3>
+      <p>Em processo por lesão corporal praticada contra a companheira, no contexto de violência doméstica, a defesa sustenta a nulidade de toda a instrução porque o mesmo magistrado que apreciou as medidas protetivas de urgência e decretou a preventiva veio a proferir a sentença condenatória.</p>
+      <details class="ppi4-resp">
+        <summary>Resposta comentada</summary>
+        <p>A tese não procede. O STF <strong>afastou</strong> a aplicação do juiz das garantias aos casos de violência doméstica e familiar contra a mulher. O fundamento: a violência doméstica é fenômeno dinâmico, com uma linha temporal que começa na comunicação da agressão e evolui — para a minoração ou o agravamento do quadro. Uma cisão rígida entre investigação e instrução impediria o juiz de conhecer toda a dinâmica do contexto de agressão, prejudicando o pronto e efetivo amparo à vítima.</p>
+      </details>
+    </div>
+
+    <div class="ppi4-caso">
+      <div class="ppi4-caso-n">Caso 4</div>
+      <h3>Os autos que ficaram para trás</h3>
+      <p>Oferecida a denúncia por tráfico de drogas, a secretaria do juízo das garantias retém os autos da investigação, remetendo ao juízo da instrução apenas os documentos relativos às provas irrepetíveis e aos meios de obtenção de prova, com base no art. 3º-C, § 3º, do CPP. O juiz da instrução, ao apreciar a resposta à acusação, alega não ter elementos para examinar pedido de absolvição sumária.</p>
+      <details class="ppi4-resp">
+        <summary>Resposta comentada</summary>
+        <p>A retenção não se sustenta: os §§ 3º e 4º do art. 3º-C foram declarados <strong>inconstitucionais</strong>, e os autos da investigação <strong>acompanham</strong> a denúncia. A objeção do magistrado, aliás, ilustra a razão da decisão: há ao menos três tarefas legais que exigem acesso ao material investigativo — a análise de <strong>absolvição sumária</strong> (art. 397), o <strong>reexame das cautelares</strong> em até 10 dias (art. 3º-C, § 2º) e a <strong>revisão da preventiva a cada 90 dias</strong> (art. 316, parágrafo único).</p>
+      </details>
+    </div>
+
+    <div class="ppi4-caso">
+      <div class="ppi4-caso-n">Caso 5</div>
+      <h3>A prisão exibida à imprensa</h3>
+      <p>Antes de cumprir mandado de prisão temporária, a autoridade policial combina com uma emissora de televisão a presença de equipe de reportagem no local, para registrar o momento da abordagem. As imagens do investigado algemado são exibidas no noticiário da noite. A defesa leva o fato ao juiz das garantias.</p>
+      <details class="ppi4-resp">
+        <summary>Resposta comentada</summary>
+        <p>Incide o art. 3º-F do CPP, declarado <strong>constitucional</strong> pelo STF: cabe ao juiz das garantias assegurar o cumprimento das regras de tratamento dos presos, <strong>impedindo o acordo ou ajuste de qualquer autoridade com órgãos da imprensa para explorar a imagem</strong> da pessoa presa, sob pena de responsabilidade civil, administrativa e penal. O dispositivo é a face processual da função externa da presunção de inocência: limite democrático à exploração midiática do processo.</p>
+      </details>
+    </div>
+
+    <div class="ppi4-caso">
+      <div class="ppi4-caso-n">Caso 6</div>
+      <h3>O furto de pequeno valor</h3>
+      <p>Investiga-se contravenção penal e, em outro feito, crime cuja pena máxima não excede dois anos. A defesa requer a remessa dos autos ao juiz das garantias, alegando que a competência dele abrange “todas as infrações penais”.</p>
+      <details class="ppi4-resp">
+        <summary>Resposta comentada</summary>
+        <p>O requerimento não procede. O próprio <strong>texto do art. 3º-C, caput</strong> ressalva as <strong>infrações de menor potencial ofensivo</strong> — as normas relativas ao juiz das garantias não se aplicam aos procedimentos de competência dos juizados especiais criminais. Note a distinção que a banca costuma explorar: esta é a única das quatro exclusões que decorre da <strong>lei</strong>; as outras três (tribunais, júri e violência doméstica) vieram da <strong>decisão do STF</strong>.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================ GUIA ============================ -->
+  <section class="ppi4-painel" data-p="guia" hidden>
+    <h2>Guia resumido</h2>
+
+    <div class="ppi4-guia">
+      <h3>Em uma frase</h3>
+      <p style="margin-bottom:0">O juiz das garantias é competência funcional por fase: controla a legalidade da investigação até o <strong>oferecimento</strong> da denúncia — mas, depois do julgamento das ADI, sobreviveu como <strong>função</strong> e perdeu quase todos os seus <strong>mecanismos de blindagem</strong>.</p>
+    </div>
+
+    <h3>Dispositivos que você precisa saber localizar</h3>
+    <div style="margin-bottom:1.1rem">
+      <span class="ppi4-pill">CPP, art. 3º-B</span>
+      <span class="ppi4-pill">CPP, art. 3º-C</span>
+      <span class="ppi4-pill">CPP, art. 3º-D</span>
+      <span class="ppi4-pill">CPP, art. 3º-E</span>
+      <span class="ppi4-pill">CPP, art. 3º-F</span>
+      <span class="ppi4-pill">CPP, art. 310</span>
+      <span class="ppi4-pill">CPP, art. 316, p.ú.</span>
+      <span class="ppi4-pill">CPP, art. 396</span>
+      <span class="ppi4-pill">CPP, art. 397</span>
+      <span class="ppi4-pill">CPP, art. 399</span>
+      <span class="ppi4-pill">CF, art. 5º, LXII</span>
+      <span class="ppi4-pill">CF, art. 96</span>
+      <span class="ppi4-pill">CF, art. 125, § 1º</span>
+      <span class="ppi4-pill">CF, art. 129, I</span>
+      <span class="ppi4-pill">CADH, art. 8º, 1</span>
+    </div>
+
+    <h3>Doze proposições para revisão rápida</h3>
+    <ol>
+      <li>Juiz das garantias é <strong>competência funcional por fase do processo</strong>.</li>
+      <li>Sua função é <strong>controle de legalidade</strong> e salvaguarda de direitos — nunca instrução.</li>
+      <li>O fundamento é a <strong>imparcialidade objetiva</strong>: Piersack (dúvida razoável) e De Cubber (juiz investigador que julga).</li>
+      <li>A competência <strong>cessa com o oferecimento</strong> da denúncia ou queixa, não com o recebimento.</li>
+      <li>Quem decide sobre o <strong>recebimento</strong> é o juiz da instrução e julgamento — o inciso XIV do art. 3º-B é inconstitucional.</li>
+      <li>São <strong>quatro exclusões</strong>: menor potencial ofensivo (lei), tribunais, júri e violência doméstica (STF).</li>
+      <li>Nos tribunais e no júri, a razão é o <strong>julgamento colegiado</strong>; na violência doméstica, é a <strong>continuidade</strong> do conhecimento do caso.</li>
+      <li>As decisões do juiz das garantias <strong>não vinculam</strong> o juiz da instrução, que reexamina as cautelares em até <strong>10 dias</strong>.</li>
+      <li>Os <strong>autos acompanham a denúncia</strong>: os §§ 3º e 4º do art. 3º-C são inconstitucionais.</li>
+      <li>O <strong>caput do art. 3º-D</strong> — impedimento — foi declarado inconstitucional.</li>
+      <li>O <strong>rodízio</strong> do parágrafo único é inconstitucional: inamovibilidade, CF art. 96 e CF art. 125, § 1º.</li>
+      <li>O <strong>art. 3º-F</strong> é constitucional e liga-se à função externa da presunção de inocência.</li>
+    </ol>
+
+    <h3>Erros que mais derrubam em prova</h3>
+    <div class="ppi4-tabela-wrap">
+      <table class="ppi4-tabela">
+        <thead><tr><th>Afirmação</th><th>Correto?</th><th>Por quê</th></tr></thead>
+        <tbody>
+          <tr><td>A competência do juiz das garantias cessa com o recebimento da denúncia</td><td>Errado</td><td>Cessa com o <strong>oferecimento</strong> — o STF declarou inconstitucional a expressão “recebimento”.</td></tr>
+          <tr><td>O juiz das garantias decide sobre o recebimento da denúncia</td><td>Errado</td><td>O inciso XIV do art. 3º-B é inconstitucional; quem decide é o juiz da instrução.</td></tr>
+          <tr><td>As normas do juiz das garantias não se aplicam aos juizados especiais criminais</td><td>Certo</td><td>Ressalva expressa do art. 3º-C, caput.</td></tr>
+          <tr><td>O juiz das garantias atua nos processos de competência do Tribunal do Júri</td><td>Errado</td><td>Excluído pelo STF: o julgamento colegiado já reforça a imparcialidade.</td></tr>
+          <tr><td>Aplica-se o juiz das garantias aos casos de violência doméstica</td><td>Errado</td><td>Excluído pelo STF: a cisão rígida prejudicaria o amparo à vítima.</td></tr>
+          <tr><td>Os autos da investigação ficam acautelados na secretaria do juízo das garantias</td><td>Errado</td><td>Os §§ 3º e 4º do art. 3º-C são inconstitucionais: os autos acompanham a denúncia.</td></tr>
+          <tr><td>As decisões do juiz das garantias vinculam o juiz da instrução</td><td>Errado</td><td>Art. 3º-C, § 2º: não vinculam, e há reexame das cautelares em até 10 dias.</td></tr>
+          <tr><td>O juiz das garantias tem função instrutória</td><td>Errado</td><td>Sua atuação é ocasional, sem funções de instrução — controle de legalidade e garantia de direitos.</td></tr>
+          <tr><td>O art. 3º-F foi declarado inconstitucional</td><td>Errado</td><td>Foi declarado <strong>constitucional</strong>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ppi4-nota"><strong>Fontes desta unidade:</strong> material de aula do Prof. Artur Vieira (Processo Penal I); texto legal do CPP (arts. 3º-A a 3º-F, 310, 316, 396, 397 e 399), da CF/88 (arts. 5º, LXII; 96; 125, § 1º; 129, I) e da Convenção Americana sobre Direitos Humanos (art. 8º, 1); STF, Plenário, ADI 6.298/DF, 6.299/DF, 6.300/DF e 6.305/DF, Rel. Min. Luiz Fux, julgamento concluído em agosto de 2023; TEDH, Piersack vs. Bélgica (1982) e De Cubber vs. Bélgica. Doutrina citada: Daniel Kessler Oliveira, Márcio André Lopes Cavalcante, Renato Brasileiro de Lima e Fauzi Hassan Choukr.</p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var raiz = document.currentScript.previousElementSibling
+  while (raiz && !raiz.classList.contains('ppi4')) raiz = raiz.previousElementSibling
+  if (!raiz) raiz = document.querySelector('.ppi4')
+  if (!raiz) return
+
+  var abas = raiz.querySelectorAll('.ppi4-tab')
+  var paineis = raiz.querySelectorAll('.ppi4-painel')
+
+  abas.forEach(function (aba) {
+    aba.addEventListener('click', function () {
+      var alvo = aba.dataset.p
+      abas.forEach(function (a) { a.setAttribute('aria-selected', String(a === aba)) })
+      paineis.forEach(function (p) { p.hidden = (p.dataset.p !== alvo) })
+      var topo = raiz.getBoundingClientRect().top + window.scrollY - 80
+      window.scrollTo({ top: topo, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+    })
+  })
+})()
+</script>

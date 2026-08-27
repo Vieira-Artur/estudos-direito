@@ -84,6 +84,11 @@ const materias = [
             titulo: "Lei Processual Penal no Tempo e no Espaço",
             descricao: "Territorialidade e lex fori · As cinco ressalvas do art. 1º do CPP · Tempus regit actum · Normas mistas · Interpretação e analogia",
             arquivo: "conteudo/processual-penal-i/03-lei-processual-tempo-espaco.html"
+          },
+          {
+            titulo: "Juiz das Garantias",
+            descricao: "Imparcialidade objetiva · Competência do art. 3º-B · Alcance e cessação · Autos acautelados · Impedimento · O que o STF decidiu",
+            arquivo: "conteudo/processual-penal-i/04-juiz-das-garantias.html"
           }
         ]
       },

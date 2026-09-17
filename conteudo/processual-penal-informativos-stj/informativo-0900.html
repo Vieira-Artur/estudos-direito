@@ -1,0 +1,162 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-titulo-data {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  vertical-align: middle;
+}
+.inf-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.inf-sub strong { color: var(--jur-text); }
+.inf-meta {
+  display: inline-block;
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--jur-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+.inf-card {
+  flex: 1;
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.inf-card:hover {
+  box-shadow: var(--jur-shadow);
+  transform: translateY(-1px);
+}
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jur-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.inf-processo {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--jur-text2);
+}
+.inf-processo a {
+  font-weight: 700;
+  color: var(--jur-accent);
+  text-decoration: none;
+}
+.inf-processo a:hover { text-decoration: underline; }
+.inf-ramo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--jur-text2);
+}
+.inf-tema {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  margin: 4px 0 10px 0;
+  line-height: 1.4;
+}
+.inf-destaque {
+  font-size: 16px;
+  color: var(--jur-text);
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.inf-destaque p { margin: 0 0 8px 0; }
+.inf-destaque p:last-child { margin-bottom: 0; }
+.inf-rodape {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jur-border);
+  font-size: 12px;
+  color: var(--jur-text2);
+}
+.inf-rodape a { color: var(--jur-accent); }
+.inf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-titulo">Informativo nº 900 <span class="inf-meta">STJ</span><span class="inf-titulo-data"> — 8 de setembro de 2026</span></h2>
+<p class="inf-sub">Edição <strong>nº 900</strong> · publicada em <strong>8 de setembro de 2026</strong> · 2 enunciados de Direito Processual Penal.</p>
+<div class="inf-card-wrap"><div class="inf-num">1</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>A autonomia investigatória do Ministério Público não constitui cláusula de dispensa das regras de atribuição e designação, devendo ser exercida nos limites da moldura normativa vigente e das garantias individuais.</p></div><div class="inf-tema">Princípio do promotor natural. Grupo de Atuação Especial de Delitos Econômicos (GEDEC). Atuação fora da Comarca da Capital sem solicitação do promotor natural e sem designação prévia do Procurador-Geral de Justiça. Violação da Resolução n. 554/2008-PGJ/SP. Desconformidade com o entendimento do STF (ADI 2.854/DF). Avocação implícita e ilegal de atribuições. Portaria de designação posterior ao oferecimento da denúncia. Impossibilidade de convalidação retroativa. Nulidade absoluta dos atos persecutórios. Trancamento da ação penal.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;019420&#x27;" target="_blank" rel="noopener">AgRg no HC 1.024.064-SP, Rel. Ministro Reynaldo Soares da Fonseca, Quinta Turma, por unanimidade, julgado em 18/8/2026.</a></span><span class="inf-ramo">DIREITO PROCESSUAL PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">2</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>1. A captação ambiental de áudio e vídeo no atendimento advocatício em estabelecimento penal federal somente pode ser autorizada por decisão judicial específica, motivada e proporcional, baseada em elementos concretos, observando o art. 8-A da Lei n. 9.296/1996, e com prazo determinado.<br><br>2. É ilegal a autorização genérica e irrestrita de monitoramento de entrevistas entre defensor e custodiado no sistema penitenciário federal.</p></div><div class="inf-tema">Sistema Penitenciário Federal. Monitoramento de áudio e vídeo no atendimento advocatício. Captação ambiental no parlatório. Autorização genérica e irrestrita. Ilegalidade. Necessidade de decisão judicial específica, motivada, proporcional e com prazo determinado.</div><div class="inf-card-foot"><span class="inf-processo">EDcl no AgRg no REsp 1.954.331-RN, Rel. Ministro Messod Azulay Neto, Quinta Turma, por unanimidade, julgado em 1/9/2026.</span><span class="inf-ramo">DIREITO PROCESSUAL PENAL, DIREITOS HUMANOS</span></div></article></div>
+<div class="inf-rodape">Fonte oficial: <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisarumaedicao&amp;livre=%270900%27.cod." target="_blank" rel="noopener">Informativo 900 no portal do STJ</a>.</div>

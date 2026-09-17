@@ -1,0 +1,162 @@
+<style>
+:root {
+  --jur-card-bg:    #ffffff;
+  --jur-border:     #e5e5e5;
+  --jur-text:       #1a1a1a;
+  --jur-text2:      #5f5f5f;
+  --jur-accent:     #2563eb;
+  --jur-accent-dim: #eef3ff;
+  --jur-shadow:     0 6px 20px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jur-card-bg:    #1a2d45;
+    --jur-border:     #253a58;
+    --jur-text:       #e8edf5;
+    --jur-text2:      #8fa3bc;
+    --jur-accent:     #6abaff;
+    --jur-accent-dim: #1a3050;
+    --jur-shadow:     0 6px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --jur-card-bg:    #142238;
+  --jur-border:     #2a4060;
+  --jur-text:       #e8eef5;
+  --jur-text2:      #a0b4cc;
+  --jur-accent:     #9ab4f8;
+  --jur-accent-dim: #1a2550;
+  --jur-shadow:     0 6px 24px rgba(0,0,0,.40);
+}
+.inf-titulo {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--jur-accent);
+  margin: 0 0 6px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--jur-border);
+}
+.inf-titulo-data {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  vertical-align: middle;
+}
+.inf-sub {
+  font-size: 13px;
+  color: var(--jur-text2);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.inf-sub strong { color: var(--jur-text); }
+.inf-meta {
+  display: inline-block;
+  background: var(--jur-accent-dim);
+  color: var(--jur-accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+.inf-card-wrap {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+.inf-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--jur-accent);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+}
+.inf-card {
+  flex: 1;
+  background: var(--jur-card-bg);
+  border: 1px solid var(--jur-border);
+  border-left: 3px solid var(--jur-accent);
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.inf-card:hover {
+  box-shadow: var(--jur-shadow);
+  transform: translateY(-1px);
+}
+.inf-card-foot {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jur-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+}
+.inf-processo {
+  font-family: var(--mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--jur-text2);
+}
+.inf-processo a {
+  font-weight: 700;
+  color: var(--jur-accent);
+  text-decoration: none;
+}
+.inf-processo a:hover { text-decoration: underline; }
+.inf-ramo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--jur-text2);
+}
+.inf-tema {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--jur-text2);
+  margin: 4px 0 10px 0;
+  line-height: 1.4;
+}
+.inf-destaque {
+  font-size: 16px;
+  color: var(--jur-text);
+  line-height: 1.65;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+.inf-destaque p { margin: 0 0 8px 0; }
+.inf-destaque p:last-child { margin-bottom: 0; }
+.inf-rodape {
+  margin-top: 32px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jur-border);
+  font-size: 12px;
+  color: var(--jur-text2);
+}
+.inf-rodape a { color: var(--jur-accent); }
+.inf-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--jur-text2);
+  font-style: italic;
+}
+</style>
+
+<h2 class="inf-titulo">Informativo nº 898 <span class="inf-meta">STJ</span><span class="inf-titulo-data"> — 25 de agosto de 2026</span></h2>
+<p class="inf-sub">Edição <strong>nº 898</strong> · publicada em <strong>25 de agosto de 2026</strong> · 2 enunciados de Direito Processual Penal.</p>
+<div class="inf-card-wrap"><div class="inf-num">1</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>1. A pronúncia não pode se basear, exclusivamente, em elementos informativos do inquérito, ressalvadas as exceções contidas na parte final do 155, caput, do CPP (provas cautelares, não repetíveis e antecipadas).<br><br>2. O testemunho indireto ou de ouvir dizer é prova lícita e admissível no ordenamento jurídico brasileiro, mas, mesmo se produzido em juízo, não é suficiente, por si só, para atingir o standard probatório exigido para a decisão de pronúncia.<br><br>3. Em contextos de intimidação da prova, criminalidade organizada, facções criminosas, silenciamento imposto à vítima ou à testemunha e outras hipóteses objetivamente demonstradas de irrepetibilidade ou dificuldade substancial de produção da prova direta, o testemunho indireto qualificado poderá assumir maior relevo probatório, desde que submetido a controle judicial estrito e não dissociado das garantias do contraditório e da ampla defesa.</p></div><div class="inf-tema">Pronúncia. Fundamentação exclusiva em elementos informativos do inquérito policial e testemunhos indiretos. Inadmissibilidade. Violação ao art. 155 do CPP. Ausência de indícios suficientes de autoria. Tema 1260.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;021004&#x27;" target="_blank" rel="noopener">REsp 2.048.687-BA, Rel. Ministro Reynaldo Soares da Fonseca, Terceira Seção, por unanimidade, julgado em 12/8/2026. (Tema 1260).</a></span><span class="inf-ramo">DIREITO PROCESSUAL PENAL</span></div></article></div>
+<div class="inf-card-wrap"><div class="inf-num">2</div><article class="inf-card"><div class="inf-destaque" lang="pt-BR"><p>1. A injúria racial gera dano moral presumido, na modalidade in re ipsa, por atingir a honra, a dignidade, a igualdade e a identidade da vítima.<br><br>2. A fixação de valor mínimo de reparação por dano moral decorrente de injúria racial dispensa instrução probatória específica sobre o abalo extrapatrimonial quando há pedido expresso e indicação do valor pretendido na denúncia.</p></div><div class="inf-tema">Injúria Racial. Dano moral in re ipsa. Fixação do valor mínimo indenizatório na sentença penal condenatória. Art. 387, IV, do CPP. Pedido expresso e indicação do montante na denúncia. Dispensa de instrução específica.</div><div class="inf-card-foot"><span class="inf-processo"><a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?aplicacao=informativo&amp;acao=pesquisar&amp;livre=@CNOT=&#x27;020426&#x27;" target="_blank" rel="noopener">REsp 2.251.248-MG, Rel. Ministro Ribeiro Dantas, Quinta Turma, por unanimidade, julgado em 18/8/2026.</a></span><span class="inf-ramo">DIREITO PROCESSUAL PENAL</span></div></article></div>
+<div class="inf-rodape">Fonte oficial: <a href="https://scon.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisarumaedicao&amp;livre=%270898%27.cod." target="_blank" rel="noopener">Informativo 898 no portal do STJ</a>.</div>

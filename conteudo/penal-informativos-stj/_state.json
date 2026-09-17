@@ -1,5 +1,5 @@
 {
-  "ultima_edicao_processada": 897,
+  "ultima_edicao_processada": 901,
   "edicoes": {
     "885": {
       "data": "22 de abril de 2026",
@@ -65,7 +65,27 @@
       "data": "18 de agosto de 2026",
       "qtd_enunciados": 4,
       "arquivo": "informativo-0897.html"
+    },
+    "898": {
+      "data": "25 de agosto de 2026",
+      "qtd_enunciados": 0,
+      "arquivo": "informativo-0898.html"
+    },
+    "899": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 2,
+      "arquivo": "informativo-0899.html"
+    },
+    "900": {
+      "data": "8 de setembro de 2026",
+      "qtd_enunciados": 1,
+      "arquivo": "informativo-0900.html"
+    },
+    "901": {
+      "data": "15 de setembro de 2026",
+      "qtd_enunciados": 2,
+      "arquivo": "informativo-0901.html"
     }
   },
-  "atualizado_em": "2026-08-20T09:42:11+00:00"
+  "atualizado_em": "2026-09-17T22:14:58+00:00"
 }

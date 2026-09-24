@@ -160,6 +160,16 @@ const materias = [
             titulo: "Estudo de Caso",
             descricao: "Operação Vitrine Limpa · Procedimento ordinário · Nulidade absoluta × relativa · Apelação",
             arquivo: "conteudo/processual-penal-iii/04-estudo-de-caso.html"
+          },
+          {
+            titulo: "Atividade Avaliativa 8A",
+            descricao: "Caso prático para resolução em sala",
+            arquivo: "conteudo/processual-penal-iii/05-atividade-avaliativa-8a.html"
+          },
+          {
+            titulo: "Atividade Avaliativa 8B",
+            descricao: "Caso prático para resolução em sala",
+            arquivo: "conteudo/processual-penal-iii/06-atividade-avaliativa-8b.html"
           }
         ]
       },

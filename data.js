@@ -250,6 +250,16 @@ const materias = [
             titulo: "Medida Cautelar Fiscal",
             descricao: "Natureza e cabimento · As 9 hipóteses do art. 2º · Indisponibilidade proporcional · Preparatória × incidental · Cessação da eficácia",
             arquivo: "conteudo/tributario/processo-tributario/04-cautelar-fiscal.html"
+          },
+          {
+            titulo: "Atividade Avaliativa 10D",
+            descricao: "",
+            arquivo: "conteudo/tributario/processo-tributario/05-atividade-avaliativa-10d.html"
+          },
+          {
+            titulo: "Atividade Avaliativa 10A",
+            descricao: "",
+            arquivo: "conteudo/tributario/processo-tributario/06-atividade-avaliativa-10a.html"
           }
         ]
       },

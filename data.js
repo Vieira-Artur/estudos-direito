@@ -163,12 +163,12 @@ const materias = [
           },
           {
             titulo: "Atividade Avaliativa 8A",
-            descricao: "Caso prático para resolução em sala",
+            descricao: "Qual é a peça? · Caso 1: O clipe que virou cativeiro · Caso 2: Boa noite, Cinderela em Diamantina",
             arquivo: "conteudo/processual-penal-iii/05-atividade-avaliativa-8a.html"
           },
           {
             titulo: "Atividade Avaliativa 8B",
-            descricao: "Caso prático para resolução em sala",
+            descricao: "Qual é a peça? · Caso 1: O clipe que virou cativeiro · Caso 2: Boa noite, Cinderela em Diamantina",
             arquivo: "conteudo/processual-penal-iii/06-atividade-avaliativa-8b.html"
           }
         ]

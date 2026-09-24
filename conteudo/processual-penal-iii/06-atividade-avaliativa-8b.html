@@ -1,22 +1,105 @@
 <style>
-.pp3-titulo {
-  font-family: var(--serif); font-size: 19px; font-weight: 700;
-  color: var(--blue); margin-bottom: 16px;
+/* ── Casos práticos: qual é a peça? (prefixo .pc-) ── */
+#pc-casos {
+  --pc-bg2: #f5f7fa;
+  --pc-bar: #7a3800;
+  font-family: var(--sans);
+  color: var(--text);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #pc-casos { --pc-bg2: #1a2840; --pc-bar: #b85c1a; }
+}
+:root[data-theme="dark"] #pc-casos { --pc-bg2: #1a2840; --pc-bar: #b85c1a; }
+
+#pc-casos .pc-titulo {
+  font-family: var(--serif); font-size: 21px; font-weight: 700;
+  color: var(--blue); margin: 0 0 22px;
   padding-bottom: 10px; border-bottom: 2px solid var(--border);
 }
-.pp3-aguardando {
-  border: 1.5px dashed var(--border); border-radius: 10px;
-  padding: 28px 24px; text-align: center;
-  color: var(--text2); font-size: 14.5px; line-height: 1.6;
+#pc-casos .pc-caso { margin-bottom: 36px; }
+#pc-casos .pc-caso-head {
+  background: var(--blue); color: #fff; border-radius: 10px 10px 0 0;
+  padding: 14px 20px;
+}
+#pc-casos .pc-caso-num {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: #ffe9a8; margin-bottom: 4px;
+}
+#pc-casos .pc-caso-head h2 {
+  font-family: var(--serif); font-size: 18px; margin: 0; color: #fff; border: none;
+}
+#pc-casos .pc-narrativa {
+  background: var(--pc-bg2); border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 10px 10px; padding: 18px 22px;
+  font-size: 14.5px; line-height: 1.75; text-align: justify;
+}
+#pc-casos .pc-narrativa p { margin: 0 0 12px; }
+#pc-casos .pc-narrativa p:last-child { margin-bottom: 0; }
+#pc-casos .pc-comando {
+  margin: 18px 0 10px; font-size: 14.5px; line-height: 1.6; font-weight: 600;
+}
+#pc-casos .pc-q-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#pc-casos .pc-q {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-left: 4px solid var(--pc-bar); border-radius: 8px;
+  padding: 12px 16px; font-size: 14.5px; line-height: 1.55;
+}
+#pc-casos .pc-q-letra {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue); color: #fff; font-weight: 700; font-size: 13.5px;
+  display: flex; align-items: center; justify-content: center;
+}
+@media (max-width: 540px) {
+  #pc-casos .pc-narrativa { padding: 14px 14px; font-size: 14px; text-align: left; }
+  #pc-casos .pc-q { padding: 10px 12px; font-size: 14px; }
+  #pc-casos .pc-caso-head { padding: 12px 14px; }
 }
 </style>
 
-<div class="pp3-wrap">
+<div id="pc-casos">
 
-<h1 class="pp3-titulo">Processo Penal III — Atividade Avaliativa 8B</h1>
+<h1 class="pc-titulo">Qual é a peça? Dois casos práticos de Processo Penal</h1>
 
-<div class="pp3-aguardando">
-  O caso desta atividade será publicado em breve.
-</div>
+<!-- ===================== CASO 1 ===================== -->
+<section class="pc-caso">
+  <div class="pc-caso-head">
+    <div class="pc-caso-num">Caso 1</div>
+    <h2>O clipe que virou cativeiro</h2>
+  </div>
+  <div class="pc-narrativa">
+    <p>Em abril de 2026, Bianca Farias, 24 anos, modelo profissional residente em Juiz de Fora/MG, foi contratada por Kauã Mendes Ribeiro, 27 anos, cantor de funk conhecido como “MC Kauã K”, para protagonizar o videoclipe da música “Rainha do Baile”. As gravações ocorreram em 20 de abril de 2026, em um sítio alugado pelo cantor na zona rural de Juiz de Fora.</p>
+    <p>Encerradas as filmagens, Kauã, que se dizia apaixonado pela modelo, recolheu o celular de Bianca, trancou-a em um dos quartos do imóvel com corrente e cadeado e, exibindo uma faca, afirmou que ela só sairia dali quando aceitasse ser a sua “musa exclusiva”. Bianca permaneceu presa no local até 7 de maio de 2026, quando conseguiu fugir pela janela, aproveitando a ausência de Kauã, que viajara para um show. No mesmo dia, registrou ocorrência na delegacia.</p>
+    <p>Em 2 de junho de 2026, por volta das 23h30, policiais civis receberam denúncia anônima de que Kauã havia voltado ao sítio. Sem mandado judicial, foram ao local e arrombaram o portão e a porta da casa, embora Kauã, que dormia sozinho no imóvel, tivesse se recusado a permitir a entrada e exigido a apresentação de mandado. Os policiais apreenderam a corrente, o cadeado, o celular de Bianca e o notebook do cantor, no qual o perito, dias depois, localizou vídeos gravados pelo próprio Kauã mostrando a modelo trancada no quarto. Kauã foi levado à delegacia, permaneceu em silêncio e foi liberado.</p>
+    <p>Concluído o inquérito, o Ministério Público ofereceu denúncia contra Kauã pelo crime do art. 148, § 1º, III, do Código Penal, instruída com o auto de apreensão, o laudo pericial do notebook e o depoimento de Bianca. A denúncia foi recebida em 10 de agosto de 2026 pelo juízo da Vara Criminal da Comarca de Juiz de Fora/MG, que determinou a citação do acusado. Kauã, que responde ao processo em liberdade, foi citado pessoalmente em <strong>17 de setembro de 2026, quinta-feira</strong>, e o mandado cumprido foi juntado aos autos em <strong>22 de setembro de 2026, terça-feira</strong>. Em seguida, procurou você para assumir sua defesa.</p>
+  </div>
+
+  <p class="pc-comando">Considerando apenas as informações narradas e que não há feriados no período, responda, na condição de advogado(a) de Kauã, sem redigir a peça:</p>
+  <ol class="pc-q-list">
+    <li class="pc-q"><span class="pc-q-letra">A</span><span>Qual é a peça processual cabível, diferente de <em>habeas corpus</em>, e qual é o seu fundamento legal?</span></li>
+    <li class="pc-q"><span class="pc-q-letra">B</span><span>Qual é o último dia do prazo para a apresentação da peça? Justifique.</span></li>
+    <li class="pc-q"><span class="pc-q-letra">C</span><span>Qual é a principal tese de direito processual penal a ser sustentada e qual é o pedido dela decorrente? Justifique.</span></li>
+  </ol>
+</section>
+
+<!-- ===================== CASO 2 ===================== -->
+<section class="pc-caso">
+  <div class="pc-caso-head">
+    <div class="pc-caso-num">Caso 2</div>
+    <h2>Boa noite, Cinderela em Diamantina</h2>
+  </div>
+  <div class="pc-narrativa">
+    <p>Na madrugada de 2 de março de 2025, durante o Carnaval de Diamantina/MG, o engenheiro Rodrigo Tavares, 34 anos, turista vindo de Belo Horizonte, conheceu Jéssica Almeida Prates, 26 anos, em uma boate no centro histórico da cidade. Depois de algumas horas de conversa, Jéssica, sem que Rodrigo percebesse, misturou um sedativo à bebida dele. Rodrigo perdeu a consciência e foi conduzido por ela, amparado, até a rua. Ali, Jéssica subtraiu o celular, o relógio, a carteira com R$ 1.200,00 e os cartões bancários da vítima, que só acordou horas depois, na calçada, sem se lembrar do ocorrido. O exame toxicológico confirmou a presença de sedativo no sangue de Rodrigo, e as câmeras da boate registraram Jéssica manipulando o copo. Identificada dias depois, ela passou a responder ao processo em liberdade.</p>
+    <p>Denunciada pelo crime do art. 157, <em>caput</em>, do Código Penal, Jéssica foi citada e apresentou resposta à acusação por meio de advogado constituído. Designada audiência de instrução e julgamento para 11 de novembro de 2025, a intimação da defesa foi publicada, por erro do cartório, em nome de advogado estranho aos autos. No dia da audiência, Jéssica compareceu sozinha. O juiz, ciente da ausência do advogado, ouviu a vítima, o segurança da boate e o policial que analisou as imagens sem nomear defensor para o ato, sob o argumento de que “a defesa poderá se manifestar oportunamente”. Como Jéssica declarou que só falaria na presença de seu advogado, o interrogatório foi redesignado.</p>
+    <p>Na audiência seguinte, realizada em 16 de junho de 2026 com a presença do advogado, Jéssica foi interrogada e negou os fatos. O advogado protestou contra a oitiva da vítima e das testemunhas sem defensor e pediu a repetição do ato, mas o juiz afirmou que examinaria a questão na sentença. Não houve requerimento de diligências. Considerando a complexidade do caso, o juízo criminal da Comarca de Diamantina/MG concedeu às partes prazo para apresentação de memoriais. O Ministério Público pediu a condenação de Jéssica nos termos da denúncia, e a defesa foi intimada em <strong>2 de setembro de 2026, quarta-feira</strong>.</p>
+  </div>
+
+  <p class="pc-comando">Considerando apenas as informações narradas e que 7 de setembro de 2026, segunda-feira, é feriado nacional (sem outros feriados no período), responda, na condição de advogado(a) de Jéssica, sem redigir a peça:</p>
+  <ol class="pc-q-list">
+    <li class="pc-q"><span class="pc-q-letra">A</span><span>Qual é a peça processual cabível, diferente de <em>habeas corpus</em>, e qual é o seu fundamento legal?</span></li>
+    <li class="pc-q"><span class="pc-q-letra">B</span><span>Qual é o último dia do prazo para a apresentação da peça? Justifique.</span></li>
+    <li class="pc-q"><span class="pc-q-letra">C</span><span>Qual é a principal tese de direito processual penal a ser sustentada e qual é o pedido dela decorrente? Justifique.</span></li>
+  </ol>
+</section>
 
 </div>

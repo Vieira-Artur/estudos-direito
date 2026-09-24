@@ -253,7 +253,7 @@ const materias = [
           },
           {
             titulo: "Atividade Avaliativa 10D",
-            descricao: "",
+            descricao: "A sócia que nunca administrou · Embargos à execução fiscal · Responsabilidade do sócio · Linha do tempo da cobrança",
             arquivo: "conteudo/tributario/processo-tributario/05-atividade-avaliativa-10d.html"
           },
           {

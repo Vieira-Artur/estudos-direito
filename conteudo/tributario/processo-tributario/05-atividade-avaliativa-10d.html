@@ -1,19 +1,220 @@
 <style>
-/* ── Atividade avaliativa (prefixo .aa-) ── */
-#aa-atividade { font-family: var(--sans); color: var(--text); }
-#aa-atividade .aa-titulo {
-  font-family: var(--serif); font-size: 21px; font-weight: 700;
-  color: var(--blue); margin: 0 0 22px;
-  padding-bottom: 10px; border-bottom: 2px solid var(--border);
-}
-#aa-atividade .aa-aviso {
-  background: var(--surface); border: 1.5px dashed var(--border);
-  border-left: 4px solid var(--gold); border-radius: 8px;
-  padding: 16px 20px; font-size: 14.5px; line-height: 1.6; color: var(--text2);
-}
+  /* Cores locais (escopadas ao bloco para não sobrescrever os tokens globais do site) */
+  #pt-trab-ef-wrap {
+    --ec-head1: #162f52; --ec-head2: #1F497D; --ec-fill: #1F497D; --ec-gold: #ffe9a8;
+    --ec-soft: #f0f5fb; --ec-chip: #e8f0f9; --ec-chip-bd: #b3cde0;
+    --ec-aviso-bg: #fff8e8; --ec-aviso-bd: #f0a500; --ec-aviso-tx: #7a5000;
+    --ec-foot-bg: #f5f8fc; --ec-muted: #6b7a8d;
+    font-family: var(--sans); color: var(--text);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) #pt-trab-ef-wrap {
+      --ec-fill: #2c5f9e; --ec-soft: #1a2840; --ec-chip: #1a3050; --ec-chip-bd: #2a4060;
+      --ec-aviso-bg: #2e2208; --ec-aviso-tx: #f0c870; --ec-foot-bg: #0f1c2e; --ec-muted: #8fa3bc;
+    }
+  }
+  :root[data-theme="dark"] #pt-trab-ef-wrap {
+    --ec-fill: #2c5f9e; --ec-soft: #1a2840; --ec-chip: #1a3050; --ec-chip-bd: #2a4060;
+    --ec-aviso-bg: #2e2208; --ec-aviso-tx: #f0c870; --ec-foot-bg: #0f1c2e; --ec-muted: #8fa3bc;
+  }
+  #pt-trab-ef-wrap, #pt-trab-ef-wrap *, #pt-trab-ef-wrap *::before, #pt-trab-ef-wrap *::after { box-sizing: border-box; }
+
+  /* ── Cabeçalho ─────────────────────────────────────────── */
+  #pt-trab-ef-wrap .ec-case-header {
+    background: linear-gradient(135deg, var(--ec-head1) 0%, var(--ec-head2) 100%);
+    border-radius: 12px;
+    padding: 26px 30px;
+    color: #fff;
+    margin-bottom: 26px;
+  }
+  #pt-trab-ef-wrap .ec-op-label {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ec-gold); margin-bottom: 7px;
+  }
+  #pt-trab-ef-wrap .ec-case-header h1 { font-family: var(--serif); font-size: 24px; margin: 0 0 6px; color: #fff; font-weight: 700; border: none; padding: 0; }
+  #pt-trab-ef-wrap .ec-case-subtitle { color: #c8d8ec; font-size: 14px; margin: 0 0 14px; font-style: italic; }
+  #pt-trab-ef-wrap .ec-case-header p { color: #ddeaf5; font-size: 13.5px; line-height: 1.6; margin: 0 0 14px; }
+  #pt-trab-ef-wrap .ec-case-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+  #pt-trab-ef-wrap .ec-meta-tag {
+    background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.28);
+    border-radius: 6px; padding: 3px 11px; font-size: 12px; color: #fff; font-weight: 500;
+  }
+
+  /* ── Seções ────────────────────────────────────────────── */
+  #pt-trab-ef-wrap .ec-sec { margin-bottom: 30px; }
+  #pt-trab-ef-wrap .ec-sec-title {
+    font-size: 12px; font-weight: 800; letter-spacing: .10em; text-transform: uppercase;
+    color: var(--text2); margin-bottom: 14px; padding-bottom: 7px; border-bottom: 2px solid var(--border);
+  }
+  #pt-trab-ef-wrap .ec-aviso {
+    background: var(--ec-aviso-bg); border: 1px solid var(--ec-aviso-bd); border-radius: 8px;
+    padding: 10px 16px; font-size: 13px; color: var(--ec-aviso-tx); margin-bottom: 14px; line-height: 1.55;
+  }
+
+  /* ── Narrativa ─────────────────────────────────────────── */
+  #pt-trab-ef-wrap .ec-narrative {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 24px; font-size: 14px; line-height: 1.78; color: var(--text);
+  }
+  #pt-trab-ef-wrap .ec-narrative p { margin: 0 0 13px; text-align: justify; }
+  #pt-trab-ef-wrap .ec-narrative p:last-child { margin-bottom: 0; }
+  #pt-trab-ef-wrap .ec-narrative strong { color: var(--blue); }
+
+  /* ── Linha do tempo dos fatos ──────────────────────────── */
+  #pt-trab-ef-wrap .ec-tl { list-style: none; margin: 0; padding: 0 0 0 4px; }
+  #pt-trab-ef-wrap .ec-tl li {
+    position: relative; padding: 0 0 14px 26px; border-left: 2px solid var(--border);
+    font-size: 13.5px; line-height: 1.55; color: var(--text);
+  }
+  #pt-trab-ef-wrap .ec-tl li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  #pt-trab-ef-wrap .ec-tl li::before {
+    content: ""; position: absolute; left: -7px; top: 3px; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--ec-fill); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--ec-fill);
+  }
+  #pt-trab-ef-wrap .ec-tl .ec-tl-data { display: block; font-weight: 700; color: var(--blue); font-size: 12.5px; }
+
+  /* ── Questões ──────────────────────────────────────────── */
+  #pt-trab-ef-wrap .ec-q-list { display: flex; flex-direction: column; gap: 12px; }
+  #pt-trab-ef-wrap .ec-q-item { border: 1px solid var(--border); border-radius: 9px; overflow: hidden; background: var(--surface); }
+  #pt-trab-ef-wrap .ec-q-head { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px; background: var(--ec-soft); }
+  #pt-trab-ef-wrap .ec-q-num {
+    background: var(--ec-fill); color: #fff; border-radius: 50%; width: 27px; height: 27px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  #pt-trab-ef-wrap .ec-q-text { flex: 1; font-size: 14px; line-height: 1.55; color: var(--text); font-weight: 600; }
+  #pt-trab-ef-wrap .ec-q-body { padding: 12px 18px 14px; border-top: 1px solid var(--border); font-size: 14px; line-height: 1.65; color: var(--text); }
+  #pt-trab-ef-wrap .ec-q-body p { margin: 0 0 10px; }
+  #pt-trab-ef-wrap .ec-q-body p:last-child { margin-bottom: 0; }
+  #pt-trab-ef-wrap .ec-sub { display: flex; gap: 10px; margin-bottom: 10px; }
+  #pt-trab-ef-wrap .ec-sub:last-child { margin-bottom: 0; }
+  #pt-trab-ef-wrap .ec-sub-letra {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 6px; background: var(--ec-chip);
+    border: 1px solid var(--ec-chip-bd); color: var(--blue); font-weight: 800; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #pt-trab-ef-wrap .ec-lista { margin: 4px 0 10px; padding-left: 20px; }
+  #pt-trab-ef-wrap .ec-lista li { margin-bottom: 4px; }
+  #pt-trab-ef-wrap .ec-nota { font-size: 13px; color: var(--text2); font-style: italic; }
+
+  /* ── Rodapé ────────────────────────────────────────────── */
+  #pt-trab-ef-wrap .ec-foot {
+    margin-top: 26px; padding: 14px 20px; background: var(--ec-foot-bg); border: 1px solid var(--border);
+    border-radius: 8px; font-size: 12px; color: var(--ec-muted); line-height: 1.65;
+  }
+  #pt-trab-ef-wrap .ec-foot strong { color: var(--text2); }
+
+  @media (max-width: 600px) {
+    #pt-trab-ef-wrap .ec-case-header { padding: 18px; }
+    #pt-trab-ef-wrap .ec-case-header h1 { font-size: 20px; }
+    #pt-trab-ef-wrap .ec-narrative { padding: 16px; font-size: 13.5px; }
+    #pt-trab-ef-wrap .ec-narrative p { text-align: left; }
+    #pt-trab-ef-wrap .ec-q-body { padding: 12px 14px; }
+  }
+  @media print {
+    #pt-trab-ef-wrap .ec-case-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
 </style>
 
-<div id="aa-atividade">
-  <h1 class="aa-titulo">Atividade Avaliativa 10D — Processo Tributário</h1>
-  <div class="aa-aviso">O enunciado desta atividade será publicado em breve.</div>
+<div id="pt-trab-ef-wrap">
+
+  <!-- ══════════ CABEÇALHO ══════════ -->
+  <div class="ec-case-header">
+    <div class="ec-op-label">Trabalho · Direito Processual Tributário</div>
+    <h1>A sócia que nunca administrou</h1>
+    <p class="ec-case-subtitle">Execução fiscal, responsabilidade do sócio e as prerrogativas da Fazenda Pública em juízo</p>
+    <p>Caso fictício para aplicação da Lei de Execução Fiscal (Lei nº 6.830/1980), do CTN e do CPC. Pessoas, empresa e processo inventados para fins didáticos.</p>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Embargos à execução fiscal</span>
+      <span class="ec-meta-tag">Prazo</span>
+      <span class="ec-meta-tag">Responsabilidade do sócio</span>
+      <span class="ec-meta-tag">CDA</span>
+      <span class="ec-meta-tag">Linha do tempo</span>
+    </div>
+  </div>
+
+  <!-- ══════════ INSTRUÇÕES ══════════ -->
+  <div class="ec-aviso">
+    <strong>Instruções.</strong> Responda às duas questões com base na legislação (LEF, CTN e CPC) e na jurisprudência do STJ e do STF. Indique sempre o fundamento legal de cada resposta. Na Questão 1, não é preciso redigir a peça completa: basta responder aos itens de forma objetiva e fundamentada.
+  </div>
+
+  <!-- ══════════ NARRATIVA ══════════ -->
+  <div class="ec-sec">
+    <div class="ec-sec-title">Questão 1 — O caso</div>
+    <div class="ec-narrative">
+      <p><strong>A sociedade.</strong> Clarice Almeida Toledo é sócia quotista, com 10% do capital, da <strong>Distribuidora Mantiqueira de Alimentos Ltda.</strong>, sediada em Juiz de Fora/MG. O contrato social, arquivado na Junta Comercial desde a constituição da empresa, atribui a administração <strong>exclusivamente</strong> ao sócio Renato Paiva Guedes. Clarice é professora, nunca assinou cheques, contratos ou guias pela sociedade e não tem procuração para representá-la.</p>
+
+      <p><strong>O débito.</strong> Entre janeiro e junho de 2024, a empresa declarou ao Fisco estadual o ICMS devido (por meio da declaração mensal de apuração), mas não recolheu o imposto, em razão de dificuldades financeiras. O Estado de Minas Gerais inscreveu o débito em dívida ativa e fez constar da Certidão de Dívida Ativa (CDA), como corresponsáveis, a empresa, Renato e Clarice. O único fundamento indicado para a inclusão dos sócios foi o <strong>“não recolhimento do imposto no prazo legal”</strong>. A empresa continua funcionando regularmente no endereço cadastrado.</p>
+
+      <p><strong>A execução.</strong> Em março de 2026, o Estado ajuizou execução fiscal de <strong>R$ 186.400,00</strong> na Vara da Fazenda Pública Estadual e Autarquias da Comarca de Juiz de Fora. Citada pelo correio, Clarice não pagou nem ofereceu bens. O oficial de justiça penhorou uma sala comercial de sua propriedade, que está alugada a terceiros, e a intimou pessoalmente da penhora em <strong>10/09/2026 (quinta-feira)</strong>. O mandado cumprido foi juntado aos autos em <strong>21/09/2026 (segunda-feira)</strong>.</p>
+
+      <p><strong>A consulta.</strong> Hoje, <strong>24/09/2026</strong>, Clarice procura você. Traz o contrato social e as alterações contratuais e informa que o contador e dois ex-empregados da empresa podem confirmar, como testemunhas, que ela jamais participou da gestão. <em>Considere apenas os feriados nacionais.</em></p>
+    </div>
+  </div>
+
+  <!-- ══════════ DATAS ══════════ -->
+  <div class="ec-sec">
+    <div class="ec-sec-title">Datas do caso</div>
+    <ul class="ec-tl">
+      <li><span class="ec-tl-data">jan. a jun./2024</span>ICMS declarado pela empresa e não recolhido.</li>
+      <li><span class="ec-tl-data">mar./2026</span>Ajuizamento da execução fiscal contra a empresa e os sócios constantes da CDA.</li>
+      <li><span class="ec-tl-data">10/09/2026 · quinta-feira</span>Clarice é intimada pessoalmente da penhora da sala comercial.</li>
+      <li><span class="ec-tl-data">21/09/2026 · segunda-feira</span>O mandado cumprido é juntado aos autos.</li>
+      <li><span class="ec-tl-data">24/09/2026 · quinta-feira</span>Clarice procura você.</li>
+    </ul>
+  </div>
+
+  <!-- ══════════ QUESTÕES ══════════ -->
+  <div class="ec-sec">
+    <div class="ec-sec-title">Questões</div>
+    <div class="ec-q-list">
+
+      <div class="ec-q-item">
+        <div class="ec-q-head">
+          <span class="ec-q-num">1</span>
+          <span class="ec-q-text">Na qualidade de advogado(a) de Clarice, responda:</span>
+        </div>
+        <div class="ec-q-body">
+          <div class="ec-sub">
+            <span class="ec-sub-letra">A</span>
+            <span>Qual é a medida processual adequada para a defesa de Clarice? Indique o fundamento legal e explique por que essa é a via cabível no caso.</span>
+          </div>
+          <div class="ec-sub">
+            <span class="ec-sub-letra">B</span>
+            <span>Qual é o último dia para apresentá-la? Demonstre a contagem, indicando o termo inicial e a forma de contagem do prazo.</span>
+          </div>
+          <div class="ec-sub">
+            <span class="ec-sub-letra">C</span>
+            <span>Qual é a principal tese de defesa e qual o pedido a ser formulado? Fundamente.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ec-q-item">
+        <div class="ec-q-head">
+          <span class="ec-q-num">2</span>
+          <span class="ec-q-text">Linha do tempo: da hipótese de incidência ao leilão</span>
+        </div>
+        <div class="ec-q-body">
+          <p>Elabore uma linha do tempo completa do crédito tributário e de sua cobrança, desde a <strong>hipótese de incidência</strong> até o <strong>leilão do bem penhorado</strong> na execução fiscal (Lei nº 6.830/1980).</p>
+          <p>Em cada etapa, indique:</p>
+          <ol class="ec-lista">
+            <li>o que acontece;</li>
+            <li>o fundamento legal;</li>
+            <li>quando houver, a prerrogativa da Fazenda Pública que se manifesta naquele momento.</li>
+          </ol>
+          <p class="ec-nota">A linha do tempo pode ser feita em forma de quadro, esquema ou desenho, desde que siga a ordem cronológica e não omita etapas.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ RODAPÉ ══════════ -->
+  <div class="ec-foot">
+    <strong>Legislação de apoio:</strong> Lei nº 6.830/1980 (Lei de Execução Fiscal); Lei nº 5.172/1966 (Código Tributário Nacional), com as alterações da Lei Complementar nº 236/2026; Lei nº 13.105/2015 (Código de Processo Civil). Textos disponíveis em planalto.gov.br — redação conferida em 24/09/2026.<br>
+    <strong>Jurisprudência:</strong> consulte a pesquisa de precedentes qualificados do STJ (processo.stj.jus.br/repetitivos) e as súmulas do STJ.<br>
+    Caso fictício elaborado para fins didáticos · Prof. Artur Vieira · Vianna Júnior
+  </div>
+
 </div>

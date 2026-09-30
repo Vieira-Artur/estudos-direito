@@ -89,6 +89,16 @@ const materias = [
             titulo: "Juiz das Garantias",
             descricao: "Imparcialidade objetiva · Competência do art. 3º-B · Alcance e cessação · Autos acautelados · Impedimento · O que o STF decidiu",
             arquivo: "conteudo/processual-penal-i/04-juiz-das-garantias.html"
+          },
+          {
+            titulo: "Atividade Avaliativa 6A",
+            descricao: "Quem produz a prova? · Sistema acusatório · Juiz das garantias · Nemo tenetur · Juiz natural · Lei no tempo",
+            arquivo: "conteudo/processual-penal-i/05-atividade-avaliativa-6a.html"
+          },
+          {
+            titulo: "Atividade Avaliativa 6B",
+            descricao: "Quem produz a prova? · Sistema acusatório · Juiz das garantias · Nemo tenetur · Juiz natural · Lei no tempo",
+            arquivo: "conteudo/processual-penal-i/06-atividade-avaliativa-6b.html"
           }
         ]
       },

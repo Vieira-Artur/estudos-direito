@@ -1,0 +1,227 @@
+<style>
+  :root {
+    --blue: #1F497D;
+    --blue-dark: #162f52;
+    --surface: #ffffff;
+    --border: #d0dcea;
+    --text: #1a1a2e;
+    --gold: #ffe9a8;
+  }
+  #pp1-trab-sp-wrap, #pp1-trab-sp-wrap *, #pp1-trab-sp-wrap *::before, #pp1-trab-sp-wrap *::after { box-sizing: border-box; }
+
+  /* ── Cabeçalho ─────────────────────────────────────────── */
+  #pp1-trab-sp-wrap .ec-case-header {
+    background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+    border-radius: 12px;
+    padding: 26px 30px;
+    color: #fff;
+    margin-bottom: 26px;
+  }
+  #pp1-trab-sp-wrap .ec-op-label {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 7px;
+  }
+  #pp1-trab-sp-wrap .ec-case-header h1 { font-size: 24px; margin: 0 0 6px; color: #fff; font-weight: 700; }
+  #pp1-trab-sp-wrap .ec-case-subtitle { color: #c8d8ec; font-size: 14px; margin: 0 0 14px; font-style: italic; }
+  #pp1-trab-sp-wrap .ec-case-header p { color: #ddeaf5; font-size: 13.5px; line-height: 1.6; margin: 0 0 14px; }
+  #pp1-trab-sp-wrap .ec-case-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+  #pp1-trab-sp-wrap .ec-meta-tag {
+    background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.28);
+    border-radius: 6px; padding: 3px 11px; font-size: 12px; color: #fff; font-weight: 500;
+  }
+
+  /* ── Seções ────────────────────────────────────────────── */
+  #pp1-trab-sp-wrap .ec-sec { margin-bottom: 30px; }
+  #pp1-trab-sp-wrap .ec-sec-title {
+    font-size: 12px; font-weight: 800; letter-spacing: .10em; text-transform: uppercase;
+    color: #4a5568; margin-bottom: 14px; padding-bottom: 7px; border-bottom: 2px solid var(--border);
+  }
+  #pp1-trab-sp-wrap .ec-aviso {
+    background: #fff8e8; border: 1px solid #f0a500; border-radius: 8px;
+    padding: 10px 16px; font-size: 13px; color: #7a5000; margin-bottom: 14px; line-height: 1.55;
+  }
+
+  /* ── Narrativa ─────────────────────────────────────────── */
+  #pp1-trab-sp-wrap .ec-narrative {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 24px; font-size: 14px; line-height: 1.78; color: var(--text);
+  }
+  #pp1-trab-sp-wrap .ec-narrative p { margin: 0 0 13px; text-align: justify; }
+  #pp1-trab-sp-wrap .ec-narrative p:last-child { margin-bottom: 0; }
+  #pp1-trab-sp-wrap .ec-narrative strong { color: var(--blue); }
+
+  /* ── Linha do tempo dos fatos ──────────────────────────── */
+  #pp1-trab-sp-wrap .ec-tl { list-style: none; margin: 0; padding: 0 0 0 4px; }
+  #pp1-trab-sp-wrap .ec-tl li {
+    position: relative; padding: 0 0 14px 26px; border-left: 2px solid var(--border);
+    font-size: 13.5px; line-height: 1.55; color: var(--text);
+  }
+  #pp1-trab-sp-wrap .ec-tl li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  #pp1-trab-sp-wrap .ec-tl li::before {
+    content: ""; position: absolute; left: -7px; top: 3px; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--blue); border: 2px solid #fff; box-shadow: 0 0 0 1px var(--blue);
+  }
+  #pp1-trab-sp-wrap .ec-tl .ec-tl-data { display: block; font-weight: 700; color: var(--blue); font-size: 12.5px; }
+
+  /* ── Questões ──────────────────────────────────────────── */
+  #pp1-trab-sp-wrap .ec-q-list { display: flex; flex-direction: column; gap: 12px; }
+  #pp1-trab-sp-wrap .ec-q-item { border: 1px solid var(--border); border-radius: 9px; overflow: hidden; background: var(--surface); }
+  #pp1-trab-sp-wrap .ec-q-head { display: flex; align-items: flex-start; gap: 12px; padding: 13px 16px; background: #f0f5fb; }
+  #pp1-trab-sp-wrap .ec-q-num {
+    background: var(--blue); color: #fff; border-radius: 50%; width: 27px; height: 27px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  #pp1-trab-sp-wrap .ec-q-text { flex: 1; font-size: 14px; line-height: 1.55; color: var(--text); font-weight: 600; }
+  #pp1-trab-sp-wrap .ec-q-body { padding: 12px 18px 14px; border-top: 1px solid var(--border); font-size: 14px; line-height: 1.65; color: var(--text); }
+  #pp1-trab-sp-wrap .ec-q-body p { margin: 0 0 10px; }
+  #pp1-trab-sp-wrap .ec-q-body p:last-child { margin-bottom: 0; }
+  #pp1-trab-sp-wrap .ec-sub { display: flex; gap: 10px; margin-bottom: 10px; }
+  #pp1-trab-sp-wrap .ec-sub:last-child { margin-bottom: 0; }
+  #pp1-trab-sp-wrap .ec-sub-letra {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 6px; background: #e8f0f9;
+    border: 1px solid #b3cde0; color: var(--blue); font-weight: 800; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #pp1-trab-sp-wrap .ec-lista { margin: 4px 0 10px; padding-left: 20px; }
+  #pp1-trab-sp-wrap .ec-lista li { margin-bottom: 4px; }
+  #pp1-trab-sp-wrap .ec-nota { font-size: 13px; color: #4a5568; font-style: italic; }
+
+  /* ── Rodapé ────────────────────────────────────────────── */
+  #pp1-trab-sp-wrap .ec-foot {
+    margin-top: 26px; padding: 14px 20px; background: #f5f8fc; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 12px; color: #6b7a8d; line-height: 1.65;
+  }
+  #pp1-trab-sp-wrap .ec-foot strong { color: #4a5568; }
+
+  @media (max-width: 600px) {
+    #pp1-trab-sp-wrap .ec-case-header { padding: 18px; }
+    #pp1-trab-sp-wrap .ec-case-header h1 { font-size: 20px; }
+    #pp1-trab-sp-wrap .ec-narrative { padding: 16px; font-size: 13.5px; }
+    #pp1-trab-sp-wrap .ec-narrative p { text-align: left; }
+    #pp1-trab-sp-wrap .ec-q-body { padding: 12px 14px; }
+  }
+  @media print {
+    #pp1-trab-sp-wrap .ec-case-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+
+<div id="pp1-trab-sp-wrap">
+
+  <div class="ec-case-header">
+    <div class="ec-op-label">Atividade Avaliativa · Direito Processual Penal I · Turma 6A</div>
+    <h1>Quem produz a prova?</h1>
+    <p class="ec-case-subtitle">Sistemas processuais, princípios, lei processual penal no tempo e juiz das garantias</p>
+    <p>Dois casos fictícios para aplicação da Constituição Federal e do CPP. Pessoas e fatos inventados para fins didáticos.</p>
+    <div class="ec-case-meta">
+      <span class="ec-meta-tag">Sistema acusatório</span>
+      <span class="ec-meta-tag">Juiz das garantias</span>
+      <span class="ec-meta-tag">Nemo tenetur</span>
+      <span class="ec-meta-tag">Presunção de inocência</span>
+      <span class="ec-meta-tag">Lei no tempo</span>
+      <span class="ec-meta-tag">Juiz natural</span>
+    </div>
+  </div>
+
+  <div class="ec-aviso">
+    <strong>Instruções.</strong> Tempo: 1h10. Responda às duas questões com base na Constituição Federal, no CPP e na jurisprudência do STF e do STJ estudada em aula. Indique sempre o fundamento de cada resposta. Seja objetivo(a): cada item pode ser respondido em um parágrafo curto.
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-sec-title">Questão 1 — Operação Engrenagem</div>
+    <div class="ec-narrative">
+      <p><strong>A investigação.</strong> Em maio de 2026, a Polícia Civil instaurou inquérito para apurar golpes aplicados contra idosos em Juiz de Fora. O principal suspeito é Caio Menezes, investigado por estelionato — crime que não é de menor potencial ofensivo. Considere que, na comarca, o juiz das garantias está implantado e que o Dr. Otávio Lemos exerce essa função.</p>
+      <p><strong>A iniciativa do juiz.</strong> Depois de ler uma reportagem sobre o caso, o Dr. Otávio, sem qualquer pedido do delegado ou do Ministério Público, determinou a busca e apreensão na casa de Caio e a quebra do sigilo telemático do celular dele. As mensagens encontradas no aparelho foram a base da denúncia.</p>
+      <p><strong>A denúncia.</strong> Em 10/08/2026, o Ministério Público ofereceu denúncia. O próprio Dr. Otávio a recebeu e designou audiência de instrução, na qual passaria a atuar.</p>
+      <p><strong>A audiência.</strong> Na audiência, depois de ouvidas as testemunhas de acusação, o Promotor desistiu da oitiva da vítima. O juiz, então, determinou de ofício a oitiva da vítima e de mais duas pessoas mencionadas no inquérito, que nenhuma das partes havia arrolado, “para buscar a verdade real”.</p>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-sec-title">Datas — Questão 1</div>
+    <ul class="ec-tl">
+      <li><span class="ec-tl-data">maio/2026</span>Instauração do inquérito; o Dr. Otávio atua como juiz das garantias.</li>
+      <li><span class="ec-tl-data">durante o inquérito</span>Busca e apreensão e quebra de sigilo telemático determinadas de ofício.</li>
+      <li><span class="ec-tl-data">10/08/2026</span>O MP oferece a denúncia; o Dr. Otávio a recebe.</li>
+      <li><span class="ec-tl-data">audiência</span>O MP desiste da vítima; o juiz determina de ofício novas oitivas.</li>
+    </ul>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-q-list">
+      <div class="ec-q-item">
+        <div class="ec-q-head">
+          <span class="ec-q-num">1</span>
+          <span class="ec-q-text">Responda:</span>
+        </div>
+        <div class="ec-q-body">
+          <div class="ec-sub">
+            <span class="ec-sub-letra">A</span>
+            <span>Qual sistema processual penal foi adotado no Brasil? Indique o critério que o distingue do sistema inquisitório e diga se a busca e apreensão e a quebra de sigilo determinadas pelo Dr. Otávio são válidas. Fundamente.</span>
+          </div>
+          <div class="ec-sub">
+            <span class="ec-sub-letra">B</span>
+            <span>Até quando vai a competência do juiz das garantias? O Dr. Otávio poderia ter recebido a denúncia? Fundamente.</span>
+          </div>
+          <div class="ec-sub">
+            <span class="ec-sub-letra">C</span>
+            <span>A determinação de ofício, na audiência, da oitiva da vítima e das duas pessoas não arroladas é compatível com o sistema acusatório? Fundamente.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-sec-title">Questão 2 — O caso Bruno</div>
+    <div class="ec-narrative">
+      <p><strong>O fato.</strong> Em 15/03/2018, Bruno Tavares, então funcionário do setor financeiro de uma distribuidora, desviou R$ 40.000,00 da empresa usando autorizações de saque com assinaturas falsas. Não houve violência nem grave ameaça. Bruno não tem antecedentes.</p>
+      <p><strong>O inquérito.</strong> Para o exame grafotécnico, o delegado exigiu que Bruno escrevesse, de próprio punho, um texto ditado, sob ameaça de prendê-lo por desobediência caso se recusasse. Bruno escreveu, e o laudo apontou que as assinaturas eram dele. No mesmo dia, o delegado convocou uma entrevista coletiva e apresentou Bruno algemado aos jornalistas como “o golpista da firma”.</p>
+      <p><strong>O processo.</strong> Bruno foi denunciado por furto qualificado mediante fraude (art. 155, § 4º, II, do CP). A denúncia foi recebida em 2019 e o processo foi distribuído, por sorteio, à 2ª Vara Criminal da comarca. Em setembro de 2026, ainda em instrução, o Tribunal de Justiça, por portaria, retirou o processo da 2ª Vara e designou um juiz “especialmente para julgar o caso Bruno”, alegando a repercussão do fato na imprensa.</p>
+      <p><strong>A lei nova.</strong> Suponha, ainda, que em outubro de 2026 entre em vigor uma lei (hipotética) que extingue determinado recurso cabível contra a sentença e exclusivo da defesa, antes de proferida a sentença no processo de Bruno.</p>
+    </div>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-sec-title">Datas — Questão 2</div>
+    <ul class="ec-tl">
+      <li><span class="ec-tl-data">15/03/2018</span>Fato: desvio de R$ 40.000,00, sem violência ou grave ameaça.</li>
+      <li><span class="ec-tl-data">inquérito</span>Grafotécnico sob ameaça de prisão e entrevista coletiva com Bruno algemado.</li>
+      <li><span class="ec-tl-data">2019</span>Recebimento da denúncia e distribuição, por sorteio, à 2ª Vara Criminal.</li>
+      <li><span class="ec-tl-data">set./2026</span>Portaria do Tribunal designa juiz especialmente para o caso Bruno.</li>
+      <li><span class="ec-tl-data">out./2026</span>Entra em vigor a lei hipotética que extingue recurso exclusivo da defesa.</li>
+    </ul>
+  </div>
+
+  <div class="ec-sec">
+    <div class="ec-q-list">
+      <div class="ec-q-item">
+        <div class="ec-q-head">
+          <span class="ec-q-num">2</span>
+          <span class="ec-q-text">Responda:</span>
+        </div>
+        <div class="ec-q-body">
+          <div class="ec-sub">
+            <span class="ec-sub-letra">A</span>
+            <span>Quais princípios processuais penais foram violados na fase de inquérito? Que consequência isso tem para o laudo grafotécnico? Fundamente.</span>
+          </div>
+          <div class="ec-sub">
+            <span class="ec-sub-letra">B</span>
+            <span>A designação de um juiz especialmente para julgar o caso de Bruno é válida? Indique o princípio envolvido e fundamente.</span>
+          </div>
+          <div class="ec-sub">
+            <span class="ec-sub-letra">C</span>
+            <span>A lei hipotética que extingue o recurso se aplica ao processo de Bruno, mesmo sendo desfavorável à defesa e posterior ao fato? Fundamente.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ec-foot">
+    <strong>Legislação de apoio:</strong> Constituição Federal, art. 5º (XXXVII, XL, LIII, LVI, LVII e LXIII) e art. 129, I; Código de Processo Penal, arts. 2º, 3º-A a 3º-F, 156 e 157; Convenção Americana sobre Direitos Humanos, art. 8º. Textos disponíveis em planalto.gov.br.<br>
+    <strong>Material de estudo:</strong> slides de Direito Processual Penal I (sistemas processuais, princípios, lei processual penal no tempo e juiz das garantias).<br>
+    Casos fictícios elaborados para fins didáticos · Prof. Artur Vieira · Vianna Júnior
+  </div>
+
+</div>

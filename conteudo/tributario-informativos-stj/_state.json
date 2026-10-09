@@ -1,5 +1,5 @@
 {
-  "ultima_edicao_processada": 902,
+  "ultima_edicao_processada": 904,
   "edicoes": {
     "885": {
       "data": "22 de abril de 2026",
@@ -90,7 +90,17 @@
       "data": "22 de setembro de 2026",
       "qtd_enunciados": 3,
       "arquivo": "informativo-0902.html"
+    },
+    "903": {
+      "data": "29 de setembro de 2026",
+      "qtd_enunciados": 2,
+      "arquivo": "informativo-0903.html"
+    },
+    "904": {
+      "data": "6 de outubro de 2026",
+      "qtd_enunciados": 1,
+      "arquivo": "informativo-0904.html"
     }
   },
-  "atualizado_em": "2026-09-24T00:32:32+00:00"
+  "atualizado_em": "2026-10-09T13:28:19+00:00"
 }

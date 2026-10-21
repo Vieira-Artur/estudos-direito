@@ -91,6 +91,11 @@ const materias = [
             arquivo: "conteudo/processual-penal-i/04-juiz-das-garantias.html"
           },
           {
+            titulo: "Acordo de Não Persecução Penal (ANPP)",
+            descricao: "Conceito e natureza · Cabimento · Vedações e negativas · Condições · Homologação · Cumprimento e descumprimento · Direito intertemporal · Teste de cabimento",
+            arquivo: "conteudo/processual-penal-i/07-acordo-nao-persecucao-penal.html"
+          },
+          {
             titulo: "Atividade Avaliativa 6A",
             descricao: "Quem produz a prova? · Sistema acusatório · Juiz das garantias · Nemo tenetur · Juiz natural · Lei no tempo",
             arquivo: "conteudo/processual-penal-i/05-atividade-avaliativa-6a.html"

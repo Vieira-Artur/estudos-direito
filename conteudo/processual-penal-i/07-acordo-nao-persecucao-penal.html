@@ -1,0 +1,1280 @@
+<style>
+/* ============================================================
+   Processo Penal I - Unidade 6: Acordo de Nao Persecucao Penal
+   Escopo: .ppi6-   ·   Estilo alinhado as Unidades 1 a 4 (padrao PP2)
+   ============================================================ */
+
+/* paleta local — mesmos nomes e valores usados nas demais unidades */
+:root {
+  --pp1-green:#1a5c1a; --pp1-green-lt:#d6f0d6;
+  --pp1-red:#8b1a1a;   --pp1-red-lt:#fce8e8;
+  --pp1-orange:#7a3800;--pp1-orange-lt:#fdebd6;
+  --pp1-purple:#4a1a8a;--pp1-purple-lt:#ede5fb;
+  --pp1-teal:#0a5c4a;  --pp1-teal-lt:#d6f0e8;
+  --pp1-yellow:#5a4000;--pp1-yellow-lt:#fdf6d6;
+  --pp1-bg2:#f5f7fa;   --pp1-bg3:#edf0f4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+    --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+    --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+    --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+    --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+    --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+    --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+  }
+}
+:root[data-theme="dark"] {
+  --pp1-green:#6fd86f; --pp1-green-lt:#0d2e0d;
+  --pp1-red:#f08080;   --pp1-red-lt:#2e0d0d;
+  --pp1-orange:#f0a060;--pp1-orange-lt:#2e1500;
+  --pp1-purple:#c0a0f8;--pp1-purple-lt:#200a40;
+  --pp1-teal:#60d8b8;  --pp1-teal-lt:#072e22;
+  --pp1-yellow:#f0d060;--pp1-yellow-lt:#2e2000;
+  --pp1-bg2:#1a2840;   --pp1-bg3:#1f3052;
+}
+
+.ppi6 { font-family: var(--sans); color: var(--text); padding-bottom: 2rem; }
+
+/* --- titulo --- */
+.ppi6-head { margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+.ppi6-kicker { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+.ppi6-h1 { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--blue); line-height: 1.25; margin: 0 0 .35rem; }
+.ppi6-sub { font-size: .9rem; color: var(--text2); line-height: 1.5; margin: 0 0 22px; }
+
+/* --- abas --- */
+.ppi6-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 22px; }
+.ppi6-tab { padding: 7px 16px; font-size: 13px; font-weight: 600; font-family: var(--sans);
+  border: 1.5px solid var(--blue); border-radius: 6px; background: var(--surface); color: var(--blue);
+  cursor: pointer; transition: background .15s, color .15s; }
+.ppi6-tab:hover { background: var(--blue-hover); }
+.ppi6-tab[aria-selected="true"] { background: var(--blue); color: #fff; }
+:root[data-theme="dark"] .ppi6-tab[aria-selected="true"],
+.ppi6-tab[aria-selected="true"] { color: #fff; }
+.ppi6-tab:focus-visible, .ppi6-bt:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.ppi6-painel[hidden] { display: none; }
+
+/* --- tipografia --- */
+.ppi6 h2 { font-size: 1.3rem; color: var(--blue); border-left: 3px solid var(--gold);
+  padding-left: 1rem; margin: 2.5rem 0 1.5rem; }
+.ppi6 h2:first-child { margin-top: 0; }
+.ppi6 h3 { color: var(--blue); font-size: 1rem; margin: 1.2rem 0 .6rem; }
+.ppi6 p { color: var(--text2); font-size: .96rem; line-height: 1.65; margin: 0 0 .85rem; }
+.ppi6 ul, .ppi6 ol { padding-left: 1.2rem; margin: 0 0 .9rem; }
+.ppi6 li { margin-bottom: .3rem; color: var(--text2); font-size: .96rem; line-height: 1.6; }
+.ppi6 strong { color: var(--blue); font-weight: 700; }
+
+/* --- card --- */
+.ppi6-card { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; transition: border-color .2s; }
+.ppi6-card:hover { border-color: var(--blue-mid); }
+.ppi6-card h3 { color: var(--blue); font-size: 1rem; margin: 0 0 .6rem; }
+.ppi6-card p, .ppi6-card li { color: var(--text2); font-size: .96rem; }
+.ppi6-card p:last-child, .ppi6-card ul:last-child { margin-bottom: 0; }
+
+/* --- lei seca --- */
+.ppi6-lei { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 6px;
+  padding: .9rem 1.2rem; margin-bottom: .8rem; font-family: monospace; font-size: .91rem; color: var(--text); }
+.ppi6-lei-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace;
+  font-weight: bold; margin-bottom: .35rem; }
+.ppi6-lei p { color: var(--text); font-family: monospace; font-size: .91rem; line-height: 1.6; margin: 0 0 .5rem; }
+.ppi6-lei p:last-child { margin-bottom: 0; }
+.ppi6-lei strong { color: var(--blue); }
+
+/* --- jurisprudencia --- */
+.ppi6-juris { background: var(--blue-light); border-left: 3px solid var(--blue);
+  padding: 1rem 1.2rem; border-radius: 0 6px 6px 0; margin-bottom: 1rem; }
+.ppi6-juris-tag { display: block; color: var(--blue); font-size: .84rem; font-family: monospace; font-weight: bold; }
+.ppi6-juris p { color: var(--text2); font-size: .94rem; margin: .3rem 0 .5rem; }
+.ppi6-juris p:last-child { margin-bottom: 0; }
+.ppi6-fonte { font-size: .84rem; color: var(--text2); font-family: monospace; margin: .3rem 0 0 !important; }
+
+/* --- alerta --- */
+.ppi6-alerta { background: var(--pp1-red-lt); border: 1px solid var(--pp1-red); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi6-alerta-tag { display: block; color: var(--pp1-red); font-weight: 700; font-size: .84rem;
+  letter-spacing: .06em; text-transform: uppercase; }
+.ppi6-alerta p { color: var(--text2); font-size: .94rem; margin: .3rem 0 0; }
+.ppi6-alerta strong { color: var(--pp1-red); }
+
+/* --- enunciados (gramatica do .alert, paleta amarela) --- */
+.ppi6-dout { background: var(--pp1-yellow-lt); border: 1px solid var(--pp1-yellow); border-radius: 6px;
+  padding: 1rem 1.2rem; margin-bottom: 1rem; }
+.ppi6-dout-tag { display: block; color: var(--pp1-yellow); font-weight: 700; font-size: .84rem; font-family: monospace; margin-bottom: .3rem; }
+.ppi6-dout p { color: var(--text2); font-size: .94rem; font-style: italic; line-height: 1.62; margin: 0 0 .45rem; }
+.ppi6-dout p:last-child { margin-bottom: 0; }
+.ppi6-dout strong { color: var(--pp1-yellow); }
+
+/* --- tabela --- */
+.ppi6-tabela-wrap { overflow-x: auto; margin: 1rem 0 1.5rem; -webkit-overflow-scrolling: touch; }
+.ppi6-tabela { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 560px; }
+.ppi6-tabela th { background: var(--pp1-bg3); color: var(--blue); border: 1px solid var(--border);
+  border-bottom: 2px solid var(--blue-light); padding: .75rem 1rem; text-align: left; font-weight: 600; }
+.ppi6-tabela td { padding: .65rem 1rem; border: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.ppi6-tabela td:first-child { color: var(--blue); font-weight: 600; }
+.ppi6-sim { color: var(--pp1-green) !important; font-weight: 700; white-space: nowrap; }
+.ppi6-nao { color: var(--pp1-red) !important; font-weight: 700; white-space: nowrap; }
+
+/* --- grids --- */
+.ppi6-g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.ppi6-g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.ppi6-g2 > .ppi6-card, .ppi6-g3 > .ppi6-card { margin-bottom: 0; }
+
+/* --- requisito numerado --- */
+.ppi6-req { position: relative; padding-left: 3.4rem; }
+.ppi6-req-n { position: absolute; left: 1.2rem; top: 1.3rem; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  background: var(--blue); color: #fff; font-weight: 700; font-size: .85rem; display: flex; align-items: center; justify-content: center; }
+:root[data-theme="dark"] .ppi6-req-n { color: #0d1b2e; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ppi6-req-n,
+  :root:not([data-theme="light"]) .ppi6-bt.prim { color: #0d1b2e; }
+}
+
+/* --- negativas (tres cartoes coloridos) --- */
+.ppi6-neg { border-top-width: 4px; border-top-style: solid; }
+.ppi6-neg.lei { border-top-color: var(--pp1-red); }
+.ppi6-neg.mp  { border-top-color: var(--pp1-orange); }
+.ppi6-neg.jz  { border-top-color: var(--pp1-purple); }
+.ppi6-neg-rot { display: inline-block; font-size: .78rem; font-family: monospace; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; padding: .15rem .55rem; border-radius: 4px; margin-bottom: .5rem; }
+.ppi6-neg.lei .ppi6-neg-rot { background: var(--pp1-red-lt); color: var(--pp1-red); }
+.ppi6-neg.mp  .ppi6-neg-rot { background: var(--pp1-orange-lt); color: var(--pp1-orange); }
+.ppi6-neg.jz  .ppi6-neg-rot { background: var(--pp1-purple-lt); color: var(--pp1-purple); }
+.ppi6-neg dl { margin: .6rem 0 0; }
+.ppi6-neg dt { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text); margin-top: .5rem; }
+.ppi6-neg dd { margin: .15rem 0 0; font-size: .93rem; color: var(--text2); line-height: 1.55; }
+
+/* --- fluxograma (HTML, reflui no celular) --- */
+.ppi6-fluxo { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 10px;
+  padding: 1.2rem; margin-bottom: 1.2rem; }
+.ppi6-passo { background: var(--surface); border: 1.5px solid var(--border); border-left: 4px solid var(--blue);
+  border-radius: 8px; padding: .8rem 1rem; max-width: 640px; margin: 0 auto; }
+.ppi6-passo-n { font-family: monospace; font-size: .76rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); }
+.ppi6-passo-t { font-weight: 700; color: var(--text); font-size: .98rem; margin: .1rem 0 .2rem; }
+.ppi6-passo p { font-size: .9rem; margin: 0; line-height: 1.5; }
+.ppi6-saida { margin-top: .5rem !important; font-size: .86rem !important; color: var(--pp1-red) !important; }
+.ppi6-saida::before { content: '↳ '; font-weight: 700; }
+.ppi6-seta { text-align: center; color: var(--gold); font-size: 1.15rem; line-height: 1; padding: .35rem 0; }
+.ppi6-ramos { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: .7rem; max-width: 860px; margin: 0 auto; }
+.ppi6-ramos .ppi6-passo { max-width: none; margin: 0; }
+.ppi6-passo.ok   { border-left-color: var(--pp1-green); }
+.ppi6-passo.ajuste { border-left-color: var(--pp1-orange); }
+.ppi6-passo.nao  { border-left-color: var(--pp1-red); }
+.ppi6-passo.ok .ppi6-passo-n { color: var(--pp1-green); }
+.ppi6-passo.ajuste .ppi6-passo-n { color: var(--pp1-orange); }
+.ppi6-passo.nao .ppi6-passo-n { color: var(--pp1-red); }
+.ppi6-art { font-family: monospace; font-size: .8rem; color: var(--blue); font-weight: 700; }
+
+/* --- linha do tempo --- */
+.ppi6-lt { position: relative; margin: 1.2rem 0 1.5rem; padding-left: 1.7rem; }
+.ppi6-lt::before { content: ''; position: absolute; left: .4rem; top: .4rem; bottom: .4rem; width: 2px;
+  background: linear-gradient(180deg, var(--blue), var(--gold)); }
+.ppi6-lt-item { position: relative; background: var(--pp1-bg2); border: 1px solid var(--border);
+  border-radius: 6px; padding: .9rem 1.2rem; margin-bottom: .8rem; }
+.ppi6-lt-item::before { content: ''; position: absolute; left: -1.62rem; top: 1rem; width: .68rem; height: .68rem;
+  border-radius: 50%; background: var(--surface); border: 2px solid var(--blue); }
+.ppi6-lt-ano { font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi6-lt-tit { font-size: .99rem; font-weight: 700; color: var(--text); margin: .2rem 0 .25rem; }
+.ppi6-lt-txt { font-size: .94rem; color: var(--text2); line-height: 1.55; margin: 0; }
+
+/* --- badge de atualizacao legislativa --- */
+.ppi6-badge { display: inline-block; font-size: .72rem; font-family: monospace; font-weight: 700;
+  background: var(--pp1-teal-lt); color: var(--pp1-teal); border: 1px solid var(--pp1-teal);
+  border-radius: 4px; padding: .05rem .4rem; margin-left: .3rem; vertical-align: middle; white-space: nowrap; }
+
+/* --- teste de cabimento --- */
+.ppi6-verif [hidden] { display: none !important; }
+.ppi6-verif { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem; margin-bottom: 1.2rem; }
+.ppi6-verif-prog { font-family: monospace; font-size: .8rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: .06em; }
+.ppi6-verif-barra { height: 4px; background: var(--pp1-bg3); border-radius: 2px; margin: .5rem 0 1rem; overflow: hidden; }
+.ppi6-verif-barra span { display: block; height: 100%; background: var(--blue); width: 0; transition: width .25s; }
+.ppi6-verif-q { font-size: 1.02rem !important; color: var(--text) !important; font-weight: 700; margin-bottom: .4rem !important; }
+.ppi6-verif-dica { font-size: .9rem !important; }
+.ppi6-verif-bts { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .9rem; }
+.ppi6-bt { padding: .55rem 1.3rem; font-size: .94rem; font-weight: 700; font-family: var(--sans); border-radius: 6px;
+  border: 1.5px solid var(--blue); background: var(--surface); color: var(--blue); cursor: pointer; }
+.ppi6-bt:hover { background: var(--blue-hover); }
+.ppi6-bt.prim { background: var(--blue); color: #fff; }
+:root[data-theme="dark"] .ppi6-bt.prim { color: #0d1b2e; }
+.ppi6-res { border-radius: 8px; padding: 1rem 1.2rem; margin-top: .4rem; border: 1px solid; }
+.ppi6-res.sim { background: var(--pp1-green-lt); border-color: var(--pp1-green); }
+.ppi6-res.nao { background: var(--pp1-red-lt); border-color: var(--pp1-red); }
+.ppi6-res-tit { font-weight: 700; font-size: 1rem; margin-bottom: .35rem; }
+.ppi6-res.sim .ppi6-res-tit { color: var(--pp1-green); }
+.ppi6-res.nao .ppi6-res-tit { color: var(--pp1-red); }
+.ppi6-res p { margin: 0 0 .5rem; font-size: .94rem; }
+.ppi6-trilha { font-size: .86rem !important; font-family: monospace; color: var(--text2); margin-top: .8rem !important; }
+
+/* --- roteiro / check-in --- */
+.ppi6-check { list-style: none; padding-left: 0 !important; }
+.ppi6-check li { display: flex; gap: 1rem; align-items: flex-start; background: var(--pp1-bg2);
+  border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; margin-bottom: .8rem;
+  transition: border-color .2s; color: var(--text2); font-size: .96rem; }
+.ppi6-check li:hover { border-color: var(--blue-mid); }
+.ppi6-check li::before { content: '☐'; font-size: 1.1rem; color: var(--blue); line-height: 1.25; flex-shrink: 0; }
+.ppi6-check b { color: var(--blue); }
+
+/* --- caso pratico --- */
+.ppi6-caso { background: var(--pp1-bg2); border: 1px solid var(--border); border-radius: 8px;
+  overflow: hidden; margin-bottom: 1.5rem; }
+.ppi6-caso-n { display: block; background: var(--pp1-bg3); border-bottom: 1px solid var(--border);
+  padding: .7rem 1.4rem; font-size: .84rem; font-family: monospace; font-weight: bold; color: var(--blue); }
+.ppi6-caso h3 { margin: 1.1rem 1.4rem .5rem; }
+.ppi6-caso p { margin: 0 1.4rem .85rem; }
+.ppi6-resp { margin: 0 1.4rem 1.2rem; background: var(--pp1-bg3); border-left: 3px solid var(--pp1-purple);
+  border-radius: 0 4px 4px 0; padding: .7rem 1rem; }
+.ppi6-resp summary { cursor: pointer; font-size: .94rem; font-weight: 700; color: var(--pp1-purple); list-style: none; }
+.ppi6-resp summary::-webkit-details-marker { display: none; }
+.ppi6-resp summary::before { content: '▸ '; }
+.ppi6-resp[open] summary::before { content: '▾ '; }
+.ppi6-resp p { margin: .55rem 0 0; font-size: .94rem; color: var(--text2); }
+
+/* --- guia resumido --- */
+.ppi6-guia { background: var(--blue-light); border: 1px solid rgba(88,166,255,.2); border-radius: 8px;
+  padding: 1.4rem; margin-bottom: 1.2rem; }
+.ppi6-guia h3 { color: var(--blue); margin-top: 0; }
+.ppi6-guia p { color: var(--text2); }
+.ppi6-pill { display: inline-block; background: var(--pp1-bg3); border: 1px solid var(--border);
+  border-radius: 20px; padding: .2rem .7rem; font-size: .84rem; font-family: monospace; font-weight: bold;
+  color: var(--blue); margin: 0 .3rem .35rem 0; }
+
+.ppi6-nota { font-size: .88rem; color: var(--text2); line-height: 1.55;
+  border-top: 1px solid var(--border); padding-top: .9rem; margin-top: 1.8rem; }
+
+@media (max-width: 480px) {
+  .ppi6-card, .ppi6-verif { padding: 1.1rem; }
+  .ppi6-req { padding-left: 1.1rem; }
+  .ppi6-req-n { position: static; display: inline-flex; margin-bottom: .45rem; }
+  .ppi6-fluxo { padding: .8rem; }
+  .ppi6 h2 { font-size: 1.15rem; }
+}
+</style>
+
+<div class="ppi6">
+
+  <div class="ppi6-head">
+    <div class="ppi6-kicker">Processo Penal I · Unidade 6</div>
+    <h1 class="ppi6-h1">Acordo de Não Persecução Penal (ANPP)</h1>
+  </div>
+  <p class="ppi6-sub">Conceito e natureza · Hipóteses de cabimento · Vedações e negativas · Condições · Homologação · Cumprimento e descumprimento · Momento e direito intertemporal</p>
+
+  <div class="ppi6-tabs" role="tablist" aria-label="Seções da unidade">
+    <button class="ppi6-tab" role="tab" aria-selected="true"  data-p="mapa">Mapa do instituto</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="conc">Conceito e natureza</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="cab">Cabimento</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="ved">Vedações e negativas</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="cond">Condições</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="hom">Homologação</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="desc">Cumprimento e descumprimento</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="tempo">Momento e direito intertemporal</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="teste">Teste de cabimento</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="rot">Roteiro de estudo</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="casos">Casos práticos</button>
+    <button class="ppi6-tab" role="tab" aria-selected="false" data-p="guia">Guia resumido</button>
+  </div>
+
+  <!-- ============================ MAPA ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="mapa">
+    <h2>O caminho do acordo, do inquérito à extinção da punibilidade</h2>
+    <p>O ANPP é uma <strong>saída negociada antes da denúncia</strong>: em vez de acusar, o Ministério Público ajusta condições com o investigado; cumpridas as condições, extingue-se a punibilidade. Siga o fluxo de cima para baixo — cada etapa traz o dispositivo que a regula.</p>
+
+    <div class="ppi6-fluxo" role="img" aria-label="Fluxograma do acordo de não persecução penal, da conclusão da investigação até o cumprimento ou o descumprimento do acordo">
+      <div class="ppi6-passo">
+        <div class="ppi6-passo-n">Etapa 1</div>
+        <div class="ppi6-passo-t">Investigação concluída: o MP examina os autos</div>
+        <p>O ANPP só entra em cena se houver base para denunciar.</p>
+        <p class="ppi6-saida">É caso de arquivamento? Arquiva-se (art.&nbsp;28). Não há acordo.</p>
+      </div>
+      <div class="ppi6-seta" aria-hidden="true">▼</div>
+
+      <div class="ppi6-passo">
+        <div class="ppi6-passo-n">Etapa 2</div>
+        <div class="ppi6-passo-t">Filtro legal: requisitos do caput e vedações do §&nbsp;2º</div>
+        <p>Sem violência ou grave ameaça · pena mínima inferior a 4 anos · necessário e suficiente · nenhuma das quatro vedações. <span class="ppi6-art">art.&nbsp;28-A, caput, §§&nbsp;1º e 2º</span></p>
+        <p class="ppi6-saida">Não passou no filtro? Não cabe ANPP: segue a denúncia (ou a transação penal, se cabível).</p>
+      </div>
+      <div class="ppi6-seta" aria-hidden="true">▼</div>
+
+      <div class="ppi6-passo">
+        <div class="ppi6-passo-n">Etapa 3</div>
+        <div class="ppi6-passo-t">Proposta do Ministério Público</div>
+        <p>O MP “poderá propor”: avalia os requisitos de forma motivada (poder-dever), e o juiz não o substitui. <span class="ppi6-art">art.&nbsp;28-A, caput</span></p>
+        <p class="ppi6-saida">O MP recusou? O investigado pode requerer a remessa dos autos ao órgão superior. <span class="ppi6-art">§&nbsp;14</span></p>
+      </div>
+      <div class="ppi6-seta" aria-hidden="true">▼</div>
+
+      <div class="ppi6-passo">
+        <div class="ppi6-passo-n">Etapa 4</div>
+        <div class="ppi6-passo-t">Termo do acordo</div>
+        <p>Confissão formal e circunstanciada + condições dos incisos I a V. Por escrito, firmado pelo MP, pelo investigado e por seu defensor. <span class="ppi6-art">art.&nbsp;28-A, §&nbsp;3º</span></p>
+      </div>
+      <div class="ppi6-seta" aria-hidden="true">▼</div>
+
+      <div class="ppi6-passo">
+        <div class="ppi6-passo-n">Etapa 5</div>
+        <div class="ppi6-passo-t">Audiência de homologação</div>
+        <p>O juiz verifica a <strong>voluntariedade</strong> (oitiva do investigado na presença do defensor) e a <strong>legalidade</strong>. Em regra, é o juiz das garantias. <span class="ppi6-art">§&nbsp;4º · art.&nbsp;3º-B, XVII</span></p>
+      </div>
+      <div class="ppi6-seta" aria-hidden="true">▼</div>
+
+      <div class="ppi6-ramos">
+        <div class="ppi6-passo ok">
+          <div class="ppi6-passo-n">Homologa</div>
+          <p>Autos voltam ao MP, que inicia a execução perante o juízo da execução penal. A vítima é intimada. <span class="ppi6-art">§§&nbsp;6º e 9º</span></p>
+        </div>
+        <div class="ppi6-passo ajuste">
+          <div class="ppi6-passo-n">Condições inadequadas</div>
+          <p>Inadequadas, insuficientes ou abusivas: autos voltam ao MP para reformular a proposta, com concordância do investigado e do defensor. <span class="ppi6-art">§&nbsp;5º</span></p>
+        </div>
+        <div class="ppi6-passo nao">
+          <div class="ppi6-passo-n">Recusa</div>
+          <p>Faltam requisitos legais ou não houve a adequação: o MP complementa a investigação ou oferece denúncia. Cabe RESE. <span class="ppi6-art">§§&nbsp;7º e 8º · art.&nbsp;581, XXV</span></p>
+        </div>
+      </div>
+      <div class="ppi6-seta" aria-hidden="true">▼</div>
+
+      <div class="ppi6-passo">
+        <div class="ppi6-passo-n">Etapa 6</div>
+        <div class="ppi6-passo-t">Execução do acordo</div>
+        <p>Enquanto o acordo não for cumprido ou rescindido, a prescrição não corre. <span class="ppi6-art">CP, art.&nbsp;116, IV</span></p>
+      </div>
+      <div class="ppi6-seta" aria-hidden="true">▼</div>
+
+      <div class="ppi6-ramos">
+        <div class="ppi6-passo ok">
+          <div class="ppi6-passo-n">Cumprido</div>
+          <p>O juízo competente decreta a extinção da punibilidade. O acordo não constará de certidão de antecedentes, salvo para impedir novo benefício em 5 anos. <span class="ppi6-art">§§&nbsp;13 e 12</span></p>
+        </div>
+        <div class="ppi6-passo nao">
+          <div class="ppi6-passo-n">Descumprido</div>
+          <p>O MP comunica ao juízo, para rescisão e posterior denúncia; o descumprimento pode justificar não oferecer suspensão condicional do processo. A vítima é intimada. <span class="ppi6-art">§§&nbsp;10, 11 e 9º</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ppi6-alerta">
+      <span class="ppi6-alerta-tag">O que você precisa fixar antes de tudo</span>
+      <p>Três perguntas resolvem a maior parte das questões: <strong>cabe?</strong> (requisitos do caput e vedações do §&nbsp;2º), <strong>quem decide?</strong> (o MP propõe e o juiz homologa — o juiz não oferece o acordo) e <strong>o que acontece depois?</strong> (cumprido, extingue-se a punibilidade; descumprido, o acordo é rescindido e o MP denuncia).</p>
+    </div>
+  </section>
+
+  <!-- ============================ CONCEITO ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="conc" hidden>
+    <h2>Conceito</h2>
+
+    <p>O ANPP teve início na <strong>Resolução nº 181/2017 do Conselho Nacional do Ministério Público</strong> e foi levado ao Código de Processo Penal pela <strong>Lei nº 13.964/2019</strong> (Pacote Anticrime), que inseriu o art.&nbsp;28-A.</p>
+
+    <div class="ppi6-dout">
+      <span class="ppi6-dout-tag">A definição doutrinária · Renato Brasileiro de Lima</span>
+      <p>“Na sistemática adotada pelo art.&nbsp;28-A do Código de Processo Penal, introduzido pela Lei nº 13.964/19 (Pacote Anticrime), cuida-se de negócio jurídico de natureza extrajudicial, necessariamente homologado pelo juízo competente – pelo menos em regra, pelo juiz das garantias (CPP, art.&nbsp;3º-B, inciso XVII, incluído pela Lei n. 13.964/19) –, celebrado entre o Ministério Público e o autor do fato delituoso – devidamente assistido por seu defensor –, que confessa formal e circunstanciadamente a prática do delito, sujeitando-se ao cumprimento de certas condições não privativas de liberdade, em troca do compromisso do Parquet de não perseguir judicialmente o caso penal extraído da investigação penal, leia-se, não oferecer denúncia, declarando-se a extinção da punibilidade caso a avença seja integralmente cumprida.”</p>
+    </div>
+
+    <h3>A mesma definição, em peças</h3>
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Elemento</th><th>O que significa</th><th>Onde está</th></tr></thead>
+        <tbody>
+          <tr><td>Natureza</td><td>Negócio jurídico extrajudicial — um acordo, não uma pena</td><td>Renato Brasileiro de Lima</td></tr>
+          <tr><td>Partes</td><td>Ministério Público e investigado, este assistido por defensor</td><td>Art. 28-A, §&nbsp;3º</td></tr>
+          <tr><td>Controle judicial</td><td>Homologação obrigatória, em regra pelo juiz das garantias</td><td>Art. 28-A, §&nbsp;4º · art.&nbsp;3º-B, XVII</td></tr>
+          <tr><td>Pressuposto</td><td>Confissão formal e circunstanciada</td><td>Art. 28-A, caput</td></tr>
+          <tr><td>Prestação do investigado</td><td>Condições não privativas de liberdade</td><td>Art. 28-A, I a V</td></tr>
+          <tr><td>Contrapartida do MP</td><td>Não oferecer denúncia</td><td>Art. 28-A, caput</td></tr>
+          <tr><td>Resultado</td><td>Cumprido o acordo, extinção da punibilidade</td><td>Art. 28-A, §&nbsp;13</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Sobre o rótulo:</strong> Renato Brasileiro fala em negócio jurídico <strong>de natureza extrajudicial</strong>; o STJ já o chamou de negócio jurídico <strong>pré-processual</strong> (RHC 161.251) e de negócio jurídico <strong>processual penal</strong> (Tema&nbsp;1098). Os nomes variam; a ideia comum é a mesma: trata-se de um acordo, e não de uma pena.</p>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;3º-B, XVII</span>
+      <p>“O juiz das garantias é responsável pelo controle da legalidade da investigação criminal [...], competindo-lhe especialmente: [...] XVII – decidir sobre a homologação de acordo de não persecução penal ou os de colaboração premiada, quando formalizados durante a investigação;”</p>
+    </div>
+
+    <div class="ppi6-alerta">
+      <span class="ppi6-alerta-tag">Por que “em regra” o juiz das garantias</span>
+      <p>O inciso XVII fala em acordo <strong>formalizado durante a investigação</strong>. Daí se deduz que, se o acordo vier a ser celebrado já no curso da ação penal (hipótese tratada na aba “Momento e direito intertemporal”), a competência do juiz das garantias já terá cessado com o oferecimento da denúncia (Unidade 4), e a homologação fica com o <strong>juiz da instrução e julgamento</strong>.</p>
+    </div>
+
+    <h2>Natureza jurídica: uma norma híbrida</h2>
+
+    <p>A norma do ANPP tem <strong>duas faces</strong>. É <strong>processual</strong> porque permite a composição entre as partes para evitar a ação penal; é <strong>material</strong> porque prevê a extinção da punibilidade de quem cumpre o acordo (§&nbsp;13).</p>
+
+    <div class="ppi6-juris">
+      <span class="ppi6-juris-tag">STJ · Tema Repetitivo 1098 · tese 1</span>
+      <p>“1 - O Acordo de não persecução penal constitui um negócio jurídico processual penal instituído por norma que possui natureza processual, no que diz respeito à possibilidade de composição entre as partes com o fim de evitar a instauração da ação penal, e, de outro lado, natureza material em razão da previsão de extinção da punibilidade de quem cumpre os deveres estabelecidos no acordo (art.&nbsp;28-A, §&nbsp;13, do Código de Processo Penal - CPP).”</p>
+      <p class="ppi6-fonte">STJ, 3ª Seção, REsp 1.890.344/RS e REsp 1.890.343/SC, Rel. Min. Reynaldo Soares da Fonseca, j. 23/10/2024 (Info&nbsp;831).</p>
+    </div>
+
+    <div class="ppi6-card">
+      <h3>A consequência: retroatividade benéfica</h3>
+      <p>Por ter conteúdo material, a norma se submete à <strong>retroatividade da lei penal mais benéfica</strong> (CF, art.&nbsp;5º, XL) — e não apenas ao <em>tempus regit actum</em> do art.&nbsp;2º do CPP. É a lógica das <strong>normas mistas</strong> estudada na Unidade 3. Os efeitos práticos estão na aba “Momento e direito intertemporal”.</p>
+    </div>
+
+    <h2>Poder-dever do MP, não direito subjetivo do investigado</h2>
+    <p>O caput diz que o Ministério Público <strong>“poderá propor”</strong> o acordo. Para o STF, avaliar os requisitos é <strong>poder-dever</strong> do MP, que deve agir <strong>motivadamente</strong>. O investigado não pode exigir o acordo do juiz, e o juiz não pode impô-lo ao MP. O que o investigado tem é um <strong>caminho de revisão</strong> da recusa dentro do próprio Ministério Público (§&nbsp;14). Detalhes na aba “Vedações e negativas”.</p>
+
+    <div class="ppi6-juris">
+      <span class="ppi6-juris-tag">STF · Plenário · HC 185.913/DF · tese 1</span>
+      <p>“1. Compete ao membro do Ministério Público oficiante, motivadamente e no exercício do seu poder-dever, avaliar o preenchimento dos requisitos para negociação e celebração do ANPP, sem prejuízo do regular exercício dos controles jurisdicional e interno;”</p>
+      <p class="ppi6-fonte">STF, Plenário, HC 185.913/DF, Rel. Min. Gilmar Mendes, julgamento finalizado em 18/9/2024 (Info&nbsp;1151).</p>
+    </div>
+
+    <h2>ANPP, transação penal e suspensão condicional do processo</h2>
+    <p>Os três são instrumentos negociais, mas não se confundem. O quadro abaixo é todo construído a partir da lei.</p>
+
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Critério</th><th>Transação penal</th><th>ANPP</th><th>Suspensão condicional do processo</th></tr></thead>
+        <tbody>
+          <tr><td>Base legal</td><td>Lei&nbsp;9.099/95, art.&nbsp;76</td><td>CPP, art.&nbsp;28-A</td><td>Lei&nbsp;9.099/95, art.&nbsp;89</td></tr>
+          <tr><td>Infrações alcançadas</td><td>Menor potencial ofensivo: contravenções e crimes com pena máxima não superior a 2 anos (art.&nbsp;61)</td><td>Sem violência ou grave ameaça e com pena mínima inferior a 4 anos</td><td>Crimes com pena mínima igual ou inferior a 1 ano, abrangidos ou não pela Lei&nbsp;9.099</td></tr>
+          <tr><td>Momento</td><td>Antes da denúncia (“não sendo caso de arquivamento”)</td><td>Antes da denúncia (“não sendo caso de arquivamento”); ressalvas na aba “Momento e direito intertemporal”</td><td>“Ao oferecer a denúncia”</td></tr>
+          <tr><td>Confissão</td><td>Não exigida pela lei</td><td>Exigida: formal e circunstanciada</td><td>Não exigida pela lei</td></tr>
+          <tr><td>O que se ajusta</td><td>Aplicação imediata de pena restritiva de direitos ou multa</td><td>Condições não privativas de liberdade (incisos I a V)</td><td>Período de prova de 2 a 4 anos, com condições</td></tr>
+          <tr><td>Desfecho</td><td>A sanção não gera reincidência; é registrada só para impedir novo benefício em 5 anos (§&nbsp;4º) e não consta de certidão (§&nbsp;6º)</td><td>Cumprido, extinção da punibilidade (§&nbsp;13); não consta de certidão, salvo para o §&nbsp;2º, III (§&nbsp;12)</td><td>Expirado o prazo sem revogação, extinção da punibilidade (§&nbsp;5º)</td></tr>
+          <tr><td>Prescrição</td><td>Sem regra específica no art.&nbsp;76</td><td>Não corre enquanto não cumprido ou rescindido (CP, art.&nbsp;116, IV)</td><td>Não corre durante a suspensão (§&nbsp;6º)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi6-alerta">
+      <span class="ppi6-alerta-tag">Como os três se encaixam</span>
+      <p>Se couber <strong>transação penal</strong>, o ANPP está vedado (art.&nbsp;28-A, §&nbsp;2º, I): a transação vem primeiro. O ANPP é anterior à denúncia; a suspensão condicional do processo é proposta <strong>com</strong> a denúncia. E o descumprimento do ANPP pode ser usado pelo MP para não oferecer a suspensão (§&nbsp;11).</p>
+    </div>
+  </section>
+
+  <!-- ============================ CABIMENTO ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="cab" hidden>
+    <h2>Hipóteses de cabimento</h2>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, caput</span>
+      <p>“Não sendo caso de arquivamento e tendo o investigado confessado formal e circunstancialmente a prática de infração penal sem violência ou grave ameaça e com pena mínima inferior a 4 (quatro) anos, o Ministério Público poderá propor acordo de não persecução penal, desde que necessário e suficiente para reprovação e prevenção do crime, mediante as seguintes condições ajustadas cumulativa e alternativamente:”</p>
+    </div>
+
+    <p>Do caput saem <strong>cinco requisitos cumulativos</strong>. Faltando um, não há acordo — e, mesmo presentes os cinco, ainda é preciso que não incida nenhuma vedação do §&nbsp;2º (próxima aba).</p>
+
+    <div class="ppi6-card ppi6-req">
+      <span class="ppi6-req-n" aria-hidden="true">1</span>
+      <h3>Não ser caso de arquivamento</h3>
+      <p>O ANPP é alternativa à <strong>denúncia</strong>. Se a investigação não reúne base para acusar, o caminho é o arquivamento (art.&nbsp;28 — Unidade 5), e não um acordo. Primeiro se pergunta “há como denunciar?”; só depois, “cabe acordo?”.</p>
+    </div>
+
+    <div class="ppi6-card ppi6-req">
+      <span class="ppi6-req-n" aria-hidden="true">2</span>
+      <h3>Confissão formal e circunstanciada</h3>
+      <p>O investigado reconhece a prática da infração de modo <strong>formal</strong> (documentado no ato) e <strong>circunstanciado</strong> (com o detalhamento do fato). O ponto que exige atenção é o <strong>momento</strong>: a confissão <strong>não precisa ter ocorrido no inquérito</strong>.</p>
+      <div class="ppi6-juris" style="margin-bottom:0">
+        <span class="ppi6-juris-tag">STJ · Tema Repetitivo 1303</span>
+        <p>“1. A confissão pelo investigado na fase de inquérito policial não constitui exigência do art.&nbsp;28-A do Código de Processo Penal para o cabimento de Acordo de Não Persecução Penal (ANPP), sendo inválida a negativa de formulação da respectiva proposta baseada em sua ausência. 2. A formalização da confissão para fins do ANPP pode se dar no momento da assinatura do acordo, perante o próprio órgão ministerial, após a ciência, avaliação e aceitação da proposta pelo beneficiado, devidamente assistido por defesa técnica, dado o caráter negocial do instituto.”</p>
+        <p class="ppi6-fonte">STJ, 3ª Seção, REsp 2.161.548/BA, Rel. Des. conv. Otávio de Almeida Toledo, j. 12/3/2025 (Info&nbsp;843).</p>
+      </div>
+    </div>
+
+    <div class="ppi6-card ppi6-req">
+      <span class="ppi6-req-n" aria-hidden="true">3</span>
+      <h3>Infração penal sem violência ou grave ameaça</h3>
+      <p>Duas perguntas clássicas:</p>
+      <ul>
+        <li><strong>Pode ser contravenção?</strong> O texto fala em “infração penal”, gênero que abrange crimes e contravenções — não há exclusão em abstrato. Mas toda contravenção é infração de menor potencial ofensivo (Lei&nbsp;9.099, art.&nbsp;61); se couber <strong>transação penal</strong>, o ANPP está vedado (§&nbsp;2º, I). Conclusão que se extrai da própria lei: o ANPP para contravenção é <strong>residual</strong>.</li>
+        <li><strong>E o crime culposo com resultado violento?</strong> O Enunciado 23 do CNPG admite o ANPP: no crime culposo, a conduta é a violação de um dever de cuidado, e o resultado violento é involuntário.</li>
+      </ul>
+      <div class="ppi6-dout" style="margin-bottom:0">
+        <span class="ppi6-dout-tag">Enunciado nº 23 do CNPG e do GNCCRIM</span>
+        <p>“É cabível o acordo de não persecução penal nos crimes culposos com resultado violento, uma vez que nos delitos desta natureza a conduta consiste na violação de um dever de cuidado objetivo por negligência, imperícia ou imprudência, cujo resultado é involuntário, não desejado e nem aceito pelo agente, apesar de previsível”.</p>
+      </div>
+    </div>
+
+    <div class="ppi6-card ppi6-req">
+      <span class="ppi6-req-n" aria-hidden="true">4</span>
+      <h3>Pena mínima inferior a 4 anos</h3>
+      <div class="ppi6-lei">
+        <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, §&nbsp;1º</span>
+        <p>“Para aferição da pena mínima cominada ao delito a que se refere o caput deste artigo, serão consideradas as causas de aumento e diminuição aplicáveis ao caso concreto.”</p>
+      </div>
+      <p>Considera-se a <strong>pena mínima em abstrato</strong>, ajustada pelas causas de aumento e de diminuição do caso. Veja como o resultado muda:</p>
+      <div class="ppi6-tabela-wrap" style="margin-bottom:.6rem">
+        <table class="ppi6-tabela">
+          <thead><tr><th>Situação</th><th>Mínimo em abstrato</th><th>Causa aplicável</th><th>Mínimo para o ANPP</th><th>Requisito</th></tr></thead>
+          <tbody>
+            <tr><td>Estelionato (CP, art.&nbsp;171, caput)</td><td>1 ano</td><td>—</td><td>1 ano</td><td class="ppi6-sim">✔ atendido</td></tr>
+            <tr><td>Peculato praticado por ocupante de cargo em comissão (CP, art.&nbsp;312 c/c art.&nbsp;327, §&nbsp;2º)</td><td>2 anos</td><td>Aumento da terça parte</td><td>2 anos e 8 meses</td><td class="ppi6-sim">✔ atendido</td></tr>
+            <tr><td>Fraude eletrônica tentada (CP, art.&nbsp;171, §&nbsp;2º-A, c/c art.&nbsp;14, II) <span class="ppi6-badge">redação: Lei&nbsp;15.397/2026</span></td><td>4 anos</td><td>Tentativa: diminuição de 1/3 a 2/3</td><td>Entre 1 ano e 4 meses e 2 anos e 8 meses</td><td class="ppi6-sim">✔ atendido (com qualquer fração)</td></tr>
+            <tr><td>Fraude eletrônica consumada (CP, art.&nbsp;171, §&nbsp;2º-A)</td><td>4 anos</td><td>—</td><td>4 anos</td><td class="ppi6-nao">✘ não atendido</td></tr>
+            <tr><td>Lavagem cometida de forma reiterada (Lei&nbsp;9.613/98, art.&nbsp;1º c/c §&nbsp;4º)</td><td>3 anos</td><td>Aumento de 1/3 a 2/3</td><td>4 anos ou mais</td><td class="ppi6-nao">✘ não atendido</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ppi6-alerta" style="margin-bottom:0">
+        <span class="ppi6-alerta-tag">“Inferior” não é “até”</span>
+        <p>A lei exige pena mínima <strong>inferior</strong> a 4 anos. Pena mínima de <strong>exatamente 4 anos</strong> não admite ANPP — é o que acontece com a fraude eletrônica consumada e com a lavagem reiterada do quadro.</p>
+      </div>
+    </div>
+
+    <div class="ppi6-card ppi6-req">
+      <span class="ppi6-req-n" aria-hidden="true">5</span>
+      <h3>Necessidade e suficiência para reprovação e prevenção do crime</h3>
+      <p>É o requisito de avaliação do caso concreto. Mesmo presentes os requisitos objetivos, o MP pode entender que o acordo não basta para reprovar e prevenir aquele crime — e, nesse caso, deve <strong>fundamentar</strong> a recusa (STF, HC 185.913, tese 1), que o investigado pode levar ao órgão superior (§&nbsp;14).</p>
+    </div>
+
+    <h3>E na Justiça Militar?</h3>
+    <div class="ppi6-juris">
+      <span class="ppi6-juris-tag">STJ · 6ª Turma · HC 988.351/MG</span>
+      <p>Em adequação ao entendimento do STF, o acordo de não persecução penal é <strong>aplicável aos crimes julgados pela Justiça Militar</strong>.</p>
+      <p class="ppi6-fonte">STJ, 6ª Turma, HC 988.351/MG, Rel. Min. Og Fernandes, j. 5/8/2025 (Info&nbsp;858).</p>
+    </div>
+
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Requisito</th><th>Pergunta de controle</th><th>Fundamento</th></tr></thead>
+        <tbody>
+          <tr><td>Não arquivamento</td><td>Há base para denunciar?</td><td>Art. 28-A, caput · art.&nbsp;28</td></tr>
+          <tr><td>Confissão</td><td>O investigado confessará formal e circunstanciadamente (ainda que só na assinatura)?</td><td>Art. 28-A, caput · Tema&nbsp;1303</td></tr>
+          <tr><td>Sem violência ou grave ameaça</td><td>A conduta foi violenta ou ameaçadora?</td><td>Art. 28-A, caput · Enunciado 23</td></tr>
+          <tr><td>Pena mínima</td><td>Com aumentos e diminuições, o mínimo fica abaixo de 4 anos?</td><td>Art. 28-A, caput e §&nbsp;1º</td></tr>
+          <tr><td>Necessidade e suficiência</td><td>O acordo basta para reprovar e prevenir o crime?</td><td>Art. 28-A, caput</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================ VEDAÇÕES E NEGATIVAS ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="ved" hidden>
+    <h2>As três negativas do ANPP</h2>
+    <p>“Não ter ANPP” pode significar três coisas diferentes. Cada uma tem quem a pronuncia, um fundamento e um remédio próprios — e não devem ser confundidas.</p>
+
+    <div class="ppi6-g3">
+      <div class="ppi6-card ppi6-neg lei">
+        <span class="ppi6-neg-rot">A lei veda</span>
+        <h3>“Não cabe”</h3>
+        <dl>
+          <dt>Fundamento</dt><dd>Art. 28-A, §&nbsp;2º, I a IV (e falta de requisito do caput)</dd>
+          <dt>Consequência</dt><dd>O MP segue para a denúncia — ou para a transação penal, no caso do inciso I</dd>
+        </dl>
+      </div>
+      <div class="ppi6-card ppi6-neg mp">
+        <span class="ppi6-neg-rot">O MP recusa</span>
+        <h3>“Não ofereço”</h3>
+        <dl>
+          <dt>Fundamento</dt><dd>Avaliação motivada do MP sobre os requisitos (poder-dever), em especial necessidade e suficiência</dd>
+          <dt>Remédio</dt><dd>Requerimento de remessa dos autos ao órgão superior do MP (§&nbsp;14 c/c art.&nbsp;28)</dd>
+        </dl>
+      </div>
+      <div class="ppi6-card ppi6-neg jz">
+        <span class="ppi6-neg-rot">O juiz recusa</span>
+        <h3>“Não homologo”</h3>
+        <dl>
+          <dt>Fundamento</dt><dd>Requisitos legais não atendidos ou adequação não realizada (§&nbsp;7º)</dd>
+          <dt>Remédio</dt><dd>Recurso em sentido estrito (art.&nbsp;581, XXV)</dd>
+        </dl>
+      </div>
+    </div>
+
+    <h2>1. Vedações legais — §&nbsp;2º</h2>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, §&nbsp;2º</span>
+      <p>“O disposto no caput deste artigo não se aplica nas seguintes hipóteses:</p>
+      <p><strong>I</strong> – se for cabível transação penal de competência dos Juizados Especiais Criminais, nos termos da lei;</p>
+      <p><strong>II</strong> – se o investigado for reincidente ou se houver elementos probatórios que indiquem conduta criminal habitual, reiterada ou profissional, exceto se insignificantes as infrações penais pretéritas;</p>
+      <p><strong>III</strong> – ter sido o agente beneficiado nos 5 (cinco) anos anteriores ao cometimento da infração, em acordo de não persecução penal, transação penal ou suspensão condicional do processo; e</p>
+      <p><strong>IV</strong> – nos crimes praticados no âmbito de violência doméstica ou familiar, ou praticados contra a mulher por razões da condição de sexo feminino, em favor do agressor.”</p>
+    </div>
+
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Inciso</th><th>Vedação</th><th>Como ler</th></tr></thead>
+        <tbody>
+          <tr><td>I</td><td>Cabimento de transação penal</td><td>O ANPP é <strong>subsidiário</strong>: se a infração é de menor potencial ofensivo e a transação é cabível (Lei&nbsp;9.099, arts.&nbsp;61 e 76), usa-se a transação.</td></tr>
+          <tr><td>II</td><td>Reincidência ou conduta criminal habitual, reiterada ou profissional</td><td>Reincidência pressupõe condenação anterior <strong>transitada em julgado</strong> (CP, art.&nbsp;63). Processo em curso ou condenação recorrida não tornam ninguém reincidente. Ressalva: infrações pretéritas insignificantes.</td></tr>
+          <tr><td>III</td><td>Benefício nos 5 anos anteriores</td><td>Vale para ANPP, transação penal ou suspensão condicional do processo. Conta-se para trás a partir do <strong>cometimento da nova infração</strong>.</td></tr>
+          <tr><td>IV</td><td>Violência doméstica ou familiar, ou crime contra a mulher por razões da condição de sexo feminino</td><td>Vedação “em favor do agressor”. Incide ainda que a conduta, em si, não tenha violência física — o que importa é o contexto.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi6-alerta">
+      <span class="ppi6-alerta-tag">O §&nbsp;12 conversa com o inciso III</span>
+      <p>A celebração e o cumprimento do ANPP <strong>não constam de certidão de antecedentes</strong> — <strong>exceto</strong> para os fins do inciso III do §&nbsp;2º. O registro existe justamente para que se saiba se o agente já foi beneficiado nos últimos 5 anos.</p>
+    </div>
+
+    <div class="ppi6-card">
+      <h3>Não confunda: o tipo de crime, por si só, não veda</h3>
+      <p>Afora a exigência de infração sem violência ou grave ameaça (caput) e o contexto do inciso IV, a lei não exclui categorias de crimes. Um crime contra a Administração Pública, como o peculato, <strong>não está vedado</strong> pela natureza: o que decide é o preenchimento dos requisitos do caput e a ausência das vedações do §&nbsp;2º.</p>
+    </div>
+
+    <h2>2. Quando o MP recusa</h2>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, §&nbsp;14</span>
+      <p>“No caso de recusa, por parte do Ministério Público, em propor o acordo de não persecução penal, o investigado poderá requerer a remessa dos autos a órgão superior, na forma do art.&nbsp;28 deste Código.”</p>
+    </div>
+
+    <div class="ppi6-g2">
+      <div class="ppi6-card">
+        <h3>O juiz não pode impor o acordo</h3>
+        <p>A possibilidade de oferecer o ANPP é conferida <strong>exclusivamente ao Ministério Público</strong>; o Judiciário não pode determinar que o Parquet o oferte. A via contra a recusa é a do §&nbsp;14, por iniciativa da defesa.</p>
+        <p class="ppi6-fonte">STJ, 5ª Turma, RHC 161.251/PR, Rel. Min. Ribeiro Dantas, j. 10/5/2022 (Info&nbsp;739) · STF, 2ª Turma, HC 194.677/SP, Rel. Min. Gilmar Mendes, j. 11/5/2021 (Info&nbsp;1017).</p>
+      </div>
+      <div class="ppi6-card">
+        <h3>Recusa por falta de confissão no inquérito é inválida</h3>
+        <p>A confissão pode ser formalizada na própria assinatura do acordo. Negar a proposta <strong>apenas</strong> porque o investigado não confessou na fase policial contraria o Tema&nbsp;1303 do STJ.</p>
+        <p class="ppi6-fonte">STJ, 3ª Seção, REsp 2.161.548/BA (Tema&nbsp;1303), j. 12/3/2025 (Info&nbsp;843).</p>
+      </div>
+    </div>
+
+    <div class="ppi6-juris">
+      <span class="ppi6-juris-tag">STJ · 6ª Turma · REsp 2.024.381/TO — como o investigado fica sabendo da recusa</span>
+      <p>Por ausência de previsão legal, o MP <strong>não é obrigado a notificar</strong> o investigado sobre a proposta. Basta que exponha, em cota na denúncia, os motivos pelos quais não ofereceu o acordo. A <strong>ciência da recusa</strong> ocorre na <strong>citação</strong>, e o acusado pode, na primeira oportunidade de manifestação nos autos, requerer a remessa ao órgão de revisão ministerial (arts.&nbsp;28-A, §&nbsp;14, e 28).</p>
+      <p class="ppi6-fonte">STJ, 6ª Turma, REsp 2.024.381/TO, Rel. Des. conv. Jesuíno Rissato, j. 7/3/2023 (Info&nbsp;766).</p>
+    </div>
+
+    <h2>3. Quando o juiz recusa a homologação</h2>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, §§&nbsp;7º e 8º</span>
+      <p>“§&nbsp;7º O juiz poderá recusar homologação à proposta que não atender aos requisitos legais ou quando não for realizada a adequação a que se refere o §&nbsp;5º deste artigo.”</p>
+      <p>“§&nbsp;8º Recusada a homologação, o juiz devolverá os autos ao Ministério Público para a análise da necessidade de complementação das investigações ou o oferecimento da denúncia.”</p>
+    </div>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;581, XXV</span>
+      <p>“Caberá recurso, no sentido estrito, da decisão, despacho ou sentença: [...] XXV – que recusar homologação à proposta de acordo de não persecução penal, previsto no art.&nbsp;28-A desta Lei.”</p>
+    </div>
+
+    <div class="ppi6-alerta">
+      <span class="ppi6-alerta-tag">Pegadinha clássica</span>
+      <p>Se o juiz acha as condições <strong>inadequadas, insuficientes ou abusivas</strong>, ele <strong>devolve os autos ao próprio MP</strong> para reformular a proposta (§&nbsp;5º). A <strong>remessa ao órgão superior</strong> do MP é outra coisa: é o remédio do investigado contra a <strong>recusa do MP</strong> (§&nbsp;14).</p>
+    </div>
+  </section>
+
+  <!-- ============================ CONDIÇÕES ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="cond" hidden>
+    <h2>Condições do acordo</h2>
+    <p>A <strong>confissão</strong> é o pressuposto. As condições propriamente ditas estão nos incisos I a V e são “ajustadas <strong>cumulativa e alternativamente</strong>”: o MP pode combinar várias delas, conforme o caso.</p>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, I a V</span>
+      <p><strong>I</strong> – reparar o dano ou restituir a coisa à vítima, exceto na impossibilidade de fazê-lo;</p>
+      <p><strong>II</strong> – renunciar voluntariamente a bens e direitos indicados pelo Ministério Público como instrumentos, produto ou proveito do crime;</p>
+      <p><strong>III</strong> – prestar serviço à comunidade ou a entidades públicas por período correspondente à pena mínima cominada ao delito diminuída de um a dois terços, em local a ser indicado pelo juízo da execução, na forma do art.&nbsp;46 do Decreto-Lei nº 2.848, de 7 de dezembro de 1940 (Código Penal);</p>
+      <p><strong>IV</strong> – pagar prestação pecuniária, a ser estipulada nos termos do art.&nbsp;45 do Decreto-Lei nº 2.848, de 7 de dezembro de 1940 (Código Penal), a entidade pública ou de interesse social, a ser indicada pelo juízo da execução, que tenha, preferencialmente, como função proteger bens jurídicos iguais ou semelhantes aos aparentemente lesados pelo delito; ou</p>
+      <p><strong>V</strong> – cumprir, por prazo determinado, outra condição indicada pelo Ministério Público, desde que proporcional e compatível com a infração penal imputada.</p>
+    </div>
+
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Condição</th><th>Limite ou parâmetro legal</th><th>Quem indica</th></tr></thead>
+        <tbody>
+          <tr><td>I · Reparar o dano ou restituir a coisa</td><td>Dispensada se houver impossibilidade</td><td>—</td></tr>
+          <tr><td>II · Renunciar a bens e direitos</td><td>Instrumentos, produto ou proveito do crime; renúncia voluntária</td><td>MP indica os bens</td></tr>
+          <tr><td>III · Prestação de serviços</td><td>Pena mínima cominada <strong>diminuída de 1/3 a 2/3</strong>; na forma do CP, art.&nbsp;46</td><td>Juízo da execução indica o local</td></tr>
+          <tr><td>IV · Prestação pecuniária</td><td>Nos termos do CP, art.&nbsp;45</td><td>Juízo da execução indica a entidade, de preferência ligada ao bem jurídico lesado</td></tr>
+          <tr><td>V · Outra condição</td><td>Prazo determinado; proporcional e compatível com a infração</td><td>MP</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Calculando a prestação de serviços (inciso III)</h3>
+    <div class="ppi6-g2">
+      <div class="ppi6-card">
+        <h3>Estelionato · mínimo de 1 ano</h3>
+        <p>1 ano − 2/3 = <strong>4 meses</strong><br>1 ano − 1/3 = <strong>8 meses</strong></p>
+        <p>Prestação de serviços entre <strong>4 e 8 meses</strong>.</p>
+      </div>
+      <div class="ppi6-card">
+        <h3>Peculato · mínimo de 2 anos</h3>
+        <p>2 anos − 2/3 = <strong>8 meses</strong><br>2 anos − 1/3 = <strong>16 meses</strong></p>
+        <p>Prestação de serviços entre <strong>8 e 16 meses</strong>.</p>
+      </div>
+    </div>
+
+    <div class="ppi6-dout">
+      <span class="ppi6-dout-tag">Enunciado nº 25 do CNPG e do GNCCRIM</span>
+      <p>“O acordo de não persecução penal não impõe penas, mas somente estabelece direitos e obrigações de natureza negocial e as medidas acordadas voluntariamente pelas partes não produzirão quaisquer efeitos daí decorrentes, incluindo a reincidência”.</p>
+    </div>
+
+    <div class="ppi6-dout">
+      <span class="ppi6-dout-tag">Enunciado nº 26 do CNPG e do GNCCRIM</span>
+      <p>“Deverá constar expressamente no termo de acordo de não persecução penal as consequências para o descumprimento das condições acordadas, bem como o compromisso do investigado em comprovar o cumprimento das condições, independentemente de notificação ou aviso prévio, devendo apresentar, imediatamente e de forma documentada, eventual justificativa para o não cumprimento de qualquer condição, sob pena de imediata rescisão e oferecimento da denúncia em caso de inércia (§10).”</p>
+    </div>
+
+    <div class="ppi6-alerta">
+      <span class="ppi6-alerta-tag">Condição não é pena</span>
+      <p>As condições do ANPP são <strong>obrigações negociais</strong>, assumidas voluntariamente — não há condenação. Por isso não geram reincidência e por isso, também, as condições têm de ser <strong>não privativas de liberdade</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ============================ HOMOLOGAÇÃO ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="hom" hidden>
+    <h2>Formalização e audiência</h2>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, §§&nbsp;3º e 4º</span>
+      <p>“§&nbsp;3º O acordo de não persecução penal será formalizado por escrito e será firmado pelo membro do Ministério Público, pelo investigado e por seu defensor.”</p>
+      <p>“§&nbsp;4º Para a homologação do acordo de não persecução penal, será realizada audiência na qual o juiz deverá verificar a sua voluntariedade, por meio da oitiva do investigado na presença do seu defensor, e sua legalidade.”</p>
+    </div>
+
+    <div class="ppi6-g2">
+      <div class="ppi6-card">
+        <h3>O que o juiz controla</h3>
+        <ul>
+          <li><strong>Voluntariedade</strong> — ouvindo o investigado, na presença do defensor.</li>
+          <li><strong>Legalidade</strong> — requisitos, vedações e adequação das condições.</li>
+        </ul>
+      </div>
+      <div class="ppi6-card">
+        <h3>O que o juiz não faz</h3>
+        <ul>
+          <li>Não <strong>oferece</strong> o acordo no lugar do MP.</li>
+          <li>Não <strong>reescreve</strong> as condições: se discorda delas, devolve os autos ao MP (§&nbsp;5º).</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>As três saídas do juiz</h2>
+
+    <div class="ppi6-fluxo" role="img" aria-label="Três decisões possíveis na audiência de homologação: homologar, devolver para reformulação ou recusar">
+      <div class="ppi6-passo">
+        <div class="ppi6-passo-n">Audiência de homologação</div>
+        <div class="ppi6-passo-t">Voluntariedade e legalidade verificadas</div>
+      </div>
+      <div class="ppi6-seta" aria-hidden="true">▼</div>
+      <div class="ppi6-ramos">
+        <div class="ppi6-passo ok">
+          <div class="ppi6-passo-n">a) Homologa</div>
+          <p>Devolve os autos ao MP, que inicia a execução perante o juízo da execução penal. <span class="ppi6-art">§&nbsp;6º</span></p>
+        </div>
+        <div class="ppi6-passo ajuste">
+          <div class="ppi6-passo-n">b) Devolve para reformular</div>
+          <p>Condições inadequadas, insuficientes ou abusivas: o MP reformula, com concordância do investigado e do defensor. <span class="ppi6-art">§&nbsp;5º</span></p>
+        </div>
+        <div class="ppi6-passo nao">
+          <div class="ppi6-passo-n">c) Recusa</div>
+          <p>Requisitos legais não atendidos, ou adequação do §&nbsp;5º não realizada. Autos ao MP para complementar a investigação ou denunciar. <span class="ppi6-art">§§&nbsp;7º e 8º</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, §§&nbsp;5º e 6º</span>
+      <p>“§&nbsp;5º Se o juiz considerar inadequadas, insuficientes ou abusivas as condições dispostas no acordo de não persecução penal, devolverá os autos ao Ministério Público para que seja reformulada a proposta de acordo, com concordância do investigado e seu defensor.”</p>
+      <p>“§&nbsp;6º Homologado judicialmente o acordo de não persecução penal, o juiz devolverá os autos ao Ministério Público para que inicie sua execução perante o juízo de execução penal.”</p>
+    </div>
+
+    <h3>A vítima</h3>
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, §&nbsp;9º</span>
+      <p>“A vítima será intimada da homologação do acordo de não persecução penal e de seu descumprimento.”</p>
+    </div>
+
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Saída</th><th>Quando</th><th>Para onde vão os autos</th><th>Fundamento</th></tr></thead>
+        <tbody>
+          <tr><td>Homologação</td><td>Acordo voluntário e legal</td><td>MP, para execução no juízo da execução penal</td><td>§&nbsp;6º</td></tr>
+          <tr><td>Devolução para reformular</td><td>Condições inadequadas, insuficientes ou abusivas</td><td>MP, para nova proposta com concordância da defesa</td><td>§&nbsp;5º</td></tr>
+          <tr><td>Recusa</td><td>Requisitos não atendidos ou adequação não feita</td><td>MP, para complementar investigação ou denunciar</td><td>§§&nbsp;7º e 8º · RESE: art.&nbsp;581, XXV</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================ CUMPRIMENTO E DESCUMPRIMENTO ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="desc" hidden>
+    <h2>O acordo em execução</h2>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CP, art.&nbsp;116, IV</span>
+      <p>“Antes de passar em julgado a sentença final, a prescrição não corre: [...] IV – enquanto não cumprido ou não rescindido o acordo de não persecução penal.”</p>
+    </div>
+
+    <div class="ppi6-lt">
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">Homologação</div>
+        <div class="ppi6-lt-tit">Começa a execução</div>
+        <p class="ppi6-lt-txt">O MP promove a execução perante o juízo da execução penal (§&nbsp;6º). A partir daí, a prescrição fica suspensa (CP, art.&nbsp;116, IV).</p>
+      </div>
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">Durante o prazo</div>
+        <div class="ppi6-lt-tit">O investigado comprova o cumprimento</div>
+        <p class="ppi6-lt-txt">O termo deve prever as consequências do descumprimento e o dever de comprovar as condições, independentemente de aviso (Enunciado 26 do CNPG).</p>
+      </div>
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">Desfecho A</div>
+        <div class="ppi6-lt-tit">Cumprimento integral</div>
+        <p class="ppi6-lt-txt">O juízo competente decreta a extinção da punibilidade (§&nbsp;13).</p>
+      </div>
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">Desfecho B</div>
+        <div class="ppi6-lt-tit">Descumprimento</div>
+        <p class="ppi6-lt-txt">O MP comunica ao juízo, para rescisão e posterior oferecimento de denúncia (§&nbsp;10). A vítima é intimada (§&nbsp;9º).</p>
+      </div>
+    </div>
+
+    <div class="ppi6-lei">
+      <span class="ppi6-lei-tag">CPP, art.&nbsp;28-A, §§&nbsp;10 a 13</span>
+      <p>“§&nbsp;10. Descumpridas quaisquer das condições estipuladas no acordo de não persecução penal, o Ministério Público deverá comunicar ao juízo, para fins de sua rescisão e posterior oferecimento de denúncia.”</p>
+      <p>“§&nbsp;11. O descumprimento do acordo de não persecução penal pelo investigado também poderá ser utilizado pelo Ministério Público como justificativa para o eventual não oferecimento de suspensão condicional do processo.”</p>
+      <p>“§&nbsp;12. A celebração e o cumprimento do acordo de não persecução penal não constarão de certidão de antecedentes criminais, exceto para os fins previstos no inciso III do §&nbsp;2º deste artigo.”</p>
+      <p>“§&nbsp;13. Cumprido integralmente o acordo de não persecução penal, o juízo competente decretará a extinção de punibilidade.”</p>
+    </div>
+
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Situação</th><th>Consequência</th><th>Fundamento</th></tr></thead>
+        <tbody>
+          <tr><td>Acordo em execução</td><td>A prescrição não corre</td><td>CP, art.&nbsp;116, IV</td></tr>
+          <tr><td>Cumprimento integral</td><td>Extinção da punibilidade, decretada pelo juízo competente</td><td>§&nbsp;13</td></tr>
+          <tr><td>Registro do acordo</td><td>Não consta de certidão de antecedentes, salvo para impedir novo benefício em 5 anos</td><td>§&nbsp;12 c/c §&nbsp;2º, III</td></tr>
+          <tr><td>Descumprimento de qualquer condição</td><td>Comunicação ao juízo, rescisão e denúncia</td><td>§&nbsp;10</td></tr>
+          <tr><td>Efeito adicional do descumprimento</td><td>Pode justificar o não oferecimento da suspensão condicional do processo</td><td>§&nbsp;11</td></tr>
+          <tr><td>Vítima</td><td>Intimada da homologação e do descumprimento</td><td>§&nbsp;9º</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi6-alerta">
+      <span class="ppi6-alerta-tag">Quem decreta a extinção</span>
+      <p>Cumprido o acordo, não é o MP que “arquiva”: é o <strong>juízo competente</strong> que <strong>decreta a extinção da punibilidade</strong> (§&nbsp;13). E quem rescinde, no descumprimento, também é o juízo — o MP apenas comunica (§&nbsp;10).</p>
+    </div>
+  </section>
+
+  <!-- ============================ MOMENTO E DIREITO INTERTEMPORAL ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="tempo" hidden>
+    <h2>Até quando se pode celebrar o acordo?</h2>
+    <p>A regra é que o ANPP seja celebrado <strong>antes do recebimento da denúncia</strong>. Mas duas questões geraram divergência por anos: o ANPP alcança fatos e processos anteriores à Lei&nbsp;13.964/2019? E pode ser celebrado depois de iniciada a ação penal? Hoje, o tema está <strong>pacificado</strong> pelo STF e pelo STJ.</p>
+
+    <h3>A linha do tempo do instituto</h3>
+    <div class="ppi6-lt">
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">2017</div>
+        <div class="ppi6-lt-tit">Resolução nº 181 do CNMP</div>
+        <p class="ppi6-lt-txt">O acordo nasce em ato normativo do Conselho Nacional do Ministério Público.</p>
+      </div>
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">24/12/2019 · 23/01/2020</div>
+        <div class="ppi6-lt-tit">Lei&nbsp;13.964/2019: publicação e vigência</div>
+        <p class="ppi6-lt-txt">O Pacote Anticrime insere o art.&nbsp;28-A no CPP, o inciso XVII no art.&nbsp;3º-B, o inciso XXV no art.&nbsp;581 e o inciso IV no art.&nbsp;116 do CP.</p>
+      </div>
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">18/09/2024</div>
+        <div class="ppi6-lt-tit">STF, Plenário, HC 185.913/DF</div>
+        <p class="ppi6-lt-txt">Rel. Min. Gilmar Mendes. O Supremo admite a aplicação retroativa do ANPP aos processos em curso e fixa quatro teses — a primeira, sobre o poder-dever motivado do MP. A data do julgamento virou marco temporal das teses do STJ.</p>
+      </div>
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">23/10/2024</div>
+        <div class="ppi6-lt-tit">STJ, Tema Repetitivo 1098</div>
+        <p class="ppi6-lt-txt">A 3ª Seção alinha-se ao STF e fixa quatro teses sobre natureza e retroatividade do ANPP.</p>
+      </div>
+      <div class="ppi6-lt-item">
+        <div class="ppi6-lt-ano">12/03/2025</div>
+        <div class="ppi6-lt-tit">STJ, Tema Repetitivo 1303</div>
+        <p class="ppi6-lt-txt">A confissão não precisa ter ocorrido no inquérito; pode ser formalizada na assinatura do acordo.</p>
+      </div>
+    </div>
+
+    <h2>Qual regra se aplica ao processo?</h2>
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Situação do processo</th><th>Regra</th><th>Tese</th></tr></thead>
+        <tbody>
+          <tr><td>Em andamento quando entrou em vigor a Lei&nbsp;13.964/2019</td><td>Cabe ANPP, <strong>mesmo sem confissão</strong> até então, desde que o pedido tenha sido feito <strong>antes do trânsito em julgado</strong> da condenação</td><td>Tema&nbsp;1098, tese 2</td></tr>
+          <tr><td>Em andamento em 18/09/2024, sem oferta do acordo ou sem justificativa idônea para não oferecê-lo</td><td>O MP — de ofício, a pedido da defesa ou provocado pelo juiz — deve se manifestar <strong>motivadamente</strong> sobre o cabimento <strong>na primeira oportunidade</strong> em que falar nos autos</td><td>Tema&nbsp;1098, tese 3</td></tr>
+          <tr><td>Investigação ou ação penal iniciada a partir de 18/09/2024</td><td>ANPP <strong>antes do recebimento da denúncia</strong>, ressalvada a possibilidade de propositura no curso da ação penal, <strong>se for o caso</strong></td><td>Tema&nbsp;1098, tese 4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ppi6-juris">
+      <span class="ppi6-juris-tag">STJ · Tema Repetitivo 1098 · teses 2 a 4</span>
+      <p>“2 - Diante da natureza híbrida da norma, a ela deve se aplicar o princípio da retroatividade da norma penal benéfica (art.&nbsp;5º, XL, da CF), pelo que é cabível a celebração de acordo de não persecução penal em casos de processos em andamento quando da entrada em vigor da Lei n. 13.964/2019, mesmo se ausente confissão do réu até aquele momento, desde que o pedido tenha sido feito antes do trânsito em julgado da condenação.”</p>
+      <p>“3 - Nos processos penais em andamento em 18/09/2024 (data do julgamento do <a class="julgado-link" href="https://jurisprudencia.stf.jus.br/pages/search?queryString=HC+185913" target="_blank" rel="noopener noreferrer" title="Ver no STF">HC 185.913/DF</a> pelo Plenário do Supremo Tribunal Federal), nos quais seria cabível em tese o ANPP, mas ele não chegou a ser oferecido pelo Ministério Público ou não houve justificativa idônea para o seu não oferecimento, o Ministério Público, agindo de ofício, a pedido da defesa ou mediante provocação do magistrado da causa, deverá, na primeira oportunidade em que falar nos autos, manifestar-se motivadamente acerca do cabimento ou não do acordo no caso concreto.”</p>
+      <p>“4 - Nas investigações ou ações penais iniciadas a partir de 18/09/2024, será admissível a celebração de ANPP antes do recebimento da denúncia, ressalvada a possibilidade de propositura do acordo, no curso da ação penal, se for o caso.”</p>
+      <p class="ppi6-fonte">STJ, 3ª Seção, REsp 1.890.344/RS e REsp 1.890.343/SC, Rel. Min. Reynaldo Soares da Fonseca, j. 23/10/2024 (Info&nbsp;831).</p>
+    </div>
+
+    <h3>“Se for o caso”: a mudança do quadro no curso da ação</h3>
+    <div class="ppi6-juris">
+      <span class="ppi6-juris-tag">STJ · 5ª Turma · AgRg no REsp 2.016.905/SP</span>
+      <p>Havendo modificação do quadro fático-jurídico — inclusive <strong>desclassificação</strong> do delito, por <em>emendatio</em> ou <em>mutatio libelli</em> —, uma vez preenchidos os requisitos legais, torna-se cabível o ANPP.</p>
+      <p class="ppi6-fonte">STJ, 5ª Turma, AgRg no REsp 2.016.905/SP, Rel. Min. Messod Azulay Neto, j. 7/3/2023 (Info&nbsp;772).</p>
+    </div>
+
+    <div class="ppi6-card">
+      <h3>O caso julgado</h3>
+      <p>Ao julgar a apelação da defesa, o tribunal reconheceu a <strong>continuidade delitiva</strong> entre os crimes de falsidade ideológica (CP, art.&nbsp;299). Com o <strong>novo patamar de apenamento</strong>, o ANPP tornou-se objetivamente viável — e o STJ reconheceu o cabimento do acordo, uma vez preenchidos os requisitos legais.</p>
+    </div>
+  </section>
+
+  <!-- ============================ TESTE DE CABIMENTO ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="teste" hidden>
+    <h2>Teste de cabimento</h2>
+    <p>Pense em um caso — real, de jornal ou dos casos práticos — e responda às perguntas na ordem em que um promotor as faria. O teste para na primeira resposta que impede o acordo e mostra o fundamento.</p>
+
+    <div class="ppi6-verif" data-verif>
+      <div aria-live="polite">
+        <div class="ppi6-verif-prog" data-v="prog">Pergunta 1 de 9</div>
+        <div class="ppi6-verif-barra" aria-hidden="true"><span data-v="barra"></span></div>
+        <div data-v="pergunta">
+          <p class="ppi6-verif-q" data-v="q"></p>
+          <p class="ppi6-verif-dica" data-v="dica"></p>
+        </div>
+        <div data-v="resultado" hidden></div>
+      </div>
+      <div class="ppi6-verif-bts" data-v="bts">
+        <button type="button" class="ppi6-bt prim" data-r="sim">Sim</button>
+        <button type="button" class="ppi6-bt" data-r="nao">Não</button>
+      </div>
+      <div class="ppi6-verif-bts" data-v="rewrap" hidden>
+        <button type="button" class="ppi6-bt" data-v="reiniciar">Recomeçar</button>
+      </div>
+      <p class="ppi6-trilha" data-v="trilha"></p>
+    </div>
+
+    <div class="ppi6-alerta">
+      <span class="ppi6-alerta-tag">Para que serve — e para que não serve</span>
+      <p>O teste organiza o <strong>raciocínio</strong> na ordem da lei. Ele não substitui a análise do caso: “necessário e suficiente”, por exemplo, é juízo do MP sobre o caso concreto, e a recusa pode ser revista pelo órgão superior (§&nbsp;14).</p>
+    </div>
+  </section>
+
+  <!-- ============================ ROTEIRO ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="rot" hidden>
+    <h2>Roteiro de estudo</h2>
+
+    <h3>Etapa 1 — Conceito e natureza</h3>
+    <ul class="ppi6-check">
+      <li><span>Definir o ANPP em uma frase, usando as expressões <b>negócio jurídico extrajudicial</b>, <b>confissão</b>, <b>condições não privativas de liberdade</b> e <b>extinção da punibilidade</b>.</span></li>
+      <li><span>Indicar a origem (<b>Resolução 181/2017 do CNMP</b>) e a lei que o levou ao CPP (<b>Lei&nbsp;13.964/2019</b>).</span></li>
+      <li><span>Explicar por que a norma é <b>híbrida</b> e qual a consequência disso (retroatividade benéfica — CF, art.&nbsp;5º, XL).</span></li>
+      <li><span>Diferenciar ANPP, <b>transação penal</b> e <b>suspensão condicional do processo</b> por infrações alcançadas, momento e confissão.</span></li>
+    </ul>
+
+    <h3>Etapa 2 — Cabimento</h3>
+    <ul class="ppi6-check">
+      <li><span>Listar os <b>cinco requisitos</b> do caput do art.&nbsp;28-A.</span></li>
+      <li><span>Calcular a pena mínima com causas de aumento e de diminuição (<b>§&nbsp;1º</b>) e explicar por que 4 anos exatos não bastam.</span></li>
+      <li><span>Responder: cabe ANPP em <b>contravenção</b>? E em <b>crime culposo com resultado violento</b>?</span></li>
+      <li><span>Dizer <b>quando</b> a confissão pode ser feita (Tema&nbsp;1303).</span></li>
+    </ul>
+
+    <h3>Etapa 3 — Vedações e negativas</h3>
+    <ul class="ppi6-check">
+      <li><span>Enunciar as <b>quatro vedações</b> do §&nbsp;2º e ligar o inciso III ao <b>§&nbsp;12</b>.</span></li>
+      <li><span>Distinguir as <b>três negativas</b> (lei, MP, juiz) e o remédio de cada uma: <b>§&nbsp;14</b>, <b>RESE</b> (art.&nbsp;581, XXV).</span></li>
+      <li><span>Explicar por que o juiz <b>não pode impor</b> o acordo ao MP e o que significa o <b>poder-dever motivado</b> do MP (STF, HC 185.913, tese 1).</span></li>
+      <li><span>Dizer como e quando o investigado toma <b>ciência da recusa</b> (REsp 2.024.381).</span></li>
+    </ul>
+
+    <h3>Etapa 4 — Condições e homologação</h3>
+    <ul class="ppi6-check">
+      <li><span>Enumerar as <b>cinco condições</b> e calcular a prestação de serviços do inciso III.</span></li>
+      <li><span>Descrever a <b>audiência</b> do §&nbsp;4º: o que o juiz verifica e como.</span></li>
+      <li><span>Explicar as <b>três saídas</b> do juiz (§§&nbsp;5º a 8º) e para onde vão os autos em cada uma.</span></li>
+    </ul>
+
+    <h3>Etapa 5 — Execução e tempo</h3>
+    <ul class="ppi6-check">
+      <li><span>Explicar o que acontece no <b>cumprimento</b> (§&nbsp;13) e no <b>descumprimento</b> (§§&nbsp;10 e 11).</span></li>
+      <li><span>Relacionar o ANPP à <b>suspensão da prescrição</b> (CP, art.&nbsp;116, IV).</span></li>
+      <li><span>Aplicar as teses do <b>Tema&nbsp;1098</b> às três situações temporais.</span></li>
+    </ul>
+  </section>
+
+  <!-- ============================ CASOS ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="casos" hidden>
+    <h2>Casos práticos</h2>
+    <p class="ppi6-sub" style="margin-bottom:1.2rem">Situações fictícias, construídas apenas para treinar a aplicação dos conceitos desta unidade. Nomes e fatos são inventados.</p>
+
+    <div class="ppi6-caso">
+      <div class="ppi6-caso-n">Caso 1</div>
+      <h3>O silêncio na delegacia</h3>
+      <p>Rogério, primário, é investigado por estelionato (CP, art.&nbsp;171, caput), com prejuízo de R$ 3.000,00 a uma loja. Ouvido na delegacia, permaneceu em silêncio. Concluído o inquérito, o promotor oferece denúncia e registra, em cota, que deixa de propor o ANPP “porque o investigado não confessou na fase policial”.</p>
+      <details class="ppi6-resp">
+        <summary>Resposta comentada</summary>
+        <p>A recusa é <strong>inválida</strong>. Pelo Tema&nbsp;1303 do STJ, a confissão no inquérito não é exigência do art.&nbsp;28-A; ela pode ser formalizada na assinatura do acordo, perante o MP, com defesa técnica. Os requisitos objetivos estão presentes: estelionato não envolve violência ou grave ameaça e tem pena mínima de 1 ano. Como Rogério toma ciência da recusa na citação (REsp 2.024.381), deve, na primeira oportunidade, requerer a <strong>remessa dos autos ao órgão superior</strong> do MP (§&nbsp;14 c/c art.&nbsp;28).</p>
+      </details>
+    </div>
+
+    <div class="ppi6-caso">
+      <div class="ppi6-caso-n">Caso 2</div>
+      <h3>A suspensão de quatro anos atrás</h3>
+      <p>Marta, servidora pública primária e de bons antecedentes, é investigada por peculato (CP, art.&nbsp;312). Há justa causa. Quatro anos antes do novo fato, ela foi beneficiada com suspensão condicional do processo em outro feito. A defesa pede o ANPP, argumentando que o crime não tem violência e que a pena mínima é de 2 anos.</p>
+      <details class="ppi6-resp">
+        <summary>Resposta comentada</summary>
+        <p>Os requisitos do caput estão presentes — peculato não é vedado pela natureza, e a pena mínima é inferior a 4 anos. Mas incide a vedação do <strong>§&nbsp;2º, III</strong>: Marta foi beneficiada com suspensão condicional do processo nos <strong>5 anos anteriores ao cometimento</strong> da nova infração. É exatamente para isso que o registro do benefício anterior é mantido (§&nbsp;12, parte final). Não cabe ANPP.</p>
+      </details>
+    </div>
+
+    <div class="ppi6-caso">
+      <div class="ppi6-caso-n">Caso 3</div>
+      <h3>Três investigados, três históricos</h3>
+      <p>Bruna, Caio e Diego são investigados por estelionato praticado em coautoria. Bruna tem condenação anterior por outro crime, transitada em julgado há dois anos. Caio foi condenado em primeira instância em outro processo e recorreu; a apelação ainda não foi julgada. Diego foi absolvido em outro processo, e o recurso do MP está pendente. Considerando apenas esses antecedentes, quem pode celebrar ANPP?</p>
+      <details class="ppi6-resp">
+        <summary>Resposta comentada</summary>
+        <p><strong>Caio e Diego.</strong> Bruna é <strong>reincidente</strong>: cometeu novo crime depois do trânsito em julgado de condenação anterior (CP, art.&nbsp;63) — vedação do §&nbsp;2º, II. Caio não é reincidente, porque sua condenação ainda não transitou em julgado; Diego, absolvido, muito menos. Recurso pendente não gera reincidência.</p>
+      </details>
+    </div>
+
+    <div class="ppi6-caso">
+      <div class="ppi6-caso-n">Caso 4</div>
+      <h3>O juiz que quis ajudar</h3>
+      <p>Denunciado por estelionato, Hélio requer ao juiz que “determine ao Ministério Público a oferta do ANPP”. O juiz, entendendo presentes os requisitos, intima o promotor a apresentar proposta em 10 dias e, diante da negativa fundamentada, rejeita a denúncia.</p>
+      <details class="ppi6-resp">
+        <summary>Resposta comentada</summary>
+        <p>O juiz errou. A oferta do ANPP é atribuição <strong>exclusiva do Ministério Público</strong>; o Judiciário não pode impô-la (STJ, RHC 161.251; STF, HC 194.677). Situação parecida apareceu no REsp 2.024.381: o juiz rejeitou a denúncia, por falta de interesse processual, como forma de forçar a propositura do acordo; o tribunal anulou a sentença e determinou que o MP se manifestasse fundamentadamente sobre o ANPP — e o STJ manteve esse entendimento. O caminho correto era outro: a defesa requerer a <strong>remessa dos autos ao órgão superior</strong> do MP (§&nbsp;14), a quem cabe rever a recusa.</p>
+      </details>
+    </div>
+
+    <div class="ppi6-caso">
+      <div class="ppi6-caso-n">Caso 5</div>
+      <h3>As condições que passaram do ponto</h3>
+      <p>No acordo celebrado com Lúcia, investigada por peculato (pena mínima de 2 anos), o MP fixou prestação de serviços à comunidade por 2 anos, além de prestação pecuniária. Na audiência, o juiz conclui que a prestação de serviços excede o limite legal.</p>
+      <details class="ppi6-resp">
+        <summary>Resposta comentada</summary>
+        <p>O inciso III limita a prestação de serviços ao período da <strong>pena mínima diminuída de um a dois terços</strong> — no peculato, entre <strong>8 e 16 meses</strong>. Dois anos é o mínimo sem nenhuma diminuição. O juiz não reescreve a condição: <strong>devolve os autos ao MP</strong> para reformular a proposta, com concordância de Lúcia e de seu defensor (§&nbsp;5º). Se a adequação não for feita, pode <strong>recusar a homologação</strong> (§&nbsp;7º), e os autos voltam ao MP para complementar a investigação ou denunciar (§&nbsp;8º). Contra a recusa cabe <strong>RESE</strong> (art.&nbsp;581, XXV).</p>
+      </details>
+    </div>
+
+    <div class="ppi6-caso">
+      <div class="ppi6-caso-n">Caso 6</div>
+      <h3>O acordo abandonado</h3>
+      <p>Homologado o ANPP de Nestor, investigado por estelionato, ele paga as primeiras parcelas da prestação pecuniária e desaparece. Dois anos depois, o MP comunica o descumprimento ao juízo. A defesa sustenta que, nesse intervalo, a prescrição seguiu correndo.</p>
+      <details class="ppi6-resp">
+        <summary>Resposta comentada</summary>
+        <p>A tese não procede: a prescrição <strong>não corre enquanto não cumprido ou não rescindido</strong> o acordo (CP, art.&nbsp;116, IV). Comunicado o descumprimento, o juízo rescinde o acordo e o MP oferece denúncia (§&nbsp;10). O descumprimento pode ainda justificar o não oferecimento de suspensão condicional do processo (§&nbsp;11). A vítima deve ser intimada do descumprimento (§&nbsp;9º).</p>
+      </details>
+    </div>
+
+    <div class="ppi6-caso">
+      <div class="ppi6-caso-n">Caso 7</div>
+      <h3>O andaime sem guarda-corpo</h3>
+      <p>Otávio, mestre de obras primário, deixa de instalar o guarda-corpo de um andaime. Um operário cai e morre. Ele é investigado por homicídio culposo (CP, art.&nbsp;121, §&nbsp;3º: detenção, de um a três anos). O promotor hesita: “houve morte — o crime não seria violento?”.</p>
+      <details class="ppi6-resp">
+        <summary>Resposta comentada</summary>
+        <p>Em tese, <strong>cabe ANPP</strong>. Pelo <strong>Enunciado 23</strong> do CNPG, o acordo é cabível nos crimes culposos com resultado violento: a conduta é a violação de um dever de cuidado, e o resultado é involuntário. A pena mínima é inferior a 4 anos, mesmo com o aumento de 1/3 do art.&nbsp;121, §&nbsp;4º, se a morte resultou da inobservância de regra técnica de profissão (1 ano e 4 meses — §&nbsp;1º do art.&nbsp;28-A). E não há transação penal, porque a pena máxima de 3 anos afasta a infração de menor potencial ofensivo (Lei&nbsp;9.099, art.&nbsp;61). Restam a análise das vedações do §&nbsp;2º e o juízo de necessidade e suficiência.</p>
+      </details>
+    </div>
+
+    <div class="ppi6-caso">
+      <div class="ppi6-caso-n">Caso 8</div>
+      <h3>A medida protetiva descumprida</h3>
+      <p>Sérgio, primário, aproxima-se da ex-companheira em desrespeito a medida protetiva de urgência, sem qualquer agressão. É investigado pelo crime do art.&nbsp;24-A da Lei&nbsp;11.340/2006 (reclusão, de 2 a 5 anos, e multa) <span class="ppi6-badge">redação: Lei&nbsp;14.994/2024</span>. A defesa pede ANPP: não houve violência e a pena mínima é de 2 anos.</p>
+      <details class="ppi6-resp">
+        <summary>Resposta comentada</summary>
+        <p>Não cabe ANPP. Ainda que a conduta não tenha violência física e a pena mínima seja inferior a 4 anos, incide a vedação do <strong>§&nbsp;2º, IV</strong>: o crime foi praticado no âmbito de <strong>violência doméstica e familiar</strong>, e a lei afasta o acordo “em favor do agressor”. A vedação olha para o <strong>contexto</strong>, não só para o meio de execução.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================ GUIA ============================ -->
+  <section class="ppi6-painel" role="tabpanel" data-p="guia" hidden>
+    <h2>Guia resumido</h2>
+
+    <div class="ppi6-guia">
+      <h3>Em uma frase</h3>
+      <p style="margin-bottom:0">O ANPP é um negócio jurídico pelo qual o MP deixa de denunciar o investigado que <strong>confessa</strong> infração <strong>sem violência ou grave ameaça</strong> e com <strong>pena mínima inferior a 4 anos</strong>, em troca de <strong>condições não privativas de liberdade</strong> — homologado pelo juiz e, se cumprido, causa de <strong>extinção da punibilidade</strong>.</p>
+    </div>
+
+    <h3>Dispositivos que você precisa saber localizar</h3>
+    <div style="margin-bottom:1.1rem">
+      <span class="ppi6-pill">CPP, art.&nbsp;28-A</span>
+      <span class="ppi6-pill">CPP, art.&nbsp;28-A, §&nbsp;1º</span>
+      <span class="ppi6-pill">CPP, art.&nbsp;28-A, §&nbsp;2º</span>
+      <span class="ppi6-pill">CPP, art.&nbsp;28-A, §&nbsp;14</span>
+      <span class="ppi6-pill">CPP, art.&nbsp;3º-B, XVII</span>
+      <span class="ppi6-pill">CPP, art.&nbsp;28</span>
+      <span class="ppi6-pill">CPP, art.&nbsp;581, XXV</span>
+      <span class="ppi6-pill">CP, art.&nbsp;45</span>
+      <span class="ppi6-pill">CP, art.&nbsp;46</span>
+      <span class="ppi6-pill">CP, art.&nbsp;63</span>
+      <span class="ppi6-pill">CP, art.&nbsp;116, IV</span>
+      <span class="ppi6-pill">Lei&nbsp;9.099, art.&nbsp;61</span>
+      <span class="ppi6-pill">Lei&nbsp;9.099, art.&nbsp;76</span>
+      <span class="ppi6-pill">Lei&nbsp;9.099, art.&nbsp;89</span>
+      <span class="ppi6-pill">CF, art.&nbsp;5º, XL</span>
+    </div>
+
+    <h3>Doze proposições para revisão rápida</h3>
+    <ol>
+      <li>O ANPP é <strong>negócio jurídico extrajudicial</strong>, com homologação judicial obrigatória.</li>
+      <li>São <strong>cinco requisitos</strong>: não ser caso de arquivamento, confissão, ausência de violência ou grave ameaça, pena mínima inferior a 4 anos e necessidade e suficiência.</li>
+      <li>A pena mínima considera as <strong>causas de aumento e de diminuição</strong> (§&nbsp;1º) — e 4 anos exatos não bastam.</li>
+      <li>A confissão <strong>não precisa</strong> ter ocorrido no inquérito; pode ser feita na assinatura (Tema&nbsp;1303).</li>
+      <li>São <strong>quatro vedações</strong>: transação cabível, reincidência ou habitualidade, benefício nos 5 anos anteriores e violência doméstica ou contra a mulher.</li>
+      <li>O ANPP é <strong>subsidiário</strong> à transação penal.</li>
+      <li>O MP <strong>“poderá propor”</strong>: avaliar o acordo é <strong>poder-dever motivado</strong> do MP, e o juiz não pode impô-lo.</li>
+      <li>Contra a <strong>recusa do MP</strong>, remessa ao órgão superior (§&nbsp;14); contra a <strong>recusa de homologação</strong>, RESE (art.&nbsp;581, XXV).</li>
+      <li>Na audiência, o juiz verifica <strong>voluntariedade</strong> (ouvindo o investigado com o defensor) e <strong>legalidade</strong>.</li>
+      <li>Condições inadequadas: o juiz <strong>devolve ao MP</strong> para reformular (§&nbsp;5º).</li>
+      <li>Em execução, a <strong>prescrição não corre</strong> (CP, art.&nbsp;116, IV); cumprido, o juízo <strong>extingue a punibilidade</strong> (§&nbsp;13).</li>
+      <li>A norma é <strong>híbrida</strong> e retroage: regras temporais do Tema&nbsp;1098 do STJ.</li>
+    </ol>
+
+    <h3>Erros que mais derrubam em prova</h3>
+    <div class="ppi6-tabela-wrap">
+      <table class="ppi6-tabela">
+        <thead><tr><th>Afirmação</th><th>Correto?</th><th>Por quê</th></tr></thead>
+        <tbody>
+          <tr><td>Cabe ANPP se a pena mínima for de até 4 anos</td><td class="ppi6-nao">Errado</td><td>A pena mínima deve ser <strong>inferior</strong> a 4 anos.</td></tr>
+          <tr><td>Para aferir a pena mínima, desprezam-se as causas de aumento e de diminuição</td><td class="ppi6-nao">Errado</td><td>O §&nbsp;1º manda considerá-las.</td></tr>
+          <tr><td>A falta de confissão no inquérito impede o ANPP</td><td class="ppi6-nao">Errado</td><td>A confissão pode ser formalizada na assinatura do acordo (Tema&nbsp;1303).</td></tr>
+          <tr><td>Sendo cabível a transação penal, o MP pode optar pelo ANPP</td><td class="ppi6-nao">Errado</td><td>O §&nbsp;2º, I veda o ANPP se couber transação.</td></tr>
+          <tr><td>Quem foi beneficiado com suspensão condicional do processo há 4 anos pode celebrar ANPP</td><td class="ppi6-nao">Errado</td><td>Vedação do §&nbsp;2º, III (5 anos anteriores ao cometimento da infração).</td></tr>
+          <tr><td>Réu com condenação ainda recorrível é reincidente para fins de ANPP</td><td class="ppi6-nao">Errado</td><td>Reincidência exige trânsito em julgado da condenação anterior (CP, art.&nbsp;63).</td></tr>
+          <tr><td>Crimes contra a Administração Pública não admitem ANPP</td><td class="ppi6-nao">Errado</td><td>Não há vedação pela natureza do crime; valem os requisitos e as vedações do art.&nbsp;28-A.</td></tr>
+          <tr><td>O juiz pode determinar que o MP ofereça o acordo</td><td class="ppi6-nao">Errado</td><td>A oferta é exclusiva do MP; contra a recusa, §&nbsp;14.</td></tr>
+          <tr><td>Se considerar as condições insuficientes, o juiz remete os autos ao órgão superior do MP</td><td class="ppi6-nao">Errado</td><td>Ele devolve os autos ao próprio MP para reformular a proposta (§&nbsp;5º).</td></tr>
+          <tr><td>Para homologar, o juiz realiza audiência e ouve o investigado na presença do defensor</td><td class="ppi6-sim">Certo</td><td>É a literalidade do §&nbsp;4º.</td></tr>
+          <tr><td>A vítima é intimada da homologação e do descumprimento</td><td class="ppi6-sim">Certo</td><td>§&nbsp;9º.</td></tr>
+          <tr><td>A celebração e o cumprimento do ANPP nunca constam de certidão de antecedentes</td><td class="ppi6-nao">Errado</td><td>Constam para os fins do §&nbsp;2º, III (§&nbsp;12).</td></tr>
+          <tr><td>Cumprido o acordo, o MP promove o arquivamento</td><td class="ppi6-nao">Errado</td><td>O juízo competente decreta a extinção da punibilidade (§&nbsp;13).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="ppi6-nota"><strong>Fontes desta unidade:</strong> material de aula do Prof. Artur Vieira (Processo Penal I). <strong>Legislação</strong> (redação conferida no Planalto em 20/10/2026; o art.&nbsp;28-A mantém a redação da Lei&nbsp;13.964/2019): CPP, arts.&nbsp;2º, 3º-B, XVII, 28, 28-A e 581, XXV; CP, arts.&nbsp;14, II e parágrafo único, 45, 46, 63, 116, IV, 121, §§&nbsp;3º e 4º, 171, caput e §&nbsp;2º-A, 299, 312 e 327, §&nbsp;2º; Lei&nbsp;9.099/95, arts.&nbsp;61, 76 e 89; Lei&nbsp;9.613/98, art.&nbsp;1º, §&nbsp;4º; Lei&nbsp;11.340/2006, art.&nbsp;24-A; CF/88, art.&nbsp;5º, XL; Resolução CNMP nº 181, de 7/8/2017. <strong>Doutrina:</strong> Renato Brasileiro de Lima (conceito). <strong>Jurisprudência:</strong> STF, Plenário, HC 185.913/DF, Rel. Min. Gilmar Mendes, julgamento finalizado em 18/9/2024 (Info&nbsp;1151); STF, 2ª Turma, HC 194.677/SP, Rel. Min. Gilmar Mendes, j. 11/5/2021 (Info&nbsp;1017); STJ, 3ª Seção, REsp 1.890.344/RS e REsp 1.890.343/SC (Tema&nbsp;1098), j. 23/10/2024 (Info&nbsp;831); STJ, 3ª Seção, REsp 2.161.548/BA (Tema&nbsp;1303), j. 12/3/2025 (Info&nbsp;843); STJ, 5ª Turma, RHC 161.251/PR, j. 10/5/2022 (Info&nbsp;739); STJ, 6ª Turma, REsp 2.024.381/TO, j. 7/3/2023 (Info&nbsp;766); STJ, 5ª Turma, AgRg no REsp 2.016.905/SP, j. 7/3/2023 (Info&nbsp;772); STJ, 6ª Turma, HC 988.351/MG, j. 5/8/2025 (Info&nbsp;858). <strong>Orientações do Ministério Público:</strong> Enunciados 23, 25 e 26 do CNPG e do GNCCRIM.</p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var raiz = document.currentScript && document.currentScript.previousElementSibling
+  while (raiz && !(raiz.classList && raiz.classList.contains('ppi6'))) raiz = raiz.previousElementSibling
+  if (!raiz) raiz = document.querySelector('.ppi6')
+  if (!raiz) return
+
+  /* ---------- abas ---------- */
+  var abas = raiz.querySelectorAll('.ppi6-tab')
+  var paineis = raiz.querySelectorAll('.ppi6-painel')
+
+  abas.forEach(function (aba) {
+    aba.addEventListener('click', function () {
+      var alvo = aba.dataset.p
+      abas.forEach(function (a) { a.setAttribute('aria-selected', String(a === aba)) })
+      paineis.forEach(function (p) { p.hidden = (p.dataset.p !== alvo) })
+      var topo = raiz.getBoundingClientRect().top + window.scrollY - 80
+      window.scrollTo({ top: topo, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+    })
+  })
+
+  /* ---------- teste de cabimento ---------- */
+  var caixa = raiz.querySelector('[data-verif]')
+  if (!caixa) return
+  var el = function (n) { return caixa.querySelector('[data-v="' + n + '"]') }
+
+  var passos = [
+    { q: 'É caso de arquivamento da investigação?',
+      dica: 'Falta base para a denúncia (ausência de justa causa, fato atípico, punibilidade extinta etc.)?',
+      para: 'sim', tit: 'Não cabe ANPP: arquiva-se',
+      txt: 'O acordo pressupõe que houvesse denúncia. Sem base para acusar, o caminho é o arquivamento (art. 28).',
+      art: 'CPP, art. 28-A, caput, e art. 28' },
+    { q: 'A conduta foi praticada com violência ou grave ameaça?',
+      dica: 'Pelo Enunciado 23 do CNPG, o crime culposo com resultado violento admite o acordo — responda “Não” nesse caso.',
+      para: 'sim', tit: 'Não cabe ANPP: infração com violência ou grave ameaça',
+      txt: 'O caput exige infração penal sem violência ou grave ameaça.',
+      art: 'CPP, art. 28-A, caput' },
+    { q: 'Consideradas as causas de aumento e de diminuição, a pena mínima é inferior a 4 anos?',
+      dica: 'Pena mínima de exatamente 4 anos não serve: a lei diz “inferior”.',
+      para: 'nao', tit: 'Não cabe ANPP: pena mínima igual ou superior a 4 anos',
+      txt: 'Para aferir a pena mínima, consideram-se as causas de aumento e de diminuição aplicáveis ao caso concreto.',
+      art: 'CPP, art. 28-A, caput e § 1º' },
+    { q: 'É cabível transação penal (infração de menor potencial ofensivo)?',
+      dica: 'Contravenções e crimes com pena máxima não superior a 2 anos (Lei 9.099, art. 61).',
+      para: 'sim', tit: 'Não cabe ANPP: use a transação penal',
+      txt: 'O ANPP é subsidiário. Sendo cabível a transação penal, o acordo de não persecução está vedado.',
+      art: 'CPP, art. 28-A, § 2º, I · Lei 9.099, art. 76' },
+    { q: 'O investigado é reincidente, ou há elementos de conduta criminal habitual, reiterada ou profissional?',
+      dica: 'Reincidência exige condenação anterior transitada em julgado (CP, art. 63). Infrações pretéritas insignificantes não impedem.',
+      para: 'sim', tit: 'Não cabe ANPP: reincidência ou habitualidade criminosa',
+      txt: 'A vedação só é afastada se insignificantes as infrações penais pretéritas.',
+      art: 'CPP, art. 28-A, § 2º, II' },
+    { q: 'Nos 5 anos anteriores ao cometimento da infração, ele foi beneficiado por ANPP, transação penal ou suspensão condicional do processo?',
+      dica: 'Conte para trás a partir da data do novo fato.',
+      para: 'sim', tit: 'Não cabe ANPP: benefício nos 5 anos anteriores',
+      txt: 'É para essa verificação que o registro do acordo anterior é mantido (§ 12).',
+      art: 'CPP, art. 28-A, § 2º, III, e § 12' },
+    { q: 'O crime foi praticado no âmbito de violência doméstica ou familiar, ou contra a mulher por razões da condição de sexo feminino?',
+      dica: 'A vedação olha para o contexto, ainda que a conduta não tenha violência física.',
+      para: 'sim', tit: 'Não cabe ANPP: vedação em favor do agressor',
+      txt: 'Nesses crimes a lei afasta o acordo em favor do agressor.',
+      art: 'CPP, art. 28-A, § 2º, IV' },
+    { q: 'O acordo é necessário e suficiente para reprovação e prevenção do crime?',
+      dica: 'É juízo do MP sobre o caso concreto, que deve ser fundamentado.',
+      para: 'nao', tit: 'O MP pode recusar fundamentadamente',
+      txt: 'Se o MP entender que o acordo não basta, a recusa deve ser motivada. O investigado pode requerer a remessa dos autos ao órgão superior do MP. O juiz não pode impor o acordo.',
+      art: 'CPP, art. 28-A, caput e § 14' },
+    { q: 'O investigado aceita confessar formal e circunstanciadamente a infração?',
+      dica: 'Não precisa ter confessado no inquérito: a confissão pode ser feita na assinatura do acordo (Tema 1303 do STJ).',
+      para: 'nao', tit: 'Sem confissão não há acordo',
+      txt: 'A confissão formal e circunstanciada é pressuposto do ANPP — mas ela pode ser feita no momento da assinatura, perante o MP e com defesa técnica.',
+      art: 'CPP, art. 28-A, caput · STJ, Tema 1303' }
+  ]
+
+  var i = 0
+  var trilha = []
+  var btSim = caixa.querySelector('[data-r="sim"]')
+  var btNao = caixa.querySelector('[data-r="nao"]')
+
+  function mostrar () {
+    var p = passos[i]
+    el('prog').textContent = 'Pergunta ' + (i + 1) + ' de ' + passos.length
+    el('barra').style.width = Math.round((i / passos.length) * 100) + '%'
+    el('q').textContent = p.q
+    el('dica').textContent = p.dica
+    el('pergunta').hidden = false
+    el('resultado').hidden = true
+    el('bts').hidden = false
+    el('rewrap').hidden = (i === 0)
+    el('trilha').textContent = trilha.length ? 'Suas respostas: ' + trilha.join(' · ') : ''
+  }
+
+  function resultado (cabe, p) {
+    var r = el('resultado')
+    r.innerHTML = ''
+    var box = document.createElement('div')
+    box.className = 'ppi6-res ' + (cabe ? 'sim' : 'nao')
+    var t = document.createElement('div'); t.className = 'ppi6-res-tit'
+    var x = document.createElement('p')
+    var f = document.createElement('p'); f.className = 'ppi6-fonte'
+    if (cabe) {
+      t.textContent = 'Em tese, cabe ANPP'
+      x.textContent = 'Próximos passos: termo escrito, firmado pelo MP, pelo investigado e pelo defensor, com as condições dos incisos I a V (§ 3º); audiência de homologação para verificar voluntariedade e legalidade (§ 4º).'
+      f.textContent = 'CPP, art. 28-A, caput, §§ 3º e 4º'
+    } else {
+      t.textContent = p.tit
+      x.textContent = p.txt
+      f.textContent = p.art
+    }
+    box.appendChild(t); box.appendChild(x); box.appendChild(f)
+    r.appendChild(box)
+    el('prog').textContent = cabe ? 'Resultado' : 'Resultado na pergunta ' + (i + 1)
+    el('barra').style.width = '100%'
+    el('pergunta').hidden = true
+    r.hidden = false
+    el('bts').hidden = true
+    el('rewrap').hidden = false
+    el('trilha').textContent = 'Suas respostas: ' + trilha.join(' · ')
+    el('reiniciar').focus()
+  }
+
+  function responder (r) {
+    var p = passos[i]
+    trilha.push((i + 1) + '. ' + (r === 'sim' ? 'Sim' : 'Não'))
+    if (r === p.para) { resultado(false, p); return }
+    i++
+    if (i >= passos.length) { resultado(true); return }
+    mostrar()
+  }
+
+  btSim.addEventListener('click', function () { responder('sim') })
+  btNao.addEventListener('click', function () { responder('nao') })
+  el('reiniciar').addEventListener('click', function () { i = 0; trilha = []; mostrar(); btSim.focus() })
+
+  mostrar()
+})()
+</script>

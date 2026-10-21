@@ -1063,6 +1063,14 @@ function abrirTema(index, fromPop = false) {
       void area.offsetWidth  // força reflow para reiniciar a animação
       area.style.removeProperty('animation')
       // corrige caminhos relativos de imagens e iframes injetados via fetch
+      // (srcset primeiro: o navegador escolhe o <source> AVIF/WebP antes do <img>)
+      area.querySelectorAll('source[srcset], img[srcset]').forEach(el => {
+        el.srcset = el.getAttribute('srcset').split(',').map(c => {
+          const [url, ...desc] = c.trim().split(/\s+/)
+          const abs = url.startsWith('http') || url.startsWith('/') || url.startsWith('data:') ? url : base + url
+          return [abs, ...desc].join(' ')
+        }).join(', ')
+      })
       area.querySelectorAll('img[src]').forEach(el => {
         const s = el.getAttribute('src')
         if (s && !s.startsWith('http') && !s.startsWith('/') && !s.startsWith('data:')) {

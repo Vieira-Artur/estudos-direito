@@ -185,6 +185,11 @@ const materias = [
             titulo: "Atividade Avaliativa 8B",
             descricao: "",
             arquivo: "conteudo/processual-penal-iii/06-atividade-avaliativa-8b.html"
+          },
+          {
+            titulo: "Revisão para a prova — Nulidades e Recursos",
+            descricao: "Dois casos · 6 perguntas cada · Absoluta × relativa · Preclusão · RESE · Fungibilidade · Prazos · Júri",
+            arquivo: "conteudo/processual-penal-iii/07-revisao-nulidades-recursos.html"
           }
         ]
       },

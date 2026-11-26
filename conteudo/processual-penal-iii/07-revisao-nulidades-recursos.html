@@ -1,0 +1,132 @@
+<style>
+/* ── Revisão para a prova: nulidades e recursos (prefixo .rv-) ── */
+#rv-revisao {
+  --rv-bg2:  #f5f7fa;
+  --rv-head: #1F497D;
+  --rv-tag:  #ffe9a8;
+  --rv-bar1: #8b1a1a;
+  --rv-bar2: #0a5c4a;
+  font-family: var(--sans);
+  color: var(--text);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #rv-revisao {
+    --rv-bg2: #1a2840; --rv-head: #1e3d6b; --rv-bar1: #f08080; --rv-bar2: #60d8b8;
+  }
+}
+:root[data-theme="dark"] #rv-revisao {
+  --rv-bg2: #1a2840; --rv-head: #1e3d6b; --rv-bar1: #f08080; --rv-bar2: #60d8b8;
+}
+
+#rv-revisao .rv-titulo {
+  font-family: var(--serif); font-size: 21px; font-weight: 700;
+  color: var(--blue); margin: 0 0 10px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--border);
+}
+#rv-revisao .rv-intro {
+  font-size: 14.5px; line-height: 1.65; color: var(--text2); margin: 0 0 26px;
+}
+#rv-revisao .rv-caso { margin-bottom: 38px; }
+#rv-revisao .rv-caso-head {
+  background: var(--rv-head); color: #fff; border-radius: 10px 10px 0 0;
+  padding: 14px 20px;
+}
+#rv-revisao .rv-caso-num {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--rv-tag); margin-bottom: 4px;
+}
+#rv-revisao .rv-caso-head h2 {
+  font-family: var(--serif); font-size: 18px; margin: 0; color: #fff; border: none;
+}
+#rv-revisao .rv-narrativa {
+  background: var(--rv-bg2); border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 10px 10px; padding: 18px 22px;
+  font-size: 14.5px; line-height: 1.75; text-align: justify;
+}
+#rv-revisao .rv-narrativa p { margin: 0 0 12px; }
+#rv-revisao .rv-narrativa p:last-child { margin-bottom: 0; }
+#rv-revisao .rv-comando {
+  margin: 18px 0 10px; font-size: 14.5px; line-height: 1.6; font-weight: 600;
+}
+#rv-revisao .rv-q-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+#rv-revisao .rv-q {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-left: 4px solid var(--rv-bar); border-radius: 8px;
+  padding: 12px 16px; font-size: 14.5px; line-height: 1.55;
+}
+#rv-revisao .rv-caso-1 { --rv-bar: var(--rv-bar1); }
+#rv-revisao .rv-caso-2 { --rv-bar: var(--rv-bar2); }
+#rv-revisao .rv-q-letra {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--rv-head); color: #fff; font-weight: 700; font-size: 13.5px;
+  display: flex; align-items: center; justify-content: center;
+}
+#rv-revisao .rv-foot {
+  margin-top: 8px; padding-top: 14px; border-top: 1px solid var(--border);
+  font-size: 12px; line-height: 1.6; color: var(--text2);
+}
+@media (max-width: 540px) {
+  #rv-revisao .rv-narrativa { padding: 14px 14px; font-size: 14px; text-align: left; }
+  #rv-revisao .rv-q { padding: 10px 12px; font-size: 14px; }
+  #rv-revisao .rv-caso-head { padding: 12px 14px; }
+}
+</style>
+
+<div id="rv-revisao">
+
+<h1 class="rv-titulo">Revisão para a prova — Nulidades e Recursos</h1>
+<p class="rv-intro">Dois casos fictícios, com seis perguntas cada. Leia os fatos com atenção e responda de forma objetiva, sempre indicando o fundamento: artigo de lei, súmula ou precedente.</p>
+
+<!-- ===================== CASO 1 ===================== -->
+<section class="rv-caso rv-caso-1">
+  <div class="rv-caso-head">
+    <div class="rv-caso-num">Caso 1 · Nulidades</div>
+    <h2>A Operação Carga Pesada</h2>
+  </div>
+  <div class="rv-narrativa">
+    <p>Entre janeiro e março de 2026, carretas carregadas de eletrodomésticos foram abordadas na BR-040, nas proximidades de Juiz de Fora/MG, por homens armados que rendiam os motoristas e desviavam a carga para um galpão no distrito industrial. A Polícia Civil batizou a investigação de Operação Carga Pesada. No curso do inquérito, o juízo da <strong>1ª Vara Criminal</strong> deferiu a busca e apreensão no galpão, onde foram encontradas parte das mercadorias e anotações com os nomes de <strong>Tiago Barcelos</strong> e <strong>Rafael Duarte</strong>.</p>
+    <p>O Ministério Público denunciou os dois por roubo majorado (art. 157, § 2º, II, e § 2º-A, I, do CP). Em vez de seguir para a 1ª Vara, que já estava preventa, o processo foi livremente distribuído à <strong>2ª Vara Criminal</strong>. Ninguém apontou o problema: nem o Ministério Público, nem as defesas, nas respostas à acusação.</p>
+    <p>Na audiência de instrução, em 16 de junho de 2026, <strong>o promotor, regularmente intimado, não compareceu</strong>. A juíza não adiou o ato: ouviu um dos motoristas rendidos e os policiais da operação e, depois de fazer as próprias perguntas, <strong>leu a cada um deles as perguntas que o Ministério Público havia deixado por escrito nos autos</strong>. O outro motorista, que se mudara para Uberlândia/MG, seria ouvido por <strong>carta precatória</strong>, ainda não devolvida.</p>
+    <p>Encerrada a prova oral, a juíza passou aos interrogatórios, embora a precatória não tivesse voltado. <strong>Rafael</strong> foi interrogado na presença de seu advogado, que <strong>nada disse sobre a ordem dos atos</strong>. O advogado de Tiago havia deixado a sala, alegando outro compromisso; Tiago disse que “não precisava de advogado para contar a verdade”, e a juíza <strong>o interrogou sem defensor</strong>.</p>
+    <p>A precatória voltou cumprida em julho, e, em 24 de agosto de 2026, a juíza condenou os dois réus. Nas apelações, as defesas alegaram, <strong>pela primeira vez</strong>, que o processo deveria ter tramitado na 1ª Vara e que Rafael fora interrogado antes da oitiva do motorista por precatória. A defesa de Tiago não mencionou o interrogatório sem defensor. Os recursos aguardam julgamento no Tribunal de Justiça de Minas Gerais.</p>
+  </div>
+
+  <p class="rv-comando">Com base nos fatos narrados, responda, indicando o fundamento:</p>
+  <ol class="rv-q-list">
+    <li class="rv-q"><span class="rv-q-letra">a</span><span>O interrogatório de Tiago sem defensor gera nulidade absoluta ou relativa? Até quando ela pode ser alegada?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">b</span><span>A nulidade por desrespeito à prevenção da 1ª Vara, alegada só na apelação, pode ser reconhecida?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">c</span><span>O interrogatório de Rafael antes da volta da precatória, alegado só na apelação, gera nulidade?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">d</span><span>A ausência do promotor anula a audiência? E a leitura das perguntas do MP pela juíza?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">e</span><span>Se o TJ anular a audiência de instrução, o que acontece com a sentença? E se a nulidade reconhecida fosse a incompetência do juízo, o que seria anulado?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">f</span><span>E se fosse no Júri e o próprio advogado de Tiago tivesse conversado com os jurados no intervalo, quebrando a incomunicabilidade? Tiago, condenado, poderia pedir a anulação?</span></li>
+  </ol>
+</section>
+
+<!-- ===================== CASO 2 ===================== -->
+<section class="rv-caso rv-caso-2">
+  <div class="rv-caso-head">
+    <div class="rv-caso-num">Caso 2 · Recursos</div>
+    <h2>Os irmãos Lemos e os cabos de cobre</h2>
+  </div>
+  <div class="rv-narrativa">
+    <p>Na madrugada de 3 de maio de 2026, a Polícia Militar flagrou <strong>Gustavo Lemos</strong>, 29 anos, colocando em sua caminhonete rolos de cabo de cobre recém-arrancados da rede elétrica de um bairro de Barbacena/MG. Uma denúncia anônima apontou o irmão dele, <strong>Caio Lemos</strong>, como o homem que teria cortado os cabos e fugido a pé. Nenhuma outra prova ligava Caio ao fato.</p>
+    <p>O Ministério Público denunciou os dois irmãos por furto qualificado pelo concurso de pessoas (art. 155, § 4º, IV, do CP). O juiz recebeu a denúncia quanto a Gustavo, mas <strong>a rejeitou quanto a Caio</strong>, por falta de justa causa. Intimado da decisão, o Ministério Público interpôs, <strong>no 4º dia</strong>, recurso que chamou de <strong>“apelação”</strong>.</p>
+    <p>Gustavo, que obteve liberdade provisória dias depois do flagrante, respondeu ao processo solto e foi condenado. Na dosimetria, o juiz fixou a pena-base no mínimo, 2 anos de reclusão, e, reconhecida a reincidência, aumentou-a em 1/6. Por erro de cálculo, porém, chegou a <strong>2 anos e 2 meses</strong>, quando o correto seria 2 anos e 4 meses. Gustavo foi <strong>intimado pessoalmente da sentença em 6 de novembro de 2026, sexta-feira</strong>, e o mandado cumprido foi <strong>juntado aos autos em 11 de novembro, quarta-feira</strong>. Só a defesa apelou; o Ministério Público não recorreu. No Tribunal de Justiça, o relator percebeu o erro de cálculo.</p>
+    <p>O irmão mais velho, <strong>Henrique Lemos</strong>, não participou desse furto: cumpre pena por outro furto de cabos, praticado em 2023. Em outubro de 2026, o <strong>juízo da Vara de Execuções Penais negou-lhe o livramento condicional</strong>.</p>
+  </div>
+
+  <p class="rv-comando">Com base nos fatos narrados e considerando que não há feriados no período, responda, indicando o fundamento:</p>
+  <ol class="rv-q-list">
+    <li class="rv-q"><span class="rv-q-letra">a</span><span>Qual o recurso contra a rejeição da denúncia, e em que prazo? E se fosse no Juizado Especial Criminal?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">b</span><span>O MP interpôs “apelação” no 4º dia. O recurso pode ser aproveitado? E se tivesse sido interposto no 7º dia?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">c</span><span>Qual o último dia para Gustavo apelar? E se a intimação tivesse ocorrido em 18/12/2026, com Gustavo solto?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">d</span><span>O TJ pode corrigir o erro material e aumentar a pena de Gustavo?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">e</span><span>Qual o recurso contra a negativa do livramento condicional, e em que prazo?</span></li>
+    <li class="rv-q"><span class="rv-q-letra">f</span><span>E se fosse no Júri: (1) o réu condenado a 18 anos pode começar a cumprir a pena antes do julgamento da apelação? (2) Se o réu fosse absolvido no quesito genérico, depois de tese de clemência registrada em ata, o TJ poderia mandá-lo a novo júri?</span></li>
+  </ol>
+</section>
+
+<p class="rv-foot">Processo Penal III — Prof. Artur Vieira · Centro de Ensino Superior de Juiz de Fora (Vianna Júnior) · Revisão de 25/11/2026. Casos e personagens fictícios, para fins didáticos. O gabarito será discutido em sala.</p>
+
+</div>

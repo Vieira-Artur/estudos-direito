@@ -1,5 +1,5 @@
 {
-  "ultima_edicao_processada": 910,
+  "ultima_edicao_processada": 911,
   "edicoes": {
     "885": {
       "data": "22 de abril de 2026",
@@ -130,7 +130,12 @@
       "data": "Data não identificada",
       "qtd_enunciados": 0,
       "arquivo": "informativo-0910.html"
+    },
+    "911": {
+      "data": "Data não identificada",
+      "qtd_enunciados": 2,
+      "arquivo": "informativo-0911.html"
     }
   },
-  "atualizado_em": "2026-11-23T21:34:38+00:00"
+  "atualizado_em": "2026-11-27T12:41:25+00:00"
 }
